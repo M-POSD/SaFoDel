@@ -1,6 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SaFoDel</string>
     <string name="school">School</string>
+    <string name="mapbox_access_token" tools:ignore="Typos"> pk.eyJ1Ijoia3h1dTAwMjUiLCJhIjoiY2tnOHY3MG1hMDBpbTJ0czJ0MWpuOXU1ayJ9.VVM65g0hQ_-XUP6KGqAu4A</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
