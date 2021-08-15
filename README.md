@@ -1,7 +1,9 @@
-# SaFoDel
+
+## Team TA27
 
 
-<div align=center><img src="https://user-images.githubusercontent.com/88869576/129469771-cdaf283e-91e3-4fe3-bf08-4691db1fe5ff.png" width="150" height="150" alt="logo"/> 
+  ![M-POSD](https://user-images.githubusercontent.com/88869576/129469958-fc1149d2-12f9-4d73-9dc2-cfefe853a80e.png)
   
+## SaFoDel
 Educating Food Delivery Bike Riders in Victoria
 
