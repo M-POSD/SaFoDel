@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.safodel.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -16,6 +18,22 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
+
+        binding.epic1Card.setOnClickListener() {
+            val action = HomeFragmentDirections.actionHomeFragmentToEpic1Fragment()
+            findNavController().navigate(action)
+        }
+
+        binding.epic2Card.setOnClickListener() {
+            val action = HomeFragmentDirections.actionHomeFragmentToEpic2Fragment()
+            findNavController().navigate(action)
+        }
+
+        binding.epic3Card.setOnClickListener() {
+            val action = HomeFragmentDirections.actionHomeFragmentToEpic3Fragment()
+            findNavController().navigate(action)
+        }
+
         return binding.root
     }
 

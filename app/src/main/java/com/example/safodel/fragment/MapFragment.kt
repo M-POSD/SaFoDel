@@ -39,7 +39,7 @@ class MapFragment:Fragment() {
             MapboxMap -> MapboxMap.setStyle(Style.LIGHT){
                 val position =  CameraPosition.Builder().target(latLng).zoom(13.0).build()
             MapboxMap.cameraPosition = position
-        }
+            }
         }
         return binding.root
     }
