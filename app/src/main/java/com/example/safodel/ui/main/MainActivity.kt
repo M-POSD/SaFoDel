@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
@@ -25,20 +27,21 @@ class MainActivity : AppCompatActivity() {
         }
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController // Control fragment
+        configBottomNavigation(navController)
+        configLeftNavigation(navController)
+    }
 
-            binding.navView.setCheckedItem(R.id.nav_view)
-            binding.navView.setNavigationItemSelectedListener {
-                if(!navController.popBackStack(it.itemId, false)){
-                    navController.popBackStack() // Previous fragment out of stack
-                    when(it.itemId){
-                        R.id.navMap -> navController.navigate(R.id.mapfragment)
-                        R.id.navSchool -> if(navController.currentDestination?.id != it.itemId ) navController.navigate(R.id.schoolFragment)
-                        R.id.navHome -> if(navController.currentDestination?.id != it.itemId ) navController.navigate(R.id.homeFragment)
-                    }
-                }
-                binding.drawerLayout.closeDrawers()
-                true
-            }
+    /**
+     * Press the navigation icon to pop up the navigation window
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+        return true
+    }
+
+    private fun configBottomNavigation(navController: NavController) {
         binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.navHome -> {
@@ -56,16 +59,19 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
     }
 
-    /**
-     * Press the navigation icon to pop up the navigation window
-     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> binding.drawerLayout.openDrawer(GravityCompat.START)
+    private fun configLeftNavigation(navController: NavController) {
+        binding.navView.setCheckedItem(R.id.nav_view)
+        binding.navView.setNavigationItemSelectedListener {
+            if(!navController.popBackStack(it.itemId, false)){
+                navController.popBackStack() // Previous fragment out of stack
+                when(it.itemId){
+                    R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+                }
+            }
+            binding.drawerLayout.closeDrawers()
+            true
         }
-        return true
     }
 }

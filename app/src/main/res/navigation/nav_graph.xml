@@ -53,5 +53,10 @@
         android:name="com.example.safodel.ui.home.Epic3Fragment"
         android:label="fragment_epic3"
         tools:layout="@layout/fragment_epic3" />
+    <fragment
+        android:id="@+id/appIntroFragment"
+        android:name="com.example.safodel.fragment.AppIntroFragment"
+        android:label="fragment_app_intro"
+        tools:layout="@layout/fragment_app_intro" />
 
 </navigation>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <!--
+            Each button of the side navigation is described here.
+            icons download from https://fonts.google.com/icons.
+        -->
+        <item
+            android:id="@+id/navAppIntro"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/app_intro" />
+    </group>
+</menu>
