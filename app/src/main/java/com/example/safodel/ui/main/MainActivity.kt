@@ -7,7 +7,8 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
-
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,24 @@ class MainActivity : AppCompatActivity() {
                 binding.drawerLayout.closeDrawers()
                 true
             }
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.navHome -> {
+                    navController.navigate(R.id.homeFragment)
+                    true
+                }
+                R.id.navSchool -> {
+                    navController.navigate(R.id.schoolFragment)
+                    true
+                }
+                R.id.navMap ->{
+                    navController.navigate(R.id.mapfragment)
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 
     /**
