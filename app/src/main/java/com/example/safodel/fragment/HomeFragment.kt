@@ -36,7 +36,7 @@ class HomeFragment:Fragment() {
         mapView = binding.mapView
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync {
-            MapboxMap -> MapboxMap.setStyle(Style.DARK){
+            MapboxMap -> MapboxMap.setStyle(Style.LIGHT){
                 val position =  CameraPosition.Builder().target(latLng).zoom(13.0).build()
             MapboxMap.cameraPosition = position
         }
