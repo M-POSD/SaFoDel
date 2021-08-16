@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homefragment">
+    app:startDestination="@id/homeFragment">
 
 <!--
     Each button in the side navigation
     has to be registered with a fragment here.
 -->
     <fragment
-        android:id="@+id/homefragment"
-        android:name="com.example.safodel.fragment.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/mapfragment"
+        android:name="com.example.safodel.fragment.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map">
         <action
-            android:id="@+id/action_homefragment_to_schoolFragment3"
+            android:id="@+id/action_mapfragment_to_schoolFragment3"
             app:destination="@id/schoolFragment" />
     </fragment>
     <fragment
@@ -23,5 +23,10 @@
         android:name="com.example.safodel.fragment.SchoolFragment"
         android:label="fragment_school"
         tools:layout="@layout/fragment_school" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.safodel.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 
 </navigation>

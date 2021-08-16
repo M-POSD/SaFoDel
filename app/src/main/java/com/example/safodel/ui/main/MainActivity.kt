@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity() {
                 if(!navController.popBackStack(it.itemId, false)){
                     navController.popBackStack() // Previous fragment out of stack
                     when(it.itemId){
-                        R.id.navHome -> navController.navigate(R.id.homefragment)
+                        R.id.navMap -> navController.navigate(R.id.mapfragment)
                         R.id.navSchool -> if(navController.currentDestination?.id != it.itemId ) navController.navigate(R.id.schoolFragment)
+                        R.id.navHome -> if(navController.currentDestination?.id != it.itemId ) navController.navigate(R.id.homeFragment)
                     }
                 }
                 binding.drawerLayout.closeDrawers()
                 true
             }
-
     }
 
     /**
