@@ -31,6 +31,9 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         _binding = null
     }
 
+    /**
+     *  Press the navigation icon to pop up the navigation window
+     */
     fun setToolbar(toolbar: androidx.appcompat.widget.Toolbar){
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
@@ -40,6 +43,9 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         toolbar.setNavigationIcon(R.drawable.menu_blue_36)
     }
 
+    /**
+     * Press the navigation icon to go back to previous page
+     */
     fun setToolbar2(toolbar: androidx.appcompat.widget.Toolbar) {
         setToolbar(toolbar)
         toolbar.setNavigationIcon(R.drawable.arrow_back_blue_36)
