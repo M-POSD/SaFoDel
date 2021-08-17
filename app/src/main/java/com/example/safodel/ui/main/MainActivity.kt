@@ -2,7 +2,10 @@ package com.example.safodel.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -13,20 +16,23 @@ import com.example.safodel.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var doubleBackToExitPressedOnce = false
+    private lateinit var navController : NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController // Control fragment
+        navController = navHostFragment.navController // Control fragment
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.menu_blue_36)
         }
-        configBottomNavigation(navController) //method to set up bottom nav
-        configLeftNavigation(navController) // method to set up left nav
+        configBottomNavigation() //method to set up bottom nav
+        configLeftNavigation() // method to set up left nav
     }
 
     /**
@@ -40,7 +46,25 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun configBottomNavigation(navController: NavController) {
+    /**
+     * If the user is in home, school and map pages, he/she needs to click twice
+     */
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment
+                    && navController.currentDestination?.id != R.id.mapfragment
+                    && navController.currentDestination?.id != R.id.schoolFragment)) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        // give user three seconds to leave without re-notification
+        Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 3000)
+    }
+
+    private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             navController.popBackStack() // Previous fragment out of stack
             when(it.itemId){
@@ -61,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun configLeftNavigation(navController: NavController) {
+    private fun configLeftNavigation() {
         binding.leftNavigation.setCheckedItem(R.id.left_navigation)
         binding.leftNavigation.setNavigationItemSelectedListener {
             if(!navController.popBackStack(it.itemId, false)){
