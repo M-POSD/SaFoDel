@@ -8,12 +8,16 @@
         -->
         <item
             android:id="@+id/navHome"
-            android:icon="@drawable/outline_school_black_36"
+            android:icon="@drawable/ic_baseline_home_24"
             android:title="@string/home" />
         <item
             android:id="@+id/navSchool"
             android:icon="@drawable/outline_school_black_36"
             android:title="@string/school" />
+        <item
+            android:id="@+id/navMap"
+            android:icon="@drawable/ic_baseline_location_on_24"
+            android:title="@string/map" />
 
     </group>
 </menu>

@@ -19,6 +19,7 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         maven {
             url 'https://api.mapbox.com/downloads/v2/releases/maven'
             authentication {
