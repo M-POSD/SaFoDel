@@ -17,8 +17,6 @@ class Epic1Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEpic1Binding.inflate(inflater,container,false)
-
-
         return binding.root
     }
 

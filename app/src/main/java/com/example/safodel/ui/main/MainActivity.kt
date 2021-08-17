@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity() {
         binding.leftNavigation.setCheckedItem(R.id.left_navigation)
         binding.leftNavigation.setNavigationItemSelectedListener {
             if(!navController.popBackStack(it.itemId, false)){
-
-                navController.popBackStack() // Previous fragment out of stack
+                if(navController.currentDestination?.id == R.id.appIntroFragment)
+                    navController.popBackStack() // Previous fragment out of stack
                 when(it.itemId){
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                 }
