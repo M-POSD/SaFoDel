@@ -14,4 +14,8 @@
         android:textSize="30sp"
         android:textColor="@color/black"/>
 
+    <include
+        layout="@layout/simple_toolbar"
+        android:id="@+id/toolbar" />
+
 </FrameLayout>

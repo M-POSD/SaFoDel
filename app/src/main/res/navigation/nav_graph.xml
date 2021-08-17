@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_homeFragment_to_epic3Fragment"
             app:destination="@id/epic3Fragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_appIntroFragment"
+            app:destination="@id/appIntroFragment" />
     </fragment>
     <fragment
         android:id="@+id/epic1Fragment"
