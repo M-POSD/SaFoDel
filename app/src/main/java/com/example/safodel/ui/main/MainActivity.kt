@@ -6,11 +6,8 @@ import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -63,10 +60,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configLeftNavigation(navController: NavController) {
-        binding.navView.setCheckedItem(R.id.nav_view)
-        binding.navView.setNavigationItemSelectedListener {
+        binding.leftNavigation.setCheckedItem(R.id.left_navigation)
+        binding.leftNavigation.setNavigationItemSelectedListener {
             if(!navController.popBackStack(it.itemId, false)){
-                navController.popBackStack() // Previous fragment out of stack
+
+                // if use the line below, the return bottom will not be able to click
+//                navController.popBackStack() // Previous fragment out of stack
                 when(it.itemId){
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                 }
