@@ -6,18 +6,10 @@ import androidx.fragment.app.Fragment
 import com.example.safodel.databinding.FragmentEpic1Binding
 import android.widget.Toast
 import android.widget.Toolbar
-import androidx.appcompat.app.AppCompatActivity
-import com.example.safodel.R
-
 
 class Epic1Fragment : Fragment() {
     private var _binding: FragmentEpic1Binding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +18,15 @@ class Epic1Fragment : Fragment() {
     ): View {
         _binding = FragmentEpic1Binding.inflate(inflater,container,false)
 
+
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+            onDestroyView()
+            return true
+
     }
 
     override fun onDestroyView() {
