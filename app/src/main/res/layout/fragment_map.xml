@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MapFragment">
 
+
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
@@ -15,5 +16,9 @@
         mapbox:mapbox_cameraTargetLng="-56.149056"
         mapbox:mapbox_cameraZoom="5.526846">
     </com.mapbox.mapboxsdk.maps.MapView>
+
+    <include
+        layout="@layout/simple_toolbar"
+        android:id="@+id/toolbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,19 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.databinding.FragmentSchoolBinding
 
 
 
-class SchoolFragment : Fragment() {
-    private var _binding: FragmentSchoolBinding? = null
-    private val binding get() = _binding!!
+class SchoolFragment :BasicFragment<FragmentSchoolBinding>(FragmentSchoolBinding::inflate){
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSchoolBinding.inflate(inflater,container,false)
+        val toolbar = binding.toolbar.root
+        setToolbar(toolbar)
         return binding.root
     }
 

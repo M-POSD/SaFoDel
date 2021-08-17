@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.safodel.R
 import com.example.safodel.databinding.FragmentAppIntroBinding
+import com.example.safodel.databinding.FragmentHomeBinding
 
 
-
-class AppIntroFragment : Fragment() {
-    private var _binding: FragmentAppIntroBinding? = null
-    private val binding get() = _binding!!
+class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntroBinding::inflate){
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,6 +23,8 @@ class AppIntroFragment : Fragment() {
                 "Project: SaFoDel\n" +
                 "\n" +
                 "Audience: Potential and already existing food delivery bike riders"
+        val toolbar = binding.toolbar.root
+        setToolbar2(toolbar)
         return binding.root
     }
 
@@ -30,4 +32,5 @@ class AppIntroFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

@@ -13,6 +13,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
+import android.view.Gravity
+
+import android.view.View
+
+import androidx.drawerlayout.widget.DrawerLayout
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,15 +33,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+//        toolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.menu_blue_36)
-        }
+//        supportActionBar?.setDisplayShowTitleEnabled(false)
+//        supportActionBar?.let {
+//            it.setDisplayHomeAsUpEnabled(true)
+//            it.setHomeAsUpIndicator(R.drawable.menu_blue_36)
+//        }
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
     }
@@ -48,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
+
 
     /**
      * If the user is in home, school and map pages, he/she needs to click twice
@@ -101,5 +111,9 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
             true
         }
+    }
+
+    fun openDrawer() {
+        binding.drawerLayout.openDrawer(GravityCompat.START)
     }
 }

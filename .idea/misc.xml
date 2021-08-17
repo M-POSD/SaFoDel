@@ -5,10 +5,12 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_app_intro.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_basic.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18840579710144928" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
@@ -17,7 +19,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

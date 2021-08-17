@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.safodel.R
+import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.databinding.FragmentMapBinding
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -18,9 +19,7 @@ import com.mapbox.mapboxsdk.maps.Style
 import javax.microedition.khronos.egl.EGL
 
 
-class MapFragment:Fragment() {
-    private var _binding: FragmentMapBinding? = null
-    private val binding get() = _binding!!
+class MapFragment:BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
     private var mapView: MapView? = null
     private lateinit var permissionsManager: PermissionsManager
     var latLng = LatLng(-37.876823, 145.045837)
@@ -33,6 +32,8 @@ class MapFragment:Fragment() {
     ): View {
         activity?.let { Mapbox.getInstance(it.application,getString(R.string.mapbox_access_token)) }
         _binding = FragmentMapBinding.inflate(inflater,container,false)
+        val toolbar = binding.toolbar.root
+        setToolbar(toolbar)
         mapView = binding.mapView
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync {
