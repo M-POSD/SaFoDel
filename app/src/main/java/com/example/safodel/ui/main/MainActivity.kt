@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                 }
             }
-            binding.drawerLayout.closeDrawers()
+            binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
             true
         }
     }
