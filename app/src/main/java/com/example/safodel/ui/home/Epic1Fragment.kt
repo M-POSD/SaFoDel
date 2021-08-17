@@ -20,12 +20,6 @@ class Epic1Fragment : Fragment() {
         return binding.root
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-            onDestroyView()
-            return true
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
