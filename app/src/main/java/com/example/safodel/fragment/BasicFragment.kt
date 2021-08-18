@@ -1,9 +1,7 @@
 package com.example.safodel.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R
@@ -20,7 +18,6 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         savedInstanceState: Bundle?
     ): View? {
         _binding = inflate.invoke(inflater,container,false)
-
         return binding.root
     }
 
@@ -35,10 +32,12 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
     fun setToolbar(toolbar: androidx.appcompat.widget.Toolbar){
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
         toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+
     }
 
     /**
@@ -51,5 +50,6 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
             activity?.onBackPressed()
         }
     }
+
 }
 
