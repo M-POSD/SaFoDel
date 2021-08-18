@@ -15,6 +15,10 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
     ): View {
         _binding = FragmentEpic3Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
+
+        binding.gear1Card.editText.text = "Gear 1"
+        binding.gear2Card.editText.text = "Gear 2"
+
         setToolbar2(toolbar)
         return binding.root
     }

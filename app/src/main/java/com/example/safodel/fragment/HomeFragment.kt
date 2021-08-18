@@ -26,17 +26,21 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val toolbar = binding.toolbar.root
         setToolbar(toolbar)
 
-        binding.epic1Card.setOnClickListener() {
+        binding.epic1Card.editText.text = "Ride Safer"
+        binding.epic2Card.editText.text = "Delivery on e-bike"
+        binding.epic3Card.editText.text = "Safty Gear"
+
+        binding.epic1Card.card.setOnClickListener() {
             val action = HomeFragmentDirections.actionHomeFragmentToEpic1Fragment()
             findNavController().navigate(action)
         }
 
-        binding.epic2Card.setOnClickListener() {
+        binding.epic2Card.card.setOnClickListener() {
             val action = HomeFragmentDirections.actionHomeFragmentToEpic2Fragment()
             findNavController().navigate(action)
         }
 
-        binding.epic3Card.setOnClickListener() {
+        binding.epic3Card.card.setOnClickListener() {
             val action = HomeFragmentDirections.actionHomeFragmentToEpic3Fragment()
             findNavController().navigate(action)
         }

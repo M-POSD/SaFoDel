@@ -23,57 +23,14 @@
             android:layout_marginBottom="20dp"
             android:src="@drawable/epic2_image" />
 
+        <include
+            layout="@layout/large_card"
+            android:id="@+id/info1Card" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/epic1Card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:checkable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/light_green">
+        <include
+            layout="@layout/large_card"
+            android:id="@+id/info2Card" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Info 1"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/epic2Card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:checkable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/light_green">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Info 2"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
     <include

@@ -6,7 +6,6 @@
     android:id="@+id/home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
 
     <include
@@ -46,85 +45,18 @@
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textSize="12dp"></TextView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/epic1Card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:checkable="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/light_green">
+        <include
+            layout="@layout/small_card"
+            android:id="@+id/epic1Card" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+        <include
+            layout="@layout/small_card"
+            android:id="@+id/epic2Card" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ride Saft"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        <include
+            layout="@layout/small_card"
+            android:id="@+id/epic3Card" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/epic2Card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:checkable="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/light_green">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Delivery on e-bike"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/epic3Card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-
-            android:checkable="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/light_green">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/safty_gear"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

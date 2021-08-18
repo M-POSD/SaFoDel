@@ -27,56 +27,14 @@
             android:src="@drawable/epic1_image" />
 
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/epic1Card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:checkable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/light_green">
+        <include
+            layout="@layout/large_card"
+            android:id="@+id/tip1Card" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+        <include
+            layout="@layout/large_card"
+            android:id="@+id/tip2Card" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tip 1"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/epic2Card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:checkable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/light_green">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tip 2"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

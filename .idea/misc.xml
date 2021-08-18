@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
+        <entry key="app/src/main/res/layout/large_card.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
