@@ -20,6 +20,8 @@ import android.view.Menu
 import android.view.View
 
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.fragment.findNavController
+import com.example.safodel.fragment.HomeFragmentDirections
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 
@@ -58,8 +60,6 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
-
 
     /**
      * If the user is in home, school and map pages, he/she needs to click twice
@@ -107,7 +107,13 @@ class MainActivity : AppCompatActivity() {
                 if(navController.currentDestination?.id == R.id.appIntroFragment)
                     navController.popBackStack() // Previous fragment out of stack
                 when(it.itemId){
-                    R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+//                    R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+
+                    // for control the action from Home to AppIntro
+                    R.id.navAppIntro -> {
+                        val action = HomeFragmentDirections.actionHomeFragmentToAppIntroFragment()
+                        navController.navigate(action)
+                    }
                 }
             }
             binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
