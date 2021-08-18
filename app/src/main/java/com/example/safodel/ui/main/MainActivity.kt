@@ -5,19 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.MenuItem
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
-import android.view.Gravity
-import android.view.Menu
 
-import android.view.View
+import androidx.core.view.MotionEventCompat
 
 import androidx.drawerlayout.widget.DrawerLayout
 import me.jessyan.autosize.AutoSizeCompat
@@ -28,21 +27,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController : NavController
-    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        toolbar = findViewById(R.id.toolbar)
-//        setSupportActionBar(toolbar)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
-//        supportActionBar?.setDisplayShowTitleEnabled(false)
-//        supportActionBar?.let {
-//            it.setDisplayHomeAsUpEnabled(true)
-//            it.setHomeAsUpIndicator(R.drawable.menu_blue_36)
-//        }
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
         AutoSizeConfig.getInstance().setBaseOnWidth(false)
@@ -98,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
     }
 
     private fun configLeftNavigation() {
@@ -122,6 +114,13 @@ class MainActivity : AppCompatActivity() {
     override fun getResources(): Resources {
         AutoSizeCompat.autoConvertDensityOfGlobal((super.getResources()))
         return super.getResources()
+    }
+
+    fun isBottomNavigationVisibale(boolean: Boolean){
+        if(boolean == false)
+            binding.bottomNavigation.visibility = View.INVISIBLE
+        else
+            binding.bottomNavigation.visibility = View.VISIBLE
     }
 
 }

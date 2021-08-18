@@ -1,13 +1,16 @@
 package com.example.safodel.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.databinding.FragmentMapBinding
+import com.example.safodel.ui.main.MainActivity
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
@@ -25,6 +28,7 @@ class MapFragment:BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate)
     var latLng = LatLng(-37.876823, 145.045837)
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +37,7 @@ class MapFragment:BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate)
         activity?.let { Mapbox.getInstance(it.application,getString(R.string.mapbox_access_token)) }
         _binding = FragmentMapBinding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
+        val mainActivity = activity as MainActivity
         setToolbar(toolbar)
         mapView = binding.mapView
         mapView?.onCreate(savedInstanceState)
@@ -42,8 +47,17 @@ class MapFragment:BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate)
             MapboxMap.cameraPosition = position
             }
         }
+
+        binding.mapView.setOnTouchListener { v, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisibale(false)
+                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisibale(true)
+            }
+            true
+        }
         return binding.root
     }
+
 
     override fun onStart() {
         super.onStart()
