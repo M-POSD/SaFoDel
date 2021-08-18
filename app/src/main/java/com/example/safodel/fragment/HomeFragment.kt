@@ -43,13 +43,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         return binding.root
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
-        return true
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
