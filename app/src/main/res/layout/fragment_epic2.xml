@@ -8,35 +8,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.home.Epic2Fragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#1effffff">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            app:contentScrim="#1effffff"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/epic2_image" />
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <include
+        layout="@layout/simple_toolbar"
+        android:id="@+id/toolbar"
+        app:layout_collapseMode="pin"/>
 
     <LinearLayout
+        android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_marginTop="30dp"
         android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="324dp"
-            android:layout_height="204dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/epic2_image" />
-
         <include
             layout="@layout/large_card"
             android:id="@+id/info1Card" />
-
         <include
             layout="@layout/large_card"
             android:id="@+id/info2Card" />
-
     </LinearLayout>
-
-    <include
-        layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

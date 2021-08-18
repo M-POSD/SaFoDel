@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 import android.view.Gravity
+import android.view.Menu
 
 import android.view.View
 
@@ -122,4 +123,5 @@ class MainActivity : AppCompatActivity() {
         AutoSizeCompat.autoConvertDensityOfGlobal((super.getResources()))
         return super.getResources()
     }
+
 }
