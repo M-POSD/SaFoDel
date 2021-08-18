@@ -44,6 +44,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             val action = HomeFragmentDirections.actionHomeFragmentToEpic3Fragment()
             findNavController().navigate(action)
         }
+
         return binding.root
     }
 

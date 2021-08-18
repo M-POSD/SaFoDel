@@ -1,5 +1,6 @@
 package com.example.safodel.ui.main
 
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -18,9 +19,8 @@ import android.view.Gravity
 import android.view.View
 
 import androidx.drawerlayout.widget.DrawerLayout
-
-
-
+import me.jessyan.autosize.AutoSizeCompat
+import me.jessyan.autosize.AutoSizeConfig
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 //        }
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
+        AutoSizeConfig.getInstance().setBaseOnWidth(false)
     }
 
     /**
@@ -115,5 +116,10 @@ class MainActivity : AppCompatActivity() {
 
     fun openDrawer() {
         binding.drawerLayout.openDrawer(GravityCompat.START)
+    }
+
+    override fun getResources(): Resources {
+        AutoSizeCompat.autoConvertDensityOfGlobal((super.getResources()))
+        return super.getResources()
     }
 }
