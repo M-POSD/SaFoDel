@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="10dp"
-                app:cardBackgroundColor="@color/skin"
+                app:cardBackgroundColor="@color/light_green"
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true">
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="10dp"
-                app:cardBackgroundColor="@color/skin"
+                app:cardBackgroundColor="@color/light_green"
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true">
@@ -94,7 +94,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="10dp"
 
-                app:cardBackgroundColor="@color/skin"
+                app:cardBackgroundColor="@color/light_green"
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true">
