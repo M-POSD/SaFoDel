@@ -2,10 +2,7 @@ package com.example.safodel.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
@@ -48,13 +45,17 @@ class MapFragment:BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate)
             }
         }
 
+        /**
+         * When touch the screen, bottom navigation set as INVISIBLE, Tap Up to show the navigation
+         */
         binding.mapView.setOnTouchListener { v, event ->
             when(event.action){
-                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisibale(false)
-                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisibale(true)
+                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
+                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
             }
-            true
+            false  // Make sure finger can move the map
         }
+
         return binding.root
     }
 
@@ -95,5 +96,7 @@ class MapFragment:BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate)
         mapView?.onDestroy()
         _binding = null
     }
+
+
 
 }

@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
         AutoSizeConfig.getInstance().setBaseOnWidth(false)
+
     }
 
     /**
@@ -122,11 +123,16 @@ class MainActivity : AppCompatActivity() {
         return super.getResources()
     }
 
-    fun isBottomNavigationVisibale(boolean: Boolean){
+
+    /**
+     * Control the bottom navigation is visible or not.
+     */
+    fun isBottomNavigationVisible(boolean: Boolean){
         if(boolean == false)
             binding.bottomNavigation.visibility = View.INVISIBLE
         else
             binding.bottomNavigation.visibility = View.VISIBLE
     }
+
 
 }
