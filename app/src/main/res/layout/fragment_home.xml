@@ -19,8 +19,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="184dp"
-            android:layout_height="177dp"
+            android:layout_width="212dp"
+            android:layout_height="213dp"
             android:layout_gravity="center"
             android:layout_marginBottom="25dp"
             android:src="@drawable/home_image" />
