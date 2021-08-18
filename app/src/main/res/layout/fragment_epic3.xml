@@ -19,8 +19,9 @@
             android:layout_width="324dp"
             android:layout_height="204dp"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginTop="10dp"
+
+            android:layout_marginBottom="20dp"
             android:src="@drawable/epic3_image" />
 
 
