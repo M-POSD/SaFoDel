@@ -44,7 +44,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
 
-        binding.mapView.setOnTouchListener { v, event ->
+        binding.mapView.setOnTouchListener { _, event ->
             when(event.action){
                 MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
                 MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
