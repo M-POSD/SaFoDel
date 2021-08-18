@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic3Binding
 import com.example.safodel.fragment.BasicFragment
 
@@ -18,6 +19,7 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
 
         binding.gear1Card.editText.text = "Gear 1"
         binding.gear2Card.editText.text = "Gear 2"
+        binding.epic3Picture.epicImage.setImageResource(R.drawable.epic3_image)
 
         setToolbar2(toolbar)
         return binding.root
