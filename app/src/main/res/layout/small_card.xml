@@ -12,7 +12,9 @@
         android:layout_marginVertical="10dp"
         android:checkable="true"
         android:clickable="true"
+        app:cardElevation="5dp"
         android:focusable="true"
+        app:cardCornerRadius="10dp"
         app:cardBackgroundColor="@color/light_green">
 
         <LinearLayout
