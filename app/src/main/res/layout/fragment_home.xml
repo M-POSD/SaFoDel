@@ -34,7 +34,7 @@
             android:layout_marginHorizontal="50dp"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="Welcome to SafeDe!"
+            android:text="Welcome to SafoDel"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textSize="30sp" />
 

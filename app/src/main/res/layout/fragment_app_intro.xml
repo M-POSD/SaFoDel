@@ -18,6 +18,7 @@
             android:layout_marginVertical="10dp"
             android:checkable="true"
             android:focusable="true"
+            app:cardCornerRadius="30dp"
             app:cardBackgroundColor="@color/light_green">
 
             <LinearLayout

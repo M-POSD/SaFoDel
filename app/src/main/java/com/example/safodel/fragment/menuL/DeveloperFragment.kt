@@ -15,8 +15,9 @@ class DeveloperFragment : BasicFragment<FragmentDeveloperBinding>(FragmentDevelo
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDeveloperBinding.inflate(inflater,container,false)
-        binding.editText.text = "Team 27\n" + "\n" +
-                "CJ" + "\n" +
+        binding.developerTeam.text = "Team 27"
+        binding.developerTeam.textSize = 25.0F
+        binding.developerName.text = "CJ" + "\n" +
                 "Francis" + "\n" +
                 "Hsuanyu" + "\n" +
                 "James" + "\n" +
