@@ -1,4 +1,4 @@
-package com.example.safodel.fragment
+package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,23 +6,19 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.safodel.R
-import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.databinding.FragmentMapBinding
+import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.ui.main.MainActivity
-import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
-import javax.microedition.khronos.egl.EGL
 
 
-class MapFragment:BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
+class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
     private var mapView: MapView? = null
     private lateinit var permissionsManager: PermissionsManager
     var latLng = LatLng(-37.876823, 145.045837)

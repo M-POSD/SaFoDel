@@ -20,7 +20,7 @@ import androidx.core.view.MotionEventCompat
 
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
-import com.example.safodel.fragment.HomeFragmentDirections
+import com.example.safodel.fragment.menuB.HomeFragmentDirections
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 
@@ -104,6 +104,11 @@ class MainActivity : AppCompatActivity() {
                     // for control the action from Home to AppIntro
                     R.id.navAppIntro -> {
                         val action = HomeFragmentDirections.actionHomeFragmentToAppIntroFragment()
+                        navController.navigate(action)
+                    }
+
+                    R.id.navDeveloper -> {
+                        val action = HomeFragmentDirections.actionHomeFragmentToDeveloperFragment()
                         navController.navigate(action)
                     }
                 }

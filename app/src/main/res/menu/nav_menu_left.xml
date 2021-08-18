@@ -11,5 +11,11 @@
             android:id="@+id/navAppIntro"
             android:icon="@drawable/ic_baseline_pedal_bike_24"
             android:title="@string/app_intro"/>
+
+        <item
+            android:id="@+id/navDeveloper"
+            android:icon="@drawable/email"
+            android:title="@string/developer"/>
+
     </group>
 </menu>

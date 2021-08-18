@@ -1,14 +1,11 @@
-package com.example.safodel.fragment
+package com.example.safodel.fragment.menuL
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
-import com.example.safodel.R
 import com.example.safodel.databinding.FragmentAppIntroBinding
-import com.example.safodel.databinding.FragmentHomeBinding
+import com.example.safodel.fragment.BasicFragment
 
 
 class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntroBinding::inflate){
@@ -18,11 +15,12 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAppIntroBinding.inflate(inflater,container,false)
-        binding.appIntro.text = "Topic: Educating Food Delivery Bike Riders\n" +
-                "\n" +
-                "Project: SaFoDel\n" +
-                "\n" +
-                "Audience: Potential and already existing food delivery bike riders"
+        binding.appIntro.text = "Topic:" + "\n" +
+                "Educating Food Delivery Bike Riders\n" + "\n" +
+                "Project:" + "\n" +
+                "SaFoDel\n" + "\n" +
+                "Audience:" + "\n" +
+                "Potential and already existing food delivery bike riders"
         val toolbar = binding.toolbar.root
         setToolbar2(toolbar)
         return binding.root

@@ -1,15 +1,10 @@
-package com.example.safodel.fragment
+package com.example.safodel.fragment.menuB
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.core.view.GravityCompat
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
-import com.example.safodel.ui.main.MainActivity
+import com.example.safodel.fragment.BasicFragment
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate){

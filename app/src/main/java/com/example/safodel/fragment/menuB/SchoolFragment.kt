@@ -1,16 +1,14 @@
-package com.example.safodel.fragment
+package com.example.safodel.fragment.menuB
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.databinding.FragmentSchoolBinding
+import com.example.safodel.fragment.BasicFragment
 
 
-
-class SchoolFragment :BasicFragment<FragmentSchoolBinding>(FragmentSchoolBinding::inflate){
+class SchoolFragment : BasicFragment<FragmentSchoolBinding>(FragmentSchoolBinding::inflate){
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
