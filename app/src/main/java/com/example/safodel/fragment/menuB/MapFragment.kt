@@ -34,7 +34,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         _binding = FragmentMapBinding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
         val mainActivity = activity as MainActivity
-        setToolbar(toolbar)
+        setToolbarBasic(toolbar)
         mapView = binding.mapView
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync {

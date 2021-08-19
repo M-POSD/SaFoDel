@@ -29,7 +29,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
     /**
      *  Press the navigation icon to pop up the navigation window
      */
-    fun setToolbar(toolbar: androidx.appcompat.widget.Toolbar){
+    fun setToolbarBasic(toolbar: androidx.appcompat.widget.Toolbar){
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
@@ -41,11 +41,22 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
     }
 
     /**
-     * Press the navigation icon to go back to previous page
+     * Press the return navigation icon to go back to previous page
      */
-    fun setToolbar2(toolbar: androidx.appcompat.widget.Toolbar) {
-        setToolbar(toolbar)
+    fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
+        setToolbarBasic(toolbar)
         toolbar.setNavigationIcon(R.drawable.back)
+        toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+    }
+
+    /**
+     * Press the cancelled navigation icon to go back to previous page
+     */
+    fun setToolbarCancel(toolbar: androidx.appcompat.widget.Toolbar) {
+        setToolbarBasic(toolbar)
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel_24)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }

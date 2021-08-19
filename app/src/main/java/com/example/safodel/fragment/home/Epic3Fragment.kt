@@ -21,7 +21,7 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         binding.gear2Card.editText.text = "Gear 2"
         binding.epic3Picture.epicImage.setImageResource(R.drawable.epic3_image)
 
-        setToolbar2(toolbar)
+        setToolbarReturn(toolbar)
         return binding.root
     }
 

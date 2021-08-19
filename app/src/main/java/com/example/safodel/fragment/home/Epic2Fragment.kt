@@ -16,7 +16,7 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
     ): View {
         _binding = FragmentEpic2Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
-        setToolbar2(toolbar)
+        setToolbarReturn(toolbar)
 
         binding.info1Card.editText.text = "Info 1"
         binding.info2Card.editText.text = "Info 2"

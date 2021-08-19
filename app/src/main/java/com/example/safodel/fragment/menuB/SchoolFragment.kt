@@ -16,7 +16,7 @@ class SchoolFragment : BasicFragment<FragmentSchoolBinding>(FragmentSchoolBindin
     ): View {
         _binding = FragmentSchoolBinding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
-        setToolbar(toolbar)
+        setToolbarBasic(toolbar)
         return binding.root
     }
 

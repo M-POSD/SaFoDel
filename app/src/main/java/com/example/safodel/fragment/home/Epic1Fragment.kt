@@ -19,7 +19,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         binding.tip1Card.editText.text = "Tip 1"
         binding.tip2Card.editText.text = "Tip 2"
         binding.epic1Picture.epicImage.setImageResource(R.drawable.epic1_image)
-        setToolbar2(toolbar)
+        setToolbarReturn(toolbar)
         return binding.root
     }
 

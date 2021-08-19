@@ -16,7 +16,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
 
         val toolbar = binding.toolbar.root
-        setToolbar(toolbar)
+        setToolbarBasic(toolbar)
 
         binding.epic1Card.editText.text = "Ride Safer"
         binding.epic2Card.editText.text = "Delivery on e-bike"
