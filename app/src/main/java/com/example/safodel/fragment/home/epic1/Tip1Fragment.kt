@@ -18,8 +18,8 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         binding.text1.text = "Here are a few safety tips to follow when delivering food on a bike"
         binding.text2.text = "Worried about your safety while delivering at night? Follow these tips to stay safe."
         val toolbar = binding.toolbar.root
-        val mainActivity = activity as MainActivity
-        mainActivity.isBottomNavigationVisible(false)
+//        val mainActivity = activity as MainActivity
+//        mainActivity.isBottomNavigationVisible(false)
         setToolbarCancel(toolbar)
         return binding.root
     }

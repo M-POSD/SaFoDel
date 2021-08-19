@@ -60,8 +60,8 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
 
-            val mainActivity = activity as MainActivity
-            mainActivity.isBottomNavigationVisible(true)
+//            val mainActivity = activity as MainActivity
+//            mainActivity.isBottomNavigationVisible(true)
         }
     }
 

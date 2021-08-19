@@ -12,11 +12,6 @@
         layout="@layout/epic_page_layout"
         android:id="@+id/epic1Picture"/>
 
-    <include
-        layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar"
-        app:layout_collapseMode="pin"/>
-
     <LinearLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
@@ -24,6 +19,12 @@
         android:gravity="center"
         android:layout_marginTop="30dp"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"/>
+
         <include
             layout="@layout/large_card"
             android:id="@+id/tip1Card" />
@@ -31,6 +32,11 @@
             layout="@layout/large_card"
             android:id="@+id/tip2Card" />
     </LinearLayout>
+
+    <include
+        layout="@layout/simple_toolbar"
+        android:id="@+id/toolbar"
+        app:layout_collapseMode="pin"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
