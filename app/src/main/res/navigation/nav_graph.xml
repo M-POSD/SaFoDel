@@ -72,7 +72,15 @@
         android:id="@+id/epic1Fragment"
         android:name="com.example.safodel.fragment.home.Epic1Fragment"
         android:label="fragment_epic1"
-        tools:layout="@layout/fragment_epic1" />
+        tools:layout="@layout/fragment_epic1" >
+        <action
+            android:id="@+id/action_epic1Fragment_to_tip1Fragment"
+            app:destination="@id/tip1Fragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom"/>
+    </fragment>
     <fragment
         android:id="@+id/epic2Fragment"
         android:name="com.example.safodel.fragment.home.Epic2Fragment"
@@ -92,5 +100,9 @@
         android:id="@+id/developerFragment"
         android:name="com.example.safodel.fragment.menuL.DeveloperFragment"
         android:label="DeveloperFragment" />
+    <fragment
+        android:id="@+id/tip1Fragment"
+        android:name="com.example.safodel.fragment.home.epic1.Tip1Fragment"
+        android:label="Tip1Fragment" />
 
 </navigation>

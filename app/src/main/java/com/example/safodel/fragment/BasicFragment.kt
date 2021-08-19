@@ -59,6 +59,9 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel_24)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
+
+            val mainActivity = activity as MainActivity
+            mainActivity.isBottomNavigationVisible(true)
         }
     }
 
