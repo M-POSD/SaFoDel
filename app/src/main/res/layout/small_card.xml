@@ -15,7 +15,7 @@
         app:cardElevation="5dp"
         android:focusable="true"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/white">
+        app:cardBackgroundColor="@color/green_blue">
 
         <LinearLayout
             android:id="@+id/cardLayout"
@@ -29,6 +29,7 @@
                 android:id="@+id/editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="Demo"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
         </LinearLayout>

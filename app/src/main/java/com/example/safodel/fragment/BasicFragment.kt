@@ -36,7 +36,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu)
 
     }
 
@@ -45,7 +45,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
      */
     fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
         setToolbarBasic(toolbar)
-        toolbar.setNavigationIcon(R.drawable.back)
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
@@ -56,7 +56,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
      */
     fun setToolbarCancel(toolbar: androidx.appcompat.widget.Toolbar) {
         setToolbarBasic(toolbar)
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel_24)
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
 

@@ -58,6 +58,25 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleY="1.9"
+        android:scaleX="1.9"
+        android:src="@drawable/top_circle" />
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleY="1.75"
+        android:scaleX="1.75"
+        android:src="@drawable/right_circle" />
+
     <include
         layout="@layout/simple_toolbar"
         android:id="@+id/toolbar" />
