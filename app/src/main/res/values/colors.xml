@@ -8,10 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="skin">#ffd9cc</color>
-    <color name="gray">#e1e1ea</color>
+<!--    <color name="gray">#e1e1ea</color>-->
+    <color name="gray">#f2f2f2</color>  <!-- 95% -->
+
     <color name="deep_gray">#4d4d4d</color>
-    <color name="light_green">#CCEEA2</color>
+    <color name="light_green">#8ED89F</color>
     <color name="deep_green">#006600</color>
     <color name="deep_brown">#661a00</color>
+    <color name="milk_white">#FCF7F7</color>
 
 </resources>

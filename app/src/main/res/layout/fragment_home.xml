@@ -8,25 +8,21 @@
     android:layout_height="match_parent"
     tools:context=".fragment.menuB.HomeFragment">
 
-    <include
-        layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
         <ImageView
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleY="1.5"
+            android:scaleY="1.6"
             android:scaleX="1.5"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="25dp"
-            android:src="@drawable/home_image" />/>
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/home_image" />
 
         <TextView
             android:layout_width="match_parent"
@@ -61,6 +57,10 @@
             android:id="@+id/epic3Card" />
 
     </LinearLayout>
+
+    <include
+        layout="@layout/simple_toolbar"
+        android:id="@+id/toolbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
