@@ -30,7 +30,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     }
 
     private fun defaultViewSetup() {
-        binding.warningCard.editText.text = "You are responsible for your own safety while delivering food."
+        binding.warningCard.editText.text = "Responsible for your own safety while delivering food."
         binding.tip1Card.editText.text = "Tip 1"
         binding.tip2Card.editText.text = "Tip 2"
         binding.tip3Card.editText.text = "Tip 3"

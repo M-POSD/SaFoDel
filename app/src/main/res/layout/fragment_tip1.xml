@@ -16,7 +16,7 @@
         <include layout="@layout/small_card"
             android:id="@+id/card1Back"/>
 
-        <include layout="@layout/large_card"
+        <include layout="@layout/medium_card"
             android:id="@+id/card2Back"/>
 
     </LinearLayout>
@@ -30,7 +30,7 @@
         <include layout="@layout/small_card"
             android:id="@+id/card1Front"/>
 
-        <include layout="@layout/large_card"
+        <include layout="@layout/medium_card"
             android:id="@+id/card2Front"/>
 
     </LinearLayout>

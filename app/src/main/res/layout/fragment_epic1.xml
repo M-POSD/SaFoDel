@@ -25,16 +25,16 @@
             android:id="@+id/warningCard" />
 
         <include
-            layout="@layout/large_card"
+            layout="@layout/medium_card"
             android:id="@+id/tip1Card" />
         <include
-            layout="@layout/large_card"
+            layout="@layout/medium_card"
             android:id="@+id/tip2Card" />
         <include
-            layout="@layout/large_card"
+            layout="@layout/medium_card"
             android:id="@+id/tip3Card" />
         <include
-            layout="@layout/large_card"
+            layout="@layout/medium_card"
             android:id="@+id/tip4Card" />
     </LinearLayout>
 

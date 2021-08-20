@@ -26,10 +26,10 @@
             android:layout_marginTop="70dp"/>
 
         <include
-            layout="@layout/large_card"
+            layout="@layout/medium_card"
             android:id="@+id/gear1Card" />
         <include
-            layout="@layout/large_card"
+            layout="@layout/medium_card"
             android:id="@+id/gear2Card" />
     </LinearLayout>
 
