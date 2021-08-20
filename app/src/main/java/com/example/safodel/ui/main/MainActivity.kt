@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController // Control fragment
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
-        AutoSizeConfig.getInstance().setBaseOnWidth(false)
+        AutoSizeConfig.getInstance().isBaseOnWidth = false
 
     }
 
@@ -133,11 +134,29 @@ class MainActivity : AppCompatActivity() {
      * Control the bottom navigation is visible or not.
      */
     fun isBottomNavigationVisible(boolean: Boolean){
-        if(boolean == false)
+        if(!boolean)
             binding.bottomNavigation.visibility = View.INVISIBLE
         else
             binding.bottomNavigation.visibility = View.VISIBLE
     }
 
-
+//    override fun onTouchEvent(event: MotionEvent): Boolean {
+//        if (navController.currentDestination?.id != R.id.tip1Fragment) {
+//            val action: Int = MotionEventCompat.getActionMasked(event)
+//            return when (action) {
+//                MotionEvent.ACTION_DOWN -> {
+//                    isBottomNavigationVisible(false)
+//                    Log.d("Down", "Action was DOWN")
+//                    true
+//                }
+//                MotionEvent.ACTION_UP -> {
+//                    isBottomNavigationVisible(true)
+//                    Log.d("Up", "Action was UP")
+//                    true
+//                }
+//                else -> super.onTouchEvent(event)
+//            }
+//        }
+//        return super.onTouchEvent(event)
+//    }
 }
