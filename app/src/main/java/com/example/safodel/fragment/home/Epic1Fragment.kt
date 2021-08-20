@@ -1,13 +1,11 @@
 package com.example.safodel.fragment.home
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.fragment.menuB.HomeFragmentDirections
 
 
 class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::inflate) {
