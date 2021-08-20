@@ -13,8 +13,8 @@ import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.ui.main.MainActivity
 
 class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inflate){
-    lateinit var flip_front : AnimatorSet
-    lateinit var flip_back : AnimatorSet
+    lateinit var flipFront : AnimatorSet
+    lateinit var flipBack : AnimatorSet
     val isFrontArray: BooleanArray = booleanArrayOf(true, true)
 
     override fun onCreateView(
@@ -32,55 +32,7 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         binding.card1Back.editText.text = tempTipMap(title1)
         binding.card2Back.editText.text = tempTipMap(title2)
 
-        flip_front = AnimatorInflater.loadAnimator(
-            activity?.applicationContext,
-            R.animator.flip_front_animator) as AnimatorSet
-
-        flip_back = AnimatorInflater.loadAnimator(
-            activity?.applicationContext,
-            R.animator.flip_back_animator) as AnimatorSet
-
-        val scale : Float = requireActivity().applicationContext.resources.displayMetrics.density
-        Log.d("Scale", "" + scale)
-        binding.card1Front.cardLayout.cameraDistance = 8000 * scale
-        binding.card1Back.cardLayout.cameraDistance = 8000 * scale
-        binding.card2Front.cardLayout.cameraDistance = 8000 * scale
-        binding.card2Back.cardLayout.cameraDistance = 8000 * scale
-
-
-        binding.card1Front.card.setOnClickListener() {
-            if (isFrontArray[0]) {
-                flip_front.setTarget(binding.card1Front.card)
-                flip_back.setTarget(binding.card1Back.card)
-                flip_front.start()
-                flip_back.start()
-                isFrontArray[0] = false
-            } else {
-                flip_front.setTarget(binding.card1Back.card)
-                flip_back.setTarget(binding.card1Front.card)
-                flip_front.start()
-                flip_back.start()
-                isFrontArray[0] = true
-            }
-
-        }
-
-        binding.card2Front.card.setOnClickListener() {
-            if (isFrontArray[1]) {
-                flip_front.setTarget(binding.card2Front.card)
-                flip_back.setTarget(binding.card2Back.card)
-                flip_front.start()
-                flip_back.start()
-                isFrontArray[1] = false
-            } else {
-                flip_front.setTarget(binding.card2Back.card)
-                flip_back.setTarget(binding.card2Front.card)
-                flip_front.start()
-                flip_back.start()
-                isFrontArray[1] = true
-            }
-
-        }
+//        flipCard() => able card to flip
 
         setToolbarCancel(toolbar)
         return binding.root
@@ -98,6 +50,59 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         tipMap["title1"] = "Hi My name is Hsuan! How are u today!"
         tipMap["title2"] = "Hi My name is CJ! Please call CJ not DJ!"
         return tipMap[key]
+    }
+
+    private fun flipCard() {
+        flipFront = AnimatorInflater.loadAnimator(
+            activity?.applicationContext,
+            R.animator.flip_front_animator) as AnimatorSet
+
+        flipBack = AnimatorInflater.loadAnimator(
+            activity?.applicationContext,
+            R.animator.flip_back_animator) as AnimatorSet
+
+        val scale : Float = requireActivity().applicationContext.resources.displayMetrics.density
+        Log.d("Scale", "" + scale)
+
+        binding.card1Front.card.cameraDistance = 8000 * scale
+        binding.card1Back.card.cameraDistance = 8000 * scale
+        binding.card2Front.card.cameraDistance = 8000 * scale
+        binding.card2Back.card.cameraDistance = 8000 * scale
+
+
+        binding.card1Front.card.setOnClickListener() {
+            if (isFrontArray[0]) {
+                flipFront.setTarget(binding.card1Front.card)
+                flipBack.setTarget(binding.card1Back.card)
+                flipFront.start()
+                flipBack.start()
+                isFrontArray[0] = false
+            } else {
+                flipFront.setTarget(binding.card1Back.card)
+                flipBack.setTarget(binding.card1Front.card)
+                flipFront.start()
+                flipBack.start()
+                isFrontArray[0] = true
+            }
+
+        }
+
+        binding.card2Front.card.setOnClickListener() {
+            if (isFrontArray[1]) {
+                flipFront.setTarget(binding.card2Front.card)
+                flipBack.setTarget(binding.card2Back.card)
+                flipFront.start()
+                flipBack.start()
+                isFrontArray[1] = false
+            } else {
+                flipFront.setTarget(binding.card2Back.card)
+                flipBack.setTarget(binding.card2Front.card)
+                flipFront.start()
+                flipBack.start()
+                isFrontArray[1] = true
+            }
+
+        }
     }
 
 }

@@ -13,7 +13,7 @@
         android:layout_marginTop="75dp"
         android:orientation="vertical">
 
-        <include layout="@layout/large_card"
+        <include layout="@layout/small_card"
             android:id="@+id/card1Back"/>
 
         <include layout="@layout/large_card"
@@ -27,7 +27,7 @@
         android:layout_marginTop="75dp"
         android:orientation="vertical">
 
-        <include layout="@layout/large_card"
+        <include layout="@layout/small_card"
             android:id="@+id/card1Front"/>
 
         <include layout="@layout/large_card"
