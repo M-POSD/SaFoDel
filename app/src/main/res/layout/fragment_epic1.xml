@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/epic1Fragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.home.Epic1Fragment">
-
-    <include
-        layout="@layout/epic_page_layout"
-        android:id="@+id/epic1Picture"/>
+    android:fillViewport="true">
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/epic1Fragment"
+    tools:context=".fragment.home.Epic1Fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="65dp"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"/>
 
         <include
             layout="@layout/large_card"
@@ -31,12 +26,25 @@
         <include
             layout="@layout/large_card"
             android:id="@+id/tip2Card" />
+        <include
+            layout="@layout/large_card"
+            android:id="@+id/tip3Card" />
+        <include
+            layout="@layout/large_card"
+            android:id="@+id/tip4Card" />
     </LinearLayout>
+
+    <include
+        layout="@layout/epic_page_layout"
+        android:id="@+id/epic1Picture"
+        app:layout_collapseMode="pin"/>
 
     <include
         layout="@layout/simple_toolbar"
         android:id="@+id/toolbar"
         app:layout_collapseMode="pin"/>
 
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+</ScrollView>
