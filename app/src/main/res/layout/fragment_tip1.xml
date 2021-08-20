@@ -7,33 +7,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.home.epic1.Tip1Fragment">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="75dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
+        android:scrollbars="vertical" />
 
-        <include layout="@layout/small_card"
-            android:id="@+id/card1Back"/>
-
-        <include layout="@layout/medium_card"
-            android:id="@+id/card2Back"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="75dp"
-        android:orientation="vertical">
-
-        <include layout="@layout/small_card"
-            android:id="@+id/card1Front"/>
-
-        <include layout="@layout/medium_card"
-            android:id="@+id/card2Front"/>
-
-    </LinearLayout>
 
     <include
         layout="@layout/simple_toolbar"
