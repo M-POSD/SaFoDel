@@ -21,6 +21,10 @@
         android:orientation="vertical">
 
         <include
+            layout="@layout/warning_card"
+            android:id="@+id/warningCard" />
+
+        <include
             layout="@layout/large_card"
             android:id="@+id/tip1Card" />
         <include

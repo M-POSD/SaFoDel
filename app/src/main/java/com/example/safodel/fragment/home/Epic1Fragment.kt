@@ -1,5 +1,6 @@
 package com.example.safodel.fragment.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.navigation.fragment.findNavController
@@ -18,9 +19,8 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     ): View {
         _binding = FragmentEpic1Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
-        binding.tip1Card.editText.text = "Tip 1"
-        binding.tip2Card.editText.text = "Tip 2"
-        binding.epic1Picture.epicImage.setImageResource(R.drawable.epic1_image)
+
+        defaultViewSetup()
 
         binding.tip1Card.card.setOnClickListener() {
             val action = Epic1FragmentDirections.actionEpic1FragmentToTip1Fragment()
@@ -29,6 +29,15 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
 
         setToolbarReturn(toolbar)
         return binding.root
+    }
+
+    private fun defaultViewSetup() {
+        binding.warningCard.editText.text = "You are responsible for your own safety while delivering food."
+        binding.tip1Card.editText.text = "Tip 1"
+        binding.tip2Card.editText.text = "Tip 2"
+        binding.tip3Card.editText.text = "Tip 3"
+        binding.tip4Card.editText.text = "Tip 4"
+        binding.epic1Picture.epicImage.setImageResource(R.drawable.epic1_image)
     }
 
     override fun onDestroyView() {
