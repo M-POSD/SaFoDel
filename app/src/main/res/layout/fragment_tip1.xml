@@ -11,15 +11,14 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="60dp"
         android:scrollbars="vertical" />
 
 
     <include
         layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar"
-        app:layout_collapseMode="pin"/>
+        android:id="@+id/toolbar"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
