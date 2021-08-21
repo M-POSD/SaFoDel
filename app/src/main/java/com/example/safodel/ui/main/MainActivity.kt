@@ -5,22 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 
-import androidx.core.view.MotionEventCompat
-
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.fragment.findNavController
 import com.example.safodel.fragment.menuB.HomeFragmentDirections
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
@@ -139,24 +131,4 @@ class MainActivity : AppCompatActivity() {
         else
             binding.bottomNavigation.visibility = View.VISIBLE
     }
-
-//    override fun onTouchEvent(event: MotionEvent): Boolean {
-//        if (navController.currentDestination?.id != R.id.tip1Fragment) {
-//            val action: Int = MotionEventCompat.getActionMasked(event)
-//            return when (action) {
-//                MotionEvent.ACTION_DOWN -> {
-//                    isBottomNavigationVisible(false)
-//                    Log.d("Down", "Action was DOWN")
-//                    true
-//                }
-//                MotionEvent.ACTION_UP -> {
-//                    isBottomNavigationVisible(true)
-//                    Log.d("Up", "Action was UP")
-//                    true
-//                }
-//                else -> super.onTouchEvent(event)
-//            }
-//        }
-//        return super.onTouchEvent(event)
-//    }
 }

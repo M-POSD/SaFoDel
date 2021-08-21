@@ -65,5 +65,12 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         }
     }
 
+    fun setToolbarVisible(isVisible: Boolean) {
+        return when(isVisible) {
+            true -> (activity as MainActivity).isBottomNavigationVisible(true)
+            false -> (activity as MainActivity).isBottomNavigationVisible(false)
+        }
+    }
+
 }
 
