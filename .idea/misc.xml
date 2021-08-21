@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.10462962962962963" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new.xml" value="0.1868421052631579" />
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.22777777777777777" />
@@ -19,7 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.12030075187969924" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
-        <entry key="app/src/main/res/layout/small_card.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/nav_menu_bottom.xml" value="0.17324561403508773" />
         <entry key="app/src/main/res/menu/nav_menu_left.xml" value="0.36041666666666666" />

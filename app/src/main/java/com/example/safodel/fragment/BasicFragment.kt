@@ -46,7 +46,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
      */
     fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
         setToolbarBasic(toolbar)
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
+        toolbar.setNavigationIcon(R.drawable.baseline_chevron_left_black_36)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
