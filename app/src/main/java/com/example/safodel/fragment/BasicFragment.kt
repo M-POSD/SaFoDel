@@ -65,6 +65,9 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         }
     }
 
+    /**
+     * Facilitate to change toolbar visibility
+     */
     fun setToolbarVisible(isVisible: Boolean) {
         return when(isVisible) {
             true -> (activity as MainActivity).isBottomNavigationVisible(true)
