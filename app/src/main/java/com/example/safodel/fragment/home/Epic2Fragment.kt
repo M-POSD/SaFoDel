@@ -20,7 +20,7 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
 
         binding.info1Card.editText.text = "Info 1"
         binding.info2Card.editText.text = "Info 2"
-        binding.epic2Picture.epicImage.setImageResource(R.drawable.epic2_image)
+        binding.epic2Picture.image.setImageResource(R.drawable.epic2_image)
 
         return binding.root
     }

@@ -35,7 +35,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         binding.tip2Card.editText.text = "Tip 2"
         binding.tip3Card.editText.text = "Tip 3"
         binding.tip4Card.editText.text = "Tip 4"
-        binding.epic1Picture.epicImage.setImageResource(R.drawable.epic1_image)
+        binding.epic1Picture.image.setImageResource(R.drawable.epic1_image)
     }
 
     override fun onDestroyView() {
