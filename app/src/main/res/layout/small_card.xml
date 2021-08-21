@@ -15,7 +15,7 @@
         app:cardElevation="5dp"
         android:focusable="true"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/green_blue">
+        app:cardBackgroundColor="@color/green">
 
         <LinearLayout
             android:id="@+id/cardLayout"
