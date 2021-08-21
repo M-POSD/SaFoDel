@@ -18,9 +18,6 @@ import com.example.safodel.model.Tip1Info
 import com.example.safodel.ui.main.MainActivity
 
 class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inflate){
-//    lateinit var flipFront : AnimatorSet
-//    lateinit var flipBack : AnimatorSet
-//    val isFrontArray: BooleanArray = booleanArrayOf(true, true)
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var tips: MutableList<Tip1Info>
     private lateinit var adapter: Tip1Adapter
@@ -58,69 +55,6 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     }
 
 }
-
-    /*
-    private fun tempTipMap(key: String): String? {
-        var tipMap : HashMap<String, String> = HashMap<String, String> ()
-        tipMap["title1"] = "Hi My name is Hsuan! How are u today!"
-        tipMap["title2"] = "Hi My name is CJ! Please call CJ not DJ!"
-        return tipMap[key]
-    }
-
-    private fun flipCard() {
-        flipFront = AnimatorInflater.loadAnimator(
-            activity?.applicationContext,
-            R.animator.flip_front_animator) as AnimatorSet
-
-        flipBack = AnimatorInflater.loadAnimator(
-            activity?.applicationContext,
-            R.animator.flip_back_animator) as AnimatorSet
-
-        val scale : Float = requireActivity().applicationContext.resources.displayMetrics.density
-        Log.d("Scale", "" + scale)
-
-        binding.card1Front.card.cameraDistance = 8000 * scale
-        binding.card1Back.card.cameraDistance = 8000 * scale
-        binding.card2Front.card.cameraDistance = 8000 * scale
-        binding.card2Back.card.cameraDistance = 8000 * scale
-
-
-        binding.card1Front.card.setOnClickListener() {
-            if (isFrontArray[0]) {
-                flipFront.setTarget(binding.card1Front.card)
-                flipBack.setTarget(binding.card1Back.card)
-                flipFront.start()
-                flipBack.start()
-                isFrontArray[0] = false
-            } else {
-                flipFront.setTarget(binding.card1Back.card)
-                flipBack.setTarget(binding.card1Front.card)
-                flipFront.start()
-                flipBack.start()
-                isFrontArray[0] = true
-            }
-
-        }
-
-        binding.card2Front.card.setOnClickListener() {
-            if (isFrontArray[1]) {
-                flipFront.setTarget(binding.card2Front.card)
-                flipBack.setTarget(binding.card2Back.card)
-                flipFront.start()
-                flipBack.start()
-                isFrontArray[1] = false
-            } else {
-                flipFront.setTarget(binding.card2Back.card)
-                flipBack.setTarget(binding.card2Front.card)
-                flipFront.start()
-                flipBack.start()
-                isFrontArray[1] = true
-            }
-
-        }
-    }
-
-     */
 
 //        val mainActivity = activity as MainActivity
 //        mainActivity.isBottomNavigationVisible(false)

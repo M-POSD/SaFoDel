@@ -8,9 +8,9 @@
     android:fitsSystemWindows="true"
     tools:context=".fragment.home.Epic1Fragment">
 
-<include
-    layout="@layout/epic_page_layout"
-    android:id="@+id/epic1Picture"/>
+    <include
+        layout="@layout/epic_page_layout"
+        android:id="@+id/epic1Picture"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

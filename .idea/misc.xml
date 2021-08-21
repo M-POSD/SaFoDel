@@ -4,25 +4,27 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.10462962962962963" />
-        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new.xml" value="0.1868421052631579" />
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18840579710144928" />
-        <entry key="app/src/main/res/layout/epic_page_layout.xml" value="0.29393115942028986" />
+        <entry key="app/src/main/res/layout/epic_page_layout.xml" value="0.11170212765957446" />
         <entry key="app/src/main/res/layout/fragment_app_intro.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_developer.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18840579710144928" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.2504528985507246" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
-        <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.12030075187969924" />
+        <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
-        <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/medium_card.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/layout/rv_tip1.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.235248919664515" />
+        <entry key="app/src/main/res/layout/small_card.xml" value="0.7130216654110864" />
+        <entry key="app/src/main/res/layout/warning_card.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
-        <entry key="app/src/main/res/menu/nav_menu_bottom.xml" value="0.17324561403508773" />
         <entry key="app/src/main/res/menu/nav_menu_left.xml" value="0.36041666666666666" />
       </map>
     </option>
