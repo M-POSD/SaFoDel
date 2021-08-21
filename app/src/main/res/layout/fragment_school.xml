@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.SchoolFragment">
+    tools:context=".fragment.menuB.SchoolFragment">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,5 +13,9 @@
         android:text="This is school page"
         android:textSize="30sp"
         android:textColor="@color/black"/>
+
+    <include
+        layout="@layout/simple_toolbar"
+        android:id="@+id/toolbar" />
 
 </FrameLayout>

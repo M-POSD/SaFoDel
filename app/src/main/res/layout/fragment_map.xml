@@ -4,7 +4,8 @@
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.MapFragment">
+    tools:context=".fragment.menuB.MapFragment">
+
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -15,5 +16,9 @@
         mapbox:mapbox_cameraTargetLng="-56.149056"
         mapbox:mapbox_cameraZoom="5.526846">
     </com.mapbox.mapboxsdk.maps.MapView>
+
+    <include
+        layout="@layout/simple_toolbar"
+        android:id="@+id/toolbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
