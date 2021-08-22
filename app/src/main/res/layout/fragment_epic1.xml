@@ -10,8 +10,8 @@
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="65dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="95dp"
         android:orientation="vertical">
 
         <include
@@ -26,9 +26,6 @@
             android:id="@+id/tip3Card"
             layout="@layout/medium_card" />
 
-        <include
-            android:id="@+id/tip4Card"
-            layout="@layout/medium_card" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

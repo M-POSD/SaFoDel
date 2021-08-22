@@ -7,7 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context=".fragment.EpicsFragment">
 
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/simple_toolbar" />

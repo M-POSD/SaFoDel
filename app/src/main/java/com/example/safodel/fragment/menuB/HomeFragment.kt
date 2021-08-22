@@ -18,9 +18,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
 
-        binding.epic1Card.editText.text = "Ride Safer"
-        binding.epic2Card.editText.text = "Delivery on e-bike"
-        binding.epic3Card.editText.text = "Safty Gear"
+        binding.epicCard12.editTextLeft.text = "Ride Safer"
+        binding.epicCard12.editTextRight.text = "Delivery on e-bike"
+        binding.epicCard34.editTextLeft.text = "Safety Gear"
+        binding.epicCard34.editTextRight.text = "Placeholder"
 
 //        binding.epic1Card.card.setOnClickListener() {
 //            val action = HomeFragmentDirections.actionHomeFragmentToEpic1Fragment()
@@ -37,7 +38,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //            findNavController().navigate(action)
 //        }
 
-        binding.epic1Card.card.setOnClickListener() {
+        binding.epicCard12.cardLeft.setOnClickListener() {
             val action = HomeFragmentDirections.actionHomeFragmentToEpicsFragment()
             findNavController().navigate(action)
         }

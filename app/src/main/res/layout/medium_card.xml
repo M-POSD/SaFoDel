@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
@@ -13,33 +14,73 @@
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="@color/green_blue">
+        app:cardBackgroundColor="#FFF6F1"
+        app:cardCornerRadius="5dp">
 
         <LinearLayout
-            android:id="@+id/cardLayout"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Demo"
-                android:textSize="25dp"
-                android:textColor="@color/white"
-                android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:scaleX="1"
-                android:scaleY="1"
-                android:src="@drawable/ic_baseline_arrow_forward_ios"/>
+                android:layout_gravity="center"
+                android:layout_weight="0.4"
+                android:scaleX="2.25"
+                android:scaleY="2.25"
+                android:src="@drawable/book" />
+
+            <LinearLayout
+                android:id="@+id/cardLayout"
+                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:layout_weight="0.6"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Demo"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Demo"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:layout_gravity="right"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
+                        android:src="@drawable/next_page" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
