@@ -1,7 +1,6 @@
 package com.example.safodel.ui.main
 
 import android.content.res.Resources
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -9,15 +8,15 @@ import android.os.Looper
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
+import com.example.safodel.adapter.EpicViewAdapter
 import com.example.safodel.databinding.ActivityMainBinding
 
-import com.example.safodel.fragment.menuB.HomeFragmentDirections
+import com.google.android.material.tabs.TabLayout
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 
@@ -26,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController : NavController
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,9 +74,8 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.navHome -> {
                     val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()
-                    var action = navController.currentBackStackEntry?.destination
+                    var action = navController.currentDestination
 //                    val currentFragment = navController.currentDestination?.removeAction()
-
 
                     Log.e("Fragment", action.toString())
 

@@ -9,7 +9,7 @@
     tools:context=".fragment.home.Epic1Fragment">
 
     <include
-        layout="@layout/epic_page_layout"
+        layout="@layout/epic_page_layout_v0"
         android:id="@+id/epic1Picture"/>
 
     <androidx.core.widget.NestedScrollView
