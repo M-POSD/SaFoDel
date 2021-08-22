@@ -15,14 +15,15 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEpic3Binding.inflate(inflater,container,false)
-        val toolbar = binding.toolbar.root
+        setDefaultView()
+        return binding.root
+    }
 
+    private fun setDefaultView() {
         binding.gear1Card.editText.text = "Gear 1"
         binding.gear2Card.editText.text = "Gear 2"
-        binding.epic3Picture.image.setImageResource(R.drawable.epic3_image)
-
-        setToolbarReturn(toolbar)
-        return binding.root
+        binding.gear3Card.editText.text = "Gear 3"
+        binding.gear4Card.editText.text = "Gear 4"
     }
 
     override fun onDestroyView() {

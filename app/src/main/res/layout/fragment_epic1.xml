@@ -1,54 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".fragment.home.Epic1Fragment">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <include
-        layout="@layout/epic_page_layout_v0"
-        android:id="@+id/epic1Picture"/>
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="65dp"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/bottom_sheet"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="65dp"
-            android:orientation="vertical">
+        <include
+            android:id="@+id/tip1Card"
+            layout="@layout/medium_card" />
 
-            <include
-                layout="@layout/warning_card"
-                android:id="@+id/warningCard" />
+        <include
+            android:id="@+id/tip2Card"
+            layout="@layout/medium_card" />
 
-            <include
-                layout="@layout/medium_card"
-                android:id="@+id/tip1Card" />
-            <include
-                layout="@layout/medium_card"
-                android:id="@+id/tip2Card" />
-            <include
-                layout="@layout/medium_card"
-                android:id="@+id/tip3Card" />
-            <include
-                layout="@layout/medium_card"
-                android:id="@+id/tip4Card" />
-        </LinearLayout>
+        <include
+            android:id="@+id/tip3Card"
+            layout="@layout/medium_card" />
 
-    </androidx.core.widget.NestedScrollView>
+        <include
+            android:id="@+id/tip4Card"
+            layout="@layout/medium_card" />
+    </LinearLayout>
 
-    <include
-        layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.core.widget.NestedScrollView>
 
 
 

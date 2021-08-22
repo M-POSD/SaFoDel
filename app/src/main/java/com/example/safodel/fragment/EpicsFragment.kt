@@ -21,7 +21,6 @@ import androidx.core.content.ContextCompat
 class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::inflate) {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPage2 : ViewPager2
-    private lateinit var adapter : EpicViewAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
