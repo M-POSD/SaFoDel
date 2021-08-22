@@ -21,7 +21,7 @@ import com.mapbox.mapboxsdk.maps.Style
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
     private var mapView: MapView? = null
     private lateinit var permissionsManager: PermissionsManager
-    var latLng = LatLng(-37.876823, 145.045837)
+    var defaultLatLng = LatLng(-37.876823, 145.045837)
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -39,11 +39,23 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync {
             MapboxMap -> MapboxMap.setStyle(Style.LIGHT){
-                val position =  CameraPosition.Builder().target(latLng).zoom(13.0).build()
+                val position =  CameraPosition.Builder().target(defaultLatLng).zoom(13.0).build()
             MapboxMap.cameraPosition = position
             }
         }
+        bottomNavHide() // Bottom navigation hide, when touch the map.
 
+        return binding.root
+    }
+
+
+
+    /*
+     *   Bottom navigation hide, when touch the map.
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    fun bottomNavHide(){
+        val mainActivity = activity as MainActivity
         binding.mapView.setOnTouchListener { _, event ->
             when(event.action){
                 MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
@@ -51,7 +63,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
             false
         }
-        return binding.root
     }
 
 

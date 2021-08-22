@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             navController.popBackStack() // Previous fragment out of stack
             when(it.itemId){
                 R.id.navHome -> {
-                    val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()
+                   // val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()
                     var action = navController.currentDestination
 //                    val currentFragment = navController.currentDestination?.removeAction()
 
