@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.home.epic1.Tip1Fragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="60dp"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/extreme_small"
+            layout="@layout/extreme_small" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notification"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:text="Beware of the RISKS of delivering on e-bikes"
+            android:gravity="center"
+            android:textColor="@color/secondary_green"
+            android:textSize="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary_green"
+            android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:scrollbars="vertical" />
+        </LinearLayout>
+    </LinearLayout>
 
 
     <include
-        layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar"/>
+        android:id="@+id/toolbar"
+        layout="@layout/simple_toolbar" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
