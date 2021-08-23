@@ -52,7 +52,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         setToolbarBasic(toolbar)
 
         val mainActivity = activity as MainActivity
+        var latLng = defaultLatLng
+        var position = CameraPosition.Builder().target(latLng).zoom(13.0)
+            .tilt(30.0).build()
+        val geocoder = Geocoder(context, Locale.getDefault())
         mapView = binding.mapView
+
 
         /*
          *   Bottom navigation hide, when touch the map.
@@ -67,7 +72,23 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-        addressSender()
+
+
+        binding.addressButton.setOnClickListener{
+            if(binding.addressEditText.text.toString() == "")
+                Toast.makeText(context,"Please enter the address", Toast.LENGTH_SHORT).show()
+            else {
+                val address = geocoder.getFromLocationName(binding.addressEditText.text.toString(), 1)
+                if (address.isNotEmpty()) {
+                    latLng = LatLng(address[0].latitude, address[0].longitude)
+                    position = CameraPosition.Builder().target(latLng).zoom(13.0)
+                        .tilt(30.0).build()
+                } else
+                    Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
+                setMapboxMap(latLng,position) // set marker
+            }
+        }
+
         binding.recenter.setOnClickListener {
             mapboxMap.setStyle(Style.LIGHT){
                 enableLocationComponent(it)
@@ -117,38 +138,22 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
-    private fun addressSender(){
-        var latLng = defaultLatLng
-        var position = CameraPosition.Builder().target(latLng).zoom(13.0)
-            .tilt(30.0).build()
-        val geocoder = Geocoder(context, Locale.getDefault())
-        binding.addressButton.setOnClickListener {
-            if(binding.addressEditText.text.toString() == "")
-                Toast.makeText(context,"Please enter the address", Toast.LENGTH_SHORT).show()
-            else {
-                val address = geocoder.getFromLocationName(binding.addressEditText.text.toString(), 1)
-                if (address.isNotEmpty()) {
-                    latLng = LatLng(address[0].latitude, address[0].longitude)
-                    position = CameraPosition.Builder().target(latLng).zoom(13.0)
-                        .tilt(30.0).build()
-                } else
-                    Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
-                    mapboxMap.setStyle(Style.LIGHT) {
-                    mapboxMap.cameraPosition
-                    val symbol = SymbolManager(mapView, mapboxMap, it)
-                    symbol.iconAllowOverlap = true
-                    it.addImage(
-                        "Marker",
-                        BitmapFactory.decodeResource(
-                            resources,
-                            R.drawable.mapbox_marker_icon_default
-                        )
-                    )
-                    symbol.create(SymbolOptions().withLatLng(latLng).withIconImage("Marker"))
-                }
-                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 4000)
-            }
+
+    private fun setMapboxMap(latLng: LatLng,position: CameraPosition){
+        mapboxMap.setStyle(Style.LIGHT) {
+            mapboxMap.cameraPosition
+            val symbol = SymbolManager(mapView, mapboxMap, it)
+            symbol.iconAllowOverlap = true
+            it.addImage(
+                "Marker",
+                BitmapFactory.decodeResource(
+                    resources,
+                    R.drawable.mapbox_marker_icon_default
+                )
+            )
+            symbol.create(SymbolOptions().withLatLng(latLng).withIconImage("Marker"))
         }
+        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 4000)
     }
 
 
