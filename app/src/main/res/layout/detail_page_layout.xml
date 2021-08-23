@@ -24,10 +24,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="14dp"
+            android:fontFamily="@font/notosansjp_bold"
             android:gravity="center"
             android:text="Beware of the RISKS of delivering on e-bikes"
             android:textColor="@color/secondary_green"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
     </LinearLayout>
 
     <LinearLayout

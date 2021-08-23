@@ -46,21 +46,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/notosansjp_bold"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/black"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="30dp" />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/notosansjp_bold"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/black"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
             </LinearLayout>
         </LinearLayout>

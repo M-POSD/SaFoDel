@@ -25,7 +25,7 @@
         <LinearLayout
             android:id="@+id/cardLayoutL"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="70dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="8dp">
@@ -34,6 +34,7 @@
                 android:id="@+id/editTextLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosansjp_bold"
                 android:textColor="@color/primary_green"
                 android:layout_gravity="center"
                 android:textSize="20dp"
@@ -60,7 +61,7 @@
         <LinearLayout
             android:id="@+id/cardLayoutR"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="70dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="8dp">
@@ -71,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_green"
                 android:gravity="center"
+                android:fontFamily="@font/notosansjp_bold"
                 android:textSize="20dp"
                 android:text="Demo"
                 android:textAppearance="?attr/textAppearanceHeadline6" />

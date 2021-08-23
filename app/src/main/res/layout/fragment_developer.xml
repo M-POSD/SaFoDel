@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/notosansjp_bold"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
                 <TextView
