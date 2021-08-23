@@ -15,14 +15,19 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEpic2Binding.inflate(inflater,container,false)
-        val toolbar = binding.toolbar.root
-        setToolbarReturn(toolbar)
 
-        binding.info1Card.editText.text = "Info 1"
-        binding.info2Card.editText.text = "Info 2"
-        binding.epic2Picture.image.setImageResource(R.drawable.epic2_image)
+        setDefaultView()
 
         return binding.root
+    }
+
+    private fun setDefaultView() {
+        binding.info1Card.title.text = "Info 1"
+        binding.info1Card.subtitle.text = "the potential risks of delivering"
+        binding.info2Card.title.text = "Info 2"
+        binding.info2Card.subtitle.text = "advantages of delivering"
+        binding.info3Card.title.text = "Info 3"
+        binding.info3Card.subtitle.text = "information on the e-bike rules and regulations"
     }
 
     override fun onDestroyView() {

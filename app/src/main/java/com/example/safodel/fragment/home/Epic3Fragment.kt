@@ -15,14 +15,17 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEpic3Binding.inflate(inflater,container,false)
-        val toolbar = binding.toolbar.root
-
-        binding.gear1Card.editText.text = "Gear 1"
-        binding.gear2Card.editText.text = "Gear 2"
-        binding.epic3Picture.image.setImageResource(R.drawable.epic3_image)
-
-        setToolbarReturn(toolbar)
+        setDefaultView()
         return binding.root
+    }
+
+    private fun setDefaultView() {
+        binding.gear1Card.title.text = "Gear 1"
+        binding.gear1Card.subtitle.text = "safety gear should wear while delivering"
+        binding.gear2Card.title.text = "Gear 2"
+        binding.gear2Card.subtitle.text = "a detailed checklist of necessary safety equipment"
+        binding.gear3Card.title.text = "Gear 3"
+        binding.gear3Card.subtitle.text = "Australian standards for the safety gear "
     }
 
     override fun onDestroyView() {

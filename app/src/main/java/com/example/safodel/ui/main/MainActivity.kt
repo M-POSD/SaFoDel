@@ -5,23 +5,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
+import com.example.safodel.adapter.EpicViewAdapter
 import com.example.safodel.databinding.ActivityMainBinding
 
-import com.example.safodel.fragment.menuB.HomeFragmentDirections
+import com.google.android.material.tabs.TabLayout
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController : NavController
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +73,12 @@ class MainActivity : AppCompatActivity() {
             navController.popBackStack() // Previous fragment out of stack
             when(it.itemId){
                 R.id.navHome -> {
+                   // val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()
+                    var action = navController.currentDestination
+//                    val currentFragment = navController.currentDestination?.removeAction()
+
+                    Log.e("Fragment", action.toString())
+
                     navController.navigate(R.id.homeFragment)
                     true
                 }
@@ -93,18 +103,18 @@ class MainActivity : AppCompatActivity() {
                 if(navController.currentDestination?.id == R.id.appIntroFragment)
                     navController.popBackStack() // Previous fragment out of stack
                 when(it.itemId){
-//                    R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
-
+                    R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+                    R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
                     // for control the action from Home to AppIntro
-                    R.id.navAppIntro -> {
-                        val action = HomeFragmentDirections.actionHomeFragmentToAppIntroFragment()
-                        navController.navigate(action)
-                    }
-
-                    R.id.navDeveloper -> {
-                        val action = HomeFragmentDirections.actionHomeFragmentToDeveloperFragment()
-                        navController.navigate(action)
-                    }
+//                    R.id.navAppIntro -> {
+//                        val action = HomeFragmentDirections.actionHomeFragmentToAppIntroFragment()
+//                        navController.navigate(action)
+//                    }
+//
+//                    R.id.navDeveloper -> {
+//                        val action = HomeFragmentDirections.actionHomeFragmentToDeveloperFragment()
+//                        navController.navigate(action)
+//                    }
                 }
             }
             binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
@@ -132,3 +142,8 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.visibility = View.VISIBLE
     }
 }
+
+//val animationOptions = NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
+//    .setExitAnim(R.anim.slide_out_left)
+//    .setPopEnterAnim(R.anim.slide_in_left)
+//    .setPopExitAnim(R.anim.slide_out_right).build()

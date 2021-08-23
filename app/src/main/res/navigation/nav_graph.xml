@@ -33,22 +33,15 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_epic1Fragment"
-            app:destination="@id/epic1Fragment"
+            android:id="@+id/action_homeFragment_to_developerFragment"
+            app:destination="@id/developerFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_homeFragment_to_epic2Fragment"
-            app:destination="@id/epic2Fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_homeFragment_to_epic3Fragment"
-            app:destination="@id/epic3Fragment"
+            android:id="@+id/action_homeFragment_to_epicsFragment"
+            app:destination="@id/epicsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -56,15 +49,8 @@
         <action
             android:id="@+id/action_homeFragment_to_appIntroFragment"
             app:destination="@id/appIntroFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_homeFragment_to_developerFragment"
-            app:destination="@id/developerFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
@@ -104,5 +90,32 @@
         android:id="@+id/tip1Fragment"
         android:name="com.example.safodel.fragment.home.epic1.Tip1Fragment"
         android:label="Tip1Fragment" />
+    <fragment
+        android:id="@+id/epicsFragment"
+        android:name="com.example.safodel.fragment.EpicsFragment"
+        android:label="fragment_epics"
+        tools:layout="@layout/fragment_epics" >
+        <action
+            android:id="@+id/action_epicsFragment_to_epic3Fragment"
+            app:destination="@id/epic3Fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_in"/>
+        <action
+            android:id="@+id/action_epicsFragment_to_epic2Fragment"
+            app:destination="@id/epic2Fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_in"/>
+        <action
+            android:id="@+id/action_epicsFragment_to_epic1Fragment"
+            app:destination="@id/epic1Fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_in"/>
+    </fragment>
 
 </navigation>

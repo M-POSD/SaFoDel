@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R
 import com.example.safodel.ui.main.MainActivity
@@ -25,6 +26,10 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
     }
 
     /**
@@ -66,6 +71,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         }
     }
 
+
     /**
      * Facilitate to change toolbar visibility
      */
@@ -75,6 +81,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
             false -> (activity as MainActivity).isBottomNavigationVisible(false)
         }
     }
+
 
 }
 
