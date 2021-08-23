@@ -17,18 +17,23 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
         maven {
             url 'https://api.mapbox.com/downloads/v2/releases/maven'
             authentication {
                 basic(BasicAuthentication)
             }
             credentials {
-                username = "mapbox"
-                password = "INSERT_MAPBOX_ACCESS_TOKEN_HERE"
+                // Do not change the username below.
+                // This should always be `mapbox` (not your username).
+                username = 'mapbox'
+                // Use the secret token you stored in gradle.properties as the password
+                password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
             }
         }
-        mavenCentral()
-        maven { url "https://jitpack.io" }
+
 
     }
 }

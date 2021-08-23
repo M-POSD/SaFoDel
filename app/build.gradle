@@ -6,6 +6,7 @@ plugins {
 
 android {
     compileSdk 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.safodel"
@@ -56,6 +57,7 @@ dependencies {
     implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.1'){
         exclude group: 'group_name', module: 'module_name'
     }
+
     implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0'
     implementation 'me.jessyan:autosize:1.2.1'
 
