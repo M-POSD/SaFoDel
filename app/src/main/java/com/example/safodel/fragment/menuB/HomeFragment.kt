@@ -23,21 +23,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.epicCard34.editTextLeft.text = "Safety Gear"
         binding.epicCard34.editTextRight.text = "Placeholder"
 
-//        binding.epic1Card.card.setOnClickListener() {
-//            val action = HomeFragmentDirections.actionHomeFragmentToEpic1Fragment()
-//            findNavController().navigate(action)
-//        }
-//
-//        binding.epic2Card.card.setOnClickListener() {
-//            val action = HomeFragmentDirections.actionHomeFragmentToEpic2Fragment()
-//            findNavController().navigate(action)
-//        }
-//
-//        binding.epic3Card.card.setOnClickListener() {
-//            val action = HomeFragmentDirections.actionHomeFragmentToEpic3Fragment()
-//            findNavController().navigate(action)
-//        }
-
         binding.epicCard12.cardLeft.setOnClickListener() {
             val action = HomeFragmentDirections.actionHomeFragmentToEpicsFragment()
             findNavController().navigate(action)

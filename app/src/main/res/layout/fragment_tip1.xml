@@ -10,34 +10,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="45dp"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/extreme_small"
-            layout="@layout/extreme_small" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/notification"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
-            android:text="Beware of the RISKS of delivering on e-bikes"
-            android:gravity="center"
-            android:textColor="@color/secondary_green"
-            android:textSize="16dp" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/extreme_small"
+                layout="@layout/extreme_small" />
+
+            <TextView
+                android:id="@+id/notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="14dp"
+                android:gravity="center"
+                android:text="Beware of the RISKS of delivering on e-bikes"
+                android:textColor="@color/secondary_green"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
             android:background="@color/primary_green"
             android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:scrollbars="vertical" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="95dp"
+                android:scrollbars="vertical" />
         </LinearLayout>
     </LinearLayout>
 
