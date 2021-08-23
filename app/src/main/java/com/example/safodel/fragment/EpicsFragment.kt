@@ -20,9 +20,6 @@ import com.example.safodel.fragment.menuB.HomeFragmentArgs
 import android.content.SharedPreferences
 
 
-
-
-
 class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::inflate) {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPage2 : ViewPager2
@@ -48,7 +45,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
         viewPage2.registerOnPageChangeCallback(getOnPageChangeCallBack())
 
-        setToolbarBasic(toolbar)
+        setToolbarReturn(toolbar)
         return binding.root
     }
 
