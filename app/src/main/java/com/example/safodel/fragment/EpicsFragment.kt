@@ -18,6 +18,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import com.example.safodel.fragment.menuB.HomeFragmentArgs
 import android.content.SharedPreferences
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.DecelerateInterpolator
 
 
 class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::inflate) {

@@ -21,6 +21,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(binding.root)
         imageAnimation()
         buttonAnimation()
+//        subTitleAnimation()
 
         binding.startButton.card.setOnClickListener {
             val intent = Intent(this@StartActivity, MainActivity::class.java)
@@ -32,13 +33,13 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun imageAnimation() {
-        val slideIn: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
+        val slideInRight: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
 
-        slideIn.interpolator = DecelerateInterpolator()
-        slideIn.duration = 2000
+        slideInRight.interpolator = DecelerateInterpolator()
+        slideInRight.duration = 2000
 
         val animation = AnimationSet(false)
-        animation.addAnimation(slideIn)
+        animation.addAnimation(slideInRight)
         animation.repeatCount = 1;
         binding.image.animation = animation
         binding.image.visibility = View.VISIBLE
@@ -47,13 +48,24 @@ class StartActivity : AppCompatActivity() {
     private fun buttonAnimation() {
 
         val fadeIn: Animation = AlphaAnimation(0.0F, 1.0F)
-        fadeIn.interpolator = DecelerateInterpolator()
+        fadeIn.interpolator = AccelerateDecelerateInterpolator()
         fadeIn.duration = 3000
 
         val animation = AnimationSet(false)
         animation.addAnimation(fadeIn)
         animation.repeatCount = 1;
         binding.startButton.card.animation = animation
-        binding.image.visibility = View.VISIBLE
+        binding.startButton.card.visibility = View.VISIBLE
+    }
+
+    private fun subTitleAnimation() {
+        val slideInLeft: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_left)
+        slideInLeft.interpolator = DecelerateInterpolator()
+        slideInLeft.duration = 3000
+
+        val animation = AnimationSet(false)
+        animation.addAnimation(slideInLeft)
+        animation.repeatCount = 1;
+        binding.subtitle.animation = animation
     }
 }

@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/epicLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:layout_marginTop="50dp">
 
-    <LinearLayout
-        android:id="@+id/bottom_sheet"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="95dp"
-        android:orientation="vertical">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include
-            android:id="@+id/info1Card"
-            layout="@layout/medium_card" />
+        <LinearLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="95dp"
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/info2Card"
-            layout="@layout/medium_card" />
+            <include
+                android:id="@+id/info1Card"
+                layout="@layout/medium_card" />
 
-        <include
-            android:id="@+id/info3Card"
-            layout="@layout/medium_card" />
-    </LinearLayout>
+            <include
+                android:id="@+id/info2Card"
+                layout="@layout/medium_card" />
 
-</androidx.core.widget.NestedScrollView>
+            <include
+                android:id="@+id/info3Card"
+                layout="@layout/medium_card" />
+        </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
