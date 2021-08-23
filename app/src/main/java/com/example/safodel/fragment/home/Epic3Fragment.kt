@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic3Binding
 import com.example.safodel.fragment.BasicFragment
@@ -16,6 +17,11 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
     ): View {
         _binding = FragmentEpic3Binding.inflate(inflater,container,false)
         setDefaultView()
+
+        binding.gear1Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
+        }
+
         return binding.root
     }
 

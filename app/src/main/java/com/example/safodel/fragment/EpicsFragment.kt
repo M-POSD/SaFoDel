@@ -48,12 +48,12 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
         viewPage2.registerOnPageChangeCallback(getOnPageChangeCallBack())
 
-        setToolbarReturn(toolbar)
+        setToolbarBasic(toolbar)
         return binding.root
     }
 
     private fun addTab() {
-        tabLayout.addTab(tabLayout.newTab().setText("Ride safe"))
+        tabLayout.addTab(tabLayout.newTab().setText("Ride safer"))
         tabLayout.addTab(tabLayout.newTab().setText("E-Bike Delivery"))
         tabLayout.addTab(tabLayout.newTab().setText("Safety gear"))
         tabLayout.setBackgroundResource(R.color.deep_green)

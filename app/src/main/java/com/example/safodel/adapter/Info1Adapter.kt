@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.databinding.DetailCardBinding
 import com.example.safodel.model.Info1
-import com.example.safodel.model.Tip1
 
 class Info1Adapter(val contxt: Context, infos: MutableList<Info1>) :
     RecyclerView.Adapter<Info1Adapter.ViewHolder>() {
@@ -21,7 +20,7 @@ class Info1Adapter(val contxt: Context, infos: MutableList<Info1>) :
         val info: Info1 = info1[position]
 
         viewHolder.binding.image.setImageResource(info.image)
-        viewHolder.binding.subtitle.text =  "Work smart, not hard"
+        viewHolder.binding.title.text =  "Wear helmet"
 
         viewHolder.binding.subtitle.text = info.description
     }

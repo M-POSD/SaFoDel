@@ -41,14 +41,14 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         tips = Tip1.initializeResultList()
         adapter = Tip1Adapter(requireActivity(), tips)
 
-        binding.recyclerView.addItemDecoration(
+        binding.tip1.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
                 LinearLayoutManager.VERTICAL )
         )
 
-        binding.recyclerView.adapter = adapter
+        binding.tip1.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
-        binding.recyclerView.layoutManager = layoutManager
+        binding.tip1.recyclerView.layoutManager = layoutManager
     }
 
 }
