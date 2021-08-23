@@ -182,6 +182,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView.onSaveInstanceState(outState)
     }
 
+
+    /*
+        low memory
+     */
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
