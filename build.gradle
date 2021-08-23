@@ -7,11 +7,9 @@ buildscript {
 
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.0"
+        classpath "com.android.tools.build:gradle:7.0.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
-
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -19,21 +17,18 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        maven { url "https://jitpack.io" }
         maven {
             url 'https://api.mapbox.com/downloads/v2/releases/maven'
             authentication {
                 basic(BasicAuthentication)
             }
             credentials {
-                // Do not change the username below.
-                // This should always be `mapbox` (not your username).
-                username = 'mapbox'
-                // Use the secret token you stored in gradle.properties as the password
-                password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
+                username = "mapbox"
+                password = "INSERT_MAPBOX_ACCESS_TOKEN_HERE"
             }
         }
+        mavenCentral()
+        maven { url "https://jitpack.io" }
 
     }
 }
