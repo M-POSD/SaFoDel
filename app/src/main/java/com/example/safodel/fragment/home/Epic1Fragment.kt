@@ -27,6 +27,11 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setDefaultView() {
         binding.tip1Card.title.text = "Tip 1"
         binding.tip1Card.subtitle.text = "while riding a bicycle"
@@ -34,11 +39,6 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         binding.tip2Card.subtitle.text = "for delivering at night"
         binding.tip3Card.title.text = "Tip 3"
         binding.tip3Card.subtitle.text = "the areas that are prone to bike accidents"
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun navAnimation() : NavOptions{

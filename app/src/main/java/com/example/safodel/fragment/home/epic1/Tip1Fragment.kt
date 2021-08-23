@@ -32,7 +32,7 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
 
         configRecycleView()
 
-        setToolbarCancel(toolbar)
+        setToolbarReturn(toolbar)
 
         return binding.root
     }
