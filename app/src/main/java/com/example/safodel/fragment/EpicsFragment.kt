@@ -78,19 +78,15 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
             override fun onPageSelected(position: Int) {
                 Log.d("onPageSelected", "onPageSelected successfully")
 
-                val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-                    "epicPosition",
-                    Context.MODE_PRIVATE
-                )
-                val initialPosition = sharedPref.getString("epicPosition", "")
-                recordPosition(-1)
-
-                when(initialPosition) {
+                when(getInitialPosition()) {
                     "0" -> tabLayout.selectTab(tabLayout.getTabAt(0))
                     "1" -> tabLayout.selectTab(tabLayout.getTabAt(1))
                     "2" -> tabLayout.selectTab(tabLayout.getTabAt(2))
                     else -> tabLayout.selectTab(tabLayout.getTabAt(position))
                 }
+
+                // set the initial position to null
+                recordPosition(-1)
 
             }
         }
@@ -104,6 +100,14 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         val spEditor = sharedPref.edit()
         spEditor.putString("epicPosition", "" + position)
         spEditor.apply()
+    }
+
+    private fun getInitialPosition() : String? {
+        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
+            "epicPosition",
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getString("epicPosition", "")
     }
 
 
