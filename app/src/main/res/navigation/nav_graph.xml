@@ -121,5 +121,10 @@
             app:popEnterAnim="@anim/fade_out"
             app:popExitAnim="@anim/fade_in"/>
     </fragment>
+    <fragment
+        android:id="@+id/info1Fragment"
+        android:name="com.example.safodel.fragment.home.epic2.Info1Fragment"
+        android:label="fragment_info1"
+        tools:layout="@layout/fragment_info1" />
 
 </navigation>

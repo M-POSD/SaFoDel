@@ -18,6 +18,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/NavigationbarBottomStyle"
             app:tabBackground="@color/white"
             app:tabGravity="fill"
             app:tabInlineLabel="true"
