@@ -2,7 +2,6 @@ package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
-import android.graphics.RenderNode
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
@@ -37,9 +35,9 @@ import java.util.*
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),OnMapReadyCallback,PermissionsListener {
     private var mapView: MapView? = null
-    private var mapboxMap: MapboxMap? = null
+    private lateinit var mapboxMap: MapboxMap
     private lateinit var permissionsManager: PermissionsManager
-    val defaultLatLng = LatLng(-37.876823, 145.045837)
+    private val defaultLatLng = LatLng(-37.876823, 145.045837)
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -52,21 +50,36 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         _binding = FragmentMapBinding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
+
+        val mainActivity = activity as MainActivity
         mapView = binding.mapView
+
+        /*
+         *   Bottom navigation hide, when touch the map.
+         */
+        binding.mapView.setOnTouchListener { _, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
+                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
+            }
+            false
+        }
+
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync(this)
-        bottomNavHide() // Bottom navigation hide, when touch the map.
         addressSender()
         binding.recenter.setOnClickListener {
-            mapboxMap?.let { it1 -> onMapReady(it1) }
+            mapboxMap.let { it1 -> onMapReady(it1) }
         }
         return binding.root
     }
 
 
     override fun onMapReady(mapboxMap: MapboxMap) {
+        mapboxMap.setMaxZoomPreference(15.0)
+        mapboxMap.setMinZoomPreference(12.0)
         this.mapboxMap = mapboxMap
-        this.mapboxMap!!.setStyle(Style.LIGHT){
+        this.mapboxMap.setStyle(Style.LIGHT){
             val position =  CameraPosition.Builder().target(defaultLatLng).zoom(13.0).build()
             mapboxMap.cameraPosition = position
             enableLocationComponent(it)
@@ -82,20 +95,18 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     .pulseEnabled(true).build()
             }
 
-            val locationComponent: LocationComponent? = mapboxMap?.locationComponent
+            val locationComponent: LocationComponent = mapboxMap.locationComponent
 
             context?.let {
                 LocationComponentActivationOptions.builder(it,loadMapStyle)
                     .locationComponentOptions(customLocationComponentOptions).build()
             }?.let {
-                if (locationComponent != null) {
-                    locationComponent.activateLocationComponent(it)
-                }
+                locationComponent.activateLocationComponent(it)
             }
 
-            locationComponent?.isLocationComponentEnabled = true
-            locationComponent?.cameraMode = CameraMode.TRACKING
-            locationComponent?.renderMode = RenderMode.NORMAL
+            locationComponent.isLocationComponentEnabled = true
+            locationComponent.cameraMode = CameraMode.TRACKING
+            locationComponent.renderMode = RenderMode.NORMAL
         }
         else{
             permissionsManager = PermissionsManager(this)
@@ -104,22 +115,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
-    /*
-     *   Bottom navigation hide, when touch the map.
-     */
-    @SuppressLint("ClickableViewAccessibility")
-    fun bottomNavHide(){
-        val mainActivity = activity as MainActivity
-        binding.mapView.setOnTouchListener { _, event ->
-            when(event.action){
-                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
-                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
-            }
-            false
-        }
-    }
 
-    fun addressSender(){
+
+    private fun addressSender(){
         var latLng = defaultLatLng
         var position = CameraPosition.Builder().target(latLng).zoom(13.0)
             .tilt(30.0).build()
@@ -129,28 +127,26 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 Toast.makeText(context,"Please enter the address", Toast.LENGTH_SHORT).show()
             else {
                 val address = geocoder.getFromLocationName(binding.addressEditText.text.toString(), 1)
-                if (!address.isEmpty()) {
+                if (address.isNotEmpty()) {
                     latLng = LatLng(address[0].latitude, address[0].longitude)
                     position = CameraPosition.Builder().target(latLng).zoom(13.0)
                         .tilt(30.0).build()
                 } else
                     Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
-                mapView?.getMapAsync { mapboxMap ->
                     mapboxMap.setStyle(Style.LIGHT) {
-                        mapboxMap.cameraPosition
-                        val symbol = SymbolManager(mapView!!, mapboxMap, it)
-                        symbol.iconAllowOverlap = true
-                        it.addImage(
-                            "Marker",
-                            BitmapFactory.decodeResource(
-                                resources,
-                                R.drawable.mapbox_marker_icon_default
-                            )
+                    mapboxMap.cameraPosition
+                    val symbol = SymbolManager(mapView!!, mapboxMap, it)
+                    symbol.iconAllowOverlap = true
+                    it.addImage(
+                        "Marker",
+                        BitmapFactory.decodeResource(
+                            resources,
+                            R.drawable.mapbox_marker_icon_default
                         )
-                        symbol.create(SymbolOptions().withLatLng(latLng).withIconImage("Marker"))
-                    }
-                    mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 4000)
+                    )
+                    symbol.create(SymbolOptions().withLatLng(latLng).withIconImage("Marker"))
                 }
+                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 4000)
             }
         }
     }
@@ -199,7 +195,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onPermissionResult(granted: Boolean) {
         if(granted){
-            mapboxMap?.getStyle {
+            mapboxMap.getStyle {
                 enableLocationComponent(it)
             }
         }
