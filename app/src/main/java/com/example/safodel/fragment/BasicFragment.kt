@@ -42,7 +42,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu)
+        toolbar.setNavigationIcon(R.drawable.menu_new)
 
     }
 
@@ -51,7 +51,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
      */
     fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
         setToolbarBasic(toolbar)
-        toolbar.setNavigationIcon(R.drawable.baseline_chevron_left_black_36)
+        toolbar.setNavigationIcon(R.drawable.arrow_left_circle)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
