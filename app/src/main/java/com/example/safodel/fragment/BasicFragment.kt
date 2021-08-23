@@ -28,6 +28,10 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         _binding = null
     }
 
+    override fun onLowMemory() {
+        super.onLowMemory()
+    }
+
     /**
      *  Press the navigation icon to pop up the navigation window
      */

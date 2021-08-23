@@ -21,7 +21,7 @@ import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController : NavController
