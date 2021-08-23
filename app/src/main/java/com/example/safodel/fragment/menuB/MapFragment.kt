@@ -34,7 +34,7 @@ import java.util.*
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),OnMapReadyCallback,PermissionsListener {
-    private var mapView: MapView? = null
+    private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
     private lateinit var permissionsManager: PermissionsManager
     private val defaultLatLng = LatLng(-37.876823, 145.045837)
@@ -65,11 +65,13 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             false
         }
 
-        mapView?.onCreate(savedInstanceState)
-        mapView?.getMapAsync(this)
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
         addressSender()
         binding.recenter.setOnClickListener {
-            mapboxMap.let { it1 -> onMapReady(it1) }
+            mapboxMap.setStyle(Style.LIGHT){
+                enableLocationComponent(it)
+            }
         }
         return binding.root
     }
@@ -115,8 +117,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
-
-
     private fun addressSender(){
         var latLng = defaultLatLng
         var position = CameraPosition.Builder().target(latLng).zoom(13.0)
@@ -135,7 +135,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
                     mapboxMap.setStyle(Style.LIGHT) {
                     mapboxMap.cameraPosition
-                    val symbol = SymbolManager(mapView!!, mapboxMap, it)
+                    val symbol = SymbolManager(mapView, mapboxMap, it)
                     symbol.iconAllowOverlap = true
                     it.addImage(
                         "Marker",
@@ -154,38 +154,38 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onStart() {
         super.onStart()
-        mapView?.onStart()
+        mapView.onStart()
     }
 
     override fun onResume() {
         super.onResume()
-        mapView?.onResume()
+        mapView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        mapView?.onPause()
+        mapView.onPause()
     }
 
     override fun onStop() {
         super.onStop()
-        mapView?.onStop()
+        mapView.onStop()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView?.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView?.onLowMemory()
+        mapView.onLowMemory()
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mapView?.onDestroy()
+        mapView.onDestroy()
         _binding = null
     }
 
