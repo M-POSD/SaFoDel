@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:theme="@style/NavigationbarBottomStyle"
             android:background="@color/third_green"
             app:menu="@menu/nav_menu_bottom">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
