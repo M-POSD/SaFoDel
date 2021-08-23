@@ -10,7 +10,8 @@
         android:id="@+id/cardLeft"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginVertical="10dp"
 
         android:checkable="true"
@@ -18,7 +19,7 @@
         app:cardElevation="5dp"
         android:focusable="true"
         android:layout_weight="0.5"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="10dp"
         app:cardBackgroundColor="@color/white">
 
         <LinearLayout
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_green"
                 android:layout_gravity="center"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:text="Demo"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
         </LinearLayout>
@@ -45,13 +46,14 @@
         android:id="@+id/cardRight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="20dp"
         android:layout_marginVertical="10dp"
         android:checkable="true"
         android:clickable="true"
         app:cardElevation="5dp"
         android:focusable="true"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="10dp"
         android:layout_weight="0.5"
         app:cardBackgroundColor="@color/white">
 
@@ -69,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_green"
                 android:gravity="center"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:text="Demo"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
         </LinearLayout>

@@ -1,25 +1,15 @@
 package com.example.safodel.ui.main
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.core.view.GravityCompat
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.viewpager2.widget.ViewPager2
-import com.example.safodel.R
-import com.example.safodel.adapter.EpicViewAdapter
-import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.databinding.ActivityStartBinding
 
-import com.google.android.material.tabs.TabLayout
-import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
+import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
+import android.view.animation.*
+import com.example.safodel.R
 
 
 class StartActivity : AppCompatActivity() {
@@ -29,7 +19,41 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        imageAnimation()
+        buttonAnimation()
+
+        binding.startButton.card.setOnClickListener {
+            val intent = Intent(this@StartActivity, MainActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
         AutoSizeConfig.getInstance().isBaseOnWidth = false
 
+    }
+
+    private fun imageAnimation() {
+        val slideIn: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
+
+        slideIn.interpolator = DecelerateInterpolator()
+        slideIn.duration = 2000
+
+        val animation = AnimationSet(false)
+        animation.addAnimation(slideIn)
+        animation.repeatCount = 1;
+        binding.image.animation = animation
+        binding.image.visibility = View.VISIBLE
+    }
+
+    private fun buttonAnimation() {
+
+        val fadeIn: Animation = AlphaAnimation(0.0F, 1.0F)
+        fadeIn.interpolator = DecelerateInterpolator()
+        fadeIn.duration = 3000
+
+        val animation = AnimationSet(false)
+        animation.addAnimation(fadeIn)
+        animation.repeatCount = 1;
+        binding.startButton.card.animation = animation
+        binding.image.visibility = View.VISIBLE
     }
 }

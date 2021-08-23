@@ -15,8 +15,9 @@
         android:foregroundServiceType="location"
         android:exported="true"
         android:theme="@style/Theme.SaFoDel">
+        <activity android:name=".ui.main.MainActivity"/>
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.main.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -131,5 +131,9 @@
         android:name="com.example.safodel.fragment.home.epic3.Gear1Fragment"
         android:label="fragment_gear1"
         tools:layout="@layout/fragment_gear1" />
+    <activity
+        android:id="@+id/startActivity"
+        android:name="com.example.safodel.ui.main.StartActivity"
+        android:label="StartActivity" />
 
 </navigation>

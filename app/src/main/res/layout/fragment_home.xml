@@ -20,9 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="75dp"
-            android:scaleX="1.75"
-            android:scaleY="2.25"
+            android:layout_marginBottom="90dp"
+            android:scaleX="2"
+            android:scaleY="2.5"
             android:src="@drawable/homepage_image" />
 
         <LinearLayout
@@ -30,20 +30,11 @@
             android:layout_height="match_parent"
             android:background="@color/primary_green"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:gravity="center"
-                android:text="Welcome to SafoDel"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textSize="35sp"
-                android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -95,3 +86,14 @@
 <!--android:scaleX="1.75"-->
 <!--android:scaleY="1.75"-->
 <!--android:src="@drawable/right_circle" />-->
+
+<!--<TextView-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+
+<!--android:layout_marginBottom="5dp"-->
+<!--android:gravity="center"-->
+<!--android:text="Welcome to SafoDel"-->
+<!--android:textAppearance="?attr/textAppearanceHeadline6"-->
+<!--android:textSize="35sp"-->
+<!--android:textColor="@color/white"/>-->
