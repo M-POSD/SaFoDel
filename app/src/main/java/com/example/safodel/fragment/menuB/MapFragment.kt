@@ -57,6 +57,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView?.getMapAsync(this)
         bottomNavHide() // Bottom navigation hide, when touch the map.
         addressSender()
+        binding.recenter.setOnClickListener {
+            mapboxMap?.let { it1 -> onMapReady(it1) }
+        }
         return binding.root
     }
 
@@ -133,7 +136,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 } else
                     Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
                 mapView?.getMapAsync { mapboxMap ->
-                    mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+                    mapboxMap.setStyle(Style.LIGHT) {
                         mapboxMap.cameraPosition
                         val symbol = SymbolManager(mapView!!, mapboxMap, it)
                         symbol.iconAllowOverlap = true
