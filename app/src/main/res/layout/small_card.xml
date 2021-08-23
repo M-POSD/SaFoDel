@@ -37,7 +37,7 @@
                 android:fontFamily="@font/notosansjp_bold"
                 android:textColor="@color/primary_green"
                 android:layout_gravity="center"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="Demo"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
         </LinearLayout>
@@ -73,7 +73,7 @@
                 android:textColor="@color/primary_green"
                 android:gravity="center"
                 android:fontFamily="@font/notosansjp_bold"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="Demo"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
         </LinearLayout>
