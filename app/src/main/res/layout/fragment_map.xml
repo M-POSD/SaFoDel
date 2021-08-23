@@ -21,4 +21,31 @@
         layout="@layout/simple_toolbar"
         android:id="@+id/toolbar" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/green"
+        android:alpha="0.5"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+        <EditText
+            android:id="@+id/addressEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:hint="Enter address"
+            android:maxLines="1"
+            android:layout_gravity="center_horizontal"/>
+        <Button
+            android:id="@+id/addressButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Send"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

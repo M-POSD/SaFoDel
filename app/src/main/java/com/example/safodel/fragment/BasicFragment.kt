@@ -78,5 +78,6 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         }
     }
 
+
 }
 
