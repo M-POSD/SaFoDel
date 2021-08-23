@@ -15,11 +15,13 @@
         <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
+        <entry key="app/src/main/res/layout/fragment_epics.xml" value="0.15789473684210525" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.16403508771929826" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.12030075187969924" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.15219298245614035" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />

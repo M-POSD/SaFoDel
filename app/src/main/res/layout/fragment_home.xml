@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.menuB.HomeFragment">
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/simple_toolbar" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/toolbar"
         android:orientation="vertical">
 
         <ImageView
@@ -18,10 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="60dp"
-            android:scaleX="1.5"
-            android:scaleY="1.6"
-            android:src="@drawable/home_image" />
+            android:layout_marginBottom="90dp"
+            android:scaleX="2"
+            android:scaleY="2.5"
+            android:src="@drawable/homepage_image" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,29 +74,24 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:scaleX="1.9"
-        android:scaleY="1.9"
-        android:src="@drawable/top_circle" />
+</RelativeLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:scaleX="1.75"
-        android:scaleY="1.75"
-        android:src="@drawable/right_circle" />
+<!--<ImageView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="right"-->
+<!--android:layout_marginTop="15dp"-->
+<!--android:layout_marginRight="15dp"-->
+<!--android:scaleX="1.9"-->
+<!--android:scaleY="1.9"-->
+<!--android:src="@drawable/top_circle" />-->
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/simple_toolbar" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+<!--<ImageView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="right"-->
+<!--android:layout_marginTop="15dp"-->
+<!--android:layout_marginRight="15dp"-->
+<!--android:scaleX="1.75"-->
+<!--android:scaleY="1.75"-->
+<!--android:src="@drawable/right_circle" />-->

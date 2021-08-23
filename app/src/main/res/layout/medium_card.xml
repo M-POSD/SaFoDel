@@ -14,6 +14,8 @@
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
         app:cardBackgroundColor="#FFF6F1"
         app:cardCornerRadius="5dp">
 

@@ -32,6 +32,10 @@
         android:name="com.example.safodel.fragment.menuB.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="epicPosition"
+            app:argType="string"
+            android:defaultValue="0"/>
         <action
             android:id="@+id/action_homeFragment_to_developerFragment"
             app:destination="@id/developerFragment"

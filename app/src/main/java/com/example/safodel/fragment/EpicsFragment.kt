@@ -1,5 +1,6 @@
 package com.example.safodel.fragment
 
+import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,10 @@ import com.example.safodel.ui.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import com.example.safodel.fragment.menuB.HomeFragmentArgs
+import android.content.SharedPreferences
+
 
 
 
@@ -31,8 +36,11 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         tabLayout = binding.tabbar.tabLayout
         viewPage2 = binding.tabbar.viewPager2
 
+
+//        Log.d("Test!!!", arguments?.getString("epicPosition").toString())
+
         val fm : FragmentManager = (activity as MainActivity).supportFragmentManager
-        viewPage2.adapter = EpicViewAdapter(fm, lifecycle)
+        viewPage2.adapter = EpicViewAdapter(fm, lifecycle,3)
 
         addTab()
 
@@ -69,9 +77,37 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         return object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 Log.d("onPageSelected", "onPageSelected successfully")
-                tabLayout.selectTab(tabLayout.getTabAt(position))
+
+                when(getInitialPosition()) {
+                    "0" -> tabLayout.selectTab(tabLayout.getTabAt(0))
+                    "1" -> tabLayout.selectTab(tabLayout.getTabAt(1))
+                    "2" -> tabLayout.selectTab(tabLayout.getTabAt(2))
+                    else -> tabLayout.selectTab(tabLayout.getTabAt(position))
+                }
+
+                // set the initial position to null
+                recordPosition(-1)
+
             }
         }
+    }
+
+    private fun recordPosition(position: Int) {
+        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
+            "epicPosition", Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putString("epicPosition", "" + position)
+        spEditor.apply()
+    }
+
+    private fun getInitialPosition() : String? {
+        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
+            "epicPosition",
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getString("epicPosition", "")
     }
 
 
