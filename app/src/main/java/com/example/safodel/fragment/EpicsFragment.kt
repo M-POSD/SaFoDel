@@ -32,7 +32,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         viewPage2 = binding.tabbar.viewPager2
 
         val fm : FragmentManager = (activity as MainActivity).supportFragmentManager
-        viewPage2.adapter = EpicViewAdapter(fm, lifecycle)
+        viewPage2.adapter = EpicViewAdapter(fm, lifecycle,3)
 
         addTab()
 

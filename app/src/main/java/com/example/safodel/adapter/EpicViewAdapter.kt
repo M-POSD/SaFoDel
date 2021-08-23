@@ -10,14 +10,17 @@ import com.example.safodel.fragment.home.Epic2Fragment
 import com.example.safodel.fragment.home.Epic3Fragment
 
 
-class EpicViewAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+class EpicViewAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, num: Int) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    override fun getItemCount(): Int = 3
+    val numOfTabs = num
+
+    override fun getItemCount(): Int = numOfTabs
 
     override fun createFragment(position: Int): Fragment {
         Log.d("createFragment", "" + position)
         return when(position) {
+            0 -> Epic1Fragment()
             1 -> Epic2Fragment()
             2 -> Epic3Fragment()
             else -> Epic1Fragment()

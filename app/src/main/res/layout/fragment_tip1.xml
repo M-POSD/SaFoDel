@@ -48,7 +48,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="95dp"
+                android:layout_marginBottom="90dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
                 android:scrollbars="vertical" />
         </LinearLayout>
     </LinearLayout>

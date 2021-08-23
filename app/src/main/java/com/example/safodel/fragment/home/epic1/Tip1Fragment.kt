@@ -45,10 +45,12 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     private fun configRecycleView() {
         tips = Tip1Info.initializeResultList()
         adapter = Tip1Adapter(requireActivity(), tips)
+
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
                 LinearLayoutManager.VERTICAL )
         )
+
         binding.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
         binding.recyclerView.layoutManager = layoutManager
