@@ -3,7 +3,9 @@ package com.example.safodel.fragment.menuB
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -30,17 +32,54 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
+import com.mapbox.navigation.base.options.NavigationOptions
+import com.mapbox.navigation.core.MapboxNavigation
+import com.mapbox.navigation.core.MapboxNavigationProvider
+import com.mapbox.navigation.core.trip.session.LocationObserver
+import com.mapbox.navigation.ui.maps.camera.data.MapboxNavigationViewportDataSource
+import com.mapbox.navigation.ui.maps.location.NavigationLocationProvider
 import java.util.*
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),OnMapReadyCallback,PermissionsListener {
+
+    // Map
     private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
+
+    // Navigation
+    private lateinit var mapboxNavigation: MapboxNavigation
+
+
+    // Map camera
     private lateinit var permissionsManager: PermissionsManager
+    private val navigationLocationProvider = NavigationLocationProvider()
+    private lateinit var viewportDataSource: MapboxNavigationViewportDataSource
+
+    // Basic value
     private val defaultLatLng = LatLng(-37.876823, 145.045837)
 
 
+    /* --- Enhance Location Callback ---*/
+    private val locationObserver = object : LocationObserver {
+        override fun onRawLocationChanged(rawLocation: Location) {
+            // NA
+        }
+        override fun onEnhancedLocationChanged(
+            enhancedLocation: Location,
+            keyPoints: List<Location>
+        ) {
+            navigationLocationProvider.changePosition(
+                location = enhancedLocation,
+                keyPoints = keyPoints
+            )
+            viewportDataSource.onLocationChanged(enhancedLocation)
+            viewportDataSource.evaluate()
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
+    @SuppressWarnings("MissingPermission")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,15 +87,34 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     ): View {
         activity?.let { Mapbox.getInstance(it.application,getString(R.string.mapbox_access_token)) }
         _binding = FragmentMapBinding.inflate(inflater,container,false)
+
+        // init the view
+        val mainActivity = activity as MainActivity
         val toolbar = binding.toolbar.root
+        mapView = binding.mapView
         setToolbarBasic(toolbar)
 
-        val mainActivity = activity as MainActivity
+        // request permission
+        permissionsManager = PermissionsManager(this)
+        permissionsManager.requestLocationPermissions(activity)
+
+        // basic location and position
         var latLng = defaultLatLng
         var position = CameraPosition.Builder().target(latLng).zoom(13.0)
             .tilt(30.0).build()
         val geocoder = Geocoder(context, Locale.getDefault())
-        mapView = binding.mapView
+
+        // Init the Mapbox Navigation
+        val navigationOptions = NavigationOptions.Builder(mainActivity)
+            .accessToken(getString(R.string.mapbox_access_token))
+            .build()
+        mapboxNavigation = MapboxNavigationProvider.create(navigationOptions)
+
+
+//        if(PermissionsManager.areLocationPermissionsGranted(context))
+//           mapboxNavigation.startTripSession()
+//        mapboxNavigation.stopTripSession()
+
 
 
         /*
@@ -83,9 +141,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     latLng = LatLng(address[0].latitude, address[0].longitude)
                     position = CameraPosition.Builder().target(latLng).zoom(13.0)
                         .tilt(30.0).build()
+                    setMapboxMap(latLng,position) // set marker
                 } else
                     Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
-                setMapboxMap(latLng,position) // set marker
+
             }
         }
 
@@ -100,7 +159,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onMapReady(mapboxMap: MapboxMap) {
         mapboxMap.setMaxZoomPreference(15.0)
-        mapboxMap.setMinZoomPreference(12.0)
+        mapboxMap.setMinZoomPreference(5.0)
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT){
             val position =  CameraPosition.Builder().target(defaultLatLng).zoom(13.0).build()
@@ -160,6 +219,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStart() {
         super.onStart()
         mapView.onStart()
+        mapboxNavigation.registerLocationObserver(locationObserver)
     }
 
     override fun onResume() {
@@ -175,6 +235,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStop() {
         super.onStop()
         mapView.onStop()
+        mapboxNavigation.unregisterLocationObserver(locationObserver)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -195,6 +256,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onDestroyView() {
         super.onDestroyView()
         mapView.onDestroy()
+        MapboxNavigationProvider.destroy()
         _binding = null
     }
 
@@ -212,9 +274,4 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             Toast.makeText(context, "user location permission not granted", Toast.LENGTH_LONG).show()
         }
     }
-
-
-
-
-
 }
