@@ -21,10 +21,14 @@ class StartActivity : AppCompatActivity() {
         setContentView(binding.root)
         imageAnimation()
         buttonAnimation()
-//        subTitleAnimation()
 
         binding.startButton.card.setOnClickListener {
-            val intent = Intent(this@StartActivity, MainActivity::class.java)
+            val intent = Intent()
+
+            // avoid to return to this activity
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.setClass(this@StartActivity, MainActivity::class.java)
+
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }

@@ -19,6 +19,7 @@ import com.example.safodel.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity(){
