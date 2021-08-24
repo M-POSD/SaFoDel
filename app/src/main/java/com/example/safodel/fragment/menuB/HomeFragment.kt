@@ -11,10 +11,7 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.content.SharedPreferences
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.AnimationUtils
+import android.view.animation.*
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate){
@@ -63,7 +60,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun helmetAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_top)
-        slideIn.interpolator = AccelerateDecelerateInterpolator()
+        slideIn.interpolator = DecelerateInterpolator()
         slideIn.duration = 3000
 
         val animation = AnimationSet(false)
@@ -74,8 +71,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun backpackAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_left)
-        slideIn.interpolator = AccelerateDecelerateInterpolator()
-        slideIn.duration = 3000
+        slideIn.interpolator = DecelerateInterpolator()
+        slideIn.duration = 2000
 
         val animation = AnimationSet(false)
         animation.addAnimation(slideIn)
