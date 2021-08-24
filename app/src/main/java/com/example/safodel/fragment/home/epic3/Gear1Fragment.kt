@@ -14,8 +14,8 @@ import com.example.safodel.model.Gear1
 
 class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::inflate){
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var gears: MutableList<Gear1>
-    private lateinit var adapter: Gear1Adapter
+    private lateinit var gear1s: MutableList<Gear1>
+    private lateinit var a1Adapter: Gear1Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,15 +38,15 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
     }
 
     private fun configRecycleView() {
-        gears = Gear1.initializeResultList()
-        adapter = Gear1Adapter(requireActivity(), gears)
+        gear1s = Gear1.initializeResultList()
+        a1Adapter = Gear1Adapter(requireActivity(), gear1s)
 
         binding.gear1.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
                 LinearLayoutManager.VERTICAL )
         )
 
-        binding.gear1.recyclerView.adapter = adapter
+        binding.gear1.recyclerView.adapter = a1Adapter
         layoutManager = LinearLayoutManager(requireActivity())
         binding.gear1.recyclerView.layoutManager = layoutManager
     }

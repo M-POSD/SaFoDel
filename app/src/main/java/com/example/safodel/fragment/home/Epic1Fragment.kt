@@ -22,6 +22,12 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         binding.tip1Card.card.setOnClickListener() {
             findNavController().navigate(R.id.tip1Fragment, null, navAnimationLeftToRight())
         }
+
+        binding.tip2Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.tip2Fragment, null, navAnimationLeftToRight())
+        }
+
+
         layoutAnimation()
 
         return binding.root
@@ -37,8 +43,6 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         binding.tip1Card.subtitle.text = "while riding a bicycle"
         binding.tip2Card.title.text = "Tip 2"
         binding.tip2Card.subtitle.text = "for delivering at night"
-        binding.tip3Card.title.text = "Tip 3"
-        binding.tip3Card.subtitle.text = "the areas that are prone to bike accidents"
     }
 
     private fun layoutAnimation() {

@@ -18,7 +18,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="4.3"
             android:layout_gravity="center">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +37,7 @@
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.713" />
+                    app:layout_constraintVertical_bias="0.786" />
 
                 <ImageView
                     android:id="@+id/helmet"

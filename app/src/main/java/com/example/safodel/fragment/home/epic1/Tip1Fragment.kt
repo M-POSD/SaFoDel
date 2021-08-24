@@ -1,21 +1,22 @@
 package com.example.safodel.fragment.home.epic1
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.Tip1Adapter
+import com.example.safodel.adapter.TipAdapter
 import com.example.safodel.databinding.FragmentTip1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Tip1
+import com.example.safodel.model.Tip
 
 class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inflate){
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var tips: MutableList<Tip1>
-    private lateinit var adapter: Tip1Adapter
+    private lateinit var tips: MutableList<Tip>
+    private lateinit var adapter: TipAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,17 +39,29 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     }
 
     private fun configRecycleView() {
-        tips = Tip1.initializeResultList()
-        adapter = Tip1Adapter(requireActivity(), tips)
+        adapter = TipAdapter(requireActivity(), getTip1s())
 
-        binding.tip1.recyclerView.addItemDecoration(
+        binding.tip.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
                 LinearLayoutManager.VERTICAL )
         )
 
-        binding.tip1.recyclerView.adapter = adapter
+        binding.tip.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
-        binding.tip1.recyclerView.layoutManager = layoutManager
+        binding.tip.recyclerView.layoutManager = layoutManager
+    }
+
+    private fun getTip1s() : MutableList<Tip> {
+        tips = Tip.initializeResultList()
+        var i = 0
+        while (i < tips.size) {
+            Log.d("getTip1s", tips[i].tip_id.toString())
+            when(tips[i].tip_id) {
+                1 -> i++
+                else -> tips.removeAt(i)
+            }
+        }
+        return tips
     }
 
 }

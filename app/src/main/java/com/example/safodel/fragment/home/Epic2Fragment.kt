@@ -28,6 +28,14 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
             findNavController().navigate(R.id.info1Fragment, null, navAnimationLeftToRight())
         }
 
+        binding.info2Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.info2Fragment, null, navAnimationLeftToRight())
+        }
+
+        binding.info3Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.info3Fragment, null, navAnimationLeftToRight())
+        }
+
         layoutAnimation()
 
         return binding.root

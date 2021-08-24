@@ -135,5 +135,20 @@
         android:id="@+id/startActivity"
         android:name="com.example.safodel.ui.main.StartActivity"
         android:label="StartActivity" />
+    <fragment
+        android:id="@+id/tip2Fragment"
+        android:name="com.example.safodel.fragment.home.epic1.Tip2Fragment"
+        android:label="fragment_tip2"
+        tools:layout="@layout/fragment_tip2" />
+    <fragment
+        android:id="@+id/info2Fragment"
+        android:name="com.example.safodel.fragment.home.epic2.Info2Fragment"
+        android:label="fragment_info2"
+        tools:layout="@layout/fragment_info2" />
+    <fragment
+        android:id="@+id/info3Fragment"
+        android:name="com.example.safodel.fragment.home.epic2.Info3Fragment"
+        android:label="fragment_info3"
+        tools:layout="@layout/fragment_info3" />
 
 </navigation>

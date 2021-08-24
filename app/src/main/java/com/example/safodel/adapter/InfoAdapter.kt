@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.databinding.DetailCardBinding
-import com.example.safodel.model.Tip1
+import com.example.safodel.model.Info
 
-class Tip1Adapter(val contxt: Context, tips: MutableList<Tip1>) :
-    RecyclerView.Adapter<Tip1Adapter.ViewHolder>() {
-    private var tip1: MutableList<Tip1> = tips
+class InfoAdapter(val contxt: Context, infos: MutableList<Info>) :
+    RecyclerView.Adapter<InfoAdapter.ViewHolder>() {
+    private var info: MutableList<Info> = infos
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: DetailCardBinding = DetailCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -17,15 +17,17 @@ class Tip1Adapter(val contxt: Context, tips: MutableList<Tip1>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val info: Tip1 = tip1[position]
+        val info: Info = info[position]
 
-        viewHolder.binding.image.setImageResource(info.image)
-        viewHolder.binding.title.text =  "No cellphone"
+        viewHolder.binding.title.text =  info.title
+
         viewHolder.binding.subtitle.text = info.description
+
+        viewHolder.binding.statistics.text = info.statistics
     }
 
     override fun getItemCount(): Int {
-        return tip1.size
+        return info.size
     }
 
     class ViewHolder(binding: DetailCardBinding) : RecyclerView.ViewHolder(binding.root) {

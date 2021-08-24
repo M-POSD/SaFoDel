@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.home.epic2
+package com.example.safodel.fragment.home.epic1
 
 import android.os.Bundle
 import android.util.Log
@@ -8,22 +8,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.InfoAdapter
-import com.example.safodel.databinding.FragmentInfo1Binding
+import com.example.safodel.adapter.TipAdapter
+import com.example.safodel.databinding.FragmentTip2Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Info
+import com.example.safodel.model.Tip
 
-class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::inflate){
+class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inflate){
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var infos: MutableList<Info>
-    private lateinit var adapter: InfoAdapter
+    private lateinit var tips: MutableList<Tip>
+    private lateinit var adapter: TipAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInfo1Binding.inflate(inflater,container,false)
+        _binding = FragmentTip2Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
 
         configRecycleView()
@@ -39,28 +39,33 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
     }
 
     private fun configRecycleView() {
-        adapter = InfoAdapter(requireActivity(), getInfo1s())
+        adapter = TipAdapter(requireActivity(), getTip2s())
 
-        binding.info1.recyclerView.addItemDecoration(
+        binding.tip.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
                 LinearLayoutManager.VERTICAL )
         )
 
-        binding.info1.recyclerView.adapter = adapter
+        binding.tip.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
-        binding.info1.recyclerView.layoutManager = layoutManager
+        binding.tip.recyclerView.layoutManager = layoutManager
     }
 
-    private fun getInfo1s() : MutableList<Info> {
-        infos = Info.initializeResultList()
+    private fun getTip2s() : MutableList<Tip> {
+        tips = Tip.initializeResultList()
         var i = 0
-        while (i < infos.size) {
-            when(infos[i].info_name) {
-                "Risk" -> i++
-                else -> infos.removeAt(i)
+        while (i < tips.size) {
+            Log.d("getTip1s", tips[i].tip_id.toString())
+            when(tips[i].tip_id) {
+                2 -> i++
+                else -> tips.removeAt(i)
             }
         }
-        return infos
+        return tips
+
     }
 
 }
+
+
+// animator refers from https://www.youtube.com/watch?v=DnXWcGmLHHs&ab_channel=doctorcode

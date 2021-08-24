@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.InfoAdapter
-import com.example.safodel.databinding.FragmentInfo1Binding
+import com.example.safodel.databinding.FragmentInfo2Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Info
 
-class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::inflate){
+class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::inflate){
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var infos: MutableList<Info>
     private lateinit var adapter: InfoAdapter
@@ -23,7 +23,7 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInfo1Binding.inflate(inflater,container,false)
+        _binding = FragmentInfo2Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
 
         configRecycleView()
@@ -41,14 +41,14 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
     private fun configRecycleView() {
         adapter = InfoAdapter(requireActivity(), getInfo1s())
 
-        binding.info1.recyclerView.addItemDecoration(
+        binding.info2.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
                 LinearLayoutManager.VERTICAL )
         )
 
-        binding.info1.recyclerView.adapter = adapter
+        binding.info2.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
-        binding.info1.recyclerView.layoutManager = layoutManager
+        binding.info2.recyclerView.layoutManager = layoutManager
     }
 
     private fun getInfo1s() : MutableList<Info> {
@@ -56,7 +56,7 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         var i = 0
         while (i < infos.size) {
             when(infos[i].info_name) {
-                "Risk" -> i++
+                "Advantage" -> i++
                 else -> infos.removeAt(i)
             }
         }
