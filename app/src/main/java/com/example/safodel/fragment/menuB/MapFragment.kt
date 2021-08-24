@@ -36,8 +36,6 @@ import com.mapbox.navigation.base.options.NavigationOptions
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.MapboxNavigationProvider
 import com.mapbox.navigation.core.trip.session.LocationObserver
-import com.mapbox.navigation.ui.maps.camera.data.MapboxNavigationViewportDataSource
-import com.mapbox.navigation.ui.maps.location.NavigationLocationProvider
 import java.util.*
 
 
@@ -53,30 +51,30 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     // Map camera
     private lateinit var permissionsManager: PermissionsManager
-    private val navigationLocationProvider = NavigationLocationProvider()
-    private lateinit var viewportDataSource: MapboxNavigationViewportDataSource
+//    private val navigationLocationProvider = NavigationLocationProvider()
+//    private lateinit var viewportDataSource: MapboxNavigationViewportDataSource
 
     // Basic value
     private val defaultLatLng = LatLng(-37.876823, 145.045837)
 
 
-    /* --- Enhance Location Callback ---*/
-    private val locationObserver = object : LocationObserver {
-        override fun onRawLocationChanged(rawLocation: Location) {
-            // NA
-        }
-        override fun onEnhancedLocationChanged(
-            enhancedLocation: Location,
-            keyPoints: List<Location>
-        ) {
-            navigationLocationProvider.changePosition(
-                location = enhancedLocation,
-                keyPoints = keyPoints
-            )
-            viewportDataSource.onLocationChanged(enhancedLocation)
-            viewportDataSource.evaluate()
-        }
-    }
+//    /* --- Enhance Location Callback ---*/
+//    private val locationObserver = object : LocationObserver {
+//        override fun onRawLocationChanged(rawLocation: Location) {
+//            // NA
+//        }
+//        override fun onEnhancedLocationChanged(
+//            enhancedLocation: Location,
+//            keyPoints: List<Location>
+//        ) {
+//            navigationLocationProvider.changePosition(
+//                location = enhancedLocation,
+//                keyPoints = keyPoints
+//            )
+//            viewportDataSource.onLocationChanged(enhancedLocation)
+//            viewportDataSource.evaluate()
+//        }
+//    }
 
     @SuppressLint("ClickableViewAccessibility")
     @SuppressWarnings("MissingPermission")
@@ -105,10 +103,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val geocoder = Geocoder(context, Locale.getDefault())
 
         // Init the Mapbox Navigation
-        val navigationOptions = NavigationOptions.Builder(mainActivity)
-            .accessToken(getString(R.string.mapbox_access_token))
-            .build()
-        mapboxNavigation = MapboxNavigationProvider.create(navigationOptions)
+//        val navigationOptions = NavigationOptions.Builder(mainActivity)
+//            .accessToken(getString(R.string.mapbox_access_token))
+//            .build()
+//        mapboxNavigation = MapboxNavigationProvider.create(navigationOptions)
 
 
 //        if(PermissionsManager.areLocationPermissionsGranted(context))
@@ -219,7 +217,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStart() {
         super.onStart()
         mapView.onStart()
-        mapboxNavigation.registerLocationObserver(locationObserver)
+//        mapboxNavigation.registerLocationObserver(locationObserver)
     }
 
     override fun onResume() {
@@ -235,7 +233,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStop() {
         super.onStop()
         mapView.onStop()
-        mapboxNavigation.unregisterLocationObserver(locationObserver)
+//        mapboxNavigation.unregisterLocationObserver(locationObserver)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -62,7 +62,7 @@ dependencies {
         exclude group: 'group_name', module: 'module_name'
     }
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
-    implementation "com.mapbox.navigation:android:2.0.0-beta.22"
+    implementation "com.mapbox.navigation:ui:1.5.1"
 
 
 
