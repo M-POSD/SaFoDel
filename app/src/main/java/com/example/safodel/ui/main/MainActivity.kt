@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity(){
             navController.popBackStack() // Previous fragment out of stack
             when(it.itemId){
                 R.id.navHome -> {
+                    overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
                     navController.navigate(R.id.homeFragment)
                     true
                 }

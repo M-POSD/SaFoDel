@@ -66,7 +66,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val animation = AnimationSet(false)
         animation.addAnimation(slideIn)
         animation.repeatCount = 1;
-        binding.helmet.animation = animation
+        binding.helmetLayout.animation = animation
     }
 
     private fun backpackAnimation() {
