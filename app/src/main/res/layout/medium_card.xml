@@ -52,7 +52,7 @@
                     android:fontFamily="@font/notosansjp_bold"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/subtitle"
@@ -69,17 +69,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="bottom"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="30dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_gravity="right"
-                        android:scaleX="1.5"
-                        android:scaleY="1.5"
+                        android:scaleX="1"
+                        android:scaleY="1"
                         android:src="@drawable/next_page" />
                 </LinearLayout>
 
