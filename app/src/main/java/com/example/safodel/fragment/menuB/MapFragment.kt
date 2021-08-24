@@ -3,9 +3,7 @@ package com.example.safodel.fragment.menuB
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.location.Geocoder
-import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -32,10 +30,8 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
-import com.mapbox.navigation.base.options.NavigationOptions
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.MapboxNavigationProvider
-import com.mapbox.navigation.core.trip.session.LocationObserver
 import java.util.*
 
 
@@ -49,32 +45,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapboxNavigation: MapboxNavigation
 
 
-    // Map camera
+    // Permission
     private lateinit var permissionsManager: PermissionsManager
-//    private val navigationLocationProvider = NavigationLocationProvider()
-//    private lateinit var viewportDataSource: MapboxNavigationViewportDataSource
 
     // Basic value
     private val defaultLatLng = LatLng(-37.876823, 145.045837)
-
-
-//    /* --- Enhance Location Callback ---*/
-//    private val locationObserver = object : LocationObserver {
-//        override fun onRawLocationChanged(rawLocation: Location) {
-//            // NA
-//        }
-//        override fun onEnhancedLocationChanged(
-//            enhancedLocation: Location,
-//            keyPoints: List<Location>
-//        ) {
-//            navigationLocationProvider.changePosition(
-//                location = enhancedLocation,
-//                keyPoints = keyPoints
-//            )
-//            viewportDataSource.onLocationChanged(enhancedLocation)
-//            viewportDataSource.evaluate()
-//        }
-//    }
 
     @SuppressLint("ClickableViewAccessibility")
     @SuppressWarnings("MissingPermission")
@@ -92,6 +67,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView = binding.mapView
         setToolbarBasic(toolbar)
 
+        // Navigation
+//        val mapboxNavigationOptions = MapboxNavigation
+//            .defaultNavigationOptionsBuilder(mainActivity, Utils.getMapboxAccessToken(this))
+//            .build()
+
         // request permission
         permissionsManager = PermissionsManager(this)
         permissionsManager.requestLocationPermissions(activity)
@@ -102,22 +82,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             .tilt(30.0).build()
         val geocoder = Geocoder(context, Locale.getDefault())
 
-        // Init the Mapbox Navigation
-//        val navigationOptions = NavigationOptions.Builder(mainActivity)
-//            .accessToken(getString(R.string.mapbox_access_token))
-//            .build()
-//        mapboxNavigation = MapboxNavigationProvider.create(navigationOptions)
-
-
-//        if(PermissionsManager.areLocationPermissionsGranted(context))
-//           mapboxNavigation.startTripSession()
-//        mapboxNavigation.stopTripSession()
-
-
-
-        /*
-         *   Bottom navigation hide, when touch the map.
-         */
+        /* --- Bottom navigation hide, when touch the map. --- */
         binding.mapView.setOnTouchListener { _, event ->
             when(event.action){
                 MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
@@ -128,7 +93,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-
 
         binding.addressButton.setOnClickListener{
             if(binding.addressEditText.text.toString() == "")
@@ -142,7 +106,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     setMapboxMap(latLng,position) // set marker
                 } else
                     Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
-
             }
         }
 
@@ -217,7 +180,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStart() {
         super.onStart()
         mapView.onStart()
-//        mapboxNavigation.registerLocationObserver(locationObserver)
     }
 
     override fun onResume() {
@@ -233,7 +195,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStop() {
         super.onStop()
         mapView.onStop()
-//        mapboxNavigation.unregisterLocationObserver(locationObserver)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -241,15 +202,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView.onSaveInstanceState(outState)
     }
 
-
-    /*
-        low memory
-     */
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
