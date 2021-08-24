@@ -61,12 +61,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun helmetAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_top)
         slideIn.interpolator = DecelerateInterpolator()
-        slideIn.duration = 3000
+        slideIn.duration = 2500
 
         val animation = AnimationSet(false)
         animation.addAnimation(slideIn)
         animation.repeatCount = 1;
-        binding.helmetLayout.animation = animation
+        binding.helmet.animation = animation
     }
 
     private fun backpackAnimation() {
