@@ -47,8 +47,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epicsFragment, null, navAnimation())
         }
 
-//        helmetAnimation()
-//        backpackAnimation()
         allAnimations()
 
         return binding.root
