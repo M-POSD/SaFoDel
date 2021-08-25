@@ -11,6 +11,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -140,10 +141,18 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         spinner.onItemSelectedListener = this
 
 
-
         // basic location and position
         val mThread = fetchdata()
         mThread.start()
+
+        /* --- Bottom navigation hide, when touch the map. --- */
+        binding.mapView.setOnTouchListener { _, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
+                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
+            }
+            false
+        }
 
 
         binding.updateMap.setOnClickListener {
@@ -324,8 +333,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
         lga = parent?.getItemAtPosition(position).toString()
-//        val mThread = fetchdata()
-//        mThread.start()
 
     }
 
@@ -342,7 +349,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         var data: String = ""
         override fun run() {
           try {
-              feature.clear()
+            feature.clear()
             /*---    Fetch the data from team's API  ---*/
             val url = URL("https://safodel-api.herokuapp.com/location/" + lga + "/")
             val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
@@ -389,23 +396,4 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
 
-/* --- Bottom navigation hide, when touch the map. --- */
-//        binding.mapView.setOnTouchListener { _, event ->
-//            when(event.action){
-//                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
-//                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
-//            }
-//            false
-//        }
 
-//            it.addSource(
-//                VectorSource("mel","mapbox://kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu")
-//            )
-//            var melLayer = CircleLayer("crashs","mel")
-//            melLayer.sourceLayer = "mel-cusco"
-//            melLayer.setProperties(
-//                visibility(VISIBLE),
-//                circleRadius(8f),
-//                circleColor(Color.argb(255,55,148,179))
-//            )
-//            it.addLayer(melLayer)
