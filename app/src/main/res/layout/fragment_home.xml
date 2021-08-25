@@ -104,18 +104,21 @@
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/notosansjp_bold"
                 android:gravity="center"
-                android:text="'Cyclists put their lives at risk for your convenience'"
+                android:text="'Don’t put your lives at risk for other’s convenience'"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <include
                 android:id="@+id/epicCard12"
-                layout="@layout/small_card" />
-
+                layout="@layout/small_cards"/>
             <include
                 android:id="@+id/epicCard34"
-                layout="@layout/small_card" />
+                layout="@layout/small_card"/>
+
+<!--            <include-->
+<!--                android:id="@+id/epicCard34"-->
+<!--                layout="@layout/small_card" />-->
 
         </LinearLayout>
 

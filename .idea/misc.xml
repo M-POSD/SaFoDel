@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_epics.xml" value="0.15789473684210525" />
         <entry key="app/src/main/res/layout/fragment_gear2.xml" value="0.26096491228070173" />
         <entry key="app/src/main/res/layout/fragment_gear3.xml" value="0.26096491228070173" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.6204371310654708" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
@@ -46,6 +46,7 @@
         <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.15219298245614035" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/small_cards.xml" value="0.26096491228070173" />
         <entry key="app/src/main/res/layout/start_button.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/nav_menu_bottom.xml" value="0.17324561403508773" />

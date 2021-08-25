@@ -30,7 +30,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.epicCard12.editTextLeft.text = "Ride Safer"
         binding.epicCard12.editTextRight.text = "E-Bike Delivery"
         binding.epicCard34.editTextLeft.text = "Safety Gear"
-        binding.epicCard34.editTextRight.text = "Placeholder"
+//        binding.epicCard34.editTextRight.text = "Placeholder"
 
         binding.epicCard12.cardLeft.setOnClickListener() {
             recordPosition(0)
