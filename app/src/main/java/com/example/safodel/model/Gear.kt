@@ -12,9 +12,11 @@ class Gear (var info_type: String, var image: Int, var title: String, var descri
             gears.add(Gear("Standard",R.drawable.helmet_standard, "Helmets must be certified",
                 "Labelled with a sticker inside the helmet, there is an Australian and NZ standard for helmets",
                 "Reduce chance of serious head injury by 70% (2016 Study)"))
-            gears.add(Gear("Recommendations",R.drawable.book, "Front & back lights",
-                "Labelled with a sticker inside the helmet, there is an Australian and NZ standard for helmets",
-                "Reduce chance of serious head injury by 70% (2016 Study)"))
+            gears.add(Gear("Recommendations",R.drawable.front_and_back_light, "Front & back lights",
+                "A steady or flashing <font color='#EE0000'>white</font> light on the <font color='#EE0000'>front</font> of the bike that is visible for at least 200 metres <br><br>" +
+                        "A steady or flashing <font color='#EE0000'>red</font> light on the <font color='#EE0000'>rear</font> of the bike that is visible for at least 200 metres <br><br>" +
+                        "A <font color='#EE0000'>red</font> reflector on the rear of the bike that is visible for at least 50 metres when illuminated by a vehicle’s headlight on low beam",
+                ""))
 
             return gears
         }

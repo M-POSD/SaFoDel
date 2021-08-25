@@ -30,8 +30,15 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         binding.gear2.extremeSmall.editText.text = "A detailed checklist of necessary safety equipment"
         binding.gear2.notification.text = "Prepare all gears listed below??????"
 
-        configRecycleView()
         setToolbarReturn(toolbar)
+
+        var checkListString = ""
+        for (item in getCheckList()) {
+            checkListString += item + "\n"
+        }
+
+        binding.gear2.detailCard.title.text = "Check list"
+        binding.gear2.detailCard.subtitle.text = checkListString
 
         return binding.root
     }
@@ -41,29 +48,16 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         _binding = null
     }
 
-    private fun configRecycleView() {
-        adapter = GearAdapter(requireActivity(), getGear3s())
-
-        binding.gear2.recyclerView.addItemDecoration(
-            DividerItemDecoration( requireActivity(),
-                LinearLayoutManager.VERTICAL )
-        )
-
-        binding.gear2.recyclerView.adapter = adapter
-        layoutManager = LinearLayoutManager(requireActivity())
-        binding.gear2.recyclerView.layoutManager = layoutManager
-    }
-
-    private fun getGear3s() : MutableList<Gear> {
-        gears = Gear.initializeResultList()
-        var i = 0
-        while (i < gears.size) {
-            when(gears[i].info_type) {
-                "Standard" -> i++
-                else -> gears.removeAt(i)
-            }
-        }
-        return gears
+    private fun getCheckList() : MutableList<String>{
+        var checkList: MutableList<String> = ArrayList()
+        checkList.add("Helmet")
+        checkList.add("Working breaks")
+        checkList.add("Lights & reflectors")
+        checkList.add("High visibility clothing ")
+        checkList.add("Check bicycle chain")
+        checkList.add("Check tyres")
+        checkList.add("Check pedals spin freely")
+        return checkList
     }
 
 }

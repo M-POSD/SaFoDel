@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.home.epic3.Gear2Fragment"
+    tools:context=".fragment.home.epic3.Gear4Fragment"
     android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/simple_toolbar" />
 
-    <include layout="@layout/detail_page_layout2"
-        android:id="@+id/gear2"/>
+    <include layout="@layout/detail_page_layout"
+        android:id="@+id/gear4"/>
 
 
 </LinearLayout>

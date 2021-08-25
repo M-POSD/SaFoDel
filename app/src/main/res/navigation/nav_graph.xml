@@ -164,5 +164,10 @@
         android:name="com.example.safodel.fragment.home.epic3.Gear2Fragment"
         android:label="fragment_gear2"
         tools:layout="@layout/fragment_gear2" />
+    <fragment
+        android:id="@+id/gear4Fragment"
+        android:name="com.example.safodel.fragment.home.epic3.Gear4Fragment"
+        android:label="fragment_gear4"
+        tools:layout="@layout/fragment_gear4" />
 
 </navigation>
