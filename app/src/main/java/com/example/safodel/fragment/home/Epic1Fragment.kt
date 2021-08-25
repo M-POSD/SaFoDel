@@ -41,7 +41,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     private fun setDefaultView() {
         binding.tip1Card.title.text = "Safety Tips - while riding a bicycle"
         binding.tip2Card.title.text = "Safety Tips - for delivering at night"
-        binding.tip2Card.title.text = "Nearby Accident Prone areas"
+        binding.tip3Card.title.text = "Nearby Accident Prone areas"
     }
 
     private fun layoutAnimation() {

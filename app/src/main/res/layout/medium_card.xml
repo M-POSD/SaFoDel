@@ -47,9 +47,10 @@
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
                     android:layout_height="0dp"
-                    android:layout_weight="6"
+                    android:layout_weight="7"
                     android:text="Demo"
                     android:fontFamily="@font/notosansjp_black"
                     android:textAppearance="?attr/textAppearanceHeadline6"
@@ -59,15 +60,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="15dp"
                         android:layout_gravity="right"
                         android:scaleX="1"
                         android:scaleY="1"
