@@ -32,10 +32,16 @@
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="50dp"
+                android:background="#9E9E9E" />
+
             <LinearLayout
                 android:id="@+id/cardLayout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -44,7 +50,8 @@
                     android:id="@+id/subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/notosansjp_bold"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6"

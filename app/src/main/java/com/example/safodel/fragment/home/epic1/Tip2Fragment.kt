@@ -26,7 +26,7 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
         _binding = FragmentTip2Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
 
-        binding.tip2.extremeSmall.editText.text = "STs delivering at night"
+        binding.tip2.extremeSmall.editText.text = "Delivering at night"
         binding.tip2.notification.text = "Worried about your safety while delivering at night? " +
                 "Follow these tips to stay safe"
 

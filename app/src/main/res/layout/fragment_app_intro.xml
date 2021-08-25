@@ -19,11 +19,11 @@
             android:checkable="true"
             android:focusable="true"
             app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="@color/gray">
+            app:cardBackgroundColor="@color/milk_white">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="8dp">
 

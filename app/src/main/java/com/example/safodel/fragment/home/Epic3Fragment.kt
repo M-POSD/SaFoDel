@@ -46,8 +46,8 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
     }
 
     private fun setDefaultView() {
-        binding.gear1Card.title.text = "Gears  information"
-        binding.gear2Card.title.text = "A detailed checklist of necessary safety equipment"
+        binding.gear1Card.title.text = "Gears information"
+        binding.gear2Card.title.text = "A checklist of necessary safety equipment"
         binding.gear3Card.title.text = "Australian standards for the safety gear"
         binding.gear4Card.title.text = "Recommendations for the safety gear"
     }
