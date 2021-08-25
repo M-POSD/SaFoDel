@@ -1,5 +1,7 @@
 package com.example.safodel.ui.main
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
@@ -19,9 +21,9 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        imageAnimation()
-        buttonAnimation()
-
+//        imageAnimation()
+//        buttonAnimation()
+        allAnimations()
         binding.startButton.card.setOnClickListener {
             val intent = Intent()
 
@@ -44,22 +46,22 @@ class StartActivity : AppCompatActivity() {
 
         val animation = AnimationSet(false)
         animation.addAnimation(slideInRight)
+
         animation.repeatCount = 1;
         binding.image.animation = animation
-        binding.image.visibility = View.VISIBLE
     }
 
     private fun buttonAnimation() {
 
         val fadeIn: Animation = AlphaAnimation(0.0F, 1.0F)
         fadeIn.interpolator = AccelerateDecelerateInterpolator()
-        fadeIn.duration = 3000
+        fadeIn.duration = 1000
 
         val animation = AnimationSet(false)
         animation.addAnimation(fadeIn)
+        animation.startTime = 1000
         animation.repeatCount = 1;
         binding.startButton.card.animation = animation
-        binding.startButton.card.visibility = View.VISIBLE
     }
 
     private fun subTitleAnimation() {
@@ -71,5 +73,16 @@ class StartActivity : AppCompatActivity() {
         animation.addAnimation(slideInLeft)
         animation.repeatCount = 1;
         binding.subtitle.animation = animation
+    }
+
+    private fun allAnimations() {
+        var objectAnimator1: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
+        var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
+        var objectAnimator3: ObjectAnimator = ObjectAnimator.ofFloat(binding.startButton.card, "alpha", 0f, 1f)
+
+        val animatorSet = AnimatorSet()
+        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
+        animatorSet.duration = 2000
+        animatorSet.start()
     }
 }

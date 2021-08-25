@@ -6,7 +6,7 @@ class Tip (var tip_id: Int, var title: String, var description: String, var stat
             var tips: MutableList<Tip> = ArrayList()
             tips.add(
                 Tip(1,"Be predictable ","-  Obeying stop and give way signs\n" +
-                    "  Ride in a straight line as much as possible (rather than weaving in traffic) \n" +
+                    "-  Ride in a straight line as much as possible (rather than weaving in traffic) \n" +
                     "-  Don’t ride in vehicle blind spots\n" +
                     "-  Signal your turns\n", "")
             )

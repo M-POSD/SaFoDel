@@ -1,5 +1,7 @@
 package com.example.safodel.fragment.menuB
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -45,8 +47,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epicsFragment, null, navAnimation())
         }
 
-        helmetAnimation()
-        backpackAnimation()
+//        helmetAnimation()
+//        backpackAnimation()
+        allAnimations()
 
         return binding.root
     }
@@ -60,7 +63,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun helmetAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_top)
-        slideIn.interpolator = DecelerateInterpolator()
+        slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 3000
 
         val animation = AnimationSet(false)
@@ -71,13 +74,26 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun backpackAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_left)
-        slideIn.interpolator = DecelerateInterpolator()
+        slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 3000
 
         val animation = AnimationSet(false)
+
         animation.addAnimation(slideIn)
         animation.repeatCount = 1;
         binding.backpack.animation = animation
+    }
+
+    private fun allAnimations() {
+        var objectAnimator1 : ObjectAnimator = ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
+        var objectAnimator2 : ObjectAnimator = ObjectAnimator.ofFloat(binding.backpack, "alpha", 0f, 1f)
+        var objectAnimator3 : ObjectAnimator = ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 0f)
+        var objectAnimator4 : ObjectAnimator = ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
+
+        val animatorSet = AnimatorSet()
+        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3).before(objectAnimator4)
+        animatorSet.duration = 2000
+        animatorSet.start()
     }
 
 
