@@ -27,6 +27,14 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
             findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
         }
 
+        binding.gear2Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.gear2Fragment, null, navAnimationLeftToRight())
+        }
+
+        binding.gear3Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.gear3Fragment, null, navAnimationLeftToRight())
+        }
+
         layoutAnimation()
 
         return binding.root

@@ -4,13 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.databinding.DetailCardBinding
 import com.example.safodel.databinding.DetailCardV0Binding
-import com.example.safodel.model.Gear1
+import com.example.safodel.model.Gear
 
-class Gear1Adapter(val contxt: Context, gear1s: MutableList<Gear1>) :
-    RecyclerView.Adapter<Gear1Adapter.ViewHolder>() {
-    private var gear1: MutableList<Gear1> = gear1s
+class GearAdapter(val contxt: Context, gears: MutableList<Gear>) :
+    RecyclerView.Adapter<GearAdapter.ViewHolder>() {
+    private var gear: MutableList<Gear> = gears
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: DetailCardV0Binding = DetailCardV0Binding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,7 +17,7 @@ class Gear1Adapter(val contxt: Context, gear1s: MutableList<Gear1>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val info: Gear1 = gear1[position]
+        val info: Gear = gear[position]
 
         viewHolder.binding.image.setImageResource(info.image)
         viewHolder.binding.title.text =  info.title
@@ -27,7 +26,7 @@ class Gear1Adapter(val contxt: Context, gear1s: MutableList<Gear1>) :
     }
 
     override fun getItemCount(): Int {
-        return gear1.size
+        return gear.size
     }
 
     class ViewHolder(binding: DetailCardV0Binding) : RecyclerView.ViewHolder(binding.root) {
