@@ -66,7 +66,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     // Navigation
     private lateinit var mapboxNavigation: MapboxNavigation
 
-
     // Permission
     private lateinit var permissionsManager: PermissionsManager
 
@@ -104,43 +103,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         // basic location and position
         var latLng = defaultLatLng
-        var position = CameraPosition.Builder().target(latLng).zoom(13.0)
-            .tilt(30.0).build()
-        val geocoder = Geocoder(context, Locale.getDefault())
-
-        /* --- Bottom navigation hide, when touch the map. --- */
-//        binding.mapView.setOnTouchListener { _, event ->
-//            when(event.action){
-//                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
-//                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
-//            }
-//            false
-//        }
-
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
-        binding.addressButton.setOnClickListener{
-            if(binding.addressEditText.text.toString() == "")
-                Toast.makeText(context,"Please enter the address", Toast.LENGTH_SHORT).show()
-            else {
-                val address = geocoder.getFromLocationName(binding.addressEditText.text.toString(), 1)
-                if (address.isNotEmpty()) {
-                    latLng = LatLng(address[0].latitude, address[0].longitude)
-                    position = CameraPosition.Builder().target(latLng).zoom(13.0)
-                        .tilt(30.0).build()
-                    setMapboxMap(latLng,position) // set marker
-                } else
-                    Toast.makeText(context, "Can not find this address.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        binding.recenter.setOnClickListener {
-            mapboxMap.setStyle(Style.LIGHT){
-                enableLocationComponent(it)
-            }
-        }
         Snackbar.make(binding.coordinator, "long press map to point", LENGTH_SHORT).show()
         return binding.root
     }
@@ -153,7 +119,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         this.mapboxMap.setStyle(Style.LIGHT){
             val position =  CameraPosition.Builder().target(defaultLatLng).zoom(13.0).build()
             mapboxMap.cameraPosition = position
+
             enableLocationComponent(it)
+
+
             it.addSource(GeoJsonSource("CLICK_SOURCE"))
             it.addSource(GeoJsonSource(
                 "ROUTE_LINE_SOURCE_ID",
@@ -234,24 +203,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             permissionsManager.requestLocationPermissions(activity)
         }
 
-    }
-
-
-    private fun setMapboxMap(latLng: LatLng,position: CameraPosition){
-        mapboxMap.setStyle(Style.LIGHT) {
-            mapboxMap.cameraPosition
-            val symbol = SymbolManager(mapView, mapboxMap, it)
-            symbol.iconAllowOverlap = true
-            it.addImage(
-                "Marker",
-                BitmapFactory.decodeResource(
-                    resources,
-                    R.drawable.mapbox_marker_icon_default
-                )
-            )
-            symbol.create(SymbolOptions().withLatLng(latLng).withIconImage("Marker"))
-        }
-        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 4000)
     }
 
 
@@ -346,9 +297,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     LENGTH_SHORT
                 ).show()
 
-// Update a gradient route LineLayer's source with the Maps SDK. This will
-// visually add/update the line on the map. All of this is being done
-// directly with Maps SDK code and NOT the Navigation UI SDK.
                 mapboxMap.getStyle {
                     val clickPointSource = it.getSourceAs<GeoJsonSource>("ROUTE_LINE_SOURCE_ID")
                     val routeLineString = LineString.fromPolyline(
@@ -373,3 +321,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 }
+
+
+
+/* --- Bottom navigation hide, when touch the map. --- */
+//        binding.mapView.setOnTouchListener { _, event ->
+//            when(event.action){
+//                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
+//                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
+//            }
+//            false
+//        }
