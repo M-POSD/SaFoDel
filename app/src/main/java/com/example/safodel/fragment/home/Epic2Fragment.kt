@@ -42,12 +42,9 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
     }
 
     private fun setDefaultView() {
-        binding.info1Card.title.text = "Info 1"
-        binding.info1Card.subtitle.text = "the potential risks of delivering"
-        binding.info2Card.title.text = "Info 2"
-        binding.info2Card.subtitle.text = "advantages of delivering"
-        binding.info3Card.title.text = "Info 3"
-        binding.info3Card.subtitle.text = "information on the e-bike rules and regulations"
+        binding.info1Card.title.text = "Risk with E-bikes"
+        binding.info2Card.title.text = "Advantages of E-bikes delivering"
+        binding.info3Card.title.text = "E-bikes Rules & Regulations"
     }
 
     private fun layoutAnimation() {

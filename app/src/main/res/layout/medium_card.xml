@@ -41,41 +41,34 @@
                 android:layout_height="170dp"
                 android:layout_weight="0.6"
                 android:orientation="vertical"
+                android:weightSum="10"
                 android:padding="8dp">
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"
                     android:text="Demo"
                     android:fontFamily="@font/notosansjp_black"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/black"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Demo"
-                    android:fontFamily="@font/notosansjp_bold"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
+                    android:textSize="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="15dp"
                         android:layout_gravity="right"
                         android:scaleX="1"
                         android:scaleY="1"

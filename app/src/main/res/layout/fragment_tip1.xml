@@ -12,7 +12,7 @@
         layout="@layout/simple_toolbar" />
 
     <include layout="@layout/detail_page_layout"
-        android:id="@+id/tip"/>
+        android:id="@+id/tip1"/>
 
 
 </LinearLayout>
