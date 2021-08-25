@@ -7,7 +7,7 @@
 ## [SaFoDel](https://m-posd.github.io/)
 Educating Food Delivery Bike Riders in Victoria
 
-# Instructions to run the application
+## Instructions to run the application
 
 If you want to run the applicaiton on your own system, we recommend the following steps:
 1. Download Android Studio on your system. (Link: https://developer.android.com/studio)
