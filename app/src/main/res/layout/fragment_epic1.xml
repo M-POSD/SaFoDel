@@ -29,6 +29,10 @@
                 android:id="@+id/tip2Card"
                 layout="@layout/medium_card" />
 
+            <include
+                android:id="@+id/tip3Card"
+                layout="@layout/medium_card" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

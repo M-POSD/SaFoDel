@@ -80,10 +80,16 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
                 Log.d("onPageSelected", "onPageSelected successfully")
 
                 when(getInitialPosition()) {
-                    "0" -> tabLayout.selectTab(tabLayout.getTabAt(0))
-                    "1" -> tabLayout.selectTab(tabLayout.getTabAt(1))
-                    "2" -> tabLayout.selectTab(tabLayout.getTabAt(2))
-                    else -> tabLayout.selectTab(tabLayout.getTabAt(position))
+                    "0" -> {
+                        updateTabView(0)
+                    }
+                    "1" -> {
+                        updateTabView(1)
+                    }
+                    "2" -> {
+                        updateTabView(2)
+                    }
+                    else -> updateTabView(position)
                 }
 
                 // set the initial position to null
@@ -111,6 +117,22 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         return sharedPref.getString("epicPosition", "")
     }
 
+    private fun updateTabView(position: Int) {
+        tabLayout.selectTab(tabLayout.getTabAt(position))
+
+        when(position) {
+            0 -> {
+                binding.tabbar.notification.text = "Find out how to ride safely while delivering food"
+            }
+            1 -> {
+                binding.tabbar.notification.text = "Find information on using e-bikes for food delivery"
+            }
+            2 -> {
+                binding.tabbar.notification.text = "Find out the cycling gear you need to deliver safe"
+            }
+        }
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

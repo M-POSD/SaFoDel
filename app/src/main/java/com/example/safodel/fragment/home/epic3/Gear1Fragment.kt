@@ -25,8 +25,10 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         _binding = FragmentGear1Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
 
-        configRecycleView()
+        binding.gear1.extremeSmall.editText.text = "Gears basic information"
+        binding.gear1.notification.text = "Safety gears should wear while delivering"
 
+        configRecycleView()
         setToolbarReturn(toolbar)
 
         return binding.root

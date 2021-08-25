@@ -26,6 +26,10 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
         _binding = FragmentTip2Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
 
+        binding.tip2.extremeSmall.editText.text = "STs delivering at night"
+        binding.tip2.notification.text = "Worried about your safety while delivering at night? " +
+                "Follow these tips to stay safe"
+
         configRecycleView()
 
         setToolbarReturn(toolbar)
@@ -41,14 +45,14 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
     private fun configRecycleView() {
         adapter = TipAdapter(requireActivity(), getTip2s())
 
-        binding.tip.recyclerView.addItemDecoration(
+        binding.tip2.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
                 LinearLayoutManager.VERTICAL )
         )
 
-        binding.tip.recyclerView.adapter = adapter
+        binding.tip2.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
-        binding.tip.recyclerView.layoutManager = layoutManager
+        binding.tip2.recyclerView.layoutManager = layoutManager
     }
 
     private fun getTip2s() : MutableList<Tip> {
