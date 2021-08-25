@@ -66,7 +66,7 @@ import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
 //mapbox dataset: kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu
 
 private val locationList: ArrayList<Point> = ArrayList()
-private val feature: ArrayList<Feature> = ArrayList()
+private var feature: ArrayList<Feature> = ArrayList()
 private var lga: String = "MELBOURNE"
 
 
@@ -178,7 +178,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 )!!)
 
             Log.d("In the main Thread Feature is ", feature.size.toString())
-            it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(feature)))
+            //it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(feature)))
+            it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(ArrayList<Feature>(
+                feature))))
 
             val baseicCircle:CircleLayer = CircleLayer(BASE_CIRCLE_LAYER_ID,SOURCE_ID).withProperties(
                 circleColor(Color.parseColor(BASE_CIRCLE_COLOR)),
@@ -219,10 +221,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             symbolIconLayer.minZoom = ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON
             it.addLayer(symbolIconLayer)
 
-            Toast.makeText(
-                context,
-                "zoom_map_in_and_out_circle_to_icon_transition", Toast.LENGTH_SHORT
-            ).show()
+            //Toast.makeText(context, "zoom_map_in_and_out_circle_to_icon_transition", Toast.LENGTH_SHORT).show()
 
             mapboxMap.animateCamera(
                 CameraUpdateFactory
@@ -323,8 +322,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        //Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
-//        lga = parent?.getItemAtPosition(position).toString()
+        Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
+        lga = parent?.getItemAtPosition(position).toString()
 //        val mThread = fetchdata()
 //        mThread.start()
 
@@ -343,6 +342,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         var data: String = ""
         override fun run() {
           try {
+              feature.clear()
             /*---    Fetch the data from team's API  ---*/
             val url = URL("https://safodel-api.herokuapp.com/location/" + lga + "/")
             val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
@@ -376,7 +376,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 for(each in 0..locationList.size-1){
                     feature.add(Feature.fromGeometry(locationList[each]))
                 }
-                this.interrupt()
             }
         }
     }
