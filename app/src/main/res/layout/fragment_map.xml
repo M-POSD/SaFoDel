@@ -23,7 +23,13 @@
             layout="@layout/simple_toolbar"
             android:id="@+id/toolbar" />
 
-
+    <Button
+        android:id="@+id/updateMap"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        />
     
     <ProgressBar
         android:id="@+id/route_retrieval_progress_spinner"

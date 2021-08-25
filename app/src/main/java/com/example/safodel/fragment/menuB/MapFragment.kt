@@ -2,13 +2,18 @@ package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentContainer
@@ -18,11 +23,14 @@ import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.ui.main.MainActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.JsonParser
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.api.directions.v5.models.RouteOptions
+import com.mapbox.geojson.Feature
+import com.mapbox.geojson.FeatureCollection
 import com.mapbox.geojson.LineString
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
@@ -41,27 +49,49 @@ import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
+import com.mapbox.mapboxsdk.style.layers.CircleLayer
 import com.mapbox.mapboxsdk.style.layers.LineLayer
 import com.mapbox.mapboxsdk.style.layers.Property.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import com.mapbox.mapboxsdk.style.sources.VectorSource
 import com.mapbox.mapboxsdk.utils.BitmapUtils
 import com.mapbox.navigation.base.internal.extensions.applyDefaultParams
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.MapboxNavigationProvider
 import com.mapbox.navigation.core.directions.session.RoutesRequestCallback
+import org.json.JSONArray
+import org.json.JSONObject
 import timber.log.Timber
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
 import java.util.*
+import kotlin.collections.ArrayList
+
+import com.mapbox.mapboxsdk.style.expressions.Expression.stop
+
+import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
+
+//mapbox dataset: kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu
+
+private val locationList: ArrayList<Point> = ArrayList()
+private val feature: ArrayList<Feature> = ArrayList()
 
 
-class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),OnMapReadyCallback,PermissionsListener,MapboxMap.OnMapLongClickListener {
+class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
+    OnMapReadyCallback,PermissionsListener {
 
     // Map
-    private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
     private lateinit var mainActivity : MainActivity
+    private lateinit var mapView: MapView
 
     // Navigation
     private lateinit var mapboxNavigation: MapboxNavigation
@@ -71,8 +101,22 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     // Basic value
     private val defaultLatLng = LatLng(-37.876823, 145.045837)
-    private val ORIGIN_COLOR = "#32a852" // Green
-    private val DESTINATION_COLOR = "#F84D4D" // Red
+    private val BASE_CIRCLE_INITIAL_RADIUS = 3.4f
+    private val RADIUS_WHEN_CIRCLES_MATCH_ICON_RADIUS = 14f
+    private val ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION = 11f
+    private val ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON = 12f
+    private val FINAL_OPACITY_OF_SHADING_CIRCLE = .5f
+    private val BASE_CIRCLE_COLOR = "#3BC802"
+    private val SHADING_CIRCLE_COLOR = "#858585"
+    private val SOURCE_ID = "SOURCE_ID"
+    private val ICON_LAYER_ID = "ICON_LAYER_ID"
+    private val BASE_CIRCLE_LAYER_ID = "BASE_CIRCLE_LAYER_ID"
+    private val SHADOW_CIRCLE_LAYER_ID = "SHADOW_CIRCLE_LAYER_ID"
+    private val ICON_IMAGE_ID = "ICON_ID"
+
+    // thread
+    val mainHandler: Handler = Handler()
+
 
     @SuppressLint("ClickableViewAccessibility")
     @SuppressWarnings("MissingPermission")
@@ -101,13 +145,21 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         permissionsManager = PermissionsManager(this)
         permissionsManager.requestLocationPermissions(activity)
 
+
         // basic location and position
         var latLng = defaultLatLng
+        val mThread = fetchdata()
+        mThread.start()
+
+        binding.updateMap.setOnClickListener {
+            Log.d("Hello user", feature.size.toString())
+            mapView.getMapAsync(this)
+        }
+
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
-        Snackbar.make(binding.coordinator, "long press map to point", LENGTH_SHORT).show()
         return binding.root
     }
 
@@ -119,20 +171,25 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         this.mapboxMap.setStyle(Style.LIGHT){
             val position =  CameraPosition.Builder().target(defaultLatLng).zoom(13.0).build()
             mapboxMap.cameraPosition = position
-
             enableLocationComponent(it)
 
-
-            it.addSource(GeoJsonSource("CLICK_SOURCE"))
-            it.addSource(GeoJsonSource(
-                "ROUTE_LINE_SOURCE_ID",
-                GeoJsonOptions().withLineMetrics(true)
-            ))
-
-
+            //withSource(new GeoJsonSource(SOURCE_ID,
+            //FeatureCollection.fromFeatures(initFeatureArray())))
             // Add the destination marker image
+//           it.addSource(
+//                VectorSource("mel","mapbox://kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu")
+//            )
+//            var melLayer = CircleLayer("crashs","mel")
+//            melLayer.sourceLayer = "mel-cusco"
+//            melLayer.setProperties(
+//                visibility(VISIBLE),
+//                circleRadius(8f),
+//                circleColor(Color.argb(255,55,148,179))
+//            )
+//            it.addLayer(melLayer)
+
             it.addImage(
-                "ICON_ID",
+                ICON_IMAGE_ID,
                 BitmapUtils.getBitmapFromDrawable(
                     context?.let { it1 ->
                         ContextCompat.getDrawable(
@@ -142,37 +199,63 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 )!!)
 
-            // Add the LineLayer below the LocationComponent's bottom layer, which is the
-// circular accuracy layer. The LineLayer will display the directions route.
-            it.addLayerBelow(
-                LineLayer("ROUTE_LAYER_ID", "ROUTE_LINE_SOURCE_ID")
-                    .withProperties(
-                        lineCap(LINE_CAP_ROUND),
-                        lineJoin(LINE_JOIN_ROUND),
-                        lineWidth(6f),
-                        lineGradient(
-                            interpolate(
-                                linear(),
-                                lineProgress(),
-                                stop(0f, color(parseColor(ORIGIN_COLOR))),
-                                stop(1f, color(parseColor(DESTINATION_COLOR)))
+            Log.d("In the main Thread Feature is ", feature.size.toString())
+            it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(feature)))
+
+            val baseicCircle:CircleLayer = CircleLayer(BASE_CIRCLE_LAYER_ID,SOURCE_ID).withProperties(
+                circleColor(Color.parseColor(BASE_CIRCLE_COLOR)),
+                circleRadius(
+                    interpolate(
+                        linear(), zoom(),
+                        stop(ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION, BASE_CIRCLE_INITIAL_RADIUS),
+                        stop(ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON, RADIUS_WHEN_CIRCLES_MATCH_ICON_RADIUS)
+                )
+            ))
+            it.addLayer(baseicCircle)
+
+            val shadowTransitionCircleLayer = CircleLayer(SHADOW_CIRCLE_LAYER_ID, SOURCE_ID)
+                .withProperties(
+                    circleColor(parseColor(SHADING_CIRCLE_COLOR)),
+                    circleRadius(RADIUS_WHEN_CIRCLES_MATCH_ICON_RADIUS),
+                    circleOpacity(
+                        interpolate(
+                            linear(), zoom(),
+                            stop(ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION - .5, 0),
+                            stop(
+                                ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION,
+                                FINAL_OPACITY_OF_SHADING_CIRCLE
                             )
                         )
-                    ),
-                "mapbox-location-shadow-layer"
+                    )
+                )
+            it.addLayerBelow(shadowTransitionCircleLayer, BASE_CIRCLE_LAYER_ID)
+
+            val symbolIconLayer = SymbolLayer(ICON_LAYER_ID, SOURCE_ID)
+            symbolIconLayer.withProperties(
+                iconImage(ICON_IMAGE_ID),
+                iconSize(1.5f),
+                iconIgnorePlacement(true),
+                iconAllowOverlap(true)
             )
 
-// Add the SymbolLayer to show the destination marker
-            it.addLayerAbove(
-                SymbolLayer("CLICK_LAYER", "CLICK_SOURCE")
-                    .withProperties(
-                        iconImage("ICON_ID")
-                    ),
-                "ROUTE_LAYER_ID"
+            symbolIconLayer.minZoom = ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON
+            it.addLayer(symbolIconLayer)
+
+            Toast.makeText(
+                context,
+                "zoom_map_in_and_out_circle_to_icon_transition", Toast.LENGTH_SHORT
+            ).show()
+
+            mapboxMap.animateCamera(
+                CameraUpdateFactory
+                    .newCameraPosition(
+                        CameraPosition.Builder()
+                            .zoom(12.5)
+                            .build()
+                    ), 3000
             )
 
-            mapboxMap.addOnMapLongClickListener(this)
-            Snackbar.make(binding.coordinator, "long press map to point", LENGTH_SHORT).show()
+
         }
     }
 
@@ -197,6 +280,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             locationComponent.isLocationComponentEnabled = true
             locationComponent.cameraMode = CameraMode.TRACKING
             locationComponent.renderMode = RenderMode.COMPASS
+
         }
         else{
             permissionsManager = PermissionsManager(this)
@@ -260,67 +344,61 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    override fun onMapLongClick(point: LatLng): Boolean {
-        binding.routeRetrievalProgressSpinner.visibility = View.INVISIBLE
 
-        // Place the destination marker at the map long click location
-        mapboxMap.getStyle {
-            val clickPointSource = it.getSourceAs<GeoJsonSource>("CLICK_SOURCE")
-            clickPointSource?.setGeoJson(Point.fromLngLat(point.longitude, point.latitude))
-        }
-        mapboxMap.locationComponent.lastKnownLocation?.let { originLocation ->
-            originLocation.latitude
-            val originPoint = Point.fromLngLat(originLocation.getLongitude(),originLocation.getLatitude())
-            val point1 = Point.fromLngLat(originLocation.getLongitude(),originLocation.getLatitude())
-            mapboxNavigation.requestRoutes(
-                RouteOptions.builder().applyDefaultParams()
-                    .accessToken(getString(R.string.mapbox_access_token))
-                    .coordinates(listOf<Point>(originPoint,point1))
-                    .alternatives(true)
-                    .profile(DirectionsCriteria.PROFILE_DRIVING_TRAFFIC)
-                    .build(),
-                routesReqCallback
-            )
-        }
-        return true
-    }
+}
 
-    private val routesReqCallback = object : RoutesRequestCallback {
-        override fun onRoutesReady(routes: List<DirectionsRoute>) {
-            if (routes.isNotEmpty()) {
-                Snackbar.make(
-                    binding.coordinator,
-                    String.format(
-                        "Step of route",
-                        routes[0].legs()?.get(0)?.steps()?.size
-                    ),
-                    LENGTH_SHORT
-                ).show()
+class fetchdata: Thread() {
 
-                mapboxMap.getStyle {
-                    val clickPointSource = it.getSourceAs<GeoJsonSource>("ROUTE_LINE_SOURCE_ID")
-                    val routeLineString = LineString.fromPolyline(
-                        routes[0].geometry()!!,
-                        6
-                    )
-                    clickPointSource?.setGeoJson(routeLineString)
+    var data: String = ""
+
+    override fun run() {
+        try {
+            val url = URL("https://safodel-api.herokuapp.com/location/MELBOURNE/")
+            val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
+            val inputStream: InputStream = httpURLConnection.inputStream
+            val bufferReader: BufferedReader = BufferedReader(InputStreamReader(inputStream))
+            var line: String
+            data = bufferReader.readLine()
+
+
+            if(data.isNotEmpty()){
+                var jsonObject = JSONObject(data)
+                var points: JSONArray = jsonObject.getJSONArray("results")
+
+                Log.d("hello pure",points.length().toString())
+                locationList.clear()
+                for(point in 0..points.length()-1){
+                    var location: JSONObject = points.getJSONObject(point)
+                    var eachPoint = Point.fromLngLat(location.get("long").
+                    toString().toDouble(),
+                        location.get("lat").toString().toDouble())
+                    //var eachLatlng = LatLng(eachPoint.latitude(),eachPoint.longitude())
+                    //Log.d("Hello size",location.get("long").toString())
+                    locationList.add(eachPoint)
                 }
-                binding.routeRetrievalProgressSpinner.visibility = View.INVISIBLE
-            } else {
-                Snackbar.make(binding.coordinator, "no route", LENGTH_SHORT).show()
             }
+
+        }catch(e: MalformedURLException){
+            e.printStackTrace()
+
+        }catch(e: IOException){
+            e.printStackTrace()
         }
 
-        override fun onRoutesRequestCanceled(routeOptions: RouteOptions) {
-            Timber.e("route request failure %s")
-            Snackbar.make(binding.coordinator, "route request fail", LENGTH_SHORT).show()
-        }
+        Handler(Looper.getMainLooper()).post {
+            run {
+                for(each in 0..locationList.size-1){
+                    feature.add(Feature.fromGeometry(locationList[each]))
+                }
+                Log.d("Hello PPPPPP", feature.size.toString())
 
-        override fun onRoutesRequestFailure(throwable: Throwable, routeOptions: RouteOptions) {
-            Timber.d("route request canceled")
+
+            }
         }
     }
 }
+
+
 
 
 
@@ -332,3 +410,15 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 //            }
 //            false
 //        }
+
+//            it.addSource(
+//                VectorSource("mel","mapbox://kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu")
+//            )
+//            var melLayer = CircleLayer("crashs","mel")
+//            melLayer.sourceLayer = "mel-cusco"
+//            melLayer.setProperties(
+//                visibility(VISIBLE),
+//                circleRadius(8f),
+//                circleColor(Color.argb(255,55,148,179))
+//            )
+//            it.addLayer(melLayer)
