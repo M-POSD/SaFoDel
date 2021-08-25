@@ -68,7 +68,8 @@ import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
 
 private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
-private var lga: String = "MELBOURNE"
+private var lga: String = "BAYSIDE"
+private var spinnerTimes = 0
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -331,9 +332,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        spinnerTimes++
         Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
-        lga = parent?.getItemAtPosition(position).toString()
-
+        if(spinnerTimes >1){
+            Log.d("Hello Spinner", spinnerTimes.toString())
+            lga = parent?.getItemAtPosition(position).toString()
+            val mThread = fetchdata()
+            mThread.start()
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -381,6 +387,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         Handler(Looper.getMainLooper()).post {
             run {
                 for(each in 0..locationList.size-1){
+                    Log.d("Hello Handler Locationlist Size is:", locationList.size.toString())
                     feature.add(Feature.fromGeometry(locationList[each]))
                 }
             }
