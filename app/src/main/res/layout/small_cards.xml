@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    android:background="@color/primary_green"
+    android:orientation="horizontal">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardLeft"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginVertical="10dp"
+
+        android:checkable="true"
+        android:clickable="true"
+        app:cardElevation="5dp"
+        android:focusable="true"
+        android:layout_weight="0.5"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/white">
+
+        <LinearLayout
+            android:id="@+id/cardLayoutL"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/editTextLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosansjp_bold"
+                android:textColor="@color/primary_green"
+                android:layout_gravity="center"
+                android:textSize="16dp"
+                android:text="Demo"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardRight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginVertical="10dp"
+        android:checkable="true"
+        android:clickable="true"
+        app:cardElevation="5dp"
+        android:focusable="true"
+        app:cardCornerRadius="10dp"
+        android:layout_weight="0.5"
+        app:cardBackgroundColor="@color/white">
+
+        <LinearLayout
+            android:id="@+id/cardLayoutR"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/editTextRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_green"
+                android:gravity="center"
+                android:fontFamily="@font/notosansjp_bold"
+                android:textSize="16dp"
+                android:text="Demo"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

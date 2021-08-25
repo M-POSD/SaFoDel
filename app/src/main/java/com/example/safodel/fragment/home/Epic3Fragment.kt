@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic3Binding
 import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.Gear
 
 class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::inflate) {
     override fun onCreateView(
@@ -27,15 +28,28 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
             findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
         }
 
+        binding.gear2Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.gear2Fragment, null, navAnimationLeftToRight())
+        }
+
+        binding.gear3Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.gear3Fragment, null, navAnimationLeftToRight())
+        }
+
+        binding.gear4Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.gear4Fragment, null, navAnimationLeftToRight())
+        }
+
         layoutAnimation()
 
         return binding.root
     }
 
     private fun setDefaultView() {
-        binding.gear1Card.title.text = "Gears  information"
-        binding.gear2Card.title.text = "A detailed checklist of necessary safety equipment"
+        binding.gear1Card.title.text = "Gears information"
+        binding.gear2Card.title.text = "A checklist of necessary safety equipment"
         binding.gear3Card.title.text = "Australian standards for the safety gear"
+        binding.gear4Card.title.text = "Recommendations for the safety gear"
     }
 
     private fun layoutAnimation() {

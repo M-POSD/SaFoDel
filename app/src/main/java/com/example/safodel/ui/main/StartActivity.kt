@@ -79,10 +79,13 @@ class StartActivity : AppCompatActivity() {
         var objectAnimator1: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
         var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator = ObjectAnimator.ofFloat(binding.startButton.card, "alpha", 0f, 1f)
+        objectAnimator1.duration = 1300
+        objectAnimator2.duration = 1300
+        objectAnimator3.duration = 800
 
         val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
-        animatorSet.duration = 2000
+
         animatorSet.start()
     }
 }

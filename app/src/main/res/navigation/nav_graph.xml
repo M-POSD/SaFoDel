@@ -150,5 +150,24 @@
         android:name="com.example.safodel.fragment.home.epic2.Info3Fragment"
         android:label="fragment_info3"
         tools:layout="@layout/fragment_info3" />
+    <fragment
+        android:id="@+id/gear3Fragment"
+        android:name="com.example.safodel.fragment.home.epic3.Gear3Fragment"
+        android:label="fragment_gear3"
+        tools:layout="@layout/fragment_gear3" />
+    <fragment
+        android:id="@+id/basicFragment"
+        android:name="com.example.safodel.fragment.BasicFragment"
+        android:label="BasicFragment" />
+    <fragment
+        android:id="@+id/gear2Fragment"
+        android:name="com.example.safodel.fragment.home.epic3.Gear2Fragment"
+        android:label="fragment_gear2"
+        tools:layout="@layout/fragment_gear2" />
+    <fragment
+        android:id="@+id/gear4Fragment"
+        android:name="com.example.safodel.fragment.home.epic3.Gear4Fragment"
+        android:label="fragment_gear4"
+        tools:layout="@layout/fragment_gear4" />
 
 </navigation>

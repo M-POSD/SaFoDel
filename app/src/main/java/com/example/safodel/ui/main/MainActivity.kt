@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity(){
      */
     override fun onBackPressed() {
         if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment
-                    && navController.currentDestination?.id != R.id.mapfragment
                     && navController.currentDestination?.id != R.id.schoolFragment)) {
             super.onBackPressed()
             return

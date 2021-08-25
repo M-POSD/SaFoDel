@@ -24,7 +24,7 @@ class Info (var info_name: String, var title: String, var description: String, v
                 ""))
             infos.add(Info("Rule", "Max motor power should be 250 watts (or 200 depending on e-bike)",
                 "A bicycle with an attached auxiliary motor should not produce power over 200 watts\n" +
-                        "\nAn electrically power assisted cycle should not have a motor exceeding 250 watts\n",
+                        "\nAn electrically power assisted cycle should not have a motor exceeding 250 watts",
                 ""))
             return infos
         }
