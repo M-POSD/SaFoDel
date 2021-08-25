@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/mapbox_notification_maneuver_image_height"
+    android:paddingLeft="@dimen/mapbox_route_overview_left_right_padding"
+    android:paddingRight="@dimen/mapbox_route_overview_left_right_padding">
+
+
+    <TextView
+        android:id="@+id/lga_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_marginLeft="@dimen/mapbox_dimen_16dp"
+        android:layout_toRightOf="@id/lga_item"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        tools:text="Choose the LGA Area"/>
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/baseline_expand_more_black_24" />
+
+
+</RelativeLayout>

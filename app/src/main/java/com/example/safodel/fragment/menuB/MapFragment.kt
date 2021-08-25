@@ -1,37 +1,33 @@
 package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
-import android.graphics.BitmapFactory
+import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Color.parseColor
-import android.location.Geocoder
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentContainer
+import androidx.fragment.app.Fragment
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.LGAList
 import com.example.safodel.ui.main.MainActivity
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
-import com.google.android.material.snackbar.Snackbar
-import com.google.gson.JsonParser
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
-import com.mapbox.api.directions.v5.DirectionsCriteria
-import com.mapbox.api.directions.v5.models.DirectionsRoute
-import com.mapbox.api.directions.v5.models.RouteOptions
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
-import com.mapbox.geojson.LineString
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
@@ -46,25 +42,16 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.CircleLayer
-import com.mapbox.mapboxsdk.style.layers.LineLayer
-import com.mapbox.mapboxsdk.style.layers.Property.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
-import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
-import com.mapbox.mapboxsdk.style.sources.VectorSource
 import com.mapbox.mapboxsdk.utils.BitmapUtils
-import com.mapbox.navigation.base.internal.extensions.applyDefaultParams
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.MapboxNavigationProvider
-import com.mapbox.navigation.core.directions.session.RoutesRequestCallback
 import org.json.JSONArray
 import org.json.JSONObject
-import timber.log.Timber
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -72,21 +59,19 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
-import java.util.*
 import kotlin.collections.ArrayList
-
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
-
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
 
 //mapbox dataset: kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu
 
 private val locationList: ArrayList<Point> = ArrayList()
 private val feature: ArrayList<Feature> = ArrayList()
+private var lga: String = "MELBOURNE"
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
-    OnMapReadyCallback,PermissionsListener {
+    OnMapReadyCallback,PermissionsListener, AdapterView.OnItemSelectedListener {
 
     // Map
     private lateinit var mapboxMap: MapboxMap
@@ -100,6 +85,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
+    private val LGAlist = LGAList.init()
     private val defaultLatLng = LatLng(-37.876823, 145.045837)
     private val BASE_CIRCLE_INITIAL_RADIUS = 3.4f
     private val RADIUS_WHEN_CIRCLES_MATCH_ICON_RADIUS = 14f
@@ -134,6 +120,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView = binding.mapView
         setToolbarBasic(toolbar)
 
+
         // Navigation
         val mapboxNavigationOptions = MapboxNavigation
             .defaultNavigationOptionsBuilder(mainActivity, getString(R.string.mapbox_access_token))
@@ -145,17 +132,23 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         permissionsManager = PermissionsManager(this)
         permissionsManager.requestLocationPermissions(activity)
 
+        // spinner init
+        val spinner: Spinner = binding.spinner
+        val arrayAdapter:ArrayAdapter<String> = ArrayAdapter<String>(mainActivity,android.R.layout.simple_spinner_item,LGAlist)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = arrayAdapter
+        spinner.onItemSelectedListener = this
+
+
 
         // basic location and position
-        var latLng = defaultLatLng
         val mThread = fetchdata()
         mThread.start()
 
+
         binding.updateMap.setOnClickListener {
-            Log.d("Hello user", feature.size.toString())
             mapView.getMapAsync(this)
         }
-
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
@@ -165,28 +158,13 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
     override fun onMapReady(mapboxMap: MapboxMap) {
-        mapboxMap.setMaxZoomPreference(15.0)
+        mapboxMap.setMaxZoomPreference(20.0)
         mapboxMap.setMinZoomPreference(5.0)
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT){
-            val position =  CameraPosition.Builder().target(defaultLatLng).zoom(13.0).build()
+            val position =  CameraPosition.Builder().target(defaultLatLng).zoom(10.0).build()
             mapboxMap.cameraPosition = position
             enableLocationComponent(it)
-
-            //withSource(new GeoJsonSource(SOURCE_ID,
-            //FeatureCollection.fromFeatures(initFeatureArray())))
-            // Add the destination marker image
-//           it.addSource(
-//                VectorSource("mel","mapbox://kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu")
-//            )
-//            var melLayer = CircleLayer("crashs","mel")
-//            melLayer.sourceLayer = "mel-cusco"
-//            melLayer.setProperties(
-//                visibility(VISIBLE),
-//                circleRadius(8f),
-//                circleColor(Color.argb(255,55,148,179))
-//            )
-//            it.addLayer(melLayer)
 
             it.addImage(
                 ICON_IMAGE_ID,
@@ -250,7 +228,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 CameraUpdateFactory
                     .newCameraPosition(
                         CameraPosition.Builder()
-                            .zoom(12.5)
+                            .zoom(10.5)
                             .build()
                     ), 3000
             )
@@ -344,36 +322,44 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        //Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
+//        lga = parent?.getItemAtPosition(position).toString()
+//        val mThread = fetchdata()
+//        mThread.start()
 
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
 }
 
-class fetchdata: Thread() {
 
-    var data: String = ""
-
-    override fun run() {
-        try {
-            val url = URL("https://safodel-api.herokuapp.com/location/MELBOURNE/")
+    /*
+     *  Collect data
+     */
+    class fetchdata(): Thread() {
+        var data: String = ""
+        override fun run() {
+          try {
+            /*---    Fetch the data from team's API  ---*/
+            val url = URL("https://safodel-api.herokuapp.com/location/" + lga + "/")
             val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
             val inputStream: InputStream = httpURLConnection.inputStream
             val bufferReader: BufferedReader = BufferedReader(InputStreamReader(inputStream))
-            var line: String
             data = bufferReader.readLine()
 
 
             if(data.isNotEmpty()){
-                var jsonObject = JSONObject(data)
-                var points: JSONArray = jsonObject.getJSONArray("results")
-
-                Log.d("hello pure",points.length().toString())
+                val jsonObject = JSONObject(data)
+                val points: JSONArray = jsonObject.getJSONArray("results")
                 locationList.clear()
                 for(point in 0..points.length()-1){
-                    var location: JSONObject = points.getJSONObject(point)
-                    var eachPoint = Point.fromLngLat(location.get("long").
+                    val location: JSONObject = points.getJSONObject(point)
+                    val eachPoint = Point.fromLngLat(location.get("long").
                     toString().toDouble(),
                         location.get("lat").toString().toDouble())
-                    //var eachLatlng = LatLng(eachPoint.latitude(),eachPoint.longitude())
-                    //Log.d("Hello size",location.get("long").toString())
                     locationList.add(eachPoint)
                 }
             }
@@ -390,13 +376,15 @@ class fetchdata: Thread() {
                 for(each in 0..locationList.size-1){
                     feature.add(Feature.fromGeometry(locationList[each]))
                 }
-                Log.d("Hello PPPPPP", feature.size.toString())
-
-
+                this.interrupt()
             }
         }
     }
+
 }
+
+
+
 
 
 

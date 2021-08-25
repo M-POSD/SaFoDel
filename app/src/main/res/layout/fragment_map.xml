@@ -27,9 +27,22 @@
         android:id="@+id/updateMap"
         android:layout_width="wrap_content"
         android:layout_gravity="center_vertical"
+        android:background="@color/milk_white"
         android:layout_height="wrap_content"
         android:text="Update"
         />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/blue_outline"
+        android:popupBackground="@drawable/blue_outline"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:spinnerMode="dropdown"
+        tools:listitem="@layout/items_lga"/>
     
     <ProgressBar
         android:id="@+id/route_retrieval_progress_spinner"
