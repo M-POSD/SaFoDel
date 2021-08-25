@@ -2,24 +2,28 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragment.menuB.MapFragment">
 
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            mapbox:mapbox_cameraTargetLat="-32.557013"
+            mapbox:mapbox_cameraTargetLng="-56.149056"
+            mapbox:mapbox_cameraZoom="5.526846">
+        </com.mapbox.mapboxsdk.maps.MapView>
 
-        mapbox:mapbox_cameraTargetLat="-32.557013"
-        mapbox:mapbox_cameraTargetLng="-56.149056"
-        mapbox:mapbox_cameraZoom="5.526846">
-    </com.mapbox.mapboxsdk.maps.MapView>
+        <include
+            layout="@layout/simple_toolbar"
+            android:id="@+id/toolbar" />
 
-    <include
-        layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -55,6 +59,17 @@
         android:textColor="@color/green"
         android:layout_gravity="bottom"
         android:layout_marginBottom="100dp"/>
+    
+    <ProgressBar
+        android:id="@+id/route_retrieval_progress_spinner"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mapView"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

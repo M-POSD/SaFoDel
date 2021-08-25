@@ -2,6 +2,7 @@ package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
+import android.graphics.Color.parseColor
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +10,21 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentContainer
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.ui.main.MainActivity
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.api.directions.v5.DirectionsCriteria
+import com.mapbox.api.directions.v5.models.DirectionsRoute
+import com.mapbox.api.directions.v5.models.RouteOptions
+import com.mapbox.geojson.LineString
+import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
@@ -30,16 +40,28 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
+import com.mapbox.mapboxsdk.style.expressions.Expression.*
+import com.mapbox.mapboxsdk.style.layers.LineLayer
+import com.mapbox.mapboxsdk.style.layers.Property.*
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer
+import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import com.mapbox.mapboxsdk.utils.BitmapUtils
+import com.mapbox.navigation.base.internal.extensions.applyDefaultParams
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.MapboxNavigationProvider
+import com.mapbox.navigation.core.directions.session.RoutesRequestCallback
+import timber.log.Timber
 import java.util.*
 
 
-class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),OnMapReadyCallback,PermissionsListener {
+class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),OnMapReadyCallback,PermissionsListener,MapboxMap.OnMapLongClickListener {
 
     // Map
     private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
+    private lateinit var mainActivity : MainActivity
 
     // Navigation
     private lateinit var mapboxNavigation: MapboxNavigation
@@ -50,6 +72,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     // Basic value
     private val defaultLatLng = LatLng(-37.876823, 145.045837)
+    private val ORIGIN_COLOR = "#32a852" // Green
+    private val DESTINATION_COLOR = "#F84D4D" // Red
 
     @SuppressLint("ClickableViewAccessibility")
     @SuppressWarnings("MissingPermission")
@@ -62,15 +86,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         _binding = FragmentMapBinding.inflate(inflater,container,false)
 
         // init the view
-        val mainActivity = activity as MainActivity
+        mainActivity = activity as MainActivity
         val toolbar = binding.toolbar.root
         mapView = binding.mapView
         setToolbarBasic(toolbar)
 
         // Navigation
-//        val mapboxNavigationOptions = MapboxNavigation
-//            .defaultNavigationOptionsBuilder(mainActivity, Utils.getMapboxAccessToken(this))
-//            .build()
+        val mapboxNavigationOptions = MapboxNavigation
+            .defaultNavigationOptionsBuilder(mainActivity, getString(R.string.mapbox_access_token))
+            .build()
+        mapboxNavigation = MapboxNavigation(mapboxNavigationOptions)
+
 
         // request permission
         permissionsManager = PermissionsManager(this)
@@ -83,13 +109,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val geocoder = Geocoder(context, Locale.getDefault())
 
         /* --- Bottom navigation hide, when touch the map. --- */
-        binding.mapView.setOnTouchListener { _, event ->
-            when(event.action){
-                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
-                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
-            }
-            false
-        }
+//        binding.mapView.setOnTouchListener { _, event ->
+//            when(event.action){
+//                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
+//                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
+//            }
+//            false
+//        }
+
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
@@ -114,6 +141,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 enableLocationComponent(it)
             }
         }
+        Snackbar.make(binding.coordinator, "long press map to point", LENGTH_SHORT).show()
         return binding.root
     }
 
@@ -126,6 +154,56 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val position =  CameraPosition.Builder().target(defaultLatLng).zoom(13.0).build()
             mapboxMap.cameraPosition = position
             enableLocationComponent(it)
+            it.addSource(GeoJsonSource("CLICK_SOURCE"))
+            it.addSource(GeoJsonSource(
+                "ROUTE_LINE_SOURCE_ID",
+                GeoJsonOptions().withLineMetrics(true)
+            ))
+
+
+            // Add the destination marker image
+            it.addImage(
+                "ICON_ID",
+                BitmapUtils.getBitmapFromDrawable(
+                    context?.let { it1 ->
+                        ContextCompat.getDrawable(
+                            it1,
+                            R.drawable.mapbox_marker_icon_default
+                        )
+                    }
+                )!!)
+
+            // Add the LineLayer below the LocationComponent's bottom layer, which is the
+// circular accuracy layer. The LineLayer will display the directions route.
+            it.addLayerBelow(
+                LineLayer("ROUTE_LAYER_ID", "ROUTE_LINE_SOURCE_ID")
+                    .withProperties(
+                        lineCap(LINE_CAP_ROUND),
+                        lineJoin(LINE_JOIN_ROUND),
+                        lineWidth(6f),
+                        lineGradient(
+                            interpolate(
+                                linear(),
+                                lineProgress(),
+                                stop(0f, color(parseColor(ORIGIN_COLOR))),
+                                stop(1f, color(parseColor(DESTINATION_COLOR)))
+                            )
+                        )
+                    ),
+                "mapbox-location-shadow-layer"
+            )
+
+// Add the SymbolLayer to show the destination marker
+            it.addLayerAbove(
+                SymbolLayer("CLICK_LAYER", "CLICK_SOURCE")
+                    .withProperties(
+                        iconImage("ICON_ID")
+                    ),
+                "ROUTE_LAYER_ID"
+            )
+
+            mapboxMap.addOnMapLongClickListener(this)
+            Snackbar.make(binding.coordinator, "long press map to point", LENGTH_SHORT).show()
         }
     }
 
@@ -149,7 +227,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             locationComponent.isLocationComponentEnabled = true
             locationComponent.cameraMode = CameraMode.TRACKING
-            locationComponent.renderMode = RenderMode.NORMAL
+            locationComponent.renderMode = RenderMode.COMPASS
         }
         else{
             permissionsManager = PermissionsManager(this)
@@ -180,6 +258,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStart() {
         super.onStart()
         mapView.onStart()
+        mainActivity.isBottomNavigationVisible(false)
     }
 
     override fun onResume() {
@@ -195,6 +274,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStop() {
         super.onStop()
         mapView.onStop()
+        mainActivity.isBottomNavigationVisible(true)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -226,6 +306,70 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
         else{
             Toast.makeText(context, "user location permission not granted", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onMapLongClick(point: LatLng): Boolean {
+        binding.routeRetrievalProgressSpinner.visibility = View.INVISIBLE
+
+        // Place the destination marker at the map long click location
+        mapboxMap.getStyle {
+            val clickPointSource = it.getSourceAs<GeoJsonSource>("CLICK_SOURCE")
+            clickPointSource?.setGeoJson(Point.fromLngLat(point.longitude, point.latitude))
+        }
+        mapboxMap.locationComponent.lastKnownLocation?.let { originLocation ->
+            originLocation.latitude
+            val originPoint = Point.fromLngLat(originLocation.getLongitude(),originLocation.getLatitude())
+            val point1 = Point.fromLngLat(originLocation.getLongitude(),originLocation.getLatitude())
+            mapboxNavigation.requestRoutes(
+                RouteOptions.builder().applyDefaultParams()
+                    .accessToken(getString(R.string.mapbox_access_token))
+                    .coordinates(listOf<Point>(originPoint,point1))
+                    .alternatives(true)
+                    .profile(DirectionsCriteria.PROFILE_DRIVING_TRAFFIC)
+                    .build(),
+                routesReqCallback
+            )
+        }
+        return true
+    }
+
+    private val routesReqCallback = object : RoutesRequestCallback {
+        override fun onRoutesReady(routes: List<DirectionsRoute>) {
+            if (routes.isNotEmpty()) {
+                Snackbar.make(
+                    binding.coordinator,
+                    String.format(
+                        "Step of route",
+                        routes[0].legs()?.get(0)?.steps()?.size
+                    ),
+                    LENGTH_SHORT
+                ).show()
+
+// Update a gradient route LineLayer's source with the Maps SDK. This will
+// visually add/update the line on the map. All of this is being done
+// directly with Maps SDK code and NOT the Navigation UI SDK.
+                mapboxMap.getStyle {
+                    val clickPointSource = it.getSourceAs<GeoJsonSource>("ROUTE_LINE_SOURCE_ID")
+                    val routeLineString = LineString.fromPolyline(
+                        routes[0].geometry()!!,
+                        6
+                    )
+                    clickPointSource?.setGeoJson(routeLineString)
+                }
+                binding.routeRetrievalProgressSpinner.visibility = View.INVISIBLE
+            } else {
+                Snackbar.make(binding.coordinator, "no route", LENGTH_SHORT).show()
+            }
+        }
+
+        override fun onRoutesRequestCanceled(routeOptions: RouteOptions) {
+            Timber.e("route request failure %s")
+            Snackbar.make(binding.coordinator, "route request fail", LENGTH_SHORT).show()
+        }
+
+        override fun onRoutesRequestFailure(throwable: Throwable, routeOptions: RouteOptions) {
+            Timber.d("route request canceled")
         }
     }
 }
