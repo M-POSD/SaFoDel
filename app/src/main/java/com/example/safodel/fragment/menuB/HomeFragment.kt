@@ -45,6 +45,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         imageAnimations()
 
+
+
         return binding.root
     }
 
@@ -89,8 +91,23 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .before(objectAnimator4)
         animatorSet.duration = 1000
         animatorSet.start()
+
+        binding.images.setOnClickListener{
+            imagesDrivingAnimation()
+        }
     }
 
+    private fun imagesDrivingAnimation() {
+        var objectAnimator1: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.images, "translationX", 0f, 800f)
+        var objectAnimator2: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.images, "translationX", -800f, 0f)
+        objectAnimator1.duration = 2000
+        objectAnimator2.duration = 2000
+        val animatorSet = AnimatorSet()
+        animatorSet.play(objectAnimator1).before(objectAnimator2)
+        animatorSet.start()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
