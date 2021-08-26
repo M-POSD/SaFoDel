@@ -292,6 +292,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onPause() {
         super.onPause()
+        mThread.interrupt()
         mapView.onPause()
     }
 
@@ -313,6 +314,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mThread.interrupt()
         mapView.onDestroy()
         MapboxNavigationProvider.destroy()
         _binding = null
@@ -362,9 +364,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val url = URL("https://safodel-api.herokuapp.com/accidents?location=" + lga)
             val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
             val inputStream: InputStream = httpURLConnection.inputStream
-            val bufferReader: BufferedReader = BufferedReader(InputStreamReader(inputStream))
+            val bufferReader = BufferedReader(InputStreamReader(inputStream))
             data = bufferReader.readLine()
-
 
             if(data.isNotEmpty()){
                 val jsonObject = JSONObject(data)
@@ -378,7 +379,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     locationList.add(eachPoint)
                 }
             }
-
         }catch(e: MalformedURLException){
             e.printStackTrace()
 

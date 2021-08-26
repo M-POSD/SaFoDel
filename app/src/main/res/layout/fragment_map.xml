@@ -34,14 +34,13 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:background="@drawable/blue_outline"
-        android:popupBackground="@drawable/blue_outline"
         android:layout_marginTop="?attr/actionBarSize"
-        android:spinnerMode="dropdown"
+        android:spinnerMode="dialog"
         tools:listitem="@layout/items_lga"/>
     
     <ProgressBar
