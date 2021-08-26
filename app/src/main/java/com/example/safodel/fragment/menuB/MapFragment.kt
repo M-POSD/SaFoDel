@@ -1,9 +1,6 @@
 package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.os.Bundle
@@ -19,7 +16,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
@@ -63,8 +59,6 @@ import java.net.URL
 import kotlin.collections.ArrayList
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
-import com.mapbox.mapboxsdk.utils.ThreadUtils
-import java.util.concurrent.ThreadFactory
 
 //mapbox dataset: kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu
 
@@ -175,7 +169,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapboxMap.setMinZoomPreference(5.0)
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT){
-            val position =  CameraPosition.Builder().target(defaultLatLng).zoom(10.0).build()
+            val position =  CameraPosition.Builder().target(defaultLatLng).zoom(8.0).build()
             mapboxMap.cameraPosition = position
             enableLocationComponent(it)
 
@@ -190,11 +184,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 )!!)
 
-            Log.d("In the main Thread Feature is ", feature.size.toString())
-            //it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(feature)))
+            if(feature.size == 0)
+                Toast.makeText(context,"Data is updating...",Toast.LENGTH_SHORT).show()
+
             it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
-
             val baseicCircle:CircleLayer = CircleLayer(BASE_CIRCLE_LAYER_ID,SOURCE_ID).withProperties(
                 circleColor(Color.parseColor(BASE_CIRCLE_COLOR)),
                 circleRadius(
@@ -234,8 +228,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             symbolIconLayer.minZoom = ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON
             it.addLayer(symbolIconLayer)
 
-            //Toast.makeText(context, "zoom_map_in_and_out_circle_to_icon_transition", Toast.LENGTH_SHORT).show()
-
             mapboxMap.animateCamera(
                 CameraUpdateFactory
                     .newCameraPosition(
@@ -268,7 +260,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
 
             locationComponent.isLocationComponentEnabled = true
-            locationComponent.cameraMode = CameraMode.TRACKING
+            //locationComponent.cameraMode = CameraMode.TRACKING
             locationComponent.renderMode = RenderMode.COMPASS
 
         }
@@ -338,7 +330,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         spinnerTimes++
         Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
-        if(spinnerTimes >1){
+        if(spinnerTimes >= 1){
             Log.d("Hello Spinner", spinnerTimes.toString())
             lga = parent?.getItemAtPosition(position).toString()
             mThread = fetchdata()
