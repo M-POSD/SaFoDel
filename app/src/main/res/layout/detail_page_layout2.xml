@@ -49,17 +49,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="5dp"
-                android:layout_weight="8"
-                app:cardBackgroundColor="#FFF6F1"
-                app:cardCornerRadius="5dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,11 +59,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="460dp"
                         android:src="@drawable/checklist"
-                        android:scaleY="1.75"
-                        android:scaleX="1.75"/>
+                        android:scaleY="2"
+                        android:scaleX="2"/>
                 </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

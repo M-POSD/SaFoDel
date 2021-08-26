@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         layout="@layout/simple_toolbar" />
 
-    <include layout="@layout/detail_page_layout"
+    <include layout="@layout/detail_page_layout3"
         android:id="@+id/gear3"/>
 
 

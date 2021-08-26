@@ -96,13 +96,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorSet.start()
 
         // after animation 4 -> set images clickable
-        objectAnimator4.addListener(
-            onEnd = {
-                binding.images.setOnClickListener{
-                    imagesDrivingAnimation()
-                }
-            }
-        )
+//        objectAnimator4.addListener(
+//            onEnd = {
+//                binding.images.setOnClickListener{
+//                    imagesDrivingAnimation()
+//                }
+//            }
+//        )
+        binding.images.setOnClickListener{
+            imagesDrivingAnimation()
+        }
     }
 
     private fun imagesDrivingAnimation() {

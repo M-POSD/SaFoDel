@@ -37,11 +37,22 @@
         android:background="@color/primary_green"
         android:orientation="vertical">
 
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Following labels indicate the helmet is an approved helmet"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/notosansjp_bold"
+            android:textSize="14dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="90dp"
             android:scrollbars="vertical" />
     </LinearLayout>
