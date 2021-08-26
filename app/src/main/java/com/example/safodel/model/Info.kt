@@ -4,7 +4,7 @@ import com.example.safodel.R
 
 class Info (var info_name: String, var title: String, var description: String, var statistics: String) {
     companion object {
-        fun initializeResultList(): MutableList<Info> {
+        fun init(): MutableList<Info> {
             var infos: MutableList<Info> = ArrayList()
             infos.add(Info("Risk", "Watch your speed",
                 "E-bikes travel much faster than regular bicycles thus be prepared to travel faster, and be mindful other road users may not expect you to be travelling so fast",

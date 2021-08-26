@@ -2,7 +2,7 @@ package com.example.safodel.model
 
 class Tip (var tip_id: Int, var title: String, var description: String, var statistics: String) {
     companion object {
-        fun initializeResultList(): MutableList<Tip> {
+        fun init(): MutableList<Tip> {
             var tips: MutableList<Tip> = ArrayList()
             tips.add(
                 Tip(1,"Be predictable ","Obeying stop and give way signs\n" +

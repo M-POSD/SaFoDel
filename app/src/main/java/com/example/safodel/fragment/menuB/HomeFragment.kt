@@ -34,29 +34,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         binding.epicCard12.cardLeft.setOnClickListener() {
             recordPosition(0)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimation())
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
         binding.epicCard12.cardRight.setOnClickListener() {
             recordPosition(1)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimation())
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
         binding.epicCard34.cardLeft.setOnClickListener() {
             recordPosition(2)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimation())
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        allAnimations()
+        imageAnimations()
 
         return binding.root
-    }
-
-    private fun navAnimation() : NavOptions {
-        return NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
-            .setExitAnim(R.anim.slide_out_left)
-            .setPopEnterAnim(R.anim.slide_in_left)
-            .setPopExitAnim(R.anim.slide_out_right).build()
     }
 
     private fun helmetAnimation() {
@@ -82,7 +75,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.backpack.animation = animation
     }
 
-    private fun allAnimations() {
+    // the animation for all images
+    private fun imageAnimations() {
         var objectAnimator1 : ObjectAnimator = ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
         var objectAnimator2 : ObjectAnimator = ObjectAnimator.ofFloat(binding.backpack, "alpha", 0f, 1f)
         var objectAnimator3 : ObjectAnimator = ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 0f)
@@ -100,6 +94,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         _binding = null
     }
 
+    // record the button position clicked to match the tab selected next page
     private fun recordPosition(position: Int) {
         val sharedPref = requireActivity().applicationContext.getSharedPreferences(
             "epicPosition", Context.MODE_PRIVATE

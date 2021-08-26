@@ -48,6 +48,7 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         _binding = null
     }
 
+    // made up the check list to display
     private fun getCheckList() : MutableList<String>{
         var checkList: MutableList<String> = ArrayList()
         checkList.add("Helmet")

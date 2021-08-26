@@ -54,8 +54,9 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         binding.info1.recyclerView.layoutManager = layoutManager
     }
 
+    // get the info1s from the model class
     private fun getInfo1s() : MutableList<Info> {
-        infos = Info.initializeResultList()
+        infos = Info.init()
         var i = 0
         while (i < infos.size) {
             when(infos[i].info_name) {

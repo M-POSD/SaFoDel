@@ -23,7 +23,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(binding.root)
 //        imageAnimation()
 //        buttonAnimation()
-        allAnimations()
+        configAllAnimations()
         binding.startButton.card.setOnClickListener {
             val intent = Intent()
 
@@ -38,6 +38,22 @@ class StartActivity : AppCompatActivity() {
 
     }
 
+    // confi all animations in the start activity
+    private fun configAllAnimations() {
+        var objectAnimator1: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
+        var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
+        var objectAnimator3: ObjectAnimator = ObjectAnimator.ofFloat(binding.startButton.card, "alpha", 0f, 1f)
+        objectAnimator1.duration = 1300
+        objectAnimator2.duration = 1300
+        objectAnimator3.duration = 800
+
+        val animatorSet = AnimatorSet()
+        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
+
+        animatorSet.start()
+    }
+
+    /////////////////////////////////////////////// temporarily useless methods below
     private fun imageAnimation() {
         val slideInRight: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
 
@@ -74,18 +90,5 @@ class StartActivity : AppCompatActivity() {
         animation.repeatCount = 1;
         binding.subtitle.animation = animation
     }
-
-    private fun allAnimations() {
-        var objectAnimator1: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
-        var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
-        var objectAnimator3: ObjectAnimator = ObjectAnimator.ofFloat(binding.startButton.card, "alpha", 0f, 1f)
-        objectAnimator1.duration = 1300
-        objectAnimator2.duration = 1300
-        objectAnimator3.duration = 800
-
-        val animatorSet = AnimatorSet()
-        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
-
-        animatorSet.start()
-    }
 }
+

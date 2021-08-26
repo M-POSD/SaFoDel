@@ -40,7 +40,7 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
             findNavController().navigate(R.id.gear4Fragment, null, navAnimationLeftToRight())
         }
 
-        layoutAnimation()
+        contentsAnimation()
 
         return binding.root
     }
@@ -52,7 +52,8 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         binding.gear4Card.title.text = "Recommendations for the safety gear"
     }
 
-    private fun layoutAnimation() {
+    // contents animation slide in from bottom
+    private fun contentsAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
         slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 1500

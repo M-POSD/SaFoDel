@@ -55,8 +55,9 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
         binding.tip2.recyclerView.layoutManager = layoutManager
     }
 
+    // get tip2s from the model class
     private fun getTip2s() : MutableList<Tip> {
-        tips = Tip.initializeResultList()
+        tips = Tip.init()
         var i = 0
         while (i < tips.size) {
             Log.d("getTip1s", tips[i].tip_id.toString())

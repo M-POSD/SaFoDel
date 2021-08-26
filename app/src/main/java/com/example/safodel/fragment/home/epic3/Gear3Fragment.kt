@@ -53,8 +53,9 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
         binding.gear3.recyclerView.layoutManager = layoutManager
     }
 
+    // get the gear3s from the model class
     private fun getGear3s() : MutableList<Gear> {
-        gears = Gear.initializeResultList()
+        gears = Gear.init()
         var i = 0
         while (i < gears.size) {
             when(gears[i].info_type) {

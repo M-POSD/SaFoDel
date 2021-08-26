@@ -27,8 +27,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
             findNavController().navigate(R.id.tip2Fragment, null, navAnimationLeftToRight())
         }
 
-
-        layoutAnimation()
+        contentsAnimation()
 
         return binding.root
     }
@@ -44,7 +43,8 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
 //        binding.tip3Card.title.text = "Nearby Accident Prone areas"
     }
 
-    private fun layoutAnimation() {
+    // contents animation slide in from bottom
+    private fun contentsAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
         slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 1500

@@ -54,8 +54,9 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         binding.tip1.recyclerView.layoutManager = layoutManager
     }
 
+    // get tip1s from the model class
     private fun getTip1s() : MutableList<Tip> {
-        tips = Tip.initializeResultList()
+        tips = Tip.init()
         var i = 0
         while (i < tips.size) {
             Log.d("getTip1s", tips[i].tip_id.toString())
@@ -68,11 +69,5 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     }
 
 }
-
-//        val mainActivity = activity as MainActivity
-//        mainActivity.isBottomNavigationVisible(false)
-
-//        toolbar.setBackgroundResource(R.color.skin) => set toolbar background color not null
-
 
 // animator refers from https://www.youtube.com/watch?v=DnXWcGmLHHs&ab_channel=doctorcode

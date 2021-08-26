@@ -36,7 +36,7 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
             findNavController().navigate(R.id.info3Fragment, null, navAnimationLeftToRight())
         }
 
-        layoutAnimation()
+        contentsAnimation()
 
         return binding.root
     }
@@ -47,7 +47,8 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         binding.info3Card.title.text = "E-bikes Rules & Regulations"
     }
 
-    private fun layoutAnimation() {
+    // contents animation slide in from bottom
+    private fun contentsAnimation() {
         val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
         slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 1500

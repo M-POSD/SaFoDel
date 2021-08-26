@@ -42,7 +42,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
     }
 
     private fun configRecycleView() {
-        adapter = InfoAdapter(requireActivity(), getInfo1s())
+        adapter = InfoAdapter(requireActivity(), getInfo2s())
 
         binding.info2.recyclerView.addItemDecoration(
             DividerItemDecoration( requireActivity(),
@@ -54,8 +54,9 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         binding.info2.recyclerView.layoutManager = layoutManager
     }
 
-    private fun getInfo1s() : MutableList<Info> {
-        infos = Info.initializeResultList()
+    // get the info2s from the model class
+    private fun getInfo2s() : MutableList<Info> {
+        infos = Info.init()
         var i = 0
         while (i < infos.size) {
             when(infos[i].info_name) {

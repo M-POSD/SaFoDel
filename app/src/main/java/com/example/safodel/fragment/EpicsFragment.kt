@@ -93,13 +93,14 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
                 }
 
                 // set the initial position to null
-                recordPosition(-1)
+                cleanInitPosition(-1)
 
             }
         }
     }
 
-    private fun recordPosition(position: Int) {
+    // clean the initial tab position received from the home page
+    private fun cleanInitPosition(position: Int) {
         val sharedPref = requireActivity().applicationContext.getSharedPreferences(
             "epicPosition", Context.MODE_PRIVATE
         )
@@ -109,6 +110,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         spEditor.apply()
     }
 
+    // get the button position clicked in the previous page to match the tab selected this page
     private fun getInitialPosition() : String? {
         val sharedPref = requireActivity().applicationContext.getSharedPreferences(
             "epicPosition",
@@ -117,6 +119,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         return sharedPref.getString("epicPosition", "")
     }
 
+    // update the tab view according to the tab position selected
     private fun updateTabView(position: Int) {
         tabLayout.selectTab(tabLayout.getTabAt(position))
 
