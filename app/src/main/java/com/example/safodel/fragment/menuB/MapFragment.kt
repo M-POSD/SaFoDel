@@ -71,7 +71,9 @@ private lateinit var mThread:Thread
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
     OnMapReadyCallback,PermissionsListener, AdapterView.OnItemSelectedListener {
 
+    // class toast value
     private lateinit var toast: Toast
+
     // Map
     private lateinit var mapboxMap: MapboxMap
     private lateinit var mainActivity : MainActivity
@@ -105,14 +107,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         setToolbarBasic(toolbar)
 
 
-        // Navigation
+        // init the Navigation
         val mapboxNavigationOptions = MapboxNavigation
             .defaultNavigationOptionsBuilder(mainActivity, getString(R.string.mapbox_access_token))
             .build()
         mapboxNavigation = MapboxNavigation(mapboxNavigationOptions)
 
 
-        // request permission
+        // request permission of user location
         permissionsManager = PermissionsManager(this)
         permissionsManager.requestLocationPermissions(activity)
 
@@ -123,6 +125,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         spinner.adapter = arrayAdapter
         spinner.onItemSelectedListener = this
 
+        // change the float buuton height
         val height = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
         height.bottomMargin = mainActivity.bottomNavHeight() + 20
         binding.floatButton.layoutParams = height
@@ -142,25 +145,33 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
 
+        // update the map
         binding.updateMap.setOnClickListener {
             mapView.getMapAsync(this)
         }
 
+        // go to the user's current location
         binding.floatButton.setOnClickListener {
             mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
         }
 
         mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync(this)
+        mapView.getMapAsync(this) // update the map
         return binding.root
     }
 
 
+    /*
+        update the map when call getMapAsync()
+     */
     override fun onMapReady(mapboxMap: MapboxMap) {
         mapboxMap.setMaxZoomPreference(20.0)
         mapboxMap.setMinZoomPreference(5.0)
+
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT){
+
+            /*-- Camera auto zoom to the LGA area --*/
             if(feature.size != 0){
                 LGAPoint = locationList[0]
                 val position = CameraPosition.Builder()
@@ -170,8 +181,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 mapboxMap.cameraPosition = position
             }
 
+            // get user location
             enableLocationComponent(it)
 
+            // Make a toast when data is updating
+            if(feature.size == 0){
+                toast.setText("Data is updating...")
+                toast.show()
+            }
+
+            /*-- Add inmage --*/
             it.addImage(
                 "icon_image",
                 BitmapUtils.getBitmapFromDrawable(
@@ -183,10 +202,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 )!!)
 
-            if(feature.size == 0){
-                toast.setText("Data is updating...")
-                toast.show()
-            }
+            /*-- Add source --*/
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
             val baseicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
@@ -198,8 +214,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         stop(12f, 14f)
                 )
             ))
+
+            /*-- Add layer --*/
             it.addLayer(baseicCircle)
 
+            /*-- Add circle layer --*/
             val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
                 .withProperties(
                     circleColor(parseColor("#858585")),
@@ -214,6 +233,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 )
             it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
+            /*-- Add symbol layer --*/
             val symbolIconLayer = SymbolLayer("icon_layer", "source")
             symbolIconLayer.withProperties(
                 iconImage("icon_image"),
@@ -221,10 +241,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 iconIgnorePlacement(true),
                 iconAllowOverlap(true)
             )
-
             symbolIconLayer.minZoom = 12f
             it.addLayer(symbolIconLayer)
 
+            /*-- Set the camera's animation --*/
             mapboxMap.animateCamera(
                 CameraUpdateFactory
                     .newCameraPosition(
@@ -259,9 +279,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             locationComponent.isLocationComponentEnabled = true
             locationComponent.cameraMode = CameraMode.TRACKING
             locationComponent.renderMode = RenderMode.COMPASS
-
         }
         else{
+            /*-- Ask permission --*/
             permissionsManager = PermissionsManager(this)
             permissionsManager.requestLocationPermissions(activity)
         }
@@ -323,11 +343,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+    /*-- Spinner listener --*/
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        spinnerTimes++
-        Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
+        spinnerTimes++ // calculate the times to test
+        //Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
         if(spinnerTimes >= 1){
-            Log.d("Hello Spinner", spinnerTimes.toString())
+            //Log.d("Hello Spinner", spinnerTimes.toString())
             lga = parent?.getItemAtPosition(position).toString()
             mThread = fetchdata()
             mThread.start()
