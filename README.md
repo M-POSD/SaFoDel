@@ -1,21 +1,54 @@
 
-## Team TA27
-
-
-  ![M-POSD](https://user-images.githubusercontent.com/88869576/129469958-fc1149d2-12f9-4d73-9dc2-cfefe853a80e.png)
+![banner](https://user-images.githubusercontent.com/88869576/130990605-514f741e-8113-465d-bba5-64700b490d3e.png)
   
 ## [SaFoDel](https://m-posd.github.io/)
 Educating Food Delivery Bike Riders in Victoria
 
-## Instructions to run the application
+<img src="https://user-images.githubusercontent.com/88869576/130999092-f473ce21-1a6d-4343-a555-810822ea3d61.gif">
 
-If you want to run the applicaiton on your own system, we recommend the following steps:
-1. Download Android Studio on your system. (Link: https://developer.android.com/studio)
-2. Clone this repository on Android Studio or Download the zip file
-3. In the Android Studio, create a new emulator with the latest api 30 (by clicking on the AVD Manager on the navigation bar).
-4. Sync the project with gradle files 
-5. Finally, run the application. 
 
-Alternatively, you can run the application on your own android device.
+## Features✨
+- E-Bike Delivery information share (Find information on using e-bikes for food delivery)
+- Safety Gears information share (Find out the cycling gear you need to deliver safe)
+- Ride Safer tips share (Find out how to ride safely while delivering food)
+- A map to see accident location base on LGA area
+- Locate the current location
+- A good Logo
+- A good UI
+ 
+## Download
 
-Download the [Release Version](https://m-posd.github.io/)
+Download `.apk` file on our [Website](https://m-posd.github.io/) or on the [Release](https://github.com/M-POSD/SaFoDel/releases) page
+
+## Android development
+
+- Written in [Kotlin](https://kotlinlang.org/) 
+- Using [Mapbox](https://www.mapbox.com/) develop map functions
+
+## Building
+### Open the Project in [Android Studio](https://developer.android.com/studio)
+
+```
+git clone https://github.com/M-POSD/SaFoDel.git
+```
+Open the `SaFoDel/` directory in Android Studio.
+
+### Get Started
+```shell
+./gradlew build
+```
+### Tips
+- Require the latest Android Studio Arctic Fox release to be able to build the app
+- Update the Kotlin to latest version.
+- Emulator with the latest api 30 (by clicking on the AVD Manager on the navigation bar).
+
+## Mapbox tokens
+
+Follow Mapbox's [docs](https://docs.mapbox.com/help/getting-started/access-tokens/) to create your tokens.
+
+- Edit "mapbox_access_token" in `res/values/strings.xml`.
+- Edit "MAPBOX_DOWNLOADS_TOKEN" in `/gradle.properties`
+
+
+
+
