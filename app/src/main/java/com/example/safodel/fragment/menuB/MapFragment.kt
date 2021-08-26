@@ -60,8 +60,6 @@ import kotlin.collections.ArrayList
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
 
-//mapbox dataset: kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu
-
 private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var lga: String = "MELBOURNE"
@@ -77,6 +75,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapboxMap: MapboxMap
     private lateinit var mainActivity : MainActivity
     private lateinit var mapView: MapView
+    private lateinit var LGAPoint:Point
 
     // Navigation
     private lateinit var mapboxNavigation: MapboxNavigation
@@ -86,24 +85,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     // Basic value
     private val LGAlist = LGAList.init()
-    private val defaultLatLng = LatLng(-37.876823, 145.045837)
-    private val BASE_CIRCLE_INITIAL_RADIUS = 3.4f
-    private val RADIUS_WHEN_CIRCLES_MATCH_ICON_RADIUS = 14f
-    private val ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION = 11f
-    private val ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON = 12f
-    private val FINAL_OPACITY_OF_SHADING_CIRCLE = .5f
-    private val BASE_CIRCLE_COLOR = "#3BC802"
-    private val SHADING_CIRCLE_COLOR = "#858585"
-    private val SOURCE_ID = "SOURCE_ID"
-    private val ICON_LAYER_ID = "ICON_LAYER_ID"
-    private val BASE_CIRCLE_LAYER_ID = "BASE_CIRCLE_LAYER_ID"
-    private val SHADOW_CIRCLE_LAYER_ID = "SHADOW_CIRCLE_LAYER_ID"
-    private val ICON_IMAGE_ID = "ICON_ID"
-
-    // thread
-    val mainHandler: Handler = Handler()
-
-
+    
     @SuppressLint("ClickableViewAccessibility")
     @SuppressWarnings("MissingPermission")
     override fun onCreateView(
@@ -161,7 +143,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-
         return binding.root
     }
 
@@ -171,12 +152,19 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapboxMap.setMinZoomPreference(5.0)
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT){
-            val position =  CameraPosition.Builder().target(defaultLatLng).zoom(8.0).build()
-            mapboxMap.cameraPosition = position
+            if(feature.size != 0){
+                LGAPoint = locationList[0]
+                val position = CameraPosition.Builder()
+                    .target(LatLng(LGAPoint.latitude(),LGAPoint.longitude()))
+                    .zoom(6.0)
+                    .build()
+                mapboxMap.cameraPosition = position
+            }
+
             enableLocationComponent(it)
 
             it.addImage(
-                ICON_IMAGE_ID,
+                "icon_image",
                 BitmapUtils.getBitmapFromDrawable(
                     context?.let { it1 ->
                         ContextCompat.getDrawable(
@@ -190,45 +178,42 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 toast.setText("Data is updating...")
                 toast.show()
             }
-            it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(ArrayList<Feature>(
+            it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
-            val baseicCircle:CircleLayer = CircleLayer(BASE_CIRCLE_LAYER_ID,SOURCE_ID).withProperties(
-                circleColor(Color.parseColor(BASE_CIRCLE_COLOR)),
+            val baseicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
+                circleColor(Color.parseColor("#3BC802")),
                 circleRadius(
                     interpolate(
                         linear(), zoom(),
-                        stop(ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION, BASE_CIRCLE_INITIAL_RADIUS),
-                        stop(ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON, RADIUS_WHEN_CIRCLES_MATCH_ICON_RADIUS)
+                        stop(11f, 3.4f),
+                        stop(12f, 14f)
                 )
             ))
             it.addLayer(baseicCircle)
 
-            val shadowTransitionCircleLayer = CircleLayer(SHADOW_CIRCLE_LAYER_ID, SOURCE_ID)
+            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
                 .withProperties(
-                    circleColor(parseColor(SHADING_CIRCLE_COLOR)),
-                    circleRadius(RADIUS_WHEN_CIRCLES_MATCH_ICON_RADIUS),
+                    circleColor(parseColor("#858585")),
+                    circleRadius(14f),
                     circleOpacity(
                         interpolate(
                             linear(), zoom(),
-                            stop(ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION - .5, 0),
-                            stop(
-                                ZOOM_LEVEL_FOR_START_OF_BASE_CIRCLE_EXPANSION,
-                                FINAL_OPACITY_OF_SHADING_CIRCLE
-                            )
+                            stop(11f - .5, 0),
+                            stop(11f, .5f)
                         )
                     )
                 )
-            it.addLayerBelow(shadowTransitionCircleLayer, BASE_CIRCLE_LAYER_ID)
+            it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
-            val symbolIconLayer = SymbolLayer(ICON_LAYER_ID, SOURCE_ID)
+            val symbolIconLayer = SymbolLayer("icon_layer", "source")
             symbolIconLayer.withProperties(
-                iconImage(ICON_IMAGE_ID),
+                iconImage("icon_image"),
                 iconSize(1.5f),
                 iconIgnorePlacement(true),
                 iconAllowOverlap(true)
             )
 
-            symbolIconLayer.minZoom = ZOOM_LEVEL_FOR_SWITCH_FROM_CIRCLE_TO_ICON
+            symbolIconLayer.minZoom = 12f
             it.addLayer(symbolIconLayer)
 
             mapboxMap.animateCamera(
@@ -271,7 +256,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             permissionsManager = PermissionsManager(this)
             permissionsManager.requestLocationPermissions(activity)
         }
-
     }
 
 
