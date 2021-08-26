@@ -1,9 +1,11 @@
 package com.example.safodel.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R

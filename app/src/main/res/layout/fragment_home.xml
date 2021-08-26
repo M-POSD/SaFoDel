@@ -12,73 +12,79 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:weightSum="10"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="10">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4.3"
-            android:layout_gravity="center">
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
-                <ImageView
-                    android:id="@+id/driver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX="1.25"
-                    android:scaleY="1.25"
-                    android:src="@drawable/wear_nothing"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.786" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/helmet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="137dp"
-                    android:scaleX="1.6"
-                    android:scaleY="1.6"
-                    android:alpha="0"
-                    android:src="@drawable/helmet"
-                    app:layout_constraintBottom_toBottomOf="@+id/driver"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.531"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.916" />
+                    <ImageView
+                        android:id="@+id/driver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="1.25"
+                        android:scaleY="1.25"
+                        android:src="@drawable/wear_nothing"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.786" />
 
-                <ImageView
-                    android:id="@+id/backpack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginEnd="127dp"
-                    android:layout_marginBottom="101dp"
-                    android:scaleX="1.25"
-                    android:scaleY="1.3"
-                    android:alpha="0"
-                    android:src="@drawable/backpack"
-                    android:translationX="25dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/driver"
-                    app:layout_constraintEnd_toEndOf="@+id/driver"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/driver"
-                    app:layout_constraintVertical_bias="1.0" />
+                    <ImageView
+                        android:id="@+id/helmet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="137dp"
+                        android:alpha="0"
+                        android:scaleX="1.6"
+                        android:scaleY="1.6"
+                        android:src="@drawable/helmet"
+                        app:layout_constraintBottom_toBottomOf="@+id/driver"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.531"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.916" />
+
+                    <ImageView
+                        android:id="@+id/backpack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginEnd="127dp"
+                        android:layout_marginBottom="101dp"
+                        android:alpha="0"
+                        android:scaleX="1.25"
+                        android:scaleY="1.3"
+                        android:src="@drawable/backpack"
+                        android:translationX="25dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/driver"
+                        app:layout_constraintEnd_toEndOf="@+id/driver"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/driver"
+                        app:layout_constraintVertical_bias="1.0" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,14 +117,15 @@
 
             <include
                 android:id="@+id/epicCard12"
-                layout="@layout/small_cards"/>
+                layout="@layout/small_cards" />
+
             <include
                 android:id="@+id/epicCard34"
-                layout="@layout/small_card"/>
+                layout="@layout/small_card" />
 
-<!--            <include-->
-<!--                android:id="@+id/epicCard34"-->
-<!--                layout="@layout/small_card" />-->
+            <!--            <include-->
+            <!--                android:id="@+id/epicCard34"-->
+            <!--                layout="@layout/small_card" />-->
 
         </LinearLayout>
 
