@@ -63,13 +63,16 @@ import java.net.URL
 import kotlin.collections.ArrayList
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
+import com.mapbox.mapboxsdk.utils.ThreadUtils
+import java.util.concurrent.ThreadFactory
 
 //mapbox dataset: kxuu0025.cksr78zv20npw27n2ctmlwar3-02exu
 
 private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
-private var lga: String = "BAYSIDE"
+private var lga: String = "MELBOURNE"
 private var spinnerTimes = 0
+private lateinit var mThread:Thread
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -143,7 +146,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
         // basic location and position
-        val mThread = fetchdata()
+        mThread = fetchdata()
         mThread.start()
 
         /* --- Bottom navigation hide, when touch the map. --- */
@@ -280,7 +283,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStart() {
         super.onStart()
         mapView.onStart()
-        mainActivity.isBottomNavigationVisible(false)
     }
 
     override fun onResume() {
@@ -295,8 +297,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onStop() {
         super.onStop()
+        mThread.interrupt()
         mapView.onStop()
-        mainActivity.isBottomNavigationVisible(true)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -337,7 +339,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         if(spinnerTimes >1){
             Log.d("Hello Spinner", spinnerTimes.toString())
             lga = parent?.getItemAtPosition(position).toString()
-            val mThread = fetchdata()
+            mThread = fetchdata()
             mThread.start()
         }
     }
@@ -357,7 +359,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
           try {
             feature.clear()
             /*---    Fetch the data from team's API  ---*/
-            val url = URL("https://safodel-api.herokuapp.com/location/" + lga + "/")
+            val url = URL("https://safodel-api.herokuapp.com/accidents?location=" + lga)
             val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
             val inputStream: InputStream = httpURLConnection.inputStream
             val bufferReader: BufferedReader = BufferedReader(InputStreamReader(inputStream))
