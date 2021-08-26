@@ -56,7 +56,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
     private fun addTab() {
         tabLayout.addTab(tabLayout.newTab().setText("Ride safer"))
         tabLayout.addTab(tabLayout.newTab().setText("E-Bike Delivery"))
-        tabLayout.addTab(tabLayout.newTab().setText("Safety gear"))
+        tabLayout.addTab(tabLayout.newTab().setText("Safety gears"))
         tabLayout.setBackgroundResource(R.color.deep_green)
     }
 

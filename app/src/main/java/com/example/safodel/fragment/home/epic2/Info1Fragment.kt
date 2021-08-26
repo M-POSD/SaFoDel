@@ -26,7 +26,7 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         _binding = FragmentInfo1Binding.inflate(inflater,container,false)
         val toolbar = binding.toolbar.root
 
-        binding.info1.extremeSmall.editText.text = "Risk with E-bikes"
+        binding.info1.extremeSmall.editText.text = "Risks with E-bikes"
         binding.info1.notification.text = "Be aware of RISKs of delivering on e-bikes"
 
         configRecycleView()
