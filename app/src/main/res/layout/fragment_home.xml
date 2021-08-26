@@ -100,7 +100,7 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/notosansjp_bold"
                 android:gravity="center"
-                android:text="Preparing you for a safe food delivery on e-bike"
+                android:text="Preparing you for a safe food delivery on bicycle"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
