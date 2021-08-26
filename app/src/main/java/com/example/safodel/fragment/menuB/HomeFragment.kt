@@ -102,8 +102,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             ObjectAnimator.ofFloat(binding.images, "translationX", 0f, 800f)
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.images, "translationX", -800f, 0f)
-        objectAnimator1.duration = 2000
-        objectAnimator2.duration = 2000
+        objectAnimator1.duration = 1500
+        objectAnimator2.duration = 1500
         val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator1).before(objectAnimator2)
         animatorSet.start()
