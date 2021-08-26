@@ -8,13 +8,13 @@ import com.example.safodel.databinding.FragmentSchoolBinding
 import com.example.safodel.fragment.BasicFragment
 
 
-class SchoolFragment : BasicFragment<FragmentSchoolBinding>(FragmentSchoolBinding::inflate){
+class SchoolFragment : BasicFragment<FragmentSchoolBinding>(FragmentSchoolBinding::inflate) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSchoolBinding.inflate(inflater,container,false)
+        _binding = FragmentSchoolBinding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
         return binding.root

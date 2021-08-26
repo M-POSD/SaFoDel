@@ -18,6 +18,7 @@
         <item
             android:id="@+id/navSchool"
             android:icon="@drawable/outline_school_black_36"
+            android:visible="false"
             android:title="@string/school" />
 
     </group>

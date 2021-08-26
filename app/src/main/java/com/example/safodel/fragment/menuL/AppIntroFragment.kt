@@ -22,7 +22,7 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
                 "Audience:" + "\n" +
                 "Potential and already existing food delivery bike riders"
         val toolbar = binding.toolbar.root
-        setToolbarReturn(toolbar)
+        setToolbarBasic(toolbar)
         return binding.root
     }
 

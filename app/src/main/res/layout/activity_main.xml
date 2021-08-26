@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:theme="@style/NavigationbarBottomStyle"
             android:background="@color/third_green"
             app:menu="@menu/nav_menu_bottom">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -34,10 +35,12 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/left_navigation"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu_left">
+        app:itemTextAppearance="@style/NavigationbarLeftTextStyle"
+        app:menu="@menu/nav_menu_left"
+        app:headerLayout="@layout/left_nav_header">
 
     </com.google.android.material.navigation.NavigationView>
 

@@ -2,12 +2,11 @@ package com.example.safodel.fragment.home
 
 import android.os.Bundle
 import android.view.*
-import androidx.navigation.NavOptions
+import android.view.animation.*
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic1Binding
 import com.example.safodel.fragment.BasicFragment
-
 
 class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::inflate) {
 
@@ -16,13 +15,19 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEpic1Binding.inflate(inflater,container,false)
+        _binding = FragmentEpic1Binding.inflate(inflater, container, false)
 
         setDefaultView()
 
         binding.tip1Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.tip1Fragment, null, navAnimation())
+            findNavController().navigate(R.id.tip1Fragment, null, navAnimationLeftToRight())
         }
+
+        binding.tip2Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.tip2Fragment, null, navAnimationLeftToRight())
+        }
+
+        contentsAnimation()
 
         return binding.root
     }
@@ -33,19 +38,21 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     }
 
     private fun setDefaultView() {
-        binding.tip1Card.title.text = "Tip 1"
-        binding.tip1Card.subtitle.text = "while riding a bicycle"
-        binding.tip2Card.title.text = "Tip 2"
-        binding.tip2Card.subtitle.text = "for delivering at night"
-        binding.tip3Card.title.text = "Tip 3"
-        binding.tip3Card.subtitle.text = "the areas that are prone to bike accidents"
+        binding.tip1Card.title.text = "Safety Tips - while riding a bicycle"
+        binding.tip2Card.title.text = "Safety Tips - for delivering at night"
+//        binding.tip3Card.title.text = "Nearby Accident Prone areas"
     }
 
-    private fun navAnimation() : NavOptions{
-        return NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
-            .setExitAnim(R.anim.slide_out_left)
-            .setPopEnterAnim(R.anim.slide_in_left)
-            .setPopExitAnim(R.anim.slide_out_right).build()
-    }
+    // contents animation slide in from bottom
+    private fun contentsAnimation() {
+        val slideIn: Animation =
+            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
+        slideIn.interpolator = AccelerateDecelerateInterpolator()
+        slideIn.duration = 1500
 
+        val animation = AnimationSet(false)
+        animation.addAnimation(slideIn)
+        animation.repeatCount = 1;
+        binding.epicLayout.animation = animation
+    }
 }

@@ -23,7 +23,7 @@ class DeveloperFragment : BasicFragment<FragmentDeveloperBinding>(FragmentDevelo
                 "James" + "\n" +
                 "Suvansh"
         val toolbar = binding.toolbar.root
-        setToolbarReturn(toolbar)
+        setToolbarBasic(toolbar)
         return binding.root
     }
 

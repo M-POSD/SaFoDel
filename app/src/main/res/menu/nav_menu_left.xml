@@ -14,7 +14,7 @@
 
         <item
             android:id="@+id/navDeveloper"
-            android:icon="@drawable/email"
+            android:icon="@drawable/baseline_people_alt_black_24"
             android:title="@string/developer"/>
 
     </group>

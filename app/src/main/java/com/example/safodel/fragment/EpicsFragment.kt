@@ -18,20 +18,21 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import com.example.safodel.fragment.menuB.HomeFragmentArgs
 import android.content.SharedPreferences
-
-
-
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.DecelerateInterpolator
 
 
 class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::inflate) {
     private lateinit var tabLayout: TabLayout
-    private lateinit var viewPage2 : ViewPager2
+    private lateinit var viewPage2: ViewPager2
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEpicsBinding.inflate(inflater,container,false)
+        _binding = FragmentEpicsBinding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
         tabLayout = binding.tabbar.tabLayout
         viewPage2 = binding.tabbar.viewPager2
@@ -39,8 +40,8 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
 //        Log.d("Test!!!", arguments?.getString("epicPosition").toString())
 
-        val fm : FragmentManager = (activity as MainActivity).supportFragmentManager
-        viewPage2.adapter = EpicViewAdapter(fm, lifecycle,3)
+        val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
+        viewPage2.adapter = EpicViewAdapter(fm, lifecycle, 3)
 
         addTab()
 
@@ -53,13 +54,13 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
     }
 
     private fun addTab() {
-        tabLayout.addTab(tabLayout.newTab().setText("Ride safe"))
+        tabLayout.addTab(tabLayout.newTab().setText("Ride safer"))
         tabLayout.addTab(tabLayout.newTab().setText("E-Bike Delivery"))
-        tabLayout.addTab(tabLayout.newTab().setText("Safety gear"))
+        tabLayout.addTab(tabLayout.newTab().setText("Safety gears"))
         tabLayout.setBackgroundResource(R.color.deep_green)
     }
 
-    private fun getOnTabSelectedListener() : OnTabSelectedListener {
+    private fun getOnTabSelectedListener(): OnTabSelectedListener {
         Log.d("getOnTabSelectedListener", "getOnTabSelectedListener successfully")
         return object : OnTabSelectedListener {
 
@@ -67,32 +68,40 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
                 viewPage2.currentItem = tab.position
                 Log.d("viewPage2.currentItem", viewPage2.currentItem.toString())
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         }
     }
 
-    private fun getOnPageChangeCallBack() : ViewPager2.OnPageChangeCallback {
+    private fun getOnPageChangeCallBack(): ViewPager2.OnPageChangeCallback {
         Log.d("getOnPageChangeCallBack", "getOnPageChangeCallBack successfully")
         return object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 Log.d("onPageSelected", "onPageSelected successfully")
 
-                when(getInitialPosition()) {
-                    "0" -> tabLayout.selectTab(tabLayout.getTabAt(0))
-                    "1" -> tabLayout.selectTab(tabLayout.getTabAt(1))
-                    "2" -> tabLayout.selectTab(tabLayout.getTabAt(2))
-                    else -> tabLayout.selectTab(tabLayout.getTabAt(position))
+                when (getInitialPosition()) {
+                    "0" -> {
+                        updateTabView(0)
+                    }
+                    "1" -> {
+                        updateTabView(1)
+                    }
+                    "2" -> {
+                        updateTabView(2)
+                    }
+                    else -> updateTabView(position)
                 }
 
                 // set the initial position to null
-                recordPosition(-1)
+                cleanInitPosition(-1)
 
             }
         }
     }
 
-    private fun recordPosition(position: Int) {
+    // clean the initial tab position received from the home page
+    private fun cleanInitPosition(position: Int) {
         val sharedPref = requireActivity().applicationContext.getSharedPreferences(
             "epicPosition", Context.MODE_PRIVATE
         )
@@ -102,7 +111,8 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         spEditor.apply()
     }
 
-    private fun getInitialPosition() : String? {
+    // get the button position clicked in the previous page to match the tab selected this page
+    private fun getInitialPosition(): String? {
         val sharedPref = requireActivity().applicationContext.getSharedPreferences(
             "epicPosition",
             Context.MODE_PRIVATE
@@ -110,6 +120,26 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         return sharedPref.getString("epicPosition", "")
     }
 
+    // update the tab view according to the tab position selected
+    private fun updateTabView(position: Int) {
+        tabLayout.selectTab(tabLayout.getTabAt(position))
+
+        when (position) {
+            0 -> {
+                binding.tabbar.notification.text =
+                    "Find out how to ride safely while delivering food"
+            }
+            1 -> {
+                binding.tabbar.notification.text =
+                    "Find information on using e-bikes for food delivery"
+            }
+            2 -> {
+                binding.tabbar.notification.text =
+                    "Find out the cycling gear you need to deliver safe"
+            }
+        }
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

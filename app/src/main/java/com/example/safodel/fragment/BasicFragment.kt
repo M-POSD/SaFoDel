@@ -1,9 +1,11 @@
 package com.example.safodel.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R
@@ -11,7 +13,8 @@ import com.example.safodel.ui.main.MainActivity
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
-abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate<TBinding>): Fragment() {
+abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflate<TBinding>) :
+    Fragment() {
     protected var _binding: TBinding? = null
     val binding get() = _binding!!
     override fun onCreateView(
@@ -19,7 +22,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = inflate.invoke(inflater,container,false)
+        _binding = inflate.invoke(inflater, container, false)
         return binding.root
     }
 
@@ -35,7 +38,7 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
     /**
      *  Press the navigation icon to pop up the navigation window
      */
-    fun setToolbarBasic(toolbar: androidx.appcompat.widget.Toolbar){
+    fun setToolbarBasic(toolbar: androidx.appcompat.widget.Toolbar) {
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
@@ -76,12 +79,17 @@ abstract class BasicFragment<TBinding: ViewBinding>(private val inflate: Inflate
      * Facilitate to change toolbar visibility
      */
     fun setToolbarVisible(isVisible: Boolean) {
-        return when(isVisible) {
+        return when (isVisible) {
             true -> (activity as MainActivity).isBottomNavigationVisible(true)
             false -> (activity as MainActivity).isBottomNavigationVisible(false)
         }
     }
 
-
+    fun navAnimationLeftToRight(): NavOptions {
+        return NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
+            .setExitAnim(R.anim.slide_out_left)
+            .setPopEnterAnim(R.anim.slide_in_left)
+            .setPopExitAnim(R.anim.slide_out_right).build()
+    }
 }
 

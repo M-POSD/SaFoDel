@@ -17,6 +17,7 @@ class EpicViewAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, nu
 
     override fun getItemCount(): Int = numOfTabs
 
+    // return the page according to tab position
     override fun createFragment(position: Int): Fragment {
         Log.d("createFragment", "" + position)
         return when(position) {

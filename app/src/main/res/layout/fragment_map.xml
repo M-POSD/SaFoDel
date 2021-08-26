@@ -2,59 +2,85 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragment.menuB.MapFragment">
 
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            mapbox:mapbox_cameraTargetLat="-32.557013"
+            mapbox:mapbox_cameraTargetLng="-56.149056"
+            mapbox:mapbox_cameraZoom="5.526846">
+        </com.mapbox.mapboxsdk.maps.MapView>
 
-        mapbox:mapbox_cameraTargetLat="-32.557013"
-        mapbox:mapbox_cameraTargetLng="-56.149056"
-        mapbox:mapbox_cameraZoom="5.526846">
-    </com.mapbox.mapboxsdk.maps.MapView>
+        <include
+            layout="@layout/simple_toolbar"
+            android:id="@+id/toolbar" />
 
-    <include
-        layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar" />
+    <TextView
+        android:id="@+id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Accident Prone Locations:"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="?attr/actionBarSize"
-        android:background="@color/green"
-        android:alpha="0.5"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-        <EditText
-            android:id="@+id/addressEditText"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:hint="Enter address"
-            android:maxLines="1"
-            android:layout_gravity="center_horizontal"/>
-        <Button
-            android:id="@+id/addressButton"
+            android:fitsSystemWindows="true"
+            android:background="@drawable/blue_outline"
+            android:spinnerMode="dialog"
+            tools:listitem="@layout/items_lga"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/updateMap"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
+            android:background="@drawable/blue_outline"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="Send"
-            android:textColor="@color/black"/>
+            android:text="Update"
+            />
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/recenter"
+
+    <ProgressBar
+        android:id="@+id/route_retrieval_progress_spinner"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mapView"/>
+    
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recenter"
-        android:background="@color/black"
-        android:textColor="@color/green"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="100dp"/>
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/third_green"
+        android:contentDescription="desc"
+        android:src="@drawable/baseline_gps_fixed_black_36"
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

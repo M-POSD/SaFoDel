@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/notosansjp_black" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/notosansjp_bold" />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        android:font="@font/notosansjp_light" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/notosansjp_medium" />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/notosansjp_regular" />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/notosansjp_thin" />
+</font-family>
