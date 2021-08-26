@@ -61,6 +61,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mapView"/>
+    
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        android:layout_margin="64dp"
+        android:backgroundTint="@color/third_green"
+        android:contentDescription="desc"
+        android:src="@drawable/baseline_gps_fixed_black_36"
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

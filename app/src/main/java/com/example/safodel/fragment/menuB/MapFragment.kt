@@ -141,6 +141,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             mapView.getMapAsync(this)
         }
 
+        binding.floatButton.setOnClickListener {
+            mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
+        }
+
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
         return binding.root
