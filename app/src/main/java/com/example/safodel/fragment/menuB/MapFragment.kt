@@ -260,7 +260,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
 
             locationComponent.isLocationComponentEnabled = true
-            //locationComponent.cameraMode = CameraMode.TRACKING
+            locationComponent.cameraMode = CameraMode.TRACKING
             locationComponent.renderMode = RenderMode.COMPASS
 
         }
