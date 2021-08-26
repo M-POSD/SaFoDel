@@ -108,7 +108,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="15dp"
                 android:fontFamily="@font/notosansjp_bold"
                 android:gravity="center"
                 android:text="'Don’t put your lives at risk for other’s convenience'"
@@ -123,6 +123,17 @@
             <include
                 android:id="@+id/epicCard34"
                 layout="@layout/small_card" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/notosansjp_bold"
+                android:gravity="center"
+                android:text="Click map to see accident locations for your suburb"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
             <!--            <include-->
             <!--                android:id="@+id/epicCard34"-->
