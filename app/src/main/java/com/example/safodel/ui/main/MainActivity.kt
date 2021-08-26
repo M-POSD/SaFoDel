@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     /**
      * Press the navigation icon to pop up the navigation window
      */
@@ -139,6 +140,10 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.visibility = View.INVISIBLE
         else
             binding.bottomNavigation.visibility = View.VISIBLE
+    }
+
+    fun bottomNavHeight(): Int{
+        return binding.bottomNavigation.height
     }
 }
 

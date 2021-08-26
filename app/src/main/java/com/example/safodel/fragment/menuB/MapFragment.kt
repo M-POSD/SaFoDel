@@ -15,6 +15,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
@@ -121,6 +122,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = arrayAdapter
         spinner.onItemSelectedListener = this
+
+        val height = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
+        height.bottomMargin = mainActivity.bottomNavHeight() + 20
+        binding.floatButton.layoutParams = height
 
 
         // basic location and position

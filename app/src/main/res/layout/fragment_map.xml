@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
-        android:layout_margin="64dp"
+        android:layout_margin="20dp"
         android:backgroundTint="@color/third_green"
         android:contentDescription="desc"
         android:src="@drawable/baseline_gps_fixed_black_36"
