@@ -72,6 +72,7 @@ private lateinit var mThread:Thread
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
     OnMapReadyCallback,PermissionsListener, AdapterView.OnItemSelectedListener {
 
+    private lateinit var toast: Toast
     // Map
     private lateinit var mapboxMap: MapboxMap
     private lateinit var mainActivity : MainActivity
@@ -112,6 +113,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     ): View {
         activity?.let { Mapbox.getInstance(it.application,getString(R.string.mapbox_access_token)) }
         _binding = FragmentMapBinding.inflate(inflater,container,false)
+        toast = Toast.makeText(context,"message",Toast.LENGTH_SHORT)
 
         // init the view
         mainActivity = activity as MainActivity
@@ -184,9 +186,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 )!!)
 
-            if(feature.size == 0)
-                Toast.makeText(context,"Data is updating...",Toast.LENGTH_SHORT).show()
-
+            if(feature.size == 0){
+                toast.setText("Data is updating...")
+                toast.show()
+            }
             it.addSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
             val baseicCircle:CircleLayer = CircleLayer(BASE_CIRCLE_LAYER_ID,SOURCE_ID).withProperties(
