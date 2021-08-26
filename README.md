@@ -24,7 +24,7 @@ Download `.apk` file on our [Website](https://m-posd.github.io/) or on the [Rele
 
 - Written in [Kotlin](https://kotlinlang.org/) 
 - Using [Mapbox](https://www.mapbox.com/) develop map functions
-- sing python -> server in [Heroku](https://www.heroku.com)
+- Using python -> server in [Heroku](https://www.heroku.com)
 
 ## Building
 ### Open the Project in [Android Studio](https://developer.android.com/studio)
