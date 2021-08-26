@@ -23,6 +23,14 @@
             layout="@layout/simple_toolbar"
             android:id="@+id/toolbar" />
 
+    <TextView
+        android:id="@+id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Accident Prone Locations:"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +59,7 @@
 
     </LinearLayout>
 
-    
+
     <ProgressBar
         android:id="@+id/route_retrieval_progress_spinner"
         android:layout_width="wrap_content"

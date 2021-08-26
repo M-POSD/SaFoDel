@@ -17,6 +17,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginTop
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
@@ -126,9 +127,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         spinner.onItemSelectedListener = this
 
         // change the float buuton height
-        val height = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
-        height.bottomMargin = mainActivity.bottomNavHeight() + 20
-        binding.floatButton.layoutParams = height
+        val FBHeight = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeight.bottomMargin = mainActivity.bottomNavHeight() + 20
+        binding.floatButton.layoutParams = FBHeight
 
 
         // basic location and position
