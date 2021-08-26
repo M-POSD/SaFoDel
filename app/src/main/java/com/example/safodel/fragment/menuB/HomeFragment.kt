@@ -1,5 +1,7 @@
 package com.example.safodel.fragment.menuB
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -10,6 +12,7 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.view.animation.*
+import androidx.core.animation.addListener
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -92,9 +95,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorSet.duration = 1000
         animatorSet.start()
 
-        binding.images.setOnClickListener{
-            imagesDrivingAnimation()
-        }
+        // after animation 4 -> set images clickable
+        objectAnimator4.addListener(
+            onEnd = {
+                binding.images.setOnClickListener{
+                    imagesDrivingAnimation()
+                }
+            }
+        )
     }
 
     private fun imagesDrivingAnimation() {
