@@ -2,6 +2,8 @@ package com.example.safodel.model
 
 
 class LGAList {
+
+    /*-- init the LGA list --*/
     companion object{
         fun init():Array<String>{
             val list =  listOf("BALLARAT","BANYULE","BASS COAST",
