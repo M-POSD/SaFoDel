@@ -32,9 +32,9 @@
                 android:id="@+id/gear3Card"
                 layout="@layout/medium_card" />
 
-            <include
-                android:id="@+id/gear4Card"
-                layout="@layout/medium_card" />
+<!--            <include-->
+<!--                android:id="@+id/gear4Card"-->
+<!--                layout="@layout/medium_card" />-->
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

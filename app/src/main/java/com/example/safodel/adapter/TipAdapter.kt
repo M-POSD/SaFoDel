@@ -12,6 +12,8 @@ class TipAdapter(val contxt: Context, tips: MutableList<Tip>) :
     private var tip: MutableList<Tip> = tips
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        // binding the view of detail_card
         val binding: DetailCardBinding =
             DetailCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 

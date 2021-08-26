@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic3Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Gear
 
 class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::inflate) {
     override fun onCreateView(
@@ -36,10 +35,6 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
             findNavController().navigate(R.id.gear3Fragment, null, navAnimationLeftToRight())
         }
 
-        binding.gear4Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.gear4Fragment, null, navAnimationLeftToRight())
-        }
-
         contentsAnimation()
 
         return binding.root
@@ -49,7 +44,6 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         binding.gear1Card.title.text = "Gears information"
         binding.gear2Card.title.text = "A checklist of necessary safety equipment"
         binding.gear3Card.title.text = "Australian standards for the safety gear"
-        binding.gear4Card.title.text = "Recommendations for the safety gear"
     }
 
     // contents animation slide in from bottom

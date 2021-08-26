@@ -4,20 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.GearAdapter
 import com.example.safodel.databinding.FragmentGear2Binding
-import com.example.safodel.databinding.FragmentGear3Binding
 
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Gear
 
 class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::inflate) {
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var gears: MutableList<Gear>
-    private lateinit var adapter: GearAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,18 +19,19 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         val toolbar = binding.toolbar.root
 
         binding.gear2.extremeSmall.editText.text =
-            "A detailed checklist of necessary safety equipment"
-        binding.gear2.notification.text = "Prepare all gears listed below??????"
+            "A checklist of necessary safety equipment"
+        binding.gear2.notification.text = "Worried about forgetting essential safety gear. Follow this checklist for a quick heads up!"
 
         setToolbarReturn(toolbar)
 
-        var checkListString = ""
-        for (item in getCheckList()) {
-            checkListString += item + "\n"
-        }
 
-        binding.gear2.detailCard.title.text = "Check list"
-        binding.gear2.detailCard.subtitle.text = checkListString
+
+
+//        // set string in checklist
+//        var checkListString = ""
+//        for (item in getCheckList()) {
+//            checkListString += item + "\n"
+//        }
 
         return binding.root
     }

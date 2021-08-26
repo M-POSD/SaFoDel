@@ -26,7 +26,8 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         val toolbar = binding.toolbar.root
 
         binding.gear1.extremeSmall.editText.text = "Gears basic information"
-        binding.gear1.notification.text = "Safety gears should wear while delivering"
+        binding.gear1.notification.text = "Wearing proper safety gear while delivering food is a must. " +
+                "Find more about the essential safety gear below. "
 
         configRecycleView()
         setToolbarReturn(toolbar)

@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.GearAdapter
+import com.example.safodel.adapter.Gear3Adapter
 import com.example.safodel.databinding.FragmentGear3Binding
 
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Gear
+import com.example.safodel.model.GearStandard
 
 class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var gears: MutableList<Gear>
-    private lateinit var adapter: GearAdapter
+    private lateinit var gearStandards: MutableList<GearStandard>
+    private lateinit var adapter: Gear3Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +28,11 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
         val toolbar = binding.toolbar.root
 
         binding.gear3.extremeSmall.editText.text = "Australian standards for the safety gear"
-        binding.gear3.notification.text = "??????"
+
+        // HtmlCompat -> allow app to use html format
+        binding.gear3.notification.text = HtmlCompat.fromHtml("Bicycle helmets should have a sticker showing the Australian Standard " +
+                "<font color='#EE0000'>AS 2063, AS/NZS 2063</font><br>",
+            HtmlCompat.FROM_HTML_MODE_LEGACY)
 
         configRecycleView()
         setToolbarReturn(toolbar)
@@ -41,7 +46,9 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
     }
 
     private fun configRecycleView() {
-        adapter = GearAdapter(requireActivity(), getGear3s())
+        gearStandards =  GearStandard.init()
+
+        adapter = Gear3Adapter(requireActivity(), gearStandards)
 
         binding.gear3.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -53,19 +60,6 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
         binding.gear3.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
         binding.gear3.recyclerView.layoutManager = layoutManager
-    }
-
-    // get the gear3s from the model class
-    private fun getGear3s(): MutableList<Gear> {
-        gears = Gear.init()
-        var i = 0
-        while (i < gears.size) {
-            when (gears[i].info_type) {
-                "Standard" -> i++
-                else -> gears.removeAt(i)
-            }
-        }
-        return gears
     }
 
 }

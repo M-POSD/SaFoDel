@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.Gear4Adapter
-import com.example.safodel.adapter.GearAdapter
 import com.example.safodel.databinding.FragmentGear4Binding
 
 import com.example.safodel.fragment.BasicFragment

@@ -4,15 +4,11 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.os.bundleOf
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
-import android.content.SharedPreferences
 import android.view.animation.*
 
 
@@ -91,7 +87,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
             .before(objectAnimator4)
-        animatorSet.duration = 2000
+        animatorSet.duration = 1000
         animatorSet.start()
     }
 

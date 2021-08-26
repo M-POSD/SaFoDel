@@ -12,6 +12,8 @@ class GearAdapter(val contxt: Context, gears: MutableList<Gear>) :
     private var gear: MutableList<Gear> = gears
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        // binding the view of detail_card_v0
         val binding: DetailCardV0Binding =
             DetailCardV0Binding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
