@@ -20,7 +20,7 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
 
         binding.gear2.extremeSmall.editText.text =
             "A checklist of necessary safety equipment"
-        binding.gear2.notification.text = "Worried about forgetting essential safety gear. Follow this checklist for a quick heads up!"
+        binding.gear2.notification.text = "Worried about forgetting essential safety gear.\nFollow this checklist for a quick heads up!"
 
         setToolbarReturn(toolbar)
 
