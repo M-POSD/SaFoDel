@@ -13,7 +13,7 @@ import com.example.safodel.databinding.FragmentInfo1Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Info
 
-class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::inflate){
+class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var infos: MutableList<Info>
     private lateinit var adapter: InfoAdapter
@@ -23,7 +23,7 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInfo1Binding.inflate(inflater,container,false)
+        _binding = FragmentInfo1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         binding.info1.extremeSmall.editText.text = "Risks with E-bikes"
@@ -45,8 +45,10 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         adapter = InfoAdapter(requireActivity(), getInfo1s())
 
         binding.info1.recyclerView.addItemDecoration(
-            DividerItemDecoration( requireActivity(),
-                LinearLayoutManager.VERTICAL )
+            DividerItemDecoration(
+                requireActivity(),
+                LinearLayoutManager.VERTICAL
+            )
         )
 
         binding.info1.recyclerView.adapter = adapter
@@ -55,11 +57,11 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
     }
 
     // get the info1s from the model class
-    private fun getInfo1s() : MutableList<Info> {
+    private fun getInfo1s(): MutableList<Info> {
         infos = Info.init()
         var i = 0
         while (i < infos.size) {
-            when(infos[i].info_name) {
+            when (infos[i].info_name) {
                 "Risk" -> i++
                 else -> infos.removeAt(i)
             }

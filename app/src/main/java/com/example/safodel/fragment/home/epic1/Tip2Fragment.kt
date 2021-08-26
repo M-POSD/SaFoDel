@@ -13,7 +13,7 @@ import com.example.safodel.databinding.FragmentTip2Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Tip
 
-class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inflate){
+class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var tips: MutableList<Tip>
     private lateinit var adapter: TipAdapter
@@ -23,7 +23,7 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTip2Binding.inflate(inflater,container,false)
+        _binding = FragmentTip2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         binding.tip2.extremeSmall.editText.text = "Delivering at night"
@@ -46,8 +46,10 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
         adapter = TipAdapter(requireActivity(), getTip2s())
 
         binding.tip2.recyclerView.addItemDecoration(
-            DividerItemDecoration( requireActivity(),
-                LinearLayoutManager.VERTICAL )
+            DividerItemDecoration(
+                requireActivity(),
+                LinearLayoutManager.VERTICAL
+            )
         )
 
         binding.tip2.recyclerView.adapter = adapter
@@ -56,12 +58,12 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
     }
 
     // get tip2s from the model class
-    private fun getTip2s() : MutableList<Tip> {
+    private fun getTip2s(): MutableList<Tip> {
         tips = Tip.init()
         var i = 0
         while (i < tips.size) {
             Log.d("getTip1s", tips[i].tip_id.toString())
-            when(tips[i].tip_id) {
+            when (tips[i].tip_id) {
                 2 -> i++
                 else -> tips.removeAt(i)
             }

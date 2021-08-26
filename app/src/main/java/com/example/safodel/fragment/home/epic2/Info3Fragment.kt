@@ -13,7 +13,7 @@ import com.example.safodel.databinding.FragmentInfo3Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Info
 
-class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::inflate){
+class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var infos: MutableList<Info>
     private lateinit var adapter: InfoAdapter
@@ -23,11 +23,12 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInfo3Binding.inflate(inflater,container,false)
+        _binding = FragmentInfo3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         binding.info3.extremeSmall.editText.text = "E-bikes Rules & Regulations"
-        binding.info3.notification.text = "Wondering whether the e-bike rules and regulations are different?"
+        binding.info3.notification.text =
+            "Wondering whether the e-bike rules and regulations are different?"
 
         configRecycleView()
 
@@ -45,8 +46,10 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         adapter = InfoAdapter(requireActivity(), getInfo3s())
 
         binding.info3.recyclerView.addItemDecoration(
-            DividerItemDecoration( requireActivity(),
-                LinearLayoutManager.VERTICAL )
+            DividerItemDecoration(
+                requireActivity(),
+                LinearLayoutManager.VERTICAL
+            )
         )
 
         binding.info3.recyclerView.adapter = adapter
@@ -55,11 +58,11 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
     }
 
     // get the info3s from the model class
-    private fun getInfo3s() : MutableList<Info> {
+    private fun getInfo3s(): MutableList<Info> {
         infos = Info.init()
         var i = 0
         while (i < infos.size) {
-            when(infos[i].info_name) {
+            when (infos[i].info_name) {
                 "Rule" -> i++
                 else -> infos.removeAt(i)
             }

@@ -16,13 +16,13 @@ import android.content.SharedPreferences
 import android.view.animation.*
 
 
-class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate){
+class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater,container,false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
@@ -53,7 +53,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     private fun helmetAnimation() {
-        val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_top)
+        val slideIn: Animation =
+            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_top)
         slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 3000
 
@@ -64,7 +65,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     private fun backpackAnimation() {
-        val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_left)
+        val slideIn: Animation =
+            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_left)
         slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 3000
 
@@ -77,13 +79,18 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // the animation for all images
     private fun imageAnimations() {
-        var objectAnimator1 : ObjectAnimator = ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
-        var objectAnimator2 : ObjectAnimator = ObjectAnimator.ofFloat(binding.backpack, "alpha", 0f, 1f)
-        var objectAnimator3 : ObjectAnimator = ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 0f)
-        var objectAnimator4 : ObjectAnimator = ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
+        var objectAnimator1: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
+        var objectAnimator2: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.backpack, "alpha", 0f, 1f)
+        var objectAnimator3: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 0f)
+        var objectAnimator4: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
 
         val animatorSet = AnimatorSet()
-        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3).before(objectAnimator4)
+        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
+            .before(objectAnimator4)
         animatorSet.duration = 2000
         animatorSet.start()
     }

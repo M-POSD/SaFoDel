@@ -12,14 +12,15 @@ class InfoAdapter(val contxt: Context, infos: MutableList<Info>) :
     private var info: MutableList<Info> = infos
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: DetailCardBinding = DetailCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: DetailCardBinding =
+            DetailCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val info: Info = info[position]
 
-        viewHolder.binding.title.text =  info.title
+        viewHolder.binding.title.text = info.title
 
         viewHolder.binding.subtitle.text = info.description
 

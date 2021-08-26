@@ -15,7 +15,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEpic1Binding.inflate(inflater,container,false)
+        _binding = FragmentEpic1Binding.inflate(inflater, container, false)
 
         setDefaultView()
 
@@ -45,7 +45,8 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
 
     // contents animation slide in from bottom
     private fun contentsAnimation() {
-        val slideIn: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
+        val slideIn: Animation =
+            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
         slideIn.interpolator = AccelerateDecelerateInterpolator()
         slideIn.duration = 1500
 

@@ -14,7 +14,7 @@ import com.example.safodel.databinding.FragmentGear3Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Gear
 
-class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::inflate){
+class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var gears: MutableList<Gear>
     private lateinit var adapter: GearAdapter
@@ -24,10 +24,11 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGear2Binding.inflate(inflater,container,false)
+        _binding = FragmentGear2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear2.extremeSmall.editText.text = "A detailed checklist of necessary safety equipment"
+        binding.gear2.extremeSmall.editText.text =
+            "A detailed checklist of necessary safety equipment"
         binding.gear2.notification.text = "Prepare all gears listed below??????"
 
         setToolbarReturn(toolbar)
@@ -49,7 +50,7 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
     }
 
     // made up the check list to display
-    private fun getCheckList() : MutableList<String>{
+    private fun getCheckList(): MutableList<String> {
         var checkList: MutableList<String> = ArrayList()
         checkList.add("Helmet")
         checkList.add("Working breaks")

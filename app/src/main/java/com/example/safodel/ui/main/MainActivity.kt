@@ -22,17 +22,18 @@ import me.jessyan.autosize.AutoSizeConfig
 import kotlin.system.exitProcess
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
@@ -57,7 +58,8 @@ class MainActivity : AppCompatActivity(){
     override fun onBackPressed() {
         if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment
                     && navController.currentDestination?.id != R.id.schoolFragment
-                    && navController.currentDestination?.id != R.id.mapfragment)) {
+                    && navController.currentDestination?.id != R.id.mapfragment)
+        ) {
             super.onBackPressed()
             return
         }
@@ -66,13 +68,15 @@ class MainActivity : AppCompatActivity(){
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
         // give user three seconds to leave without re-notification
-        Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 3000)
+        Handler(Looper.getMainLooper()).postDelayed(Runnable {
+            doubleBackToExitPressedOnce = false
+        }, 3000)
     }
 
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             navController.popBackStack() // Previous fragment out of stack
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.navHome -> {
                     navController.navigate(R.id.homeFragment)
                     true
@@ -81,7 +85,7 @@ class MainActivity : AppCompatActivity(){
                     navController.navigate(R.id.schoolFragment)
                     true
                 }
-                R.id.navMap ->{
+                R.id.navMap -> {
                     navController.navigate(R.id.mapfragment)
                     true
                 }
@@ -94,10 +98,10 @@ class MainActivity : AppCompatActivity(){
     private fun configLeftNavigation() {
         binding.leftNavigation.setCheckedItem(R.id.left_navigation)
         binding.leftNavigation.setNavigationItemSelectedListener {
-            if(!navController.popBackStack(it.itemId, false)){
-                if(navController.currentDestination?.id == R.id.appIntroFragment)
+            if (!navController.popBackStack(it.itemId, false)) {
+                if (navController.currentDestination?.id == R.id.appIntroFragment)
                     navController.popBackStack() // Previous fragment out of stack
-                when(it.itemId){
+                when (it.itemId) {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                     R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
                     // for control the action from Home to AppIntro
@@ -130,8 +134,8 @@ class MainActivity : AppCompatActivity(){
     /**
      * Control the bottom navigation is visible or not.
      */
-    fun isBottomNavigationVisible(boolean: Boolean){
-        if(!boolean)
+    fun isBottomNavigationVisible(boolean: Boolean) {
+        if (!boolean)
             binding.bottomNavigation.visibility = View.INVISIBLE
         else
             binding.bottomNavigation.visibility = View.VISIBLE

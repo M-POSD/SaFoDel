@@ -12,14 +12,15 @@ class TipAdapter(val contxt: Context, tips: MutableList<Tip>) :
     private var tip: MutableList<Tip> = tips
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: DetailCardBinding = DetailCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: DetailCardBinding =
+            DetailCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val info: Tip = tip[position]
-        viewHolder.binding.title.text =  info.title
+        viewHolder.binding.title.text = info.title
         viewHolder.binding.subtitle.text = info.description
         viewHolder.binding.statistics.text = info.statistics
     }

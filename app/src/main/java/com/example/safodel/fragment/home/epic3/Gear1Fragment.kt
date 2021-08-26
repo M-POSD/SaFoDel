@@ -12,7 +12,7 @@ import com.example.safodel.databinding.FragmentGear1Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Gear
 
-class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::inflate){
+class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var gears: MutableList<Gear>
     private lateinit var adapter: GearAdapter
@@ -22,7 +22,7 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGear1Binding.inflate(inflater,container,false)
+        _binding = FragmentGear1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         binding.gear1.extremeSmall.editText.text = "Gears basic information"
@@ -43,8 +43,10 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         adapter = GearAdapter(requireActivity(), getGear1s())
 
         binding.gear1.recyclerView.addItemDecoration(
-            DividerItemDecoration( requireActivity(),
-                LinearLayoutManager.VERTICAL )
+            DividerItemDecoration(
+                requireActivity(),
+                LinearLayoutManager.VERTICAL
+            )
         )
 
         binding.gear1.recyclerView.adapter = adapter
@@ -53,11 +55,11 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
     }
 
     // get the gear1s from the model class
-    private fun getGear1s() : MutableList<Gear> {
+    private fun getGear1s(): MutableList<Gear> {
         gears = Gear.init()
         var i = 0
         while (i < gears.size) {
-            when(gears[i].info_type) {
+            when (gears[i].info_type) {
                 "Gear" -> i++
                 else -> gears.removeAt(i)
             }

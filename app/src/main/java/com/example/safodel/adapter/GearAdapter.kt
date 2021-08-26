@@ -12,7 +12,8 @@ class GearAdapter(val contxt: Context, gears: MutableList<Gear>) :
     private var gear: MutableList<Gear> = gears
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: DetailCardV0Binding = DetailCardV0Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: DetailCardV0Binding =
+            DetailCardV0Binding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -20,7 +21,7 @@ class GearAdapter(val contxt: Context, gears: MutableList<Gear>) :
         val info: Gear = gear[position]
 
         viewHolder.binding.image.setImageResource(info.image)
-        viewHolder.binding.title.text =  info.title
+        viewHolder.binding.title.text = info.title
         viewHolder.binding.subtitle.text = info.description
         viewHolder.binding.statistics.text = info.statistics
     }

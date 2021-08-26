@@ -26,13 +26,13 @@ import android.view.animation.DecelerateInterpolator
 
 class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::inflate) {
     private lateinit var tabLayout: TabLayout
-    private lateinit var viewPage2 : ViewPager2
+    private lateinit var viewPage2: ViewPager2
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEpicsBinding.inflate(inflater,container,false)
+        _binding = FragmentEpicsBinding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
         tabLayout = binding.tabbar.tabLayout
         viewPage2 = binding.tabbar.viewPager2
@@ -40,8 +40,8 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
 //        Log.d("Test!!!", arguments?.getString("epicPosition").toString())
 
-        val fm : FragmentManager = (activity as MainActivity).supportFragmentManager
-        viewPage2.adapter = EpicViewAdapter(fm, lifecycle,3)
+        val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
+        viewPage2.adapter = EpicViewAdapter(fm, lifecycle, 3)
 
         addTab()
 
@@ -60,7 +60,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         tabLayout.setBackgroundResource(R.color.deep_green)
     }
 
-    private fun getOnTabSelectedListener() : OnTabSelectedListener {
+    private fun getOnTabSelectedListener(): OnTabSelectedListener {
         Log.d("getOnTabSelectedListener", "getOnTabSelectedListener successfully")
         return object : OnTabSelectedListener {
 
@@ -68,18 +68,19 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
                 viewPage2.currentItem = tab.position
                 Log.d("viewPage2.currentItem", viewPage2.currentItem.toString())
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         }
     }
 
-    private fun getOnPageChangeCallBack() : ViewPager2.OnPageChangeCallback {
+    private fun getOnPageChangeCallBack(): ViewPager2.OnPageChangeCallback {
         Log.d("getOnPageChangeCallBack", "getOnPageChangeCallBack successfully")
         return object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 Log.d("onPageSelected", "onPageSelected successfully")
 
-                when(getInitialPosition()) {
+                when (getInitialPosition()) {
                     "0" -> {
                         updateTabView(0)
                     }
@@ -111,7 +112,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
     }
 
     // get the button position clicked in the previous page to match the tab selected this page
-    private fun getInitialPosition() : String? {
+    private fun getInitialPosition(): String? {
         val sharedPref = requireActivity().applicationContext.getSharedPreferences(
             "epicPosition",
             Context.MODE_PRIVATE
@@ -123,15 +124,18 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
     private fun updateTabView(position: Int) {
         tabLayout.selectTab(tabLayout.getTabAt(position))
 
-        when(position) {
+        when (position) {
             0 -> {
-                binding.tabbar.notification.text = "Find out how to ride safely while delivering food"
+                binding.tabbar.notification.text =
+                    "Find out how to ride safely while delivering food"
             }
             1 -> {
-                binding.tabbar.notification.text = "Find information on using e-bikes for food delivery"
+                binding.tabbar.notification.text =
+                    "Find information on using e-bikes for food delivery"
             }
             2 -> {
-                binding.tabbar.notification.text = "Find out the cycling gear you need to deliver safe"
+                binding.tabbar.notification.text =
+                    "Find out the cycling gear you need to deliver safe"
             }
         }
 
