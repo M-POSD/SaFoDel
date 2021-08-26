@@ -23,33 +23,40 @@
             layout="@layout/simple_toolbar"
             android:id="@+id/toolbar" />
 
-    <Button
-        android:id="@+id/updateMap"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@color/milk_white"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="150dp"
-        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:background="@drawable/blue_outline"
-        android:popupBackground="@drawable/blue_outline"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="?attr/actionBarSize"
-        android:spinnerMode="dropdown"
-        tools:listitem="@layout/items_lga"/>
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:background="@drawable/blue_outline"
+            android:spinnerMode="dialog"
+            tools:listitem="@layout/items_lga"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/updateMap"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/blue_outline"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            />
+
+    </LinearLayout>
+
     
     <ProgressBar
         android:id="@+id/route_retrieval_progress_spinner"
         android:layout_width="wrap_content"
         android:visibility="invisible"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
