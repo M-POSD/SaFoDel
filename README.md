@@ -4,7 +4,7 @@
 ## [SaFoDel](https://m-posd.github.io/)
 Educating Food Delivery Bike Riders in Victoria
 
-<img src="https://user-images.githubusercontent.com/88869576/130999092-f473ce21-1a6d-4343-a555-810822ea3d61.gif">
+<img src="https://user-images.githubusercontent.com/88869576/130999668-f6d115d8-a5d7-4e58-bb18-cd1047a8add2.gif">
 
 
 ## Features✨
@@ -24,6 +24,7 @@ Download `.apk` file on our [Website](https://m-posd.github.io/) or on the [Rele
 
 - Written in [Kotlin](https://kotlinlang.org/) 
 - Using [Mapbox](https://www.mapbox.com/) develop map functions
+- Ssing python -> server in [Heroku](https://www.heroku.com)
 
 ## Building
 ### Open the Project in [Android Studio](https://developer.android.com/studio)
