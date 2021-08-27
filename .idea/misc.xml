@@ -14,17 +14,10 @@
         <entry key="app/src/main/res/drawable/tab_color_selector.xml" value="0.270995670995671" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/checkbox_layout.xml" value="0.4549763033175355" />
         <entry key="app/src/main/res/layout/detail_card.xml" value="0.10156096284916337" />
         <entry key="app/src/main/res/layout/detail_card_v0.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/detail_card_v1.xml" value="0.26096491228070173" />
-        <entry key="app/src/main/res/layout/detail_card_v2.xml" value="0.14628623188405798" />
-        <entry key="app/src/main/res/layout/detail_card_v3.xml" value="0.21822916666666667" />
-        <entry key="app/src/main/res/layout/detail_card_v4.xml" value="0.14628623188405798" />
-        <entry key="app/src/main/res/layout/detail_card_v5.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/detail_page_layout.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/detail_page_layout2.xml" value="0.14628623188405798" />
-        <entry key="app/src/main/res/layout/detail_page_layout3.xml" value="0.2203125" />
         <entry key="app/src/main/res/layout/epic_page_layout.xml" value="0.29393115942028986" />
         <entry key="app/src/main/res/layout/epic_page_layout_v0.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/extreme_small.xml" value="0.15070921985815602" />
@@ -38,7 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
-        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.16403508771929826" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.31188852923890625" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_tip.xml" value="0.2884963768115942" />
         <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.12030075187969924" />
@@ -51,7 +44,6 @@
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
         <entry key="app/src/main/res/layout/start_button.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/test.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/nav_menu_bottom.xml" value="0.17324561403508773" />
         <entry key="app/src/main/res/menu/nav_menu_left.xml" value="0.36041666666666666" />
