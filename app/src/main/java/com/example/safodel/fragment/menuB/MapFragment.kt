@@ -178,7 +178,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 LGAPoint = locationList[0]
                 val position = CameraPosition.Builder()
                     .target(LatLng(LGAPoint.latitude(),LGAPoint.longitude()))
-                    .zoom(6.0)
+                    .zoom(9.0)
                     .build()
                 mapboxMap.cameraPosition = position
             }
