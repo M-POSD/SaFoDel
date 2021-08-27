@@ -40,7 +40,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:weightSum="10"
             android:layout_marginBottom="70dp">
 
@@ -48,23 +48,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="460dp"
-                        android:src="@drawable/checklist"
-                        android:scaleY="2"
-                        android:scaleX="2"/>
-                </LinearLayout>
+            <include layout="@layout/detail_card_v3"
+                android:id="@+id/detail_card_v3"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 
-
+<!--<LinearLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:orientation="vertical"-->
+<!--android:gravity="center">-->
+<!--<ImageView-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="460dp"-->
+<!--    android:src="@drawable/checklist"-->
+<!--    android:scaleY="2"-->
+<!--    android:scaleX="2"/>-->
+<!--</LinearLayout>-->
 

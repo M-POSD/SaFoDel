@@ -48,4 +48,10 @@
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/notosansjp_bold</item>
     </style>
+
+    <style name="Widget.App.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/button_tint</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/notosansjp_bold</item>
+    </style>
 </resources>
