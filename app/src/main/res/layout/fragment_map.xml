@@ -57,8 +57,17 @@
             android:background="@drawable/blue_outline"
             android:text="Update" />
 
+
+
     </LinearLayout>
 
+<!--    <com.mapbox.search.ui.view.SearchBottomSheetView-->
+<!--        android:id="@+id/searchSheet"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="invisible"-->
+<!--        android:elevation="8dp">-->
+<!--    </com.mapbox.search.ui.view.SearchBottomSheetView>-->
 
     <ProgressBar
         android:id="@+id/route_retrieval_progress_spinner"

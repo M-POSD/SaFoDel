@@ -115,7 +115,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val mapboxNavigationOptions = MapboxNavigation
             .defaultNavigationOptionsBuilder(mainActivity, getString(R.string.mapbox_access_token))
             .build()
-        mapboxNavigation = MapboxNavigation(mapboxNavigationOptions)
+        //mapboxNavigation = MapboxNavigation(mapboxNavigationOptions)
 
 
         // request permission of user location
@@ -398,6 +398,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
     }
+
+//    fun addSearchSheet(){
+//        val inflater = LayoutInflater.from(context)
+//        val searchSheet = inflater.inflate(R.layout.search_address,null,false)
+//        binding.coordinator.addView(searchSheet)
+
+        //binding.searchSheet.initializeSearch()
+ //   }
 }
 
 
