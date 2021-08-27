@@ -63,7 +63,6 @@ import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
 import com.mapbox.mapboxsdk.style.layers.Property
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 
 
 private val locationList: ArrayList<Point> = ArrayList()
@@ -273,7 +272,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             /*--  Float button can hide the crash data relative view.   --*/
             binding.floatButtonNav.setOnClickListener {
-                hideCrashData()
+                changeToNav()
             }
         }
     }
@@ -381,13 +380,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
     /* -- Hide or Show the crash relative view. -- */
-    fun hideCrashData(){
+    fun changeToNav(){
         mapboxMap.getStyle {
             val bcLayer =  it.getLayer("basic_circle_cayer")
             val scLayer = it.getLayer("shadow_circle_cayer")
             val siLayer = it.getLayer("icon_layer")
             if(bcLayer != null && scLayer != null && siLayer != null){
                 if(Property.VISIBLE.equals(bcLayer.visibility.value)){
+                    mapboxMap.setStyle(Style.TRAFFIC_DAY)
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
                     binding.textTop.visibility = View.INVISIBLE
                     binding.spinner.visibility = View.INVISIBLE
@@ -395,15 +395,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     bcLayer.setProperties(visibility(Property.NONE))
                     scLayer.setProperties(visibility(Property.NONE))
                     siLayer.setProperties(visibility(Property.NONE))
-                }else{
-                    binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
-                    binding.textTop.visibility = View.VISIBLE
-                    binding.spinner.visibility = View.VISIBLE
-                    binding.updateMap.visibility = View.VISIBLE
-                    bcLayer.setProperties(visibility(Property.VISIBLE))
-                    scLayer.setProperties(visibility(Property.VISIBLE))
-                    siLayer.setProperties(visibility(Property.VISIBLE))
                 }
+            }else {
+                mapView.getMapAsync(this)
+                binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
+                binding.textTop.visibility = View.VISIBLE
+                binding.spinner.visibility = View.VISIBLE
+                binding.updateMap.visibility = View.VISIBLE
+                bcLayer?.setProperties(visibility(Property.VISIBLE))
+                scLayer?.setProperties(visibility(Property.VISIBLE))
+                siLayer?.setProperties(visibility(Property.VISIBLE))
             }
         }
     }
