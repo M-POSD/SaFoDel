@@ -8,6 +8,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
         AutoSizeConfig.getInstance().isBaseOnWidth = false
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
     }
 
