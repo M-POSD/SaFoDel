@@ -32,30 +32,30 @@
         android:text="Accident Prone Locations:"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
         android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             android:background="@drawable/blue_outline"
+            android:fitsSystemWindows="true"
             android:spinnerMode="dialog"
-            tools:listitem="@layout/items_lga"/>
+            tools:listitem="@layout/items_lga" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/updateMap"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
-            android:background="@drawable/blue_outline"
             android:layout_height="wrap_content"
-            android:text="Update"
-            />
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/blue_outline"
+            android:text="Update" />
 
     </LinearLayout>
 
@@ -80,6 +80,18 @@
         android:backgroundTint="@color/third_green"
         android:contentDescription="desc"
         android:src="@drawable/baseline_gps_fixed_black_36"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButtonNav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/third_green"
+        android:contentDescription="desc"
+        android:src="@drawable/baseline_assistant_direction_black_36"
         />
 
 

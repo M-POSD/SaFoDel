@@ -17,7 +17,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
@@ -61,6 +60,11 @@ import java.net.URL
 import kotlin.collections.ArrayList
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
+import com.mapbox.mapboxsdk.style.layers.Property
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory
+
 
 private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
@@ -129,7 +133,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         // change the float buuton height
         val FBHeight = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
         FBHeight.bottomMargin = mainActivity.bottomNavHeight() + 20
+        Log.d("FBHeight 1 ", FBHeight.bottomMargin .toString())
         binding.floatButton.layoutParams = FBHeight
+
+        // change the float buuton Nav height
+        val FBHeightNav = binding.floatButtonNav.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeightNav.bottomMargin = FBHeight.bottomMargin * 2
+        Log.d("FBHeight 2 ", FBHeightNav.bottomMargin .toString())
+        binding.floatButtonNav.layoutParams = FBHeightNav
 
 
         // basic location and position
@@ -155,6 +166,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.floatButton.setOnClickListener {
             mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
         }
+
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this) // update the map
@@ -207,7 +219,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
             val baseicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
-                circleColor(Color.parseColor("#3BC802")),
+                circleColor(Color.parseColor("#8AD0AB")),
+                visibility(Property.VISIBLE),
                 circleRadius(
                     interpolate(
                         linear(), zoom(),
@@ -224,6 +237,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .withProperties(
                     circleColor(parseColor("#858585")),
                     circleRadius(14f),
+                    visibility(Property.VISIBLE),
                     circleOpacity(
                         interpolate(
                             linear(), zoom(),
@@ -237,6 +251,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             /*-- Add symbol layer --*/
             val symbolIconLayer = SymbolLayer("icon_layer", "source")
             symbolIconLayer.withProperties(
+                visibility(Property.VISIBLE),
                 iconImage("icon_image"),
                 iconSize(1.5f),
                 iconIgnorePlacement(true),
@@ -256,6 +271,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
 
 
+            /*--  Float button can hide the crash data relative view.   --*/
+            binding.floatButtonNav.setOnClickListener {
+                hideCrashData()
+            }
         }
     }
 
@@ -358,6 +377,35 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
+    }
+
+
+    /* -- Hide or Show the crash relative view. -- */
+    fun hideCrashData(){
+        mapboxMap.getStyle {
+            val bcLayer =  it.getLayer("basic_circle_cayer")
+            val scLayer = it.getLayer("shadow_circle_cayer")
+            val siLayer = it.getLayer("icon_layer")
+            if(bcLayer != null && scLayer != null && siLayer != null){
+                if(Property.VISIBLE.equals(bcLayer.visibility.value)){
+                    binding.floatButtonNav.setImageResource(R.drawable.crash_36)
+                    binding.textTop.visibility = View.INVISIBLE
+                    binding.spinner.visibility = View.INVISIBLE
+                    binding.updateMap.visibility = View.INVISIBLE
+                    bcLayer.setProperties(visibility(Property.NONE))
+                    scLayer.setProperties(visibility(Property.NONE))
+                    siLayer.setProperties(visibility(Property.NONE))
+                }else{
+                    binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
+                    binding.textTop.visibility = View.VISIBLE
+                    binding.spinner.visibility = View.VISIBLE
+                    binding.updateMap.visibility = View.VISIBLE
+                    bcLayer.setProperties(visibility(Property.VISIBLE))
+                    scLayer.setProperties(visibility(Property.VISIBLE))
+                    siLayer.setProperties(visibility(Property.VISIBLE))
+                }
+            }
+        }
     }
 }
 
