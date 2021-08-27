@@ -146,16 +146,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mThread = fetchdata()
         mThread.start()
 
-        /* --- Bottom navigation hide, when touch the map. --- */
-        binding.mapView.setOnTouchListener { _, event ->
-            when(event.action){
-                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
-                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
-            }
-            false
-        }
-
-
         // update the map
         binding.updateMap.setOnClickListener {
             mapView.getMapAsync(this)
@@ -460,6 +450,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
 
+
+
+
+/* --- Bottom navigation hide, when touch the map. --- */
+//        binding.mapView.setOnTouchListener { _, event ->
+//            when(event.action){
+//                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
+//                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
+//            }
+//            false
+//        }
 
 
 
