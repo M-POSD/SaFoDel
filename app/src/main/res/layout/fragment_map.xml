@@ -13,8 +13,7 @@
     <com.mapbox.maps.MapView
         android:id="@+id/mapView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"/>
+        android:layout_height="match_parent" />
 
     <com.mapbox.navigation.ui.maps.camera.view.MapboxRecenterButton
         android:id="@+id/recenter"
