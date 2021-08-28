@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuB
+package com.example.safodel.fragment.menuL
 
 import android.os.Bundle
 import android.view.LayoutInflater

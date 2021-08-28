@@ -13,18 +13,10 @@
         android:id="@+id/mapfragment"
         android:name="com.example.safodel.fragment.menuB.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map">
-        <action
-            android:id="@+id/action_mapfragment_to_schoolFragment3"
-            app:destination="@id/schoolFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
-    </fragment>
+        tools:layout="@layout/fragment_map"/>
     <fragment
         android:id="@+id/schoolFragment"
-        android:name="com.example.safodel.fragment.menuB.SchoolFragment"
+        android:name="com.example.safodel.fragment.menuL.SchoolFragment"
         android:label="fragment_school"
         tools:layout="@layout/fragment_school" />
     <fragment
@@ -38,11 +30,7 @@
             android:defaultValue="0"/>
         <action
             android:id="@+id/action_homeFragment_to_developerFragment"
-            app:destination="@id/developerFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:destination="@id/developerFragment"/>
         <action
             android:id="@+id/action_homeFragment_to_epicsFragment"
             app:destination="@id/epicsFragment"
@@ -52,11 +40,13 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_appIntroFragment"
-            app:destination="@id/appIntroFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:destination="@id/appIntroFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_mapfragment"
+            app:destination="@id/mapfragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_schoolFragment"
+            app:destination="@id/schoolFragment" />
     </fragment>
     <fragment
         android:id="@+id/epic1Fragment"
