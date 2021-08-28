@@ -159,5 +159,10 @@
         android:name="com.example.safodel.fragment.home.epic3.Gear4Fragment"
         android:label="fragment_gear4"
         tools:layout="@layout/fragment_gear4" />
+    <fragment
+        android:id="@+id/analysisFragment"
+        android:name="com.example.safodel.fragment.menuL.AnalysisFragment"
+        android:label="fragment_analysis"
+        tools:layout="@layout/fragment_analysis" />
 
 </navigation>
