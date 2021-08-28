@@ -1,14 +1,15 @@
 package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Color.parseColor
+import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -24,6 +25,9 @@ import com.example.safodel.model.LGAList
 import com.example.safodel.ui.main.MainActivity
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.api.directions.v5.models.DirectionsRoute
+import com.mapbox.api.directions.v5.models.RouteOptions
+import com.mapbox.bindgen.Expected
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
 import com.mapbox.geojson.Point
@@ -63,6 +67,39 @@ import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
 import com.mapbox.mapboxsdk.style.layers.Property
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
+import com.mapbox.maps.CameraOptions
+import com.mapbox.maps.plugin.LocationPuck2D
+import com.mapbox.maps.plugin.animation.camera
+import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
+import com.mapbox.maps.plugin.gestures.gestures
+import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.navigation.base.extensions.applyDefaultNavigationOptions
+import com.mapbox.navigation.base.extensions.applyLanguageAndVoiceUnitOptions
+import com.mapbox.navigation.base.options.NavigationOptions
+import com.mapbox.navigation.base.route.RouterCallback
+import com.mapbox.navigation.base.route.RouterFailure
+import com.mapbox.navigation.base.route.RouterOrigin
+import com.mapbox.navigation.base.trip.model.RouteProgress
+import com.mapbox.navigation.core.directions.session.RoutesObserver
+import com.mapbox.navigation.core.trip.session.LocationObserver
+import com.mapbox.navigation.core.trip.session.RouteProgressObserver
+import com.mapbox.navigation.ui.base.util.MapboxNavigationConsumer
+import com.mapbox.navigation.ui.maps.camera.NavigationCamera
+import com.mapbox.navigation.ui.maps.camera.data.MapboxNavigationViewportDataSource
+import com.mapbox.navigation.ui.maps.camera.lifecycle.NavigationBasicGesturesHandler
+import com.mapbox.navigation.ui.maps.camera.state.NavigationCameraState
+import com.mapbox.navigation.ui.maps.camera.state.NavigationCameraStateChangedObserver
+import com.mapbox.navigation.ui.maps.location.NavigationLocationProvider
+import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineApi
+import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineView
+import com.mapbox.navigation.ui.maps.route.line.model.*
+import com.mapbox.navigation.utils.internal.ifNonNull
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import com.mapbox.maps.MapboxMap as MapboxMap2
+import com.mapbox.maps.MapView as MapView2
+import com.mapbox.maps.Style as Style2
 
 
 private val locationList: ArrayList<Point> = ArrayList()
@@ -80,18 +117,110 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     // Map
     private lateinit var mapboxMap: MapboxMap
+    private lateinit var mapboxMap2: MapboxMap2
     private lateinit var mainActivity : MainActivity
     private lateinit var mapView: MapView
+    private lateinit var mapView2 : MapView2
     private lateinit var LGAPoint:Point
 
-    // Navigation
+    // Route
+    private lateinit var routeLineAPI: MapboxRouteLineApi
+    private lateinit var routeLineView: MapboxRouteLineView
+
+    /* ----- Mapbox Navigation components ----- */
     private lateinit var mapboxNavigation: MapboxNavigation
+
+    // location puck integration
+    private val navigationLocationProvider = NavigationLocationProvider()
+
+    //camera
+    private lateinit var viewportDataSource: MapboxNavigationViewportDataSource
+    private lateinit var navigationCamera: NavigationCamera
 
     // Permission
     private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
     private val LGAlist = LGAList.init()
+
+    /* ----- Location and route progress callbacks ----- */
+    private val locationObserver = object : LocationObserver {
+        override fun onRawLocationChanged(rawLocation: Location) {
+            // not handled
+        }
+        override fun onEnhancedLocationChanged(
+            enhancedLocation: Location,
+            keyPoints: List<Location>
+        ) {
+            // update location puck's position on the map
+            navigationLocationProvider.changePosition(
+                location = enhancedLocation,
+                keyPoints = keyPoints
+            )
+            // update camera position to account for new location
+            viewportDataSource.onLocationChanged(enhancedLocation)
+            viewportDataSource.evaluate()
+        }
+    }
+
+    private val routeProgressObserver = object : RouteProgressObserver {
+        override fun onRouteProgressChanged(routeProgress: RouteProgress) {
+            // update the camera position to account for the progressed fragment of the route
+            viewportDataSource.onRouteProgressChanged(routeProgress)
+            viewportDataSource.evaluate()
+        }
+    }
+
+    private val routesObserver = object : RoutesObserver {
+        override fun onRoutesChanged(routes: List<DirectionsRoute>) {
+            if (routes.isNotEmpty()) {
+                // generate route geometries asynchronously and render them
+                CoroutineScope(Dispatchers.Main).launch {
+                    val result = routeLineAPI.setRoutes(
+                        listOf(RouteLine(routes.first(), null)),object:
+                    MapboxNavigationConsumer<Expected<RouteLineError,RouteSetValue>>{
+                            override fun accept(value: Expected<RouteLineError,RouteSetValue>) {
+                                ifNonNull(routeLineView, mapboxMap2.getStyle()) { view, style ->
+                                    view.renderRouteDrawData(style, value)
+                                    viewportDataSource.options.followingFrameOptions.zoomUpdatesAllowed = true
+                                    viewportDataSource.options.followingFrameOptions.centerUpdatesAllowed = true
+                                    viewportDataSource.evaluate()
+                                    navigationCamera.requestNavigationCameraToFollowing()
+                                }
+                            }
+                    }
+                    )
+//                    val style = mapboxMap2.getStyle()
+//                    if (style != null) {
+//                        routeLineView.renderRouteDrawData(style,result)
+//                    }
+                }
+                // update the camera position to account for the new route
+                viewportDataSource.onRouteChanged(routes.first())
+                viewportDataSource.evaluate()
+            } else {
+                val style = mapboxMap2.getStyle()
+                if (style != null) {
+                    routeLineAPI.clearRouteLine(
+                        object :
+                            MapboxNavigationConsumer<
+                                    Expected<RouteLineError, RouteLineClearValue>> {
+                            override fun accept(
+                                value: Expected<RouteLineError, RouteLineClearValue>
+                            ) {
+                                routeLineView.renderClearRouteLineValue(style, value)
+                            }
+                        }
+                    )
+                }
+                // remove the route reference to change camera position
+                viewportDataSource.clearRouteData()
+                viewportDataSource.evaluate()
+            }
+        }
+    }
+
+
     
     @SuppressLint("ClickableViewAccessibility")
     @SuppressWarnings("MissingPermission")
@@ -108,15 +237,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mainActivity = activity as MainActivity
         val toolbar = binding.toolbar.root
         mapView = binding.mapView
+        mapView2 = binding.mapView2
         setToolbarBasic(toolbar)
-
-
-        // init the Navigation
-        val mapboxNavigationOptions = MapboxNavigation
-            .defaultNavigationOptionsBuilder(mainActivity, getString(R.string.mapbox_access_token))
-            .build()
-        //mapboxNavigation = MapboxNavigation(mapboxNavigationOptions)
-
 
         // request permission of user location
         permissionsManager = PermissionsManager(this)
@@ -156,9 +278,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
         }
 
+        // initialize Mapbox Navigation
+        mapboxNavigation = MapboxNavigation(
+            NavigationOptions.Builder(mainActivity)
+                .accessToken(getString(R.string.mapbox_access_token))
+                .build()
+        )
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this) // update the map
+        mapboxNavigation.startTripSession()
         return binding.root
     }
 
@@ -377,7 +506,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val siLayer = it.getLayer("icon_layer")
             if(bcLayer != null && scLayer != null && siLayer != null){
                 if(Property.VISIBLE.equals(bcLayer.visibility.value)){
-                    mapboxMap.setStyle(Style.TRAFFIC_DAY)
+                    mapView2.visibility = View.VISIBLE
+                    mapView.visibility = View.INVISIBLE
+                    binding.recenter.visibility = View.VISIBLE
+                    initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
                     binding.textTop.visibility = View.INVISIBLE
                     binding.spinner.visibility = View.INVISIBLE
@@ -387,6 +519,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     siLayer.setProperties(visibility(Property.NONE))
                 }
             }else {
+                mapView2.visibility = View.INVISIBLE
+                mapView.visibility = View.VISIBLE
+                binding.recenter.visibility = View.INVISIBLE
                 mapView.getMapAsync(this)
                 binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
                 binding.textTop.visibility = View.VISIBLE
@@ -399,13 +534,133 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-//    fun addSearchSheet(){
-//        val inflater = LayoutInflater.from(context)
-//        val searchSheet = inflater.inflate(R.layout.search_address,null,false)
-//        binding.coordinator.addView(searchSheet)
+    private fun initNav(){
 
-        //binding.searchSheet.initializeSearch()
- //   }
+        // initialize the location puck
+        mapView2.location.apply {
+            this.locationPuck = LocationPuck2D(
+                bearingImage = ContextCompat.getDrawable(
+                    mainActivity,
+                    R.drawable.mapbox_navigation_puck_icon
+                )
+            )
+            setLocationProvider(navigationLocationProvider)
+            enabled = true
+        }
+
+        // move the camera to current location on the first update
+        mapboxNavigation.registerLocationObserver(object : LocationObserver {
+            override fun onRawLocationChanged(rawLocation: Location) {
+                val point = Point.fromLngLat(rawLocation.longitude, rawLocation.latitude)
+                val cameraOptions = CameraOptions.Builder()
+                    .center(point)
+                    .zoom(13.0)
+                    .build()
+                mapboxMap2.setCamera(cameraOptions)
+                mapboxNavigation.unregisterLocationObserver(this)
+            }
+            override fun onEnhancedLocationChanged(
+                enhancedLocation: Location,
+                keyPoints: List<Location>
+            ) {
+                // not handled
+            }
+        })
+
+        viewportDataSource = MapboxNavigationViewportDataSource(
+            mapView2.getMapboxMap()
+        )
+        navigationCamera = NavigationCamera(
+            mapView2.getMapboxMap(),
+            mapView2.camera,
+            viewportDataSource
+        )
+        mapView2.camera.addCameraAnimationsLifecycleListener(
+            NavigationBasicGesturesHandler(navigationCamera)
+        )
+        navigationCamera.registerNavigationCameraStateChangeObserver(
+            object : NavigationCameraStateChangedObserver {
+                override fun onNavigationCameraStateChanged(
+                    navigationCameraState: NavigationCameraState
+                ) {
+                    // shows/hide the recenter button depending on the camera state
+                    when (navigationCameraState) {
+                        NavigationCameraState.TRANSITION_TO_FOLLOWING,
+                        NavigationCameraState.FOLLOWING -> binding.recenter.visibility =
+                            View.INVISIBLE
+
+                        NavigationCameraState.TRANSITION_TO_OVERVIEW,
+                        NavigationCameraState.OVERVIEW,
+                        NavigationCameraState.IDLE -> binding.recenter.visibility =
+                            View.VISIBLE
+                    }
+                }
+            }
+        )
+        val mapboxRouteLineOptions = MapboxRouteLineOptions.Builder(mainActivity)
+            .withRouteLineBelowLayerId("road-label")
+            .build()
+        routeLineAPI = MapboxRouteLineApi(mapboxRouteLineOptions)
+        routeLineView = MapboxRouteLineView(mapboxRouteLineOptions)
+
+        mapboxMap2.loadStyleUri(
+            Style.MAPBOX_STREETS,
+           {
+                    // add long click listener that search for a route to the clicked destination
+                    mapView2.gestures.addOnMapLongClickListener(
+                        object : OnMapLongClickListener {
+                            override fun onMapLongClick(point: Point): Boolean {
+                                findRoute(point)
+                                return true
+                            }
+                        }
+                    )
+            }
+        )
+
+        binding.recenter.setOnClickListener {
+            navigationCamera.requestNavigationCameraToFollowing()
+        }
+        mapboxNavigation.startTripSession()
+    }
+
+    private fun findRoute(destination: Point) {
+        val origin = navigationLocationProvider.lastLocation?.let {
+            Point.fromLngLat(it.longitude, it.latitude)
+        } ?: return
+
+        mapboxNavigation.requestRoutes(
+            RouteOptions.builder()
+                .applyDefaultNavigationOptions()
+                .applyLanguageAndVoiceUnitOptions(mainActivity)
+                .coordinatesList(listOf(origin, destination))
+                .build(),
+            object : RouterCallback {
+                override fun onRoutesReady(
+                    routes: List<DirectionsRoute>,
+                    routerOrigin: RouterOrigin
+                ) {
+                    setRouteAndStartNavigation(routes.first())
+                }
+
+                override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
+                    // no impl
+                }
+
+                override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
+                    // no impl
+                }
+            }
+        )
+    }
+
+    private fun setRouteAndStartNavigation(route: DirectionsRoute) {
+        // set route
+        mapboxNavigation.setRoutes(listOf(route))
+
+        // move the camera to overview when new route is available
+        navigationCamera.requestNavigationCameraToOverview()
+    }
 }
 
 
