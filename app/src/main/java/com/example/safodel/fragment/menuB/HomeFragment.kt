@@ -6,13 +6,17 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.view.animation.*
+import android.widget.ImageView
+import android.widget.Toolbar
 import androidx.core.animation.addListener
+import androidx.core.view.isVisible
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -46,9 +50,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
+        configModeTheme()
         imageAnimations()
-
-
 
         return binding.root
     }
@@ -88,11 +91,25 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 0f)
         var objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
+        var objectAnimator5: ObjectAnimator = ObjectAnimator.ofFloat(binding.headlight, "alpha", 0f, 1f).setDuration(500)
 
         val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
             .before(objectAnimator4)
         animatorSet.duration = 1000
+
+        Log.d("headlight", binding.headlight.isVisible.toString())
+
+        if (binding.headlight.isVisible) {
+            objectAnimator4.addListener(
+                onEnd = {
+                    val animatorSet = AnimatorSet()
+                    animatorSet.play(objectAnimator5)
+                    animatorSet.start()
+                })
+        }
+
+
         animatorSet.start()
 
         // after animation 4 -> set images clickable
@@ -134,5 +151,35 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val spEditor = sharedPref.edit()
         spEditor.putString("epicPosition", "" + position)
         spEditor.apply()
+    }
+
+    private fun configModeTheme() {
+        binding.lightMode.setOnClickListener {
+            binding.lightMode.visibility = View.INVISIBLE
+            binding.darkMode.visibility = View.VISIBLE
+            binding.coordinatorLayout.setBackgroundResource(R.color.gray)
+            binding.headlight.visibility = View.VISIBLE
+            binding.backpack.alpha = 0f
+            binding.helmet.alpha = 0f
+            binding.headlight.alpha = 0f
+            imageAnimations()
+            val toolbar = binding.toolbar.root
+            setToolbarWhite(toolbar)
+            Log.d("config", binding.headlight.isVisible.toString())
+        }
+
+
+        binding.darkMode.setOnClickListener {
+            binding.darkMode.visibility = View.INVISIBLE
+            binding.lightMode.visibility = View.VISIBLE
+            binding.coordinatorLayout.setBackgroundResource(R.color.white)
+            binding.headlight.visibility = View.INVISIBLE
+            binding.backpack.alpha = 0f
+            binding.helmet.alpha = 0f
+            binding.headlight.alpha = 0f
+            imageAnimations()
+            val toolbar = binding.toolbar.root
+            setToolbarBasic(toolbar)
+        }
     }
 }

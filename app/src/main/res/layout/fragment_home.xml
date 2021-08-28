@@ -25,7 +25,8 @@
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:id="@+id/coordinatorLayout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/images"
@@ -81,7 +82,20 @@
                         app:layout_constraintTop_toTopOf="@+id/driver"
                         app:layout_constraintVertical_bias="1.0" />
 
-
+                    <ImageView
+                        android:id="@+id/headlight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0"
+                        android:visibility="invisible"
+                        android:src="@drawable/ic_baseline_menu_24"
+                        android:scaleX="1"
+                        android:scaleY="1.25"
+                        app:layout_constraintBottom_toBottomOf="@+id/driver"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.144"
+                        app:layout_constraintStart_toEndOf="@+id/driver"
+                        app:layout_constraintTop_toTopOf="@+id/driver" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -146,5 +160,26 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/simple_toolbar" />
+
+    <ImageView
+        android:id="@+id/light_mode"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_baseline_light_mode"/>
+
+    <ImageView
+        android:id="@+id/dark_mode"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_baseline_dark_mode"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

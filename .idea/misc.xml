@@ -6,7 +6,9 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new.xml" value="0.1868421052631579" />
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.10462962962962963" />
+        <entry key="app/src/main/res/drawable/ic_baseline_dark_mode.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22777777777777777" />
+        <entry key="app/src/main/res/drawable/ic_baseline_light_mode_24.xml" value="0.240625" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/ic_baseline_pedal_bike_24.xml" value="0.240625" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.23958333333333334" />
@@ -31,7 +33,7 @@
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_epics.xml" value="0.15789473684210525" />
         <entry key="app/src/main/res/layout/fragment_exam.xml" value="0.22447916666666667" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.14513366994940607" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="1.5" />
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
