@@ -16,7 +16,7 @@ class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inf
     ): View {
         _binding = FragmentExamBinding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
-        setToolbarBasic(toolbar)
+        setToolbarWhite(toolbar)
         return binding.root
     }
 
