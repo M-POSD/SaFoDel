@@ -8,6 +8,17 @@
             icons download from https://fonts.google.com/icons.
         -->
         <item
+            android:id="@+id/navAnalysis"
+            android:icon="@drawable/analysis"
+            android:title="@string/analysis"/>
+
+
+        <item
+            android:id="@+id/navExam"
+            android:icon="@drawable/exam"
+            android:title="@string/exam"/>
+
+        <item
             android:id="@+id/navAppIntro"
             android:icon="@drawable/ic_baseline_pedal_bike_24"
             android:title="@string/app_intro"/>

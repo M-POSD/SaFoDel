@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.menuL.SchoolFragment">
+    tools:context=".fragment.menuL.ExamFragment">
 
     <include
         android:id="@+id/toolbar"

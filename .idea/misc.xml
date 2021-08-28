@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.22777777777777777" />
+        <entry key="app/src/main/res/drawable/ic_baseline_pedal_bike_24.xml" value="0.240625" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/drawable/mapbox_ic_end_navigation.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/drawable/mapbox_ic_start_navigation.xml" value="0.17291666666666666" />
@@ -27,6 +28,7 @@
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_epics.xml" value="0.15789473684210525" />
+        <entry key="app/src/main/res/layout/fragment_exam.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.14513366994940607" />
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />

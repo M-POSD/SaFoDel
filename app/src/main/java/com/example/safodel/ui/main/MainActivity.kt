@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onBackPressed() {
         if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment
-                    && navController.currentDestination?.id != R.id.schoolFragment
                     && navController.currentDestination?.id != R.id.mapfragment)
         ) {
             super.onBackPressed()
@@ -84,10 +83,6 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.homeFragment)
                     true
                 }
-                R.id.navSchool -> {
-                    navController.navigate(R.id.schoolFragment)
-                    true
-                }
                 R.id.navMap -> {
                     navController.navigate(R.id.mapfragment)
                     true
@@ -107,16 +102,7 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                     R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-                    // for control the action from Home to AppIntro
-//                    R.id.navAppIntro -> {
-//                        val action = HomeFragmentDirections.actionHomeFragmentToAppIntroFragment()
-//                        navController.navigate(action)
-//                    }
-//
-//                    R.id.navDeveloper -> {
-//                        val action = HomeFragmentDirections.actionHomeFragmentToDeveloperFragment()
-//                        navController.navigate(action)
-//                    }
+                    R.id.navExam -> navController.navigate(R.id.examFragment)
                 }
             }
             binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.

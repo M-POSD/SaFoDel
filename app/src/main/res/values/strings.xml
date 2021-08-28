@@ -12,5 +12,7 @@
     <string name="developer">About Us</string>
     <string name="SaFoDel"><b>SaFoDel</b></string>
     <string name="start_subtitle"><b>Alert Today, Alive Tomorrow</b></string>
+    <string name="exam">EXAM</string>
+    <string name="analysis">ANALYSIS</string>
 
 </resources>
