@@ -1,7 +1,6 @@
 package com.example.safodel.fragment.menuB
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.location.Location
@@ -94,9 +93,6 @@ import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineApi
 import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineView
 import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -174,53 +170,35 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private val routesObserver = object : RoutesObserver {
         override fun onRoutesChanged(routes: List<DirectionsRoute>) {
             if (routes.isNotEmpty()) {
-                // generate route geometries asynchronously and render them
-                CoroutineScope(Dispatchers.Main).launch {
-                    val result = routeLineAPI.setRoutes(
-                        listOf(RouteLine(routes.first(), null)),object:
+                val selectedRoute = routes.first()
+                routeLineAPI.setRoutes(listOf(RouteLine(selectedRoute, null)), object :
                     MapboxNavigationConsumer<Expected<RouteLineError,RouteSetValue>>{
-                            override fun accept(value: Expected<RouteLineError,RouteSetValue>) {
-                                ifNonNull(routeLineView, mapboxMap2.getStyle()) { view, style ->
-                                    view.renderRouteDrawData(style, value)
-                                    viewportDataSource.options.followingFrameOptions.zoomUpdatesAllowed = true
-                                    viewportDataSource.options.followingFrameOptions.centerUpdatesAllowed = true
-                                    viewportDataSource.evaluate()
-                                    navigationCamera.requestNavigationCameraToFollowing()
+                    override fun accept(value: Expected<RouteLineError,RouteSetValue>) {
+                        ifNonNull(routeLineView, mapboxMap2.getStyle()) { view, style ->
+                            view.renderRouteDrawData(style, value)
+                            viewportDataSource.options.followingFrameOptions.zoomUpdatesAllowed = true
+                            viewportDataSource.options.followingFrameOptions.centerUpdatesAllowed = true
+                            viewportDataSource.evaluate()
+                            navigationCamera.requestNavigationCameraToFollowing()
+                        }
+                    }
+                })
+                viewportDataSource.onRouteChanged(selectedRoute)
+            } else {
+                viewportDataSource.clearRouteData()
+                navigationCamera.requestNavigationCameraToIdle()
+                    ifNonNull(routeLineAPI, routeLineView, mapboxMap2.getStyle()) { api, view, style ->
+                        api.clearRouteLine(
+                            object : MapboxNavigationConsumer<Expected< RouteLineError,RouteLineClearValue>> {
+                                override fun accept(value: Expected<RouteLineError,RouteLineClearValue>) {
+                                    view.renderClearRouteLineValue(style, value)
                                 }
                             }
+                        )
                     }
-                    )
-//                    val style = mapboxMap2.getStyle()
-//                    if (style != null) {
-//                        routeLineView.renderRouteDrawData(style,result)
-//                    }
-                }
-                // update the camera position to account for the new route
-                viewportDataSource.onRouteChanged(routes.first())
-                viewportDataSource.evaluate()
-            } else {
-                val style = mapboxMap2.getStyle()
-                if (style != null) {
-                    routeLineAPI.clearRouteLine(
-                        object :
-                            MapboxNavigationConsumer<
-                                    Expected<RouteLineError, RouteLineClearValue>> {
-                            override fun accept(
-                                value: Expected<RouteLineError, RouteLineClearValue>
-                            ) {
-                                routeLineView.renderClearRouteLineValue(style, value)
-                            }
-                        }
-                    )
-                }
-                // remove the route reference to change camera position
-                viewportDataSource.clearRouteData()
-                viewportDataSource.evaluate()
+
             }
-        }
-    }
-
-
+        }}
     
     @SuppressLint("ClickableViewAccessibility")
     @SuppressWarnings("MissingPermission")
@@ -238,6 +216,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val toolbar = binding.toolbar.root
         mapView = binding.mapView
         mapView2 = binding.mapView2
+        mapboxMap2 = mapView2.getMapboxMap()
         setToolbarBasic(toolbar)
 
         // request permission of user location
@@ -287,7 +266,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this) // update the map
-        mapboxNavigation.startTripSession()
         return binding.root
     }
 
@@ -429,11 +407,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStart() {
         super.onStart()
         mapView.onStart()
+        mapView2.onStart()
+        mapboxNavigation.registerRoutesObserver(routesObserver)
+        mapboxNavigation.registerRouteProgressObserver(routeProgressObserver)
+        mapboxNavigation.registerLocationObserver(locationObserver)
     }
 
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+
     }
 
     override fun onPause() {
@@ -446,6 +429,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         super.onStop()
         mThread.interrupt()
         mapView.onStop()
+        mapView2.onStop()
+        mapboxNavigation.unregisterRoutesObserver(routesObserver)
+        mapboxNavigation.unregisterRouteProgressObserver(routeProgressObserver)
+        mapboxNavigation.unregisterLocationObserver(locationObserver)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -456,6 +443,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+        mapView2.onLowMemory()
     }
 
     override fun onDestroyView() {
@@ -463,6 +451,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mThread.interrupt()
         mapView.onDestroy()
         MapboxNavigationProvider.destroy()
+        mapView2.onDestroy()
+        mapboxNavigation.onDestroy()
         _binding = null
     }
 
@@ -505,7 +495,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val scLayer = it.getLayer("shadow_circle_cayer")
             val siLayer = it.getLayer("icon_layer")
             if(bcLayer != null && scLayer != null && siLayer != null){
-                if(Property.VISIBLE.equals(bcLayer.visibility.value)){
+                if(View.VISIBLE.equals(mapView.visibility)){
                     mapView2.visibility = View.VISIBLE
                     mapView.visibility = View.INVISIBLE
                     binding.recenter.visibility = View.VISIBLE
@@ -518,7 +508,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     scLayer.setProperties(visibility(Property.NONE))
                     siLayer.setProperties(visibility(Property.NONE))
                 }
-            }else {
+            else {
                 mapView2.visibility = View.INVISIBLE
                 mapView.visibility = View.VISIBLE
                 binding.recenter.visibility = View.INVISIBLE
@@ -527,13 +517,15 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 binding.textTop.visibility = View.VISIBLE
                 binding.spinner.visibility = View.VISIBLE
                 binding.updateMap.visibility = View.VISIBLE
-                bcLayer?.setProperties(visibility(Property.VISIBLE))
-                scLayer?.setProperties(visibility(Property.VISIBLE))
-                siLayer?.setProperties(visibility(Property.VISIBLE))
+                bcLayer.setProperties(visibility(Property.VISIBLE))
+                scLayer.setProperties(visibility(Property.VISIBLE))
+                siLayer.setProperties(visibility(Property.VISIBLE))
+            }
             }
         }
     }
 
+    @SuppressWarnings("MissingPermission")
     private fun initNav(){
 
         // initialize the location puck
@@ -604,7 +596,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         routeLineView = MapboxRouteLineView(mapboxRouteLineOptions)
 
         mapboxMap2.loadStyleUri(
-            Style.MAPBOX_STREETS,
+            Style2.TRAFFIC_DAY,
            {
                     // add long click listener that search for a route to the clicked destination
                     mapView2.gestures.addOnMapLongClickListener(
