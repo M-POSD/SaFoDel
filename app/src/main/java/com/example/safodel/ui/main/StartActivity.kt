@@ -24,7 +24,7 @@ class StartActivity : AppCompatActivity() {
 //        imageAnimation()
 //        buttonAnimation()
         configAllAnimations()
-        binding.startButton.card.setOnClickListener {
+        binding.startButton.button.setOnClickListener {
             val intent = Intent()
 
             // avoid to return to this activity
@@ -45,7 +45,7 @@ class StartActivity : AppCompatActivity() {
             ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
         var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.startButton.card, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(binding.startButton.button, "alpha", 0f, 1f)
         objectAnimator1.duration = 1300
         objectAnimator2.duration = 1300
         objectAnimator3.duration = 800
@@ -80,7 +80,7 @@ class StartActivity : AppCompatActivity() {
         animation.addAnimation(fadeIn)
         animation.startTime = 1000
         animation.repeatCount = 1;
-        binding.startButton.card.animation = animation
+        binding.startButton.button.animation = animation
     }
 
     private fun subTitleAnimation() {
