@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentInfo2Binding
 import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.GroupCard1Data
 
 class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var info1s: MutableList<EBikeInfo1>
-    private lateinit var adapter: GroupCard2Adapter
+    private lateinit var info2s: MutableList<GroupCard1Data>
+    private lateinit var adapter: GroupCard1Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +43,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
     }
 
     private fun configRecycleView() {
-        adapter = GroupCard2Adapter(requireActivity(), getInfo2s())
+        adapter = GroupCard1Adapter(requireActivity(), getInfo2s())
 
         binding.info2.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -56,16 +58,16 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
     }
 
     // get the info2s from the model class
-    private fun getInfo2s(): MutableList<EBikeInfo1> {
-        info1s = EBikeInfo1.init()
+    private fun getInfo2s(): MutableList<GroupCard1Data> {
+        info2s = GroupCard1Data.init()
         var i = 0
-        while (i < info1s.size) {
-            when (info1s[i].info_name) {
-                "Advantage" -> i++
-                else -> info1s.removeAt(i)
+        while (i < info2s.size) {
+            when (info2s[i].dataType) {
+                "ebikeinfo2" -> i++
+                else -> info2s.removeAt(i)
             }
         }
-        return info1s
+        return info2s
     }
 
 }

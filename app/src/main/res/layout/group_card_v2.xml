@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-    <include layout="@layout/detail_card_v7"
+    <include layout="@layout/detail_card_v4"
         android:id="@+id/image_left"/>
-    <include layout="@layout/detail_card_v8"
+    <include layout="@layout/detail_card_v5"
         android:id="@+id/image_right"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

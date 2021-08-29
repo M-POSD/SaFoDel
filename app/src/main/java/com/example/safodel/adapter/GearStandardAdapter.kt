@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.databinding.DetailCardStandardBinding
 import com.example.safodel.databinding.DetailCardV4Binding
 import com.example.safodel.model.GearStandard
 
@@ -14,8 +15,8 @@ class GearStandardAdapter(val context: Context, gearStandards: MutableList<GearS
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // binding the view of detail_card_v4
-        val binding: DetailCardV4Binding =
-            DetailCardV4Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: DetailCardStandardBinding =
+            DetailCardStandardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -29,7 +30,7 @@ class GearStandardAdapter(val context: Context, gearStandards: MutableList<GearS
         return gearStandards.size
     }
 
-    class ViewHolder(binding: DetailCardV4Binding) : RecyclerView.ViewHolder(binding.root) {
-        val binding: DetailCardV4Binding = binding
+    class ViewHolder(binding: DetailCardStandardBinding) : RecyclerView.ViewHolder(binding.root) {
+        val binding: DetailCardStandardBinding = binding
     }
 }

@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.databinding.FragmentTip2Binding
 import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.GroupCard1Data
 
 class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var tip1s: MutableList<Tip1>
+    private lateinit var tip2s: MutableList<GroupCard1Data>
     private lateinit var adapter: GroupCard1Adapter
 
     override fun onCreateView(
@@ -57,17 +58,16 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
     }
 
     // get tip2s from the model class
-    private fun getTip2s(): MutableList<Tip1> {
-        tip1s = Tip1.init()
+    private fun getTip2s(): MutableList<GroupCard1Data> {
+        tip2s = GroupCard1Data.init()
         var i = 0
-        while (i < tip1s.size) {
-            Log.d("getTip1s", tip1s[i].tip_id.toString())
-            when (tip1s[i].tip_id) {
-                2 -> i++
-                else -> tip1s.removeAt(i)
+        while (i < tip2s.size) {
+            when (tip2s[i].dataType) {
+                "tip2" -> i++
+                else -> tip2s.removeAt(i)
             }
         }
-        return tip1s
+        return tip2s
 
     }
 

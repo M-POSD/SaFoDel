@@ -2,6 +2,7 @@ package com.example.safodel.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.databinding.GroupCardV2Binding
@@ -29,11 +30,13 @@ class GroupCard2Adapter(val context: Context, group2Data: MutableList<GroupCard2
             viewHolder.binding.imageLeft.statistics.text = data.statistics
             viewHolder.binding.imageLeft.description.text = data.description
             viewHolder.binding.imageLeft.image.setImageResource(data.image)
+            viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
         } else {
             viewHolder.binding.imageRight.title.text = data.title
             viewHolder.binding.imageRight.statistics.text = data.statistics
             viewHolder.binding.imageRight.description.text = data.description
             viewHolder.binding.imageRight.image.setImageResource(data.image)
+            viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
         }
 
     }

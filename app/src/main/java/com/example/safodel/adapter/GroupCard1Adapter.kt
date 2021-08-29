@@ -31,21 +31,26 @@ class GroupCard1Adapter(val context: Context, group1Data: MutableList<GroupCard1
         if (data.cardType == 1) {
             viewHolder.binding.imageLeft.description.text = data.description
             viewHolder.binding.imageLeft.image.setImageResource(data.image)
+            viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
+            viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
+        } else if (data.cardType == 0) { // present text only
+            viewHolder.binding.pureText.description.text = data.description
+            viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
+            viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
+
         } else {
             viewHolder.binding.imageRight.description.text = data.description
             viewHolder.binding.imageRight.image.setImageResource(data.image)
-
-            // if card type == 0 or  card type == 3, set text to red => this is a fact
-            if (data.cardType == 0 || data.cardType == 3) {
+            viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
+            viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
+            // if card type == 3, set text to red => this is a fact
+            if (data.cardType == 3) {
                 viewHolder.binding.imageRight.description.setTextColor(
                     ContextCompat.getColor(
                         context,
                         R.color.red
                     )
                 )
-
-                // if card type == 0, set image invisible
-                if (data.cardType == 0) viewHolder.binding.imageRight.image.visibility = View.GONE
             }
         }
 
