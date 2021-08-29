@@ -61,8 +61,7 @@ class MainActivity : AppCompatActivity() {
      * If the user is in home, school and map pages, he/she needs to click twice
      */
     override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment
-                    && navController.currentDestination?.id != R.id.mapfragment)
+        if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment)
         ) {
             super.onBackPressed()
             return
@@ -79,9 +78,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
-            navController.popBackStack() // Previous fragment out of stack
             when (it.itemId) {
                 R.id.navHome -> {
+                    navController.popBackStack() // Previous fragment out of stack
                     navController.navigate(R.id.homeFragment)
                     true
                 }

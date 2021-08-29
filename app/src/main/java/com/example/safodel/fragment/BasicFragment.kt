@@ -64,7 +64,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      * Press the return navigation icon to go back to previous page
      */
-    fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
+    open fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
         setToolbarBasic(toolbar)
         toolbar.setNavigationIcon(R.drawable.arrow_left_circle)
         toolbar.setNavigationOnClickListener {

@@ -9,14 +9,17 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
@@ -108,8 +111,9 @@ private lateinit var mThread:Thread
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
     OnMapReadyCallback,PermissionsListener, AdapterView.OnItemSelectedListener {
 
-    // class toast value
+    // View
     private lateinit var toast: Toast
+    private lateinit var toolbar: Toolbar
 
     // Map
     private lateinit var mapboxMap: MapboxMap
@@ -213,7 +217,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         // init the view
         mainActivity = activity as MainActivity
-        val toolbar = binding.toolbar.root
+        toolbar = binding.toolbar.root
         mapView = binding.mapView
         mapView2 = binding.mapView2
         mapboxMap2 = mapView2.getMapboxMap()
@@ -367,6 +371,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
 
 
+
             /*--  Float button can hide the crash data relative view.   --*/
             binding.floatButtonNav.setOnClickListener {
                 changeToNav()
@@ -448,6 +453,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mainActivity.isBottomNavigationVisible(true)
         mThread.interrupt()
         mapView.onDestroy()
         MapboxNavigationProvider.destroy()
@@ -496,6 +502,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val siLayer = it.getLayer("icon_layer")
             if(bcLayer != null && scLayer != null && siLayer != null){
                 if(View.VISIBLE.equals(mapView.visibility)){
+                    setToolbarReturn(toolbar)
+                    mainActivity.isBottomNavigationVisible(false)
                     mapView2.visibility = View.VISIBLE
                     mapView.visibility = View.INVISIBLE
                     binding.recenter.visibility = View.VISIBLE
@@ -509,6 +517,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     siLayer.setProperties(visibility(Property.NONE))
                 }
             else {
+                setToolbarBasic(toolbar)
+                mainActivity.isBottomNavigationVisible(true)
                 mapView2.visibility = View.INVISIBLE
                 mapView.visibility = View.VISIBLE
                 binding.recenter.visibility = View.INVISIBLE
@@ -527,6 +537,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     @SuppressWarnings("MissingPermission")
     private fun initNav(){
+
 
         // initialize the location puck
         mapView2.location.apply {
@@ -653,6 +664,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         // move the camera to overview when new route is available
         navigationCamera.requestNavigationCameraToOverview()
     }
+
 }
 
 
@@ -700,22 +712,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+
 }
-
-
-
-
-
-
-
-/* --- Bottom navigation hide, when touch the map. --- */
-//        binding.mapView.setOnTouchListener { _, event ->
-//            when(event.action){
-//                MotionEvent.ACTION_DOWN -> mainActivity.isBottomNavigationVisible(false)
-//                MotionEvent.ACTION_UP -> mainActivity.isBottomNavigationVisible(true)
-//            }
-//            false
-//        }
 
 
 

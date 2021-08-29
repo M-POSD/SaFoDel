@@ -13,7 +13,8 @@
         android:id="@+id/mapfragment"
         android:name="com.example.safodel.fragment.menuB.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map"/>
+        tools:layout="@layout/fragment_map">
+    </fragment>
     <fragment
         android:id="@+id/examFragment"
         android:name="com.example.safodel.fragment.menuL.ExamFragment"
