@@ -1,6 +1,7 @@
 package com.example.safodel.ui.main
 
 import android.content.res.Resources
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +11,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2
@@ -136,10 +138,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-//val animationOptions = NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
-//    .setExitAnim(R.anim.slide_out_left)
-//    .setPopEnterAnim(R.anim.slide_in_left)
-//    .setPopExitAnim(R.anim.slide_out_right).build()
 
 //
 // val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()

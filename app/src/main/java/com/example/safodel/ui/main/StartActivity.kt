@@ -10,6 +10,8 @@ import com.example.safodel.databinding.ActivityStartBinding
 import me.jessyan.autosize.AutoSizeConfig
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
+import android.os.Build
+import android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import android.view.animation.*
 import com.example.safodel.R
 

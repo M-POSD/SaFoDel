@@ -30,7 +30,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@color/white"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="30dp"
             app:cardElevation="5dp">
 
             <LinearLayout
@@ -66,8 +66,22 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:textColor="@color/deep_gray"/>
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary_green"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/notosansjp_black"
+                    android:text="Start"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:cornerRadius="8dp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
