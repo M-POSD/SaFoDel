@@ -46,11 +46,17 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
     // made up the check list to display
     private fun configDefaultView() {
         binding.gear2.detailCardV3.checkbox1.checkbox.text = "Helmet"
+        binding.gear2.detailCardV3.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)
         binding.gear2.detailCardV3.checkbox2.checkbox.text = "Rear and Front lights"
+        binding.gear2.detailCardV3.checkbox2.checkboxImage.setImageResource(R.drawable.bicycle_with_light)
         binding.gear2.detailCardV3.checkbox3.checkbox.text = "Mask and face over"
+        binding.gear2.detailCardV3.checkbox3.checkboxImage.setImageResource(R.drawable.mask)
         binding.gear2.detailCardV3.checkbox4.checkbox.text = "Reflective vest"
+        binding.gear2.detailCardV3.checkbox4.checkboxImage.setImageResource(R.drawable.vest)
         binding.gear2.detailCardV3.checkbox5.checkbox.text = "Gloves"
+        binding.gear2.detailCardV3.checkbox5.checkboxImage.setImageResource(R.drawable.gloves)
         binding.gear2.detailCardV3.checkbox6.checkbox.text = "Hand Sanitizer"
+        binding.gear2.detailCardV3.checkbox6.checkboxImage.setImageResource(R.drawable.hand_sanitizer)
 
     }
 
