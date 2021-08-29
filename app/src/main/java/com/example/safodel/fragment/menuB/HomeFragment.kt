@@ -98,8 +98,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .before(objectAnimator4)
         animatorSet.duration = 1000
 
-        Log.d("headlight", binding.headlight.isVisible.toString())
-
         if (binding.headlight.isVisible) {
             objectAnimator4.addListener(
                 onEnd = {

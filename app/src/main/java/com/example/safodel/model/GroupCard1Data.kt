@@ -25,7 +25,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "tip2",
                     "Try to ride on well-lit roads and wear bright or light coloured clothing or a reflective vest.",
-                    R.drawable.book,
+                    R.drawable.tip2_1,
                     2
                 )
             )
@@ -33,7 +33,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "tip2",
                     "Always use front and rear lights.",
-                    R.drawable.book,
+                    R.drawable.tip2_2,
                     1
                 )
             )
@@ -41,7 +41,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "tip2",
                     "Keep backup lights or a portable charger.",
-                    R.drawable.book,
+                    R.drawable.tip2_3,
                     2
                 )
             )
@@ -49,7 +49,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "tip2",
                     "Avoid delivering in areas with poor lighting.",
-                    R.drawable.book,
+                    R.drawable.tip2_4,
                     1
                 )
             )
@@ -59,7 +59,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "ebikeinfo2",
                     "Make riding twice as easy as push bikes",
-                    R.drawable.book,
+                    R.drawable.info2_1,
                     2
                 )
             )
@@ -67,7 +67,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "ebikeinfo2",
                     "Particularly come in handy when riding up hills or over long distances",
-                    R.drawable.book,
+                    R.drawable.info2_2,
                     1
                 )
             )
@@ -75,7 +75,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "ebikeinfo2",
                     "Promote the idea of sustainability",
-                    R.drawable.book,
+                    R.drawable.info2_3,
                     2
                 )
             )
@@ -83,7 +83,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "ebikeinfo2",
                     "No need to break your bank because of the low rental cost",
-                    R.drawable.book,
+                    R.drawable.info2_4,
                     1
                 )
             )
@@ -93,7 +93,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "ebikeinfo3",
                     "Victorian government allows a maximum power of 250 watts",
-                    R.drawable.book,
+                    R.drawable.info3_1,
                     2
                 )
             )
@@ -101,7 +101,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "ebikeinfo3",
                     "A maximum speed of 25 Km/h is allowed if the rider is pedalling",
-                    R.drawable.book,
+                    R.drawable.info3_2,
                     1
                 )
             )
@@ -109,7 +109,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "ebikeinfo3",
                     "All other rules are the same as pedal bicycles",
-                    R.drawable.book,
+                    R.drawable.info3_3,
                     2
                 )
             )
@@ -119,7 +119,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "gear",
                     "Bicycle helmets reduce the chances of a serious head injury by almost 70%",
-                    R.drawable.helmet1_v2,
+                    R.drawable.gear1_1,
                     3
                 )
             )
@@ -127,24 +127,24 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "gear",
                     "Warm Gloves not only protect you from cold but also help you maintain safe grip at all times",
-                    R.drawable.helmet1_v2,
-                    2
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "gear",
-                    "With the lockdown restrictions on, food delivery companies require masks or face covers for every driver",
-                    R.drawable.helmet1_v2,
+                    R.drawable.gear1_2,
                     1
                 )
             )
             groupCard1Data.add(
                 GroupCard1Data(
                     "gear",
-                    "Always be prepared for bad weather and carry a rain jacket in your delivery bag.",
-                    R.drawable.helmet1_v2,
+                    "With the lockdown restrictions on, food delivery companies require masks or face covers for every driver",
+                    R.drawable.gear1_3,
                     2
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "gear",
+                    "Always be prepared for bad weather and carry a rain jacket in your delivery bag.",
+                    R.drawable.gear1_4,
+                    1
                 )
             )
 
