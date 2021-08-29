@@ -1,22 +1,20 @@
 package com.example.safodel.fragment.home.epic2
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.InfoAdapter
+import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentInfo2Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Info
 
 class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var infos: MutableList<Info>
-    private lateinit var adapter: InfoAdapter
+    private lateinit var info1s: MutableList<EBikeInfo1>
+    private lateinit var adapter: GroupCard2Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +41,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
     }
 
     private fun configRecycleView() {
-        adapter = InfoAdapter(requireActivity(), getInfo2s())
+        adapter = GroupCard2Adapter(requireActivity(), getInfo2s())
 
         binding.info2.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -58,16 +56,16 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
     }
 
     // get the info2s from the model class
-    private fun getInfo2s(): MutableList<Info> {
-        infos = Info.init()
+    private fun getInfo2s(): MutableList<EBikeInfo1> {
+        info1s = EBikeInfo1.init()
         var i = 0
-        while (i < infos.size) {
-            when (infos[i].info_name) {
+        while (i < info1s.size) {
+            when (info1s[i].info_name) {
                 "Advantage" -> i++
-                else -> infos.removeAt(i)
+                else -> info1s.removeAt(i)
             }
         }
-        return infos
+        return info1s
     }
 
 }

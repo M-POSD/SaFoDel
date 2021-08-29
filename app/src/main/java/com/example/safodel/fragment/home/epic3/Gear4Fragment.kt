@@ -7,16 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.Gear4Adapter
 import com.example.safodel.databinding.FragmentGear4Binding
 
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Gear
 
 class Gear4Fragment : BasicFragment<FragmentGear4Binding>(FragmentGear4Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var gears: MutableList<Gear>
-    private lateinit var adapter: Gear4Adapter
+    private lateinit var adapter: TestAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +39,7 @@ class Gear4Fragment : BasicFragment<FragmentGear4Binding>(FragmentGear4Binding::
     }
 
     private fun configRecycleView() {
-        adapter = Gear4Adapter(requireActivity(), getGear4s())
+        adapter = TestAdapter(requireActivity(), getGear4s())
 
         binding.gear4.recyclerView.addItemDecoration(
             DividerItemDecoration(

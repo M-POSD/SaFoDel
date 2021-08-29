@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.TipAdapter
+import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.databinding.FragmentTip1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Tip
 
 class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var tips: MutableList<Tip>
-    private lateinit var adapter: TipAdapter
+    private lateinit var tip1s: MutableList<Tip1>
+    private lateinit var adapter: GroupCard1Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +41,7 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     }
 
     private fun configRecycleView() {
-        adapter = TipAdapter(requireActivity(), getTip1s())
+        adapter = GroupCard1Adapter(requireActivity(), getTip1s())
 
         binding.tip1.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -57,17 +56,17 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     }
 
     // get tip1s from the model class
-    private fun getTip1s(): MutableList<Tip> {
-        tips = Tip.init()
+    private fun getTip1s(): MutableList<Tip1> {
+        tip1s = Tip1.init()
         var i = 0
-        while (i < tips.size) {
-            Log.d("getTip1s", tips[i].tip_id.toString())
-            when (tips[i].tip_id) {
+        while (i < tip1s.size) {
+            Log.d("getTip1s", tip1s[i].tip_id.toString())
+            when (tip1s[i].tip_id) {
                 1 -> i++
-                else -> tips.removeAt(i)
+                else -> tip1s.removeAt(i)
             }
         }
-        return tips
+        return tip1s
     }
 
 }

@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.databinding.DetailCardV4Binding
 import com.example.safodel.model.GearStandard
 
-class Gear3Adapter(val contxt: Context, gearStandards: MutableList<GearStandard>) :
-    RecyclerView.Adapter<Gear3Adapter.ViewHolder>() {
+class GearStandardAdapter(val context: Context, gearStandards: MutableList<GearStandard>) :
+    RecyclerView.Adapter<GearStandardAdapter.ViewHolder>() {
     private var gearStandards: MutableList<GearStandard> = gearStandards
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

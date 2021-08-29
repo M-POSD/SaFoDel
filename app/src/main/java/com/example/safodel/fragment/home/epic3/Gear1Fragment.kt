@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.GearAdapter
 import com.example.safodel.databinding.FragmentGear1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Gear
 
 class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
@@ -55,7 +53,7 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         binding.gear1.recyclerView.layoutManager = layoutManager
     }
 
-    // get the gear1s from the model class
+    // get the gears from the model class
     private fun getGear1s(): MutableList<Gear> {
         gears = Gear.init()
         var i = 0
