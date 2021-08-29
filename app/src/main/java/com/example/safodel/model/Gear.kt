@@ -2,13 +2,18 @@ package com.example.safodel.model
 
 import com.example.safodel.R
 
-class Gear (var info_type: String, var image: Int, var title: String, var description: String, var statistics: String) {
+class Gear (var info_type: String, var image: Int,  var description: String) {
     companion object {
         fun init(): MutableList<Gear> {
             var gears: MutableList<Gear> = ArrayList()
-            gears.add(Gear("Gear",R.drawable.helmet1_v2, "Wear the right helmet",
-            "Ensure it meets standards, there should be a certified sticker inside the helmet",
-            ""))
+            gears.add(Gear("Gear",R.drawable.helmet1_v2,
+            "Ensure it meets standards, there should be a certified sticker inside the helmet"))
+            gears.add(Gear("Gear",R.drawable.helmet1_v2,
+                "Ensure it meets standards, there should be a certified sticker inside the helmet"))
+            gears.add(Gear("Gear",R.drawable.helmet1_v2,
+                "Ensure it meets standards, there should be a certified sticker inside the helmet"))
+            gears.add(Gear("Gear",R.drawable.helmet1_v2,
+                "Ensure it meets standards, there should be a certified sticker inside the helmet"))
 
 
             return gears

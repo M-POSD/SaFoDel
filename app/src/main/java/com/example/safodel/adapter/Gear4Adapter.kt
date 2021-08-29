@@ -24,10 +24,8 @@ class Gear4Adapter(val contxt: Context, gears: MutableList<Gear>) :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val info: Gear = gear[position]
         viewHolder.binding.image.setImageResource(info.image)
-        viewHolder.binding.title.text = info.title
         viewHolder.binding.subtitle.text =
             HtmlCompat.fromHtml(info.description, HtmlCompat.FROM_HTML_MODE_LEGACY)
-        viewHolder.binding.statistics.text = info.statistics
     }
 
     override fun getItemCount(): Int {
