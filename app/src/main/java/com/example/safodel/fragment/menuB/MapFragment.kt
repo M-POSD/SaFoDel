@@ -269,6 +269,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         // go to the user's current location
         binding.floatButton.setOnClickListener {
             mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
+            if(this::navigationCamera.isInitialized)
+                navigationCamera.requestNavigationCameraToOverview()
         }
 
         // initialize Mapbox Navigation
