@@ -33,8 +33,6 @@
             mapbox:mapbox_cameraZoom="5.526846">
         </com.mapbox.mapboxsdk.maps.MapView>
 
-
-
         <include
             layout="@layout/simple_toolbar"
             android:id="@+id/toolbar" />
