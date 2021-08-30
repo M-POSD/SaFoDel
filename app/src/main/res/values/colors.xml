@@ -25,6 +25,7 @@
     <color name="secondary_green">#24AC31</color>
     <color name="third_green">#8AD0AB</color>
     <color name="red">#ff0000</color>
-
+    <color name="dark">#363A43</color>
+    <color name="gray2">#7A8089</color>
 
 </resources>

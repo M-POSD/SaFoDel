@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/default_option_border_bg.xml" value="0.28703703703703703" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new.xml" value="0.1868421052631579" />
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.10462962962962963" />
@@ -15,7 +16,9 @@
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/drawable/mapbox_ic_end_navigation.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/drawable/mapbox_ic_start_navigation.xml" value="0.17291666666666666" />
+        <entry key="app/src/main/res/drawable/selected_option_border_bg.xml" value="0.28703703703703703" />
         <entry key="app/src/main/res/drawable/tab_color_selector.xml" value="0.270995670995671" />
+        <entry key="app/src/main/res/font/notosansjp.xml" value="0.28703703703703703" />
         <entry key="app/src/main/res/layout-v28/fragment_home.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.15070921985815602" />
@@ -31,6 +34,7 @@
         <entry key="app/src/main/res/layout/detail_card_v8.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/detail_page_layout.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/detail_page_layout2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/detail_page_layout3.xml" value="0.2296875" />
         <entry key="app/src/main/res/layout/epic_page_layout.xml" value="0.29393115942028986" />
         <entry key="app/src/main/res/layout/epic_page_layout_v0.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/extreme_small.xml" value="0.15070921985815602" />
@@ -41,7 +45,7 @@
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_epics.xml" value="0.15789473684210525" />
-        <entry key="app/src/main/res/layout/fragment_exam.xml" value="0.3963291155124393" />
+        <entry key="app/src/main/res/layout/fragment_exam.xml" value="0.24697035051982488" />
         <entry key="app/src/main/res/layout/fragment_exam1.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />

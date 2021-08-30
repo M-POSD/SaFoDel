@@ -17,7 +17,7 @@
         android:backgroundTint="@color/primary_green"
         android:elevation="5dp"
         android:fontFamily="@font/notosansjp_bold"
-        android:text="Start"
+        android:text="START"
         android:textAppearance="?attr/textAppearanceHeadline6"
         android:textColor="@color/white"
         android:textSize="20dp"
