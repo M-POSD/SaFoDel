@@ -1,7 +1,5 @@
 package com.example.safodel.fragment.menuL.exam
 
-import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -13,9 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentExam1Binding
-import com.example.safodel.databinding.FragmentExamBinding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.GroupCard2Data
 import com.example.safodel.model.Question
 
 
@@ -117,3 +113,8 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
 
     }
 }
+
+/*
+    Referred from:
+    https://www.youtube.com/watch?v=b21fiIyOW4A&t=203s&ab_channel=tutorialsEU
+ */
