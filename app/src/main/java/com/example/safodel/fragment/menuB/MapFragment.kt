@@ -75,6 +75,7 @@ import com.mapbox.maps.plugin.animation.camera
 import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
 import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.navigation.base.TimeFormat
 import com.mapbox.navigation.base.extensions.applyDefaultNavigationOptions
 import com.mapbox.navigation.base.extensions.applyLanguageAndVoiceUnitOptions
 import com.mapbox.navigation.base.formatter.DistanceFormatterOptions
@@ -101,6 +102,8 @@ import com.mapbox.navigation.ui.maps.route.arrow.model.RouteArrowOptions
 import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineApi
 import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineView
 import com.mapbox.navigation.ui.maps.route.line.model.*
+import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
+import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
@@ -138,6 +141,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     /* ----- Mapbox Navigation components ----- */
     private lateinit var mapboxNavigation: MapboxNavigation
     private lateinit var maneuverApi: MapboxManeuverApi
+    private lateinit var tripProgressApi: MapboxTripProgressApi
 
     // location puck integration
     private val navigationLocationProvider = NavigationLocationProvider()
@@ -202,6 +206,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.maneuverView.visibility = View.VISIBLE
                     binding.maneuverView.renderManeuvers(maneuvers)
                 }
+            )
+
+            binding.tripProgressView.render(
+                tripProgressApi.getTripProgress(routeProgress)
             )
         }
     }
@@ -272,21 +280,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         spinner.onItemSelectedListener = this
 
         // change the float button height
-        val FBHeight = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
-        FBHeight.bottomMargin = mainActivity.bottomNavHeight() + 20
-        binding.floatButton.layoutParams = FBHeight
-
-        // change the float button Nav height
-        val FBHeightNav = binding.floatButtonNav.layoutParams as CoordinatorLayout.LayoutParams
-        FBHeightNav.bottomMargin = FBHeight.bottomMargin * 2
-        binding.floatButtonNav.layoutParams = FBHeightNav
-
-        // change the float button Stop height
-        val FBHeightStop = binding.floatButtonStop.layoutParams as CoordinatorLayout.LayoutParams
-        FBHeightStop.bottomMargin = FBHeightNav.bottomMargin * 2
-        binding.floatButtonStop.layoutParams = FBHeightStop
-
-
+        changeFloatButtonHeight()
         // basic location and position
         mThread = fetchdata()
         mThread.start()
@@ -555,26 +549,27 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.textTop.visibility = View.INVISIBLE
                     binding.spinner.visibility = View.INVISIBLE
                     binding.updateMap.visibility = View.INVISIBLE
-
                     bcLayer.setProperties(visibility(Property.NONE))
                     scLayer.setProperties(visibility(Property.NONE))
                     siLayer.setProperties(visibility(Property.NONE))
+
                 }
             else {
-                setToolbarBasic(toolbar)
-                mainActivity.isBottomNavigationVisible(true)
-                mapView2.visibility = View.INVISIBLE
-                binding.floatButtonStop.visibility = View.INVISIBLE
-                mapView.visibility = View.VISIBLE
-                binding.recenter.visibility = View.INVISIBLE
-                mapView.getMapAsync(this)
-                binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
-                binding.textTop.visibility = View.VISIBLE
-                binding.spinner.visibility = View.VISIBLE
-                binding.updateMap.visibility = View.VISIBLE
-                bcLayer.setProperties(visibility(Property.VISIBLE))
-                scLayer.setProperties(visibility(Property.VISIBLE))
-                siLayer.setProperties(visibility(Property.VISIBLE))
+                    setToolbarBasic(toolbar)
+                    mainActivity.isBottomNavigationVisible(true)
+                    mapView2.visibility = View.INVISIBLE
+                    binding.floatButtonStop.visibility = View.INVISIBLE
+                    mapView.visibility = View.VISIBLE
+                    binding.recenter.visibility = View.INVISIBLE
+                    mapView.getMapAsync(this)
+                    binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
+                    binding.textTop.visibility = View.VISIBLE
+                    binding.spinner.visibility = View.VISIBLE
+                    binding.updateMap.visibility = View.VISIBLE
+                    bcLayer.setProperties(visibility(Property.VISIBLE))
+                    scLayer.setProperties(visibility(Property.VISIBLE))
+                    siLayer.setProperties(visibility(Property.VISIBLE))
+
             }
             }
         }
@@ -582,10 +577,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     @SuppressWarnings("MissingPermission")
     private fun initNav(){
-
-
-
-
         // initialize the location puck
         mapView2.location.apply {
             this.locationPuck = LocationPuck2D(
@@ -651,6 +642,22 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         // initialize top maneuver view
         maneuverApi = MapboxManeuverApi(
             MapboxDistanceFormatter(DistanceFormatterOptions.Builder(mainActivity).build())
+        )
+
+        // initialize bottom progress view
+        tripProgressApi = MapboxTripProgressApi(
+            TripProgressUpdateFormatter.Builder(mainActivity)
+                .distanceRemainingFormatter(
+                    DistanceRemainingFormatter(
+                        mapboxNavigation.navigationOptions.distanceFormatterOptions
+                    )
+                )
+                .timeRemainingFormatter(TimeRemainingFormatter(mainActivity))
+                .percentRouteTraveledFormatter(PercentDistanceTraveledFormatter())
+                .estimatedTimeToArrivalFormatter(
+                    EstimatedTimeToArrivalFormatter(mainActivity, TimeFormat.NONE_SPECIFIED)
+                )
+                .build()
         )
 
 
@@ -724,15 +731,40 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         // move the camera to overview when new route is available
         navigationCamera.requestNavigationCameraToOverview()
+        binding.tripProgressCard.visibility = View.VISIBLE
+        changeFloatButtonHeight()
     }
 
     private fun clearRouteAndStopNavigation() {
         // clear
         mapboxNavigation.setRoutes(listOf())
         binding.maneuverView.visibility = View.INVISIBLE
+        binding.tripProgressCard.visibility = View.INVISIBLE
+        changeFloatButtonHeight()
 
         // camera overview
         navigationCamera.requestNavigationCameraToOverview()
+
+    }
+
+    private fun changeFloatButtonHeight(){
+        // change the float button height
+        val FBHeight = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
+        if(binding.tripProgressCard.visibility.equals(View.VISIBLE))
+            FBHeight.bottomMargin = binding.tripProgressCard.height + 20
+        else
+            FBHeight.bottomMargin = mainActivity.bottomNavHeight() + 20
+        binding.floatButton.layoutParams = FBHeight
+
+        // change the float button Nav height
+        val FBHeightNav = binding.floatButtonNav.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeightNav.bottomMargin = FBHeight.bottomMargin * 2
+        binding.floatButtonNav.layoutParams = FBHeightNav
+
+        // change the float button Stop height
+        val FBHeightStop = binding.floatButtonStop.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeightStop.bottomMargin = FBHeight.bottomMargin * 3
+        binding.floatButtonStop.layoutParams = FBHeightStop
     }
 
 }
