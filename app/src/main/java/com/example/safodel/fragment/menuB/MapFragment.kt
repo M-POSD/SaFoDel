@@ -685,6 +685,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private fun clearRouteAndStopNavigation() {
         // clear
         mapboxNavigation.setRoutes(listOf())
+
+        // camera overview
+        navigationCamera.requestNavigationCameraToOverview()
     }
 
 }
