@@ -158,12 +158,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     /* ----- Location and route progress callbacks ----- */
     private val locationObserver = object : LocationObserver {
-
         // use this after location get the new point
         override fun onRawLocationChanged(rawLocation: Location) {
             // not handled
         }
-
         // when map(location's route) match the road
         override fun onEnhancedLocationChanged(
             enhancedLocation: Location,
@@ -293,8 +291,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         // go to the user's current location
         binding.floatButton.setOnClickListener {
             mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
-            if(this::navigationCamera.isInitialized)
+            if(this::navigationCamera.isInitialized){
                 navigationCamera.requestNavigationCameraToOverview()
+                updateNavCamera()
+            }
+
         }
 
         // initialize Mapbox Navigation
@@ -471,14 +472,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mThread.interrupt()
         mapView.onStop()
         mapView2.onStop()
-        mapboxNavigation.unregisterRoutesObserver(routesObserver)
-        mapboxNavigation.unregisterRouteProgressObserver(routeProgressObserver)
-        mapboxNavigation.unregisterLocationObserver(locationObserver)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
+
     }
 
     override fun onLowMemory() {
@@ -489,12 +488,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mainActivity.isBottomNavigationVisible(true)
         mThread.interrupt()
         mapView.onDestroy()
-        MapboxNavigationProvider.destroy()
         mapView2.onDestroy()
         mapboxNavigation.onDestroy()
+        if (::mapboxNavigation.isInitialized){
+            mapboxNavigation.unregisterRoutesObserver(routesObserver)
+            mapboxNavigation.unregisterLocationObserver(locationObserver)
+            mapboxNavigation.unregisterRouteProgressObserver(routeProgressObserver)
+        }
+        MapboxNavigationProvider.destroy()
+        mainActivity.isBottomNavigationVisible(true)
         _binding = null
     }
 
@@ -590,23 +594,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
         // move the camera to current location on the first update
-        mapboxNavigation.registerLocationObserver(object : LocationObserver {
-            override fun onRawLocationChanged(rawLocation: Location) {
-                val point = Point.fromLngLat(rawLocation.longitude, rawLocation.latitude)
-                val cameraOptions = CameraOptions.Builder()
-                    .center(point)
-                    .zoom(13.0)
-                    .build()
-                mapboxMap2.setCamera(cameraOptions)
-                mapboxNavigation.unregisterLocationObserver(this)
-            }
-            override fun onEnhancedLocationChanged(
-                enhancedLocation: Location,
-                keyPoints: List<Location>
-            ) {
-                // not handled
-            }
-        })
+        updateNavCamera()
 
         viewportDataSource = MapboxNavigationViewportDataSource(
             mapView2.getMapboxMap()
@@ -627,9 +615,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     // shows/hide the recenter button depending on the camera state
                     when (navigationCameraState) {
                         NavigationCameraState.TRANSITION_TO_FOLLOWING,
-                        NavigationCameraState.FOLLOWING -> binding.recenter.visibility =
-                            View.INVISIBLE
-
+                        NavigationCameraState.FOLLOWING -> binding.recenter.visibility = View.INVISIBLE
                         NavigationCameraState.TRANSITION_TO_OVERVIEW,
                         NavigationCameraState.OVERVIEW,
                         NavigationCameraState.IDLE -> binding.recenter.visibility =
@@ -694,6 +680,28 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
         mapboxNavigation.startTripSession()
     }
+
+    private fun updateNavCamera(){
+
+        mapboxNavigation.registerLocationObserver(object : LocationObserver {
+            override fun onRawLocationChanged(rawLocation: Location) {
+                val point = Point.fromLngLat(rawLocation.longitude, rawLocation.latitude)
+                val cameraOptions = CameraOptions.Builder()
+                    .center(point)
+                    .zoom(13.0)
+                    .build()
+                mapboxMap2.setCamera(cameraOptions)
+                mapboxNavigation.unregisterLocationObserver(this)
+            }
+            override fun onEnhancedLocationChanged(
+                enhancedLocation: Location,
+                keyPoints: List<Location>
+            ) {
+                // not handled
+            }
+        })
+    }
+
 
     private fun findRoute(destination: Point) {
         val origin = navigationLocationProvider.lastLocation?.let {
