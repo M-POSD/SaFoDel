@@ -140,9 +140,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun imagesDrivingAnimation() {
         var objectAnimator1: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.images, "translationX", 0f, 2 * (view?.width ?: 1500) / 3.toFloat())
+            ObjectAnimator.ofFloat(binding.images, "translationX", 0f, 4 * (view?.width ?: 1500) / 5.toFloat())
         var objectAnimator2: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.images, "translationX", -2 * (view?.width ?: 1500) / 3.toFloat(), 0f)
+            ObjectAnimator.ofFloat(binding.images, "translationX", -4 * (view?.width ?: 1500) / 5.toFloat(), 0f)
         objectAnimator1.duration = 1500
         objectAnimator2.duration = 1500
         val animatorSet = AnimatorSet()
