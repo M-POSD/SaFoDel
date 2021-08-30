@@ -170,7 +170,7 @@
     <ImageView
         android:id="@+id/light_mode"
         android:layout_gravity="right"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
     <ImageView
         android:id="@+id/dark_mode"
         android:layout_gravity="right"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
