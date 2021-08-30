@@ -56,8 +56,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             override fun getOutline(view: View?, outline: Outline?) {
                 val path = Path()
                 path.moveTo(view!!.width.toFloat(), view.height.toFloat())
-                path.lineTo(view.width / 4.toFloat(), view.height /2.toFloat())
-                path.lineTo(view.width / 4.toFloat(), 0.toFloat())
+                path.lineTo(2 * view.width / 3.toFloat(), 2 * view.height /3.toFloat())
+                path.lineTo(2 * view.width / 3.toFloat(), 0.toFloat())
                 path.lineTo(0 .toFloat(), 0.toFloat())
                 path.lineTo(0 .toFloat(), view.height /2.toFloat())
                 path.close()
