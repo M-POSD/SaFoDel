@@ -77,21 +77,27 @@ import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.navigation.base.extensions.applyDefaultNavigationOptions
 import com.mapbox.navigation.base.extensions.applyLanguageAndVoiceUnitOptions
+import com.mapbox.navigation.base.formatter.DistanceFormatterOptions
 import com.mapbox.navigation.base.options.NavigationOptions
 import com.mapbox.navigation.base.route.RouterCallback
 import com.mapbox.navigation.base.route.RouterFailure
 import com.mapbox.navigation.base.route.RouterOrigin
 import com.mapbox.navigation.base.trip.model.RouteProgress
 import com.mapbox.navigation.core.directions.session.RoutesObserver
+import com.mapbox.navigation.core.formatter.MapboxDistanceFormatter
 import com.mapbox.navigation.core.trip.session.LocationObserver
 import com.mapbox.navigation.core.trip.session.RouteProgressObserver
 import com.mapbox.navigation.ui.base.util.MapboxNavigationConsumer
+import com.mapbox.navigation.ui.maneuver.api.MapboxManeuverApi
 import com.mapbox.navigation.ui.maps.camera.NavigationCamera
 import com.mapbox.navigation.ui.maps.camera.data.MapboxNavigationViewportDataSource
 import com.mapbox.navigation.ui.maps.camera.lifecycle.NavigationBasicGesturesHandler
 import com.mapbox.navigation.ui.maps.camera.state.NavigationCameraState
 import com.mapbox.navigation.ui.maps.camera.state.NavigationCameraStateChangedObserver
 import com.mapbox.navigation.ui.maps.location.NavigationLocationProvider
+import com.mapbox.navigation.ui.maps.route.arrow.api.MapboxRouteArrowApi
+import com.mapbox.navigation.ui.maps.route.arrow.api.MapboxRouteArrowView
+import com.mapbox.navigation.ui.maps.route.arrow.model.RouteArrowOptions
 import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineApi
 import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineView
 import com.mapbox.navigation.ui.maps.route.line.model.*
@@ -126,9 +132,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
     private lateinit var routeLineView: MapboxRouteLineView
+    private lateinit var routeArrowView: MapboxRouteArrowView
+    private val routeArrowAPI: MapboxRouteArrowApi = MapboxRouteArrowApi()
 
     /* ----- Mapbox Navigation components ----- */
     private lateinit var mapboxNavigation: MapboxNavigation
+    private lateinit var maneuverApi: MapboxManeuverApi
 
     // location puck integration
     private val navigationLocationProvider = NavigationLocationProvider()
@@ -173,6 +182,27 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             // update the camera position to account for the progressed fragment of the route
             viewportDataSource.onRouteProgressChanged(routeProgress)
             viewportDataSource.evaluate()
+
+            // show arrow on the route line with the next maneuver
+            val maneuverArrowResult = routeArrowAPI.addUpcomingManeuverArrow(routeProgress)
+            val style = mapboxMap2.getStyle()
+            if (style != null) {
+                routeArrowView.renderManeuverUpdate(style, maneuverArrowResult)
+            }
+            val maneuvers = maneuverApi.getManeuvers(routeProgress)
+            maneuvers.fold(
+                { error ->
+                    Toast.makeText(
+                        mainActivity,
+                        error.errorMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                {
+                    binding.maneuverView.visibility = View.VISIBLE
+                    binding.maneuverView.renderManeuvers(maneuvers)
+                }
+            )
         }
     }
 
@@ -554,6 +584,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private fun initNav(){
 
 
+
+
         // initialize the location puck
         mapView2.location.apply {
             this.locationPuck = LocationPuck2D(
@@ -615,11 +647,21 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 }
             }
         )
+
+        // initialize top maneuver view
+        maneuverApi = MapboxManeuverApi(
+            MapboxDistanceFormatter(DistanceFormatterOptions.Builder(mainActivity).build())
+        )
+
+
+
         val mapboxRouteLineOptions = MapboxRouteLineOptions.Builder(mainActivity)
             .withRouteLineBelowLayerId("road-label")
             .build()
         routeLineAPI = MapboxRouteLineApi(mapboxRouteLineOptions)
         routeLineView = MapboxRouteLineView(mapboxRouteLineOptions)
+        val routeArrowOptions = RouteArrowOptions.Builder(mainActivity).build()
+        routeArrowView = MapboxRouteArrowView(routeArrowOptions)
 
         mapboxMap2.loadStyleUri(
             Style2.TRAFFIC_DAY,
@@ -687,6 +729,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private fun clearRouteAndStopNavigation() {
         // clear
         mapboxNavigation.setRoutes(listOf())
+        binding.maneuverView.visibility = View.INVISIBLE
 
         // camera overview
         navigationCamera.requestNavigationCameraToOverview()

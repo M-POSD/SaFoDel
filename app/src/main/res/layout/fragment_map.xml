@@ -73,12 +73,15 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/blue_outline"
             android:text="Update" />
-
-
-
     </LinearLayout>
 
 
+    <com.mapbox.navigation.ui.maneuver.view.MapboxManeuverView
+        android:id="@+id/maneuverView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:visibility="invisible"/>
 
     <ProgressBar
         android:id="@+id/route_retrieval_progress_spinner"
