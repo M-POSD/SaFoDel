@@ -449,7 +449,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onStart() {
         super.onStart()
         mapView.onStart()
-        mapView2.onStart()
         mapboxNavigation.registerRoutesObserver(routesObserver)
         mapboxNavigation.registerRouteProgressObserver(routeProgressObserver)
         mapboxNavigation.registerLocationObserver(locationObserver)
@@ -471,7 +470,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         super.onStop()
         mThread.interrupt()
         mapView.onStop()
-        mapView2.onStop()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -483,14 +481,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
-        mapView2.onLowMemory()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         mThread.interrupt()
         mapView.onDestroy()
-        mapView2.onDestroy()
         mapboxNavigation.onDestroy()
         if (::mapboxNavigation.isInitialized){
             mapboxNavigation.unregisterRoutesObserver(routesObserver)
@@ -613,14 +609,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     navigationCameraState: NavigationCameraState
                 ) {
                     // shows/hide the recenter button depending on the camera state
-                    when (navigationCameraState) {
-                        NavigationCameraState.TRANSITION_TO_FOLLOWING,
-                        NavigationCameraState.FOLLOWING -> binding.recenter.visibility = View.INVISIBLE
-                        NavigationCameraState.TRANSITION_TO_OVERVIEW,
-                        NavigationCameraState.OVERVIEW,
-                        NavigationCameraState.IDLE -> binding.recenter.visibility =
-                            View.VISIBLE
-                    }
+                        when (navigationCameraState) {
+                            NavigationCameraState.TRANSITION_TO_FOLLOWING,
+                            NavigationCameraState.FOLLOWING -> binding.recenter.visibility = View.INVISIBLE
+                            NavigationCameraState.TRANSITION_TO_OVERVIEW,
+                            NavigationCameraState.OVERVIEW,
+                            NavigationCameraState.IDLE -> binding.recenter.visibility =
+                                View.VISIBLE
+                        }
                 }
             }
         )
@@ -749,9 +745,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.maneuverView.visibility = View.INVISIBLE
         binding.tripProgressCard.visibility = View.INVISIBLE
         changeFloatButtonHeight()
-
-        // camera overview
-        navigationCamera.requestNavigationCameraToOverview()
 
     }
 
