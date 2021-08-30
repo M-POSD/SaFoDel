@@ -160,5 +160,10 @@
         android:name="com.example.safodel.fragment.menuL.AnalysisFragment"
         android:label="fragment_analysis"
         tools:layout="@layout/fragment_analysis" />
+    <fragment
+        android:id="@+id/exam1Fragment"
+        android:name="com.example.safodel.fragment.menuL.exam.Exam1Fragment"
+        android:label="fragment_exam1"
+        tools:layout="@layout/fragment_exam1" />
 
 </navigation>

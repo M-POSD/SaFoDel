@@ -65,13 +65,14 @@
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Name"
                         android:textColor="@color/deep_gray"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button"
+                    android:id="@+id/startBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/primary_green"
