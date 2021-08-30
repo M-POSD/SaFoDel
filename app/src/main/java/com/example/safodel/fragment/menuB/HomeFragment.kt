@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Outline
+import android.graphics.Path
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -48,6 +50,19 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.epicCard34.cardLeft.setOnClickListener() {
             recordPosition(2)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+        }
+
+        binding.backpack.outlineProvider = object : ViewOutlineProvider(){
+            override fun getOutline(view: View?, outline: Outline?) {
+                val path = Path()
+                path.moveTo(view!!.width.toFloat(), view.height.toFloat())
+                path.lineTo(view.width / 4.toFloat(), view.height /2.toFloat())
+                path.lineTo(view.width / 4.toFloat(), 0.toFloat())
+                path.lineTo(0 .toFloat(), 0.toFloat())
+                path.lineTo(0 .toFloat(), view.height /2.toFloat())
+                path.close()
+                outline!!.setConvexPath(path)
+            }
         }
 
         configModeTheme()
@@ -155,7 +170,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.lightMode.setOnClickListener {
             binding.lightMode.visibility = View.INVISIBLE
             binding.darkMode.visibility = View.VISIBLE
-            binding.coordinatorLayout.setBackgroundResource(R.color.gray)
+            binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
             binding.headlight.visibility = View.VISIBLE
             binding.backpack.alpha = 0f
             binding.helmet.alpha = 0f
