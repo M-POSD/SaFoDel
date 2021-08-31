@@ -85,6 +85,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         imageAnimations()
 
         return binding.root
+
     }
 
     private fun helmetAnimation() {
