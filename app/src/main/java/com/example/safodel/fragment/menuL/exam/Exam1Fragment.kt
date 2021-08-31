@@ -21,7 +21,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     private lateinit var mQuestions: MutableList<Question>
     private var mCurrentPosition: Int = 1
     private var mSelectedOptionPosition: Int = 0
-    private var toast= Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
+    private lateinit var toast: Toast
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,20 +29,14 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentExam1Binding.inflate(inflater, container, false)
+        toast = Toast.makeText(activity,null,Toast.LENGTH_SHORT)
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
 
         mQuestions = Question.init()
 
-        setQuestions()
-
-        if (mCurrentPosition == mQuestions!!.size){
-            binding.submitButton.text = "FINISH"
-        }else {
-            binding.submitButton.text = "SUBMIT"
-        }
-
         configOnClickListener()
+        setQuestions()
 
         return binding.root
     }
@@ -57,6 +51,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     }
 
     private fun setQuestions() {
+
+        binding.submitButton.text = "SUBMIT"
+
         val question = mQuestions!![mCurrentPosition - 1]
 
         configDefaultOptionsView()
@@ -106,18 +103,22 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
             R.id.option4 -> selectedOptionView(binding.option4,4)
             R.id.submitButton -> {
                 if (mSelectedOptionPosition == 0) {
-                    mCurrentPosition++
-                    Log.d("mCurrentPosition: ", mCurrentPosition.toString())
+                    if (binding.submitButton.text == "SUBMIT") {
+                        toast.setText("Please select an option")
+                        toast.show()
+                    } else {
+                        mCurrentPosition++
 
-                    when{
-                        mCurrentPosition <= mQuestions!!.size -> {
-                            setQuestions()
-                        }
-                        else -> {
-                            toast.setText("You have successfully completed the Quiz!")
-                            toast.show()
-                        }
+                        when{
+                            mCurrentPosition <= mQuestions!!.size -> {
+                                setQuestions()
+                            }
+                            else -> {
+                                toast.setText("You have successfully completed the Quiz")
+                                toast.show()
+                            }
 
+                        }
                     }
                 }else {
                     val question = mQuestions?.get(mCurrentPosition - 1)
@@ -125,15 +126,15 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                         Log.d("checkAnswer: ", "I am the wrong answer")
                     }
-                    answerView(mSelectedOptionPosition, R.drawable.correct_option_border_bg)
-
+                    answerView(question!!.answer, R.drawable.correct_option_border_bg)
+                    Log.d("mSelectedOptionPosition: ", mSelectedOptionPosition.toString())
                     if (mCurrentPosition == mQuestions!!.size){
                         binding.submitButton.text = "FINISH"
                     }else {
                         binding.submitButton.text = "GO TO NEXT QUESTION"
                     }
                     mSelectedOptionPosition = 0
-                    Log.d("mSelectedOptionPosition: ", mSelectedOptionPosition.toString())
+
                 }
             }
         }

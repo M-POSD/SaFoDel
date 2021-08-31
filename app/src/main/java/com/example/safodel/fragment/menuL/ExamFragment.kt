@@ -14,13 +14,14 @@ import com.example.safodel.fragment.BasicFragment
 
 
 class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inflate) {
-    private var toast= Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
+    private lateinit var toast: Toast
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentExamBinding.inflate(inflater, container, false)
+        toast = Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
         val toolbar = binding.toolbar.root
         setToolbarWhite(toolbar)
 
@@ -28,6 +29,7 @@ class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inf
             var userName = binding.editText.text.toString()
             Log.d("userName", userName)
             if (userName.isEmpty()) {
+
                 toast.setText("Please enter your name")
                 toast.show()
             } else {
