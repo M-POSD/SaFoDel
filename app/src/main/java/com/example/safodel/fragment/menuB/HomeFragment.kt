@@ -24,6 +24,7 @@ import androidx.core.view.isVisible
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private lateinit var toast: Toast
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,9 +33,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
-
-        val toolbar = binding.toolbar.root
-        setToolbarBasic(toolbar)
+        toolbar = binding.toolbar.root
 
         binding.epicCard12.editTextLeft.text = "Ride Safer"
         binding.epicCard12.editTextRight.text = "E-Bike Delivery"
@@ -85,8 +84,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         }
 
-        configModeTheme()
+
+        setToolbarBasic(toolbar)
         imageAnimations()
+        configModeTheme()
+
 
         return binding.root
 
@@ -177,7 +179,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             binding.helmet.alpha = 0f
             binding.headlight.alpha = 0f
             imageAnimations()
-            val toolbar = binding.toolbar.root
             setToolbarWhite(toolbar)
         }
 
@@ -191,10 +192,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             binding.helmet.alpha = 0f
             binding.headlight.alpha = 0f
             imageAnimations()
-            val toolbar = binding.toolbar.root
             setToolbarBasic(toolbar)
         }
     }
+
+    private fun configAnimationView() {
+
+    }
+
 }
 
 /*
