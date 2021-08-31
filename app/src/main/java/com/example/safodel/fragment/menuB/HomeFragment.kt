@@ -139,8 +139,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 })
         }
 
-
         animatorSet.start()
+
+        binding.images.setOnClickListener{
+            imagesDrivingAnimation()
+        }
 
         /**
          * I am broken
@@ -154,9 +157,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //            }
 //        )
 
-        binding.images.setOnClickListener{
-            imagesDrivingAnimation()
-        }
+
     }
 
     private fun imagesDrivingAnimation() {
