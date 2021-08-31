@@ -21,6 +21,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     private lateinit var mQuestions: MutableList<Question>
     private var mCurrentPosition: Int = 1
     private var mSelectedOptionPosition: Int = 0
+    private var toast= Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +35,14 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         mQuestions = Question.init()
 
         setQuestions()
-        configOnClickListener()
 
         if (mCurrentPosition == mQuestions!!.size){
             binding.submitButton.text = "FINISH"
         }else {
             binding.submitButton.text = "SUBMIT"
         }
+
+        configOnClickListener()
 
         return binding.root
     }
@@ -105,19 +107,23 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
             R.id.submitButton -> {
                 if (mSelectedOptionPosition == 0) {
                     mCurrentPosition++
+                    Log.d("mCurrentPosition: ", mCurrentPosition.toString())
 
                     when{
-                        mCurrentPosition <= mQuestions!!.size -> setQuestions()
-                        else -> Toast.makeText(requireActivity(),
-                            "You have successfully completed the Quiz",
-                            Toast.LENGTH_SHORT)
-                            .show()
+                        mCurrentPosition <= mQuestions!!.size -> {
+                            setQuestions()
+                        }
+                        else -> {
+                            toast.setText("You have successfully completed the Quiz!")
+                            toast.show()
+                        }
 
                     }
                 }else {
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                        Log.d("checkAnswer: ", "I am the wrong answer")
                     }
                     answerView(mSelectedOptionPosition, R.drawable.correct_option_border_bg)
 
@@ -136,9 +142,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     private fun answerView(answer: Int, drawableView: Int) {
         when(answer) {
             1 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
-            2 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
-            3 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
-            4 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
+            2 -> binding.option2.background = ContextCompat.getDrawable(requireActivity(), drawableView)
+            3 -> binding.option3.background = ContextCompat.getDrawable(requireActivity(), drawableView)
+            4 -> binding.option4.background = ContextCompat.getDrawable(requireActivity(), drawableView)
         }
     }
 

@@ -37,6 +37,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/notosansjp_bold"
                     android:text="Demo"
+                    android:justificationMode="inter_word"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/red"
                     android:textSize="14dp" />

@@ -48,26 +48,26 @@ class GroupCard2Data(
             // ebikeinfo1 data
             groupCard2Data.add(
                 GroupCard2Data("ebikeinfo1",
-                    "MORE THEFT",
-                    "The higher price tags have also led to more e-bikes being stolen than a standard bicycle",
-                    "TIP: Make sure you lock your bike properly",
-                    R.drawable.info1_1,
-                    2)
-            )
-            groupCard2Data.add(
-                GroupCard2Data("ebikeinfo1",
                     "HIGH SPEED DANGER",
                     "Buying a high-speed e-bike may lead to faster deliveries but it is illegal",
                     "TIP: Be sure to check the government guidelines before buying an e-bike",
                     R.drawable.info1_2,
-                    1)
+                    2)
             )
             groupCard2Data.add(
                 GroupCard2Data("ebikeinfo1",
                     "HIGH THROTTLE",
                     "Too Much Initial Throttle Can Cause Minor Injuries",
-                    "TIP: Get accustomed to riding an e-bike before actually going out for your first deliveryEBikeInfo1",
+                    "TIP: Get accustomed to riding an e-bike before actually going out for your first delivery",
                     R.drawable.info1_3,
+                    1)
+            )
+            groupCard2Data.add(
+                GroupCard2Data("ebikeinfo1",
+                    "MORE THEFT",
+                    "The higher price tags have also led to more e-bikes being stolen than a standard bicycle",
+                    "TIP: Make sure you lock your bike properly",
+                    R.drawable.info1_1,
                     2)
             )
             return groupCard2Data

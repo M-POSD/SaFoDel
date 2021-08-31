@@ -14,6 +14,7 @@ import com.example.safodel.fragment.BasicFragment
 
 
 class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inflate) {
+    private var toast= Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,7 +28,8 @@ class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inf
             var userName = binding.editText.text.toString()
             Log.d("userName", userName)
             if (userName.isEmpty()) {
-                Toast.makeText(activity, "Please enter your name", Toast.LENGTH_SHORT).show()
+                toast.setText("Please enter your name")
+                toast.show()
             } else {
                 var arg = bundleOf(
                     Pair("userName", userName)
