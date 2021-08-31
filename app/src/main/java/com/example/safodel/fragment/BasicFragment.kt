@@ -18,6 +18,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     protected var _binding: TBinding? = null
     val binding get() = _binding!!
     override fun onCreateView(
+
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?

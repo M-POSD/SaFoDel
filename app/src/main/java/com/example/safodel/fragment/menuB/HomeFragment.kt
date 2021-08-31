@@ -141,14 +141,18 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         animatorSet.start()
 
-        // after animation 4 -> set images clickable
+        /**
+         * I am broken
+         */
 //        objectAnimator4.addListener(
 //            onEnd = {
+//                Log.d("onEnd", "i am the end")
 //                binding.images.setOnClickListener{
 //                    imagesDrivingAnimation()
 //                }
 //            }
 //        )
+
         binding.images.setOnClickListener{
             imagesDrivingAnimation()
         }
