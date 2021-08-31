@@ -52,6 +52,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
+        /* -- draw shadow light to the backpack--*/
         binding.backpack.outlineProvider = object : ViewOutlineProvider(){
             override fun getOutline(view: View?, outline: Outline?) {
                 val path = Path()
@@ -65,6 +66,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         }
 
+
+        /* -- draw shadow light to the headlight--*/
         binding.headlight.outlineProvider = object : ViewOutlineProvider(){
             override fun getOutline(view: View?, outline: Outline?) {
                 val path = Path()
