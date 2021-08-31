@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
         binding.login.setOnClickListener {
             val password = binding.passwordEdit.text.toString().toByteArray()
             val byte = BigInteger(1,sha.digest(password)).toString()
-            if (byte.equals(getString(R.string.password))) {
+            if (byte == getString(R.string.password)) {
                 val intent = Intent(this, StartActivity::class.java)
                 startActivity(intent)
                 finish()
