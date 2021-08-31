@@ -65,6 +65,19 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         }
 
+        binding.headlight.outlineProvider = object : ViewOutlineProvider(){
+            override fun getOutline(view: View?, outline: Outline?) {
+                val path = Path()
+                path.moveTo(view!!.width.toFloat(), view.height.toFloat())
+                path.lineTo(5 * view.width .toFloat(), 2 * view.height /3.toFloat())
+                path.lineTo(5 * view.width .toFloat(), 10 * view.height /3.toFloat())
+                path.lineTo(-view.width .toFloat(), 0.toFloat())
+                path.lineTo(-view.width .toFloat(), view.height /2.toFloat())
+                path.close()
+                outline!!.setConvexPath(path)
+            }
+        }
+
         configModeTheme()
         imageAnimations()
 
