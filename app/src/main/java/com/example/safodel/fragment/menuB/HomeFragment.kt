@@ -32,6 +32,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
+
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
 
@@ -84,54 +85,15 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         }
 
-        var imageAnimatorSet = imageAnimations()
-        var imagesDrivingAnimationSet = AnimatorSet()
-
-        if (imageAnimatorSet.isRunning) {
-            toast.setText("Please wait for the animation finished")
-            toast.show()
-        } else {
-            binding.images.setOnClickListener{
-                imagesDrivingAnimation()
-            }
-        }
-
-
-        configModeTheme(animatorSet)
-
-
+        configModeTheme()
+        imageAnimations()
 
         return binding.root
 
     }
 
-    private fun helmetAnimation() {
-        val slideIn: Animation =
-            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_top)
-        slideIn.interpolator = AccelerateDecelerateInterpolator()
-        slideIn.duration = 3000
-
-        val animation = AnimationSet(false)
-        animation.addAnimation(slideIn)
-        animation.repeatCount = 1;
-        binding.helmet.animation = animation
-    }
-
-    private fun backpackAnimation() {
-        val slideIn: Animation =
-            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_left)
-        slideIn.interpolator = AccelerateDecelerateInterpolator()
-        slideIn.duration = 3000
-
-        val animation = AnimationSet(false)
-
-        animation.addAnimation(slideIn)
-        animation.repeatCount = 1;
-        binding.backpack.animation = animation
-    }
-
     // the animation for all images
-    private fun imageAnimations(): AnimatorSet {
+    private fun imageAnimations() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
         var objectAnimator2: ObjectAnimator =
@@ -153,7 +115,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         animatorSet.start()
 
-        return animatorSet
+        binding.images.setOnClickListener{
+            if (animatorSet.isRunning) {
+                toast.setText("Please wait for the animation finished")
+                toast.show()
+            }else {
+                imagesDrivingAnimation()
+            }
+        }
 
         /**
          * I am broken
@@ -167,12 +136,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //            }
 //        )
 
-//        objectAnimator4.addListener(
-//            onEnd = {
-//                val animatorSet = AnimatorSet()
-//                animatorSet.play(objectAnimator5)
-//                animatorSet.start()
-//            })
 
     }
 
@@ -204,44 +167,61 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         spEditor.apply()
     }
 
-    private fun configModeTheme(animatorSet: AnimatorSet) {
-
+    private fun configModeTheme() {
         binding.lightMode.setOnClickListener {
-            if (!animatorSet.isRunning) {
-                binding.lightMode.visibility = View.INVISIBLE
-                binding.darkMode.visibility = View.VISIBLE
-                binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
-                binding.headlight.visibility = View.VISIBLE
-                binding.backpack.alpha = 0f
-                binding.helmet.alpha = 0f
-                binding.headlight.alpha = 0f
-                imageAnimations()
-                val toolbar = binding.toolbar.root
-                setToolbarWhite(toolbar)
-            } else {
-                toast.setText("Please wait for the animation finished")
-                toast.show()
-            }
-
+            binding.lightMode.visibility = View.INVISIBLE
+            binding.darkMode.visibility = View.VISIBLE
+            binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
+            binding.headlight.visibility = View.VISIBLE
+            binding.backpack.alpha = 0f
+            binding.helmet.alpha = 0f
+            binding.headlight.alpha = 0f
+            imageAnimations()
+            val toolbar = binding.toolbar.root
+            setToolbarWhite(toolbar)
         }
 
 
         binding.darkMode.setOnClickListener {
-            if (!animatorSet.isRunning) {
-                binding.darkMode.visibility = View.INVISIBLE
-                binding.lightMode.visibility = View.VISIBLE
-                binding.coordinatorLayout.setBackgroundResource(R.color.white)
-                binding.headlight.visibility = View.INVISIBLE
-                binding.backpack.alpha = 0f
-                binding.helmet.alpha = 0f
-                binding.headlight.alpha = 0f
-                imageAnimations()
-                val toolbar = binding.toolbar.root
-                setToolbarBasic(toolbar)
-            } else {
-                toast.setText("Please wait for the animation finished")
-                toast.show()
-            }
+            binding.darkMode.visibility = View.INVISIBLE
+            binding.lightMode.visibility = View.VISIBLE
+            binding.coordinatorLayout.setBackgroundResource(R.color.white)
+            binding.headlight.visibility = View.INVISIBLE
+            binding.backpack.alpha = 0f
+            binding.helmet.alpha = 0f
+            binding.headlight.alpha = 0f
+            imageAnimations()
+            val toolbar = binding.toolbar.root
+            setToolbarBasic(toolbar)
         }
     }
 }
+
+/*
+    currently useless
+
+    private fun helmetAnimation() {
+        val slideIn: Animation =
+            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_top)
+        slideIn.interpolator = AccelerateDecelerateInterpolator()
+        slideIn.duration = 3000
+
+        val animation = AnimationSet(false)
+        animation.addAnimation(slideIn)
+        animation.repeatCount = 1;
+        binding.helmet.animation = animation
+    }
+
+    private fun backpackAnimation() {
+        val slideIn: Animation =
+            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_left)
+        slideIn.interpolator = AccelerateDecelerateInterpolator()
+        slideIn.duration = 3000
+
+        val animation = AnimationSet(false)
+
+        animation.addAnimation(slideIn)
+        animation.repeatCount = 1;
+        binding.backpack.animation = animation
+    }
+ */
