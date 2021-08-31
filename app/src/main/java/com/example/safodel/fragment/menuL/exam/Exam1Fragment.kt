@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.safodel.R
@@ -33,7 +34,13 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         mQuestions = Question.init()
 
         setQuestions()
-        configTextOnClickListener()
+        configOnClickListener()
+
+        if (mCurrentPosition == mQuestions!!.size){
+            binding.submitButton.text = "FINISH"
+        }else {
+            binding.submitButton.text = "SUBMIT"
+        }
 
         return binding.root
     }
@@ -48,7 +55,6 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     }
 
     private fun setQuestions() {
-        mCurrentPosition = 1
         val question = mQuestions!![mCurrentPosition - 1]
 
         configDefaultOptionsView()
@@ -82,12 +88,12 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         }
     }
 
-    private fun configTextOnClickListener() {
+    private fun configOnClickListener() {
         binding.option1.setOnClickListener(this)
         binding.option2.setOnClickListener(this)
         binding.option3.setOnClickListener(this)
         binding.option4.setOnClickListener(this)
-
+        binding.submitButton.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -96,6 +102,43 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
             R.id.option2 -> selectedOptionView(binding.option2,2)
             R.id.option3 -> selectedOptionView(binding.option3,3)
             R.id.option4 -> selectedOptionView(binding.option4,4)
+            R.id.submitButton -> {
+                if (mSelectedOptionPosition == 0) {
+                    mCurrentPosition++
+
+                    when{
+                        mCurrentPosition <= mQuestions!!.size -> setQuestions()
+                        else -> Toast.makeText(requireActivity(),
+                            "You have successfully completed the Quiz",
+                            Toast.LENGTH_SHORT)
+                            .show()
+
+                    }
+                }else {
+                    val question = mQuestions?.get(mCurrentPosition - 1)
+                    if (question!!.answer != mSelectedOptionPosition) {
+                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }
+                    answerView(mSelectedOptionPosition, R.drawable.correct_option_border_bg)
+
+                    if (mCurrentPosition == mQuestions!!.size){
+                        binding.submitButton.text = "FINISH"
+                    }else {
+                        binding.submitButton.text = "GO TO NEXT QUESTION"
+                    }
+                    mSelectedOptionPosition = 0
+                    Log.d("mSelectedOptionPosition: ", mSelectedOptionPosition.toString())
+                }
+            }
+        }
+    }
+
+    private fun answerView(answer: Int, drawableView: Int) {
+        when(answer) {
+            1 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
+            2 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
+            3 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
+            4 -> binding.option1.background = ContextCompat.getDrawable(requireActivity(), drawableView)
         }
     }
 

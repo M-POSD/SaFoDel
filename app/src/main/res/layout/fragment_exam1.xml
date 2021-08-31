@@ -90,7 +90,7 @@
                     android:padding="15dp"
                     android:text="Apple1"
                     android:textColor="@color/gray2"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/option2"
@@ -103,7 +103,7 @@
                     android:padding="15dp"
                     android:text="Apple2"
                     android:textColor="@color/gray2"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/option3"
@@ -116,7 +116,7 @@
                     android:padding="15dp"
                     android:text="Apple3"
                     android:textColor="@color/gray2"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/option4"
@@ -129,10 +129,10 @@
                     android:padding="15dp"
                     android:text="Apple4"
                     android:textColor="@color/gray2"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/submitButton"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_margin="10dp"
