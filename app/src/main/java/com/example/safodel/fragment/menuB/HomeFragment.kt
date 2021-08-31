@@ -1,25 +1,17 @@
 package com.example.safodel.fragment.menuB
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Outline
 import android.graphics.Path
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
-import android.view.animation.*
-import android.widget.ImageView
 import android.widget.Toast
-import android.widget.Toolbar
-import androidx.core.animation.addListener
-import androidx.core.view.isVisible
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -46,7 +38,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.epicCard12.editTextLeft.text = "Ride Safer"
         binding.epicCard12.editTextRight.text = "E-Bike Delivery"
         binding.epicCard34.editTextLeft.text = "Safety Gears"
-//        binding.epicCard34.editTextRight.text = "Placeholder"
+        binding.epicCard34.editTextRight.text = "Placeholder"
 
         binding.epicCard12.cardLeft.setOnClickListener() {
             recordPosition(0)
@@ -92,19 +84,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         }
 
-
         setToolbarBasic(toolbar)
         imageAnimations()
         imagesDrivingAnimation()
         startAnimation("light")
-
         configModeTheme()
 
         return binding.root
 
     }
 
-    // the animation for all images
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    // add animation for the individual image
     private fun imageAnimations() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
@@ -123,21 +118,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorSetNight.play(objectAnimator4).before(objectAnimator5)
         animatorSetNight.duration = 1000
 
-        /**
-         * I am broken
-         */
-//        objectAnimator4.addListener(
-//            onEnd = {
-//                Log.d("onEnd", "i am the end")
-//                binding.images.setOnClickListener{
-//                    imagesDrivingAnimation()
-//                }
-//            }
-//        )
-
-
     }
 
+    // add driving functionalities for images
     private fun imagesDrivingAnimation() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.images, "translationX", 0f, 4 * (view?.width ?: 1500) / 5.toFloat())
@@ -147,11 +130,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         objectAnimator2.duration = 1500
 
         animatorDriving.play(objectAnimator1).before(objectAnimator2)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     // record the button position clicked to match the tab selected next page
@@ -165,11 +143,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         spEditor.apply()
     }
 
+    // config the top section layout (white background section), added all necessary image and animation based on different mode
     private fun configModeTheme() {
         binding.lightMode.setOnClickListener {
             if (animatorSetLight.isRunning || animatorSetNight.isRunning || animatorDriving.isRunning) {
-                toast.setText("Please wait for the animation finished")
-                toast.show()
+
             } else {
                 binding.lightMode.visibility = View.INVISIBLE
                 binding.darkMode.visibility = View.VISIBLE
@@ -185,8 +163,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         binding.darkMode.setOnClickListener {
             if (animatorSetLight.isRunning || animatorSetNight.isRunning || animatorDriving.isRunning) {
-                toast.setText("Please wait for the animation finished")
-                toast.show()
+
             } else {
                 binding.darkMode.visibility = View.INVISIBLE
                 binding.lightMode.visibility = View.VISIBLE
@@ -201,6 +178,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
     }
 
+    // start all animation
     private fun startAnimation(mode: String) {
         when(mode) {
             "light" -> animatorSetLight.start()
@@ -209,8 +187,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         binding.images.setOnClickListener{
             if (animatorSetLight.isRunning || animatorSetNight.isRunning) {
-                toast.setText("Please wait for the animation finished")
-                toast.show()
+
             }else {
                 animatorDriving.start()
             }
@@ -246,4 +223,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animation.repeatCount = 1;
         binding.backpack.animation = animation
     }
+
+        objectAnimator4.addListener(
+            onEnd = {
+                Log.d("onEnd", "i am the end")
+                binding.images.setOnClickListener{
+                    imagesDrivingAnimation()
+                }
+            }
+        )
+
  */
