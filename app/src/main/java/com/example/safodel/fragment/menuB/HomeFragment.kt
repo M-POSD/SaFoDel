@@ -25,6 +25,10 @@ import androidx.core.view.isVisible
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private lateinit var toast: Toast
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var animatorSetLight: AnimatorSet
+    private lateinit var animatorSetNight: AnimatorSet
+    private lateinit var animatorDriving: AnimatorSet
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +38,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
+
+        animatorSetLight = AnimatorSet()
+        animatorSetNight = AnimatorSet()
+        animatorDriving = AnimatorSet()
 
         binding.epicCard12.editTextLeft.text = "Ride Safer"
         binding.epicCard12.editTextRight.text = "E-Bike Delivery"
@@ -87,8 +95,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         setToolbarBasic(toolbar)
         imageAnimations()
-        configModeTheme()
+        imagesDrivingAnimation()
+        startAnimation("light")
 
+        configModeTheme()
 
         return binding.root
 
@@ -106,25 +116,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
         var objectAnimator5: ObjectAnimator = ObjectAnimator.ofFloat(binding.headlight, "alpha", 0f, 1f).setDuration(500)
 
-        val animatorSet = AnimatorSet()
-        animatorSet.play(objectAnimator1).with(objectAnimator2)
-            .before(objectAnimator3).before(objectAnimator4)
-        animatorSet.duration = 1000
+        animatorSetLight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3).before(objectAnimator4)
+        animatorSetLight.duration = 1000
 
-        if (binding.headlight.isVisible) {
-            animatorSet.play(objectAnimator4).before(objectAnimator5)
-        }
-
-        animatorSet.start()
-
-        binding.images.setOnClickListener{
-            if (animatorSet.isRunning) {
-                toast.setText("Please wait for the animation finished")
-                toast.show()
-            }else {
-                imagesDrivingAnimation()
-            }
-        }
+        animatorSetNight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3).before(objectAnimator4)
+        animatorSetNight.play(objectAnimator4).before(objectAnimator5)
+        animatorSetNight.duration = 1000
 
         /**
          * I am broken
@@ -148,9 +145,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             ObjectAnimator.ofFloat(binding.images, "translationX", -4 * (view?.width ?: 1500) / 5.toFloat(), 0f)
         objectAnimator1.duration = 1500
         objectAnimator2.duration = 1500
-        val animatorSet = AnimatorSet()
-        animatorSet.play(objectAnimator1).before(objectAnimator2)
-        animatorSet.start()
+
+        animatorDriving.play(objectAnimator1).before(objectAnimator2)
     }
 
     override fun onDestroyView() {
@@ -171,33 +167,54 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun configModeTheme() {
         binding.lightMode.setOnClickListener {
-            binding.lightMode.visibility = View.INVISIBLE
-            binding.darkMode.visibility = View.VISIBLE
-            binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
-            binding.headlight.visibility = View.VISIBLE
-            binding.backpack.alpha = 0f
-            binding.helmet.alpha = 0f
-            binding.headlight.alpha = 0f
-            imageAnimations()
-            setToolbarWhite(toolbar)
+            if (animatorSetLight.isRunning || animatorSetNight.isRunning || animatorDriving.isRunning) {
+                toast.setText("Please wait for the animation finished")
+                toast.show()
+            } else {
+                binding.lightMode.visibility = View.INVISIBLE
+                binding.darkMode.visibility = View.VISIBLE
+                binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
+                binding.headlight.visibility = View.VISIBLE
+                binding.backpack.alpha = 0f
+                binding.helmet.alpha = 0f
+                binding.headlight.alpha = 0f
+                startAnimation("night")
+                setToolbarWhite(toolbar)
+            }
         }
 
-
         binding.darkMode.setOnClickListener {
-            binding.darkMode.visibility = View.INVISIBLE
-            binding.lightMode.visibility = View.VISIBLE
-            binding.coordinatorLayout.setBackgroundResource(R.color.white)
-            binding.headlight.visibility = View.INVISIBLE
-            binding.backpack.alpha = 0f
-            binding.helmet.alpha = 0f
-            binding.headlight.alpha = 0f
-            imageAnimations()
-            setToolbarBasic(toolbar)
+            if (animatorSetLight.isRunning || animatorSetNight.isRunning || animatorDriving.isRunning) {
+                toast.setText("Please wait for the animation finished")
+                toast.show()
+            } else {
+                binding.darkMode.visibility = View.INVISIBLE
+                binding.lightMode.visibility = View.VISIBLE
+                binding.coordinatorLayout.setBackgroundResource(R.color.white)
+                binding.headlight.visibility = View.INVISIBLE
+                binding.backpack.alpha = 0f
+                binding.helmet.alpha = 0f
+                binding.headlight.alpha = 0f
+                startAnimation("light")
+                setToolbarBasic(toolbar)
+            }
         }
     }
 
-    private fun configAnimationView() {
+    private fun startAnimation(mode: String) {
+        when(mode) {
+            "light" -> animatorSetLight.start()
+            "night" -> animatorSetNight.start()
+        }
 
+        binding.images.setOnClickListener{
+            if (animatorSetLight.isRunning || animatorSetNight.isRunning) {
+                toast.setText("Please wait for the animation finished")
+                toast.show()
+            }else {
+                animatorDriving.start()
+            }
+        }
     }
 
 }
