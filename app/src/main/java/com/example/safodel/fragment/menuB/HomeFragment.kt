@@ -7,11 +7,14 @@ import android.graphics.Outline
 import android.graphics.Path
 import android.os.Bundle
 import android.view.*
+import android.widget.FrameLayout
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.widget.Toast
+import com.takusemba.spotlight.OnTargetListener
+import com.takusemba.spotlight.shape.Circle
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -20,6 +23,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var animatorSetLight: AnimatorSet
     private lateinit var animatorSetNight: AnimatorSet
     private lateinit var animatorDriving: AnimatorSet
+
+    // testing section -> spotlight function
+    private var isBeginnerMode = false
+    private var currentToast: Toast? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +62,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
+        binding.epicCard34.cardRight.setOnClickListener() {
+            startSpotLight()
+        }
+
+
         /* -- draw shadow light to the backpack--*/
         binding.backpack.outlineProvider = object : ViewOutlineProvider(){
             override fun getOutline(view: View?, outline: Outline?) {
@@ -89,6 +101,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         imagesDrivingAnimation()
         startAnimation("light")
         configModeTheme()
+
+        isBeginnerMode = true
 
         return binding.root
 
@@ -192,6 +206,40 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 animatorDriving.start()
             }
         }
+    }
+
+    private fun startSpotLight() {
+        val targets = ArrayList<Target>()
+        val firstRoot = FrameLayout(requireContext())
+        val first = layoutInflater.inflate(R.layout.layout_target, firstRoot)
+        val firstTarget = Target.Builder()
+            .setAnchor(binding.helmet)
+            .setShape(Circle(100f))
+            .setOverlay(first)
+            .setOnTargetListener(object : OnTargetListener {
+                override fun onStarted() {
+                    currentToast?.cancel()
+                    currentToast = Toast.makeText(
+                        requireContext(),
+                        "Please wear the helmet before riding",
+                        Toast.LENGTH_SHORT
+                    )
+                    currentToast?.show()
+                }
+
+                override fun onEnded() {
+                    currentToast?.cancel()
+                    currentToast = Toast.makeText(
+                        requireContext(),
+                        "Bye Bye Let move on next",
+                        Toast.LENGTH_SHORT
+                    )
+                    currentToast?.show()
+                }
+            })
+            .build()
+
+        targets.add(firstTarget)
     }
 
 }

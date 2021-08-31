@@ -79,6 +79,9 @@ dependencies {
 
 
 
+    // spotlight
+    implementation 'com.github.takusemba:spotlight:2.0.5'
+
 
 
 
