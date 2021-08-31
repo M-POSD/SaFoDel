@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="100dp"
+    android:gravity="right"
+    android:weightSum="1">
     <TextView
         android:id="@+id/custom_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:maxWidth="170dp"
+        android:text="I am the Demo"
+        android:justificationMode="inter_word"
+        android:fontFamily="@font/notosansjp_bold"
+        android:textSize="14dp"
+        android:textColor="@color/white"/>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="this is a custom text"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/close_target"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/close_target"
-        android:layout_width="0dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/next_target"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="next_target"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/close_spotlight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <Button
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@color/primary_green"
+        android:elevation="5dp"
+        android:fontFamily="@font/notosansjp_bold"
+        android:text="Next"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        app:cornerRadius="50dp" />
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/close_spotlight"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="close_spotlight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@color/primary_green"
+        android:elevation="5dp"
+        android:fontFamily="@font/notosansjp_bold"
+        android:text="Close"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        app:cornerRadius="50dp" />
+    </LinearLayout>
+</LinearLayout>

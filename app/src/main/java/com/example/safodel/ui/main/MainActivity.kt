@@ -1,5 +1,8 @@
 package com.example.safodel.ui.main
 
+import android.R.attr
+import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +26,10 @@ import com.google.android.material.tabs.TabLayout
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 import kotlin.system.exitProcess
+import android.R.attr.defaultValue
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         AutoSizeConfig.getInstance().isBaseOnWidth = false
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        recordLearningMode()
     }
 
 
@@ -134,6 +142,24 @@ class MainActivity : AppCompatActivity() {
 
     fun bottomNavHeight(): Int{
         return binding.bottomNavigation.height
+    }
+
+
+    /**
+     * For record user want to conduct learning mode or not
+     */
+    private fun recordLearningMode() {
+        val isLearningMode = intent.getBooleanExtra(
+            "isLearningMode",
+            false
+        )
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            "isLearningMode", Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putBoolean("isLearningMode", isLearningMode)
+        spEditor.apply()
     }
 }
 

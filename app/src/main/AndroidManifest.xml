@@ -18,16 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SaFoDel">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.main.LoginActivity"
             android:exported="true">
 
 
         </activity>
         <activity
-            android:name=".ui.main.StartActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.LoginActivity"
+            android:name=".ui.main.StartActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

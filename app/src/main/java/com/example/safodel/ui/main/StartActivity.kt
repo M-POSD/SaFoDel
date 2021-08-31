@@ -28,7 +28,7 @@ class StartActivity : AppCompatActivity() {
         configAllAnimations()
         binding.startButton.button.setOnClickListener {
             val intent = Intent()
-
+            intent.putExtra("isLearningMode", false)
             // avoid to return to this activity
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             intent.setClass(this@StartActivity, MainActivity::class.java)
@@ -37,6 +37,16 @@ class StartActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
+        binding.learningMode.setOnClickListener {
+            val intent = Intent()
+            intent.putExtra("isLearningMode", true)
+            // avoid to return to this activity
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.setClass(this@StartActivity, MainActivity::class.java)
+
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
         AutoSizeConfig.getInstance().isBaseOnWidth = false
 
     }
@@ -48,13 +58,16 @@ class StartActivity : AppCompatActivity() {
         var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.startButton.button, "alpha", 0f, 1f)
+        var objectAnimator4: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.learningMode, "alpha", 0f, 1f)
         objectAnimator1.duration = 1300
         objectAnimator2.duration = 1300
-        objectAnimator3.duration = 800
+        objectAnimator3.duration = 500
+        objectAnimator4.duration = 500
 
         val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
-
+        animatorSet.play(objectAnimator3).before(objectAnimator4)
         animatorSet.start()
     }
 
