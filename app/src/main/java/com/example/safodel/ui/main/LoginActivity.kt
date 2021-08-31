@@ -3,11 +3,9 @@ package com.example.safodel.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityLoginBinding
-import com.example.safodel.databinding.ActivityMainBinding
 import java.math.BigInteger
 import java.security.MessageDigest
 
