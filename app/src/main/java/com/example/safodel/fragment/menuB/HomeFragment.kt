@@ -125,8 +125,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         var objectAnimator5: ObjectAnimator = ObjectAnimator.ofFloat(binding.headlight, "alpha", 0f, 1f).setDuration(500)
 
         val animatorSet = AnimatorSet()
-        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
-            .before(objectAnimator4)
+        animatorSet.play(objectAnimator1).with(objectAnimator2)
+            .before(objectAnimator3).before(objectAnimator4)
         animatorSet.duration = 1000
 
         if (binding.headlight.isVisible) {
