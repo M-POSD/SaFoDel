@@ -16,6 +16,7 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.widget.Toast
+import com.example.safodel.ui.main.MainActivity
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Target
 import com.takusemba.spotlight.OnTargetListener
@@ -26,8 +27,12 @@ import com.takusemba.spotlight.shape.*
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+    // Basic value
     private lateinit var toast: Toast
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var mainActivity : MainActivity
+
+
     private lateinit var animatorSetLight: AnimatorSet
     private lateinit var animatorSetNight: AnimatorSet
     private lateinit var animatorDriving: AnimatorSet
@@ -45,6 +50,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
+        mainActivity = activity as MainActivity
 
         animatorSetLight = AnimatorSet()
         animatorSetNight = AnimatorSet()
@@ -386,7 +392,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 override fun onEnded() {
                     currentToast?.cancel()
                     currentToast = Toast.makeText(
-                        requireContext(),
+                        mainActivity,
                         "Learning Mode Ends",
                         Toast.LENGTH_SHORT
                     )
