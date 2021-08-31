@@ -200,6 +200,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         binding.images.setOnClickListener{
+            if(animatorDriving.isRunning)
+            {
+                animatorDriving.cancel()
+                animatorDriving.start()
+            }
             if (animatorSetLight.isRunning || animatorSetNight.isRunning) {
 
             }else {
