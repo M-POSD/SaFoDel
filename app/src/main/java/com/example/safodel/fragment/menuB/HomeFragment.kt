@@ -16,12 +16,14 @@ import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.view.animation.*
 import android.widget.ImageView
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.core.animation.addListener
 import androidx.core.view.isVisible
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+    private lateinit var toast: Toast
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,6 +31,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
 
@@ -81,8 +84,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         }
 
-        configModeTheme()
-        imageAnimations()
+        var imageAnimatorSet = imageAnimations()
+        var imagesDrivingAnimationSet = AnimatorSet()
+
+        if (imageAnimatorSet.isRunning) {
+            toast.setText("Please wait for the animation finished")
+            toast.show()
+        } else {
+            binding.images.setOnClickListener{
+                imagesDrivingAnimation()
+            }
+        }
+
+
+        configModeTheme(animatorSet)
+
+
 
         return binding.root
 
@@ -114,7 +131,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     // the animation for all images
-    private fun imageAnimations() {
+    private fun imageAnimations(): AnimatorSet {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
         var objectAnimator2: ObjectAnimator =
@@ -131,19 +148,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorSet.duration = 1000
 
         if (binding.headlight.isVisible) {
-            objectAnimator4.addListener(
-                onEnd = {
-                    val animatorSet = AnimatorSet()
-                    animatorSet.play(objectAnimator5)
-                    animatorSet.start()
-                })
+            animatorSet.play(objectAnimator4).before(objectAnimator5)
         }
 
         animatorSet.start()
 
-        binding.images.setOnClickListener{
-            imagesDrivingAnimation()
-        }
+        return animatorSet
 
         /**
          * I am broken
@@ -157,6 +167,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //            }
 //        )
 
+//        objectAnimator4.addListener(
+//            onEnd = {
+//                val animatorSet = AnimatorSet()
+//                animatorSet.play(objectAnimator5)
+//                animatorSet.start()
+//            })
 
     }
 
@@ -188,32 +204,44 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         spEditor.apply()
     }
 
-    private fun configModeTheme() {
+    private fun configModeTheme(animatorSet: AnimatorSet) {
+
         binding.lightMode.setOnClickListener {
-            binding.lightMode.visibility = View.INVISIBLE
-            binding.darkMode.visibility = View.VISIBLE
-            binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
-            binding.headlight.visibility = View.VISIBLE
-            binding.backpack.alpha = 0f
-            binding.helmet.alpha = 0f
-            binding.headlight.alpha = 0f
-            imageAnimations()
-            val toolbar = binding.toolbar.root
-            setToolbarWhite(toolbar)
+            if (!animatorSet.isRunning) {
+                binding.lightMode.visibility = View.INVISIBLE
+                binding.darkMode.visibility = View.VISIBLE
+                binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
+                binding.headlight.visibility = View.VISIBLE
+                binding.backpack.alpha = 0f
+                binding.helmet.alpha = 0f
+                binding.headlight.alpha = 0f
+                imageAnimations()
+                val toolbar = binding.toolbar.root
+                setToolbarWhite(toolbar)
+            } else {
+                toast.setText("Please wait for the animation finished")
+                toast.show()
+            }
+
         }
 
 
         binding.darkMode.setOnClickListener {
-            binding.darkMode.visibility = View.INVISIBLE
-            binding.lightMode.visibility = View.VISIBLE
-            binding.coordinatorLayout.setBackgroundResource(R.color.white)
-            binding.headlight.visibility = View.INVISIBLE
-            binding.backpack.alpha = 0f
-            binding.helmet.alpha = 0f
-            binding.headlight.alpha = 0f
-            imageAnimations()
-            val toolbar = binding.toolbar.root
-            setToolbarBasic(toolbar)
+            if (!animatorSet.isRunning) {
+                binding.darkMode.visibility = View.INVISIBLE
+                binding.lightMode.visibility = View.VISIBLE
+                binding.coordinatorLayout.setBackgroundResource(R.color.white)
+                binding.headlight.visibility = View.INVISIBLE
+                binding.backpack.alpha = 0f
+                binding.helmet.alpha = 0f
+                binding.headlight.alpha = 0f
+                imageAnimations()
+                val toolbar = binding.toolbar.root
+                setToolbarBasic(toolbar)
+            } else {
+                toast.setText("Please wait for the animation finished")
+                toast.show()
+            }
         }
     }
 }
