@@ -37,6 +37,8 @@ class StartActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
+        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty_12,0,
+            R.drawable.baseline_chevron_right_green_12,0)
         binding.learningMode.setOnClickListener {
             val intent = Intent()
             intent.putExtra("isLearningMode", true)

@@ -122,13 +122,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.epicCard34.cardRight.setOnClickListener() {
-            startSpotLight()
-        }
-
         view.doOnPreDraw {
             if (isLearningMode()) {
                 startSpotLight()
+                requireActivity().applicationContext.getSharedPreferences(
+                    "isLearningMode",
+                    Context.MODE_PRIVATE
+                ).edit().putBoolean("isLearningMode", false).apply()
             }
         }
 
