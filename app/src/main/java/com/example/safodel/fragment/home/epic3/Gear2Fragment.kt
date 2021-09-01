@@ -21,7 +21,7 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         _binding = FragmentGear2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear2.extremeSmall.editText.text =
+        binding.gear2.currentPageText.text =
             "A checklist of necessary safety equipment"
         binding.gear2.notification.text =
             "Worried about forgetting essential safety gear.\nFollow this checklist for a quick heads up!"

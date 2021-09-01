@@ -27,7 +27,7 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
         _binding = FragmentGear3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear3.extremeSmall.editText.text = "Australian standards for the safety gear"
+        binding.gear3.currentPageText.text = "Australian standards for the safety gear"
 
         // HtmlCompat -> allow app to use html format
         binding.gear3.notification.text = HtmlCompat.fromHtml("Bicycle helmets should have a sticker showing the Australian Standard " +

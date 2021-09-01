@@ -26,7 +26,7 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         _binding = FragmentInfo3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.info3.extremeSmall.editText.text = "E-bikes Rules & Regulations"
+        binding.info3.currentPageText.text = "E-bikes Rules & Regulations"
         binding.info3.notification.text =
             "Wondering whether the e-bike rules and regulations are different?"
 

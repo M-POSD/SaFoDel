@@ -28,7 +28,7 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         _binding = FragmentTip1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.tip1.extremeSmall.editText.text = "Riding a bicycle"
+        binding.tip1.currentPageText.text = "Riding a bicycle"
         binding.tip1.notification.text = "Here are a few safety tips for delivering food on bicycle"
 
         configRecycleView()

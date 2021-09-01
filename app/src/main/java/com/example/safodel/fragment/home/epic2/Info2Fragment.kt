@@ -26,7 +26,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         _binding = FragmentInfo2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.info2.extremeSmall.editText.text = "Advantages of E-bikes delivering"
+        binding.info2.currentPageText.text = "Advantages of E-bikes delivering"
         binding.info2.notification.text =
             "E-bikes are rising in popularity especially in the food delivery community, here's why"
 
