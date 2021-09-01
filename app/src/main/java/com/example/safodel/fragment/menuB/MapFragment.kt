@@ -359,6 +359,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 circleColor(Color.parseColor("#FF0000")),
                 visibility(Property.VISIBLE),
                 iconIgnorePlacement(false),
+                iconAllowOverlap(false),
                 circleRadius(
                     interpolate(
                         linear(), zoom(),
@@ -385,7 +386,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                             stop(15f,0f)
                         )
                     ),
-                    iconIgnorePlacement(false)
+                    iconIgnorePlacement(false),
+                    iconAllowOverlap(false)
                 )
             it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
@@ -396,6 +398,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 iconImage("icon_image"),
                 iconSize(1.5f),
                 iconIgnorePlacement(false),
+                iconAllowOverlap(false)
             )
             symbolIconLayer.minZoom = 15f
             it.addLayer(symbolIconLayer)
