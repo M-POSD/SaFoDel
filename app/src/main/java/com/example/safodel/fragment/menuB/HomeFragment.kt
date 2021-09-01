@@ -27,6 +27,7 @@ import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.*
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -305,6 +306,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val fourth = layoutInflater.inflate(R.layout.layout_target, fourthRoot)
         fourth.findViewById<TextView>(R.id.custom_text).text =
             "This is the menu for you to have a quiz, see visualisation graph or know more about us ^_^"
+        fourth.findViewById<TextView>(R.id.next_target).isVisible = false
         val fourthTarget = Target.Builder()
             .setAnchor(80f, 120f)
             .setShape(Circle(120f))
@@ -363,7 +365,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+//        fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
