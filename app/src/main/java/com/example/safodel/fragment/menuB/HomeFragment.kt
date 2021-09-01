@@ -7,6 +7,7 @@ import android.graphics.Color.argb
 import android.graphics.Outline
 import android.graphics.Path
 import android.os.Bundle
+import android.text.Layout
 import android.view.*
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
@@ -16,6 +17,7 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.widget.Toast
+import androidx.core.view.children
 import androidx.core.view.doOnPreDraw
 import com.example.safodel.ui.main.MainActivity
 import com.takusemba.spotlight.OnSpotlightListener
@@ -24,14 +26,14 @@ import com.takusemba.spotlight.OnTargetListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.*
-
+import android.view.ViewGroup
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     // Basic value
     private lateinit var toast: Toast
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
-    private lateinit var mainActivity : MainActivity
+    private lateinit var mainActivity: MainActivity
 
 
     private lateinit var animatorSetLight: AnimatorSet
@@ -79,14 +81,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
 
         /* -- draw shadow light to the backpack--*/
-        binding.backpack.outlineProvider = object : ViewOutlineProvider(){
+        binding.backpack.outlineProvider = object : ViewOutlineProvider() {
             override fun getOutline(view: View?, outline: Outline?) {
                 val path = Path()
                 path.moveTo(view!!.width.toFloat(), view.height.toFloat())
-                path.lineTo(2 * view.width / 3.toFloat(), 2 * view.height /3.toFloat())
+                path.lineTo(2 * view.width / 3.toFloat(), 2 * view.height / 3.toFloat())
                 path.lineTo(2 * view.width / 3.toFloat(), 0.toFloat())
-                path.lineTo(0 .toFloat(), 0.toFloat())
-                path.lineTo(0 .toFloat(), view.height /2.toFloat())
+                path.lineTo(0.toFloat(), 0.toFloat())
+                path.lineTo(0.toFloat(), view.height / 2.toFloat())
                 path.close()
                 outline!!.setConvexPath(path)
             }
@@ -94,14 +96,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
 
         /* -- draw shadow light to the headlight--*/
-        binding.headlight.outlineProvider = object : ViewOutlineProvider(){
+        binding.headlight.outlineProvider = object : ViewOutlineProvider() {
             override fun getOutline(view: View?, outline: Outline?) {
                 val path = Path()
                 path.moveTo(view!!.width.toFloat(), view.height.toFloat())
-                path.lineTo(5 * view.width .toFloat(), 2 * view.height /3.toFloat())
-                path.lineTo(5 * view.width .toFloat(), 10 * view.height /3.toFloat())
-                path.lineTo(-view.width .toFloat(), 0.toFloat())
-                path.lineTo(-view.width .toFloat(), view.height /2.toFloat())
+                path.lineTo(5 * view.width.toFloat(), 2 * view.height / 3.toFloat())
+                path.lineTo(5 * view.width.toFloat(), 10 * view.height / 3.toFloat())
+                path.lineTo(-view.width.toFloat(), 0.toFloat())
+                path.lineTo(-view.width.toFloat(), view.height / 2.toFloat())
                 path.close()
                 outline!!.setConvexPath(path)
             }
@@ -149,12 +151,15 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 0f)
         var objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
-        var objectAnimator5: ObjectAnimator = ObjectAnimator.ofFloat(binding.headlight, "alpha", 0f, 1f).setDuration(500)
+        var objectAnimator5: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.headlight, "alpha", 0f, 1f).setDuration(500)
 
-        animatorSetLight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3).before(objectAnimator4)
+        animatorSetLight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
+            .before(objectAnimator4)
         animatorSetLight.duration = 1000
 
-        animatorSetNight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3).before(objectAnimator4)
+        animatorSetNight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
+            .before(objectAnimator4)
         animatorSetNight.play(objectAnimator4).before(objectAnimator5)
         animatorSetNight.duration = 1000
 
@@ -163,9 +168,19 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // add driving functionalities for images
     private fun imagesDrivingAnimation() {
         var objectAnimator1: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.images, "translationX", 0f, 4 * (view?.width ?: 1500) / 5.toFloat())
+            ObjectAnimator.ofFloat(
+                binding.images,
+                "translationX",
+                0f,
+                4 * (view?.width ?: 1500) / 5.toFloat()
+            )
         var objectAnimator2: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.images, "translationX", -4 * (view?.width ?: 1500) / 5.toFloat(), 0f)
+            ObjectAnimator.ofFloat(
+                binding.images,
+                "translationX",
+                -4 * (view?.width ?: 1500) / 5.toFloat(),
+                0f
+            )
         objectAnimator1.duration = 1500
         objectAnimator2.duration = 1500
 
@@ -220,20 +235,19 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // start all animation
     private fun startAnimation(mode: String) {
-        when(mode) {
+        when (mode) {
             "light" -> animatorSetLight.start()
             "night" -> animatorSetNight.start()
         }
 
-        binding.images.setOnClickListener{
-            if(animatorDriving.isRunning)
-            {
+        binding.images.setOnClickListener {
+            if (animatorDriving.isRunning) {
                 animatorDriving.cancel()
                 animatorDriving.start()
             }
             if (animatorSetLight.isRunning || animatorSetNight.isRunning) {
 
-            }else {
+            } else {
                 animatorDriving.start()
             }
         }
@@ -241,136 +255,60 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // for the learning mode for the beginner of the application
     private fun startSpotLight() {
+
         val targets = ArrayList<Target>()
 
         // first target
         val firstRoot = FrameLayout(requireContext())
         val first = layoutInflater.inflate(R.layout.layout_target, firstRoot)
-        first.findViewById<TextView>(R.id.custom_text).text = "This is home page for user to return home easily"
+        first.findViewById<TextView>(R.id.custom_text).text =
+            "This is home page for user to return home easily"
         val firstTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navHome))
             .setShape(Circle(120f))
-            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
             .setOverlay(first)
-            .setOnTargetListener(object : OnTargetListener {
-                override fun onStarted() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "Start",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-
-                override fun onEnded() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "End",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-            })
             .build()
 
         targets.add(firstTarget)
 
         val secondRoot = FrameLayout(requireContext())
         val second = layoutInflater.inflate(R.layout.layout_target, secondRoot)
-        second.findViewById<TextView>(R.id.custom_text).text = "This is Map page to see the historical accident locations in Victoria"
+        second.findViewById<TextView>(R.id.custom_text).text =
+            "This is Map page to see the historical accident locations in Victoria"
         val secondTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navMap))
             .setShape(Circle(120f))
-            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
             .setOverlay(second)
-            .setOnTargetListener(object : OnTargetListener {
-                override fun onStarted() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "Start",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-
-                override fun onEnded() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "End",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-            })
             .build()
 
         targets.add(secondTarget)
 
         val thirdRoot = FrameLayout(requireContext())
         val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
-        third.findViewById<TextView>(R.id.custom_text).text = "These four buttons in the home page allow you to find all necessary information for e-bike delivering"
+        third.findViewById<TextView>(R.id.custom_text).text =
+            "These four buttons in the home page allow you to find all necessary information for e-bike delivering"
         val thirdTarget = Target.Builder()
             .setAnchor(binding.epicCard12.cardLeft)
-            .setShape(RoundedRectangle((view?.height ?: 2000) / 7.toFloat(), (view?.width ?: 1000) / 2.toFloat(), 10f))
+            .setShape(
+                RoundedRectangle(
+                    (view?.height ?: 2000) / 7.toFloat(),
+                    (view?.width ?: 1000) / 2.toFloat(),
+                    10f
+                )
+            )
             .setOverlay(third)
-            .setOnTargetListener(object : OnTargetListener {
-                override fun onStarted() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "Start",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-
-                override fun onEnded() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "End",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-            })
             .build()
 
         targets.add(thirdTarget)
 
         val fourthRoot = FrameLayout(requireContext())
         val fourth = layoutInflater.inflate(R.layout.layout_target, fourthRoot)
-        fourth.findViewById<TextView>(R.id.custom_text).text = "This is the menu for you to have a quiz, see visualisation graph or know more about us ^_^"
+        fourth.findViewById<TextView>(R.id.custom_text).text =
+            "This is the menu for you to have a quiz, see visualisation graph or know more about us ^_^"
         val fourthTarget = Target.Builder()
-            .setAnchor(80f,120f)
+            .setAnchor(80f, 120f)
             .setShape(Circle(120f))
-            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
             .setOverlay(fourth)
-            .setOnTargetListener(object : OnTargetListener {
-                override fun onStarted() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "Learning mode Begins",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-
-                override fun onEnded() {
-//                    currentToast?.cancel()
-//                    currentToast = Toast.makeText(
-//                        requireContext(),
-//                        "Learning Mode Ends",
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    currentToast?.show()
-                }
-            })
             .build()
 
         targets.add(fourthTarget)
@@ -404,11 +342,23 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             })
             .build()
 
+        binding.homeCoordinatorLayout1.setAllEnabled(false)
+        requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(false)
+        requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(false)
+
         spotlight.start()
 
-        val nextTarget = View.OnClickListener { spotlight.next() }
 
-        val closeSpotlight = View.OnClickListener { spotlight.finish() }
+        val nextTarget = View.OnClickListener {
+            spotlight.next()
+        }
+
+        val closeSpotlight = View.OnClickListener {
+            spotlight.finish()
+            binding.homeCoordinatorLayout1.setAllEnabled(true)
+            requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(true)
+            requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(true)
+        }
 
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
@@ -419,6 +369,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         fourth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+    }
+
+    // referred from https://stackoverflow.com/questions/6238881/how-to-disable-all-click-events-of-a-layout
+    // -> disable the view and its view group
+    private fun View.setAllEnabled(enabled: Boolean) {
+        isEnabled = enabled
+        if (this is ViewGroup) children.forEach { child -> child.setAllEnabled(enabled) }
     }
 
     private fun isLearningMode(): Boolean {
