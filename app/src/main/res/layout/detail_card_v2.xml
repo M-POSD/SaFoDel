@@ -35,7 +35,7 @@
                     android:id="@+id/cardLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
+                    android:layout_weight="0.7"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     android:padding="8dp">
@@ -53,10 +53,8 @@
                         android:textSize="14dp" />
 
                 </LinearLayout>
-                <View
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.1"/>
+
+
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="0dp"

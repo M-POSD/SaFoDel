@@ -74,7 +74,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "ebikeinfo2",
-                    "Promote the idea of sustainability",
+                    "Promote sustainability",
                     R.drawable.info2_3,
                     2
                 )

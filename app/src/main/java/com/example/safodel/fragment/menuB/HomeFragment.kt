@@ -233,6 +233,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     // for the learning mode for the beginner of the application
+    // using open source git "spotlight" package
     private fun startSpotLight() {
 
         val targets = ArrayList<Target>()
@@ -241,7 +242,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val firstRoot = FrameLayout(requireContext())
         val first = layoutInflater.inflate(R.layout.layout_target, firstRoot)
         first.findViewById<TextView>(R.id.custom_text).text =
-            "This is home page for user to return home easily"
+            "This is Home page for you to return to this home page easily"
         val firstTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navHome))
             .setShape(Circle(120f))
@@ -253,7 +254,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val secondRoot = FrameLayout(requireContext())
         val second = layoutInflater.inflate(R.layout.layout_target, secondRoot)
         second.findViewById<TextView>(R.id.custom_text).text =
-            "This is Map page to see the historical accident locations in Victoria"
+            "This is Map page to see the historical accident locations in Victoria with details"
         val secondTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navMap))
             .setShape(Circle(120f))
@@ -340,9 +341,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // seventh target
         val seventhRoot = FrameLayout(requireContext())
         val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
-        fourth.findViewById<TextView>(R.id.custom_text).text =
-            "Left Menu has quiz, graph or know more about us ~lol~"
-        fourth.findViewById<TextView>(R.id.next_target).alpha = 0f
+        seventh.findViewById<TextView>(R.id.custom_text).text =
+            "Left Menu has\n" +
+                    "QUIZ ->\n" +
+                    "Test your understanding of delivering on food\n\n" +
+                    "ANALYSIS ->\n" +
+                    "Check the historical data in different region, time and weather\n\n" +
+                    "ABOUT APP ->\n" +
+                    "Understand the purpose of this app\n\n" +
+                    "ABOUT US ->\n" +
+                    "Know more about the developer team"
+        seventh.findViewById<TextView>(R.id.next_target).alpha = 0f
         val seventhTarget = Target.Builder()
             .setAnchor(80f, 120f)
             .setShape(Circle(110f))
@@ -363,7 +372,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     currentToast?.cancel()
                     currentToast = Toast.makeText(
                         requireContext(),
-                        "Learning mode Begins",
+                        "Welcome to the SaFoDel learning mode",
                         Toast.LENGTH_SHORT
                     )
                     currentToast?.show()
@@ -373,7 +382,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     currentToast?.cancel()
                     currentToast = Toast.makeText(
                         mainActivity,
-                        "Learning Mode Ends",
+                        "Thanks for watching\n" +
+                                "Enjoy SaFoDel",
                         Toast.LENGTH_SHORT
                     )
                     currentToast?.show()
@@ -401,9 +411,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        third.findViewById<View>(R.id.next_target).setOnClickListener{
-            spotlight.next()
-        }
+        third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fifth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
