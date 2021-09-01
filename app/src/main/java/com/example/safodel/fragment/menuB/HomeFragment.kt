@@ -265,7 +265,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val thirdRoot = FrameLayout(requireContext())
         val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
         third.findViewById<TextView>(R.id.custom_text).text =
-            "These four buttons in the home page allow you to find all necessary information for e-bike delivering"
+            "Find out how to ride safely while delivering food"
         val thirdTarget = Target.Builder()
             .setAnchor(binding.epicCard12.cardLeft)
             .setShape(
@@ -284,16 +284,73 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val fourthRoot = FrameLayout(requireContext())
         val fourth = layoutInflater.inflate(R.layout.layout_target, fourthRoot)
         fourth.findViewById<TextView>(R.id.custom_text).text =
+            "Find information on using e-bike for food delivery"
+        val fourthTarget = Target.Builder()
+            .setAnchor(binding.epicCard12.cardRight)
+            .setShape(
+                RoundedRectangle(
+                    (view?.height ?: 2000) / 7.toFloat(),
+                    (view?.width ?: 1000) / 2.toFloat(),
+                    10f
+                )
+            )
+            .setOverlay(fourth)
+            .build()
+
+        targets.add(fourthTarget)
+
+        // fifth target
+        val fifthRoot = FrameLayout(requireContext())
+        val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
+        fifth.findViewById<TextView>(R.id.custom_text).text =
+            "Find out the cycling gear you need to deliver safe"
+        val fifthTarget = Target.Builder()
+            .setAnchor(binding.epicCard34.cardLeft)
+            .setShape(
+                RoundedRectangle(
+                    (view?.height ?: 2000) / 7.toFloat(),
+                    (view?.width ?: 1000) / 2.toFloat(),
+                    10f
+                )
+            )
+            .setOverlay(fifth)
+            .build()
+
+        targets.add(fifthTarget)
+
+        // sixth target
+        val sixthRoot = FrameLayout(requireContext())
+        val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
+        sixth.findViewById<TextView>(R.id.custom_text).text =
+            "Find out the measure for handling the bike accident"
+        val sixthTarget = Target.Builder()
+            .setAnchor(binding.epicCard34.cardRight)
+            .setShape(
+                RoundedRectangle(
+                    (view?.height ?: 2000) / 7.toFloat(),
+                    (view?.width ?: 1000) / 2.toFloat(),
+                    10f
+                )
+            )
+            .setOverlay(sixth)
+            .build()
+
+        targets.add(sixthTarget)
+
+        // seventh target
+        val seventhRoot = FrameLayout(requireContext())
+        val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
+        fourth.findViewById<TextView>(R.id.custom_text).text =
             "Left Menu has quiz, graph or know more about us ~lol~"
         fourth.findViewById<TextView>(R.id.next_target).alpha = 0f
-        val fourthTarget = Target.Builder()
+        val seventhTarget = Target.Builder()
             .setAnchor(80f, 120f)
             .setShape(Circle(110f))
-            .setOverlay(fourth)
+            .setOverlay(seventh)
             .build()
 //            .setEffect(RippleEffect(110f, 200f, argb(30, 124, 255, 90)))
 
-        targets.add(fourthTarget)
+        targets.add(seventhTarget)
 //
 //        // fifth target
 //        val fifthRoot = FrameLayout(requireContext())
@@ -376,12 +433,18 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //                requireActivity().findViewById<View>(R.id.navDeveloper).setAllEnabled(false)
 //            }
         }
+        fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        fifth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         fourth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        sixth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        seventh.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+
     }
 
     // referred from https://stackoverflow.com/questions/6238881/how-to-disable-all-click-events-of-a-layout
