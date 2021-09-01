@@ -306,7 +306,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val fourth = layoutInflater.inflate(R.layout.layout_target, fourthRoot)
         fourth.findViewById<TextView>(R.id.custom_text).text =
             "This is the menu for you to have a quiz, see visualisation graph or know more about us ^_^"
-        fourth.findViewById<TextView>(R.id.next_target).isVisible = false
+        fourth.findViewById<TextView>(R.id.next_target).alpha = 0f
         val fourthTarget = Target.Builder()
             .setAnchor(80f, 120f)
             .setShape(Circle(120f))
