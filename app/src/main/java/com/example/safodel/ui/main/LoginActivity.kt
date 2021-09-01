@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityLoginBinding
+import tyrantgit.explosionfield.ExplosionField
 import java.math.BigInteger
 import java.security.MessageDigest
 
@@ -47,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.putBoolean("enabled",false)
                     editor.apply()
                     binding.passwordEdit.isEnabled = false
+                    ExplosionField.attach2Window(this).explode(binding.login)
                 }
             }
         }

@@ -78,9 +78,10 @@ dependencies {
     androidTestImplementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
 
 
-
     // spotlight
     implementation 'com.github.takusemba:spotlight:2.0.5'
+
+    implementation 'tyrantgit:explosionfield:1.0.1'
 
 
 
