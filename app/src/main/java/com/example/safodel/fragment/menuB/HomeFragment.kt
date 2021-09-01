@@ -16,6 +16,7 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
 import android.widget.Toast
+import androidx.core.view.doOnPreDraw
 import com.example.safodel.ui.main.MainActivity
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Target
@@ -125,8 +126,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             startSpotLight()
         }
 
-        if (isLearningMode()) {
-            startSpotLight()
+        view.doOnPreDraw {
+            if (isLearningMode()) {
+                startSpotLight()
+            }
         }
 
     }
