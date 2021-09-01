@@ -79,14 +79,10 @@
                             android:layout_marginEnd="127dp"
                             android:layout_marginBottom="101dp"
                             android:alpha="0"
-                            android:elevation="10dp"
-                            android:outlineProvider="bounds"
-                            android:outlineSpotShadowColor="@color/yellow"
                             android:scaleX="1.25"
                             android:scaleY="1.3"
                             android:src="@drawable/backpack"
                             android:translationX="25dp"
-                            android:translationZ="10dp"
                             app:layout_constraintBottom_toBottomOf="@+id/driver"
                             app:layout_constraintEnd_toEndOf="@+id/driver"
                             app:layout_constraintHorizontal_bias="1.0"
@@ -96,23 +92,19 @@
 
                         <ImageView
                             android:id="@+id/headlight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="239dp"
+                            android:layout_height="202dp"
                             android:alpha="0"
-                            android:elevation="10dp"
-                            android:outlineProvider="bounds"
-                            android:outlineSpotShadowColor="@color/yellow"
-                            android:scaleX="0.5"
-                            android:scaleY="0.5"
-                            android:src="@drawable/headlight2"
-                            android:translationZ="10dp"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+                            android:src="@drawable/headlight3"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="@+id/driver"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.147"
+                            app:layout_constraintHorizontal_bias="0.557"
                             app:layout_constraintStart_toEndOf="@+id/driver"
                             app:layout_constraintTop_toTopOf="@+id/driver"
-                            app:layout_constraintVertical_bias="0.603" />
+                            app:layout_constraintVertical_bias="0.0" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>

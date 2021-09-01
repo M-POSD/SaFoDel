@@ -81,35 +81,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
 
-        /* -- draw shadow light to the backpack--*/
-        binding.backpack.outlineProvider = object : ViewOutlineProvider() {
-            override fun getOutline(view: View?, outline: Outline?) {
-                val path = Path()
-                path.moveTo(view!!.width.toFloat(), view.height.toFloat())
-                path.lineTo(2 * view.width / 3.toFloat(), 2 * view.height / 3.toFloat())
-                path.lineTo(2 * view.width / 3.toFloat(), 0.toFloat())
-                path.lineTo(0.toFloat(), 0.toFloat())
-                path.lineTo(0.toFloat(), view.height / 2.toFloat())
-                path.close()
-                outline!!.setConvexPath(path)
-            }
-        }
-
-
-        /* -- draw shadow light to the headlight--*/
-        binding.headlight.outlineProvider = object : ViewOutlineProvider() {
-            override fun getOutline(view: View?, outline: Outline?) {
-                val path = Path()
-                path.moveTo(view!!.width.toFloat(), view.height.toFloat())
-                path.lineTo(5 * view.width.toFloat(), 2 * view.height / 3.toFloat())
-                path.lineTo(5 * view.width.toFloat(), 10 * view.height / 3.toFloat())
-                path.lineTo(-view.width.toFloat(), 0.toFloat())
-                path.lineTo(-view.width.toFloat(), view.height / 2.toFloat())
-                path.close()
-                outline!!.setConvexPath(path)
-            }
-        }
-
         setToolbarBasic(toolbar)
         imageAnimations()
         imagesDrivingAnimation()
@@ -210,6 +181,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
                 binding.headlight.visibility = View.VISIBLE
                 binding.backpack.alpha = 0f
+                binding.backpack.setImageResource(R.drawable.backpack_light)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
                 startAnimation("night")
@@ -226,6 +198,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.coordinatorLayout.setBackgroundResource(R.color.white)
                 binding.headlight.visibility = View.INVISIBLE
                 binding.backpack.alpha = 0f
+                binding.backpack.setImageResource(R.drawable.backpack)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
                 startAnimation("light")
