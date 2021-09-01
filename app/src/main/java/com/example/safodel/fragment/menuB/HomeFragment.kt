@@ -61,9 +61,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorDriving = AnimatorSet()
 
         binding.epicCard12.editTextLeft.text = "Ride Safer"
-        binding.epicCard12.editTextRight.text = "E-Bike Delivery"
+        binding.epicCard12.editTextRight.text = "E-Bike Info"
         binding.epicCard34.editTextLeft.text = "Safety Gears"
-        binding.epicCard34.editTextRight.text = "Placeholder"
+        binding.epicCard34.editTextRight.text = "Accident"
 
         binding.epicCard12.cardLeft.setOnClickListener() {
             recordPosition(0)
@@ -77,6 +77,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         binding.epicCard34.cardLeft.setOnClickListener() {
             recordPosition(2)
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+        }
+
+        binding.epicCard34.cardRight.setOnClickListener() {
+            recordPosition(3)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
