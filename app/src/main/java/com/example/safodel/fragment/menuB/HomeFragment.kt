@@ -351,27 +351,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //            .setEffect(RippleEffect(110f, 200f, argb(30, 124, 255, 90)))
 
         targets.add(seventhTarget)
-//
-//        // fifth target
-//        val fifthRoot = FrameLayout(requireContext())
-//        val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
-//        fifth.findViewById<TextView>(R.id.custom_text).text =
-//            "I am the graph section"
-//        fifth.findViewById<TextView>(R.id.next_target).alpha = 0f
-//        val fifthTarget = Target.Builder()
-//            .setAnchor(requireActivity().findViewById<View>(R.id.navAnalysis))
-//            .setShape(
-//                RoundedRectangle(
-//                    (view?.height ?: 2000) / 13.toFloat(),
-//                    (view?.width ?: 1000) / 3.toFloat(),
-//                    10f
-//                )
-//            )
-//            .setEffect(RippleEffect(110f, 200f, argb(30, 124, 255, 90)))
-//            .setOverlay(fourth)
-//            .build()
-//
-//        targets.add(fifthTarget)
 
         // create spotlight
         val spotlight = Spotlight.Builder(requireActivity())
@@ -424,14 +403,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener{
             spotlight.next()
-//            binding.toolbar.simpleToolbar.setAllEnabled(true)
-//            binding.toolbar.simpleToolbar.setOnClickListener{
-//                fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-//                requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(false)
-//                requireActivity().findViewById<View>(R.id.navExam).setAllEnabled(false)
-//                requireActivity().findViewById<View>(R.id.navAppIntro).setAllEnabled(false)
-//                requireActivity().findViewById<View>(R.id.navDeveloper).setAllEnabled(false)
-//            }
         }
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fifth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
