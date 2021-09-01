@@ -347,7 +347,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     context?.let { it1 ->
                         ContextCompat.getDrawable(
                             it1,
-                            R.drawable.mapbox_marker_icon_default
+                            R.drawable.crash_location
                         )
                     }
                 )!!)
@@ -356,13 +356,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
             val baseicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
-                circleColor(Color.parseColor("#8AD0AB")),
+                circleColor(Color.parseColor("#FF0000")),
                 visibility(Property.VISIBLE),
+                iconIgnorePlacement(false),
                 circleRadius(
                     interpolate(
                         linear(), zoom(),
-                        stop(11f, 3.4f),
-                        stop(12f, 14f)
+                        stop(11f, 4f),
+                        stop(12f, 4f),
+                        stop(15f,4f),
+                        stop(15.1f,0f)
                 )
             ))
 
@@ -372,16 +375,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             /*-- Add circle layer --*/
             val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
                 .withProperties(
-                    circleColor(parseColor("#858585")),
-                    circleRadius(14f),
+                    circleColor(parseColor("#FC9C9C")),
+                    circleRadius(6f),
                     visibility(Property.VISIBLE),
                     circleOpacity(
                         interpolate(
                             linear(), zoom(),
-                            stop(11f - .5, 0),
-                            stop(11f, .5f)
+                            stop(11f, .5f),
+                            stop(15f,0f)
                         )
-                    )
+                    ),
+                    iconIgnorePlacement(false)
                 )
             it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
@@ -391,10 +395,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 visibility(Property.VISIBLE),
                 iconImage("icon_image"),
                 iconSize(1.5f),
-                iconIgnorePlacement(true),
-                iconAllowOverlap(true)
+                iconIgnorePlacement(false),
             )
-            symbolIconLayer.minZoom = 12f
+            symbolIconLayer.minZoom = 15f
             it.addLayer(symbolIconLayer)
 
             /*-- Set the camera's animation --*/
