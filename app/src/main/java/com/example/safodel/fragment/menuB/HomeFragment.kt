@@ -112,7 +112,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         startAnimation("light")
         configModeTheme()
 
-        isBeginnerMode = true
+        isBeginnerMode = false
 
         return binding.root
 
