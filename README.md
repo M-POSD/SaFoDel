@@ -41,7 +41,7 @@ Open the `SaFoDel/` directory in Android Studio.
 ### Tips
 - Require the latest Android Studio Arctic Fox release to be able to build the app
 - Update the Kotlin to latest version.
-- Emulator with the latest sdk 30 (at least 24 sdk) by clicking on the AVD Manager on the navigation bar.
+- Emulator with the latest sdk 30 (at least 24) by clicking on the AVD Manager on the navigation bar.
 
 ## Mapbox tokens
 
