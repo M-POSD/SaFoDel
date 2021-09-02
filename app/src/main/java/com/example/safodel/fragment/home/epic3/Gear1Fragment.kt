@@ -25,10 +25,7 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         _binding = FragmentGear1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear1.currentPageText.text = "Gears basic information"
-        binding.gear1.notification.text = "Wearing proper safety gear while delivering food is a must. " +
-                "Find more about the essential safety gear below. "
-
+        configDefaultTextView()
         configRecycleView()
         setToolbarReturn(toolbar)
 
@@ -40,6 +37,13 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         _binding = null
     }
 
+    private fun configDefaultTextView() {
+        binding.gear1.currentPageText.text = "Gears basic information"
+        binding.gear1.notification.text = "Wearing proper safety gear while delivering food is a must. " +
+                "Find more about the essential safety gear below. "
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         adapter = GroupCard1Adapter(requireActivity(), getGear1s())
 

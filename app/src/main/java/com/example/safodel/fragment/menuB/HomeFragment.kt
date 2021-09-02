@@ -60,10 +60,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorSetNight = AnimatorSet()
         animatorDriving = AnimatorSet()
 
-        binding.epicCard12.editTextLeft.text = "Ride Safer"
-        binding.epicCard12.editTextRight.text = "E-Bike Info"
-        binding.epicCard34.editTextLeft.text = "Safety Gears"
-        binding.epicCard34.editTextRight.text = "Accident"
+        configDefaultTextView()
+
 
         binding.epicCard12.cardLeft.setOnClickListener() {
             recordPosition(0)
@@ -116,6 +114,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    // set up default text view
+    private fun configDefaultTextView() {
+        binding.epicCard12.editTextLeft.text = "Ride Safer"
+        binding.epicCard12.editTextRight.text = "E-Bike Info"
+        binding.epicCard34.editTextLeft.text = "Safety Gears"
+        binding.epicCard34.editTextRight.text = "Accident"
     }
 
     // add animation for the individual image
@@ -224,9 +230,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 animatorDriving.cancel()
                 animatorDriving.start()
             }
-            if (animatorSetLight.isRunning || animatorSetNight.isRunning) {
 
-            } else {
+            if (!animatorSetLight.isRunning && !animatorSetNight.isRunning) {
                 animatorDriving.start()
             }
         }
@@ -396,7 +401,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(false)
 
         spotlight.start()
-
 
         val nextTarget = View.OnClickListener {
             spotlight.next()

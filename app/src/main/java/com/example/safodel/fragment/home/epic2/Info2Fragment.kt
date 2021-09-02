@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.GroupCard1Adapter
-import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentInfo2Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.GroupCard1Data
@@ -26,9 +25,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         _binding = FragmentInfo2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.info2.currentPageText.text = "Advantages of E-bikes delivering"
-        binding.info2.notification.text =
-            "E-bikes are rising in popularity especially in the food delivery community, here's why"
+        configDefaultTextView()
 
         configRecycleView()
 
@@ -42,6 +39,14 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         _binding = null
     }
 
+    // set up the default text view
+    private fun configDefaultTextView() {
+        binding.info2.currentPageText.text = "Advantages of E-bikes delivering"
+        binding.info2.notification.text =
+            "E-bikes are rising in popularity especially in the food delivery community, here's why"
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         adapter = GroupCard1Adapter(requireActivity(), getInfo2s())
 

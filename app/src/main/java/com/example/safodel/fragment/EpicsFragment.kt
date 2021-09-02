@@ -33,12 +33,9 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEpicsBinding.inflate(inflater, container, false)
-        val toolbar = binding.toolbar.root
+
         tabLayout = binding.tabbar.tabLayout
         viewPage2 = binding.tabbar.viewPager2
-
-
-//        Log.d("Test!!!", arguments?.getString("epicPosition").toString())
 
         val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
         viewPage2.adapter = EpicViewAdapter(fm, lifecycle, 4)
@@ -49,8 +46,14 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
         viewPage2.registerOnPageChangeCallback(getOnPageChangeCallBack())
 
+        val toolbar = binding.toolbar.root
         setToolbarReturn(toolbar)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun addTab() {
@@ -147,11 +150,6 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
             }
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

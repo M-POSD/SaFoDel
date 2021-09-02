@@ -8,7 +8,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic2Binding
@@ -41,6 +40,11 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setDefaultView() {
         binding.info1Card.title.text = "Risks with E-bikes"
         binding.info2Card.title.text = "Advantages of E-bikes delivering"
@@ -58,11 +62,6 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         animation.addAnimation(slideIn)
         animation.repeatCount = 1;
         binding.epicLayout.animation = animation
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

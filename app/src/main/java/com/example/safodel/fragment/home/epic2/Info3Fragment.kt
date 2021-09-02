@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.GroupCard1Adapter
-import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentInfo3Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.GroupCard1Data
@@ -26,9 +25,7 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         _binding = FragmentInfo3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.info3.currentPageText.text = "E-bikes Rules & Regulations"
-        binding.info3.notification.text =
-            "Wondering whether the e-bike rules and regulations are different?"
+        configDefaultTextView()
 
         configRecycleView()
 
@@ -42,6 +39,14 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         _binding = null
     }
 
+    // set up the default text view
+    private fun configDefaultTextView() {
+        binding.info3.currentPageText.text = "E-bikes Rules & Regulations"
+        binding.info3.notification.text =
+            "Wondering whether the e-bike rules and regulations are different?"
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         adapter = GroupCard1Adapter(requireActivity(), getInfo3s())
 

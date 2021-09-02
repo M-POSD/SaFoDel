@@ -20,7 +20,7 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
     ): View {
         _binding = FragmentEpic4Binding.inflate(inflater, container, false)
 
-        setDefaultView()
+        configDefaultTextView()
 
         binding.rule1Card.card.setOnClickListener() {
 //            findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
@@ -39,7 +39,12 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         return binding.root
     }
 
-    private fun setDefaultView() {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun configDefaultTextView() {
         binding.rule1Card.title.text = "PLACEHOLDER"
         binding.rule2Card.title.text = "PLACEHOLDER"
         binding.rule3Card.title.text = "PLACEHOLDER"
@@ -56,11 +61,6 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         animation.addAnimation(slideIn)
         animation.repeatCount = 1
         binding.epicLayout.animation = animation
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

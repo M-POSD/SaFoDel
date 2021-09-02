@@ -25,8 +25,7 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         _binding = FragmentInfo1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.info1.currentPageText.text = "Risks with E-bikes"
-        binding.info1.notification.text = "Be aware of RISKs of delivering on e-bikes"
+        configDefaultTextView()
 
         configRecycleView()
 
@@ -40,6 +39,13 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
         _binding = null
     }
 
+    // set up the default text view
+    private fun configDefaultTextView() {
+        binding.info1.currentPageText.text = "Risks with E-bikes"
+        binding.info1.notification.text = "Be aware of RISKs of delivering on e-bikes"
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         adapter = GroupCard2Adapter(requireActivity(), getInfo1s())
 

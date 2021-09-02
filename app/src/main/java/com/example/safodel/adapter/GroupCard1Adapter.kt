@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.R
-import com.example.safodel.databinding.DetailCardBinding
 import com.example.safodel.databinding.GroupCardV1Binding
 import com.example.safodel.model.*
 
@@ -17,7 +16,7 @@ class GroupCard1Adapter(val context: Context, group1Data: MutableList<GroupCard1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        // binding the view of detail_card
+        // binding the view of group_card_v1
         val binding: GroupCardV1Binding =
             GroupCardV1Binding.inflate(LayoutInflater.from(parent.context), parent, false)
 
@@ -43,6 +42,7 @@ class GroupCard1Adapter(val context: Context, group1Data: MutableList<GroupCard1
             viewHolder.binding.imageRight.image.setImageResource(data.image)
             viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
             viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
+
             // if card type == 3, set text to red => this is a fact
             if (data.cardType == 3) {
                 viewHolder.binding.imageRight.description.setTextColor(

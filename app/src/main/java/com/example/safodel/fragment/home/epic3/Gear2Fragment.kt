@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentGear2Binding
-
 import com.example.safodel.fragment.BasicFragment
 
 class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::inflate) {
@@ -21,12 +20,9 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         _binding = FragmentGear2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear2.currentPageText.text =
-            "A checklist of necessary safety equipment"
-        binding.gear2.notification.text =
-            "Worried about forgetting essential safety gear.\nFollow this checklist for a quick heads up!"
-
         setToolbarReturn(toolbar)
+
+        // set up the default text and image view
         configDefaultView()
 
         // set up the checkbox on the checkbox list has been clicked by users or not
@@ -45,6 +41,11 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
 
     // made up the check list to display
     private fun configDefaultView() {
+        binding.gear2.currentPageText.text =
+            "A checklist of necessary safety equipment"
+        binding.gear2.notification.text =
+            "Worried about forgetting essential safety gear.\nFollow this checklist for a quick heads up!"
+
         binding.gear2.detailCardV3.checkbox1.checkbox.text = "Helmet"
         binding.gear2.detailCardV3.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)
         binding.gear2.detailCardV3.checkbox2.checkbox.text = "Rear and Front lights"
@@ -57,7 +58,6 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         binding.gear2.detailCardV3.checkbox5.checkboxImage.setImageResource(R.drawable.gloves)
         binding.gear2.detailCardV3.checkbox6.checkbox.text = "Hand Sanitizer"
         binding.gear2.detailCardV3.checkbox6.checkboxImage.setImageResource(R.drawable.hand_sanitizer)
-
     }
 
     // keep the record of the checkbox clicked
@@ -82,6 +82,7 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         return sharedPref.getBoolean(checkbox, false)
     }
 
+    // set the checkbox was clicked by user or not
     private fun configCheckboxClicked() {
         binding.gear2.detailCardV3.checkbox1.checkbox.isChecked = getCheckboxSharePrefer(1)
         binding.gear2.detailCardV3.checkbox2.checkbox.isChecked = getCheckboxSharePrefer(2)
@@ -89,17 +90,9 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         binding.gear2.detailCardV3.checkbox4.checkbox.isChecked = getCheckboxSharePrefer(4)
         binding.gear2.detailCardV3.checkbox5.checkbox.isChecked = getCheckboxSharePrefer(5)
         binding.gear2.detailCardV3.checkbox6.checkbox.isChecked = getCheckboxSharePrefer(6)
-
-//        binding.gear2.detailCardV3.checkbox1.checkboxImage.setImageResource(R.drawable.checkbox2)
-//        binding.gear2.detailCardV3.checkbox2.checkboxImage.setImageResource(R.drawable.checkbox2)
-//        binding.gear2.detailCardV3.checkbox3.checkboxImage.setImageResource(R.drawable.checkbox2)
-//        binding.gear2.detailCardV3.checkbox4.checkboxImage.setImageResource(R.drawable.checkbox2)
-//        binding.gear2.detailCardV3.checkbox5.checkboxImage.setImageResource(R.drawable.checkbox2)
-//        binding.gear2.detailCardV3.checkbox6.checkboxImage.setImageResource(R.drawable.checkbox2)
-
-
     }
 
+    // record if the user tick the check box
     private fun configCheckboxClickListener() {
         binding.gear2.detailCardV3.checkbox1.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -144,5 +137,4 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
             }
         })
     }
-
 }

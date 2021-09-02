@@ -21,7 +21,7 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
     ): View {
         _binding = FragmentEpic3Binding.inflate(inflater, container, false)
 
-        setDefaultView()
+        configDefaultTextView()
 
         binding.gear1Card.card.setOnClickListener() {
             findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
@@ -40,7 +40,12 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         return binding.root
     }
 
-    private fun setDefaultView() {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun configDefaultTextView() {
         binding.gear1Card.title.text = "Gears information"
         binding.gear2Card.title.text = "A checklist of necessary safety equipment"
         binding.gear3Card.title.text = "Australian standards for the safety gear"
@@ -57,11 +62,6 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         animation.addAnimation(slideIn)
         animation.repeatCount = 1;
         binding.epicLayout.animation = animation
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

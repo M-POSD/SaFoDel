@@ -14,7 +14,7 @@ class GroupCard2Adapter(val context: Context, group2Data: MutableList<GroupCard2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        // binding the view of detail_card
+        // binding the view of group_card_v2
         val binding: GroupCardV2Binding =
             GroupCardV2Binding.inflate(LayoutInflater.from(parent.context), parent, false)
 

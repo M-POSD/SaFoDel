@@ -17,7 +17,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     ): View {
         _binding = FragmentEpic1Binding.inflate(inflater, container, false)
 
-        setDefaultView()
+        configDefaultTextView()
 
         binding.tip1Card.card.setOnClickListener() {
             findNavController().navigate(R.id.tip1Fragment, null, navAnimationLeftToRight())
@@ -37,10 +37,9 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         _binding = null
     }
 
-    private fun setDefaultView() {
+    private fun configDefaultTextView() {
         binding.tip1Card.title.text = "Safety Tips - while riding a bicycle"
         binding.tip2Card.title.text = "Safety Tips - for delivering at night"
-//        binding.tip3Card.title.text = "Nearby Accident Prone areas"
     }
 
     // contents animation slide in from bottom

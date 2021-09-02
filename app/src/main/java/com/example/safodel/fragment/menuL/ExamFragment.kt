@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentExamBinding
 import com.example.safodel.fragment.BasicFragment
+import com.google.android.material.button.MaterialButton
 
 
 class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inflate) {
@@ -21,15 +22,26 @@ class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inf
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentExamBinding.inflate(inflater, container, false)
+
         toast = Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
+
         val toolbar = binding.toolbar.root
         setToolbarWhite(toolbar)
 
+        configBtnOnClickListener()
+
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun configBtnOnClickListener() {
         binding.startBtn.setOnClickListener {
             var userName = binding.editText.text.toString()
-            Log.d("userName", userName)
             if (userName.isEmpty()) {
-
                 toast.setText("Please enter your name")
                 toast.show()
             } else {
@@ -39,11 +51,5 @@ class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inf
                 findNavController().navigate(R.id.exam1Fragment, arg, navAnimationLeftToRight())
             }
         }
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
