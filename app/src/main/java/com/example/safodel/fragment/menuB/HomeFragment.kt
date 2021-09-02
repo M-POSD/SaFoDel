@@ -184,9 +184,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // config the top section layout (white background section), added all necessary image and animation based on different mode
     private fun configModeTheme() {
         binding.lightMode.setOnClickListener {
-            if (animatorSetLight.isRunning || animatorSetNight.isRunning || animatorDriving.isRunning) {
-
-            } else {
+            if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
                 binding.lightMode.visibility = View.INVISIBLE
                 binding.darkMode.visibility = View.VISIBLE
                 binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
@@ -201,9 +199,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         binding.darkMode.setOnClickListener {
-            if (animatorSetLight.isRunning || animatorSetNight.isRunning || animatorDriving.isRunning) {
-
-            } else {
+            if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
                 binding.darkMode.visibility = View.INVISIBLE
                 binding.lightMode.visibility = View.VISIBLE
                 binding.coordinatorLayout.setBackgroundResource(R.color.white)
@@ -387,8 +383,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     currentToast?.cancel()
                     currentToast = Toast.makeText(
                         mainActivity,
-                        "Thanks for watching\n" +
-                                "Enjoy SaFoDel",
+                        "Thanks for watching",
                         Toast.LENGTH_SHORT
                     )
                     currentToast?.show()
