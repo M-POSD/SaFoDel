@@ -80,10 +80,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-//        binding.epicCard34.cardRight.setOnClickListener() {
-//            recordPosition(3)
-//            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
-//        }
+        binding.epicCard34.cardRight.setOnClickListener() {
+            recordPosition(3)
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+        }
 
 
         setToolbarBasic(toolbar)
@@ -320,23 +320,23 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         targets.add(fifthTarget)
 
         // sixth target
-//        val sixthRoot = FrameLayout(requireContext())
-//        val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
-//        sixth.findViewById<TextView>(R.id.custom_text).text =
-//            "Find out the measure for handling the bike accident"
-//        val sixthTarget = Target.Builder()
-//            .setAnchor(binding.epicCard34.cardRight)
-//            .setShape(
-//                RoundedRectangle(
-//                    (view?.height ?: 2000) / 7.toFloat(),
-//                    (view?.width ?: 1000) / 2.toFloat(),
-//                    10f
-//                )
-//            )
-//            .setOverlay(sixth)
-//            .build()
-//
-//        targets.add(sixthTarget)
+        val sixthRoot = FrameLayout(requireContext())
+        val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
+        sixth.findViewById<TextView>(R.id.custom_text).text =
+            "Find out the measure for handling the bike accident"
+        val sixthTarget = Target.Builder()
+            .setAnchor(binding.epicCard34.cardRight)
+            .setShape(
+                RoundedRectangle(
+                    (view?.height ?: 2000) / 7.toFloat(),
+                    (view?.width ?: 1000) / 2.toFloat(),
+                    10f
+                )
+            )
+            .setOverlay(sixth)
+            .build()
+
+        targets.add(sixthTarget)
 
         // seventh target
         val seventhRoot = FrameLayout(requireContext())
@@ -414,14 +414,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fifth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-//        sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         fourth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        sixth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        sixth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         seventh.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
 
     }

@@ -24,7 +24,7 @@
             app:tabBackground="@drawable/tab_color_selector"
             app:tabGravity="fill"
             app:tabInlineLabel="true"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/TabStyle"
             app:tabTextColor="@color/deep_green" />
