@@ -145,7 +145,7 @@
 
                 <include
                     android:id="@+id/epicCard34"
-                    layout="@layout/small_cards" />
+                    layout="@layout/small_card" />
 
                 <TextView
                     android:layout_width="match_parent"
