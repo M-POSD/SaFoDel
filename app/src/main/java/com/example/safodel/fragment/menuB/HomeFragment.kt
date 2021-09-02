@@ -358,7 +358,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     "Know more about the developer team"
         seventh.findViewById<TextView>(R.id.next_target).alpha = 0f
         val seventhTarget = Target.Builder()
-            .setAnchor(80f, 120f)
+            .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))   // get the image view position
             .setShape(Circle(110f))
             .setOverlay(seventh)
             .build()
