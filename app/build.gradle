@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.safodel"
-        minSdk 23
+        minSdk 24
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -63,8 +63,25 @@ dependencies {
         exclude group: 'group_name', module: 'module_name'
     }
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
-    implementation "com.mapbox.navigation:ui:1.5.1"
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.0.0-alpha.2' // Java SDK : Direction
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.18" // Search with UI
+    implementation "com.mapbox.navigation:android:2.0.0-beta.24" // SDK Navigation
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:0.5.1'
 
+    // Security
+    implementation("androidx.security:security-crypto:1.0.0")
+    // For Identity Credential APIs
+    implementation("androidx.security:security-identity-credential:1.0.0-alpha02")
+    // For App Authentication APIs
+    implementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
+    // For App Authentication API testing
+    androidTestImplementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
+
+
+    // spotlight
+    implementation 'com.github.takusemba:spotlight:2.0.5'
+
+    implementation 'tyrantgit:explosionfield:1.0.1'
 
 
 

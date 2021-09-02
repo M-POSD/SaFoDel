@@ -41,7 +41,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 //        Log.d("Test!!!", arguments?.getString("epicPosition").toString())
 
         val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
-        viewPage2.adapter = EpicViewAdapter(fm, lifecycle, 3)
+        viewPage2.adapter = EpicViewAdapter(fm, lifecycle, 4)
 
         addTab()
 
@@ -55,8 +55,9 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
     private fun addTab() {
         tabLayout.addTab(tabLayout.newTab().setText("Ride safer"))
-        tabLayout.addTab(tabLayout.newTab().setText("E-Bike Delivery"))
+        tabLayout.addTab(tabLayout.newTab().setText("E-Bike Info"))
         tabLayout.addTab(tabLayout.newTab().setText("Safety gears"))
+//        tabLayout.addTab(tabLayout.newTab().setText("Accident"))
         tabLayout.setBackgroundResource(R.color.deep_green)
     }
 
@@ -89,6 +90,9 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
                     }
                     "2" -> {
                         updateTabView(2)
+                    }
+                    "3" -> {
+                        updateTabView(3)
                     }
                     else -> updateTabView(position)
                 }
@@ -136,6 +140,10 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
             2 -> {
                 binding.tabbar.notification.text =
                     "Find out the cycling gear you need to deliver safe"
+            }
+            3 -> {
+                binding.tabbar.notification.text =
+                    "Find out the measure for handling the bike accident"
             }
         }
 

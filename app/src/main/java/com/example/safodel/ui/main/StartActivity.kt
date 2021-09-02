@@ -10,6 +10,8 @@ import com.example.safodel.databinding.ActivityStartBinding
 import me.jessyan.autosize.AutoSizeConfig
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
+import android.os.Build
+import android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import android.view.animation.*
 import com.example.safodel.R
 
@@ -24,9 +26,22 @@ class StartActivity : AppCompatActivity() {
 //        imageAnimation()
 //        buttonAnimation()
         configAllAnimations()
-        binding.startButton.card.setOnClickListener {
+        binding.startButton.button.setOnClickListener {
             val intent = Intent()
+            intent.putExtra("isLearningMode", false)
+            // avoid to return to this activity
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.setClass(this@StartActivity, MainActivity::class.java)
 
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+
+        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty_12,0,
+            R.drawable.baseline_chevron_right_green_12,0)
+        binding.learningMode.setOnClickListener {
+            val intent = Intent()
+            intent.putExtra("isLearningMode", true)
             // avoid to return to this activity
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             intent.setClass(this@StartActivity, MainActivity::class.java)
@@ -44,14 +59,17 @@ class StartActivity : AppCompatActivity() {
             ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
         var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.startButton.card, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(binding.startButton.button, "alpha", 0f, 1f)
+        var objectAnimator4: ObjectAnimator =
+            ObjectAnimator.ofFloat(binding.learningMode, "alpha", 0f, 1f)
         objectAnimator1.duration = 1300
         objectAnimator2.duration = 1300
-        objectAnimator3.duration = 800
+        objectAnimator3.duration = 500
+        objectAnimator4.duration = 500
 
         val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
-
+        animatorSet.play(objectAnimator3).before(objectAnimator4)
         animatorSet.start()
     }
 
@@ -79,7 +97,7 @@ class StartActivity : AppCompatActivity() {
         animation.addAnimation(fadeIn)
         animation.startTime = 1000
         animation.repeatCount = 1;
-        binding.startButton.card.animation = animation
+        binding.startButton.button.animation = animation
     }
 
     private fun subTitleAnimation() {

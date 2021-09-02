@@ -1,22 +1,22 @@
 package com.example.safodel.fragment.home.epic2
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.InfoAdapter
+import com.example.safodel.adapter.GroupCard1Adapter
+import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentInfo3Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Info
+import com.example.safodel.model.GroupCard1Data
 
 class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var infos: MutableList<Info>
-    private lateinit var adapter: InfoAdapter
+    private lateinit var info3s: MutableList<GroupCard1Data>
+    private lateinit var adapter: GroupCard1Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +26,7 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         _binding = FragmentInfo3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.info3.extremeSmall.editText.text = "E-bikes Rules & Regulations"
+        binding.info3.currentPageText.text = "E-bikes Rules & Regulations"
         binding.info3.notification.text =
             "Wondering whether the e-bike rules and regulations are different?"
 
@@ -43,7 +43,7 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
     }
 
     private fun configRecycleView() {
-        adapter = InfoAdapter(requireActivity(), getInfo3s())
+        adapter = GroupCard1Adapter(requireActivity(), getInfo3s())
 
         binding.info3.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -58,16 +58,16 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
     }
 
     // get the info3s from the model class
-    private fun getInfo3s(): MutableList<Info> {
-        infos = Info.init()
+    private fun getInfo3s(): MutableList<GroupCard1Data> {
+        info3s = GroupCard1Data.init()
         var i = 0
-        while (i < infos.size) {
-            when (infos[i].info_name) {
-                "Rule" -> i++
-                else -> infos.removeAt(i)
+        while (i < info3s.size) {
+            when (info3s[i].dataType) {
+                "ebikeinfo3" -> i++
+                else -> info3s.removeAt(i)
             }
         }
-        return infos
+        return info3s
     }
 
 }

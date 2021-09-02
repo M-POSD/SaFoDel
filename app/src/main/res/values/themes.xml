@@ -48,4 +48,17 @@
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/notosansjp_bold</item>
     </style>
+
+    <style name="Widget.App.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/button_tint</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/notosansjp_bold</item>
+    </style>
+
+    <style name="MapboxCustomManeuverStyle" parent="MapboxStyleManeuverView">
+        <item name="maneuverViewBackgroundColor">@color/third_green</item>
+        <item name="subManeuverViewBackgroundColor">@color/green</item>
+        <item name="upcomingManeuverViewBackgroundColor">@color/green</item>
+    </style>
+
 </resources>

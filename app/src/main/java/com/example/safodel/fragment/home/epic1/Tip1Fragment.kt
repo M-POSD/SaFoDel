@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.TipAdapter
+import com.example.safodel.adapter.GroupCard1Adapter
+import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentTip1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Tip
+import com.example.safodel.model.GroupCard1Data
+import com.example.safodel.model.GroupCard2Data
 
 class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var tips: MutableList<Tip>
-    private lateinit var adapter: TipAdapter
+    private lateinit var tip1s: MutableList<GroupCard2Data>
+    private lateinit var adapter: GroupCard2Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +28,7 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         _binding = FragmentTip1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.tip1.extremeSmall.editText.text = "Riding a bicycle"
+        binding.tip1.currentPageText.text = "Riding a bicycle"
         binding.tip1.notification.text = "Here are a few safety tips for delivering food on bicycle"
 
         configRecycleView()
@@ -42,7 +44,7 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     }
 
     private fun configRecycleView() {
-        adapter = TipAdapter(requireActivity(), getTip1s())
+        adapter = GroupCard2Adapter(requireActivity(), getTip1s())
 
         binding.tip1.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -57,17 +59,16 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
     }
 
     // get tip1s from the model class
-    private fun getTip1s(): MutableList<Tip> {
-        tips = Tip.init()
+    private fun getTip1s(): MutableList<GroupCard2Data> {
+        tip1s = GroupCard2Data.init()
         var i = 0
-        while (i < tips.size) {
-            Log.d("getTip1s", tips[i].tip_id.toString())
-            when (tips[i].tip_id) {
-                1 -> i++
-                else -> tips.removeAt(i)
+        while (i < tip1s.size) {
+            when (tip1s[i].dataType) {
+                "tip1" -> i++
+                else -> tip1s.removeAt(i)
             }
         }
-        return tips
+        return tip1s
     }
 
 }

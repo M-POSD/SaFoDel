@@ -8,7 +8,7 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.Gear3Adapter
+import com.example.safodel.adapter.GearStandardAdapter
 import com.example.safodel.databinding.FragmentGear3Binding
 
 import com.example.safodel.fragment.BasicFragment
@@ -17,7 +17,7 @@ import com.example.safodel.model.GearStandard
 class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var gearStandards: MutableList<GearStandard>
-    private lateinit var adapter: Gear3Adapter
+    private lateinit var adapter: GearStandardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +27,7 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
         _binding = FragmentGear3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear3.extremeSmall.editText.text = "Australian standards for the safety gear"
+        binding.gear3.currentPageText.text = "Australian standards for the safety gear"
 
         // HtmlCompat -> allow app to use html format
         binding.gear3.notification.text = HtmlCompat.fromHtml("Bicycle helmets should have a sticker showing the Australian Standard " +
@@ -48,7 +48,7 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
     private fun configRecycleView() {
         gearStandards =  GearStandard.init()
 
-        adapter = Gear3Adapter(requireActivity(), gearStandards)
+        adapter = GearStandardAdapter(requireActivity(), gearStandards)
 
         binding.gear3.recyclerView.addItemDecoration(
             DividerItemDecoration(

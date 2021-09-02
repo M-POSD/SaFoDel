@@ -1,16 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">SaFoDel</string>
+    <string name="app_name" translatable="false">SaFoDel</string>
     <string name="school">School</string>
-    <string name="mapbox_access_token">pk.eyJ1Ijoia3h1dTAwMjUiLCJhIjoiY2tzbzd1NTFhMDZpbDJvcWgxNG0wOWU3eiJ9.pKu2k1sFyjp5tsACHK7MyA</string>
+    <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoiamF6MjAyMTA4MjciLCJhIjoiY2tzdTI5NWttMWJ5NzJua3R4Ynd5aG5sOSJ9.5zTN0BjRVD-NBfNe32sAaw</string>
 
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home">Home</string>
-    <string name="map">Map</string>
-    <string name="app_intro">App Intro</string>
-    <string name="safty_gear">Safty Gear</string>
-    <string name="developer">About Us</string>
-    <string name="SaFoDel"><b>SaFoDel</b></string>
-    <string name="start_subtitle"><b>Alert Today, Alive Tomorrow</b></string>
-
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="map" translatable="false">Map</string>
+    <string name="app_intro" translatable="false">About App</string>
+    <string name="safty_gear" translatable="false">Safety Gear</string>
+    <string name="developer" translatable="false">About Us</string>
+    <string name="SaFoDel" translatable="false"><b>SaFoDel</b></string>
+    <string name="start_subtitle" translatable="false"><b>Alert Today, Alive Tomorrow</b></string>
+    <string name="exam" translatable="false">EXAM</string>
+    <string name="analysis" translatable="false">ANALYSIS</string>
+    <string name="password">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
 </resources>

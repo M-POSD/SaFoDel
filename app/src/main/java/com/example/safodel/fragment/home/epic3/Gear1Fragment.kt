@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.GearAdapter
+import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.databinding.FragmentGear1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.Gear
+import com.example.safodel.model.GroupCard1Data
 
 class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var gears: MutableList<Gear>
-    private lateinit var adapter: GearAdapter
+    private lateinit var gears: MutableList<GroupCard1Data>
+    private lateinit var adapter: GroupCard1Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +25,7 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         _binding = FragmentGear1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear1.extremeSmall.editText.text = "Gears basic information"
+        binding.gear1.currentPageText.text = "Gears basic information"
         binding.gear1.notification.text = "Wearing proper safety gear while delivering food is a must. " +
                 "Find more about the essential safety gear below. "
 
@@ -41,7 +41,7 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
     }
 
     private fun configRecycleView() {
-        adapter = GearAdapter(requireActivity(), getGear1s())
+        adapter = GroupCard1Adapter(requireActivity(), getGear1s())
 
         binding.gear1.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -55,13 +55,13 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
         binding.gear1.recyclerView.layoutManager = layoutManager
     }
 
-    // get the gear1s from the model class
-    private fun getGear1s(): MutableList<Gear> {
-        gears = Gear.init()
+    // get the gears from the model class
+    private fun getGear1s(): MutableList<GroupCard1Data> {
+        gears = GroupCard1Data.init()
         var i = 0
         while (i < gears.size) {
-            when (gears[i].info_type) {
-                "Gear" -> i++
+            when (gears[i].dataType) {
+                "gear" -> i++
                 else -> gears.removeAt(i)
             }
         }

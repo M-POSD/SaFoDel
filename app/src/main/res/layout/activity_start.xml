@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ImageView
@@ -38,7 +39,7 @@
             android:id="@+id/subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/notosansjp_bold"
             android:gravity="center"
             android:text="@string/start_subtitle"
@@ -48,6 +49,24 @@
         <include
             android:id="@+id/start_button"
             layout="@layout/start_button" />
+
+        <TextView
+            android:id="@+id/learning_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:visibility="invisible"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0"
+            android:fontFamily="@font/notosansjp_bold"
+            android:text="LEARNING MODE"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/primary_green"
+            android:textSize="12dp"
+            app:cornerRadius="50dp"
+            android:focusable="true" />
     </LinearLayout>
 
 

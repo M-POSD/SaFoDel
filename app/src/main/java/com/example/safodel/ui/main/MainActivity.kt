@@ -1,6 +1,10 @@
 package com.example.safodel.ui.main
 
+import android.R.attr
+import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -8,7 +12,9 @@ import android.os.Looper
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2
@@ -20,6 +26,10 @@ import com.google.android.material.tabs.TabLayout
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 import kotlin.system.exitProcess
+import android.R.attr.defaultValue
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +48,9 @@ class MainActivity : AppCompatActivity() {
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
         AutoSizeConfig.getInstance().isBaseOnWidth = false
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        recordLearningMode()
     }
 
 
@@ -57,9 +69,7 @@ class MainActivity : AppCompatActivity() {
      * If the user is in home, school and map pages, he/she needs to click twice
      */
     override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment
-                    && navController.currentDestination?.id != R.id.schoolFragment
-                    && navController.currentDestination?.id != R.id.mapfragment)
+        if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment)
         ) {
             super.onBackPressed()
             return
@@ -76,14 +86,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
-            navController.popBackStack() // Previous fragment out of stack
             when (it.itemId) {
                 R.id.navHome -> {
+                    navController.popBackStack() // Previous fragment out of stack
                     navController.navigate(R.id.homeFragment)
-                    true
-                }
-                R.id.navSchool -> {
-                    navController.navigate(R.id.schoolFragment)
                     true
                 }
                 R.id.navMap -> {
@@ -105,16 +111,8 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                     R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-                    // for control the action from Home to AppIntro
-//                    R.id.navAppIntro -> {
-//                        val action = HomeFragmentDirections.actionHomeFragmentToAppIntroFragment()
-//                        navController.navigate(action)
-//                    }
-//
-//                    R.id.navDeveloper -> {
-//                        val action = HomeFragmentDirections.actionHomeFragmentToDeveloperFragment()
-//                        navController.navigate(action)
-//                    }
+                    //R.id.navExam -> navController.navigate(R.id.examFragment)
+                    //R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
                 }
             }
             binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
@@ -145,12 +143,26 @@ class MainActivity : AppCompatActivity() {
     fun bottomNavHeight(): Int{
         return binding.bottomNavigation.height
     }
+
+
+    /**
+     * For record user want to conduct learning mode or not
+     */
+    private fun recordLearningMode() {
+        val isLearningMode = intent.getBooleanExtra(
+            "isLearningMode",
+            false
+        )
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            "isLearningMode", Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putBoolean("isLearningMode", isLearningMode)
+        spEditor.apply()
+    }
 }
 
-//val animationOptions = NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
-//    .setExitAnim(R.anim.slide_out_left)
-//    .setPopEnterAnim(R.anim.slide_in_left)
-//    .setPopExitAnim(R.anim.slide_out_right).build()
 
 //
 // val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()

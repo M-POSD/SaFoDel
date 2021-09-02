@@ -14,19 +14,12 @@
         android:name="com.example.safodel.fragment.menuB.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map">
-        <action
-            android:id="@+id/action_mapfragment_to_schoolFragment3"
-            app:destination="@id/schoolFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment
-        android:id="@+id/schoolFragment"
-        android:name="com.example.safodel.fragment.menuB.SchoolFragment"
+        android:id="@+id/examFragment"
+        android:name="com.example.safodel.fragment.menuL.ExamFragment"
         android:label="fragment_school"
-        tools:layout="@layout/fragment_school" />
+        tools:layout="@layout/fragment_exam" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.safodel.fragment.menuB.HomeFragment"
@@ -38,11 +31,7 @@
             android:defaultValue="0"/>
         <action
             android:id="@+id/action_homeFragment_to_developerFragment"
-            app:destination="@id/developerFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:destination="@id/developerFragment"/>
         <action
             android:id="@+id/action_homeFragment_to_epicsFragment"
             app:destination="@id/epicsFragment"
@@ -52,11 +41,13 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_appIntroFragment"
-            app:destination="@id/appIntroFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:destination="@id/appIntroFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_mapfragment"
+            app:destination="@id/mapfragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_schoolFragment"
+            app:destination="@id/examFragment" />
     </fragment>
     <fragment
         android:id="@+id/epic1Fragment"
@@ -165,9 +156,14 @@
         android:label="fragment_gear2"
         tools:layout="@layout/fragment_gear2" />
     <fragment
-        android:id="@+id/gear4Fragment"
-        android:name="com.example.safodel.fragment.home.epic3.Gear4Fragment"
-        android:label="fragment_gear4"
-        tools:layout="@layout/fragment_gear4" />
+        android:id="@+id/analysisFragment"
+        android:name="com.example.safodel.fragment.menuL.AnalysisFragment"
+        android:label="fragment_analysis"
+        tools:layout="@layout/fragment_analysis" />
+    <fragment
+        android:id="@+id/exam1Fragment"
+        android:name="com.example.safodel.fragment.menuL.exam.Exam1Fragment"
+        android:label="fragment_exam1"
+        tools:layout="@layout/fragment_exam1" />
 
 </navigation>

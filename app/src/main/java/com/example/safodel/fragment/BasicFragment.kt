@@ -18,6 +18,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     protected var _binding: TBinding? = null
     val binding get() = _binding!!
     override fun onCreateView(
+
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,14 +46,26 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
-        toolbar.setNavigationIcon(R.drawable.menu_new)
+        toolbar.setNavigationIcon(R.drawable.menu_green)
+    }
 
+    /**
+     *  Press the white navigation icon to pop up the navigation window
+     */
+    fun setToolbarWhite(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationOnClickListener {
+            mainActivity.openDrawer()
+        }
+        toolbar.setNavigationIcon(R.drawable.menu_white)
     }
 
     /**
      * Press the return navigation icon to go back to previous page
      */
-    fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
+    open fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
         setToolbarBasic(toolbar)
         toolbar.setNavigationIcon(R.drawable.arrow_left_circle)
         toolbar.setNavigationOnClickListener {
