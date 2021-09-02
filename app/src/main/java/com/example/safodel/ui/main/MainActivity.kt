@@ -111,8 +111,8 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                     R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-                    R.id.navExam -> navController.navigate(R.id.examFragment)
-                    R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
+                    //R.id.navExam -> navController.navigate(R.id.examFragment)
+                    //R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
                 }
             }
             binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
