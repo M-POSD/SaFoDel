@@ -30,7 +30,7 @@
             android:checkable="true"
             android:focusable="true"
             app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="@color/milk_white">
+            app:cardBackgroundColor="@color/primary_green">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,12 +44,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/notosansjp_bold"
+                    android:textColor="@color/white"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
                 <TextView
                     android:id="@+id/developer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:layout_gravity="center"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6" />

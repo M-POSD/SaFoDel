@@ -51,8 +51,10 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     }
 
     private fun setQuestions() {
-
         binding.submitButton.text = "SUBMIT"
+
+        // when the question haven't answered, set the current questions is clickable until has been answer
+        setOptionClickable(true)
 
         val question = mQuestions!![mCurrentPosition - 1]
 
@@ -135,6 +137,8 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                     }
                     mSelectedOptionPosition = 0
 
+                    // when the question is answered, set the current questions is not clickable until go to next one
+                    setOptionClickable(false)
                 }
             }
         }
@@ -160,6 +164,14 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
             requireActivity(),
             R.drawable.selected_option_border_bg
         )
+    }
+
+    // set all options isClickable
+    private fun setOptionClickable(isClickable: Boolean) {
+        binding.option1.isClickable = isClickable
+        binding.option2.isClickable = isClickable
+        binding.option3.isClickable = isClickable
+        binding.option4.isClickable = isClickable
 
     }
 }

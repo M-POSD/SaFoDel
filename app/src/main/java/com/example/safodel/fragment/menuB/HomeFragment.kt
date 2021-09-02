@@ -36,12 +36,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var mainActivity: MainActivity
 
-
     private lateinit var animatorSetLight: AnimatorSet
     private lateinit var animatorSetNight: AnimatorSet
     private lateinit var animatorDriving: AnimatorSet
 
-    // testing section -> spotlight function
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
 
