@@ -62,8 +62,8 @@ Follow Mapbox's [docs](https://docs.mapbox.com/help/getting-started/access-token
 
 | Module              | Description
 | ------------------- | -----------
-| [spotlight](https://github.com/TakuSemba/Spotlight)              | Lights wherever we want
-| [explosionfield](https://github.com/tyrantgit/ExplosionField)  | explosive dust effect for views
+| [Spotlight](https://github.com/TakuSemba/Spotlight)              | Lights wherever we want
+| [Explosionfield](https://github.com/tyrantgit/ExplosionField)  | explosive dust effect for views
 | [ColorDialog](https://github.com/andyxialm/ColorDialog) | Create dialog
 | [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize) | auto size the screen
 
