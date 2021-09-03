@@ -1,6 +1,7 @@
 package com.example.safodel.fragment.menuL
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +16,12 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAppIntroBinding.inflate(inflater,container,false)
-        binding.appIntro.text = "Topic:" + "\n" +
-                "Educating Food Delivery Bike Riders\n" + "\n" +
-                "Project:" + "\n" +
-                "SaFoDel\n" + "\n" +
-                "Audience:" + "\n" +
+        binding.appIntro.text = "Topic:" + "\n" + "\n" +
+                "Educating Food Delivery Bike Riders\n" + "\n" + "\n" +
+                "Audience:" + "\n" + "\n" +
                 "Potential and already existing food delivery bike riders"
+        binding.appIntro.gravity = Gravity.CENTER
+        binding.appIntro.textSize = 16F
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
         return binding.root
