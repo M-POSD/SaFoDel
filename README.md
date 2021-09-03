@@ -62,7 +62,6 @@ Follow Mapbox's [docs](https://docs.mapbox.com/help/getting-started/access-token
 
 | Module              | Description
 | ------------------- | -----------
-| [Mapbox](https://www.mapbox.com/)| Generate Map and navigation functions
 | [spotlight](https://github.com/TakuSemba/Spotlight)              | Lights wherever we want
 | [explosionfield](https://github.com/tyrantgit/ExplosionField)  | explosive dust effect for views
 | [ColorDialog](https://github.com/andyxialm/ColorDialog) | Create dialog
