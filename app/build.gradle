@@ -81,7 +81,10 @@ dependencies {
     // spotlight
     implementation 'com.github.takusemba:spotlight:2.0.5'
 
+    // login password animation
     implementation 'tyrantgit:explosionfield:1.0.1'
+
+    implementation 'fr.tvbarthel.blurdialogfragment:lib:2.2.0'
 
 
 
