@@ -84,6 +84,7 @@ dependencies {
     // login password animation
     implementation 'tyrantgit:explosionfield:1.0.1'
 
+    // dialog
     implementation 'com.github.andyxialm:ColorDialog:1.0.0'
 
 

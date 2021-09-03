@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import cn.refactor.lib.colordialog.PromptDialog
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentExam1Binding
 import com.example.safodel.fragment.BasicFragment
@@ -127,6 +128,10 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                     if (question!!.answer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                         Log.d("checkAnswer: ", "I am the wrong answer")
+                        configDialog("error", question.information)
+
+                    } else {
+                        configDialog("success", question.information)
                     }
                     answerView(question!!.answer, R.drawable.correct_option_border_bg)
                     Log.d("mSelectedOptionPosition: ", mSelectedOptionPosition.toString())
@@ -173,6 +178,28 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         binding.option3.isClickable = isClickable
         binding.option4.isClickable = isClickable
 
+    }
+
+    private fun configDialog(type: String, info: String) {
+        var promptDialog = PromptDialog(context)
+            .setAnimationEnable(true)
+            .setContentText("$info\n")
+            .setPositiveListener ("OK"){
+                it.dismiss()
+            }
+
+        when(type) {
+            "correct" -> {
+                promptDialog.setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
+                    .setTitleText("CORRECT!")
+                    .show()
+            }
+            "error" -> {
+                promptDialog.setDialogType(PromptDialog.DIALOG_TYPE_WRONG)
+                    .setTitleText("ERROR!")
+                    .show()
+            }
+        }
     }
 }
 

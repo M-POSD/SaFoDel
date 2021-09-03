@@ -10,7 +10,8 @@ class Question(
     var option2: String,
     var option3: String,
     var option4: String,
-    var answer: Int
+    var answer: Int,
+    var information: String
 
 ) {
     companion object {
@@ -24,7 +25,8 @@ class Question(
                 "epic2",
                 "epic3",
                 "epic4",
-                1
+                1,
+                "This the first version of epic 1 image"
             ))
             questions.add(Question(
                 2, "What is this?",
@@ -33,7 +35,8 @@ class Question(
                 "hand sanitizer",
                 "hand washer",
                 "dont select me plz",
-                2
+                2,
+                "Hand sanitize. You must keep this word in mind"
             ))
             questions.add(Question(
                 3, "What is this?",
@@ -42,7 +45,8 @@ class Question(
                 "no book",
                 "notebook",
                 "book",
-                4
+                4,
+                "BOOK ???"
             ))
             questions.add(Question(
                 4, "What is my colour?",
@@ -51,7 +55,8 @@ class Question(
                 "glove",
                 "golves",
                 "blue",
-                4
+                4,
+                "Select 'COLOUR' !! "
             ))
             questions.add(Question(
                 5, "What is this?",
@@ -60,7 +65,8 @@ class Question(
                 "lights",
                 "headlight",
                 "I am the answer",
-                3
+                3,
+                "I AM THE HEADLIGHT, PLZ REMEMBER ME!"
             ))
 
 
