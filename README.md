@@ -58,6 +58,15 @@ Follow Mapbox's [docs](https://docs.mapbox.com/help/getting-started/access-token
 - Edit "mapbox_access_token" in `res/values/strings.xml`.
 - Edit "MAPBOX_DOWNLOADS_TOKEN" in `/gradle.properties`
 
+## Third-party open source projects
+
+| Module              | Description
+| ------------------- | -----------
+| [Mapbox](https://www.mapbox.com/)| Generate Map and navigation functions
+| [spotlight](https://github.com/TakuSemba/Spotlight)              | Lights wherever we want
+| [explosionfield](https://github.com/tyrantgit/ExplosionField)  | explosive dust effect for views
+| [ColorDialog](https://github.com/andyxialm/ColorDialog) | Create dialog
+
 
 
 
