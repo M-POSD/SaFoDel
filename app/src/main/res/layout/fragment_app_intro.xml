@@ -29,6 +29,7 @@
         app:layout_constraintTop_toTopOf="@id/logo"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20dp"
         android:layout_marginTop="80dp"/>
 
     <LinearLayout
@@ -44,6 +45,7 @@
             android:id="@+id/about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:text="About"
             android:textColor="@color/green_blue"
             android:clickable="true"/>
@@ -53,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:textSize="20dp"
             android:text="Audience"
             android:textColor="@color/green_blue"
             android:clickable="true"/>
