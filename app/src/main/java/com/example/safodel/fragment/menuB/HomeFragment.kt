@@ -28,6 +28,7 @@ import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.*
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import dyanamitechetan.vusikview.VusikView
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -39,6 +40,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var animatorSetLight: AnimatorSet
     private lateinit var animatorSetNight: AnimatorSet
     private lateinit var animatorDriving: AnimatorSet
+    private lateinit var rainingList: IntArray
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
@@ -57,36 +59,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorSetLight = AnimatorSet()
         animatorSetNight = AnimatorSet()
         animatorDriving = AnimatorSet()
+        rainingList = IntArray(1)
 
         configDefaultTextView()
-
-
-        binding.epicCard12.cardLeft.setOnClickListener() {
-            recordPosition(0)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
-        }
-
-        binding.epicCard12.cardRight.setOnClickListener() {
-            recordPosition(1)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
-        }
-
-        binding.epicCard34.cardLeft.setOnClickListener() {
-            recordPosition(2)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
-        }
-
-        binding.epicCard34.cardRight.setOnClickListener() {
-            recordPosition(3)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
-        }
-
-
+        configNavigationOnClickListener()
         setToolbarBasic(toolbar)
         imageAnimations()
         imagesDrivingAnimation()
         startAnimation("light")
         configModeTheme()
+
+        // first raining animation
+        rainingAnimation(R.drawable.drop_blue_v3)
+//        rainingList[0] = R.drawable.drop_blue
+//        binding.vusik.setImages(rainingList).start()
 
         isBeginnerMode = false
 
@@ -120,6 +106,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.epicCard12.editTextRight.text = "E-Bike Info"
         binding.epicCard34.editTextLeft.text = "Safety Gears"
         binding.epicCard34.editTextRight.text = "Accident"
+    }
+
+    // raining animation
+    private fun rainingAnimation(rainingImage: Int) {
+//        binding.vusik.stopNotesFall()
+        rainingList[0] = rainingImage
+        binding.vusik.setImages(rainingList).start()
+        binding.vusik.startNotesFall()
     }
 
     // add animation for the individual image
@@ -179,6 +173,29 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         spEditor.apply()
     }
 
+    // config onClickListener for navigation
+    private fun configNavigationOnClickListener() {
+        binding.epicCard12.cardLeft.setOnClickListener() {
+            recordPosition(0)
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+        }
+
+        binding.epicCard12.cardRight.setOnClickListener() {
+            recordPosition(1)
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+        }
+
+        binding.epicCard34.cardLeft.setOnClickListener() {
+            recordPosition(2)
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+        }
+
+        binding.epicCard34.cardRight.setOnClickListener() {
+            recordPosition(3)
+            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+        }
+    }
+
     // config the top section layout (white background section), added all necessary image and animation based on different mode
     private fun configModeTheme() {
         binding.lightMode.setOnClickListener {
@@ -191,6 +208,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.backpack.setImageResource(R.drawable.backpack_light)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
+//                rainingAnimation(R.drawable.drop_blue)
                 startAnimation("night")
                 setToolbarWhite(toolbar)
             }
@@ -206,6 +224,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.backpack.setImageResource(R.drawable.backpack)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
+//                rainingAnimation(R.drawable.drop_blue)
                 startAnimation("light")
                 setToolbarBasic(toolbar)
             }

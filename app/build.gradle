@@ -78,17 +78,20 @@ dependencies {
     androidTestImplementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
 
 
-    // spotlight
+    // Spotlight
     implementation 'com.github.takusemba:spotlight:2.0.5'
 
-    // login password animation
+    // Login password animation
     implementation 'tyrantgit:explosionfield:1.0.1'
 
-    // dialog
+    // Dialog
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
-    //spinner
-    implementation 'com.github.arcadefire:nice-spinner:1.4.4'
+    // Spinner
+    implementation "com.github.arcadefire:nice-spinner:1.4.4"
+
+    // Raining animation
+    implementation 'dyanamitechetan.vusikview:vusikview:1.1'
 
 
 

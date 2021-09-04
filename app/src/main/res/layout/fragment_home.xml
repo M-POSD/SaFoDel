@@ -36,6 +36,13 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center">
 
+                    <dyanamitechetan.vusikview.VusikView
+                        android:id="@+id/vusik"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:fallSpeed="0.3"
+                        app:fallCount="50"/>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/images"
                         android:layout_width="match_parent"
