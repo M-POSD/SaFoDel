@@ -273,11 +273,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         // spinner init
         val spinner: NiceSpinner = binding.spinner
-//        val arrayAdapter:ArrayAdapter<String> = ArrayAdapter<String>(mainActivity,android.R.layout.simple_spinner_item,LGAlist)
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = arrayAdapter
-//        spinner.onItemSelectedListener = this
         spinner.attachDataSource(LGAlist)
+        spinner.text = "SELECT HERE"
         spinner.setOnSpinnerItemSelectedListener { parent, view, position, id ->
             spinnerTimes++ // calculate the times to test
             if(spinnerTimes >= 1){
@@ -528,18 +525,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             Toast.makeText(context, "user location permission not granted", Toast.LENGTH_LONG).show()
         }
     }
-
-//    /*-- Spinner listener --*/
-//    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//        spinnerTimes++ // calculate the times to test
-//        if(spinnerTimes >= 1){
-//            lga = parent?.getItemAtPosition(position).toString()
-//            mThread = fetchdata()
-//            mThread.start()
-//        }
-//    }
-
-
 
     /* -- Hide or Show the crash relative view. -- */
     fun changeToNav(){
