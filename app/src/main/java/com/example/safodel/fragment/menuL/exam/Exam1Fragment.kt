@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import cn.refactor.lib.colordialog.PromptDialog
+import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentExam1Binding
 import com.example.safodel.fragment.BasicFragment
@@ -180,28 +180,13 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
 
     }
 
-    private fun configDialog(type: String, info: String) {
-        var promptDialog = PromptDialog(context)
-            .setAnimationEnable(true)
-            .setContentText("$info\n")
-            .setPositiveListener ("OK"){
-                it.dismiss()
-            }
-
-        when(type) {
-            "correct" -> {
-                promptDialog.setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
-                    .setTitleText("CORRECT!")
-                    .show()
-            }
-            "error" -> {
-                promptDialog.setDialogType(PromptDialog.DIALOG_TYPE_WRONG)
-                    .setTitleText("ERROR!")
-                    .show()
-            }
+    private fun configDialog(type:String, info: String) {
+        MaterialDialog(requireContext()).show {
+            title(text = type)
+            message(text = info)
         }
-    }
 }
+    }
 
 /*
     Referred from:

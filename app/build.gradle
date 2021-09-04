@@ -85,7 +85,6 @@ dependencies {
     implementation 'tyrantgit:explosionfield:1.0.1'
 
     // dialog
-    implementation 'com.github.andyxialm:ColorDialog:1.0.0'
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
 
