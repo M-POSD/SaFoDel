@@ -55,14 +55,11 @@
         android:fitsSystemWindows="true"
         android:orientation="horizontal">
 
-        <Spinner
+        <org.angmarch.views.NiceSpinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/blue_outline"
-            android:fitsSystemWindows="true"
-            android:spinnerMode="dialog"
-            tools:listitem="@layout/items_lga" />
+            android:fitsSystemWindows="true" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/updateMap"

@@ -105,6 +105,7 @@ import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
+import org.angmarch.views.NiceSpinner
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -118,7 +119,7 @@ private lateinit var mThread:Thread
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
-    OnMapReadyCallback,PermissionsListener, AdapterView.OnItemSelectedListener {
+    OnMapReadyCallback,PermissionsListener {
 
     // View
     private lateinit var toast: Toast
@@ -271,11 +272,20 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         permissionsManager.requestLocationPermissions(activity)
 
         // spinner init
-        val spinner: Spinner = binding.spinner
-        val arrayAdapter:ArrayAdapter<String> = ArrayAdapter<String>(mainActivity,android.R.layout.simple_spinner_item,LGAlist)
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = arrayAdapter
-        spinner.onItemSelectedListener = this
+        val spinner: NiceSpinner = binding.spinner
+//        val arrayAdapter:ArrayAdapter<String> = ArrayAdapter<String>(mainActivity,android.R.layout.simple_spinner_item,LGAlist)
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        spinner.adapter = arrayAdapter
+//        spinner.onItemSelectedListener = this
+        spinner.attachDataSource(LGAlist)
+        spinner.setOnSpinnerItemSelectedListener { parent, view, position, id ->
+            spinnerTimes++ // calculate the times to test
+            if(spinnerTimes >= 1){
+                lga = parent?.getItemAtPosition(position).toString()
+                mThread = fetchdata()
+                mThread.start()
+            }
+        }
 
         // change the float button height
         changeFloatButtonHeight()
@@ -519,21 +529,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    /*-- Spinner listener --*/
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        spinnerTimes++ // calculate the times to test
-        //Log.d("Hello spinner", parent?.getItemAtPosition(position).toString())
-        if(spinnerTimes >= 1){
-            //Log.d("Hello Spinner", spinnerTimes.toString())
-            lga = parent?.getItemAtPosition(position).toString()
-            mThread = fetchdata()
-            mThread.start()
-        }
-    }
+//    /*-- Spinner listener --*/
+//    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//        spinnerTimes++ // calculate the times to test
+//        if(spinnerTimes >= 1){
+//            lga = parent?.getItemAtPosition(position).toString()
+//            mThread = fetchdata()
+//            mThread.start()
+//        }
+//    }
 
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
 
 
     /* -- Hide or Show the crash relative view. -- */
