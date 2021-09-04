@@ -3,11 +3,8 @@ package com.example.safodel.fragment.menuB
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.Color.argb
-import android.graphics.Outline
-import android.graphics.Path
 import android.os.Bundle
-import android.text.Layout
+import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
@@ -22,16 +19,25 @@ import androidx.core.view.doOnPreDraw
 import com.example.safodel.ui.main.MainActivity
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Target
-import com.takusemba.spotlight.OnTargetListener
 import com.takusemba.spotlight.Spotlight
-import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.*
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import dyanamitechetan.vusikview.VusikView
+import com.example.safodel.retrofit.RetrofitClient
+import com.example.safodel.retrofit.RetrofitInterface
+import com.example.safodel.model.WeatherResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+    // get weather
+    private val APP_ID = "898ef19b846722554449f6068e7c7253"
+    private val CITY_NAME = "Caulfield"
+    private lateinit var weatherService: RetrofitInterface
+
     // Basic value
     private lateinit var toast: Toast
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
@@ -52,6 +58,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        weatherService = RetrofitClient.getRetrofitService()
+        callWeatherService()
+
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
         mainActivity = activity as MainActivity
@@ -62,17 +71,15 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         rainingList = IntArray(1)
 
         configDefaultTextView()
-        configNavigationOnClickListener()
+        configOnClickListener()
         setToolbarBasic(toolbar)
         imageAnimations()
         imagesDrivingAnimation()
-        startAnimation("light")
-        configModeTheme()
-
-        // first raining animation
-        rainingAnimation(R.drawable.drop_blue_v3)
-//        rainingList[0] = R.drawable.drop_blue
-//        binding.vusik.setImages(rainingList).start()
+        if (getCurrentTime() > 18 || getCurrentTime() < 7) {
+            configTheme("night")
+        } else {
+            configTheme("light")
+        }
 
         isBeginnerMode = false
 
@@ -174,7 +181,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     // config onClickListener for navigation
-    private fun configNavigationOnClickListener() {
+    private fun configOnClickListener() {
         binding.epicCard12.cardLeft.setOnClickListener() {
             recordPosition(0)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
@@ -194,39 +201,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             recordPosition(3)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
-    }
 
-    // config the top section layout (white background section), added all necessary image and animation based on different mode
-    private fun configModeTheme() {
         binding.lightMode.setOnClickListener {
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
-                binding.lightMode.visibility = View.INVISIBLE
-                binding.darkMode.visibility = View.VISIBLE
-                binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
-                binding.headlight.visibility = View.VISIBLE
-                binding.backpack.alpha = 0f
-                binding.backpack.setImageResource(R.drawable.backpack_light)
-                binding.helmet.alpha = 0f
-                binding.headlight.alpha = 0f
-//                rainingAnimation(R.drawable.drop_blue)
-                startAnimation("night")
-                setToolbarWhite(toolbar)
+                configTheme("night")
             }
         }
 
         binding.darkMode.setOnClickListener {
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
-                binding.darkMode.visibility = View.INVISIBLE
-                binding.lightMode.visibility = View.VISIBLE
-                binding.coordinatorLayout.setBackgroundResource(R.color.white)
-                binding.headlight.visibility = View.INVISIBLE
-                binding.backpack.alpha = 0f
-                binding.backpack.setImageResource(R.drawable.backpack)
-                binding.helmet.alpha = 0f
-                binding.headlight.alpha = 0f
-//                rainingAnimation(R.drawable.drop_blue)
-                startAnimation("light")
-                setToolbarBasic(toolbar)
+                configTheme("light")
             }
         }
     }
@@ -455,5 +439,68 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             Context.MODE_PRIVATE
         )
         return sharedPref.getBoolean("isLearningMode", false)
+    }
+
+    private fun callWeatherService() {
+        val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(
+            CITY_NAME,
+            APP_ID
+        )
+
+        callAsync.enqueue(object : Callback<WeatherResponse?> {
+            override fun onResponse(call: Call<WeatherResponse?>?, response: Response<WeatherResponse?>) {
+                if (response.isSuccessful) {
+                    val list = response.body()!!.weatherList
+                    if (list!= null) {
+                        val weather = list[0].main
+                        if (weather == "Rain") {
+                            rainingAnimation(R.drawable.drop_blue_v3)
+                        }
+                        Log.d("currentWeather", weather)
+                    }
+                } else {
+                    Log.i("Error ", "Response failed")
+                }
+            }
+
+            override fun onFailure(call: Call<WeatherResponse?>?, t: Throwable) {
+                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // get current hour
+    private fun getCurrentTime(): Int {
+        val calendar = Calendar.getInstance()
+        return calendar.get(Calendar.HOUR_OF_DAY)
+    }
+
+    private fun configTheme(mode: String) {
+        when(mode) {
+            "light" -> {
+                binding.darkMode.visibility = View.INVISIBLE
+                binding.lightMode.visibility = View.VISIBLE
+                binding.coordinatorLayout.setBackgroundResource(R.color.white)
+                binding.headlight.visibility = View.INVISIBLE
+                binding.backpack.alpha = 0f
+                binding.backpack.setImageResource(R.drawable.backpack)
+                binding.helmet.alpha = 0f
+                binding.headlight.alpha = 0f
+                startAnimation("light")
+                setToolbarBasic(toolbar)
+            }
+            "night" -> {
+                binding.lightMode.visibility = View.INVISIBLE
+                binding.darkMode.visibility = View.VISIBLE
+                binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
+                binding.headlight.visibility = View.VISIBLE
+                binding.backpack.alpha = 0f
+                binding.backpack.setImageResource(R.drawable.backpack_light)
+                binding.helmet.alpha = 0f
+                binding.headlight.alpha = 0f
+                startAnimation("night")
+                setToolbarWhite(toolbar)
+            }
+        }
     }
 }
