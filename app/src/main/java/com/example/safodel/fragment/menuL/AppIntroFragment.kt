@@ -2,12 +2,12 @@ package com.example.safodel.fragment.menuL
 
 import android.graphics.Paint
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import cn.refactor.lib.colordialog.ColorDialog
-import cn.refactor.lib.colordialog.PromptDialog
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.example.safodel.R
 import com.example.safodel.databinding.FragmentAppIntroBinding
 import com.example.safodel.fragment.BasicFragment
 
@@ -24,24 +24,16 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
 
         binding.about.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
         binding.about.setOnClickListener {
-            PromptDialog(context).setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
-                .setAnimationEnable(true)
-                .setTitleText("Topic")
-                .setContentText("Educating Food Delivery Bike Riders\n")
-                .setPositiveListener ("OK"){
-                    it.dismiss()
-                }.show()
+            MaterialDialog(requireContext()).show{
+                customView(R.layout.appinfo_about)
+            }
         }
 
         binding.audience.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
         binding.audience.setOnClickListener {
-            PromptDialog(context).setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
-                .setAnimationEnable(true)
-                .setTitleText("Audience")
-                .setContentText("Potential and already existing food delivery bike riders\n")
-                .setPositiveListener("OK") {
-                    it.dismiss()
-                }.show()
+            MaterialDialog(requireContext()).show {
+                customView(R.layout.appinfo_audience)
+            }
         }
 
 
