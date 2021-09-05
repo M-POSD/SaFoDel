@@ -48,24 +48,36 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         _binding = null
     }
 
+    /*
+        Setting the spinner
+     */
     private fun initSpinner() {
         spProvince = binding.spinner
         spProvince.item = suburbList
         spProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
-
-                    dialog.show {
-                        title(text = "loading.. Please wait.")
-                        cancelable(false)
-                        cancelOnTouchOutside(false)
-                    }
+                    setDialog()
                     callSuburbClient(spProvince.item[position].toString())
-
             }
             override fun onNothingSelected(adapterView: AdapterView<*>) {}
         }
     }
 
+    /*
+        Setting the dialog when item select
+     */
+    private fun setDialog(){
+        dialog.show {
+            message(text = "loading.. Please wait.")
+            cancelable(false)
+            cancelOnTouchOutside(false)
+        }
+    }
+
+
+    /*
+        Init the data from retrofit 2
+     */
     private fun callSuburbClient(suburbName: String){
         val callAsync: Call<SuburbResponse> = suburbInterface.totalRepos(
             "total",
@@ -83,7 +95,6 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     Log.i("Error ", "Response failed")
                 }
             }
-
             override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
                 dialog.dismiss()
                 Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
