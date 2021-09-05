@@ -57,35 +57,49 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
 
         binding.submitBtn.button.text = "SUBMIT"
         // when the question haven't answered, set the current questions is clickable until has been answer
-
+        setOptionClickable(true)
         val question = mQuestions!![mCurrentPosition - 1]
 
         // set info view isGone
         infoView(0, question)
-        configDefaultOptionsView()
+
 
         binding.progressBar.progress = mCurrentPosition
         binding.progress.text = "$mCurrentPosition/${binding.progressBar.max}"
 
         binding.question.text = question!!.question
-        if (question.image!=0) {
+        if (question.image != 0) {
             binding.image.setImageResource(question.image)
             binding.image.visibility = View.VISIBLE
         }
-        binding.opt1.option.text = question.option1
-        binding.opt2.option.text = question.option2
-        binding.opt3.option.text = question.option3
-        binding.opt4.option.text = question.option4
+        configDefaultOptionsView()
         binding.questionInfo.text = question.information
-        setOptionClickable(true)
+
     }
 
     private fun configDefaultOptionsView() {
         val options = ArrayList<TextView>()
         options.add(0, binding.opt1.option)
         options.add(1, binding.opt2.option)
-        options.add(2, binding.opt3.option)
-        options.add(3, binding.opt4.option)
+
+        val question = mQuestions!![mCurrentPosition - 1]
+        if (question.option3 == "") {
+            binding.opt3.option.visibility = View.GONE
+        } else {
+            options.add(2, binding.opt3.option)
+            binding.opt3.option.visibility = View.VISIBLE
+        }
+        if (question.option4 == "") {
+            binding.opt4.option.visibility = View.GONE
+        } else {
+            options.add(2, binding.opt4.option)
+            binding.opt4.option.visibility = View.VISIBLE
+        }
+
+        binding.opt1.option.text = question.option1
+        binding.opt2.option.text = question.option2
+        binding.opt3.option.text = question.option3
+        binding.opt4.option.text = question.option4
 
         for (option in options) {
             option.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray2))
@@ -112,7 +126,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         when (v) {
             binding.opt1.option -> selectedOptionView(binding.opt1.option, 1)
             binding.opt2.option -> selectedOptionView(binding.opt2.option, 2)
-            binding.opt3.option  -> selectedOptionView(binding.opt3.option, 3)
+            binding.opt3.option -> selectedOptionView(binding.opt3.option, 3)
             binding.opt4.option -> selectedOptionView(binding.opt4.option, 4)
             binding.submitBtn.button -> {
                 if (mSelectedOptionPosition == 0) {
@@ -127,10 +141,8 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                                 setQuestions()
                             }
                             else -> {
-                                configDialog("Success","You have successfully completed the Quiz")
+                                configDialog("Success", "You have successfully completed the Quiz")
                                 binding.submitBtn.button.text = "RETURN"
-//                                toast.setText("You have successfully completed the Quiz")
-//                                toast.show()
                             }
 
                         }
@@ -138,10 +150,11 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                 } else {
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
-                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg, R.color.wrong_border_color)
                     }
-                    answerView(question!!.answer, R.drawable.correct_option_border_bg)
+                    answerView(question!!.answer, R.drawable.correct_option_border_bg, R.color.correct_border_color)
                     infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
+
                     if (mCurrentPosition == mQuestions!!.size) {
                         binding.submitBtn.button.text = "FINISH"
                     } else {
@@ -156,16 +169,28 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         }
     }
 
-    private fun answerView(answer: Int, drawableView: Int) {
+    private fun answerView(answer: Int, drawableView: Int, color: Int) {
         when (answer) {
-            1 -> binding.opt1.option.background =
-                ContextCompat.getDrawable(requireActivity(), drawableView)
-            2 -> binding.opt2.option.background =
-                ContextCompat.getDrawable(requireActivity(), drawableView)
-            3 -> binding.opt3.option.background =
-                ContextCompat.getDrawable(requireActivity(), drawableView)
-            4 -> binding.opt4.option.background =
-                ContextCompat.getDrawable(requireActivity(), drawableView)
+            1 -> {
+                binding.opt1.option.background =
+                    ContextCompat.getDrawable(requireActivity(), drawableView)
+                binding.opt1.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+            }
+            2 -> {
+                binding.opt2.option.background =
+                    ContextCompat.getDrawable(requireActivity(), drawableView)
+                binding.opt2.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+            }
+            3 -> {
+                binding.opt3.option.background =
+                    ContextCompat.getDrawable(requireActivity(), drawableView)
+                binding.opt3.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+            }
+            4 -> {
+                binding.opt4.option.background =
+                    ContextCompat.getDrawable(requireActivity(), drawableView)
+                binding.opt4.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+            }
         }
     }
 
@@ -215,7 +240,12 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         configDefaultOptionsView()
         mSelectedOptionPosition = selectedOption
 
-        textView.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+        textView.setTextColor(
+            ContextCompat.getColor(
+                requireActivity(),
+                R.color.correct_border_color
+            )
+        )
         var typeface: Typeface? =
             ResourcesCompat.getFont(requireActivity(), R.font.notosansjp_bold)
         textView.typeface = typeface

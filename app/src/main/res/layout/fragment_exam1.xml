@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="0.8"
+        android:layout_weight="0.83"
         android:orientation="vertical"
         android:paddingHorizontal="20dp">
 
@@ -63,9 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:justificationMode="inter_word"
             android:layout_marginHorizontal="10dp"
             android:fontFamily="@font/notosansjp_black"
-            android:gravity="center"
             android:text="What is this?"
             android:textColor="@color/dark"
             android:textSize="16dp" />
@@ -96,9 +96,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:justificationMode="inter_word"
                 android:background="@drawable/default_option_border_bg"
                 android:fontFamily="@font/notosansjp_bold"
-                android:gravity="center"
                 android:padding="10dp"
                 android:visibility="gone"
                 android:layout_marginBottom="5dp"
@@ -113,7 +113,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.07"
+        android:layout_weight="0.04"
         android:gravity="bottom">
 
         <include
