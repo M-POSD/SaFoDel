@@ -63,6 +63,12 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.anychart.AnyChartView
+            android:id="@+id/barChart"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+
 
     </LinearLayout>
 

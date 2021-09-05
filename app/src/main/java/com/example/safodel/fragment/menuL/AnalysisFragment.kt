@@ -8,14 +8,21 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
+import com.anychart.APIlib
+import com.anychart.AnyChart
+import com.anychart.AnyChartFormat
+import com.anychart.AnyChartView
+import com.anychart.chart.common.dataentry.DataEntry
+import com.anychart.chart.common.dataentry.ValueDataEntry
+import com.anychart.charts.Cartesian
+import com.anychart.core.cartesian.series.Bar
+import com.anychart.core.cartesian.series.Column
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentAnalysisBinding
 import com.example.safodel.databinding.FragmentExamBinding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.SuburbList
-import com.example.safodel.model.SuburbResponse
-import com.example.safodel.model.WeatherResponse
+import com.example.safodel.model.*
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import retrofit2.Call
@@ -28,6 +35,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private var suburbList = SuburbList.init()
     private lateinit var suburbInterface: SuburbInterface
     private lateinit var dialog: MaterialDialog
+    private lateinit var bar: Cartesian
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +46,8 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         val toolbar = binding.toolbar.root
         dialog = MaterialDialog(requireContext())
         setToolbarBasic(toolbar)
+        bar = AnyChart.column()
+        binding.barChart.setChart(bar)
         initSpinner()
         suburbInterface = SuburbClient.getRetrofitService()
         return binding.root
@@ -79,10 +89,12 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Init the data from retrofit 2
      */
     private fun callSuburbClient(suburbName: String){
+
         val callAsync: Call<SuburbResponse> = suburbInterface.totalRepos(
             "total",
             suburbName
         )
+
         callAsync.enqueue(object : Callback<SuburbResponse?> {
             override fun onResponse(call: Call<SuburbResponse?>?, response: Response<SuburbResponse?>) {
                 if (response.isSuccessful) {
@@ -100,5 +112,43 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                 Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
+
+        val callTime: Call<SuburbTimeResponse> = suburbInterface.timeRepos(
+            "time",
+            suburbName
+        )
+
+        callTime.enqueue(object : Callback<SuburbTimeResponse?> {
+            override fun onResponse(call: Call<SuburbTimeResponse?>?, response: Response<SuburbTimeResponse?>) {
+                if (response.isSuccessful) {
+                    val resultList = response.body()!!.suburbTimeAccidents
+                    setBarChat(resultList)
+                } else {
+                    Log.i("Error ", "Response failed")
+                }
+            }
+            override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
+                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
+    private fun setBarChat(list: List<SuburbTimeAccidents>){
+        val data: ArrayList<DataEntry> = ArrayList()
+        val lackData: ArrayList<Int> = ArrayList()
+        for(i in 0..23)
+            lackData.add(i)
+        for(i in list){
+            if(lackData.contains(i.accidentHours))
+                lackData.remove(i.accidentHours)
+        }
+        for(each in list){
+            data.add(ValueDataEntry(each.accidentHours,each.accidentsNumber))
+        }
+        for(each in lackData)
+            data.add(ValueDataEntry(each,0))
+        bar.data(data)
+        Log.d("Set the bar chart", "Success!!  " + data.size)
+    }
+
 }
