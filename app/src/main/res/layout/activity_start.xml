@@ -48,7 +48,7 @@
 
         <include
             android:id="@+id/start_button"
-            layout="@layout/start_button" />
+            layout="@layout/large_button" />
 
         <TextView
             android:id="@+id/learning_mode"

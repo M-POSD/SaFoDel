@@ -17,32 +17,14 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingHorizontal="16dp">
-
-        <TextView
-            android:id="@+id/question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:fontFamily="@font/notosansjp_bold"
-            android:gravity="center"
-            android:text="What is this?"
-            android:textColor="@color/dark"
-            android:textSize="20dp" />
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/epic1_image" />
+        android:paddingHorizontal="20dp">
 
         <LinearLayout
             android:id="@+id/progress_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="16dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ProgressBar
@@ -52,8 +34,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:indeterminate="false"
+                android:padding="5dp"
                 android:max="5"
-                android:minHeight="50dp"
+                android:minHeight="20dp"
                 android:progress="0" />
 
             <TextView
@@ -61,17 +44,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="15dp"
+                android:padding="5dp"
                 android:text="0/5"
                 android:textColorHint="@color/gray2"
                 android:textSize="14dp" />
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/epic1_image" />
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:fontFamily="@font/notosansjp_bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="What is this?"
+            android:textColor="@color/dark"
+            android:textSize="20dp" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="70dp"
             android:fillViewport="true">
 
             <LinearLayout
@@ -91,16 +93,9 @@
                 <include android:id="@+id/opt4"
                     layout="@layout/option_and_info"/>
 
-                <Button
-                    android:id="@+id/submitButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="@color/primary_green"
-                    android:fontFamily="@font/notosansjp_bold"
-                    android:text="SUBMIT"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
+                <include android:id="@+id/submitBtn"
+                    layout="@layout/medium_btn"/>
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

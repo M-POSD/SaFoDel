@@ -52,13 +52,13 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     }
 
     private fun setQuestions() {
-        binding.submitButton.text = "SUBMIT"
-
+        binding.submitBtn.button.text = "SUBMIT"
         // when the question haven't answered, set the current questions is clickable until has been answer
-        setOptionClickable(true)
 
         val question = mQuestions!![mCurrentPosition - 1]
 
+        // set info view isGone
+        infoView(0, question)
         configDefaultOptionsView()
 
         binding.progressBar.progress = mCurrentPosition
@@ -70,6 +70,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         binding.opt2.option.text = question.option2
         binding.opt3.option.text = question.option3
         binding.opt4.option.text = question.option4
+        setOptionClickable(true)
     }
 
     private fun configDefaultOptionsView() {
@@ -96,18 +97,19 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         binding.opt2.option.setOnClickListener(this)
         binding.opt3.option.setOnClickListener(this)
         binding.opt4.option.setOnClickListener(this)
-        binding.submitButton.setOnClickListener(this)
+        binding.submitBtn.button.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.opt1 -> selectedOptionView(binding.opt1.option, 1)
-            R.id.opt2 -> selectedOptionView(binding.opt2.option, 2)
-            R.id.opt3 -> selectedOptionView(binding.opt3.option, 3)
-            R.id.opt4 -> selectedOptionView(binding.opt4.option, 4)
-            R.id.submitButton -> {
+        Log.d("onClick", v.toString())
+        when (v) {
+            binding.opt1.option -> selectedOptionView(binding.opt1.option, 1)
+            binding.opt2.option -> selectedOptionView(binding.opt2.option, 2)
+            binding.opt3.option  -> selectedOptionView(binding.opt3.option, 3)
+            binding.opt4.option -> selectedOptionView(binding.opt4.option, 4)
+            binding.submitBtn.button -> {
                 if (mSelectedOptionPosition == 0) {
-                    if (binding.submitButton.text == "SUBMIT") {
+                    if (binding.submitBtn.button.text == "SUBMIT") {
                         toast.setText("Please select an option")
                         toast.show()
                     } else {
@@ -118,8 +120,10 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                                 setQuestions()
                             }
                             else -> {
-                                toast.setText("You have successfully completed the Quiz")
-                                toast.show()
+                                configDialog("Success","You have successfully completed the Quiz")
+                                binding.submitBtn.button.text = "RETURN"
+//                                toast.setText("You have successfully completed the Quiz")
+//                                toast.show()
                             }
 
                         }
@@ -128,18 +132,15 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
-                        Log.d("checkAnswer: ", "I am the wrong answer")
-                        configDialog("error", question.information)
+                        infoView(mSelectedOptionPosition, question)
 
-                    } else {
-                        configDialog("success", question.information)
                     }
                     answerView(question!!.answer, R.drawable.correct_option_border_bg)
-                    Log.d("mSelectedOptionPosition: ", mSelectedOptionPosition.toString())
+                    infoView(mSelectedOptionPosition , question)
                     if (mCurrentPosition == mQuestions!!.size) {
-                        binding.submitButton.text = "FINISH"
+                        binding.submitBtn.button.text = "FINISH"
                     } else {
-                        binding.submitButton.text = "GO TO NEXT QUESTION"
+                        binding.submitBtn.button.text = "GO TO NEXT QUESTION"
                     }
                     mSelectedOptionPosition = 0
 
@@ -160,6 +161,34 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                 ContextCompat.getDrawable(requireActivity(), drawableView)
             4 -> binding.opt4.option.background =
                 ContextCompat.getDrawable(requireActivity(), drawableView)
+        }
+    }
+
+    private fun infoView(infoPosition: Int, question: Question) {
+        when (infoPosition) {
+            0 -> {
+                binding.opt1.info.visibility = View.GONE
+                binding.opt2.info.visibility = View.GONE
+                binding.opt3.info.visibility = View.GONE
+                binding.opt4.info.visibility = View.GONE
+
+            }
+            1 -> {
+                binding.opt1.info.text = question.information
+                binding.opt1.info.visibility = View.VISIBLE
+            }
+            2 -> {
+                binding.opt2.info.text = question.information
+                binding.opt2.info.visibility = View.VISIBLE
+            }
+            3 -> {
+                binding.opt3.info.text = question.information
+                binding.opt3.info.visibility = View.VISIBLE
+            }
+            4 -> {
+                binding.opt4.info.text = question.information
+                binding.opt4.info.visibility = View.VISIBLE
+            }
         }
     }
 
