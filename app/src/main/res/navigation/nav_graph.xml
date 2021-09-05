@@ -165,5 +165,10 @@
         android:name="com.example.safodel.fragment.menuL.exam.Exam1Fragment"
         android:label="fragment_exam1"
         tools:layout="@layout/fragment_exam1" />
+    <fragment
+        android:id="@+id/examFinishFragment"
+        android:name="com.example.safodel.fragment.menuL.exam.ExamFinishFragment"
+        android:label="fragment_exam_finish"
+        tools:layout="@layout/fragment_exam_finish" />
 
 </navigation>

@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentExam1Binding
@@ -22,6 +24,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     private lateinit var mQuestions: MutableList<Question>
     private var mCurrentPosition: Int = 1
     private var mSelectedOptionPosition: Int = 0
+    private var totalScore = 0
     private lateinit var toast: Toast
 
     override fun onCreateView(
@@ -45,10 +48,6 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun getArgument() {
-        var arg = arguments?.get("userName") ?: "No Name"
     }
 
     private fun setQuestions() {
@@ -141,8 +140,13 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                                 setQuestions()
                             }
                             else -> {
-                                configDialog("Success", "You have successfully completed the Quiz")
-                                binding.submitBtn.button.text = "RETURN"
+//                                configDialog("Success", "You have successfully completed the Quiz")
+//                                binding.submitBtn.button.text = "RETURN"
+                                var arg = bundleOf(
+                                    Pair("score", totalScore),
+                                    Pair("numOfQuestions", mQuestions.size)
+                                )
+                                findNavController().navigate(R.id.examFinishFragment, arg, navAnimationLeftToRight())
                             }
 
                         }
@@ -225,6 +229,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                 binding.questionInfo.background =
                     ContextCompat.getDrawable(requireActivity(), R.drawable.correct_info_border_bg)
                 binding.questionInfo.visibility = View.VISIBLE
+                totalScore++
             }
             // wrong answer info
             6 -> {
