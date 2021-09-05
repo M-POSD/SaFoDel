@@ -20,7 +20,7 @@ class Question(
 
             questions.add(Question(
                     1, "What is this?",
-                R.drawable.epic1_image,
+                0,
                 "epic1",
                 "epic2",
                 "epic3",
@@ -30,7 +30,7 @@ class Question(
             ))
             questions.add(Question(
                 2, "What is this?",
-                R.drawable.hand_sanitizer,
+                0,
                 "hand shaker",
                 "hand sanitizer",
                 "hand washer",
@@ -40,7 +40,7 @@ class Question(
             ))
             questions.add(Question(
                 3, "What is this?",
-                R.drawable.book,
+                0,
                 "book1",
                 "no book",
                 "notebook",
@@ -50,7 +50,7 @@ class Question(
             ))
             questions.add(Question(
                 4, "What is my colour?",
-                R.drawable.gloves,
+                0,
                 "gloves",
                 "glove",
                 "golves",
@@ -60,7 +60,7 @@ class Question(
             ))
             questions.add(Question(
                 5, "What is this?",
-                R.drawable.headlight,
+                0,
                 "light",
                 "lights",
                 "headlight",

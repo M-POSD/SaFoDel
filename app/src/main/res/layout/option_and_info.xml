@@ -14,9 +14,9 @@
         android:fontFamily="@font/notosansjp_bold"
         android:gravity="center"
         android:padding="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         android:text="Apple1"
-        android:textColor="@color/gray2"
+        android:textColor="@color/black"
         android:textSize="14dp" />
 
     <TextView
@@ -25,12 +25,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/default_option_border_bg"
-        android:fontFamily="@font/notosansjp_bold"
+        android:fontFamily="@font/notosansjp_black"
         android:gravity="center"
         android:padding="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         android:visibility="gone"
         android:text="Apple1"
-        android:textColor="@color/gray2"
+        android:textColor="@color/black"
         android:textSize="14dp" />
 </LinearLayout>

@@ -23,6 +23,7 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.startButton.button.alpha = 0f
 //        imageAnimation()
 //        buttonAnimation()
         configAllAnimations()

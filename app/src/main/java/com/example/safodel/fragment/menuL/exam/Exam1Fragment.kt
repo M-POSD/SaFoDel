@@ -52,6 +52,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
     }
 
     private fun setQuestions() {
+        // default image view
+        binding.image.visibility = View.GONE
+
         binding.submitBtn.button.text = "SUBMIT"
         // when the question haven't answered, set the current questions is clickable until has been answer
 
@@ -65,11 +68,15 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         binding.progress.text = "$mCurrentPosition/${binding.progressBar.max}"
 
         binding.question.text = question!!.question
-        binding.image.setImageResource(question.image)
+        if (question.image!=0) {
+            binding.image.setImageResource(question.image)
+            binding.image.visibility = View.VISIBLE
+        }
         binding.opt1.option.text = question.option1
         binding.opt2.option.text = question.option2
         binding.opt3.option.text = question.option3
         binding.opt4.option.text = question.option4
+        binding.questionInfo.text = question.information
         setOptionClickable(true)
     }
 
@@ -132,11 +139,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
-                        infoView(mSelectedOptionPosition, question)
-
                     }
                     answerView(question!!.answer, R.drawable.correct_option_border_bg)
-                    infoView(mSelectedOptionPosition , question)
+                    infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
                     if (mCurrentPosition == mQuestions!!.size) {
                         binding.submitBtn.button.text = "FINISH"
                     } else {
@@ -171,6 +176,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                 binding.opt2.info.visibility = View.GONE
                 binding.opt3.info.visibility = View.GONE
                 binding.opt4.info.visibility = View.GONE
+                binding.questionInfo.visibility = View.GONE
 
             }
             1 -> {
@@ -189,6 +195,19 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                 binding.opt4.info.text = question.information
                 binding.opt4.info.visibility = View.VISIBLE
             }
+            // correct answer info
+            5 -> {
+                binding.questionInfo.background =
+                    ContextCompat.getDrawable(requireActivity(), R.drawable.correct_info_border_bg)
+                binding.questionInfo.visibility = View.VISIBLE
+            }
+            // wrong answer info
+            6 -> {
+                binding.questionInfo.background =
+                    ContextCompat.getDrawable(requireActivity(), R.drawable.wrong_info_border_bg)
+                binding.questionInfo.visibility = View.VISIBLE
+            }
+
         }
     }
 
@@ -196,9 +215,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         configDefaultOptionsView()
         mSelectedOptionPosition = selectedOption
 
-        textView.setTextColor(ContextCompat.getColor(requireActivity(), R.color.dark))
+        textView.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
         var typeface: Typeface? =
-            ResourcesCompat.getFont(requireActivity(), R.font.notosansjp_black)
+            ResourcesCompat.getFont(requireActivity(), R.font.notosansjp_bold)
         textView.typeface = typeface
         textView.background = ContextCompat.getDrawable(
             requireActivity(),

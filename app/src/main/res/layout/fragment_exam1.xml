@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".fragment.menuL.exam.Exam1Fragment">
 
     <include
@@ -13,9 +14,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_weight="0.8"
         android:orientation="vertical"
         android:paddingHorizontal="20dp">
 
@@ -24,19 +25,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <ProgressBar
                 android:id="@+id/progressBar"
+                android:theme="@style/ProgressBarStyle"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:indeterminate="false"
-                android:padding="5dp"
                 android:max="5"
                 android:minHeight="20dp"
+                android:layout_marginHorizontal="10dp"
                 android:progress="0" />
 
             <TextView
@@ -44,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="5dp"
+                android:layout_marginRight="5dp"
                 android:text="0/5"
                 android:textColorHint="@color/gray2"
                 android:textSize="14dp" />
@@ -54,50 +55,69 @@
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/epic1_image" />
+            android:visibility="gone"
+            android:layout_marginTop="16dp" />
 
         <TextView
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:fontFamily="@font/notosansjp_bold"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:fontFamily="@font/notosansjp_black"
             android:gravity="center"
             android:text="What is this?"
             android:textColor="@color/dark"
-            android:textSize="20dp" />
+            android:textSize="16dp" />
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="70dp"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <include
+                android:id="@+id/opt1"
+                layout="@layout/option_and_info" />
+
+            <include
+                android:id="@+id/opt2"
+                layout="@layout/option_and_info" />
+
+            <include
+                android:id="@+id/opt3"
+                layout="@layout/option_and_info" />
+
+            <include
+                android:id="@+id/opt4"
+                layout="@layout/option_and_info" />
+
+            <TextView
+                android:id="@+id/question_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/default_option_border_bg"
+                android:fontFamily="@font/notosansjp_bold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:layout_marginBottom="5dp"
+                android:text="Apple1"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
 
-                <include android:id="@+id/opt1"
-                    layout="@layout/option_and_info"/>
+        </LinearLayout>
 
-                <include android:id="@+id/opt2"
-                    layout="@layout/option_and_info"/>
-
-                <include android:id="@+id/opt3"
-                    layout="@layout/option_and_info"/>
-
-                <include android:id="@+id/opt4"
-                    layout="@layout/option_and_info"/>
-
-                <include android:id="@+id/submitBtn"
-                    layout="@layout/medium_btn"/>
-
-            </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07"
+        android:gravity="bottom">
+
+        <include
+            android:id="@+id/submitBtn"
+            layout="@layout/medium_btn" />
+    </LinearLayout>
 </LinearLayout>
