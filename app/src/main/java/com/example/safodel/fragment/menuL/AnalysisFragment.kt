@@ -7,20 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+
 import com.afollestad.materialdialogs.MaterialDialog
-import com.anychart.APIlib
 import com.anychart.AnyChart
-import com.anychart.AnyChartFormat
-import com.anychart.AnyChartView
+
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Cartesian
-import com.anychart.core.cartesian.series.Bar
-import com.anychart.core.cartesian.series.Column
+import com.anychart.palettes.RangeColors
+
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
-import com.example.safodel.R
+
 import com.example.safodel.databinding.FragmentAnalysisBinding
-import com.example.safodel.databinding.FragmentExamBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.*
 import com.example.safodel.retrofit.SuburbClient
@@ -46,7 +44,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         val toolbar = binding.toolbar.root
         dialog = MaterialDialog(requireContext())
         setToolbarBasic(toolbar)
-        bar = AnyChart.column()
+        bar = AnyChart.column().title("Accident time")
+            .palette(RangeColors.instantiate().items("#8AD0AB","#8AD0AB"))
+        bar.tooltip().titleFormat("Times: {%value}").format("Accidents Hour: {%x}")
         binding.barChart.setChart(bar)
         initSpinner()
         suburbInterface = SuburbClient.getRetrofitService()

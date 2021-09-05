@@ -63,8 +63,17 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="10dp"
+            android:text="Time Count"
+            android:textSize="20dp"/>
+
         <com.anychart.AnyChartView
             android:id="@+id/barChart"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:layout_width="300dp"
             android:layout_height="300dp" />
