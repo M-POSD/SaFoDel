@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.menuL.AnalysisFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome Analysis"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <include layout="@layout/simple_toolbar"
         android:id="@+id/toolbar"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+        android:id="@+id/spinner"
+        android:layout_width="250dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:smsp_errorText="ERROR"
+        app:smsp_enableErrorLabel="false"
+        app:smsp_floatingLabelColor="@color/deep_green"
+        app:smsp_floatingLabelText="Select the suburb"
+        app:smsp_hint="Select area"
+        app:smsp_hintColor="#388E3C"
+        app:smsp_itemColor="@color/third_green"
+        app:smsp_itemListColor="@color/third_green"
+        app:smsp_itemListHintBackgroundColor="#808080"
+        app:smsp_itemListHintColor="#FFFFFF"
+        app:smsp_multilineError="false"
+        app:smsp_selectedItemListColor="#FF5252"
+        app:smsp_isSearchable="true"
+        app:smsp_enableDismissSearch="true"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
