@@ -89,6 +89,7 @@ dependencies {
 
     // Spinner
     implementation "com.github.arcadefire:nice-spinner:1.4.4"
+    implementation 'com.github.chivorns:smartmaterialspinner:1.5.0'
 
     // Raining animation
     implementation 'dyanamitechetan.vusikview:vusikview:1.1'
