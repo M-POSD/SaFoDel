@@ -34,6 +34,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var suburbInterface: SuburbInterface
     private lateinit var dialog: MaterialDialog
     private lateinit var bar: Cartesian
+    private lateinit var bar2: Cartesian
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +49,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             .palette(RangeColors.instantiate().items("#8AD0AB","#8AD0AB"))
         bar.tooltip().titleFormat("Times: {%value}").format("Accidents Hour: {%x}")
         binding.barChart.setChart(bar)
+
+//        // i am just for testing purpose
+        testingChart()
         initSpinner()
         suburbInterface = SuburbClient.getRetrofitService()
         return binding.root
@@ -148,7 +152,18 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         for(each in lackData)
             data.add(ValueDataEntry(each,0))
         bar.data(data)
+
+        // testing
+        bar2.data(data)
         Log.d("Set the bar chart", "Success!!  " + data.size)
+    }
+
+    private fun testingChart() {
+        bar2 = AnyChart.column().title("Accident time")
+            .palette(RangeColors.instantiate().items("#8AD0AB","#8AD0AB"))
+        bar2.tooltip().titleFormat("Times: {%value}").format("Accidents Hour: {%x}")
+        binding.barChart2.setChart(bar2)
+        binding.barChart3.setChart(bar2)
     }
 
 }

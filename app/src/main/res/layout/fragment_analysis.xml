@@ -14,30 +14,31 @@
         <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
             android:id="@+id/spinner"
             android:layout_width="250dp"
-            android:layout_marginTop="?attr/actionBarSize"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            app:smsp_errorText="ERROR"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:smsp_enableDismissSearch="true"
             app:smsp_enableErrorLabel="false"
+            app:smsp_errorText="ERROR"
             app:smsp_floatingLabelColor="@color/deep_green"
             app:smsp_floatingLabelText="Suburb:"
             app:smsp_hint="Select the suburb"
-            app:smsp_searchHeaderBackgroundColor="@color/third_green"
             app:smsp_hintColor="#388E3C"
+            app:smsp_isSearchable="true"
             app:smsp_itemColor="@color/deep_green"
             app:smsp_itemListColor="@color/third_green"
             app:smsp_itemListHintBackgroundColor="#808080"
             app:smsp_itemListHintColor="#FFFFFF"
             app:smsp_multilineError="false"
-            app:smsp_selectedItemListColor="@color/black"
-            app:smsp_isSearchable="true"
-            app:smsp_enableDismissSearch="true"/>
+            app:smsp_searchHeaderBackgroundColor="@color/third_green"
+            app:smsp_selectedItemListColor="@color/black" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp">
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -47,18 +48,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:text="Accidents Number"
                     android:textAlignment="center"
-                    android:textSize="14dp"
-                    android:text="Accidents Number"/>
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/accidentNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
                     android:layout_marginLeft="35dp"
-                    android:textSize="24dp"
-                    android:text=""/>
+                    android:layout_marginTop="35dp"
+                    android:text=""
+                    android:textSize="24dp" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -69,19 +70,77 @@
             android:layout_marginLeft="35dp"
             android:layout_marginTop="10dp"
             android:text="Time Count"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
-        <com.anychart.AnyChartView
-            android:id="@+id/barChart"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:layout_width="400dp"
-            android:layout_height="300dp" />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="400dp"
+                    android:layout_height="300dp"
+                    android:gravity="center"
+                    android:text="WTF"
+                    android:textSize="50dp"/>
+
+                <com.anychart.AnyChartView
+                    android:id="@+id/barChart"
+                    android:layout_width="400dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp" />
+
+                <com.anychart.AnyChartView
+                    android:id="@+id/barChart2"
+                    android:layout_width="400dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp" />
+                <com.anychart.AnyChartView
+                    android:id="@+id/barChart3"
+                    android:layout_width="400dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp" />
+            </LinearLayout>
+        </HorizontalScrollView>
 
     </LinearLayout>
 
-    <include layout="@layout/simple_toolbar"
-        android:id="@+id/toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/simple_toolbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!--<HorizontalScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<LinearLayout-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginTop="10dp"-->
+    <!--    android:orientation="horizontal">-->
+
+    <!--    <com.anychart.AnyChartView-->
+    <!--        android:id="@+id/barChart"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:layout_width="400dp"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        android:layout_gravity="center" />-->
+
+    <!--    <com.anychart.AnyChartView-->
+    <!--        android:id="@+id/barChart2"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:layout_width="400dp"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        android:layout_gravity="center" />-->
+    <!--</LinearLayout>-->
+    <!--</HorizontalScrollView>-->
