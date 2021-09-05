@@ -475,6 +475,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         return calendar.get(Calendar.HOUR_OF_DAY)
     }
 
+    // theme based on light or night
     private fun configTheme(mode: String) {
         when(mode) {
             "light" -> {
