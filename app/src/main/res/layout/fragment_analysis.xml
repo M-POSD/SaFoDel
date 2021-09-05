@@ -6,28 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".fragment.menuL.AnalysisFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+            android:id="@+id/spinner"
+            android:layout_width="250dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:smsp_errorText="ERROR"
+            app:smsp_enableErrorLabel="false"
+            app:smsp_floatingLabelColor="@color/deep_green"
+            app:smsp_floatingLabelText="Suburb:"
+            app:smsp_hint="Select the suburb"
+            app:smsp_searchHeaderBackgroundColor="@color/third_green"
+            app:smsp_hintColor="#388E3C"
+            app:smsp_itemColor="@color/deep_green"
+            app:smsp_itemListColor="@color/third_green"
+            app:smsp_itemListHintBackgroundColor="#808080"
+            app:smsp_itemListHintColor="#FFFFFF"
+            app:smsp_multilineError="false"
+            app:smsp_selectedItemListColor="@color/black"
+            app:smsp_isSearchable="true"
+            app:smsp_enableDismissSearch="true"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textAlignment="center"
+                    android:textSize="14dp"
+                    android:text="Accidents Number"/>
+
+                <TextView
+                    android:id="@+id/accidentNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginLeft="35dp"
+                    android:textSize="24dp"
+                    android:text=""/>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </LinearLayout>
 
     <include layout="@layout/simple_toolbar"
         android:id="@+id/toolbar"/>
 
-    <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
-        android:id="@+id/spinner"
-        android:layout_width="250dp"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:smsp_errorText="ERROR"
-        app:smsp_enableErrorLabel="false"
-        app:smsp_floatingLabelColor="@color/deep_green"
-        app:smsp_floatingLabelText="Select the suburb"
-        app:smsp_hint="Select area"
-        app:smsp_hintColor="#388E3C"
-        app:smsp_itemColor="@color/third_green"
-        app:smsp_itemListColor="@color/third_green"
-        app:smsp_itemListHintBackgroundColor="#808080"
-        app:smsp_itemListHintColor="#FFFFFF"
-        app:smsp_multilineError="false"
-        app:smsp_selectedItemListColor="#FF5252"
-        app:smsp_isSearchable="true"
-        app:smsp_enableDismissSearch="true"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

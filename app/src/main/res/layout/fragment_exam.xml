@@ -77,6 +77,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Name"
                         android:textSize="20dp"
+                        android:maxLines="1"
+                        android:inputType="text"
                         android:textColor="@color/deep_gray"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.button.MaterialButton
