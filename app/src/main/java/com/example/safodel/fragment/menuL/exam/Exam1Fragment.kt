@@ -101,6 +101,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         binding.opt4.option.text = question.option4
 
         for (option in options) {
+            option.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.default_option_icon,0)
             option.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray2))
             var typeface: Typeface? =
                 ResourcesCompat.getFont(requireActivity(), R.font.notosansjp_bold)
@@ -154,9 +155,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                 } else {
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
-                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg, R.color.wrong_border_color)
+                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg, R.color.wrong_border_color, R.drawable.error_icon)
                     }
-                    answerView(question!!.answer, R.drawable.correct_option_border_bg, R.color.correct_border_color)
+                    answerView(question!!.answer, R.drawable.correct_option_border_bg, R.color.correct_border_color, R.drawable.success_icon)
                     infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
 
                     if (mCurrentPosition == mQuestions!!.size) {
@@ -173,27 +174,31 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         }
     }
 
-    private fun answerView(answer: Int, drawableView: Int, color: Int) {
+    private fun answerView(answer: Int, drawableView: Int, color: Int,icon: Int) {
         when (answer) {
             1 -> {
                 binding.opt1.option.background =
                     ContextCompat.getDrawable(requireActivity(), drawableView)
                 binding.opt1.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+                binding.opt1.option.setCompoundDrawablesWithIntrinsicBounds(0,0,icon,0)
             }
             2 -> {
                 binding.opt2.option.background =
                     ContextCompat.getDrawable(requireActivity(), drawableView)
                 binding.opt2.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+                binding.opt2.option.setCompoundDrawablesWithIntrinsicBounds(0,0,icon,0)
             }
             3 -> {
                 binding.opt3.option.background =
                     ContextCompat.getDrawable(requireActivity(), drawableView)
                 binding.opt3.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+                binding.opt3.option.setCompoundDrawablesWithIntrinsicBounds(0,0,icon,0)
             }
             4 -> {
                 binding.opt4.option.background =
                     ContextCompat.getDrawable(requireActivity(), drawableView)
                 binding.opt4.option.setTextColor(ContextCompat.getColor(requireActivity(), color))
+                binding.opt4.option.setCompoundDrawablesWithIntrinsicBounds(0,0,icon,0)
             }
         }
     }
@@ -251,6 +256,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                 R.color.correct_border_color
             )
         )
+
+        textView.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.success_icon,0)
+
         var typeface: Typeface? =
             ResourcesCompat.getFont(requireActivity(), R.font.notosansjp_bold)
         textView.typeface = typeface
