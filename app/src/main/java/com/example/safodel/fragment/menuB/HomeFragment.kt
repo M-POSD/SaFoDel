@@ -37,6 +37,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private val APP_ID = "898ef19b846722554449f6068e7c7253"
     private val CITY_NAME = "Caulfield"
 
+    private lateinit var currentWeatherIcons: IntArray
+
     private lateinit var weatherService: RetrofitInterface
 
     // Basic value
@@ -51,6 +53,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
+    private var isRaining = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -117,9 +120,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     // raining animation
-    private fun rainingAnimation(rainingImage: Int) {
+    private fun rainingAnimation() {
 //        binding.vusik.stopNotesFall()
-        rainingList[0] = rainingImage
+        rainingList[0] = R.drawable.drop_blue_v3
         binding.vusik.setImages(rainingList).start()
         binding.vusik.startNotesFall()
     }
@@ -213,6 +216,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
                 configTheme("light")
             }
+        }
+
+        binding.weatherLightMode.setOnClickListener {
+            rainingAnimation()
+        }
+        binding.weatherDarkMode.setOnClickListener {
+            rainingAnimation()
         }
     }
 
@@ -449,13 +459,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         )
 
         callAsync.enqueue(object : Callback<WeatherResponse?> {
-            override fun onResponse(call: Call<WeatherResponse?>?, response: Response<WeatherResponse?>) {
+            override fun onResponse(
+                call: Call<WeatherResponse?>?,
+                response: Response<WeatherResponse?>
+            ) {
                 if (response.isSuccessful) {
                     val list = response.body()!!.weatherList
-                    if (list!= null) {
+                    if (list != null) {
                         val weather = list[0].main
                         if (weather == "Rain") {
-                            rainingAnimation(R.drawable.drop_blue_v3)
+                            rainingAnimation()
                         }
                         Log.d("currentWeather", weather)
                     }
@@ -478,10 +491,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // theme based on light or night
     private fun configTheme(mode: String) {
-        when(mode) {
+        when (mode) {
             "light" -> {
-                binding.darkMode.visibility = View.INVISIBLE
-                binding.lightMode.visibility = View.VISIBLE
+                binding.darkModeLayout.visibility = View.INVISIBLE
+                binding.lightModeLayout.visibility = View.VISIBLE
                 binding.coordinatorLayout.setBackgroundResource(R.color.white)
                 binding.headlight.visibility = View.INVISIBLE
                 binding.backpack.alpha = 0f
@@ -492,8 +505,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 setToolbarBasic(toolbar)
             }
             "night" -> {
-                binding.lightMode.visibility = View.INVISIBLE
-                binding.darkMode.visibility = View.VISIBLE
+                binding.lightModeLayout.visibility = View.INVISIBLE
+                binding.darkModeLayout.visibility = View.VISIBLE
                 binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
                 binding.headlight.visibility = View.VISIBLE
                 binding.backpack.alpha = 0f
@@ -504,5 +517,27 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 setToolbarWhite(toolbar)
             }
         }
+    }
+
+    // currently this is just for getting Rain weather icons(different mode light/night)
+    private fun configWeatherIcons(): IntArray {
+        currentWeatherIcons = IntArray(2)
+
+        when ("Rain") {
+            "Clear" -> {
+                currentWeatherIcons[0] = R.drawable.clear_black
+                currentWeatherIcons[1] = R.drawable.clear_white
+            }
+            "Rain" -> {
+                currentWeatherIcons[0] = R.drawable.rain_black
+                currentWeatherIcons[1] = R.drawable.rain_white
+            }
+            else -> {
+                currentWeatherIcons[0] = R.drawable.clouds_black
+                currentWeatherIcons[1] = R.drawable.clouds_white
+            }
+        }
+
+        return currentWeatherIcons
     }
 }

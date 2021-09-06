@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="286dp"
             android:scaleX="1.4"
-            android:scaleY="1.8"
+            android:scaleY="1.6"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:src="@drawable/new_logo" />
