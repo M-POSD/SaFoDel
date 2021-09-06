@@ -1,6 +1,7 @@
 package com.example.safodel.retrofit
 
 import com.example.safodel.model.SuburbResponse
+import com.example.safodel.model.SuburbStreetsResponse
 import com.example.safodel.model.SuburbTimeResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -18,4 +19,8 @@ interface SuburbInterface {
                   @Query("suburb") suburb_name: String)
             : Call<SuburbTimeResponse>
 
+    @GET("{key}?")
+    fun streetRepos(@Path("key") key : String?,
+                    @Query("suburb") suburb_name: String)
+                    : Call<SuburbStreetsResponse>
 }
