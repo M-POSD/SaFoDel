@@ -1,32 +1,22 @@
 package com.example.safodel.ui.main
 
-import android.R.attr
 import android.content.Context
-import android.content.Intent
 import android.content.res.Resources
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
-import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
-import com.example.safodel.adapter.EpicViewAdapter
 import com.example.safodel.databinding.ActivityMainBinding
 
-import com.google.android.material.tabs.TabLayout
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
-import kotlin.system.exitProcess
-import android.R.attr.defaultValue
 
 
 
