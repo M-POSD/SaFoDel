@@ -62,6 +62,8 @@ class MainActivity : AppCompatActivity() {
      * If the user is in home, school and map pages, he/she needs to click twice
      */
     override fun onBackPressed() {
+        // stop users to go back if they are in the following fragment,
+        // giving the warning message at the same time
         if (navController.currentDestination?.id == R.id.exam1Fragment ||
             navController.currentDestination?.id == R.id.examFinishFragment) {
             toastMain.setText("Not allow go back in the page")
