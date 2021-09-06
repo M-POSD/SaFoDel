@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.core.view.marginLeft
 import com.afollestad.materialdialogs.MaterialDialog
@@ -19,11 +20,11 @@ import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.HorizontalBarChart
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +35,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private var suburbList = SuburbList.init()
     private lateinit var suburbInterface: SuburbInterface
     private lateinit var dialog: MaterialDialog
-    private lateinit var bar2: BarChart
+    private lateinit var lineChart: LineChart
     private lateinit var bar: HorizontalBarChart
 
     override fun onCreateView(
@@ -52,7 +53,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         setToolbarBasic(toolbar)
 
         // Set Chart
-        bar2 = binding.barChart2
+        lineChart = binding.lineChart
         bar = binding.barChart
         bar.zoomOut()
         bar.xAxis.labelCount = 5
@@ -139,7 +140,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             override fun onResponse(call: Call<SuburbTimeResponse?>?, response: Response<SuburbTimeResponse?>) {
                 if (response.isSuccessful) {
                     val resultList = response.body()!!.suburbTimeAccidents
-                    setBarChart(resultList)
+                    setLineChart(resultList)
                 } else {
                     Log.i("Error ", "Response failed")
                 }
@@ -176,29 +177,26 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     /*
         Set the Bar Chart of Accident time in this Suburb.
      */
-    private fun setBarChart(list: List<SuburbTimeAccidents>){
+    private fun setLineChart(list: List<SuburbTimeAccidents>){
         val color  = ContextCompat.getColor(requireContext(), R.color.third_green)
-        val data2: MutableList<BarEntry> = ArrayList()
-        val lackData: ArrayList<Int> = ArrayList()
-        for(i in 0..23)
-            lackData.add(i)
-        for(i in list){
-            if(lackData.contains(i.accidentHours))
-                lackData.remove(i.accidentHours)
-        }
-        for(each in list){
-            data2.add(BarEntry(each.accidentHours.toFloat(),each.accidentsNumber.toFloat()))
-        }
-        for(each in lackData)
-            data2.add(BarEntry(each.toFloat(),0.05f))
-        val barDataset = BarDataSet(data2,"Accident Times")
-        barDataset.setColor(color)
-        barDataset.valueFormatter = IntegerFormatter()
-        val barData = BarData(barDataset)
+        val colorList = ArrayList<Int>()
+        colorList.add(ColorTemplate.rgb("#8AD0AB"))
+        val data2: MutableList<Entry> = ArrayList()
 
-        bar2.data = barData
-        setBarStyle(bar2)
-        bar2.invalidate()
+        for(each in list){
+            data2.add(Entry(each.accidentHours.toFloat(),each.accidentsNumber.toFloat()))
+        }
+        val lineDataset = LineDataSet(data2,"Accident Times")
+        lineDataset.setColor(color)
+        lineDataset.valueFormatter = IntegerFormatter()
+        lineDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
+        lineDataset.lineWidth = 2f
+        lineDataset.circleColors = colorList
+        val lineData = LineData(lineDataset)
+
+        lineChart.data = lineData
+        setLineStyle(lineChart)
+        lineChart.invalidate()
     }
 
     private fun setStreetsBarChat(list: List<SuburbStreetsAccidents>){
@@ -240,15 +238,15 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     /*
         Set the style of bar2
      */
-    private fun setBarStyle(bar2:BarChart){
-        bar2.axisLeft.setDrawGridLines(false)
-        bar2.xAxis.setDrawGridLines(false)
-        bar2.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        bar2.axisRight.isEnabled = false
-        bar2.xAxis.axisMinimum = 0f
-        bar2.xAxis.axisMaximum = 23f
-        bar2.axisLeft.valueFormatter = IntegerFormatter()
-        bar2.description.text = ""
+    private fun setLineStyle(lineChart:LineChart){
+        lineChart.axisLeft.setDrawGridLines(false)
+        lineChart.xAxis.setDrawGridLines(false)
+        lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        lineChart.axisRight.isEnabled = false
+        lineChart.xAxis.axisMinimum = 0f
+        lineChart.xAxis.axisMaximum = 23f
+        lineChart.axisLeft.valueFormatter = IntegerFormatter()
+        lineChart.description.text = ""
     }
 }
 

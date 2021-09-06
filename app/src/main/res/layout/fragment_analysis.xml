@@ -90,8 +90,8 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Accident times for different hourly periods of the day"/>
 
-                    <com.github.mikephil.charting.charts.BarChart
-                        android:id="@+id/barChart2"
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
                         android:layout_width="400dp"
                         android:layout_height="300dp"
                         android:layout_gravity="center"
