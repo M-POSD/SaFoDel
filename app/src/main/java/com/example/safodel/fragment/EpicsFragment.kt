@@ -138,7 +138,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
             }
             1 -> {
                 binding.tabbar.notification.text =
-                    "Find information on using e-bikes for food delivery"
+                    "Find information on using E-Bikes for food delivery"
             }
             2 -> {
                 binding.tabbar.notification.text =

@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.6"
-            android:padding="20dp"
+            android:paddingHorizontal="20dp"
             android:fontFamily="@font/notosansjp_bold"
             android:layout_gravity="center"
             android:gravity="center"
