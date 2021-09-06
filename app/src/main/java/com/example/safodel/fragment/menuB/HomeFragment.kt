@@ -110,9 +110,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // set up default text view
     private fun configDefaultTextView() {
         binding.epicCard12.editTextLeft.text = "Ride Safer"
-        binding.epicCard12.editTextRight.text = "E-Bike Info"
-        binding.epicCard34.editTextLeft.text = "Safety Gears"
-        binding.epicCard34.editTextRight.text = "Accident"
+        binding.epicCard12.editTextRight.text = "Delivery on E-bike"
+        binding.epicCard34.editTextLeft.text = "Safety Gear"
+        binding.epicCard34.editTextRight.text = "In an Accident"
     }
 
     // raining animation

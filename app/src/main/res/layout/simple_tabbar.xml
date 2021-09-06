@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_marginHorizontal="4dp"
             android:layout_height="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.8"
             android:theme="@style/NavigationbarBottomStyle"
             app:tabBackground="@drawable/tab_color_selector"
             app:tabGravity="fill"
@@ -34,11 +34,12 @@
             android:id="@+id/notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/notosansjp_bold"
             android:gravity="center"
             android:text="Find how to ride safely while delivering food"
             android:textColor="@color/secondary_green"
-            android:textSize="14dp" />
+            android:textSize="16dp" />
 
         <TextView
             android:layout_width="match_parent"
