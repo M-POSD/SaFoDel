@@ -227,6 +227,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         bar.axisLeft.setDrawGridLines(false)
         bar.axisRight.setDrawGridLines(false)
         bar.xAxis.setDrawGridLines(false)
+        bar.extraLeftOffset = 5f
         bar.axisRight.isEnabled = false
         bar.xAxis.position = XAxis.XAxisPosition.BOTTOM
         bar.axisLeft.valueFormatter = IntegerFormatter()
