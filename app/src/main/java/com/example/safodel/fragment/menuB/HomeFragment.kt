@@ -278,7 +278,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val v2Root = FrameLayout(requireContext())
         val v2 = layoutInflater.inflate(R.layout.layout_target, v2Root)
         v2.findViewById<TextView>(R.id.custom_text).text =
-            "We help you prepare for a safe food delivery experience on a bike. " +
+            "What is SaFoDel?\n" +
+                    "We help you prepare for a safe food delivery experience on a bike. " +
                     "Currently, our services are focused on the 'Victorian' riders\n\n" +
                     "Following, all functions on home page will be introduced"
         v2.findViewById<ImageView>(R.id.custom_image).visibility = View.GONE
