@@ -143,6 +143,9 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
                             else -> {
 //                                configDialog("Success", "You have successfully completed the Quiz")
 //                                binding.submitBtn.button.text = "RETURN"
+
+                                // allow user go back
+                                mCurrentPosition--
                                 var arg = bundleOf(
                                     Pair("score", totalScore),
                                     Pair("numOfQuestions", mQuestions.size)

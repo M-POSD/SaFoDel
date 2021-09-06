@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
+    private lateinit var toastMain: Toast
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +50,11 @@ class MainActivity : AppCompatActivity() {
         configLeftNavigation() // method to set up left nav
         AutoSizeConfig.getInstance().isBaseOnWidth = false
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
         recordLearningMode()
     }
+
 
 
     /**
@@ -69,6 +72,13 @@ class MainActivity : AppCompatActivity() {
      * If the user is in home, school and map pages, he/she needs to click twice
      */
     override fun onBackPressed() {
+        if (navController.currentDestination?.id == R.id.exam1Fragment ||
+            navController.currentDestination?.id == R.id.examFinishFragment) {
+            toastMain.setText("Not allow go back in the page")
+            toastMain.show()
+            return
+        }
+
         if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment)
         ) {
             super.onBackPressed()

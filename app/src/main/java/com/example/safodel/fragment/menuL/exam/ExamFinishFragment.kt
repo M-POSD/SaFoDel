@@ -56,7 +56,7 @@ class ExamFinishFragment : BasicFragment<FragmentExamFinishBinding>(FragmentExam
 
     private fun configBtnOnClickListener() {
         binding.returnButton.setOnClickListener {
-            findNavController().navigate(R.id.examFragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
         }
         binding.ruleInfoButton.setOnClickListener {
             toast.setText("PlaceHolder Right Now!")
