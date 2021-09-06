@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginLeft
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
@@ -54,6 +55,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         bar2 = binding.barChart2
         bar = binding.barChart
         bar.zoomOut()
+        bar.xAxis.labelCount = 5
 
         // Setting Spinner
         initSpinner()
@@ -227,13 +229,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         bar.axisLeft.setDrawGridLines(false)
         bar.axisRight.setDrawGridLines(false)
         bar.xAxis.setDrawGridLines(false)
-        bar.extraLeftOffset = 5f
         bar.axisRight.isEnabled = false
         bar.xAxis.position = XAxis.XAxisPosition.BOTTOM
         bar.axisLeft.valueFormatter = IntegerFormatter()
         bar.xAxis.valueFormatter = StreetNameFormatter(bar,map)
-        bar.xAxis.setAvoidFirstLastClipping(true)
-        bar.xAxis.setCenterAxisLabels(true)
         bar.description.text = ""
     }
 
