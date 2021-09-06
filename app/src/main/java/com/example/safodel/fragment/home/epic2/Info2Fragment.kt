@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.GroupCard1Adapter
-import com.example.safodel.databinding.FragmentInfo2Binding
+import com.example.safodel.databinding.FragmentInfo3Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.GroupCard1Data
 
-class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::inflate) {
+class Info2Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var info2s: MutableList<GroupCard1Data>
     private lateinit var adapter: GroupCard1Adapter
@@ -22,7 +22,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInfo2Binding.inflate(inflater, container, false)
+        _binding = FragmentInfo3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         configDefaultTextView()
@@ -41,9 +41,9 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
 
     // set up the default text view
     private fun configDefaultTextView() {
-        binding.info2.currentPageText.text = "Advantages of Delivering on E-Bikes"
+        binding.info2.currentPageText.text = "E-Bikes Rules & Regulation"
         binding.info2.notification.text =
-            "E-bikes are rising in popularity especially in the food delivery community, here's why"
+            "Wondering whether the e-bike rules and regulations are different?"
     }
 
     // call recycle view adapter to set up the view
@@ -62,13 +62,13 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         binding.info2.recyclerView.layoutManager = layoutManager
     }
 
-    // get the info2s from the model class
+    // get the info3s from the model class
     private fun getInfo2s(): MutableList<GroupCard1Data> {
         info2s = GroupCard1Data.init()
         var i = 0
         while (i < info2s.size) {
             when (info2s[i].dataType) {
-                "ebikeinfo2" -> i++
+                "ebikeinfo3" -> i++
                 else -> info2s.removeAt(i)
             }
         }
