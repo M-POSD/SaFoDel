@@ -146,6 +146,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 
                                 // allow user go back
                                 mCurrentPosition--
+//                                findNavController().popBackStack(R.id.examFinishFragment, true)
                                 var arg = bundleOf(
                                     Pair("score", totalScore),
                                     Pair("numOfQuestions", mQuestions.size)

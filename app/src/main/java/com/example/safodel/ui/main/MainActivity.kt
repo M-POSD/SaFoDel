@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navHome -> {
-                    navController.popBackStack() // Previous fragment out of stack
+                    navController.popBackStack(R.id.homeFragment, true) // Previous fragment out of stack
                     navController.navigate(R.id.homeFragment)
                     true
                 }
