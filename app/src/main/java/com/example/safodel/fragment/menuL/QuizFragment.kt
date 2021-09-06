@@ -9,19 +9,19 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
-import com.example.safodel.databinding.FragmentExamBinding
+import com.example.safodel.databinding.FragmentQuizBinding
 import com.example.safodel.fragment.BasicFragment
 import com.google.android.material.button.MaterialButton
 
 
-class ExamFragment : BasicFragment<FragmentExamBinding>(FragmentExamBinding::inflate) {
+class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inflate) {
     private lateinit var toast: Toast
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentExamBinding.inflate(inflater, container, false)
+        _binding = FragmentQuizBinding.inflate(inflater, container, false)
 
         toast = Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
 

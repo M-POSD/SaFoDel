@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context=".fragment.menuL.exam.Exam1Fragment">
+    tools:context=".fragment.menuL.quiz.QuizPageFragment">
 
     <include
         android:id="@+id/toolbar"

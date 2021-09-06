@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/examFragment"
-        android:name="com.example.safodel.fragment.menuL.ExamFragment"
+        android:name="com.example.safodel.fragment.menuL.QuizFragment"
         android:label="fragment_school"
-        tools:layout="@layout/fragment_exam" />
+        tools:layout="@layout/fragment_quiz" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.safodel.fragment.menuB.HomeFragment"
@@ -162,13 +162,13 @@
         tools:layout="@layout/fragment_analysis" />
     <fragment
         android:id="@+id/exam1Fragment"
-        android:name="com.example.safodel.fragment.menuL.exam.Exam1Fragment"
+        android:name="com.example.safodel.fragment.menuL.quiz.QuizPageFragment"
         android:label="fragment_exam1"
-        tools:layout="@layout/fragment_exam1" />
+        tools:layout="@layout/fragment_quiz_page" />
     <fragment
         android:id="@+id/examFinishFragment"
-        android:name="com.example.safodel.fragment.menuL.exam.ExamFinishFragment"
+        android:name="com.example.safodel.fragment.menuL.quiz.QuizResultFragment"
         android:label="fragment_exam_finish"
-        tools:layout="@layout/fragment_exam_finish" />
+        tools:layout="@layout/fragment_quiz_resault" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuL.exam
+package com.example.safodel.fragment.menuL.quiz
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
-import com.example.safodel.databinding.FragmentExamFinishBinding
+import com.example.safodel.databinding.FragmentQuizResaultBinding
 import com.example.safodel.fragment.BasicFragment
 
 
-class ExamFinishFragment : BasicFragment<FragmentExamFinishBinding>(FragmentExamFinishBinding::inflate) {
+class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQuizResaultBinding::inflate) {
     private lateinit var toast: Toast
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentExamFinishBinding.inflate(inflater, container, false)
+        _binding = FragmentQuizResaultBinding.inflate(inflater, container, false)
 
         toast = Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
         configDefaultView()

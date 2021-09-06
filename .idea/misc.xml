@@ -31,8 +31,9 @@
         <entry key="app/src/main/res/layout/appinfo_about.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/appinfo_audience.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/big_button.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/checkbox_layout.xml" value="0.21855143062419705" />
         <entry key="app/src/main/res/layout/detail_card.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/detail_card_checklist.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/detail_card_checklist.xml" value="0.38485158648925283" />
         <entry key="app/src/main/res/layout/detail_card_standard.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card_v0.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/detail_card_v1.xml" value="0.26096491228070173" />
@@ -65,6 +66,8 @@
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.31188852923890625" />
+        <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.1649122807017544" />
+        <entry key="app/src/main/res/layout/fragment_quiz_resault.xml" value="0.1649122807017544" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_tip.xml" value="0.2884963768115942" />
         <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.12030075187969924" />

@@ -36,6 +36,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // get weather
     private val APP_ID = "898ef19b846722554449f6068e7c7253"
     private val CITY_NAME = "Caulfield"
+
     private lateinit var weatherService: RetrofitInterface
 
     // Basic value

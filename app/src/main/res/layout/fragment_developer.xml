@@ -11,14 +11,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="286dp"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
+            android:scaleX="1.4"
+            android:scaleY="1.8"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:src="@drawable/new_logo" />
@@ -32,7 +33,7 @@
             android:fontFamily="@font/notosansjp_bold"
             android:text="Know more"
             android:textColor="@color/primary_green"
-            android:textSize="14dp" />
+            android:textSize="20dp" />
 
     </LinearLayout>
 

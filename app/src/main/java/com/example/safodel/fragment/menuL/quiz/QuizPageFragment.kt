@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuL.exam
+package com.example.safodel.fragment.menuL.quiz
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -14,12 +14,12 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
-import com.example.safodel.databinding.FragmentExam1Binding
+import com.example.safodel.databinding.FragmentQuizPageBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Question
 
 
-class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::inflate),
+class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPageBinding::inflate),
     View.OnClickListener {
     private lateinit var mQuestions: MutableList<Question>
     private var mCurrentPosition: Int = 1
@@ -32,7 +32,7 @@ class Exam1Fragment : BasicFragment<FragmentExam1Binding>(FragmentExam1Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentExam1Binding.inflate(inflater, container, false)
+        _binding = FragmentQuizPageBinding.inflate(inflater, container, false)
         toast = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)

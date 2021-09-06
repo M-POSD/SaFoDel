@@ -8,18 +8,19 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:textSize="14dp" />
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="7"
-        android:theme="@style/Widget.App.CheckBox"
-        android:focusable="true"
         android:layout_gravity="center"
-        android:text="Helmet" />
+        android:layout_weight="7.5"
+        android:focusable="true"
+        android:text="Helmet"
+        android:textSize="20dp"
+        android:theme="@style/Widget.App.CheckBox" />
 
     <ImageView
         android:id="@+id/checkboxImage"

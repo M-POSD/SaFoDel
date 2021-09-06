@@ -26,14 +26,23 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
 
         binding.rule1Card.card.setOnClickListener() {
+            toast.cancel()
+            toast.setText("This function haven't completed")
+            toast.show()
 //            findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
         }
 
         binding.rule2Card.card.setOnClickListener() {
+            toast.cancel()
+            toast.setText("This function haven't completed")
+            toast.show()
 //            findNavController().navigate(R.id.gear2Fragment, null, navAnimationLeftToRight())
         }
 
         binding.rule3Card.card.setOnClickListener() {
+            toast.cancel()
+            toast.setText("This function haven't completed")
+            toast.show()
 //            findNavController().navigate(R.id.gear3Fragment, null, navAnimationLeftToRight())
         }
 
