@@ -37,8 +37,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private val APP_ID = "898ef19b846722554449f6068e7c7253"
     private val CITY_NAME = "Caulfield"
 
-    private lateinit var currentWeatherIcons: IntArray
-
     private lateinit var weatherService: RetrofitInterface
 
     // Basic value
@@ -53,7 +51,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
-    private var isRaining = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -356,9 +353,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
         seventh.findViewById<TextView>(R.id.custom_text).text =
             "Left Menu has\n" +
-                    "QUIZ ->\n" +
-                    "Test your understanding of delivering on food\n\n" +
-                    "ANALYSIS ->\n" +
+                    "QUIZ YOURSELF ->\n" +
+                    "Test your understanding of road rules while delivering food\n\n" +
+                    "ACCIDENT TRENDS ->\n" +
                     "Check the historical data in different region, time and weather\n\n" +
                     "ABOUT APP ->\n" +
                     "Understand the purpose of this app\n\n" +
@@ -521,7 +518,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // currently this is just for getting Rain weather icons(different mode light/night)
     private fun configWeatherIcons(): IntArray {
-        currentWeatherIcons = IntArray(2)
+        var currentWeatherIcons = IntArray(2)
 
         when ("Rain") {
             "Clear" -> {
