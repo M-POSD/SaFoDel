@@ -1,94 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:weightSum="10"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:orientation="horizontal"
+        android:weightSum="10">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
-        android:layout_width="0dp"
-        android:layout_weight="8"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        app:cardBackgroundColor="#FFF6F1"
-        app:cardCornerRadius="5dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <View
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="8"
+            app:cardBackgroundColor="#FFF6F1"
+            app:cardCornerRadius="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/notosansjp_black"
-                android:text="SAFETY GEAR\n CHECKLIST"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:weightSum="10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.9"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="2dp"
-                    android:layout_weight="8.2"
-                    android:background="#9E9E9E" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <include
-                    layout="@layout/checkbox_layout"
-                    android:id="@+id/checkbox1" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansjp_black"
+                    android:text="SAFETY GEAR\n CHECKLIST"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
-                <include
-                    layout="@layout/checkbox_layout"
-                    android:id="@+id/checkbox2" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
 
-                <include
-                    layout="@layout/checkbox_layout"
-                    android:id="@+id/checkbox3" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:textSize="14dp" />
 
-                <include
-                    layout="@layout/checkbox_layout"
-                    android:id="@+id/checkbox4" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_weight="8.2"
+                        android:background="#9E9E9E" />
+                </LinearLayout>
 
-                <include
-                    layout="@layout/checkbox_layout"
-                    android:id="@+id/checkbox5" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical">
 
-                <include
-                    layout="@layout/checkbox_layout"
-                    android:id="@+id/checkbox6" />
+                    <include
+                        android:id="@+id/checkbox1"
+                        layout="@layout/checkbox_layout" />
+
+                    <include
+                        android:id="@+id/checkbox2"
+                        layout="@layout/checkbox_layout" />
+
+                    <include
+                        android:id="@+id/checkbox3"
+                        layout="@layout/checkbox_layout" />
+
+                    <include
+                        android:id="@+id/checkbox4"
+                        layout="@layout/checkbox_layout" />
+
+                    <include
+                        android:id="@+id/checkbox5"
+                        layout="@layout/checkbox_layout" />
+
+                    <include
+                        android:id="@+id/checkbox6"
+                        layout="@layout/checkbox_layout" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>
