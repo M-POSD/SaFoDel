@@ -1,57 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="100dp"
-    android:gravity="right"
-    android:weightSum="1">
-    <TextView
-        android:id="@+id/custom_text"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:maxWidth="170dp"
-        android:text="I am the Demo"
-        android:justificationMode="inter_word"
-        android:fontFamily="@font/notosansjp_bold"
-        android:textSize="14dp"
-        android:textColor="@color/white"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/next_target"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:backgroundTint="@color/primary_green"
-        android:elevation="5dp"
-        android:fontFamily="@font/notosansjp_bold"
-        android:text="Next"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textColor="@color/white"
-        android:textSize="10dp"
-        app:cornerRadius="50dp" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/close_spotlight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:backgroundTint="@color/primary_green"
-        android:elevation="5dp"
-        android:fontFamily="@font/notosansjp_bold"
-        android:text="Close"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textColor="@color/white"
-        android:textSize="10dp"
-        app:cornerRadius="50dp" />
+        android:layout_marginTop="100dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/custom_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosansjp_bold"
+                android:justificationMode="inter_word"
+                android:maxWidth="230dp"
+                android:text="I am the Demoddddddddddddddddd"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+            <ImageView
+                android:id="@+id/custom_image"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:scaleY="1.25"
+                android:scaleX="1.25"
+                android:visibility="invisible"
+                android:src="@drawable/food_map"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/next_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/primary_green"
+                android:elevation="5dp"
+                android:fontFamily="@font/notosansjp_bold"
+                android:text="Next"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:cornerRadius="50dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/close_spotlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/primary_green"
+                android:elevation="5dp"
+                android:fontFamily="@font/notosansjp_bold"
+                android:text="Close"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:cornerRadius="50dp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

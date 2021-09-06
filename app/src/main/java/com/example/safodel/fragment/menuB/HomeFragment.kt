@@ -22,6 +22,7 @@ import com.takusemba.spotlight.Target
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.shape.*
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.example.safodel.retrofit.RetrofitClient
 import com.example.safodel.retrofit.RetrofitInterface
 import com.example.safodel.model.WeatherResponse
@@ -248,11 +249,49 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         val targets = ArrayList<Target>()
 
+        // v0 target
+        val v0Root = FrameLayout(requireContext())
+        val v0 = layoutInflater.inflate(R.layout.layout_target, v0Root)
+        v0.findViewById<TextView>(R.id.custom_text).text =
+            "Welcome to learning mode\n" +
+                    "It's time to know more about the application\n" +
+                    "Click Next for the next step\n" +
+                    "Click Close for leaving this mode"
+        val v0Target = Target.Builder()
+            .setOverlay(v0)
+            .build()
+        targets.add(v0Target)
+
+        // v1 target
+        val v1Root = FrameLayout(requireContext())
+        val v1 = layoutInflater.inflate(R.layout.layout_target, v1Root)
+        v1.findViewById<TextView>(R.id.custom_text).text =
+            "Food delivery riders are not given enough safety training and local traffic knowledge, " +
+                    "making them unacceptably vulnerable"
+        v1.findViewById<ImageView>(R.id.custom_image).visibility = View.VISIBLE
+        val v1Target = Target.Builder()
+            .setOverlay(v1)
+            .build()
+        targets.add(v1Target)
+
+        // v2 target
+        val v2Root = FrameLayout(requireContext())
+        val v2 = layoutInflater.inflate(R.layout.layout_target, v2Root)
+        v2.findViewById<TextView>(R.id.custom_text).text =
+            "We help you prepare for a safe food delivery experience on a bike. " +
+                    "Currently, our services are focused on the 'Victorian' riders\n\n" +
+                    "Following, all functions on home page will be introduced"
+        v2.findViewById<ImageView>(R.id.custom_image).visibility = View.GONE
+        val v2Target = Target.Builder()
+            .setOverlay(v2)
+            .build()
+        targets.add(v2Target)
+
         // first target
         val firstRoot = FrameLayout(requireContext())
         val first = layoutInflater.inflate(R.layout.layout_target, firstRoot)
         first.findViewById<TextView>(R.id.custom_text).text =
-            "This is Home page for you to return to this home page easily"
+            "Home button allows you to return home page directly"
         val firstTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navHome))
             .setShape(Circle(120f))
@@ -264,7 +303,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val secondRoot = FrameLayout(requireContext())
         val second = layoutInflater.inflate(R.layout.layout_target, secondRoot)
         second.findViewById<TextView>(R.id.custom_text).text =
-            "This is Map page to see the historical accident locations in Victoria with details"
+            "Map button allows you to see the historical accident locations in Victoria with details"
         val secondTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navMap))
             .setShape(Circle(120f))
@@ -276,7 +315,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val thirdRoot = FrameLayout(requireContext())
         val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
         third.findViewById<TextView>(R.id.custom_text).text =
-            "Find out how to ride safely while delivering food"
+            "Ride-Safer button allows you to find out how to ride safely while delivering food"
         val thirdTarget = Target.Builder()
             .setAnchor(binding.epicCard12.cardLeft)
             .setShape(
@@ -295,7 +334,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val fourthRoot = FrameLayout(requireContext())
         val fourth = layoutInflater.inflate(R.layout.layout_target, fourthRoot)
         fourth.findViewById<TextView>(R.id.custom_text).text =
-            "Find information on using e-bike for food delivery"
+            "Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery"
         val fourthTarget = Target.Builder()
             .setAnchor(binding.epicCard12.cardRight)
             .setShape(
@@ -314,7 +353,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val fifthRoot = FrameLayout(requireContext())
         val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
         fifth.findViewById<TextView>(R.id.custom_text).text =
-            "Find out the cycling gear you need to deliver safe"
+            "Safety-Gear button allows you to find out the cycling gear you need to deliver safe"
         val fifthTarget = Target.Builder()
             .setAnchor(binding.epicCard34.cardLeft)
             .setShape(
@@ -333,7 +372,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val sixthRoot = FrameLayout(requireContext())
         val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
         sixth.findViewById<TextView>(R.id.custom_text).text =
-            "Find out the measure for handling the bike accident"
+            "In-an-Accident button allows you to find out the measure for handling the bike accident"
         val sixthTarget = Target.Builder()
             .setAnchor(binding.epicCard34.cardRight)
             .setShape(
@@ -352,14 +391,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val seventhRoot = FrameLayout(requireContext())
         val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
         seventh.findViewById<TextView>(R.id.custom_text).text =
-            "Left Menu has\n" +
-                    "QUIZ YOURSELF ->\n" +
+            "Left Menu has\n\n" +
+                    "QUIZ YOURSELF:\n" +
                     "Test your understanding of road rules while delivering food\n\n" +
-                    "ACCIDENT TRENDS ->\n" +
-                    "Check the historical data in different region, time and weather\n\n" +
-                    "ABOUT APP ->\n" +
+                    "ACCIDENT TRENDS:\n" +
+                    "Check the trends in historical accident in different suburbs\n\n" +
+                    "ABOUT APP:\n" +
                     "Understand the purpose of this app\n\n" +
-                    "ABOUT US ->\n" +
+                    "ABOUT US:\n" +
                     "Know more about the developer team"
         seventh.findViewById<TextView>(R.id.next_target).alpha = 0f
         val seventhTarget = Target.Builder()
@@ -417,6 +456,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(true)
         }
 
+        v0.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        v1.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        v2.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
@@ -424,6 +466,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fifth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
+        v0.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        v1.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        v2.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
