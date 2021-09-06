@@ -37,6 +37,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var dialog: MaterialDialog
     private lateinit var lineChart: LineChart
     private lateinit var bar: HorizontalBarChart
+    private var suburbName = "MELBOURNE"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +45,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAnalysisBinding.inflate(inflater, container, false)
+
 
         // Set Dialog
         dialog = MaterialDialog(requireContext())
@@ -63,12 +65,20 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
 
         // Retrofit get data
         suburbInterface = SuburbClient.getRetrofitService()
+
+        // Open page set default value
+        start()
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun start(){
+        setDialog()
+        callSuburbClient("melbourne")
     }
 
     /*
@@ -81,6 +91,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
                     setDialog()
                     callSuburbClient(spProvince.item[position].toString())
+                    binding.suburbName.text = spProvince.item[position].toString()
             }
             override fun onNothingSelected(adapterView: AdapterView<*>) {}
         }
