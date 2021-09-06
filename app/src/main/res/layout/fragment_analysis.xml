@@ -82,32 +82,21 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="400dp"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="WTF"
-                    android:textSize="50dp"/>
-
                 <com.anychart.AnyChartView
                     android:id="@+id/barChart"
                     android:layout_width="400dp"
                     android:layout_height="300dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp" />
-
-                <com.anychart.AnyChartView
+                
+                <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barChart2"
                     android:layout_width="400dp"
                     android:layout_height="300dp"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp" />
-                <com.anychart.AnyChartView
-                    android:id="@+id/barChart3"
-                    android:layout_width="400dp"
-                    android:layout_height="300dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="10dp"/>
+
+
             </LinearLayout>
         </HorizontalScrollView>
 

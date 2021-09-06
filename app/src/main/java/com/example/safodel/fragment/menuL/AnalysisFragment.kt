@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 
 import com.afollestad.materialdialogs.MaterialDialog
 import com.anychart.AnyChart
@@ -14,15 +15,28 @@ import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Cartesian
+import com.anychart.core.gauge.pointers.Bar
 import com.anychart.palettes.RangeColors
 
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+import com.example.safodel.R
 
 import com.example.safodel.databinding.FragmentAnalysisBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.*
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import com.github.mikephil.charting.formatter.IValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.mapbox.maps.extension.style.expressions.dsl.generated.format
+import com.mapbox.maps.extension.style.types.formatted
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +48,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var suburbInterface: SuburbInterface
     private lateinit var dialog: MaterialDialog
     private lateinit var bar: Cartesian
-    private lateinit var bar2: Cartesian
+    private lateinit var bar2: BarChart
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,10 +62,12 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         bar = AnyChart.column().title("Accident time")
             .palette(RangeColors.instantiate().items("#8AD0AB","#8AD0AB"))
         bar.tooltip().titleFormat("Times: {%value}").format("Accidents Hour: {%x}")
+
+        // 2
+        bar2 = binding.barChart2
+
         binding.barChart.setChart(bar)
 
-//        // i am just for testing purpose
-        testingChart()
         initSpinner()
         suburbInterface = SuburbClient.getRetrofitService()
         return binding.root
@@ -138,7 +154,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     }
 
     private fun setBarChat(list: List<SuburbTimeAccidents>){
+        var color  = ContextCompat.getColor(requireContext(), R.color.third_green)
         val data: ArrayList<DataEntry> = ArrayList()
+        val data2: MutableList<BarEntry> = ArrayList()
         val lackData: ArrayList<Int> = ArrayList()
         for(i in 0..23)
             lackData.add(i)
@@ -147,23 +165,35 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                 lackData.remove(i.accidentHours)
         }
         for(each in list){
+            data2.add(BarEntry(each.accidentHours.toFloat(),each.accidentsNumber.toFloat()))
             data.add(ValueDataEntry(each.accidentHours,each.accidentsNumber))
         }
         for(each in lackData)
             data.add(ValueDataEntry(each,0))
         bar.data(data)
+        val barDataset = BarDataSet(data2,"Accident Times")
+        barDataset.setColor(color)
+        barDataset.valueFormatter = IntegerFormatter()
+        val barData = BarData(barDataset)
 
-        // testing
-        bar2.data(data)
-        Log.d("Set the bar chart", "Success!!  " + data.size)
+        bar2.data = barData
+        bar2.axisLeft.setDrawGridLines(false)
+        bar2.xAxis.setDrawGridLines(false)
+        bar2.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        bar2.axisRight.isEnabled = false
+        bar2.xAxis.axisMinimum = 0f
+        bar2.axisLeft.setDrawZeroLine(true)
+        bar2.axisLeft.valueFormatter = IntegerFormatter()
+        bar2.description.text = ""
+        bar2.invalidate()
+
     }
+}
 
-    private fun testingChart() {
-        bar2 = AnyChart.column().title("Accident time")
-            .palette(RangeColors.instantiate().items("#8AD0AB","#8AD0AB"))
-        bar2.tooltip().titleFormat("Times: {%value}").format("Accidents Hour: {%x}")
-        binding.barChart2.setChart(bar2)
-        binding.barChart3.setChart(bar2)
+class IntegerFormatter() : ValueFormatter() {
+
+    override fun getFormattedValue(value: Float): String {
+        return value.toInt().toString()
     }
 
 }
