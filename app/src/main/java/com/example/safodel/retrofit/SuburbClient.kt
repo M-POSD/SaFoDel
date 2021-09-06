@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SuburbClient {
 
     companion object RetrofitManager {
-        private val BASE_URL = "https://safodel-api-1.herokuapp.com/"
+        private val BASE_URL = "http://13.211.206.2//"
 
         fun getRetrofitService(): SuburbInterface {
             val retrofit = Retrofit.Builder()
