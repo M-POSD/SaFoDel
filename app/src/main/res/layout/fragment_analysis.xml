@@ -37,7 +37,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,14 +64,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="10dp"
-            android:text="Time Count"
-            android:textSize="20dp" />
-
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -79,24 +71,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
-                <com.anychart.AnyChartView
-                    android:id="@+id/barChart"
-                    android:layout_width="400dp"
-                    android:layout_height="300dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp" />
-                
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/barChart2"
-                    android:layout_width="400dp"
-                    android:layout_height="300dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Accident times for different hourly periods of the day"/>
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart2"
+                        android:layout_width="400dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"/>
+
+                </LinearLayout>
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -107,29 +104,3 @@
         layout="@layout/simple_toolbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!--<HorizontalScrollView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
-
-    <!--<LinearLayout-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:layout_marginTop="10dp"-->
-    <!--    android:orientation="horizontal">-->
-
-    <!--    <com.anychart.AnyChartView-->
-    <!--        android:id="@+id/barChart"-->
-    <!--        android:layout_margin="10dp"-->
-    <!--        android:layout_width="400dp"-->
-    <!--        android:layout_height="300dp"-->
-    <!--        android:layout_gravity="center" />-->
-
-    <!--    <com.anychart.AnyChartView-->
-    <!--        android:id="@+id/barChart2"-->
-    <!--        android:layout_margin="10dp"-->
-    <!--        android:layout_width="400dp"-->
-    <!--        android:layout_height="300dp"-->
-    <!--        android:layout_gravity="center" />-->
-    <!--</LinearLayout>-->
-    <!--</HorizontalScrollView>-->
