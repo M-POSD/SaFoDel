@@ -776,7 +776,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
           try {
             feature.clear()
             /*---    Fetch the data from team's API  ---*/
-            val url = URL("https://safodel-api.herokuapp.com/accidents?location=" + lga)
+            val url = URL("http://13.211.206.2/accidents?location=" + lga)
             val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
             val inputStream: InputStream = httpURLConnection.inputStream
             val bufferReader = BufferedReader(InputStreamReader(inputStream))
