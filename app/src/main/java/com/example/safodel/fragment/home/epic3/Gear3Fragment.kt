@@ -40,7 +40,7 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.gear3.currentPageText.text = "Australian standards for the safety gear"
+        binding.gear3.currentPageText.text = "Australian Standards for Safety Gear"
 
         // HtmlCompat -> allow app to use html format
         binding.gear3.notification.text = HtmlCompat.fromHtml(

@@ -42,7 +42,7 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
     // set up the default text view
     private fun configDefaultTextView() {
         binding.info1.currentPageText.text = "Risks with E-bikes"
-        binding.info1.notification.text = "Be aware of RISKs of delivering on e-bikes"
+        binding.info1.notification.text = "Be aware of the risks of delivering on an e-bike"
     }
 
     // call recycle view adapter to set up the view

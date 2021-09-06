@@ -8,11 +8,13 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic4Binding
 import com.example.safodel.fragment.BasicFragment
 
 class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::inflate) {
+    private lateinit var toast: Toast
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,6 +23,7 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         _binding = FragmentEpic4Binding.inflate(inflater, container, false)
 
         configDefaultTextView()
+        toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
 
         binding.rule1Card.card.setOnClickListener() {
 //            findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
@@ -45,9 +48,9 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.rule1Card.title.text = "PLACEHOLDER"
-        binding.rule2Card.title.text = "PLACEHOLDER"
-        binding.rule3Card.title.text = "PLACEHOLDER"
+        binding.rule1Card.title.text = "Steps to Follow"
+        binding.rule2Card.title.text = "Workers' Rights"
+        binding.rule3Card.title.text = "Claiming Insurance"
     }
 
     // contents animation slide in from bottom

@@ -41,7 +41,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
 
     // set up the default text view
     private fun configDefaultTextView() {
-        binding.info2.currentPageText.text = "Advantages of E-bikes delivering"
+        binding.info2.currentPageText.text = "Advantages of Delivering on E-Bikes"
         binding.info2.notification.text =
             "E-bikes are rising in popularity especially in the food delivery community, here's why"
     }

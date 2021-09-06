@@ -51,7 +51,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Following labels indicate the helmet is an approved helmet"
+            android:text="The following labels indicate a helmet has been approved"
             android:textColor="@color/white"
             android:layout_marginHorizontal="80dp"
             android:layout_marginTop="10dp"

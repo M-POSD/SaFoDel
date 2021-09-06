@@ -38,7 +38,7 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.gear1.currentPageText.text = "Gears basic information"
+        binding.gear1.currentPageText.text = "Basic gear information"
         binding.gear1.notification.text = "Wearing proper safety gear while delivering food is a must. " +
                 "Find more about the essential safety gear below. "
     }

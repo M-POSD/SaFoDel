@@ -41,7 +41,7 @@ class Info3Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
 
     // set up the default text view
     private fun configDefaultTextView() {
-        binding.info3.currentPageText.text = "E-bikes Rules & Regulations"
+        binding.info3.currentPageText.text = "E-Bikes Rules & Regulation"
         binding.info3.notification.text =
             "Wondering whether the e-bike rules and regulations are different?"
     }

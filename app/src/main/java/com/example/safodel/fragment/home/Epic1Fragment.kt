@@ -38,7 +38,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.tip1Card.title.text = "Safety Tips - while riding a bicycle"
+        binding.tip1Card.title.text = "Safety Tips - whilst riding a bicycle"
         binding.tip2Card.title.text = "Safety Tips - for delivering at night"
     }
 

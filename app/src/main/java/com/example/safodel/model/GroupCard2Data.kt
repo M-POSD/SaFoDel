@@ -57,7 +57,7 @@ class GroupCard2Data(
             groupCard2Data.add(
                 GroupCard2Data("ebikeinfo1",
                     "HIGH THROTTLE",
-                    "Too Much Initial Throttle Can Cause Minor Injuries",
+                    "Too much initial throttle can cause injury",
                     "TIP: Get accustomed to riding an e-bike before actually going out for your first delivery",
                     R.drawable.info1_3,
                     1)
@@ -65,7 +65,7 @@ class GroupCard2Data(
             groupCard2Data.add(
                 GroupCard2Data("ebikeinfo1",
                     "MORE THEFT",
-                    "The higher price tags have also led to more e-bikes being stolen than a standard bicycle",
+                    "The higher price for e-bikes has seen more thefts of e-bikes over regular bikes",
                     "TIP: Make sure you lock your bike properly",
                     R.drawable.info1_1,
                     2)
