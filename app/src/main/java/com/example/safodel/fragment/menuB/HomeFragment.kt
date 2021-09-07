@@ -258,6 +258,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     "Click Next for the next step\n" +
                     "Click Close for leaving this mode"
         val v0Target = Target.Builder()
+            .setShape(Circle(0f))
             .setOverlay(v0)
             .build()
         targets.add(v0Target)
@@ -270,6 +271,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     "making them unacceptably vulnerable"
         v1.findViewById<ImageView>(R.id.custom_image).visibility = View.VISIBLE
         val v1Target = Target.Builder()
+            .setShape(Circle(0f))
             .setOverlay(v1)
             .build()
         targets.add(v1Target)
@@ -284,6 +286,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     "Following, all functions on home page will be introduced"
         v2.findViewById<ImageView>(R.id.custom_image).visibility = View.GONE
         val v2Target = Target.Builder()
+            .setShape(Circle(0f))
             .setOverlay(v2)
             .build()
         targets.add(v2Target)
