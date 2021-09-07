@@ -74,12 +74,95 @@ class   GroupCard2Data(
             // inAnAccident1 data
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
-                    "MORE THEFT",
-                    "The higher price for e-bikes has seen more thefts of e-bikes over regular bikes",
-                    "TIP: Make sure you lock your bike properly",
-                    R.drawable.info1_1,
+                    "This is general advice only",
+                    "",
+                    "In the unfortunate event of a bike accident these are some steps to look after yourself",
+                    0,
                     0)
             )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident1",
+                    "Check on Yourself",
+                    "",
+                    "Make sure you’re okay, contact help if needed and try place yourself in a safe location " +
+                            "if your accident was on the road",
+                    R.drawable.info1_1,
+                    2)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident1",
+                    "Collect Details & Take Photos",
+                    "",
+                    "Collect details of those involved in accident and any witnesses " +
+                            "as they may be necessary for insurance purposes later on",
+                    R.drawable.info1_1,
+                    1)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident1",
+                    "See a Doctor",
+                    "",
+                    "Always give priority to your health and safety. " +
+                            "Even if you feel it is only a small incident, it’s best to see a doctor",
+                    R.drawable.info1_1,
+                    2)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident1",
+                    "Report Incident to Police & Platform",
+                    "",
+                    "Report the incident to the police as well as let your platform know " +
+                            "you’ve been in an accident as they may offer assistance",
+                    R.drawable.info1_1,
+                    1)
+            )
+
+            // inAnAccident2 data
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident2",
+                    "",
+                    "",
+                    "Typically gig economy workers are treated as independent contractors and " +
+                            "therefore lack some ordinary working protections and benefits",
+                    0,
+                    0)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident2",
+                    "Inconsistent Rules",
+                    "",
+                    "It is important to know that  food delivery platforms have different working contracts and " +
+                            "manage the working relationship differently",
+                    0,
+                    2)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident2",
+                    "Employee or Not?",
+                    "",
+                    "Uber Eats treats it’s riders as independent contractors while " +
+                            "a recent ruling Deliveroo drivers as  employees",
+                    0,
+                    1)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident2",
+                    "Growing Area",
+                    "",
+                    "How gig workers are treated is a growing area, " +
+                            "groups like the transport workers union (TWU) are fighting for gig workers to have more rights",
+                    0,
+                    2)
+            )
+
+
 
             return groupCard2Data
         }

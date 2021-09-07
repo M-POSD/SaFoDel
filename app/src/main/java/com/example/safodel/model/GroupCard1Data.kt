@@ -148,6 +148,34 @@ class GroupCard1Data(
                 )
             )
 
+            // inAnAccident3 data
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident3",
+                    "Most delivery companies offer a support package for driver and delivery partners, " +
+                            "helping to cover partners should something go wrong while using their platform ",
+                    0,
+                    0
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident3",
+                    "To find out the insurance details provided by your food delivery platform, " +
+                            "select your partner below",
+                    0,
+                    1
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident2",
+                    "The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions",
+                    0,
+                    1
+                )
+            )
+
             return groupCard1Data
         }
     }
