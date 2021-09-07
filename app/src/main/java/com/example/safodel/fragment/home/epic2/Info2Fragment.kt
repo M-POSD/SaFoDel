@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.GroupCard1Adapter
+import com.example.safodel.databinding.FragmentInfo2Binding
 import com.example.safodel.databinding.FragmentInfo3Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.GroupCard1Data
 
-class Info2Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::inflate) {
+class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var info2s: MutableList<GroupCard1Data>
     private lateinit var adapter: GroupCard1Adapter
@@ -22,7 +23,7 @@ class Info2Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInfo3Binding.inflate(inflater, container, false)
+        _binding = FragmentInfo2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         configDefaultTextView()
@@ -62,13 +63,13 @@ class Info2Fragment : BasicFragment<FragmentInfo3Binding>(FragmentInfo3Binding::
         binding.info2.recyclerView.layoutManager = layoutManager
     }
 
-    // get the info3s from the model class
+    // get the info2s from the model class
     private fun getInfo2s(): MutableList<GroupCard1Data> {
         info2s = GroupCard1Data.init()
         var i = 0
         while (i < info2s.size) {
             when (info2s[i].dataType) {
-                "ebikeinfo3" -> i++
+                "eBikeInfo2" -> i++
                 else -> info2s.removeAt(i)
             }
         }

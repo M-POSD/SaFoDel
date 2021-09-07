@@ -54,10 +54,10 @@ class GroupCard1Data(
                 )
             )
 
-            // ebikeinfo2 data
+            // eBikeInfo1 data
             groupCard1Data.add(
                 GroupCard1Data(
-                    "ebikeinfo2",
+                    "eBikeInfo1",
                     "Make riding twice as easy as push bikes",
                     R.drawable.info2_1,
                     2
@@ -65,7 +65,7 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "ebikeinfo2",
+                    "eBikeInfo1",
                     "Comes in handy when riding up hills or over long distances",
                     R.drawable.info2_2,
                     1
@@ -73,7 +73,7 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "ebikeinfo2",
+                    "eBikeInfo1",
                     "Promote sustainability",
                     R.drawable.info2_3,
                     2
@@ -81,17 +81,17 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "ebikeinfo2",
+                    "eBikeInfo1",
                     "No need to break the bank as they’re generally cheaper to rent",
                     R.drawable.info2_4,
                     1
                 )
             )
 
-            // ebikeinfo3 data
+            // eBikeInfo2 data
             groupCard1Data.add(
                 GroupCard1Data(
-                    "ebikeinfo3",
+                    "eBikeInfo2",
                     "The Victorian Government allows a maximum power of 250 watts",
                     R.drawable.info3_1,
                     2
@@ -99,7 +99,7 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "ebikeinfo3",
+                    "eBikeInfo2",
                     "A maximum speed of 25 km/h is allowed if the rider is pedalling",
                     R.drawable.info3_2,
                     1
@@ -107,7 +107,7 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "ebikeinfo3",
+                    "eBikeInfo2",
                     "All other rules are the same as pedal bicycles",
                     R.drawable.info3_3,
                     2

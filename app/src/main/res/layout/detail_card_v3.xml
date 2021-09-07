@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="10dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/description"
@@ -40,6 +40,19 @@
                     android:justificationMode="inter_word"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/red"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/description2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansjp_bold"
+                    android:text="Demo"
+                    android:justificationMode="inter_word"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
                     android:textSize="14dp" />
             </LinearLayout>
         </LinearLayout>

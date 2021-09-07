@@ -2,7 +2,7 @@ package com.example.safodel.model
 
 import com.example.safodel.R
 
-class GroupCard2Data(
+class   GroupCard2Data(
     var dataType: String,
     var title: String,
     var statistics: String,
@@ -45,9 +45,9 @@ class GroupCard2Data(
                     R.drawable.tip1_4,1)
             )
 
-            // ebikeinfo1 data
+            // eBikeInfo3 data
             groupCard2Data.add(
-                GroupCard2Data("ebikeinfo1",
+                GroupCard2Data("eBikeInfo3",
                     "HIGH SPEED DANGER",
                     "Buying a high-speed e-bike may lead to faster deliveries but it is illegal",
                     "TIP: Be sure to check the government guidelines before buying an e-bike",
@@ -55,7 +55,7 @@ class GroupCard2Data(
                     2)
             )
             groupCard2Data.add(
-                GroupCard2Data("ebikeinfo1",
+                GroupCard2Data("eBikeInfo3",
                     "HIGH THROTTLE",
                     "Too much initial throttle can cause injury",
                     "TIP: Get accustomed to riding an e-bike before actually going out for your first delivery",
@@ -63,13 +63,24 @@ class GroupCard2Data(
                     1)
             )
             groupCard2Data.add(
-                GroupCard2Data("ebikeinfo1",
+                GroupCard2Data("eBikeInfo3",
                     "MORE THEFT",
                     "The higher price for e-bikes has seen more thefts of e-bikes over regular bikes",
                     "TIP: Make sure you lock your bike properly",
                     R.drawable.info1_1,
                     2)
             )
+
+            // inAnAccident1 data
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident1",
+                    "MORE THEFT",
+                    "The higher price for e-bikes has seen more thefts of e-bikes over regular bikes",
+                    "TIP: Make sure you lock your bike properly",
+                    R.drawable.info1_1,
+                    0)
+            )
+
             return groupCard2Data
         }
     }
