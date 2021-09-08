@@ -16,7 +16,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Take extra care when cycling at night. It is harder for drivers to see you and for you to see hazards.",
+                    "Take extra care when cycling at night. It is harder for drivers to see you and for you to see hazards",
                     0,
                     0
                 )
@@ -24,7 +24,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Try to ride on well-lit roads and wear bright or light coloured clothing or a reflective vest.",
+                    "Try to ride on well-lit roads and wear bright or light coloured clothing or a reflective vest",
                     R.drawable.tip2_1,
                     2
                 )
@@ -32,7 +32,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Always use front and rear lights.",
+                    "Always use front and rear lights",
                     R.drawable.tip2_2,
                     1
                 )
@@ -40,7 +40,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Keep backup lights or a portable charger.",
+                    "Keep backup lights or a portable charger",
                     R.drawable.tip2_3,
                     2
                 )
@@ -48,7 +48,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Avoid delivering in areas with poor lighting.",
+                    "Avoid delivering in areas with poor lighting",
                     R.drawable.tip2_4,
                     1
                 )

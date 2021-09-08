@@ -1,10 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!--  unchangeable setting  -->
     <string name="app_name" translatable="false">SaFoDel</string>
     <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoiamF6MjAyMTA4MjciLCJhIjoiY2tzdTI5NWttMWJ5NzJua3R4Ynd5aG5sOSJ9.5zTN0BjRVD-NBfNe32sAaw</string>
     <string name="SaFoDel" translatable="false"><b>SaFoDel</b></string>
     <string name="start_subtitle" translatable="false"><b>Alert Today, Alive Tomorrow</b></string>
     <string name="password" translatable="false">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
 
+    <!--  home button  -->
     <string name="home">Home</string>
     <string name="map" >Map</string>
     <string name="app_intro" >About App</string>
@@ -12,5 +14,21 @@
     <string name="developer" >About Us</string>
     <string name="exam">Quiz Yourself</string>
     <string name="analysis">Accident Trends</string>
+
+    <!--  epic1  -->
+
+    <!--  epic2  -->
+
+    <!--  epic3  -->
+
+    <!--  epic4  -->
+
+    <!--  epic5  -->
+
+    <!--  question  -->
+
+    <!--  analysis  -->
+
+    <!--  map  -->
 
 </resources>
