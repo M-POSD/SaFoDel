@@ -45,83 +45,63 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/blue_outline">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:text="Accidents Number"
-                                android:textAlignment="center"
-                                android:textSize="14dp" />
-
-                            <TextView
-                                android:id="@+id/accidentNumber"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_marginTop="35dp"
-                                android:text=""
-                                android:textSize="24dp" />
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_marginStart="30dp">
-
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/suburbName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
+                            android:text="MELBOURNE"
+                            android:textSize="16dp" />
 
-                            <TextView
-                                android:id="@+id/suburbName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:text="MELBOURNE"
-                                android:textAlignment="center"
-                                android:textSize="30dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:textSize="16dp"
+                            android:text="Total Accidents:"/>
 
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/accidentNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="Numbeer"
+                            android:textSize="16dp" />
 
-                    </com.google.android.material.card.MaterialCardView>
-
+                    </LinearLayout>
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Top 5 of Accidents Road in this Suburb"/>
+                        android:text="Top 5 Roads by Accident Total"/>
 
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/barChart"
                         android:layout_width="400dp"
-                        android:layout_height="300dp"
+                        android:layout_height="250dp"
                         android:layout_margin="10dp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
@@ -141,7 +121,7 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"
                         android:layout_width="400dp"
-                        android:layout_height="300dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"/>
                 </LinearLayout>
