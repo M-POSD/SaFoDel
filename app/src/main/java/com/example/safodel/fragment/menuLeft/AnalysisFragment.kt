@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuL
+package com.example.safodel.fragment.menuLeft
 
 import android.os.Bundle
 import android.util.Log
@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginLeft
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
@@ -18,7 +16,6 @@ import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.*
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis

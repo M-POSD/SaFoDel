@@ -1,11 +1,9 @@
 package com.example.safodel.fragment
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
@@ -14,14 +12,6 @@ import com.example.safodel.databinding.FragmentEpicsBinding
 import com.example.safodel.ui.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import com.example.safodel.fragment.menuB.HomeFragmentArgs
-import android.content.SharedPreferences
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.DecelerateInterpolator
 
 
 class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::inflate) {

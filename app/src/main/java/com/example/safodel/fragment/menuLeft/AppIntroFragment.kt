@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuL
+package com.example.safodel.fragment.menuLeft
 
 import android.graphics.Paint
 import android.os.Bundle

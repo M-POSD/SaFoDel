@@ -1,17 +1,14 @@
-package com.example.safodel.fragment.menuL
+package com.example.safodel.fragment.menuLeft
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentQuizBinding
 import com.example.safodel.fragment.BasicFragment
-import com.google.android.material.button.MaterialButton
 
 
 class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inflate) {

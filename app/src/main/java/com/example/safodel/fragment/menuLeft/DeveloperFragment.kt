@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuL
+package com.example.safodel.fragment.menuLeft
 
 import android.content.Intent
 import android.graphics.Paint
@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.example.safodel.R
 import com.example.safodel.databinding.FragmentDeveloperBinding
 import com.example.safodel.fragment.BasicFragment
 
