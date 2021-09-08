@@ -78,7 +78,7 @@ class   GroupCard2Data(
                     "",
                     "In the unfortunate event of a bike accident these are some steps to look after yourself",
                     0,
-                    0)
+                    4)
             )
 
             groupCard2Data.add(
@@ -87,7 +87,7 @@ class   GroupCard2Data(
                     "",
                     "Make sure you’re okay, contact help if needed and try place yourself in a safe location " +
                             "if your accident was on the road",
-                    R.drawable.info1_1,
+                    R.drawable.inanaccident1_1,
                     2)
             )
 
@@ -97,7 +97,7 @@ class   GroupCard2Data(
                     "",
                     "Collect details of those involved in accident and any witnesses " +
                             "as they may be necessary for insurance purposes later on",
-                    R.drawable.info1_1,
+                    R.drawable.inanaccident1_2,
                     1)
             )
 
@@ -107,7 +107,7 @@ class   GroupCard2Data(
                     "",
                     "Always give priority to your health and safety. " +
                             "Even if you feel it is only a small incident, it’s best to see a doctor",
-                    R.drawable.info1_1,
+                    R.drawable.inanaccident1_3,
                     2)
             )
 
@@ -117,7 +117,7 @@ class   GroupCard2Data(
                     "",
                     "Report the incident to the police as well as let your platform know " +
                             "you’ve been in an accident as they may offer assistance",
-                    R.drawable.info1_1,
+                    R.drawable.inanaccident1_4,
                     1)
             )
 
@@ -129,7 +129,7 @@ class   GroupCard2Data(
                     "Typically gig economy workers are treated as independent contractors and " +
                             "therefore lack some ordinary working protections and benefits",
                     0,
-                    0)
+                    4)
             )
 
             groupCard2Data.add(
@@ -138,7 +138,7 @@ class   GroupCard2Data(
                     "",
                     "It is important to know that  food delivery platforms have different working contracts and " +
                             "manage the working relationship differently",
-                    0,
+                    R.drawable.inanaccident2_1,
                     2)
             )
 
@@ -148,7 +148,7 @@ class   GroupCard2Data(
                     "",
                     "Uber Eats treats it’s riders as independent contractors while " +
                             "a recent ruling Deliveroo drivers as  employees",
-                    0,
+                    R.drawable.inanaccident2_2,
                     1)
             )
 
@@ -158,7 +158,7 @@ class   GroupCard2Data(
                     "",
                     "How gig workers are treated is a growing area, " +
                             "groups like the transport workers union (TWU) are fighting for gig workers to have more rights",
-                    0,
+                    R.drawable.inanaccident2_3,
                     2)
             )
 

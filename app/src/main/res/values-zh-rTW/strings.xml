@@ -1,17 +1,10 @@
 <?xml version="1.0" ?>
 <resources>
-    <string name="app_name">SaFoDel</string>
-    <string name="school">School</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoiamF6MjAyMTA4MjciLCJhIjoiY2tzdTI5NWttMWJ5NzJua3R4Ynd5aG5sOSJ9.5zTN0BjRVD-NBfNe32sAaw</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">家</string>
     <string name="map">地圖</string>
     <string name="app_intro">關於應用</string>
-    <string name="safty_gear">Safety Gear</string>
+    <string name="safety_gear">Safety Gear</string>
     <string name="developer">關於我們</string>
-    <string name="SaFoDel"></string>
-    <string name="start_subtitle"></string>
     <string name="exam">自我測驗</string>
     <string name="analysis">事故趨勢</string>
-    <string name="password">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
 </resources>

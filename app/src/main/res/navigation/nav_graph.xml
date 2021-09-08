@@ -170,5 +170,20 @@
         android:name="com.example.safodel.fragment.menuL.quiz.QuizResultFragment"
         android:label="fragment_exam_finish"
         tools:layout="@layout/fragment_quiz_resault" />
+    <fragment
+        android:id="@+id/accident1Fragment"
+        android:name="com.example.safodel.fragment.home.epic4.Accident1Fragment"
+        android:label="fragment_accident1"
+        tools:layout="@layout/fragment_accident1" />
+    <fragment
+        android:id="@+id/accident2Fragment"
+        android:name="com.example.safodel.fragment.home.epic4.Accident2Fragment"
+        android:label="fragment_accident2"
+        tools:layout="@layout/fragment_accident2" />
+    <fragment
+        android:id="@+id/accident3Fragment"
+        android:name="com.example.safodel.fragment.home.epic4.Accident3Fragment"
+        android:label="fragment_accident3"
+        tools:layout="@layout/fragment_accident3" />
 
 </navigation>

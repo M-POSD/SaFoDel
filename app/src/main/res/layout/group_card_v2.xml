@@ -7,5 +7,7 @@
         android:id="@+id/image_left"/>
     <include layout="@layout/detail_card_v5"
         android:id="@+id/image_right"/>
+    <include layout="@layout/detail_card_v3"
+        android:id="@+id/pure_text"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

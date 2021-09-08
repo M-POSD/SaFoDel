@@ -9,6 +9,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic4Binding
 import com.example.safodel.fragment.BasicFragment
@@ -26,24 +28,15 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
 
         binding.rule1Card.card.setOnClickListener() {
-            toast.cancel()
-            toast.setText("This function haven't completed")
-            toast.show()
-//            findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.accident1Fragment, null, navAnimationLeftToRight())
         }
 
         binding.rule2Card.card.setOnClickListener() {
-            toast.cancel()
-            toast.setText("This function haven't completed")
-            toast.show()
-//            findNavController().navigate(R.id.gear2Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.accident2Fragment, null, navAnimationLeftToRight())
         }
 
         binding.rule3Card.card.setOnClickListener() {
-            toast.cancel()
-            toast.setText("This function haven't completed")
-            toast.show()
-//            findNavController().navigate(R.id.gear3Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.accident3Fragment, null, navAnimationLeftToRight())
         }
 
         contentsAnimation()

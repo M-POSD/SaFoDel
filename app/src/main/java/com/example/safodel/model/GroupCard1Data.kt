@@ -163,16 +163,56 @@ class GroupCard1Data(
                     "inAnAccident3",
                     "To find out the insurance details provided by your food delivery platform, " +
                             "select your partner below",
-                    0,
-                    1
+                    R.drawable.inanaccident3_1,
+                    2
                 )
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "inAnAccident2",
+                    "inAnAccident3",
+                    "Click to Know More",
+                    R.drawable.food_delivery_1,
+                    2
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident3",
+                    "Click to Know More",
+                    R.drawable.food_delivery_2,
+                    2
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident3",
+                    "Click to Know More",
+                    R.drawable.food_delivery_3,
+                    2
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident3",
+                    "Click to Know More",
+                    R.drawable.food_delivery_4,
+                    2
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident3",
+                    "Click to Know Mor",
+                    R.drawable.food_delivery_5,
+                    2
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "inAnAccident3",
                     "The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions",
-                    0,
-                    1
+                    R.drawable.inanaccident3_2,
+                    2
                 )
             )
 
