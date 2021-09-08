@@ -66,7 +66,7 @@
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
-        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.31188852923890625" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.1649122807017544" />
         <entry key="app/src/main/res/layout/fragment_quiz_resault.xml" value="0.1649122807017544" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />

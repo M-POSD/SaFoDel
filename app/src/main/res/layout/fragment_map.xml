@@ -38,14 +38,6 @@
             android:id="@+id/toolbar" />
 
 
-    <TextView
-        android:id="@+id/textTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Accident Prone Locations:"/>
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
@@ -55,17 +47,34 @@
         android:fitsSystemWindows="true"
         android:orientation="horizontal">
 
-        <org.angmarch.views.NiceSpinner
+        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
             android:id="@+id/spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:smsp_enableDismissSearch="true"
+            app:smsp_enableErrorLabel="false"
+            app:smsp_errorText="ERROR"
+            app:smsp_floatingLabelColor="@color/deep_green"
+            app:smsp_floatingLabelText="Accident Prone Location:"
+            app:smsp_hint="Select the suburb"
+            app:smsp_hintColor="#388E3C"
+            app:smsp_isSearchable="true"
+            app:smsp_itemColor="@color/deep_green"
+            app:smsp_itemListColor="@color/third_green"
+            app:smsp_itemListHintBackgroundColor="#808080"
+            app:smsp_itemListHintColor="#FFFFFF"
+            app:smsp_multilineError="false"
+            app:smsp_searchHeaderBackgroundColor="@color/third_green"
+            app:smsp_selectedItemListColor="@color/black"
+            android:fitsSystemWindows="true"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/updateMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_margin="10dp"
             android:background="@drawable/blue_outline"
             android:text="Update" />
     </LinearLayout>

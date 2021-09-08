@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -267,16 +268,20 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         permissionsManager.requestLocationPermissions(activity)
 
         // spinner init
-        val spinner: NiceSpinner = binding.spinner
-        spinner.attachDataSource(LGAlist)
-        spinner.text = "SELECT HERE"
-        spinner.setOnSpinnerItemSelectedListener { parent, view, position, id ->
-            spinnerTimes++ // calculate the times to test
-            if(spinnerTimes >= 1){
-                lga = parent?.getItemAtPosition(position).toString()
-                mThread = fetchdata()
-                mThread.start()
+        val spinner = binding.spinner
+        spinner.item  = LGAlist
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                spinnerTimes++ // calculate the times to test
+                if(spinnerTimes >= 1){
+                    lga = parent?.getItemAtPosition(position).toString()
+                    mThread = fetchdata()
+                    mThread.start()
+                }
             }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
         // change the float button height
@@ -537,7 +542,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.floatButtonStop.visibility = View.VISIBLE
                     initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
-                    binding.textTop.visibility = View.INVISIBLE
                     binding.spinner.visibility = View.INVISIBLE
                     binding.updateMap.visibility = View.INVISIBLE
                     bcLayer.setProperties(visibility(Property.NONE))
@@ -554,7 +558,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.recenter.visibility = View.INVISIBLE
                     mapView.getMapAsync(this)
                     binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
-                    binding.textTop.visibility = View.VISIBLE
                     binding.spinner.visibility = View.VISIBLE
                     binding.updateMap.visibility = View.VISIBLE
                     bcLayer.setProperties(visibility(Property.VISIBLE))
