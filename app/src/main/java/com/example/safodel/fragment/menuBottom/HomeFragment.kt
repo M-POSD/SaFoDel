@@ -111,10 +111,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // set up default text view
     private fun configDefaultTextView() {
-        binding.epicCard12.editTextLeft.text = "Ride Safer"
-        binding.epicCard12.editTextRight.text = "Delivery on E-bike"
-        binding.epicCard34.editTextLeft.text = "Safety Gear"
-        binding.epicCard34.editTextRight.text = "In an Accident"
+        binding.epicCard12.editTextLeft.text = getString(R.string.epic1_heading)
+        binding.epicCard12.editTextRight.text = getString(R.string.epic2_heading)
+        binding.epicCard34.editTextLeft.text = getString(R.string.epic3_heading)
+        binding.epicCard34.editTextRight.text = getString(R.string.epic4_heading)
     }
 
     // raining animation
@@ -252,11 +252,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // v0 target
         val v0Root = FrameLayout(requireContext())
         val v0 = layoutInflater.inflate(R.layout.layout_target, v0Root)
-        v0.findViewById<TextView>(R.id.custom_text).text =
-            "Welcome to learning mode\n" +
-                    "It's time to know more about the application\n" +
-                    "Click Next for the next step\n" +
-                    "Click Close for leaving this mode"
+        v0.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v0)
+
         val v0Target = Target.Builder()
             .setShape(Circle(0f))
             .setOverlay(v0)
@@ -266,9 +263,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // v1 target
         val v1Root = FrameLayout(requireContext())
         val v1 = layoutInflater.inflate(R.layout.layout_target, v1Root)
-        v1.findViewById<TextView>(R.id.custom_text).text =
-            "Food delivery riders are not given enough safety training and local traffic knowledge, " +
-                    "making them unacceptably vulnerable"
+        v1.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v1)
+
         v1.findViewById<ImageView>(R.id.custom_image).visibility = View.VISIBLE
         val v1Target = Target.Builder()
             .setShape(Circle(0f))
@@ -279,11 +275,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // v2 target
         val v2Root = FrameLayout(requireContext())
         val v2 = layoutInflater.inflate(R.layout.layout_target, v2Root)
-        v2.findViewById<TextView>(R.id.custom_text).text =
-            "What is SaFoDel?\n" +
-                    "We help you prepare for a safe food delivery experience on a bike. " +
-                    "Currently, our services are focused on the 'Victorian' riders\n\n" +
-                    "Following, all functions on home page will be introduced"
+        v2.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v2)
+
         v2.findViewById<ImageView>(R.id.custom_image).visibility = View.GONE
         val v2Target = Target.Builder()
             .setShape(Circle(0f))
@@ -294,8 +287,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // first target
         val firstRoot = FrameLayout(requireContext())
         val first = layoutInflater.inflate(R.layout.layout_target, firstRoot)
-        first.findViewById<TextView>(R.id.custom_text).text =
-            "Home button allows you to return home page directly"
+        first.findViewById<TextView>(R.id.custom_text).text = getString(R.string.first_target)
         val firstTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navHome))
             .setShape(Circle(120f))
@@ -306,8 +298,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // second target
         val secondRoot = FrameLayout(requireContext())
         val second = layoutInflater.inflate(R.layout.layout_target, secondRoot)
-        second.findViewById<TextView>(R.id.custom_text).text =
-            "Map button allows you to see the historical accident locations in Victoria with details"
+        second.findViewById<TextView>(R.id.custom_text).text = getString(R.string.second_target)
+
         val secondTarget = Target.Builder()
             .setAnchor(requireActivity().findViewById<View>(R.id.navMap))
             .setShape(Circle(120f))
@@ -318,8 +310,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // third target
         val thirdRoot = FrameLayout(requireContext())
         val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
-        third.findViewById<TextView>(R.id.custom_text).text =
-            "Ride-Safer button allows you to find out how to ride safely while delivering food"
+        third.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
         val thirdTarget = Target.Builder()
             .setAnchor(binding.epicCard12.cardLeft)
             .setShape(
@@ -337,8 +328,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // fourth target
         val fourthRoot = FrameLayout(requireContext())
         val fourth = layoutInflater.inflate(R.layout.layout_target, fourthRoot)
-        fourth.findViewById<TextView>(R.id.custom_text).text =
-            "Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery"
+        fourth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fourth_target)
+
         val fourthTarget = Target.Builder()
             .setAnchor(binding.epicCard12.cardRight)
             .setShape(
@@ -356,8 +347,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // fifth target
         val fifthRoot = FrameLayout(requireContext())
         val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
-        fifth.findViewById<TextView>(R.id.custom_text).text =
-            "Safety-Gear button allows you to find out the cycling gear you need to deliver safe"
+        fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
+
         val fifthTarget = Target.Builder()
             .setAnchor(binding.epicCard34.cardLeft)
             .setShape(
@@ -375,8 +366,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // sixth target
         val sixthRoot = FrameLayout(requireContext())
         val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
-        sixth.findViewById<TextView>(R.id.custom_text).text =
-            "In-an-Accident button allows you to find out the measure for handling the bike accident"
+        sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
+
         val sixthTarget = Target.Builder()
             .setAnchor(binding.epicCard34.cardRight)
             .setShape(
@@ -394,16 +385,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // seventh target
         val seventhRoot = FrameLayout(requireContext())
         val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
-        seventh.findViewById<TextView>(R.id.custom_text).text =
-            "Left Menu has\n\n" +
-                    "QUIZ YOURSELF:\n" +
-                    "Test your understanding of road rules while delivering food\n\n" +
-                    "ACCIDENT TRENDS:\n" +
-                    "Check the trends in historical accident in different suburbs\n\n" +
-                    "ABOUT APP:\n" +
-                    "Understand the purpose of this app\n\n" +
-                    "ABOUT US:\n" +
-                    "Know more about the developer team"
+        seventh.findViewById<TextView>(R.id.custom_text).text = getString(R.string.seventh_target)
+
         seventh.findViewById<TextView>(R.id.next_target).alpha = 0f
         val seventhTarget = Target.Builder()
             .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))   // get the image view position
@@ -425,7 +408,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     currentToast?.cancel()
                     currentToast = Toast.makeText(
                         requireContext(),
-                        "Welcome to the SaFoDel learning mode",
+                        getString(R.string.start_learning_mode),
                         Toast.LENGTH_SHORT
                     )
                     currentToast?.show()
@@ -435,7 +418,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     currentToast?.cancel()
                     currentToast = Toast.makeText(
                         mainActivity,
-                        "Thanks for watching",
+                        getString(R.string.end_learning_mode),
                         Toast.LENGTH_SHORT
                     )
                     currentToast?.show()

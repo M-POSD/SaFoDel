@@ -2,9 +2,15 @@
     <!--  unchangeable setting  -->
     <string name="app_name" translatable="false">SaFoDel</string>
     <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoiamF6MjAyMTA4MjciLCJhIjoiY2tzdTI5NWttMWJ5NzJua3R4Ynd5aG5sOSJ9.5zTN0BjRVD-NBfNe32sAaw</string>
+    <string name="password" translatable="false">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
     <string name="SaFoDel" translatable="false"><b>SaFoDel</b></string>
     <string name="start_subtitle" translatable="false"><b>Alert Today, Alive Tomorrow</b></string>
-    <string name="password" translatable="false">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
+    <string name="app_id_weather_api" translatable="false">898ef19b846722554449f6068e7c7253</string>
+    <string name="city_name" translatable="false">Caulfield,AU</string>
+
+    <!--  toast  -->
+    <string name="start_learning_mode">Welcome to the SaFoDel learning mode</string>
+    <string name="end_learning_mode">Thanks for watching</string>
 
     <!--  home button  -->
     <string name="home">Home</string>
@@ -15,16 +21,35 @@
     <string name="exam">Quiz Yourself</string>
     <string name="analysis">Accident Trends</string>
 
+    <!--  spotlight description  -->
+    <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\nClick Next for the next step\nClick Close for leaving this mode</string>
+    <string name="v1">Food delivery riders are not given enough safety training and local traffic knowledge, making them unacceptably vulnerable</string>
+    <string name="v2">What is SaFoDel?\nWe help you prepare for a safe food delivery experience on a bike. Currently, our services are focused on the Victorian riders\n\nFollowing, all functions on home page will be introduced</string>
+    <string name="first_target">Home button allows you to return home page directly</string>
+    <string name="second_target">Map button allows you to see the historical accident locations in Victoria with details</string>
+    <string name="third_target">Ride-Safer button allows you to find out how to ride safely while delivering food</string>
+    <string name="fourth_target">Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery</string>
+    <string name="fifth_target">Safety-Gear button allows you to find out the cycling gear you need to deliver safe</string>
+    <string name="sixth_target">In-an-Accident button allows you to find out the measure for handling the bike accident</string>
+    <string name="seventh_target">Left Menu has\n\nQUIZ YOURSELF:\nTest your understanding of road rules while delivering food\n\nACCIDENT TRENDS:\nCheck the trends in historical accident in different suburbs\n\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team</string>
+
+
     <!--  epic1  -->
+    <string name="epic1_heading" translatable="false">Ride Safer</string>
     <string name="tip2_1_title" translatable="false">RIDE CAREFULLY AT INTERSECTIONS</string>
-    <string name="tip2_1_statistics" translatable="false">"Bicycle crashes are marginally more common (55%) at intersections"</string>
-    <string name="tip2_1_description" translatable="false">"TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)"</string>
+    <string name="tip2_1_statistics" translatable="false">Bicycle crashes are marginally more common (55%) at intersections</string>
+    <string name="tip2_1_description" translatable="false">TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)</string>
 
     <!--  epic2  -->
+    <string name="epic2_heading" translatable="false">Delivery on E-bike</string>
     <string name="info1_1" translatable="false">Accident Trends</string>
+
     <!--  epic3  -->
+    <string name="epic3_heading" translatable="false">Safety Gear</string>
     <string name="gear1_1" translatable="false">Accident Trends</string>
+
     <!--  epic4  -->
+    <string name="epic4_heading" translatable="false">In an Accident</string>
     <string name="inanaccident1_1" translatable="false">Accident Trends</string>
     <!--  epic5  -->
 
