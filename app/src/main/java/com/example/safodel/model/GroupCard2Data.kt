@@ -18,9 +18,9 @@ class   GroupCard2Data(
             groupCard2Data.add(
                 GroupCard2Data("tip1",
                     "RIDE CAREFULLY AT INTERSECTIONS",
-                    "Bicycle crashes are marginally more common (55%) at intersections",
+                        "Bicycle crashes are marginally more common (55%) at intersections",
                     "TIP: If you want to turn right at any intersection, " +
-                            "doing a hook turn is often a safer option (unless a sign prohibits it).",
+                            "doing a hook turn is often a safer option (unless a sign prohibits it)",
                     R.drawable.tip1_1,2)
             )
             groupCard2Data.add(

@@ -16,13 +16,16 @@
     <string name="analysis">Accident Trends</string>
 
     <!--  epic1  -->
+    <string name="tip2_1_title" translatable="false">RIDE CAREFULLY AT INTERSECTIONS</string>
+    <string name="tip2_1_statistics" translatable="false">"Bicycle crashes are marginally more common (55%) at intersections"</string>
+    <string name="tip2_1_description" translatable="false">"TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)"</string>
 
     <!--  epic2  -->
-
+    <string name="info1_1" translatable="false">Accident Trends</string>
     <!--  epic3  -->
-
+    <string name="gear1_1" translatable="false">Accident Trends</string>
     <!--  epic4  -->
-
+    <string name="inanaccident1_1" translatable="false">Accident Trends</string>
     <!--  epic5  -->
 
     <!--  question  -->
