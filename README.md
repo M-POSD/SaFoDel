@@ -10,14 +10,14 @@ Educating Food Delivery Bike Riders in Victoria
 
 
 ## Features✨
+- Accident Trends add accident trend graph for each suburb and common information among all suburbs
 - E-Bike Delivery information sharing (Find information on using e-bikes for food delivery)
 - Safety Gears information sharing (Find out the cycling gear you need to deliver safe)
 - In an Accident tips sharing (Find out the information while encountered the accident)
 - Ride Safer tips sharing (Find out how to ride safely while delivering food)
 - A quiz for testing user road rules understanding
 - A map to see accident location base on LGA area
-- Locate the current location
-- Accident Trends add accident trend graph for each suburb and common information among all suburbs  
+- Locate the current location  
 - A good Logo
 - A good UI
  
