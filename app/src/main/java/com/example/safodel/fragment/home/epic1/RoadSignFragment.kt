@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.home.epic4
+package com.example.safodel.fragment.home.epic1
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,23 +7,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.GroupCard1Adapter
-import com.example.safodel.databinding.FragmentAccident3Binding
-import com.example.safodel.databinding.FragmentTip2Binding
+import com.example.safodel.adapter.GroupCard2Adapter
+import com.example.safodel.databinding.FragmentRoadSignBinding
+import com.example.safodel.databinding.FragmentTip1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.GroupCard1Data
+import com.example.safodel.model.GroupCard2Data
 
-class Accident3Fragment : BasicFragment<FragmentAccident3Binding>(FragmentAccident3Binding::inflate) {
+class RoadSignFragment : BasicFragment<FragmentRoadSignBinding>(FragmentRoadSignBinding::inflate) {
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var accident3s: MutableList<GroupCard1Data>
-    private lateinit var adapter: GroupCard1Adapter
+    private lateinit var roadSigns: MutableList<GroupCard2Data>
+    private lateinit var adapter: GroupCard2Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAccident3Binding.inflate(inflater, container, false)
+        _binding = FragmentRoadSignBinding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         configDefaultTextView()
@@ -42,41 +42,39 @@ class Accident3Fragment : BasicFragment<FragmentAccident3Binding>(FragmentAccide
 
     // set up the default text view
     private fun configDefaultTextView() {
-        binding.accident3.currentPageText.text = "Claiming Insurance"
-        binding.accident3.notification.text = "Find out information regarding insurance claims"
+        binding.roadSign.currentPageText.text = "Understand Road Sign"
+        binding.roadSign.notification.text = "Here are a few significant road signs you must understand"
     }
 
     // call recycle view adapter to set up the view
     private fun configRecycleView() {
-        adapter = GroupCard1Adapter(requireActivity(), getAccident3s())
+        adapter = GroupCard2Adapter(requireActivity(), getRoadSigns())
 
-        binding.accident3.recyclerView.addItemDecoration(
+        binding.roadSign.recyclerView.addItemDecoration(
             DividerItemDecoration(
                 requireActivity(),
                 LinearLayoutManager.VERTICAL
             )
         )
 
-        binding.accident3.recyclerView.adapter = adapter
+        binding.roadSign.recyclerView.adapter = adapter
         layoutManager = LinearLayoutManager(requireActivity())
-        binding.accident3.recyclerView.layoutManager = layoutManager
+        binding.roadSign.recyclerView.layoutManager = layoutManager
     }
 
-    // get accident3s from the model class
-    private fun getAccident3s(): MutableList<GroupCard1Data> {
-        accident3s = GroupCard1Data.init()
+    // get roadSigns from the model class
+    private fun getRoadSigns(): MutableList<GroupCard2Data> {
+        roadSigns = GroupCard2Data.init()
         var i = 0
-        while (i < accident3s.size) {
-            when (accident3s[i].dataType) {
-                "inAnAccident3" -> i++
-                else -> accident3s.removeAt(i)
+        while (i < roadSigns.size) {
+            when (roadSigns[i].dataType) {
+                "roadSign" -> i++
+                else -> roadSigns.removeAt(i)
             }
         }
-        return accident3s
-
+        return roadSigns
     }
 
 }
-
 
 // animator refers from https://www.youtube.com/watch?v=DnXWcGmLHHs&ab_channel=doctorcode

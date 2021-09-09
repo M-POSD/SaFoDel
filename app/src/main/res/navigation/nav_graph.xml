@@ -185,5 +185,10 @@
         android:name="com.example.safodel.fragment.home.epic4.Accident3Fragment"
         android:label="fragment_accident3"
         tools:layout="@layout/fragment_accident3" />
+    <fragment
+        android:id="@+id/roadSignFragment"
+        android:name="com.example.safodel.fragment.home.epic1.RoadSignFragment"
+        android:label="fragment_road_sign"
+        tools:layout="@layout/fragment_road_sign" />
 
 </navigation>

@@ -43,7 +43,7 @@ class Accident1Fragment : BasicFragment<FragmentAccident1Binding>(FragmentAccide
     // set up the default text view
     private fun configDefaultTextView() {
         binding.accident1.currentPageText.text = "Steps to Follow"
-        binding.accident1.notification.text = ""
+        binding.accident1.notification.text = "Steps to follow in the event of an accident"
     }
 
     // call recycle view adapter to set up the view

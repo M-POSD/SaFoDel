@@ -44,7 +44,7 @@ class Accident2Fragment : BasicFragment<FragmentAccident2Binding>(FragmentAccide
     // set up the default text view
     private fun configDefaultTextView() {
         binding.accident2.currentPageText.text = "Workers' Rights"
-        binding.accident2.notification.text = ""
+        binding.accident2.notification.text = "Information about current movements in gig workers’ rights"
     }
 
     // call recycle view adapter to set up the view

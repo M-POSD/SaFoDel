@@ -162,6 +162,69 @@ class   GroupCard2Data(
                     2)
             )
 
+            // roadSign data -> for tip3 currently
+            groupCard2Data.add(
+                GroupCard2Data("roadSign",
+                    "Slippery when wet",
+                    "",
+                    "These signs indicate roads that get particularly slippery in wet weather, " +
+                            "cyclists also take care, reducing your speed\n" +
+                            "Remember to remain visibility in wet weather, " +
+                            "and be careful of tram tracks that can get very slippery",
+                    R.drawable.road_sign_1,
+                    2)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("roadSign",
+                    "Construction related signs",
+                    "",
+                    "These signs indicate road construction is ahead, " +
+                            "be prepared to be slow down, stop or be directed by traffic controllers or potential detours",
+                    R.drawable.road_sign_2,
+                    1)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("roadSign",
+                    "Biking parking related signs",
+                    "",
+                    "It’s important to keep an eye out for these signs, " +
+                            "be sure not to park in these areas as it may result in being fined or having your bike seized",
+                    R.drawable.road_sign_3,
+                    2)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("roadSign",
+                    "Biking parking related signs",
+                    "",
+                    "It’s important to keep an eye out for these signs, " +
+                            "be sure not to park in these areas as it may result in being fined or having your bike seized",
+                    R.drawable.road_sign_4,
+                    1)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("roadSign",
+                    "Hook turns",
+                    "",
+                    "These signs mean that the only way to turn right at this intersection is via a hook turn. " +
+                            "However, unless stated otherwise, it is recommended cyclists hook turn at intersections " +
+                            "rather than turning right from the right lane as it is often safer.",
+                    R.drawable.road_sign_5,
+                    2)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("roadSign",
+                    "Dismount signs",
+                    "",
+                    "These signs indicate cyclists must dismount their bike and walk across the specific path, " +
+                            "typically these are at pedestrian crossings or bridges",
+                    R.drawable.road_sign_6,
+                    1)
+            )
 
 
             return groupCard2Data

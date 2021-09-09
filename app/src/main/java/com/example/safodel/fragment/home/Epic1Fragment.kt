@@ -27,6 +27,10 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
             findNavController().navigate(R.id.tip2Fragment, null, navAnimationLeftToRight())
         }
 
+        binding.tip3Card.card.setOnClickListener() {
+            findNavController().navigate(R.id.roadSignFragment, null, navAnimationLeftToRight())
+        }
+
         contentsAnimation()
 
         return binding.root
@@ -40,6 +44,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     private fun configDefaultTextView() {
         binding.tip1Card.title.text = getString(R.string.tip1_name_v1)
         binding.tip2Card.title.text = getString(R.string.tip2_name_v1)
+        binding.tip3Card.title.text = getString(R.string.tip3_name_v1)
     }
 
     // contents animation slide in from bottom
