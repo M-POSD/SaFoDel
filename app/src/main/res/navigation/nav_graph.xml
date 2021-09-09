@@ -114,7 +114,7 @@
     </fragment>
     <fragment
         android:id="@+id/info1Fragment"
-        android:name="com.example.safodel.fragment.home.epic2.Info3Fragment"
+        android:name="com.example.safodel.fragment.home.epic2.Info1Fragment"
         android:label="fragment_info1"
         tools:layout="@layout/fragment_info1" />
     <fragment
@@ -133,12 +133,12 @@
         tools:layout="@layout/fragment_tip2" />
     <fragment
         android:id="@+id/info2Fragment"
-        android:name="com.example.safodel.fragment.home.epic2.Info1Fragment"
+        android:name="com.example.safodel.fragment.home.epic2.Info2Fragment"
         android:label="fragment_info2"
         tools:layout="@layout/fragment_info2" />
     <fragment
         android:id="@+id/info3Fragment"
-        android:name="com.example.safodel.fragment.home.epic2.Info2Fragment"
+        android:name="com.example.safodel.fragment.home.epic2.Info3Fragment"
         android:label="fragment_info3"
         tools:layout="@layout/fragment_info3" />
     <fragment
