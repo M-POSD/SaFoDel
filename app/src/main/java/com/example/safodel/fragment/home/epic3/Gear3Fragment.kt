@@ -27,13 +27,7 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
         _binding = FragmentGear3Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.gear3.currentPageText.text = "Australian standards for the safety gear"
-
-        // HtmlCompat -> allow app to use html format
-        binding.gear3.notification.text = HtmlCompat.fromHtml("Bicycle helmets should have a sticker showing the Australian Standard " +
-                "<font color='#EE0000'>AS 2063, AS/NZS 2063</font><br>",
-            HtmlCompat.FROM_HTML_MODE_LEGACY)
-
+        configDefaultTextView()
         configRecycleView()
         setToolbarReturn(toolbar)
 
@@ -45,6 +39,17 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
         _binding = null
     }
 
+    private fun configDefaultTextView() {
+        binding.gear3.currentPageText.text = "Australian Standards for Safety Gear"
+
+        // HtmlCompat -> allow app to use html format
+        binding.gear3.notification.text = HtmlCompat.fromHtml(
+            "Bicycle helmets should have a sticker showing the Australian Standard " +
+                    "<font color='#EE0000'>AS 2063, AS/NZS 2063</font><br>",
+            HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         gearStandards =  GearStandard.init()
 

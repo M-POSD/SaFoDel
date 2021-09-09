@@ -1,7 +1,6 @@
 package com.example.safodel.fragment.home.epic1
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +25,7 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
         _binding = FragmentTip2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.tip2.currentPageText.text = "Delivering at night"
-        binding.tip2.notification.text = "Worried about your safety while delivering at night? " +
-                "Follow these tips to stay safe"
+        configDefaultTextView()
 
         configRecycleView()
 
@@ -42,6 +39,14 @@ class Tip2Fragment : BasicFragment<FragmentTip2Binding>(FragmentTip2Binding::inf
         _binding = null
     }
 
+    // set up the default text view
+    private fun configDefaultTextView() {
+        binding.tip2.currentPageText.text = "Delivering at night"
+        binding.tip2.notification.text = "Worried about your safety while delivering at night? " +
+                "Follow these tips to stay safe"
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         adapter = GroupCard1Adapter(requireActivity(), getTip2s())
 

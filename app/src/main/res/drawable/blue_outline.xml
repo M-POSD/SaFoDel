@@ -1,6 +1,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke android:color="@color/third_green" android:width="1dp"/>
-    <gradient android:endColor="@color/milk_white"/>
-    <gradient android:startColor="@color/milk_white"/>
+    <gradient android:endColor="@color/white"/>
+    <gradient android:startColor="@color/white"/>
     <corners android:radius="@dimen/cardview_default_radius"/>
 </shape>

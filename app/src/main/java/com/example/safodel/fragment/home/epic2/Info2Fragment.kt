@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.adapter.GroupCard1Adapter
-import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentInfo2Binding
+import com.example.safodel.databinding.FragmentInfo3Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.GroupCard1Data
 
@@ -26,9 +26,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         _binding = FragmentInfo2Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.info2.currentPageText.text = "Advantages of E-bikes delivering"
-        binding.info2.notification.text =
-            "E-bikes are rising in popularity especially in the food delivery community, here's why"
+        configDefaultTextView()
 
         configRecycleView()
 
@@ -42,6 +40,14 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         _binding = null
     }
 
+    // set up the default text view
+    private fun configDefaultTextView() {
+        binding.info2.currentPageText.text = "E-Bikes Rules & Regulation"
+        binding.info2.notification.text =
+            "Wondering whether the e-bike rules and regulations are different?"
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         adapter = GroupCard1Adapter(requireActivity(), getInfo2s())
 
@@ -63,7 +69,7 @@ class Info2Fragment : BasicFragment<FragmentInfo2Binding>(FragmentInfo2Binding::
         var i = 0
         while (i < info2s.size) {
             when (info2s[i].dataType) {
-                "ebikeinfo2" -> i++
+                "eBikeInfo2" -> i++
                 else -> info2s.removeAt(i)
             }
         }

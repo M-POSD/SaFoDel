@@ -1,18 +1,15 @@
 package com.example.safodel.fragment.home.epic1
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentTip1Binding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.GroupCard1Data
 import com.example.safodel.model.GroupCard2Data
 
 class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inflate) {
@@ -28,8 +25,7 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         _binding = FragmentTip1Binding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
-        binding.tip1.currentPageText.text = "Riding a bicycle"
-        binding.tip1.notification.text = "Here are a few safety tips for delivering food on bicycle"
+        configDefaultTextView()
 
         configRecycleView()
 
@@ -43,6 +39,13 @@ class Tip1Fragment : BasicFragment<FragmentTip1Binding>(FragmentTip1Binding::inf
         _binding = null
     }
 
+    // set up the default text view
+    private fun configDefaultTextView() {
+        binding.tip1.currentPageText.text = "Riding a bicycle"
+        binding.tip1.notification.text = "Here are a few safety tips for delivering food on bicycle"
+    }
+
+    // call recycle view adapter to set up the view
     private fun configRecycleView() {
         adapter = GroupCard2Adapter(requireActivity(), getTip1s())
 

@@ -61,4 +61,8 @@
         <item name="upcomingManeuverViewBackgroundColor">@color/green</item>
     </style>
 
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/secondary_green</item>
+    </style>
+
 </resources>

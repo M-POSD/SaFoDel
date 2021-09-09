@@ -8,11 +8,15 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
+import android.widget.Toast
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic4Binding
 import com.example.safodel.fragment.BasicFragment
 
 class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::inflate) {
+    private lateinit var toast: Toast
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -20,18 +24,19 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
     ): View {
         _binding = FragmentEpic4Binding.inflate(inflater, container, false)
 
-        setDefaultView()
+        configDefaultTextView()
+        toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
 
         binding.rule1Card.card.setOnClickListener() {
-//            findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.accident1Fragment, null, navAnimationLeftToRight())
         }
 
         binding.rule2Card.card.setOnClickListener() {
-//            findNavController().navigate(R.id.gear2Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.accident2Fragment, null, navAnimationLeftToRight())
         }
 
         binding.rule3Card.card.setOnClickListener() {
-//            findNavController().navigate(R.id.gear3Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.accident3Fragment, null, navAnimationLeftToRight())
         }
 
         contentsAnimation()
@@ -39,10 +44,15 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         return binding.root
     }
 
-    private fun setDefaultView() {
-        binding.rule1Card.title.text = "PLACEHOLDER"
-        binding.rule2Card.title.text = "PLACEHOLDER"
-        binding.rule3Card.title.text = "PLACEHOLDER"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun configDefaultTextView() {
+        binding.rule1Card.title.text = getString(R.string.in_an_accident1_name)
+        binding.rule2Card.title.text = getString(R.string.in_an_accident2_name)
+        binding.rule3Card.title.text = getString(R.string.in_an_accident3_name)
     }
 
     // contents animation slide in from bottom
@@ -56,11 +66,6 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         animation.addAnimation(slideIn)
         animation.repeatCount = 1
         binding.epicLayout.animation = animation
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

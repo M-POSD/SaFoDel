@@ -1,11 +1,9 @@
 package com.example.safodel.fragment
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
@@ -14,14 +12,6 @@ import com.example.safodel.databinding.FragmentEpicsBinding
 import com.example.safodel.ui.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import com.example.safodel.fragment.menuB.HomeFragmentArgs
-import android.content.SharedPreferences
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.DecelerateInterpolator
 
 
 class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::inflate) {
@@ -33,12 +23,9 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEpicsBinding.inflate(inflater, container, false)
-        val toolbar = binding.toolbar.root
+
         tabLayout = binding.tabbar.tabLayout
         viewPage2 = binding.tabbar.viewPager2
-
-
-//        Log.d("Test!!!", arguments?.getString("epicPosition").toString())
 
         val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
         viewPage2.adapter = EpicViewAdapter(fm, lifecycle, 4)
@@ -49,25 +36,29 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
         viewPage2.registerOnPageChangeCallback(getOnPageChangeCallBack())
 
+        val toolbar = binding.toolbar.root
         setToolbarReturn(toolbar)
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun addTab() {
-        tabLayout.addTab(tabLayout.newTab().setText("Ride safer"))
-        tabLayout.addTab(tabLayout.newTab().setText("E-Bike Info"))
-        tabLayout.addTab(tabLayout.newTab().setText("Safety gears"))
-//        tabLayout.addTab(tabLayout.newTab().setText("Accident"))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.epic1_name)))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.epic2_name))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.epic3_name))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.epic4_name))
         tabLayout.setBackgroundResource(R.color.deep_green)
     }
 
     private fun getOnTabSelectedListener(): OnTabSelectedListener {
-        Log.d("getOnTabSelectedListener", "getOnTabSelectedListener successfully")
         return object : OnTabSelectedListener {
 
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPage2.currentItem = tab.position
-                Log.d("viewPage2.currentItem", viewPage2.currentItem.toString())
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
@@ -130,28 +121,19 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
         when (position) {
             0 -> {
-                binding.tabbar.notification.text =
-                    "Find out how to ride safely while delivering food"
+                binding.tabbar.notification.text = getString(R.string.epic1_slang)
             }
             1 -> {
-                binding.tabbar.notification.text =
-                    "Find information on using e-bikes for food delivery"
+                binding.tabbar.notification.text = getString(R.string.epic2_slang)
             }
             2 -> {
-                binding.tabbar.notification.text =
-                    "Find out the cycling gear you need to deliver safe"
+                binding.tabbar.notification.text = getString(R.string.epic3_slang)
             }
             3 -> {
-                binding.tabbar.notification.text =
-                    "Find out the measure for handling the bike accident"
+                binding.tabbar.notification.text = getString(R.string.epic4_slang)
             }
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

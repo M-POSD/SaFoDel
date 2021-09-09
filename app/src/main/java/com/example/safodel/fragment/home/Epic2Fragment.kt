@@ -8,7 +8,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpic2Binding
@@ -22,7 +21,7 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
     ): View {
         _binding = FragmentEpic2Binding.inflate(inflater, container, false)
 
-        setDefaultView()
+        configDefaultView()
 
         binding.info1Card.card.setOnClickListener() {
             findNavController().navigate(R.id.info1Fragment, null, navAnimationLeftToRight())
@@ -41,10 +40,15 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         return binding.root
     }
 
-    private fun setDefaultView() {
-        binding.info1Card.title.text = "Risks with E-bikes"
-        binding.info2Card.title.text = "Advantages of E-bikes delivering"
-        binding.info3Card.title.text = "E-bikes Rules & Regulations"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun configDefaultView() {
+        binding.info1Card.title.text = getString(R.string.info1_name)
+        binding.info2Card.title.text = getString(R.string.info2_name)
+        binding.info3Card.title.text = getString(R.string.info3_name)
     }
 
     // contents animation slide in from bottom
@@ -58,11 +62,6 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         animation.addAnimation(slideIn)
         animation.repeatCount = 1;
         binding.epicLayout.animation = animation
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

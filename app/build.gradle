@@ -78,10 +78,30 @@ dependencies {
     androidTestImplementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
 
 
-    // spotlight
+    // Spotlight
     implementation 'com.github.takusemba:spotlight:2.0.5'
 
+    // Login password animation
     implementation 'tyrantgit:explosionfield:1.0.1'
+
+    // Dialog
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+
+    // Spinner
+    implementation "com.github.arcadefire:nice-spinner:1.4.4"
+    implementation 'com.github.chivorns:smartmaterialspinner:1.5.0'
+
+    // Raining animation
+    implementation 'dyanamitechetan.vusikview:vusikview:1.1'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    // Chart
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 
 

@@ -81,9 +81,6 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
-
-//            val mainActivity = activity as MainActivity
-//            mainActivity.isBottomNavigationVisible(true)
         }
     }
 
@@ -98,6 +95,9 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         }
     }
 
+    /**
+     * build the navigation animation from left to right
+     */
     fun navAnimationLeftToRight(): NavOptions {
         return NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
             .setExitAnim(R.anim.slide_out_left)

@@ -11,18 +11,18 @@
 -->
     <fragment
         android:id="@+id/mapfragment"
-        android:name="com.example.safodel.fragment.menuB.MapFragment"
+        android:name="com.example.safodel.fragment.menuBottom.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map">
     </fragment>
     <fragment
         android:id="@+id/examFragment"
-        android:name="com.example.safodel.fragment.menuL.ExamFragment"
+        android:name="com.example.safodel.fragment.menuLeft.QuizFragment"
         android:label="fragment_school"
-        tools:layout="@layout/fragment_exam" />
+        tools:layout="@layout/fragment_quiz" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.safodel.fragment.menuB.HomeFragment"
+        android:name="com.example.safodel.fragment.menuBottom.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <argument
@@ -74,12 +74,12 @@
         tools:layout="@layout/fragment_epic3" />
     <fragment
         android:id="@+id/appIntroFragment"
-        android:name="com.example.safodel.fragment.menuL.AppIntroFragment"
+        android:name="com.example.safodel.fragment.menuLeft.AppIntroFragment"
         android:label="fragment_app_intro"
         tools:layout="@layout/fragment_app_intro" />
     <fragment
         android:id="@+id/developerFragment"
-        android:name="com.example.safodel.fragment.menuL.DeveloperFragment"
+        android:name="com.example.safodel.fragment.menuLeft.DeveloperFragment"
         android:label="DeveloperFragment" />
     <fragment
         android:id="@+id/tip1Fragment"
@@ -157,13 +157,38 @@
         tools:layout="@layout/fragment_gear2" />
     <fragment
         android:id="@+id/analysisFragment"
-        android:name="com.example.safodel.fragment.menuL.AnalysisFragment"
+        android:name="com.example.safodel.fragment.menuLeft.AnalysisFragment"
         android:label="fragment_analysis"
         tools:layout="@layout/fragment_analysis" />
     <fragment
         android:id="@+id/exam1Fragment"
-        android:name="com.example.safodel.fragment.menuL.exam.Exam1Fragment"
+        android:name="com.example.safodel.fragment.menuLeft.quiz.QuizPageFragment"
         android:label="fragment_exam1"
-        tools:layout="@layout/fragment_exam1" />
+        tools:layout="@layout/fragment_quiz_page" />
+    <fragment
+        android:id="@+id/examFinishFragment"
+        android:name="com.example.safodel.fragment.menuLeft.quiz.QuizResultFragment"
+        android:label="fragment_exam_finish"
+        tools:layout="@layout/fragment_quiz_resault" />
+    <fragment
+        android:id="@+id/accident1Fragment"
+        android:name="com.example.safodel.fragment.home.epic4.Accident1Fragment"
+        android:label="fragment_accident1"
+        tools:layout="@layout/fragment_accident1" />
+    <fragment
+        android:id="@+id/accident2Fragment"
+        android:name="com.example.safodel.fragment.home.epic4.Accident2Fragment"
+        android:label="fragment_accident2"
+        tools:layout="@layout/fragment_accident2" />
+    <fragment
+        android:id="@+id/accident3Fragment"
+        android:name="com.example.safodel.fragment.home.epic4.Accident3Fragment"
+        android:label="fragment_accident3"
+        tools:layout="@layout/fragment_accident3" />
+    <fragment
+        android:id="@+id/roadSignFragment"
+        android:name="com.example.safodel.fragment.home.epic1.RoadSignFragment"
+        android:label="fragment_road_sign"
+        tools:layout="@layout/fragment_road_sign" />
 
 </navigation>

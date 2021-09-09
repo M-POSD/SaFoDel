@@ -1,32 +1,22 @@
 package com.example.safodel.ui.main
 
-import android.R.attr
 import android.content.Context
-import android.content.Intent
 import android.content.res.Resources
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
-import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
-import com.example.safodel.adapter.EpicViewAdapter
 import com.example.safodel.databinding.ActivityMainBinding
 
-import com.google.android.material.tabs.TabLayout
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
-import kotlin.system.exitProcess
-import android.R.attr.defaultValue
 
 
 
@@ -36,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
+    private lateinit var toastMain: Toast
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +40,11 @@ class MainActivity : AppCompatActivity() {
         configLeftNavigation() // method to set up left nav
         AutoSizeConfig.getInstance().isBaseOnWidth = false
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
         recordLearningMode()
     }
+
 
 
     /**
@@ -69,6 +62,15 @@ class MainActivity : AppCompatActivity() {
      * If the user is in home, school and map pages, he/she needs to click twice
      */
     override fun onBackPressed() {
+        // stop users to go back if they are in the following fragment,
+        // giving the warning message at the same time
+        if (navController.currentDestination?.id == R.id.exam1Fragment ||
+            navController.currentDestination?.id == R.id.examFinishFragment) {
+            toastMain.setText("Not allow go back in the page")
+            toastMain.show()
+            return
+        }
+
         if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment)
         ) {
             super.onBackPressed()
@@ -88,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navHome -> {
-                    navController.popBackStack() // Previous fragment out of stack
+                    navController.popBackStack(R.id.homeFragment, true) // Previous fragment out of stack
                     navController.navigate(R.id.homeFragment)
                     true
                 }
@@ -111,8 +113,8 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                     R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-                    //R.id.navExam -> navController.navigate(R.id.examFragment)
-                    //R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
+                    R.id.navExam -> navController.navigate(R.id.examFragment)
+                    R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
                 }
             }
             binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.

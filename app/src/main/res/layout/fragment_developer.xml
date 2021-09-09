@@ -6,56 +6,34 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".fragment.menuL.DeveloperFragment">
+    tools:context=".fragment.menuLeft.DeveloperFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="286dp"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
+            android:scaleX="1.4"
+            android:scaleY="1.6"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:src="@drawable/new_logo" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/know_more"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:checkable="true"
-            android:focusable="true"
-            app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="@color/milk_white">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/developer_team"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/notosansjp_bold"
-                    android:text="Demo"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-                <TextView
-                    android:id="@+id/developer_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Demo"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notosansjp_bold"
+            android:text="Know more"
+            android:textColor="@color/primary_green"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
