@@ -27,7 +27,7 @@ Download `.apk` file on our [Website](https://m-posd.github.io/) or on the [Rele
 
 ## Try it online
 
-[Appetize](https://appetize.io/embed/004vf8q2r7afaz8rhbvkg7w3zm?device=pixel4&scale=75&orientation=portrait&osVersion=10.0&deviceColor=black&location=(39.903924,116.391432)) (Iteration 1)
+[Appetize](https://appetize.io/embed/004vf8q2r7afaz8rhbvkg7w3zm?device=pixel4&scale=75&orientation=portrait&osVersion=10.0&location=(39.903924,116.391432)) (Iteration 2)
 
 Appetize limite our account to 1 concurrent user each time. If screen showing 'Account-level queue', please wait.
 
