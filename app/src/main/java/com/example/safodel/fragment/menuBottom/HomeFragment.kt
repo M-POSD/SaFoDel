@@ -111,10 +111,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // set up default text view
     private fun configDefaultTextView() {
-        binding.epicCard12.editTextLeft.text = getString(R.string.epic1_heading)
-        binding.epicCard12.editTextRight.text = getString(R.string.epic2_heading)
-        binding.epicCard34.editTextLeft.text = getString(R.string.epic3_heading)
-        binding.epicCard34.editTextRight.text = getString(R.string.epic4_heading)
+        binding.epicCard12.editTextLeft.text = getString(R.string.epic1_name)
+        binding.epicCard12.editTextRight.text = getString(R.string.epic2_name)
+        binding.epicCard34.editTextLeft.text = getString(R.string.epic3_name)
+        binding.epicCard34.editTextRight.text = getString(R.string.epic4_name)
     }
 
     // raining animation

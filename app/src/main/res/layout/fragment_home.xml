@@ -131,7 +131,7 @@
                     android:fontFamily="@font/notosansjp_bold"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
-                    android:text="Preparing you for safer food deliveries on bicycle in Victoria"
+                    android:text="@string/home_page_slang_1"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
@@ -142,7 +142,7 @@
                     android:layout_marginBottom="15dp"
                     android:fontFamily="@font/notosansjp_bold"
                     android:gravity="center"
-                    android:text="'Don’t put your life at risk for other’s convenience'"
+                    android:text="@string/home_page_slang_2"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/white"
                     android:textSize="14dp" />
