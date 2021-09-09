@@ -50,9 +50,9 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.rule1Card.title.text = "Steps to Follow"
-        binding.rule2Card.title.text = "Workers' Rights"
-        binding.rule3Card.title.text = "Claiming Insurance"
+        binding.rule1Card.title.text = getString(R.string.inanaccident1_name)
+        binding.rule2Card.title.text = getString(R.string.inanaccident2_name)
+        binding.rule3Card.title.text = getString(R.string.inanaccident3_name)
     }
 
     // contents animation slide in from bottom

@@ -46,9 +46,9 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.gear1Card.title.text = "Basic gear information"
-        binding.gear2Card.title.text = "A checklist of necessary safety equipment"
-        binding.gear3Card.title.text = "Australian Standards for Safety Gear"
+        binding.gear1Card.title.text = getString(R.string.gear1_name)
+        binding.gear2Card.title.text = getString(R.string.gear2_name)
+        binding.gear3Card.title.text = getString(R.string.gear3_name)
     }
 
     // contents animation slide in from bottom

@@ -21,7 +21,7 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
     ): View {
         _binding = FragmentEpic2Binding.inflate(inflater, container, false)
 
-        setDefaultView()
+        configDefaultView()
 
         binding.info1Card.card.setOnClickListener() {
             findNavController().navigate(R.id.info1Fragment, null, navAnimationLeftToRight())
@@ -45,10 +45,10 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         _binding = null
     }
 
-    private fun setDefaultView() {
-        binding.info1Card.title.text = "Advantages of Delivering on E-Bikes"
-        binding.info2Card.title.text = "E-Bikes Rules & Regulation"
-        binding.info3Card.title.text = "Risks with E-bikes"
+    private fun configDefaultView() {
+        binding.info1Card.title.text = getString(R.string.info1_name)
+        binding.info2Card.title.text = getString(R.string.info2_name)
+        binding.info3Card.title.text = getString(R.string.info3_name)
     }
 
     // contents animation slide in from bottom

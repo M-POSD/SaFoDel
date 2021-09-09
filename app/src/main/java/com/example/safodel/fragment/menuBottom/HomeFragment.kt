@@ -71,6 +71,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         animatorSetNight = AnimatorSet()
         animatorDriving = AnimatorSet()
         rainingList = IntArray(1)
+        rainingList[0] = R.drawable.drop_blue_v3
 
         configDefaultTextView()
         configOnClickListener()
@@ -120,7 +121,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // raining animation
     private fun rainingAnimation() {
 //        binding.vusik.stopNotesFall()
-        rainingList[0] = R.drawable.drop_blue_v3
         binding.vusik.setImages(rainingList).start()
         binding.vusik.startNotesFall()
     }

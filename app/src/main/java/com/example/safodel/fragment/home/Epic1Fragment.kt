@@ -38,8 +38,8 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.tip1Card.title.text = "Safety Tips - whilst riding a bicycle"
-        binding.tip2Card.title.text = "Safety Tips - for delivering at night"
+        binding.tip1Card.title.text = getString(R.string.tip1_name_v1)
+        binding.tip2Card.title.text = getString(R.string.tip2_name_v1)
     }
 
     // contents animation slide in from bottom

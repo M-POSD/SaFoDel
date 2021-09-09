@@ -55,12 +55,10 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
     }
 
     private fun getOnTabSelectedListener(): OnTabSelectedListener {
-        Log.d("getOnTabSelectedListener", "getOnTabSelectedListener successfully")
         return object : OnTabSelectedListener {
 
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPage2.currentItem = tab.position
-                Log.d("viewPage2.currentItem", viewPage2.currentItem.toString())
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
@@ -123,20 +121,16 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
 
         when (position) {
             0 -> {
-                binding.tabbar.notification.text =
-                    "Find out how to ride safely while delivering food"
+                binding.tabbar.notification.text = getString(R.string.epic1_slang)
             }
             1 -> {
-                binding.tabbar.notification.text =
-                    "Find information on using E-Bikes for food delivery"
+                binding.tabbar.notification.text = getString(R.string.epic2_slang)
             }
             2 -> {
-                binding.tabbar.notification.text =
-                    "Find out the cycling gear you need to deliver safe"
+                binding.tabbar.notification.text = getString(R.string.epic3_slang)
             }
             3 -> {
-                binding.tabbar.notification.text =
-                    "Find out the measure for handling the bike accident"
+                binding.tabbar.notification.text = getString(R.string.epic4_slang)
             }
         }
 
