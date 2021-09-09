@@ -35,7 +35,7 @@ Appetize limite our account to 1 concurrent user each time. If screen showing 'A
 
 - Written in [Kotlin](https://kotlinlang.org/) 
 - Using [Mapbox](https://www.mapbox.com/) developed map functions
-- Using [Python](https://www.python.org/) built a server and deployed in [Heroku](https://www.heroku.com)
+- A server built by [Python](https://www.python.org/) and deployed in [AWS](https://aws.amazon.com/)
 
 ## Building
 ### Open the Project in [Android Studio](https://developer.android.com/studio)
