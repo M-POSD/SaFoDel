@@ -26,15 +26,15 @@ class   GroupCard2Data(
             groupCard2Data.add(
                 GroupCard2Data("tip1",
                     "STOP AND GIVE WAY",
-                    "15% of bike rider casualties occur when a driver or rider who is turning right fails to give way to an oncoming vehicle travelling straight through.",
-                    "TIP: At intersections without traffic lights, signs or road lines, give way to any vehicle entering or approaching the intersection from your right.",
+                    "15% of bike rider casualties occur when a driver or rider who is turning right fails to give way to an oncoming vehicle travelling straight through",
+                    "TIP: If you are at intersections without traffic lights, signs or road lines, give way to any vehicle entering or approaching the intersection from your right",
                     R.drawable.tip1_2,1)
             )
             groupCard2Data.add(
                 GroupCard2Data("tip1",
                     "AVOID DOORING",
                     "8% of bike rider casualties occur when a driver opens their door into the path of a bike rider.",
-                    "TIP: While it is never the rider’s fault when hit by an opening door, you must be aware of the risk and position themselves so that any chance of a collision is reduced.",
+                    "TIP: While it is never the rider’s fault when hit by an opening door, you must be aware of the risk and position themselves so that any chance of a collision is reduced",
                     R.drawable.tip1_3,2)
             )
             groupCard2Data.add(

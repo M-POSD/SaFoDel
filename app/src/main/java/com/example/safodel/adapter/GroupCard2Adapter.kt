@@ -34,8 +34,8 @@ class GroupCard2Adapter(val context: Context, group2Data: MutableList<GroupCard2
                 viewHolder.binding.imageLeft.statistics.text = data.statistics
                 viewHolder.binding.imageLeft.description.text = data.description
                 viewHolder.binding.imageLeft.image.setImageResource(data.image)
-                viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
-                viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
+                viewHolder.binding.imageRight.linearLayout2.visibility = View.GONE
+                viewHolder.binding.pureText.linearLayout3.visibility = View.GONE
             }
             4 -> {
                 viewHolder.binding.pureText.description.text = data.description
@@ -43,18 +43,19 @@ class GroupCard2Adapter(val context: Context, group2Data: MutableList<GroupCard2
                     viewHolder.binding.pureText.description2.text = data.title
                     viewHolder.binding.pureText.description2.visibility = View.VISIBLE
                 }
-                viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
-                viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
+                viewHolder.binding.imageLeft.linearLayout1.visibility = View.GONE
+                viewHolder.binding.imageRight.linearLayout2.visibility = View.GONE
             }
             else -> {
                 viewHolder.binding.imageRight.title.text = data.title
                 if (data.statistics.isEmpty()) {
-                    viewHolder.binding.imageLeft.statistics.visibility = View.GONE
+                    viewHolder.binding.imageRight.statistics.visibility = View.GONE
                 }
                 viewHolder.binding.imageRight.description.text = data.description
+                viewHolder.binding.imageRight.statistics.text = data.statistics
                 viewHolder.binding.imageRight.image.setImageResource(data.image)
-                viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
-                viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
+                viewHolder.binding.imageLeft.linearLayout1.visibility = View.GONE
+                viewHolder.binding.pureText.linearLayout3.visibility = View.GONE
             }
         }
 
