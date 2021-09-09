@@ -47,10 +47,10 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
     }
 
     private fun addTab() {
-        tabLayout.addTab(tabLayout.newTab().setText("Ride safer"))
-        tabLayout.addTab(tabLayout.newTab().setText("Delivery on E-bike"))
-        tabLayout.addTab(tabLayout.newTab().setText("Safety gear"))
-        tabLayout.addTab(tabLayout.newTab().setText("In an Accident"))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.epic1_name)))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.epic2_name))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.epic3_name))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.epic4_name))
         tabLayout.setBackgroundResource(R.color.deep_green)
     }
 
