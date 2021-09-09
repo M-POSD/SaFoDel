@@ -255,6 +255,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         lineChart.xAxis.axisMaximum = 23f
         lineChart.axisLeft.valueFormatter = IntegerFormatter()
         lineChart.description.text = ""
+        lineChart.zoomOut()
     }
 }
 
@@ -276,6 +277,7 @@ class StreetNameFormatter(bar: HorizontalBarChart, map: HashMap<Int,String>):Val
     override fun getFormattedValue(value: Float): String {
         val res = map.get(value.toInt())
         bar.zoomOut()
+
         if(res != null)
             return res
         return "NULL"
