@@ -23,6 +23,11 @@ class GroupCard2Adapter(val context: Context, group2Data: MutableList<GroupCard2
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         var data: GroupCard2Data = group2[position]
+        viewHolder.binding.imageLeft.statistics.visibility = View.VISIBLE
+        viewHolder.binding.imageRight.linearLayout2.visibility = View.VISIBLE
+        viewHolder.binding.pureText.linearLayout3.visibility = View.VISIBLE
+        viewHolder.binding.imageLeft.linearLayout1.visibility = View.VISIBLE
+        viewHolder.binding.imageRight.statistics.visibility = View.VISIBLE
 
         // if card type == 1, put the image on left, otherwise put it on right
         when (data.cardType) {
