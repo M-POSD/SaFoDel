@@ -202,7 +202,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "Click to Know Mor",
+                    "Click to Know More",
                     R.drawable.food_delivery_5,
                     2
                 )

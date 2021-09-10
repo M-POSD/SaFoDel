@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.R
 import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.databinding.FragmentInfo1Binding
 import com.example.safodel.databinding.FragmentInfo2Binding
@@ -42,9 +43,8 @@ class Info1Fragment : BasicFragment<FragmentInfo1Binding>(FragmentInfo1Binding::
 
     // set up the default text view
     private fun configDefaultTextView() {
-        binding.info1.currentPageText.text = "Advantages of Delivering on E-Bikes"
-        binding.info1.notification.text =
-            "E-bikes are rising in popularity especially in the food delivery community, here's why"
+        binding.info1.currentPageText.text = getString(R.string.info1_name)
+        binding.info1.notification.text = getString(R.string.info1_slang)
     }
 
     // call recycle view adapter to set up the view

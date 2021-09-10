@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.R
 import com.example.safodel.adapter.GroupCard2Adapter
 import com.example.safodel.databinding.FragmentRoadSignBinding
 import com.example.safodel.databinding.FragmentTip1Binding
@@ -42,8 +43,8 @@ class RoadSignFragment : BasicFragment<FragmentRoadSignBinding>(FragmentRoadSign
 
     // set up the default text view
     private fun configDefaultTextView() {
-        binding.roadSign.currentPageText.text = "Understand Road Sign"
-        binding.roadSign.notification.text = "Here are a few significant road signs you must understand"
+        binding.roadSign.currentPageText.text = getString(R.string.tip3_name_v2)
+        binding.roadSign.notification.text = getString(R.string.tip3_slang)
     }
 
     // call recycle view adapter to set up the view

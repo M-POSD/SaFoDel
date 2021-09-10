@@ -41,10 +41,8 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
 
     // made up the check list to display
     private fun configDefaultView() {
-        binding.gear2.currentPageText.text =
-            "A checklist of necessary safety equipment"
-        binding.gear2.notification.text =
-            "Worried about forgetting essential safety gear?\nFollow this checklist for a quick heads up!"
+        binding.gear2.currentPageText.text = getString(R.string.gear2_name)
+        binding.gear2.notification.text = getString(R.string.gear2_slang)
 
         binding.gear2.detailCardV3.checkbox1.checkbox.text = "Helmet"
         binding.gear2.detailCardV3.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)

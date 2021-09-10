@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.R
 import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.databinding.FragmentGear1Binding
 import com.example.safodel.fragment.BasicFragment
@@ -38,9 +39,8 @@ class Gear1Fragment : BasicFragment<FragmentGear1Binding>(FragmentGear1Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.gear1.currentPageText.text = "Basic gear information"
-        binding.gear1.notification.text = "Wearing proper safety gear while delivering food is a must. " +
-                "Find more about the essential safety gear below. "
+        binding.gear1.currentPageText.text = getString(R.string.gear1_name)
+        binding.gear1.notification.text = getString(R.string.gear1_slang)
     }
 
     // call recycle view adapter to set up the view

@@ -8,6 +8,7 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.R
 import com.example.safodel.adapter.GearStandardAdapter
 import com.example.safodel.databinding.FragmentGear3Binding
 
@@ -40,12 +41,11 @@ class Gear3Fragment : BasicFragment<FragmentGear3Binding>(FragmentGear3Binding::
     }
 
     private fun configDefaultTextView() {
-        binding.gear3.currentPageText.text = "Australian Standards for Safety Gear"
+        binding.gear3.currentPageText.text = getString(R.string.gear3_name)
 
         // HtmlCompat -> allow app to use html format
         binding.gear3.notification.text = HtmlCompat.fromHtml(
-            "Bicycle helmets should have a sticker showing the Australian Standard " +
-                    "<font color='#EE0000'>AS 2063, AS/NZS 2063</font><br>",
+            getString(R.string.gear3_slang),
             HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
