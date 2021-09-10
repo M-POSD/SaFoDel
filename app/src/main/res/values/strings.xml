@@ -12,17 +12,17 @@
     <string name="notify_select_option">Please select an option</string>
 
     <!--  button  -->
-    <string name="start_button" translatable="false">START</string>
-    <string name="again_button" translatable="false">AGAIN</string>
-    <string name="rule_info_button" translatable="false">RULE INFO</string>
+    <string name="start_button">START</string>
+    <string name="again_button">AGAIN</string>
+    <string name="rule_info_button">RULE INFO</string>
     <string name="submit_button">SUBMIT</string>
     <string name="finish_button">FINISH</string>
     <string name="go_next_button">GO TO NEXT QUESTION</string>
 
     <!--  start activity  -->
-    <string name="SaFoDel" translatable="false"><b>SaFoDel</b></string>
-    <string name="start_subtitle" translatable="false"><b>Alert Today, Alive Tomorrow</b></string>
-    <string name="learning_mode" translatable="false">LEARNING MODE</string>
+    <string name="SaFoDel" translatable="false">SaFoDel</string>
+    <string name="start_subtitle" translatable="false">Alert Today, Alive Tomorrow</string>
+    <string name="learning_mode">LEARNING MODE</string>
 
     <!--  home navigation  -->
     <string name="home">Home</string>
@@ -66,15 +66,15 @@
     <string name="seventh_target">Left Menu has\n\nQUIZ YOURSELF:\nTest your understanding of road rules while delivering food\n\nACCIDENT TRENDS:\nCheck the trends in historical accident in different suburbs\n\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team</string>
 
     <!--  epic1  -->
-    <string name="epic1_name" translatable="false">Ride Safer</string>
-    <string name="tip1_name_v1" translatable="false">Safety Tips - whilst riding a bicycle</string>
-    <string name="tip1_name_v2" translatable="false">Riding a bicycle</string>
-    <string name="tip2_name_v1" translatable="false">Safety Tips - for delivering at night</string>
-    <string name="tip2_name_v2" translatable="false">Delivering at night</string>
+    <string name="epic1_name">Ride Safer</string>
+    <string name="tip1_name_v1">Safety Tips - whilst riding a bicycle</string>
+    <string name="tip1_name_v2">Riding a bicycle</string>
+    <string name="tip2_name_v1">Safety Tips - for delivering at night</string>
+    <string name="tip2_name_v2" >Delivering at night</string>
 
-    <string name="tip1_1_title" translatable="false">RIDE CAREFULLY AT INTERSECTIONS</string>
-    <string name="tip1_1_statistics" translatable="false">Bicycle crashes are marginally more common (55%) at intersections</string>
-    <string name="tip1_1_description" translatable="false">TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)</string>
+    <string name="tip1_1_title">RIDE CAREFULLY AT INTERSECTIONS</string>
+    <string name="tip1_1_statistics" >Bicycle crashes are marginally more common (55%) at intersections</string>
+    <string name="tip1_1_description" >TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)</string>
     <string name="tip1_2_title">STOP AND GIVE WAY</string>
     <string name="tip1_2_statistics">15% of bike rider casualties occur when a driver or rider who is turning right fails to give way to an oncoming vehicle travelling straight through</string>
     <string name="tip1_2_description">TIP: If you are at intersections without traffic lights, signs or road lines, give way to any vehicle entering or approaching the intersection from your right</string>
@@ -91,90 +91,90 @@
     <string name="tip2_4_description">Avoid delivering in areas with poor lighting</string>
 
     <!--  epic2  -->
-    <string name="epic2_name" translatable="false">Delivery on E-bike</string>
-    <string name="info1_name" translatable="false">Advantages of Delivering on E-Bikes</string>
-    <string name="info2_name" translatable="false">E-Bikes Rules &amp; Regulation</string>
-    <string name="info3_name" translatable="false">Risks with E-bikes</string>
-    <string name="info1_1_description" translatable="false">Make riding twice as easy as push bikes</string>
-    <string name="info1_2_description" translatable="false">Comes in handy when riding up hills or over long distances</string>
-    <string name="info1_3_description" translatable="false">Promote sustainability</string>
-    <string name="info1_4_description" translatable="false">No need to break the bank as they’re generally cheaper to rent</string>
-    <string name="info2_1_description" translatable="false">The Victorian Government allows a maximum power of 250 watts</string>
-    <string name="info2_2_description" translatable="false">A maximum speed of 25 km/h is allowed if the rider is pedalling</string>
-    <string name="info2_3_description" translatable="false">All other rules are the same as pedal bicycles</string>
-    <string name="info3_1_title" translatable="false">HIGH SPEED DANGER</string>
-    <string name="info3_1_statistics" translatable="false">Buying a high-speed e-bike may lead to faster deliveries but it is illegal</string>
-    <string name="info3_1_description" translatable="false">TIP: Be sure to check the government guidelines before buying an e-bike</string>
-    <string name="info3_2_title" translatable="false">HIGH THROTTLE</string>
-    <string name="info3_2_statistics" translatable="false">Too much initial throttle can cause injury</string>
-    <string name="info3_2_description" translatable="false">TIP: Get accustomed to riding an e-bike before actually going out for your first delivery</string>
-    <string name="info3_3_title" translatable="false">MORE THEFT</string>
-    <string name="info3_3_statistics" translatable="false">The higher price for e-bikes has seen more thefts of e-bikes over regular bikes</string>
-    <string name="info3_3_description" translatable="false">TIP: Make sure you lock your bike properly</string>
+    <string name="epic2_name" >Delivery on E-bike</string>
+    <string name="info1_name" >Advantages of Delivering on E-Bikes</string>
+    <string name="info2_name" >E-Bikes Rules &amp; Regulation</string>
+    <string name="info3_name" >Risks with E-bikes</string>
+    <string name="info1_1_description" >Make riding twice as easy as push bikes</string>
+    <string name="info1_2_description" >Comes in handy when riding up hills or over long distances</string>
+    <string name="info1_3_description" >Promote sustainability</string>
+    <string name="info1_4_description" >No need to break the bank as they’re generally cheaper to rent</string>
+    <string name="info2_1_description" >The Victorian Government allows a maximum power of 250 watts</string>
+    <string name="info2_2_description" >A maximum speed of 25 km/h is allowed if the rider is pedalling</string>
+    <string name="info2_3_description" >All other rules are the same as pedal bicycles</string>
+    <string name="info3_1_title" >HIGH SPEED DANGER</string>
+    <string name="info3_1_statistics" >Buying a high-speed e-bike may lead to faster deliveries but it is illegal</string>
+    <string name="info3_1_description" >TIP: Be sure to check the government guidelines before buying an e-bike</string>
+    <string name="info3_2_title" >HIGH THROTTLE</string>
+    <string name="info3_2_statistics" >Too much initial throttle can cause injury</string>
+    <string name="info3_2_description" >TIP: Get accustomed to riding an e-bike before actually going out for your first delivery</string>
+    <string name="info3_3_title" >MORE THEFT</string>
+    <string name="info3_3_statistics" >The higher price for e-bikes has seen more thefts of e-bikes over regular bikes</string>
+    <string name="info3_3_description" >TIP: Make sure you lock your bike properly</string>
 
     <!--  epic3  -->
-    <string name="epic3_name" translatable="false">Safety Gear</string>
-    <string name="gear1_name" translatable="false">Basic gear information</string>
-    <string name="gear2_name" translatable="false">A checklist of necessary safety equipment</string>
-    <string name="gear3_name" translatable="false">Australian Standards for Safety Gear</string>
-    <string name="gear3_notification" translatable="false">The following labels indicate a helmet has been approved</string>
-    <string name="gear1_1_description" translatable="false">Bicycle helmets reduce the chances of a serious head injury by almost 70%</string>
-    <string name="gear1_2_description" translatable="false">Warm gloves not only protect you from cold but also help you maintain safe grip at all times</string>
-    <string name="gear1_3_description" translatable="false">With the lockdown restrictions on, food delivery companies require masks or face covers for all drivers</string>
-    <string name="gear1_4_description" translatable="false">Always be prepared for bad weather and carry a rain jacket in your delivery bag</string>
+    <string name="epic3_name" >Safety Gear</string>
+    <string name="gear1_name" >Basic gear information</string>
+    <string name="gear2_name" >A checklist of necessary safety equipment</string>
+    <string name="gear3_name" >Australian Standards for Safety Gear</string>
+    <string name="gear3_notification" >The following labels indicate a helmet has been approved</string>
+    <string name="gear1_1_description" >Bicycle helmets reduce the chances of a serious head injury by almost 70%</string>
+    <string name="gear1_2_description" >Warm gloves not only protect you from cold but also help you maintain safe grip at all times</string>
+    <string name="gear1_3_description" >With the lockdown restrictions on, food delivery companies require masks or face covers for all drivers</string>
+    <string name="gear1_4_description" >Always be prepared for bad weather and carry a rain jacket in your delivery bag</string>
     <string name="gear_check_list_item1">Helmet</string>
     <string name="gear_check_list_item2">Rear and front lights</string>
     <string name="gear_check_list_item3">Mask and face over</string>
     <string name="gear_check_list_item4">Reflective vest</string>
     <string name="gear_check_list_item5">Gloves</string>
     <string name="gear_check_list_item6">Hand sanitiser</string>
-    <string name="gear_standard_bsi" translatable="false">BSI</string>
-    <string name="gear_standard_global_mark" translatable="false">Global-Mark</string>
-    <string name="gear_standard_sai_global" translatable="false">SAI Global</string>
-    <string name="gear_standard_aus" translatable="false">AUS</string>
+    <string name="gear_standard_bsi" >BSI</string>
+    <string name="gear_standard_global_mark" >Global-Mark</string>
+    <string name="gear_standard_sai_global" >SAI Global</string>
+    <string name="gear_standard_aus" >AUS</string>
 
     <!--  epic4  -->
-    <string name="epic4_name" translatable="false">In an Accident</string>
-    <string name="in_an_accident1_name" translatable="false">Steps to Follow</string>
-    <string name="in_an_accident2_name" translatable="false">Workers\' Rights</string>
-    <string name="in_an_accident3_name" translatable="false">Claiming Insurance</string>
-    <string name="in_an_accident1_0_title" translatable="false">This is general advice only</string>
-    <string name="in_an_accident1_0_description" translatable="false">In the unfortunate event of a bike accident these are some steps to look after yourself</string>
-    <string name="in_an_accident1_1_title" translatable="false">Check on Yourself</string>
-    <string name="in_an_accident1_1_description" translatable="false">Make sure you\'re okay, contact help if needed and try place yourself in a safe location if your accident was on the road</string>
-    <string name="in_an_accident1_2_title" translatable="false">Collect Details &amp; Take Photos</string>
-    <string name="in_an_accident1_2_description" translatable="false">Collect details of those involved in accident and any witnesses as they may be necessary for insurance purposes later on</string>
-    <string name="in_an_accident1_3_title" translatable="false">See a Doctor</string>
-    <string name="in_an_accident1_3_description" translatable="false">Always give priority to your health and safety. Even if you feel it is only a small incident, it\'s best to see a doctor</string>
-    <string name="in_an_accident1_4_title" translatable="false">Report Incident to Police &amp; Platform</string>
-    <string name="in_an_accident1_4_description" translatable="false">Report the incident to the police as well as let your platform know you\'ve been in an accident as they may offer assistance</string>
-    <string name="in_an_accident2_0_description" translatable="false">Typically gig economy workers are treated as independent contractors and therefore lack some ordinary working protections and benefits</string>
-    <string name="in_an_accident2_1_title" translatable="false">Inconsistent Rules</string>
-    <string name="in_an_accident2_1_description" translatable="false">It is important to know that  food delivery platforms have different working contracts and manage the working relationship differently</string>
-    <string name="in_an_accident2_2_title" translatable="false">Employee or Not?</string>
-    <string name="in_an_accident2_2_description" translatable="false">Uber Eats treats it’s riders as independent contractors while a recent ruling Deliveroo drivers as  employees</string>
-    <string name="in_an_accident2_3_title" translatable="false">Growing Area</string>
-    <string name="in_an_accident2_3_description" translatable="false">How gig workers are treated is a growing area, groups like the transport workers union (TWU) are fighting for gig workers to have more rights</string>
-    <string name="in_an_accident3_0_description" translatable="false">Most delivery companies offer a support package for driver and delivery partners, helping to cover partners should something go wrong while using their platform</string>
+    <string name="epic4_name" >In an Accident</string>
+    <string name="in_an_accident1_name" >Steps to Follow</string>
+    <string name="in_an_accident2_name" >Workers\' Rights</string>
+    <string name="in_an_accident3_name" >Claiming Insurance</string>
+    <string name="in_an_accident1_0_title" >This is general advice only</string>
+    <string name="in_an_accident1_0_description" >In the unfortunate event of a bike accident these are some steps to look after yourself</string>
+    <string name="in_an_accident1_1_title" >Check on Yourself</string>
+    <string name="in_an_accident1_1_description" >Make sure you\'re okay, contact help if needed and try place yourself in a safe location if your accident was on the road</string>
+    <string name="in_an_accident1_2_title" >Collect Details &amp; Take Photos</string>
+    <string name="in_an_accident1_2_description" >Collect details of those involved in accident and any witnesses as they may be necessary for insurance purposes later on</string>
+    <string name="in_an_accident1_3_title" >See a Doctor</string>
+    <string name="in_an_accident1_3_description" >Always give priority to your health and safety. Even if you feel it is only a small incident, it\'s best to see a doctor</string>
+    <string name="in_an_accident1_4_title" >Report Incident to Police &amp; Platform</string>
+    <string name="in_an_accident1_4_description" >Report the incident to the police as well as let your platform know you\'ve been in an accident as they may offer assistance</string>
+    <string name="in_an_accident2_0_description" >Typically gig economy workers are treated as independent contractors and therefore lack some ordinary working protections and benefits</string>
+    <string name="in_an_accident2_1_title" >Inconsistent Rules</string>
+    <string name="in_an_accident2_1_description" >It is important to know that  food delivery platforms have different working contracts and manage the working relationship differently</string>
+    <string name="in_an_accident2_2_title" >Employee or Not?</string>
+    <string name="in_an_accident2_2_description" >Uber Eats treats it’s riders as independent contractors while a recent ruling Deliveroo drivers as  employees</string>
+    <string name="in_an_accident2_3_title" >Growing Area</string>
+    <string name="in_an_accident2_3_description" >How gig workers are treated is a growing area, groups like the transport workers union (TWU) are fighting for gig workers to have more rights</string>
+    <string name="in_an_accident3_0_description" >Most delivery companies offer a support package for driver and delivery partners, helping to cover partners should something go wrong while using their platform</string>
     <string name="in_an_accident3_1_description">To find out the insurance details provided by your food delivery platform, select your partner below</string>
     <string name="in_an_accident3_2_description">The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions</string>
     <string name="food_delivery_description">Click to Know More!</string>
 
     <!--  epic5  -->
-    <string name="tip3_name_v1" translatable="false">Safety Tips - understand the road sign</string>
-    <string name="tip3_name_v2" translatable="false">Understand Road Sign</string>
-    <string name="road_sign1_title" translatable="false">Slippery when wet</string>
-    <string name="road_sign1_description" translatable="false">These signs indicate roads that get particularly slippery in wet weather, cyclists also take care, reducing your speed\nRemember to remain visibility in wet weather, and be careful of tram tracks that can get very slippery</string>
-    <string name="road_sign2_title" translatable="false">Construction related signs</string>
-    <string name="road_sign2_description" translatable="false">These signs indicate road construction is ahead, be prepared to be slow down, stop or be directed by traffic controllers or potential detours</string>
-    <string name="road_sign3_title" translatable="false">Biking parking related signs</string>
-    <string name="road_sign3_description" translatable="false">It\'s important to keep an eye out for these signs, be sure not to park in these areas as it may result in being fined or having your bike seized</string>
-    <string name="road_sign4_title" translatable="false">Shared paths</string>
-    <string name="road_sign4_description" translatable="false">These paths are for both cyclists and pedestrians, it\'s expected pedestrians stick to the left and cyclists provide a warning when approaching pedestrians (i.e. ring your bell, or call out)</string>
-    <string name="road_sign5_title" translatable="false">Hook turns</string>
-    <string name="road_sign5_description" translatable="false">These signs mean that the only way to turn right at this intersection is via a hook turn. However, unless stated otherwise, it is recommended cyclists hook turn at intersections rather than turning right from the right lane as it is often safer.</string>
-    <string name="road_sign6_title" translatable="false">Dismount signs</string>
-    <string name="road_sign6_description" translatable="false">These signs indicate cyclists must dismount their bike and walk across the specific path, typically these are at pedestrian crossings or bridges</string>
+    <string name="tip3_name_v1" >Safety Tips - understand the road sign</string>
+    <string name="tip3_name_v2" >Understand Road Sign</string>
+    <string name="road_sign1_title" >Slippery when wet</string>
+    <string name="road_sign1_description" >These signs indicate roads that get particularly slippery in wet weather, cyclists also take care, reducing your speed\nRemember to remain visibility in wet weather, and be careful of tram tracks that can get very slippery</string>
+    <string name="road_sign2_title" >Construction related signs</string>
+    <string name="road_sign2_description" >These signs indicate road construction is ahead, be prepared to be slow down, stop or be directed by traffic controllers or potential detours</string>
+    <string name="road_sign3_title" >Biking parking related signs</string>
+    <string name="road_sign3_description" >It\'s important to keep an eye out for these signs, be sure not to park in these areas as it may result in being fined or having your bike seized</string>
+    <string name="road_sign4_title" >Shared paths</string>
+    <string name="road_sign4_description" >These paths are for both cyclists and pedestrians, it\'s expected pedestrians stick to the left and cyclists provide a warning when approaching pedestrians (i.e. ring your bell, or call out)</string>
+    <string name="road_sign5_title" >Hook turns</string>
+    <string name="road_sign5_description" >These signs mean that the only way to turn right at this intersection is via a hook turn. However, unless stated otherwise, it is recommended cyclists hook turn at intersections rather than turning right from the right lane as it is often safer.</string>
+    <string name="road_sign6_title" >Dismount signs</string>
+    <string name="road_sign6_description" >These signs indicate cyclists must dismount their bike and walk across the specific path, typically these are at pedestrian crossings or bridges</string>
 
     <!--  question  -->
     <string name="yes">Yes</string>
