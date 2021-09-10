@@ -54,7 +54,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         // default image view
         binding.image.visibility = View.GONE
 
-        binding.submitBtn.button.text = "SUBMIT"
+        binding.submitBtn.button.text = getString(R.string.submit_button)
         // when the question haven't answered, set the current questions is clickable until has been answer
         setOptionClickable(true)
         val question = mQuestions!![mCurrentPosition - 1]
@@ -131,7 +131,8 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
             binding.submitBtn.button -> {
                 if (mSelectedOptionPosition == 0) {
                     if (binding.submitBtn.button.text == "SUBMIT") {
-                        toast.setText("Please select an option")
+                        toast.cancel()
+                        toast.setText(getString(R.string.notify_select_option))
                         toast.show()
                     } else {
                         mCurrentPosition++
@@ -165,9 +166,9 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                     infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
 
                     if (mCurrentPosition == mQuestions!!.size) {
-                        binding.submitBtn.button.text = "FINISH"
+                        binding.submitBtn.button.text = getString(R.string.finish_button)
                     } else {
-                        binding.submitBtn.button.text = "GO TO NEXT QUESTION"
+                        binding.submitBtn.button.text = getString(R.string.go_next_button)
                     }
                     mSelectedOptionPosition = 0
 

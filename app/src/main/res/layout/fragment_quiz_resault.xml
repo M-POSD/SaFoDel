@@ -28,7 +28,7 @@
             android:layout_weight="1.2"
             android:fontFamily="@font/notosansjp_black"
             android:gravity="center"
-            android:text="Result"
+            android:text="@string/result"
             android:textColor="@color/white"
             android:textSize="30dp" />
 
@@ -103,7 +103,7 @@
                         android:elevation="5dp"
                         android:fontFamily="@font/notosansjp_black"
                         android:gravity="center"
-                        android:text="Again"
+                        android:text="@string/again_button"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         android:textColor="@color/white"
                         android:textSize="14dp"
@@ -118,7 +118,7 @@
                         android:elevation="5dp"
                         android:fontFamily="@font/notosansjp_black"
                         android:gravity="center"
-                        android:text="Rule Info"
+                        android:text="@string/rule_info_button"
                         android:visibility="gone"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         android:textColor="@color/white"

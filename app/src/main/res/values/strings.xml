@@ -9,14 +9,22 @@
     <!--  toast  -->
     <string name="start_learning_mode">Welcome to the SaFoDel learning mode</string>
     <string name="end_learning_mode">Thanks for watching</string>
+    <string name="notify_select_option">Please select an option</string>
+
+    <!--  button  -->
+    <string name="start_button" translatable="false">START</string>
+    <string name="again_button" translatable="false">AGAIN</string>
+    <string name="rule_info_button" translatable="false">RULE INFO</string>
+    <string name="submit_button">SUBMIT</string>
+    <string name="finish_button">FINISH</string>
+    <string name="go_next_button">GO TO NEXT QUESTION</string>
 
     <!--  start activity  -->
     <string name="SaFoDel" translatable="false"><b>SaFoDel</b></string>
     <string name="start_subtitle" translatable="false"><b>Alert Today, Alive Tomorrow</b></string>
-    <string name="start_button" translatable="false">START</string>
     <string name="learning_mode" translatable="false">LEARNING MODE</string>
 
-    <!--  home button  -->
+    <!--  home navigation  -->
     <string name="home">Home</string>
     <string name="map">Map</string>
     <string name="app_intro">About App</string>
@@ -174,5 +182,21 @@
     <!--  analysis  -->
 
     <!--  map  -->
+
+    <!--  quiz  -->
+    <string name="quiz">QUIZ</string>
+    <string name="quiz_heading">Take a quick quiz to test your understanding</string>
+    <string name="result">RESULT</string>
+    <string name="result_heading_1">Learning rules again</string>
+    <string name="result_heading_2">Review rules sometimes</string>
+    <string name="result_heading_3">Perfect !!!</string>
+
+
+    <!--  about app  -->
+    <string name="about">ABOUT</string>
+    <string name="audience">AUDIENCE</string>
+
+    <!--  about developer  -->
+    <string name="know_more">KNOW MORE</string>
 
 </resources>

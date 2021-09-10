@@ -37,16 +37,6 @@ class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inf
 
     private fun configBtnOnClickListener() {
         binding.startBtn.setOnClickListener {
-//            var userName = binding.editText.text.toString()
-//            if (userName.isEmpty()) {
-//                toast.setText("Please enter your name")
-//                toast.show()
-//            } else {
-//                var arg = bundleOf(
-//                    Pair("userName", userName)
-//                )
-//                findNavController().navigate(R.id.exam1Fragment, arg, navAnimationLeftToRight())
-//            }
             findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
         }
     }

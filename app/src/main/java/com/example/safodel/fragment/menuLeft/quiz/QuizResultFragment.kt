@@ -41,15 +41,15 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
         when {
             accuracy < 0.6 -> {
                 binding.image.setImageResource(R.drawable.failure)
-                binding.title.text = "Learning rules again"
+                binding.title.text = getString(R.string.result_heading_1)
             }
             accuracy < 1f -> {
                 binding.image.setImageResource(R.drawable.medal)
-                binding.title.text = "Review rules sometimes"
+                binding.title.text = getString(R.string.result_heading_2)
             }
             accuracy == 1f -> {
                 binding.image.setImageResource(R.drawable.campion)
-                binding.title.text = "Perfect !!!"
+                binding.title.text = getString(R.string.result_heading_3)
             }
         }
     }
@@ -57,10 +57,6 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
     private fun configBtnOnClickListener() {
         binding.returnButton.setOnClickListener {
             findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
-        }
-        binding.ruleInfoButton.setOnClickListener {
-            toast.setText("PlaceHolder Right Now!")
-            toast.show()
         }
     }
 

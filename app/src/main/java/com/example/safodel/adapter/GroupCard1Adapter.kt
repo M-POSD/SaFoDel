@@ -59,7 +59,6 @@ class GroupCard1Adapter(val context: Context, group1Data: MutableList<GroupCard1
                 )
             }
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -70,6 +69,3 @@ class GroupCard1Adapter(val context: Context, group1Data: MutableList<GroupCard1
         val binding: GroupCardV1Binding = binding
     }
 }
-
-//viewHolder.binding.subtitle.text =
-//            HtmlCompat.fromHtml(info.description, HtmlCompat.FROM_HTML_MODE_LEGACY)
