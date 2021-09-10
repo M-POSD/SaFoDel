@@ -6,7 +6,9 @@
 ## [SaFoDel](https://m-posd.github.io/)
 Educating Food Delivery Bike Riders in Victoria
 
-<img src="https://user-images.githubusercontent.com/88869576/132779416-3033c588-903f-441a-a69c-1e4d6f640a76.gif">
+<img src="https://user-images.githubusercontent.com/88869576/132779416-3033c588-903f-441a-a69c-1e4d6f640a76.gif">  <img src="https://user-images.githubusercontent.com/88869576/132779686-01b1b6a9-7ccd-490b-b5c0-73aaf9fdf5c1.gif">
+
+
 
 
 ## Features✨
