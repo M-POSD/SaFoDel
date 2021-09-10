@@ -34,17 +34,17 @@ class GroupCard1Adapter(val context: Context, group1Data: MutableList<GroupCard1
 
         // if card type == 1, put the image on left, otherwise put it on right
         if (data.cardType == 1) {
-            viewHolder.binding.imageLeft.description.text = data.description
+            viewHolder.binding.imageLeft.description.text = context.getString(data.description_id)
             viewHolder.binding.imageLeft.image.setImageResource(data.image)
             viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
             viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
         } else if (data.cardType == 0) { // present text only
-            viewHolder.binding.pureText.description.text = data.description
+            viewHolder.binding.pureText.description.text = context.getString(data.description_id)
             viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
             viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
 
         } else {
-            viewHolder.binding.imageRight.description.text = data.description
+            viewHolder.binding.imageRight.description.text = context.getString(data.description_id)
             viewHolder.binding.imageRight.image.setImageResource(data.image)
             viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
             viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE

@@ -4,7 +4,7 @@ import com.example.safodel.R
 
 class GroupCard1Data(
     var dataType: String,
-    var description: String,
+    var description_id: Int,
     var image: Int,
     var cardType: Int
 ) {
@@ -16,7 +16,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Take extra care when cycling at night. It is harder for drivers to see you and for you to see hazards",
+                    R.string.tip2_0_description,
                     0,
                     0
                 )
@@ -24,7 +24,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Try to ride on well-lit roads and wear bright or light coloured clothing or a reflective vest",
+                    R.string.tip2_1_description,
                     R.drawable.tip2_1,
                     2
                 )
@@ -32,7 +32,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Always use front and rear lights",
+                    R.string.tip2_2_description,
                     R.drawable.tip2_2,
                     1
                 )
@@ -40,7 +40,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Keep backup lights or a portable charger",
+                    R.string.tip2_3_description,
                     R.drawable.tip2_3,
                     2
                 )
@@ -48,7 +48,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "tip2",
-                    "Avoid delivering in areas with poor lighting",
+                    R.string.tip2_4_description,
                     R.drawable.tip2_4,
                     1
                 )
@@ -58,7 +58,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "eBikeInfo1",
-                    "Make riding twice as easy as push bikes",
+                    R.string.info1_1_description,
                     R.drawable.info2_1,
                     2
                 )
@@ -66,7 +66,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "eBikeInfo1",
-                    "Comes in handy when riding up hills or over long distances",
+                    R.string.info1_2_description,
                     R.drawable.info2_2,
                     1
                 )
@@ -74,7 +74,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "eBikeInfo1",
-                    "Promote sustainability",
+                    R.string.info1_3_description,
                     R.drawable.info2_3,
                     2
                 )
@@ -82,7 +82,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "eBikeInfo1",
-                    "No need to break the bank as they’re generally cheaper to rent",
+                    R.string.info1_4_description,
                     R.drawable.info2_4,
                     1
                 )
@@ -92,7 +92,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "eBikeInfo2",
-                    "The Victorian Government allows a maximum power of 250 watts",
+                    R.string.info2_1_description,
                     R.drawable.info3_1,
                     2
                 )
@@ -100,7 +100,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "eBikeInfo2",
-                    "A maximum speed of 25 km/h is allowed if the rider is pedalling",
+                    R.string.info2_2_description,
                     R.drawable.info3_2,
                     1
                 )
@@ -108,7 +108,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "eBikeInfo2",
-                    "All other rules are the same as pedal bicycles",
+                    R.string.info2_3_description,
                     R.drawable.info3_3,
                     2
                 )
@@ -118,7 +118,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "gear",
-                    "Bicycle helmets reduce the chances of a serious head injury by almost 70%",
+                    R.string.gear1_1_description,
                     R.drawable.gear1_1,
                     3
                 )
@@ -126,7 +126,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "gear",
-                    "Warm gloves not only protect you from cold but also help you maintain safe grip at all times",
+                    R.string.gear1_2_description,
                     R.drawable.gear1_2,
                     1
                 )
@@ -134,7 +134,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "gear",
-                    "With the lockdown restrictions on, food delivery companies require masks or face covers for all drivers",
+                    R.string.gear1_3_description,
                     R.drawable.gear1_3,
                     2
                 )
@@ -142,7 +142,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "gear",
-                    "Always be prepared for bad weather and carry a rain jacket in your delivery bag",
+                    R.string.gear1_4_description,
                     R.drawable.gear1_4,
                     1
                 )
@@ -152,8 +152,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "Most delivery companies offer a support package for driver and delivery partners, " +
-                            "helping to cover partners should something go wrong while using their platform",
+                    R.string.in_an_accident3_0_description,
                     0,
                     0
                 )
@@ -161,8 +160,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "To find out the insurance details provided by your food delivery platform, " +
-                            "select your partner below",
+                    R.string.in_an_accident3_1_description,
                     R.drawable.inanaccident3_1,
                     2
                 )
@@ -170,7 +168,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "Click to Know More",
+                    R.string.food_delivery_description,
                     R.drawable.food_delivery_1,
                     2
                 )
@@ -178,7 +176,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "Click to Know More",
+                    R.string.food_delivery_description,
                     R.drawable.food_delivery_2,
                     2
                 )
@@ -186,7 +184,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "Click to Know More",
+                    R.string.food_delivery_description,
                     R.drawable.food_delivery_3,
                     2
                 )
@@ -194,7 +192,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "Click to Know More",
+                    R.string.food_delivery_description,
                     R.drawable.food_delivery_4,
                     2
                 )
@@ -202,7 +200,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "Click to Know More",
+                    R.string.food_delivery_description,
                     R.drawable.food_delivery_5,
                     2
                 )
@@ -210,7 +208,7 @@ class GroupCard1Data(
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    "The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions",
+                    R.string.in_an_accident3_2_description,
                     R.drawable.inanaccident3_2,
                     2
                 )
