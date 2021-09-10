@@ -32,32 +32,34 @@ class GroupCard2Adapter(val context: Context, group2Data: MutableList<GroupCard2
         // if card type == 1, put the image on left, otherwise put it on right
         when (data.cardType) {
             1 -> {
-                viewHolder.binding.imageLeft.title.text = data.title
-                if (data.statistics.isEmpty()) {
+                viewHolder.binding.imageLeft.title.text = context.getString(data.title_id)
+                if (data.statistics_id == 0) {
                     viewHolder.binding.imageLeft.statistics.visibility = View.GONE
+                } else {
+                    viewHolder.binding.imageLeft.statistics.text = context.getString(data.statistics_id)
                 }
-                viewHolder.binding.imageLeft.statistics.text = data.statistics
-                viewHolder.binding.imageLeft.description.text = data.description
+                viewHolder.binding.imageLeft.description.text = context.getString(data.description_id)
                 viewHolder.binding.imageLeft.image.setImageResource(data.image)
                 viewHolder.binding.imageRight.linearLayout2.visibility = View.GONE
                 viewHolder.binding.pureText.linearLayout3.visibility = View.GONE
             }
             4 -> {
-                viewHolder.binding.pureText.description.text = data.description
-                if (data.title.isNotEmpty()) {
-                    viewHolder.binding.pureText.description2.text = data.title
+                viewHolder.binding.pureText.description.text = context.getString(data.description_id)
+                if (data.title_id != 0) {
+                    viewHolder.binding.pureText.description2.text = context.getString(data.title_id)
                     viewHolder.binding.pureText.description2.visibility = View.VISIBLE
                 }
                 viewHolder.binding.imageLeft.linearLayout1.visibility = View.GONE
                 viewHolder.binding.imageRight.linearLayout2.visibility = View.GONE
             }
             else -> {
-                viewHolder.binding.imageRight.title.text = data.title
-                if (data.statistics.isEmpty()) {
+                viewHolder.binding.imageRight.title.text = context.getString(data.title_id)
+                if (data.statistics_id == 0) {
                     viewHolder.binding.imageRight.statistics.visibility = View.GONE
+                } else {
+                    viewHolder.binding.imageRight.statistics.text = context.getString(data.statistics_id)
                 }
-                viewHolder.binding.imageRight.description.text = data.description
-                viewHolder.binding.imageRight.statistics.text = data.statistics
+                viewHolder.binding.imageRight.description.text = context.getString(data.description_id)
                 viewHolder.binding.imageRight.image.setImageResource(data.image)
                 viewHolder.binding.imageLeft.linearLayout1.visibility = View.GONE
                 viewHolder.binding.pureText.linearLayout3.visibility = View.GONE

@@ -44,17 +44,17 @@ class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::
         binding.gear2.currentPageText.text = getString(R.string.gear2_name)
         binding.gear2.notification.text = getString(R.string.gear2_slang)
 
-        binding.gear2.detailCardV3.checkbox1.checkbox.text = "Helmet"
+        binding.gear2.detailCardV3.checkbox1.checkbox.text = getString(R.string.gear_check_list_item1)
         binding.gear2.detailCardV3.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)
-        binding.gear2.detailCardV3.checkbox2.checkbox.text = "Rear and front lights"
+        binding.gear2.detailCardV3.checkbox2.checkbox.text = getString(R.string.gear_check_list_item2)
         binding.gear2.detailCardV3.checkbox2.checkboxImage.setImageResource(R.drawable.bicycle_with_light)
-        binding.gear2.detailCardV3.checkbox3.checkbox.text = "Mask and face over"
+        binding.gear2.detailCardV3.checkbox3.checkbox.text = getString(R.string.gear_check_list_item3)
         binding.gear2.detailCardV3.checkbox3.checkboxImage.setImageResource(R.drawable.mask)
-        binding.gear2.detailCardV3.checkbox4.checkbox.text = "Reflective vest"
+        binding.gear2.detailCardV3.checkbox4.checkbox.text = getString(R.string.gear_check_list_item4)
         binding.gear2.detailCardV3.checkbox4.checkboxImage.setImageResource(R.drawable.vest)
-        binding.gear2.detailCardV3.checkbox5.checkbox.text = "Gloves"
+        binding.gear2.detailCardV3.checkbox5.checkbox.text = getString(R.string.gear_check_list_item5)
         binding.gear2.detailCardV3.checkbox5.checkboxImage.setImageResource(R.drawable.gloves)
-        binding.gear2.detailCardV3.checkbox6.checkbox.text = "Hand sanitiser"
+        binding.gear2.detailCardV3.checkbox6.checkbox.text = getString(R.string.gear_check_list_item6)
         binding.gear2.detailCardV3.checkbox6.checkboxImage.setImageResource(R.drawable.hand_sanitizer)
     }
 

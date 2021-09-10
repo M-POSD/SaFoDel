@@ -153,7 +153,7 @@ class GroupCard1Data(
                 GroupCard1Data(
                     "inAnAccident3",
                     "Most delivery companies offer a support package for driver and delivery partners, " +
-                            "helping to cover partners should something go wrong while using their platform ",
+                            "helping to cover partners should something go wrong while using their platform",
                     0,
                     0
                 )
