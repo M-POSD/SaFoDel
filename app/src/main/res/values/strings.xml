@@ -67,9 +67,9 @@
     <string name="tip3_name_v1" translatable="false">Safety Tips - understand the road sign</string>
     <string name="tip3_name_v2" translatable="false">Understand Road Sign</string>
 
-    <string name="tip2_1_title" translatable="false">RIDE CAREFULLY AT INTERSECTIONS</string>
-    <string name="tip2_1_statistics" translatable="false">Bicycle crashes are marginally more common (55%) at intersections</string>
-    <string name="tip2_1_description" translatable="false">TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)</string>
+    <string name="tip1_1_title" translatable="false">RIDE CAREFULLY AT INTERSECTIONS</string>
+    <string name="tip1_1_statistics" translatable="false">Bicycle crashes are marginally more common (55%) at intersections</string>
+    <string name="tip1_1_description" translatable="false">TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)</string>
 
     <!--  epic2  -->
     <string name="epic2_name" translatable="false">Delivery on E-bike</string>
@@ -85,7 +85,10 @@
     <string name="gear3_name" translatable="false">Australian Standards for Safety Gear</string>
     <string name="gear3_notification" translatable="false">The following labels indicate a helmet has been approved</string>
     <string name="gear1_1" translatable="false">Accident Trends</string>
-
+    <string name="gear_standard_bsi" translatable="false">BSI</string>
+    <string name="gear_standard_global_mark" translatable="false">Global-Mark</string>
+    <string name="gear_standard_sai_global" translatable="false">SAI Global</string>
+    <string name="gear_standard_aus" translatable="false">AUS</string>
     <!--  epic4  -->
     <string name="epic4_name" translatable="false">In an Accident</string>
     <string name="in_an_accident1_name" translatable="false">Steps to Follow</string>

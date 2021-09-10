@@ -23,7 +23,7 @@ class GearStandardAdapter(val context: Context, gearStandards: MutableList<GearS
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val info: GearStandard = gearStandards[position]
         viewHolder.binding.image.setImageResource(info.image)
-        viewHolder.binding.title.text = info.title
+        viewHolder.binding.title.text = context.getString(info.title_id)
     }
 
     override fun getItemCount(): Int {
