@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.R
 import com.example.safodel.adapter.GroupCard1Adapter
 import com.example.safodel.databinding.FragmentAccident3Binding
 import com.example.safodel.databinding.FragmentTip2Binding
@@ -42,8 +43,8 @@ class Accident3Fragment : BasicFragment<FragmentAccident3Binding>(FragmentAccide
 
     // set up the default text view
     private fun configDefaultTextView() {
-        binding.accident3.currentPageText.text = "Claiming Insurance"
-        binding.accident3.notification.text = "Find out information regarding insurance claims"
+        binding.accident3.currentPageText.text = getString(R.string.in_an_accident3_name)
+        binding.accident3.notification.text = getString(R.string.in_an_accident3_slang)
     }
 
     // call recycle view adapter to set up the view

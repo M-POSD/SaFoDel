@@ -40,7 +40,10 @@
     <string name="info3_slang">Be aware of the risks of delivering on an e-bike</string>
     <string name="gear1_slang">Wearing proper safety gear while delivering food is a must. Find more about the essential safety gear below</string>
     <string name="gear2_slang">Worried about forgetting essential safety gear?\nFollow this checklist for a quick heads up!</string>
-    <string name="gear3_slang">"Bicycle helmets should have a sticker showing the Australian Standard <font color='#EE0000'>AS 2063, AS/NZS 2063</font><br/>"</string>
+    <string name="gear3_slang"><![CDATA[Bicycle helmets should have a sticker showing the Australian Standard <font color="#EE0000">AS 2063, AS/NZS 2063</font>!]]></string>
+    <string name="in_an_accident1_slang">Steps to follow in the event of an accident</string>
+    <string name="in_an_accident2_slang">Information about current movements in gig workers\' rights</string>
+    <string name="in_an_accident3_slang">Find out information regarding insurance claims</string>
 
     <!--  spotlight description  -->
     <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\nClick Next for the next step\nClick Close for leaving this mode</string>
@@ -80,6 +83,7 @@
     <string name="gear1_name" translatable="false">Basic gear information</string>
     <string name="gear2_name" translatable="false">A checklist of necessary safety equipment</string>
     <string name="gear3_name" translatable="false">Australian Standards for Safety Gear</string>
+    <string name="gear3_notification" translatable="false">The following labels indicate a helmet has been approved</string>
     <string name="gear1_1" translatable="false">Accident Trends</string>
 
     <!--  epic4  -->
