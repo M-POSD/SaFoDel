@@ -28,7 +28,7 @@
             android:layout_weight="1.5"
             android:fontFamily="@font/notosansjp_black"
             android:gravity="center"
-            android:text="@string/quiz_heading"
+            android:text="@string/quiz"
             android:textColor="@color/white"
             android:textSize="30dp" />
 

@@ -66,39 +66,41 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         binding.progressBar.progress = mCurrentPosition
         binding.progress.text = "$mCurrentPosition/${binding.progressBar.max}"
 
-        binding.question.text = question!!.question
+        Log.d("69:", getString(question!!.question))
+        binding.question.text = getString(question!!.question)
+
         if (question.image != 0) {
             binding.image.setImageResource(question.image)
             binding.image.visibility = View.VISIBLE
         }
         configDefaultOptionsView()
-        binding.questionInfo.text = question.information
+        binding.questionInfo.text = getString(question.information)
 
     }
 
     private fun configDefaultOptionsView() {
         val options = ArrayList<TextView>()
-        options.add(0, binding.opt1.option)
-        options.add(1, binding.opt2.option)
-
         val question = mQuestions!![mCurrentPosition - 1]
-        if (question.option3 == "") {
+        options.add(0, binding.opt1.option)
+        binding.opt1.option.text = getString(question.option1)
+        options.add(1, binding.opt2.option)
+        binding.opt2.option.text = getString(question.option2)
+
+        if (question.option3 == 0) {
             binding.opt3.option.visibility = View.GONE
         } else {
             options.add(2, binding.opt3.option)
+            binding.opt3.option.text = getString(question.option3)
             binding.opt3.option.visibility = View.VISIBLE
         }
-        if (question.option4 == "") {
+
+        if (question.option4 == 0) {
             binding.opt4.option.visibility = View.GONE
         } else {
             options.add(2, binding.opt4.option)
+            binding.opt4.option.text = getString(question.option4)
             binding.opt4.option.visibility = View.VISIBLE
         }
-
-        binding.opt1.option.text = question.option1
-        binding.opt2.option.text = question.option2
-        binding.opt3.option.text = question.option3
-        binding.opt4.option.text = question.option4
 
         for (option in options) {
             option.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.default_option_icon,0)
@@ -132,6 +134,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                 if (mSelectedOptionPosition == 0) {
                     if (binding.submitBtn.button.text == "SUBMIT") {
                         toast.cancel()
+                        Log.d("139", getString(R.string.notify_select_option))
                         toast.setText(getString(R.string.notify_select_option))
                         toast.show()
                     } else {
@@ -145,8 +148,6 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 //                                configDialog("Success", "You have successfully completed the Quiz")
 //                                binding.submitBtn.button.text = "RETURN"
 
-                                // allow user go back
-                                mCurrentPosition--
 //                                findNavController().popBackStack(R.id.examFinishFragment, true)
                                 var arg = bundleOf(
                                     Pair("score", totalScore),
@@ -166,8 +167,10 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                     infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
 
                     if (mCurrentPosition == mQuestions!!.size) {
+                        Log.d("172", getString(R.string.finish_button))
                         binding.submitBtn.button.text = getString(R.string.finish_button)
                     } else {
+                        Log.d("175", getString(R.string.finish_button))
                         binding.submitBtn.button.text = getString(R.string.go_next_button)
                     }
                     mSelectedOptionPosition = 0
@@ -219,19 +222,20 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 
             }
             1 -> {
-                binding.opt1.info.text = question.information
+                Log.d("227", getString(question.information))
+                binding.opt1.info.text = getString(question.information)
                 binding.opt1.info.visibility = View.VISIBLE
             }
             2 -> {
-                binding.opt2.info.text = question.information
+                binding.opt2.info.text = getString(question.information)
                 binding.opt2.info.visibility = View.VISIBLE
             }
             3 -> {
-                binding.opt3.info.text = question.information
+                binding.opt3.info.text = getString(question.information)
                 binding.opt3.info.visibility = View.VISIBLE
             }
             4 -> {
-                binding.opt4.info.text = question.information
+                binding.opt4.info.text = getString(question.information)
                 binding.opt4.info.visibility = View.VISIBLE
             }
             // correct answer info
