@@ -18,6 +18,8 @@
     <string name="submit_button">SUBMIT</string>
     <string name="finish_button">FINISH</string>
     <string name="go_next_button">GO TO NEXT QUESTION</string>
+    <string name="next_button">NEXT</string>
+    <string name="close_button">CLOSE</string>
 
     <!--  start activity  -->
     <string name="SaFoDel" translatable="false">SaFoDel</string>
@@ -158,7 +160,11 @@
     <string name="in_an_accident3_0_description" >Most delivery companies offer a support package for driver and delivery partners, helping to cover partners should something go wrong while using their platform</string>
     <string name="in_an_accident3_1_description">To find out the insurance details provided by your food delivery platform, select your partner below</string>
     <string name="in_an_accident3_2_description">The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions</string>
-    <string name="food_delivery_description">Click to Know More!</string>
+    <string name="click_to_know_more">Click to Know More!</string>
+    <string name="uber_link">https://www.uber.com/au/en/drive/insurance/injury-protection/</string>
+    <string name="deliveroo_link">https://riders.deliveroo.com.au/en/news/your-free-deliveroo-rider-insurance</string>
+    <string name="doordash_link">https://help.doordash.com/dashers/s/article/Requirements-for-Dashing?language=en_AU</string>
+    <string name="easi_link">https://www.easi.com.au/delivery-user/</string>
 
     <!--  epic5  -->
     <string name="tip3_name_v1" >Safety Tips - understand the road sign</string>

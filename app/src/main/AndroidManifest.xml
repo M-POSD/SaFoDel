@@ -19,7 +19,7 @@
         android:theme="@style/Theme.SaFoDel"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.main.LoginActivity"
+            android:name=".ui.main.StartActivity"
             android:exported="true">
 
             <intent-filter>
@@ -34,7 +34,7 @@
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.StartActivity"
+            android:name=".ui.main.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
 

@@ -165,44 +165,44 @@ class GroupCard1Data(
                     2
                 )
             )
+//            groupCard1Data.add(
+//                GroupCard1Data(
+//                    "inAnAccident3",
+//                    R.string.uber_link,
+//                    R.drawable.food_delivery_1,
+//                    2
+//                )
+//            )
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    R.string.food_delivery_description,
-                    R.drawable.food_delivery_1,
-                    2
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "inAnAccident3",
-                    R.string.food_delivery_description,
+                    R.string.uber_link,
                     R.drawable.food_delivery_2,
-                    2
+                    -1
                 )
             )
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    R.string.food_delivery_description,
+                    R.string.deliveroo_link,
                     R.drawable.food_delivery_3,
-                    2
+                    -1
                 )
             )
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    R.string.food_delivery_description,
+                    R.string.doordash_link,
                     R.drawable.food_delivery_4,
-                    2
+                    -1
                 )
             )
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    R.string.food_delivery_description,
+                    R.string.easi_link,
                     R.drawable.food_delivery_5,
-                    2
+                    -1
                 )
             )
             groupCard1Data.add(

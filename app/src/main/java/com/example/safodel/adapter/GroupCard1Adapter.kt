@@ -1,10 +1,14 @@
 package com.example.safodel.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Paint
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safodel.R
 import com.example.safodel.databinding.GroupCardV1Binding
@@ -42,7 +46,17 @@ class GroupCard1Adapter(val context: Context, group1Data: MutableList<GroupCard1
             viewHolder.binding.pureText.description.text = context.getString(data.description_id)
             viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
             viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
-
+        } else if (data.cardType == -1) {
+            viewHolder.binding.imageRight.description.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
+            viewHolder.binding.imageRight.description.setOnClickListener {
+                val url = context.getString(data.description_id)
+                val internetAct = Intent(Intent.ACTION_VIEW)
+                internetAct.data = Uri.parse(url)
+                context.startActivity(internetAct)
+            }
+            viewHolder.binding.imageRight.image.setImageResource(data.image)
+            viewHolder.binding.imageLeft.linearLayout1.visibility = View.INVISIBLE
+            viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
         } else {
             viewHolder.binding.imageRight.description.text = context.getString(data.description_id)
             viewHolder.binding.imageRight.image.setImageResource(data.image)

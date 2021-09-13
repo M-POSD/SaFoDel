@@ -362,7 +362,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             /*-- Add source --*/
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
-            val baseicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
+            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
                 circleColor(Color.parseColor("#FF0000")),
                 visibility(Property.VISIBLE),
                 iconIgnorePlacement(false),
@@ -378,7 +378,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             ))
 
             /*-- Add layer --*/
-            it.addLayer(baseicCircle)
+            it.addLayer(basicCircle)
 
             /*-- Add circle layer --*/
             val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")

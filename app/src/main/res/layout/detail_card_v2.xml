@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/notosansjp_bold"
-                        android:text="Demo"
+                        android:text="@string/click_to_know_more"
                         android:justificationMode="inter_word"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         android:textColor="@color/black"
