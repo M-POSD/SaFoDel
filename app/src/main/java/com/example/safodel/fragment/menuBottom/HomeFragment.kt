@@ -52,6 +52,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
+    private var isRaining = false
+    private var isInitialRainingAnimation = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -121,8 +123,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // raining animation
     private fun rainingAnimation() {
 //        binding.vusik.stopNotesFall()
-        binding.vusik.setImages(rainingList).start()
-        binding.vusik.startNotesFall()
+        if (isInitialRainingAnimation) {
+            isInitialRainingAnimation = false
+            isRaining = true
+            binding.vusik.setImages(rainingList).start()
+            binding.vusik.startNotesFall()
+        } else {
+            if (isRaining) {
+                isRaining = false
+                binding.vusik.pauseNotesFall()
+                binding.vusik.visibility = View.INVISIBLE
+            } else {
+                isRaining = true
+                binding.vusik.resumeNotesFall()
+                binding.vusik.visibility = View.VISIBLE
+            }
+        }
     }
 
     // add animation for the individual image
