@@ -144,11 +144,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // add animation for the individual image
     private fun imageAnimations() {
         var objectAnimator1: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 68f)
+            ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 77f)
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.backpack, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 0f)
+            ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 28f)
         var objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
         var objectAnimator5: ObjectAnimator =
@@ -543,7 +543,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.coordinatorLayout.setBackgroundResource(R.color.white)
                 binding.headlight.visibility = View.INVISIBLE
                 binding.backpack.alpha = 0f
-                binding.backpack.setImageResource(R.drawable.backpack)
+                binding.backpack.setImageResource(R.drawable.backpack_light)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
                 startAnimation("light")
@@ -555,7 +555,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
                 binding.headlight.visibility = View.VISIBLE
                 binding.backpack.alpha = 0f
-                binding.backpack.setImageResource(R.drawable.backpack_light)
+                binding.backpack.setImageResource(R.drawable.backpack_dark)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
                 startAnimation("night")
