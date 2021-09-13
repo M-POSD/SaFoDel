@@ -67,14 +67,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="137dp"
-                            android:translationY="10dp"
                             android:scaleX="1.2"
                             android:scaleY="1.2"
                             android:src="@drawable/helmet"
+                            android:translationY="10dp"
                             app:layout_constraintBottom_toBottomOf="@+id/driver"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.531"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/driver"
+                            app:layout_constraintHorizontal_bias="0.561"
+                            app:layout_constraintStart_toStartOf="@+id/driver"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="1.0" />
 
@@ -89,13 +89,13 @@
                             android:scaleY="1"
                             android:src="@drawable/backpack_light"
                             android:translationX="35dp"
-                            android:translationY="10dp"
+                            android:translationY="11dp"
                             app:layout_constraintBottom_toBottomOf="@+id/driver"
                             app:layout_constraintEnd_toEndOf="@+id/driver"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/driver"
-                            app:layout_constraintVertical_bias="1.0" />
+                            app:layout_constraintVertical_bias="0.533" />
 
                         <ImageView
                             android:id="@+id/headlight"
@@ -128,7 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:fontFamily="@font/notosansjp_bold"
+                    android:fontFamily="@font/notosansjp_black"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
                     android:text="@string/home_page_slang_1"
@@ -154,17 +154,6 @@
                 <include
                     android:id="@+id/epicCard34"
                     layout="@layout/small_cards" />
-
-                <!--                <TextView-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginBottom="10dp"-->
-                <!--                    android:fontFamily="@font/notosansjp_bold"-->
-                <!--                    android:gravity="center"-->
-                <!--                    android:text="Click map to see accident locations for your suburb"-->
-                <!--                    android:textAppearance="?attr/textAppearanceHeadline6"-->
-                <!--                    android:textColor="@color/white"-->
-                <!--                    android:textSize="14dp" />-->
 
             </LinearLayout>
 

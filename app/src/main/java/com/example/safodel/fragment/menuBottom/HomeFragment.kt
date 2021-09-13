@@ -55,6 +55,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private var isRaining = false
     private var isInitialRainingAnimation = true
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -144,11 +145,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // add animation for the individual image
     private fun imageAnimations() {
         var objectAnimator1: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, 77f)
+            ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, binding.backpack.translationX)
+        Log.d("height", binding.homeFragmentXML.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.backpack, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, 28f)
+            ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, binding.helmet.translationY)
+        Log.d("width", binding.homeFragmentXML.height.toString())
         var objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
         var objectAnimator5: ObjectAnimator =
@@ -174,6 +177,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 0f,
                 4 * (view?.width ?: 1500) / 5.toFloat()
             )
+
+        Log.d("width", view?.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 binding.images,
