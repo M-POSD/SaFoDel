@@ -42,6 +42,13 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
+        val left_header = binding.leftNavigation.getHeaderView(0)
+        val left_header_text = left_header.findViewById<View>(R.id.left_header_text)
+        left_header_text.isClickable = true
+        left_header_text.setOnClickListener {
+            binding.drawerLayout.closeDrawers()
+        }
+
         recordLearningMode()
     }
 
