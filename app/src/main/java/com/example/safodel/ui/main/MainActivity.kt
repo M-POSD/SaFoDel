@@ -102,14 +102,17 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navMap -> {
+                    navController.popBackStack(R.id.mapfragment,true)
                     navController.navigate(R.id.mapfragment)
                     true
                 }
                 R.id.navExam -> {
+                    navController.popBackStack(R.id.examFragment,true)
                     navController.navigate(R.id.examFragment)
                     true
                 }
                 R.id.navAnalysis -> {
+                    navController.popBackStack(R.id.navAnalysis,true)
                     navController.navigate(R.id.analysisFragment)
                     true
                 }
