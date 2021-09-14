@@ -80,7 +80,8 @@ class MainActivity : AppCompatActivity() {
 
         if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment)
         ) {
-            super.onBackPressed()
+            navController.popBackStack()
+            binding.bottomNavigation.selectedItemId = R.id.navHome
             return
         }
 
@@ -102,14 +103,17 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navMap -> {
+                    navController.popBackStack()
                     navController.navigate(R.id.mapfragment)
                     true
                 }
                 R.id.navExam -> {
+                    navController.popBackStack()
                     navController.navigate(R.id.examFragment)
                     true
                 }
                 R.id.navAnalysis -> {
+                    navController.popBackStack()
                     navController.navigate(R.id.analysisFragment)
                     true
                 }
