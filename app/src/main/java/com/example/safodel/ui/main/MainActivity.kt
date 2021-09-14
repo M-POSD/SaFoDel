@@ -78,10 +78,13 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment)
-        ) {
-            navController.popBackStack()
+        if(navController.currentDestination?.id != R.id.homeFragment){
             binding.bottomNavigation.selectedItemId = R.id.navHome
+            return
+        }
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
             return
         }
 
@@ -103,21 +106,28 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navMap -> {
-                    navController.popBackStack()
-                    navController.navigate(R.id.mapfragment)
+                    if(navController.currentDestination?.id != R.id.navMap){
+                        navController.navigate(R.id.mapfragment)
+                    }
                     true
                 }
                 R.id.navExam -> {
-                    navController.popBackStack()
-                    navController.navigate(R.id.examFragment)
+                    if(navController.currentDestination?.id != R.id.navExam){
+                        navController.navigate(R.id.examFragment)
+                    }
                     true
                 }
                 R.id.navAnalysis -> {
-                    navController.popBackStack()
-                    navController.navigate(R.id.analysisFragment)
+                    if(navController.currentDestination?.id != R.id.navAnalysis){
+                        navController.navigate(R.id.analysisFragment)
+                    }
                     true
                 }
-                else -> false
+                else -> {
+                    navController.popBackStack()
+                    binding.bottomNavigation.selectedItemId = R.id.navHome
+                    true
+                }
             }
         }
 
