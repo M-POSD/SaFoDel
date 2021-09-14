@@ -16,10 +16,16 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import com.afollestad.materialdialogs.MaterialDialog
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.LGAList
+import com.example.safodel.model.SuburbMapResponse
+import com.example.safodel.model.SuburbResponse
+import com.example.safodel.retrofit.SuburbClient
+import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.ui.main.MainActivity
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -102,6 +108,9 @@ import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
 import org.angmarch.views.NiceSpinner
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -111,7 +120,10 @@ private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var lga: String = "MELBOURNE"
 private var spinnerTimes = 0
-private lateinit var mThread:Thread
+//private lateinit var mThread:Thread
+
+// Retrofit
+private lateinit var suburbInterface: SuburbInterface
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -120,6 +132,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     // View
     private lateinit var toast: Toast
     private lateinit var toolbar: Toolbar
+    private lateinit var dialog: MaterialDialog
 
     // Map
     private lateinit var mapboxMap: MapboxMap
@@ -128,6 +141,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapView: MapView
     private lateinit var mapView2 : MapView2
     private lateinit var LGAPoint:Point
+
+
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -252,6 +267,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     ): View {
         activity?.let { Mapbox.getInstance(it.application,getString(R.string.mapbox_access_token)) }
         _binding = FragmentMapBinding.inflate(inflater,container,false)
+
+        // init the toast (it will not show)
         toast = Toast.makeText(context,"message",Toast.LENGTH_SHORT)
 
         // init the view
@@ -259,13 +276,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mainActivity = activity as MainActivity
         toolbar = binding.toolbar.root
         mapView = binding.mapView
-        mapView2 = binding.mapView2
-        mapboxMap2 = mapView2.getMapboxMap()
+        mapView2 = binding.mapView2  // for navigation
+        mapboxMap2 = mapView2.getMapboxMap() // for navigation
         setToolbarBasic(toolbar)
 
         // request permission of user location
         permissionsManager = PermissionsManager(this)
         permissionsManager.requestLocationPermissions(activity)
+
+        // Set Dialog
+        dialog = MaterialDialog(requireContext())
 
         // spinner init
         val spinner = binding.spinner
@@ -274,21 +294,27 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
+                setDialog()
                 spinnerTimes++ // calculate the times to test
                 if(spinnerTimes >= 1){
                     lga = parent?.getItemAtPosition(position).toString()
-                    mThread = fetchdata()
-                    mThread.start()
+                    callSuburbClient()
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+
+
+        suburbInterface = SuburbClient.getRetrofitService()
+
         // change the float button height
         changeFloatButtonHeight()
         // basic location and position
-        mThread = fetchdata()
-        mThread.start()
+
+        // Update data
+        setDialog()
+        callSuburbClient()
 
         // update the map
         binding.updateMap.setOnClickListener {
@@ -475,13 +501,13 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onPause() {
         super.onPause()
-        mThread.interrupt()
+        //mThread.interrupt()
         mapView.onPause()
     }
 
     override fun onStop() {
         super.onStop()
-        mThread.interrupt()
+        //mThread.interrupt()
         mapView.onStop()
     }
 
@@ -498,7 +524,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mThread.interrupt()
+        //mThread.interrupt()
         mapView.onDestroy()
         mapboxNavigation.onDestroy()
         if (::mapboxNavigation.isInitialized){
@@ -526,7 +552,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    /* -- Hide or Show the crash relative view. -- */
+
+
+
+    /* --
+            UI part - Hide or Show the crash relative view.
+    -- */
     fun changeToNav(){
         mapboxMap.getStyle {
             val bcLayer =  it.getLayer("basic_circle_cayer")
@@ -568,6 +599,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    ///                                  Navigation                                    ////
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     @SuppressWarnings("MissingPermission")
     private fun initNav(){
@@ -762,54 +798,55 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.floatButtonStop.layoutParams = FBHeightStop
     }
 
-}
 
 
     /*
-     *  Collect data
+        Collect the data
      */
-    class fetchdata(): Thread() {
-        var data: String = ""
-        override fun run() {
-          try {
-            feature.clear()
-            /*---    Fetch the data from team's API  ---*/
-            val url = URL("http://13.211.206.2/accidents?location=" + lga)
-            val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
-            val inputStream: InputStream = httpURLConnection.inputStream
-            val bufferReader = BufferedReader(InputStreamReader(inputStream))
-            data = bufferReader.readLine()
+    private fun callSuburbClient() {
+        feature.clear()
+        locationList.clear()
+        val callAsync: Call<SuburbMapResponse> = suburbInterface.mapRepos(
+            "accidents",
+            lga
+        )
+        callAsync.enqueue(object : Callback<SuburbMapResponse?> {
+            override fun onResponse(call: Call<SuburbMapResponse?>?, response: Response<SuburbMapResponse?>) {
+                if (response.isSuccessful) {
+                    dialog.dismiss()
+                    val resultList = response.body()?.suburbMapAccidents
+                    if (resultList?.isNotEmpty() == true) {
+                        for(each in resultList){
+                            val eachPoint = Point.fromLngLat(each.point_long,each.point_lat)
+                            locationList.add(eachPoint)
+                        }
+                    }
+                    for(each in 0..locationList.size-1){
+                        feature.add(Feature.fromGeometry(locationList[each]))
+                    }
 
-            if(data.isNotEmpty()){
-                val jsonObject = JSONObject(data)
-                val points: JSONArray = jsonObject.getJSONArray("results")
-                locationList.clear()
-                for(point in 0..points.length()-1){
-                    val location: JSONObject = points.getJSONObject(point)
-                    val eachPoint = Point.fromLngLat(location.get("long").
-                    toString().toDouble(),
-                        location.get("lat").toString().toDouble())
-                    locationList.add(eachPoint)
+                } else {
+                    Log.i("Error ", "Response failed")
                 }
             }
-        }catch(e: MalformedURLException){
-            e.printStackTrace()
-
-        }catch(e: IOException){
-            e.printStackTrace()
-        }
-
-        Handler(Looper.getMainLooper()).post {
-            run {
-                for(each in 0..locationList.size-1){
-                    Log.d("Hello Handler Locationlist Size is:", locationList.size.toString())
-                    feature.add(Feature.fromGeometry(locationList[each]))
-                }
+            override fun onFailure(call: Call<SuburbMapResponse?>?, t: Throwable) {
+                dialog.dismiss()
+                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
             }
-        }
+        })
     }
 
 
+    /*
+        Setting the dialog when item select
+     */
+    private fun setDialog(){
+        dialog.show {
+            message(text = "loading.. Please wait.")
+            cancelable(false)
+            cancelOnTouchOutside(false)
+        }
+    }
 }
 
 
