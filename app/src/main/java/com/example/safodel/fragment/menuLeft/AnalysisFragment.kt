@@ -111,7 +111,6 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
      */
     private fun callSuburbClient(suburbName: String){
 
-
         /*
             Get the number for the total Text in the card
          */

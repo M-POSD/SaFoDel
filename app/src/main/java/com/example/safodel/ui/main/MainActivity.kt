@@ -78,7 +78,9 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if(navController.currentDestination?.id != R.id.homeFragment){
+        if(navController.currentDestination?.id == R.id.mapfragment ||
+            navController.currentDestination?.id == R.id.examFragment ||
+            navController.currentDestination?.id == R.id.analysisFragment){
             binding.bottomNavigation.selectedItemId = R.id.navHome
             return
         }
