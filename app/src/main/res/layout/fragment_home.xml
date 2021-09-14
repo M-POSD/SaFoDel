@@ -102,9 +102,10 @@
                             android:layout_width="239dp"
                             android:layout_height="202dp"
                             android:alpha="0"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
                             android:src="@drawable/headlight3"
+                            android:translationX="-15dp"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="@+id/driver"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -117,45 +118,59 @@
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ScrollView
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="6.5"
-                android:background="@color/primary_green"
-                android:orientation="vertical">
+                android:layout_weight="6.5">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/notosansjp_black"
-                    android:gravity="center"
-                    android:paddingHorizontal="20dp"
-                    android:text="@string/home_page_slang_1"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
+                    android:background="@color/primary_green"
+                    android:orientation="vertical"
+                    android:paddingBottom="70dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/notosansjp_bold"
-                    android:gravity="center"
-                    android:text="@string/home_page_slang_2"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
-                    android:textSize="14dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/notosansjp_black"
+                        android:gravity="center"
+                        android:paddingHorizontal="30dp"
+                        android:text="@string/home_page_slang_1"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
 
-                <include
-                    android:id="@+id/epicCard12"
-                    layout="@layout/small_cards" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:fontFamily="@font/notosansjp_bold"
+                        android:gravity="center"
+                        android:text="@string/home_page_slang_2"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textColor="@color/white"
+                        android:textSize="14dp" />
 
-                <include
-                    android:id="@+id/epicCard34"
-                    layout="@layout/small_cards" />
+                    <include
+                        android:id="@+id/epicCard1"
+                        layout="@layout/small_card" />
 
-            </LinearLayout>
+                    <include
+                        android:id="@+id/epicCard2"
+                        layout="@layout/small_card" />
+
+                    <include
+                        android:id="@+id/epicCard3"
+                        layout="@layout/small_card" />
+
+                    <include
+                        android:id="@+id/epicCard4"
+                        layout="@layout/small_card" />
+
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 
@@ -195,8 +210,8 @@
             android:layout_gravity="right"
             android:layout_marginTop="40dp"
             android:layout_marginRight="30dp"
-            android:visibility="invisible"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/weather_dark_mode"
@@ -209,8 +224,8 @@
                 android:id="@+id/dark_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_dark_mode"
-                android:padding="1dp" />
+                android:padding="1dp"
+                android:src="@drawable/ic_baseline_dark_mode" />
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

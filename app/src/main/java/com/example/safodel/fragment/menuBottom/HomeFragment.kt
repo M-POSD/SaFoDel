@@ -77,7 +77,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         rainingList[0] = R.drawable.drop_blue_v3
 
         configDefaultTextView()
+        configDefaultImageView()
         configOnClickListener()
+
         setToolbarBasic(toolbar)
         imageAnimations()
         imagesDrivingAnimation()
@@ -115,10 +117,18 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // set up default text view
     private fun configDefaultTextView() {
-        binding.epicCard12.editTextLeft.text = getString(R.string.epic1_name)
-        binding.epicCard12.editTextRight.text = getString(R.string.epic2_name)
-        binding.epicCard34.editTextLeft.text = getString(R.string.epic3_name)
-        binding.epicCard34.editTextRight.text = getString(R.string.epic4_name)
+        binding.epicCard1.scEditText.text = getString(R.string.epic1_name)
+        binding.epicCard2.scEditText.text = getString(R.string.epic2_name)
+        binding.epicCard3.scEditText.text = getString(R.string.epic3_name)
+        binding.epicCard4.scEditText.text = getString(R.string.epic4_name)
+    }
+
+    // set up default image view
+    private fun configDefaultImageView() {
+        binding.epicCard1.scImageView.setImageResource(R.drawable.tip)
+        binding.epicCard2.scImageView.setImageResource(R.drawable.delivery_on_ebike)
+        binding.epicCard3.scImageView.setImageResource(R.drawable.safety_gear)
+        binding.epicCard4.scImageView.setImageResource(R.drawable.in_an_accident)
     }
 
     // raining animation
@@ -205,22 +215,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // config onClickListener for navigation
     private fun configOnClickListener() {
-        binding.epicCard12.cardLeft.setOnClickListener() {
+        binding.epicCard1.scCard.setOnClickListener() {
             recordPosition(0)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        binding.epicCard12.cardRight.setOnClickListener() {
+        binding.epicCard2.scCard.setOnClickListener() {
             recordPosition(1)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        binding.epicCard34.cardLeft.setOnClickListener() {
+        binding.epicCard3.scCard.setOnClickListener() {
             recordPosition(2)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        binding.epicCard34.cardRight.setOnClickListener() {
+        binding.epicCard4.scCard.setOnClickListener() {
             recordPosition(3)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
@@ -333,7 +343,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
         third.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
         val thirdTarget = Target.Builder()
-            .setAnchor(binding.epicCard12.cardLeft)
+            .setAnchor(binding.epicCard1.scCard)
             .setShape(
                 RoundedRectangle(
                     (view?.height ?: 2000) / 7.toFloat(),
@@ -352,7 +362,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fourth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fourth_target)
 
         val fourthTarget = Target.Builder()
-            .setAnchor(binding.epicCard12.cardRight)
+            .setAnchor(binding.epicCard2.scCard)
             .setShape(
                 RoundedRectangle(
                     (view?.height ?: 2000) / 7.toFloat(),
@@ -371,7 +381,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
 
         val fifthTarget = Target.Builder()
-            .setAnchor(binding.epicCard34.cardLeft)
+            .setAnchor(binding.epicCard3.scCard)
             .setShape(
                 RoundedRectangle(
                     (view?.height ?: 2000) / 7.toFloat(),
@@ -390,7 +400,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
 
         val sixthTarget = Target.Builder()
-            .setAnchor(binding.epicCard34.cardRight)
+            .setAnchor(binding.epicCard4.scCard)
             .setShape(
                 RoundedRectangle(
                     (view?.height ?: 2000) / 7.toFloat(),

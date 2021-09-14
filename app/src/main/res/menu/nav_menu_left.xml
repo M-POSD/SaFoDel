@@ -7,16 +7,6 @@
             Each button of the side navigation is described here.
             icons download from https://fonts.google.com/icons.
         -->
-        <item
-            android:id="@+id/navAnalysis"
-            android:icon="@drawable/analysis"
-            android:title="@string/analysis"/>
-
-
-        <item
-            android:id="@+id/navExam"
-            android:icon="@drawable/exam"
-            android:title="@string/exam"/>
 
         <item
             android:id="@+id/navAppIntro"

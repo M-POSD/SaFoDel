@@ -32,8 +32,10 @@
     <string name="app_intro">About App</string>
     <string name="safety_gear">Safety Gear</string>
     <string name="developer">About Us</string>
-    <string name="exam">Quiz Yourself</string>
-    <string name="analysis">Accident Trends</string>
+<!--    <string name="exam">Quiz Yourself</string>-->
+    <string name="exam">Quiz</string>
+<!--    <string name="analysis">Accident Trends</string>-->
+    <string name="analysis">Trends</string>
 
     <!--  slang heading for each page  -->
     <string name="home_page_slang_1">Preparing you for safer food deliveries on bicycle in Victoria</string>
