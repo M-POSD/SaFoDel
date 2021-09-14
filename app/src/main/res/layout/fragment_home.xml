@@ -26,120 +26,140 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3.5"
+                android:layout_weight="4"
                 android:background="@color/white"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <androidx.coordinatorlayout.widget.CoordinatorLayout
-                    android:id="@+id/coordinatorLayout"
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center">
+                    android:layout_weight="0.03"
+                    android:visibility="invisible" />
 
-                    <dyanamitechetan.vusikview.VusikView
-                        android:id="@+id/vusik"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.94"
+                    android:layout_marginTop="30dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="10dp">
+
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/coordinatorLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:fallCount="50"
-                        app:fallSpeed="0.3" />
+                        android:layout_gravity="center">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/images"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        <dyanamitechetan.vusikview.VusikView
+                            android:id="@+id/vusik"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:fallCount="50"
+                            app:fallSpeed="0.3" />
 
-                        <ImageView
-                            android:id="@+id/driver"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:scaleX="1"
-                            android:scaleY="1"
-                            android:src="@drawable/wear_nothing"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.497"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/images"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/helmet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="137dp"
-                            android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            android:src="@drawable/helmet"
-                            android:translationY="10dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/driver"
-                            app:layout_constraintEnd_toEndOf="@+id/driver"
-                            app:layout_constraintHorizontal_bias="0.561"
-                            app:layout_constraintStart_toStartOf="@+id/driver"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0" />
+                            <ImageView
+                                android:id="@+id/driver"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:scaleX="1"
+                                android:scaleY="1"
+                                android:src="@drawable/wear_nothing"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.497"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="1.0" />
 
-                        <ImageView
-                            android:id="@+id/backpack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
-                            android:layout_marginEnd="127dp"
-                            android:layout_marginBottom="101dp"
-                            android:scaleX="1"
-                            android:scaleY="1"
-                            android:src="@drawable/backpack_light"
-                            android:translationX="35dp"
-                            android:translationY="11dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/driver"
-                            app:layout_constraintEnd_toEndOf="@+id/driver"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/driver"
-                            app:layout_constraintVertical_bias="0.533" />
+                            <ImageView
+                                android:id="@+id/helmet"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="137dp"
+                                android:scaleX="1.2"
+                                android:scaleY="1.2"
+                                android:src="@drawable/helmet"
+                                android:translationY="10dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/driver"
+                                app:layout_constraintEnd_toEndOf="@+id/driver"
+                                app:layout_constraintHorizontal_bias="0.561"
+                                app:layout_constraintStart_toStartOf="@+id/driver"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="1.0" />
 
-                        <ImageView
-                            android:id="@+id/headlight"
-                            android:layout_width="239dp"
-                            android:layout_height="202dp"
-                            android:alpha="0"
-                            android:scaleX="0.7"
-                            android:scaleY="0.7"
-                            android:src="@drawable/headlight3"
-                            android:translationX="-15dp"
-                            android:visibility="invisible"
-                            app:layout_constraintBottom_toBottomOf="@+id/driver"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.557"
-                            app:layout_constraintStart_toEndOf="@+id/driver"
-                            app:layout_constraintTop_toTopOf="@+id/driver"
-                            app:layout_constraintVertical_bias="0.0" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            <ImageView
+                                android:id="@+id/backpack"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="11dp"
+                                android:layout_marginEnd="127dp"
+                                android:layout_marginBottom="101dp"
+                                android:scaleX="1"
+                                android:scaleY="1"
+                                android:src="@drawable/backpack_light"
+                                android:translationX="35dp"
+                                android:translationY="11dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/driver"
+                                app:layout_constraintEnd_toEndOf="@+id/driver"
+                                app:layout_constraintHorizontal_bias="1.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/driver"
+                                app:layout_constraintVertical_bias="0.533" />
 
-                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                            <ImageView
+                                android:id="@+id/headlight"
+                                android:layout_width="239dp"
+                                android:layout_height="202dp"
+                                android:alpha="0"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:src="@drawable/headlight3"
+                                android:translationX="-15dp"
+                                android:visibility="invisible"
+                                app:layout_constraintBottom_toBottomOf="@+id/driver"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.557"
+                                app:layout_constraintStart_toEndOf="@+id/driver"
+                                app:layout_constraintTop_toTopOf="@+id/driver"
+                                app:layout_constraintVertical_bias="0.0" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.05"
-                android:weightSum="1"
-                android:orientation="horizontal">
+                android:layout_weight="0.03"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:visibility="invisible"
-                    android:layout_weight="0.14"/>
+                    android:layout_weight="0.1"
+                    android:visibility="invisible" />
+
                 <View
+                    android:id="@+id/ground_for_driver"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.72"
-                    android:background="@color/third_green" />
+                    android:layout_weight="0.8"
+                    android:background="@color/black" />
             </LinearLayout>
 
             <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="6.45">
+                android:layout_weight="6">
 
                 <LinearLayout
                     android:layout_width="match_parent"

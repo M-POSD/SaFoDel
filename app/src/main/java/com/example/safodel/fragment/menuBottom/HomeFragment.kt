@@ -561,6 +561,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.backpack.setImageResource(R.drawable.backpack_light)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
+                binding.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
                 setToolbarBasic(toolbar)
             }
@@ -573,6 +574,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.backpack.setImageResource(R.drawable.backpack_dark)
                 binding.helmet.alpha = 0f
                 binding.headlight.alpha = 0f
+                binding.groundForDriver.visibility = View.INVISIBLE
                 startAnimation("night")
                 setToolbarWhite(toolbar)
             }
