@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +36,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var dialog: MaterialDialog
     private lateinit var lineChart: LineChart
     private lateinit var bar: HorizontalBarChart
+    private lateinit var accidentsNumber : TextView
     private var suburbName = "MELBOURNE"
 
     override fun onCreateView(
@@ -51,6 +54,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         val toolbar = binding.toolbar.root
         setToolbarBasic(toolbar)
 
+        // Set text
+        accidentsNumber  = binding.accidentNumber
+
         // Set Chart
         lineChart = binding.lineChart
         bar = binding.barChart
@@ -64,13 +70,19 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         suburbInterface = SuburbClient.getRetrofitService()
 
         // Open page set default value
-        start()
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        start()
+
     }
 
     fun start(){
@@ -124,7 +136,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     dialog.dismiss()
                     val resultList = response.body()?.suburbAccidents
                     if(resultList?.isNotEmpty() == true){
-                        binding.accidentNumber.text = resultList[0].accidents.toString()
+                        accidentsNumber.text = resultList[0].accidents.toString()
                     }
                 } else {
                     Log.i("Error ", "Response failed")
