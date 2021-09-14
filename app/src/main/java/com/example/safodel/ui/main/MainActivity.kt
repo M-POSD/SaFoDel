@@ -85,6 +85,12 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        if(navController.currentDestination?.id != R.id.homeFragment)
+        {
+            super.onBackPressed()
+            return
+        }
+
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
             return
