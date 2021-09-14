@@ -552,7 +552,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    /* -- Hide or Show the crash relative view. -- */
+
+
+
+    /* --
+            UI part - Hide or Show the crash relative view.
+    -- */
     fun changeToNav(){
         mapboxMap.getStyle {
             val bcLayer =  it.getLayer("basic_circle_cayer")
@@ -594,6 +599,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    ///                                  Navigation                                    ////
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     @SuppressWarnings("MissingPermission")
     private fun initNav(){
