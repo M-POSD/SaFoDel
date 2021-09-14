@@ -224,16 +224,15 @@
     <string name="question7_information">Cyclists need to wear a securely fitted and fastened helmet with a mark of compliance with the Australian Standard</string>
     <!--  analysis  -->
 
-    <!--  map  -->
-
     <!--  quiz  -->
     <string name="quiz">QUIZ</string>
-    <string name="quiz_heading">Take a quick quiz to test your understanding</string>
+    <string name="quiz_heading">Start to test your understanding for road rules</string>
     <string name="result">RESULT</string>
     <string name="result_heading_1">Learning rules again</string>
     <string name="result_heading_2">Review rules sometimes</string>
     <string name="result_heading_3">Perfect !!!</string>
 
+    <!--  map  -->
 
     <!--  about app  -->
     <string name="about">ABOUT</string>
