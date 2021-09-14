@@ -118,12 +118,22 @@
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="300dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.05"
-                android:layout_gravity="center"
-                android:background="@color/third_green"/>
+                android:weightSum="1"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.14"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.72"
+                    android:background="@color/third_green" />
+            </LinearLayout>
 
             <ScrollView
                 android:layout_width="wrap_content"
