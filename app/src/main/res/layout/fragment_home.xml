@@ -118,15 +118,22 @@
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>
             </LinearLayout>
 
+            <View
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.05"
+                android:layout_gravity="center"
+                android:background="@color/third_green"/>
+
             <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="6.5">
+                android:layout_weight="6.45">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/primary_green"
+                    android:background="@color/white"
                     android:orientation="vertical"
                     android:paddingBottom="70dp">
 
@@ -139,7 +146,7 @@
                         android:paddingHorizontal="30dp"
                         android:text="@string/home_page_slang_1"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:textColor="@color/white"
+                        android:textColor="@color/primary_green"
                         android:textSize="20dp" />
 
                     <TextView
@@ -150,7 +157,7 @@
                         android:gravity="center"
                         android:text="@string/home_page_slang_2"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:textColor="@color/white"
+                        android:textColor="@color/primary_green"
                         android:textSize="14dp" />
 
                     <include

@@ -27,7 +27,7 @@
             android:layout_gravity="bottom"
             app:labelVisibilityMode="labeled"
             android:theme="@style/NavigationbarBottomStyle"
-            android:background="@color/third_green"
+            android:background="@color/white"
             app:menu="@menu/nav_menu_bottom">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
