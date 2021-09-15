@@ -31,6 +31,7 @@ class EpicsFragment : BasicFragment<FragmentEpicsBinding>(FragmentEpicsBinding::
         val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
         viewPage2.adapter = EpicViewAdapter(fm, lifecycle, 4)
         binding.tabbar.wormDotsIndicatorTabbar.setViewPager2(binding.tabbar.viewPager2)
+
         addTab()
 
         tabLayout.addOnTabSelectedListener(getOnTabSelectedListener())
