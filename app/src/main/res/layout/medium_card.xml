@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:layout_weight="0.4"
+                android:layout_weight="0.35"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:src="@drawable/book" />
@@ -40,7 +40,7 @@
                 android:id="@+id/cardLayout"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
-                android:layout_weight="0.6"
+                android:layout_weight="0.65"
                 android:orientation="vertical"
                 android:weightSum="10"
                 android:paddingBottom="8dp">
@@ -51,11 +51,14 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_height="0dp"
-                    android:layout_weight="8"
+                    android:layout_gravity="center"
+                    android:layout_weight="7.5"
+                    android:gravity="center"
                     android:text="Demo"
                     android:fontFamily="@font/notosansjp_bold"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/black"
+                    android:paddingTop="5dp"
                     android:textSize="18dp" />
 
                 <LinearLayout

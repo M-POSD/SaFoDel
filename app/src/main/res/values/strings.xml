@@ -77,9 +77,9 @@
 
     <!--  epic1  -->
     <string name="epic1_name">Ride Safer</string>
-    <string name="tip1_name_v1">Safety Tips - whilst riding a bicycle</string>
+    <string name="tip1_name_v1">Safety Tips -\nWhilst riding a bicycle</string>
     <string name="tip1_name_v2">Riding a bicycle</string>
-    <string name="tip2_name_v1">Safety Tips - for delivering at night</string>
+    <string name="tip2_name_v1">Safety Tips -\nFor delivering at night</string>
     <string name="tip2_name_v2" >Delivering at night</string>
 
     <string name="tip1_1_title">RIDE CAREFULLY AT INTERSECTIONS</string>
@@ -175,7 +175,7 @@
     <string name="easi_link">https://www.easi.com.au/delivery-user/</string>
 
     <!--  epic5  -->
-    <string name="tip3_name_v1" >Safety Tips - understand road signs</string>
+    <string name="tip3_name_v1" >Safety Tips -\nUnderstand road signs</string>
     <string name="tip3_name_v2" >Understand Road Sign</string>
     <string name="road_sign1_title" >Slippery when wet</string>
     <string name="road_sign1_description" >These signs indicate roads that get particularly slippery in wet weather, cyclists also take care, reducing your speed\nRemember to remain visibility in wet weather, and be careful of tram tracks that can get very slippery</string>
