@@ -49,6 +49,9 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         binding.info1Card.title.text = getString(R.string.info1_name)
         binding.info2Card.title.text = getString(R.string.info2_name)
         binding.info3Card.title.text = getString(R.string.info3_name)
+        binding.info1Card.mediumCardImage.setImageResource(R.drawable.info1)
+        binding.info2Card.mediumCardImage.setImageResource(R.drawable.info2)
+        binding.info3Card.mediumCardImage.setImageResource(R.drawable.info3)
     }
 
     // contents animation slide in from bottom

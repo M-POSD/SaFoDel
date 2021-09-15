@@ -49,6 +49,9 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         binding.gear1Card.title.text = getString(R.string.gear1_name)
         binding.gear2Card.title.text = getString(R.string.gear2_name)
         binding.gear3Card.title.text = getString(R.string.gear3_name)
+        binding.gear1Card.mediumCardImage.setImageResource(R.drawable.gear1)
+        binding.gear2Card.mediumCardImage.setImageResource(R.drawable.checklist)
+        binding.gear3Card.mediumCardImage.setImageResource(R.drawable.gear3)
     }
 
     // contents animation slide in from bottom

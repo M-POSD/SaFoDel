@@ -53,6 +53,9 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         binding.rule1Card.title.text = getString(R.string.in_an_accident1_name)
         binding.rule2Card.title.text = getString(R.string.in_an_accident2_name)
         binding.rule3Card.title.text = getString(R.string.in_an_accident3_name)
+        binding.rule1Card.mediumCardImage.setImageResource(R.drawable.inanaccident1)
+        binding.rule2Card.mediumCardImage.setImageResource(R.drawable.inanaccident2)
+        binding.rule3Card.mediumCardImage.setImageResource(R.drawable.inanaccident3)
     }
 
     // contents animation slide in from bottom
