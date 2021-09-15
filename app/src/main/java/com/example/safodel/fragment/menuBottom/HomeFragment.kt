@@ -468,6 +468,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         val closeSpotlight = View.OnClickListener {
+            binding.homeScrollView.fullScroll(ScrollView.FOCUS_UP)
             spotlight.finish()
             binding.homeCoordinatorLayout1.setAllEnabled(true)
             requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(true)
