@@ -73,7 +73,7 @@
     <string name="sixth_target">Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery</string>
     <string name="seventh_target">Safety-Gear button allows you to find out the cycling gear you need to deliver safe</string>
     <string name="eighth_target">In-an-Accident button allows you to find out the measure for handling the bike accident</string>
-    <string name="ninth_target">Left Menu has\n\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team</string>
+    <string name="ninth_target">Left Menu has\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team</string>
 
     <!--  epic1  -->
     <string name="epic1_name">Ride Safer</string>
