@@ -67,11 +67,13 @@
     <string name="v2">What is SaFoDel?\nWe help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders</string>
     <string name="first_target">Home button allows you to return home page directly</string>
     <string name="second_target">Map button allows you to see the historical accident locations in Victoria with details</string>
-    <string name="third_target">Ride-Safer button allows you to find out how to ride safely while delivering food</string>
-    <string name="fourth_target">Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery</string>
-    <string name="fifth_target">Safety-Gear button allows you to find out the cycling gear you need to deliver safe</string>
-    <string name="sixth_target">In-an-Accident button allows you to find out the measure for handling the bike accident</string>
-    <string name="seventh_target">Left Menu has\n\nQUIZ YOURSELF:\nTest your understanding of road rules while delivering food\n\nACCIDENT TRENDS:\nCheck the trends in historical accident in different suburbs\n\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team</string>
+    <string name="third_target">ACCIDENT-TRENDS button allows to check the trends in historical accident in different suburbs</string>
+    <string name="fourth_target">QUIZ-YOURSELF button allows you to test your understanding of road rules while delivering food</string>
+    <string name="fifth_target">Ride-Safer button allows you to find out how to ride safely while delivering food</string>
+    <string name="sixth_target">Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery</string>
+    <string name="seventh_target">Safety-Gear button allows you to find out the cycling gear you need to deliver safe</string>
+    <string name="eighth_target">In-an-Accident button allows you to find out the measure for handling the bike accident</string>
+    <string name="ninth_target">Left Menu has\n\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team</string>
 
     <!--  epic1  -->
     <string name="epic1_name">Ride Safer</string>

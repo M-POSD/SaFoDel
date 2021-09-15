@@ -7,13 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
-import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.fragment.BasicFragment
-import android.widget.Toast
 import androidx.core.view.children
 import androidx.core.view.doOnPreDraw
 import com.example.safodel.ui.main.MainActivity
@@ -22,7 +19,7 @@ import com.takusemba.spotlight.Target
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.shape.*
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.*
 import com.example.safodel.retrofit.RetrofitClient
 import com.example.safodel.retrofit.RetrofitInterface
 import com.example.safodel.model.WeatherResponse
@@ -291,30 +288,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .build()
         targets.add(v0Target)
 
-//        // v1 target
-//        val v1Root = FrameLayout(requireContext())
-//        val v1 = layoutInflater.inflate(R.layout.layout_target, v1Root)
-//        v1.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v1)
-//
-//        v1.findViewById<ImageView>(R.id.custom_image).visibility = View.VISIBLE
-//        val v1Target = Target.Builder()
-//            .setShape(Circle(0f))
-//            .setOverlay(v1)
-//            .build()
-//        targets.add(v1Target)
-
-        // v2 target
-//        val v2Root = FrameLayout(requireContext())
-//        val v2 = layoutInflater.inflate(R.layout.layout_target, v2Root)
-//        v2.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v2)
-//
-//        v2.findViewById<ImageView>(R.id.custom_image).visibility = View.GONE
-//        val v2Target = Target.Builder()
-//            .setShape(Circle(0f))
-//            .setOverlay(v2)
-//            .build()
-//        targets.add(v2Target)
-
         // first target
         val firstRoot = FrameLayout(requireContext())
         val first = layoutInflater.inflate(R.layout.layout_target, firstRoot)
@@ -342,18 +315,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val thirdRoot = FrameLayout(requireContext())
         val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
         third.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
+
         val thirdTarget = Target.Builder()
-            .setAnchor(binding.epicCard1.scCard)
-            .setShape(
-                RoundedRectangle(
-                    (view?.height ?: 2000) / 7.toFloat(),
-                    (view?.width ?: 1000) / 2.toFloat(),
-                    10f
-                )
-            )
+            .setAnchor(requireActivity().findViewById<View>(R.id.navAnalysis))
+            .setShape(Circle(120f))
             .setOverlay(third)
             .build()
-
         targets.add(thirdTarget)
 
         // fourth target
@@ -362,14 +329,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fourth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fourth_target)
 
         val fourthTarget = Target.Builder()
-            .setAnchor(binding.epicCard2.scCard)
-            .setShape(
-                RoundedRectangle(
-                    (view?.height ?: 2000) / 7.toFloat(),
-                    (view?.width ?: 1000) / 2.toFloat(),
-                    10f
-                )
-            )
+            .setAnchor(requireActivity().findViewById<View>(R.id.navExam))
+            .setShape(Circle(120f))
             .setOverlay(fourth)
             .build()
 
@@ -381,11 +342,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
 
         val fifthTarget = Target.Builder()
-            .setAnchor(binding.epicCard3.scCard)
+            .setAnchor(binding.epicCard1.scCard)
             .setShape(
                 RoundedRectangle(
-                    (view?.height ?: 2000) / 7.toFloat(),
-                    (view?.width ?: 1000) / 2.toFloat(),
+                    binding.epicCard1.scCard.height * 1.2.toFloat(),
+                    binding.epicCard1.scCard.width* 1.2.toFloat(),
                     10f
                 )
             )
@@ -400,11 +361,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
 
         val sixthTarget = Target.Builder()
-            .setAnchor(binding.epicCard4.scCard)
+            .setAnchor(binding.homePageSlang2)
             .setShape(
                 RoundedRectangle(
-                    (view?.height ?: 2000) / 7.toFloat(),
-                    (view?.width ?: 1000) / 2.toFloat(),
+                    binding.epicCard2.scCard.height * 1.2.toFloat(),
+                    binding.epicCard2.scCard.width* 1.2.toFloat(),
                     10f
                 )
             )
@@ -418,15 +379,52 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
         seventh.findViewById<TextView>(R.id.custom_text).text = getString(R.string.seventh_target)
 
-        seventh.findViewById<TextView>(R.id.next_target).alpha = 0f
         val seventhTarget = Target.Builder()
-            .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))   // get the image view position
-            .setShape(Circle(110f))
+            .setAnchor(binding.epicCard1.scCard)
+            .setShape(
+                RoundedRectangle(
+                    binding.epicCard3.scCard.height * 1.2.toFloat(),
+                    binding.epicCard3.scCard.width* 1.2.toFloat(),
+                    10f
+                )
+            )
             .setOverlay(seventh)
             .build()
-//            .setEffect(RippleEffect(110f, 200f, argb(30, 124, 255, 90)))
 
         targets.add(seventhTarget)
+
+        // eighth target
+        val eighthRoot = FrameLayout(requireContext())
+        val eighth = layoutInflater.inflate(R.layout.layout_target, eighthRoot)
+        eighth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.eighth_target)
+
+        val eighthTarget = Target.Builder()
+            .setAnchor(binding.epicCard2.scCard)
+            .setShape(
+                RoundedRectangle(
+                    binding.epicCard4.scCard.height * 1.2.toFloat(),
+                    binding.epicCard4.scCard.width* 1.2.toFloat(),
+                    10f
+                )
+            )
+            .setOverlay(eighth)
+            .build()
+
+        targets.add(eighthTarget)
+
+        // ninth target
+        val ninthRoot = FrameLayout(requireContext())
+        val ninth = layoutInflater.inflate(R.layout.layout_target, ninthRoot)
+        ninth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.ninth_target)
+
+        ninth.findViewById<TextView>(R.id.next_target).alpha = 0f
+        val ninthTarget = Target.Builder()
+            .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))   // get the image view position
+            .setShape(Circle(110f))
+            .setOverlay(ninth)
+            .build()
+
+        targets.add(ninthTarget)
 
         // create spotlight
         val spotlight = Spotlight.Builder(requireActivity())
@@ -460,6 +458,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.homeCoordinatorLayout1.setAllEnabled(false)
         requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(false)
         requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(false)
+        requireActivity().findViewById<View>(R.id.navExam).setAllEnabled(false)
+        requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(false)
 
         spotlight.start()
 
@@ -472,21 +472,24 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             binding.homeCoordinatorLayout1.setAllEnabled(true)
             requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(true)
             requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(true)
+            requireActivity().findViewById<View>(R.id.navExam).setAllEnabled(true)
+            requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(true)
         }
 
         v0.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-//        v1.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-//        v2.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        fifth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        fifth.findViewById<View>(R.id.next_target).setOnClickListener {
+            binding.homeScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+            spotlight.next()
+        }
         sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        seventh.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        eighth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
         v0.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        v1.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        v2.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
@@ -494,6 +497,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         sixth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         seventh.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        eighth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        ninth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
 
     }
 
