@@ -31,14 +31,9 @@ class WelcomeSafoDelFragment: Fragment() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.welcomeInformation1.image, "translationX", 100f, 0f)
         var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.welcomeInformation1.image, "alpha", 0f, 1f)
-//        var objectAnimator3: ObjectAnimator =
-//            ObjectAnimator.ofFloat(binding.startButton.button, "alpha", 0f, 1f)
-//        var objectAnimator4: ObjectAnimator =
-//            ObjectAnimator.ofFloat(binding.learningMode, "alpha", 0f, 1f)
+
         objectAnimator1.duration = 1300
         objectAnimator2.duration = 1300
-//        objectAnimator3.duration = 500
-//        objectAnimator4.duration = 500
 
         val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator1).with(objectAnimator2)

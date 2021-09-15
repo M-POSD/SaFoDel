@@ -16,10 +16,10 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_marginHorizontal="4dp"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.35"
             android:theme="@style/NavigationbarBottomStyle"
             app:tabBackground="@drawable/tab_color_selector"
             app:tabGravity="fill"
@@ -29,11 +29,27 @@
             app:tabTextAppearance="@style/TabStyle"
             app:tabTextColor="@color/deep_green" />
 
+        <View android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"/>
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/worm_dots_indicator_tabbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:dotsColor="@color/deep_green"
+            app:dotsStrokeColor="@color/green_blue"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="12dp"
+            app:dotsSpacing="4dp"
+            app:dotsStrokeWidth="2dp"
+            />
+
         <TextView
             android:id="@+id/notification"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.65"
+            android:layout_weight="0.5"
             android:fontFamily="@font/notosansjp_bold"
             android:gravity="center"
             android:paddingHorizontal="20dp"
