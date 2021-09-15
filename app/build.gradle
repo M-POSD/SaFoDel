@@ -103,7 +103,7 @@ dependencies {
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-
-
+    // Page indicator view
+    implementation 'com.tbuonomo:dotsindicator:4.2'
 
 }

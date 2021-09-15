@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="10"
+    tools:context=".fragment.safodelStart.WelcomeSafoDelFragment">
+
+    <include android:id="@+id/welcome_information_1"
+        layout="@layout/fragment_safodel_information1"/>
+
+    <include android:id="@+id/welcome_information_2"
+        layout="@layout/fragment_safodel_information2"/>
+</LinearLayout>

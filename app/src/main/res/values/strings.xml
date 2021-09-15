@@ -23,8 +23,12 @@
 
     <!--  start activity  -->
     <string name="SaFoDel" translatable="false">SaFoDel</string>
-    <string name="start_subtitle" translatable="false">Alert Today, Alive Tomorrow</string>
+    <string name="SaFo" translatable="false">SaFo</string>
+    <string name="Del" translatable="false">Del</string>
+    <string name="welcome_to">WELCOME TO</string>
+    <string name="start_subtitle" translatable="false">YOUR SAFE FOOD\n DELIVERY PARTNER</string>
     <string name="learning_mode">LEARNING MODE</string>
+
 
     <!--  home navigation  -->
     <string name="home">Home</string>
@@ -60,7 +64,7 @@
     <!--  spotlight description  -->
     <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\nClick Next for the next step\nClick Close for leaving this mode</string>
     <string name="v1">Food delivery riders are not given enough safety training and local traffic knowledge, making them unacceptably vulnerable</string>
-    <string name="v2">What is SaFoDel?\nWe help you prepare for a safe food delivery experience on a bike. Currently, our services are focused on the Victorian riders\n\nFollowing, all functions on home page will be introduced</string>
+    <string name="v2">What is SaFoDel?\nWe help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders</string>
     <string name="first_target">Home button allows you to return home page directly</string>
     <string name="second_target">Map button allows you to see the historical accident locations in Victoria with details</string>
     <string name="third_target">Ride-Safer button allows you to find out how to ride safely while delivering food</string>

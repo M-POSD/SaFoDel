@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/welcome_information1_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="50dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/home_activity_image" />
+
+        <TextView
+            android:id="@+id/subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/notosansjp_medium"
+            android:gravity="center"
+            android:text="@string/welcome_to"
+            android:textColor="@color/third_green"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="-20dp">
+
+            <TextView
+                android:id="@+id/safo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster_two_bold_italic"
+                android:gravity="center"
+                android:text="@string/SaFo"
+                android:textColor="@color/primary_green"
+                android:textSize="60dp" />
+
+            <TextView
+                android:id="@+id/del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster_two_bold_italic"
+                android:gravity="center"
+                android:text="@string/Del"
+                android:textColor="@color/wrong_border_color"
+                android:textSize="60dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/notosansjp_medium"
+            android:gravity="center"
+            android:paddingHorizontal="40dp"
+            android:text="@string/start_subtitle"
+            android:textColor="@color/secondary_green"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+</LinearLayout>

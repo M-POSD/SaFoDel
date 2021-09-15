@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:attrs="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="10"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="60dp"
-        android:layout_marginRight="50dp"
-        android:alpha="0"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:src="@drawable/home_activity_image" />
-
-    <TextView
-        android:id="@+id/safodel"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/start_viewPager2"
         android:layout_width="match_parent"
-        android:layout_height="92dp"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="150dp"
-        android:fontFamily="@font/notosansjp_black"
-        android:gravity="center"
-        android:text="@string/SaFoDel"
-        android:textColor="@color/primary_green"
-        android:textSize="45dp" />
+        android:layout_height="0dp"
+        android:layout_below="@id/linearLayout"
+        android:layout_weight="7.5"
+        android:background="@color/white" />
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/safodel"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/subtitle"
-            android:layout_width="match_parent"
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/worm_dots_indicator"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/notosansjp_bold"
-            android:gravity="center"
-            android:text="@string/start_subtitle"
-            android:textColor="@color/primary_green"
-            android:textSize="20dp" />
+            android:layout_gravity="center"
+            app:dotsColor="@color/green_blue"
+            app:dotsStrokeColor="@color/light_green"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="16dp"
+            app:dotsSpacing="4dp"
+            app:dotsStrokeWidth="2dp"
+            />
+
+<!--        <include layout="@layout/horizontal_scrolling_icon"/>-->
 
         <include
             android:id="@+id/start_button"
@@ -69,4 +60,4 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

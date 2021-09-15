@@ -291,29 +291,29 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .build()
         targets.add(v0Target)
 
-        // v1 target
-        val v1Root = FrameLayout(requireContext())
-        val v1 = layoutInflater.inflate(R.layout.layout_target, v1Root)
-        v1.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v1)
-
-        v1.findViewById<ImageView>(R.id.custom_image).visibility = View.VISIBLE
-        val v1Target = Target.Builder()
-            .setShape(Circle(0f))
-            .setOverlay(v1)
-            .build()
-        targets.add(v1Target)
+//        // v1 target
+//        val v1Root = FrameLayout(requireContext())
+//        val v1 = layoutInflater.inflate(R.layout.layout_target, v1Root)
+//        v1.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v1)
+//
+//        v1.findViewById<ImageView>(R.id.custom_image).visibility = View.VISIBLE
+//        val v1Target = Target.Builder()
+//            .setShape(Circle(0f))
+//            .setOverlay(v1)
+//            .build()
+//        targets.add(v1Target)
 
         // v2 target
-        val v2Root = FrameLayout(requireContext())
-        val v2 = layoutInflater.inflate(R.layout.layout_target, v2Root)
-        v2.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v2)
-
-        v2.findViewById<ImageView>(R.id.custom_image).visibility = View.GONE
-        val v2Target = Target.Builder()
-            .setShape(Circle(0f))
-            .setOverlay(v2)
-            .build()
-        targets.add(v2Target)
+//        val v2Root = FrameLayout(requireContext())
+//        val v2 = layoutInflater.inflate(R.layout.layout_target, v2Root)
+//        v2.findViewById<TextView>(R.id.custom_text).text = getString(R.string.v2)
+//
+//        v2.findViewById<ImageView>(R.id.custom_image).visibility = View.GONE
+//        val v2Target = Target.Builder()
+//            .setShape(Circle(0f))
+//            .setOverlay(v2)
+//            .build()
+//        targets.add(v2Target)
 
         // first target
         val firstRoot = FrameLayout(requireContext())
@@ -475,8 +475,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         v0.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        v1.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        v2.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+//        v1.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+//        v2.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
@@ -485,8 +485,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
         v0.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-        v1.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-        v2.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//        v1.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//        v2.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)

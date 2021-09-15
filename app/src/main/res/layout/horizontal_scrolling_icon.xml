@@ -3,12 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_margin="10dp"
     android:gravity="center">
     <ImageView
+        android:id="@+id/image_position_1"
+        android:layout_marginHorizontal="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/black_circle_filled"/>
     <ImageView
+        android:id="@+id/image_position_2"
+        android:layout_marginHorizontal="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/black_circle_unfilled"/>
