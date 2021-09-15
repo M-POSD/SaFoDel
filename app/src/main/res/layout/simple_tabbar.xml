@@ -39,7 +39,7 @@
             android:layout_gravity="center"
             app:dotsColor="@color/deep_green"
             app:dotsStrokeColor="@color/green_blue"
-            app:dotsCornerRadius="8dp"
+            app:dotsCornerRadius="4dp"
             app:dotsSize="12dp"
             app:dotsSpacing="4dp"
             app:dotsStrokeWidth="2dp"
