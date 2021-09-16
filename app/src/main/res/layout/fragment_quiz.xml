@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.menuLeft.QuizFragment">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +13,6 @@
         android:layout_gravity="center"
         android:weightSum="10"
         android:orientation="vertical">
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -36,8 +33,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4.5"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             app:cardCornerRadius="30dp"
             android:backgroundTint="@color/primary_green"
             app:cardElevation="5dp">
@@ -53,29 +50,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
+                    android:layout_marginHorizontal="20dp"
                     android:fontFamily="@font/notosansjp_bold"
                     android:gravity="center"
                     android:text="@string/quiz_heading"
                     android:textColor="@color/white"
-                    android:textSize="23dp" />
+                    android:textSize="20dp" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"/>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/startBtn"
-                    android:layout_margin="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3.5"
-                    android:backgroundTint="@color/white"
-                    android:elevation="5dp"
-                    android:fontFamily="@font/notosansjp_black"
-                    android:text="@string/start_button"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/primary_green"
-                    android:textSize="20dp"
-                    app:cornerRadius="30dp" />
+                    android:layout_weight="4.7"/>
+
+                <include android:id="@+id/startBtn"
+                    layout="@layout/medium_btn"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

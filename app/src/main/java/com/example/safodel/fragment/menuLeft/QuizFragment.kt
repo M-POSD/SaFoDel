@@ -36,7 +36,7 @@ class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inf
     }
 
     private fun configBtnOnClickListener() {
-        binding.startBtn.setOnClickListener {
+        binding.startBtn.button.setOnClickListener {
             findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
         }
     }

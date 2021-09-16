@@ -232,7 +232,7 @@
 
     <!--  quiz  -->
     <string name="quiz">QUIZ</string>
-    <string name="quiz_heading">Start to test your understanding for road rules</string>
+    <string name="quiz_heading">Test your understanding for road rules</string>
     <string name="result">RESULT</string>
     <string name="result_heading_1">Learning rules again</string>
     <string name="result_heading_2">Review rules sometimes</string>

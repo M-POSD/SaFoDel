@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.menuLeft.quiz.QuizResultFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="30dp"
-            android:layout_weight="1.2"
+            android:layout_weight="1.5"
             android:fontFamily="@font/notosansjp_black"
             android:gravity="center"
             android:text="@string/result"
@@ -35,16 +34,16 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="5"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_weight="4.5"
             android:background="@color/primary_green"
             app:cardCornerRadius="30dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/primary_green"
                 android:padding="16dp"
@@ -54,7 +53,7 @@
                     android:id="@+id/image"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="4"
                     android:layout_gravity="center"
                     android:scaleX="1"
                     android:scaleY="1"
@@ -64,7 +63,7 @@
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="2.3"
                     android:fontFamily="@font/notosansjp_bold"
                     android:gravity="center"
                     android:text="Champion"
@@ -75,7 +74,8 @@
                     android:id="@+id/level"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1.8"
+                    android:layout_marginTop="-10dp"
                     android:fontFamily="@font/notosansjp_bold"
                     android:textColor="@color/white"
                     android:gravity="center"
@@ -85,48 +85,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3"
-                    android:weightSum="10"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/return_button"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:backgroundTint="@color/white"
-                        android:elevation="5dp"
-                        android:fontFamily="@font/notosansjp_black"
-                        android:gravity="center"
-                        android:text="@string/again_button"
-                        android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:textColor="@color/primary_green"
-                        android:textSize="14dp"
-                        app:cornerRadius="30dp" />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/rule_info_button"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:backgroundTint="@color/primary_green"
-                        android:elevation="5dp"
-                        android:fontFamily="@font/notosansjp_black"
-                        android:gravity="center"
-                        android:text="@string/rule_info_button"
-                        android:visibility="gone"
-                        android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"
-                        app:cornerRadius="30dp" />
-                </LinearLayout>
+                <include layout="@layout/medium_btn"
+                    android:id="@+id/return_button"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

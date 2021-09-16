@@ -35,6 +35,8 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
     }
 
     private fun configDefaultView() {
+        binding.returnButton.button.text = getString(R.string.again_button)
+
         val args = getArgument()
         val accuracy = args[0].toFloat() / args[1].toFloat()
         binding.level.text = "${args[0]} / ${args[1]}"
@@ -55,7 +57,7 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
     }
 
     private fun configBtnOnClickListener() {
-        binding.returnButton.setOnClickListener {
+        binding.returnButton.button.setOnClickListener {
             findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
         }
     }
