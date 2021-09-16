@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/snow"
     android:orientation="vertical">
 
     <LinearLayout
@@ -64,7 +65,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="75dp"
             android:scrollbars="vertical" />
     </LinearLayout>
 </LinearLayout>

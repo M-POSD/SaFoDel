@@ -28,6 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
+import androidx.core.widget.NestedScrollView
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -85,6 +86,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         } else {
             configTheme("light")
         }
+        configScrollingListener()
 
         isBeginnerMode = false
 
@@ -152,17 +154,28 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // add animation for the individual image
     private fun imageAnimations() {
         var objectAnimator1: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.homePageImages.backpack, "translationX", -100f, binding.homePageImages.backpack.translationX)
+            ObjectAnimator.ofFloat(
+                binding.homePageImages.backpack,
+                "translationX",
+                -100f,
+                binding.homePageImages.backpack.translationX
+            )
         Log.d("height", binding.homeFragmentXML.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.homePageImages.backpack, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.homePageImages.helmet, "translationY", -120f, binding.homePageImages.helmet.translationY)
+            ObjectAnimator.ofFloat(
+                binding.homePageImages.helmet,
+                "translationY",
+                -120f,
+                binding.homePageImages.helmet.translationY
+            )
         Log.d("width", binding.homeFragmentXML.height.toString())
         var objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.homePageImages.helmet, "alpha", 0f, 1f)
         var objectAnimator5: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.homePageImages.headlight, "alpha", 0f, 1f).setDuration(500)
+            ObjectAnimator.ofFloat(binding.homePageImages.headlight, "alpha", 0f, 1f)
+                .setDuration(500)
 
         animatorSetLight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
             .before(objectAnimator4)
@@ -208,6 +221,26 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val spEditor = sharedPref.edit()
         spEditor.putString("epicPosition", "" + position)
         spEditor.apply()
+    }
+
+    private fun configScrollingListener() {
+        if (binding.homeScrollView!=null) {
+            Log.d("configScrollingListener", binding.homeScrollView.toString())
+            binding.homeScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                if (scrollY > oldScrollY) {
+                    Log.d("scroll down", "Scroll DOWN")
+                }
+                if (scrollY < oldScrollY) {
+                    Log.d("scroll up", "Scroll UP")
+                }
+//                if (scrollY == 0) {
+//                    Log.i("top scroll", "TOP SCROLL")
+//                }
+//                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
+//                    Log.i("bottom scroll", "BOTTOM SCROLL")
+//                }
+            })
+        }
     }
 
     // config onClickListener for navigation
@@ -347,7 +380,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .setShape(
                 RoundedRectangle(
                     binding.homepageButtonLayout.epicCard1.scCard.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard1.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard1.scCard.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -367,7 +400,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .setShape(
                 RoundedRectangle(
                     binding.homepageButtonLayout.epicCard2.scCard.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard2.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard2.scCard.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -377,8 +410,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         targets.add(sixthTarget)
 
 
-        val height =  (binding.homepageButtonLayout.epicCard4.scCard.height
-                       - binding.homepageButtonLayout.epicCard4.scCard.top*2).toFloat()
+        val height = (binding.homepageButtonLayout.epicCard4.scCard.height
+                - binding.homepageButtonLayout.epicCard4.scCard.top * 2).toFloat()
 
         // seventh target
         val seventhRoot = FrameLayout(requireContext())
@@ -386,11 +419,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         seventh.findViewById<TextView>(R.id.custom_text).text = getString(R.string.seventh_target)
 
         val seventhTarget = Target.Builder()
-            .setAnchor((binding.root.width/2).toFloat(),(requireActivity().findViewById<View>(R.id.bottom_navigation).top - height*3))
+            .setAnchor(
+                (binding.root.width / 2).toFloat(),
+                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height * 3)
+            )
             .setShape(
                 RoundedRectangle(
                     binding.homepageButtonLayout.epicCard3.scCard.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard3.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard3.scCard.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -400,7 +436,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         targets.add(seventhTarget)
 
 
-
         // eighth target
         val eighthRoot = FrameLayout(requireContext())
         val eighth = layoutInflater.inflate(R.layout.layout_target, eighthRoot)
@@ -408,11 +443,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
 
         val eighthTarget = Target.Builder()
-            .setAnchor((binding.root.width/2).toFloat(),(requireActivity().findViewById<View>(R.id.bottom_navigation).top - height))
+            .setAnchor(
+                (binding.root.width / 2).toFloat(),
+                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height)
+            )
             .setShape(
                 RoundedRectangle(
                     binding.homepageButtonLayout.epicCard4.scCard.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard4.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard4.scCard.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -486,24 +524,25 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(true)
         }
 
-        v0.findViewById<View>(R.id.next_target).setOnClickListener{
-            binding.homeScrollView.scrollTo(0,0)
+        v0.findViewById<View>(R.id.next_target).setOnClickListener {
+            binding.homeScrollView.scrollTo(0, 0)
             spotlight.next()
         }
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        var scroll = binding.homepageButtonLayout.epicCard1.scCard.top + binding.homepageButtonLayout.epicCard1.scCard.bottom
+        var scroll =
+            binding.homepageButtonLayout.epicCard1.scCard.top + binding.homepageButtonLayout.epicCard1.scCard.bottom
         fifth.findViewById<View>(R.id.next_target).setOnClickListener {
-            binding.homeScrollView.scrollTo(0,scroll)
+            binding.homeScrollView.scrollTo(0, scroll)
             spotlight.next()
         }
         sixth.findViewById<View>(R.id.next_target).setOnClickListener {
             binding.homeScrollView.fullScroll(ScrollView.FOCUS_DOWN)
             spotlight.next()
         }
-        seventh.findViewById<View>(R.id.next_target).setOnClickListener{
+        seventh.findViewById<View>(R.id.next_target).setOnClickListener {
             spotlight.next()
         }
         eighth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)

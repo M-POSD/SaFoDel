@@ -4,7 +4,7 @@
     android:id="@+id/homepage_app_bar"
     android:layout_width="match_parent"
     android:layout_height="300dp"
-    android:background="@color/white"
+    android:background="@color/snow"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         app:contentScrim="@null"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        app:statusBarScrim="@android:color/transparent"
+        app:statusBarScrim="@color/snow"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -31,22 +31,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:layout_weight="9.9"
-                android:fitsSystemWindows="true">
+                android:layout_weight="9.9">
 
                 <dyanamitechetan.vusikview.VusikView
                     android:id="@+id/vusik"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:fallCount="50"
-                    app:fallSpeed="0.3"
-                    android:fitsSystemWindows="true"/>
+                    app:fallSpeed="0.3"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/images"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="true">
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/driver"
@@ -120,8 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="1"
-                android:fitsSystemWindows="true">
+                android:weightSum="1">
 
                 <TextView
                     android:layout_width="0dp"

@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="10"
+    android:fitsSystemWindows="true"
+    android:background="@color/snow"
     android:orientation="vertical">
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        />
+        android:layout_weight="0.5" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
         android:layout_marginVertical="50dp"
         android:scaleX="2"
         android:scaleY="2"
-        android:src="@drawable/food_map" />
+        android:src="@drawable/food_map_without_background" />
 
     <TextView
         android:id="@+id/subtitle"

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="horizontal"
+    android:background="@color/snow"
     android:weightSum="1">
 
     <com.google.android.material.button.MaterialButton
@@ -13,12 +14,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_weight="0.6"
-        android:backgroundTint="@color/primary_green"
+        android:backgroundTint="@color/white"
         android:elevation="5dp"
         android:fontFamily="@font/notosansjp_bold"
         android:text="START"
         android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textColor="@color/white"
+        android:textColor="@color/primary_green"
         android:textSize="14dp"
         android:padding="5dp"
         app:cornerRadius="50dp" />

@@ -7,32 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:fitsSystemWindows="true"
     tools:context=".fragment.menuBottom.HomeFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/homeCoordinatorLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:fitsSystemWindows="true">
+        android:clickable="true">
 
         <include
             android:id="@+id/home_page_images"
             layout="@layout/homepage_images" />
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/home_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="90dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <include
-                android:id="@+id/homepage_button_layout"
-                layout="@layout/homepage_button_layout" />
-
-        </androidx.core.widget.NestedScrollView>
 
         <include
             android:id="@+id/toolbar"
@@ -90,6 +75,21 @@
                 android:padding="1dp"
                 android:src="@drawable/ic_baseline_dark_mode" />
         </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/home_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="75dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <include
+                android:id="@+id/homepage_button_layout"
+                layout="@layout/homepage_button_layout" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

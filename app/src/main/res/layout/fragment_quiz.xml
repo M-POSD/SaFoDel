@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primary_green"
+        android:background="@color/snow"
         android:layout_gravity="center"
         android:weightSum="10"
         android:orientation="vertical">
@@ -29,7 +29,7 @@
             android:fontFamily="@font/notosansjp_black"
             android:gravity="center"
             android:text="@string/quiz"
-            android:textColor="@color/white"
+            android:textColor="@color/primary_green"
             android:textSize="30dp" />
 
         <androidx.cardview.widget.CardView
@@ -38,8 +38,8 @@
             android:layout_weight="4.5"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@color/white"
             app:cardCornerRadius="30dp"
+            android:backgroundTint="@color/primary_green"
             app:cardElevation="5dp">
 
             <LinearLayout
@@ -56,7 +56,7 @@
                     android:fontFamily="@font/notosansjp_bold"
                     android:gravity="center"
                     android:text="@string/quiz_heading"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="23dp" />
                 <View
                     android:layout_width="match_parent"
@@ -68,12 +68,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="3.5"
-                    android:backgroundTint="@color/primary_green"
+                    android:backgroundTint="@color/white"
                     android:elevation="5dp"
                     android:fontFamily="@font/notosansjp_black"
                     android:text="@string/start_button"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
+                    android:textColor="@color/primary_green"
                     android:textSize="20dp"
                     app:cornerRadius="30dp" />
             </LinearLayout>

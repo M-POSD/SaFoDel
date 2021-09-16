@@ -28,7 +28,7 @@
             app:labelVisibilityMode="labeled"
             app:elevation="0dp"
             android:theme="@style/NavigationbarBottomStyle"
-            android:background="@color/white"
+            android:background="@color/snow"
             app:menu="@menu/nav_menu_bottom">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
