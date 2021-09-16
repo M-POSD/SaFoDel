@@ -23,8 +23,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/simple_toolbar"
-            app:layout_collapseMode="pin" />
+            layout="@layout/simple_toolbar" />
 
         <LinearLayout
             android:id="@+id/light_mode_layout"
