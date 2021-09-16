@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="snow">#FFFFFB</color>
+    <color name="snow2">#FBFBF7</color>
     <color name="skin">#ffd9cc</color>
 <!--    <color name="gray">#e1e1ea</color>-->
     <color name="gray">#8c8c8c</color>  <!-- 95% -->
@@ -19,11 +21,14 @@
     <color name="green_blue">#50C2C9</color>
     <color name="green">#70C8A1</color>
     <color name="yellow">#FCFF71</color>
+    <color name="secondary_yellow">#FFD371</color>
     <color name="darkSky">#161b36</color>
 
     <color name="primary_green">#5DBE8A</color>
-    <color name="secondary_green">#24AC31</color>
-    <color name="third_green">#8AD0AB</color>
+<!--    <color name="secondary_green">#24AC31</color>-->
+<!--    <color name="third_green">#8AD0AB</color>-->
+    <color name="secondary_green">#5DBE8A</color>
+    <color name="third_green">#5DBE8A</color>
     <color name="red">#ff0000</color>
     <color name="dark">#363A43</color>
     <color name="gray2">#7A8089</color>

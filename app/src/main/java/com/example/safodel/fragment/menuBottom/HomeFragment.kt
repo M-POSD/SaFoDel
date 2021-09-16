@@ -114,18 +114,18 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // set up default text view
     private fun configDefaultTextView() {
-        binding.epicCard1.scEditText.text = getString(R.string.epic1_name)
-        binding.epicCard2.scEditText.text = getString(R.string.epic2_name)
-        binding.epicCard3.scEditText.text = getString(R.string.epic3_name)
-        binding.epicCard4.scEditText.text = getString(R.string.epic4_name)
+        binding.homepageButtonLayout.epicCard1.scEditText.text = getString(R.string.epic1_name)
+        binding.homepageButtonLayout.epicCard2.scEditText.text = getString(R.string.epic2_name)
+        binding.homepageButtonLayout.epicCard3.scEditText.text = getString(R.string.epic3_name)
+        binding.homepageButtonLayout.epicCard4.scEditText.text = getString(R.string.epic4_name)
     }
 
     // set up default image view
     private fun configDefaultImageView() {
-        binding.epicCard1.scImageView.setImageResource(R.drawable.tip)
-        binding.epicCard2.scImageView.setImageResource(R.drawable.delivery_on_ebike)
-        binding.epicCard3.scImageView.setImageResource(R.drawable.safety_gear)
-        binding.epicCard4.scImageView.setImageResource(R.drawable.in_an_accident)
+        binding.homepageButtonLayout.epicCard1.scImageView.setImageResource(R.drawable.tip)
+        binding.homepageButtonLayout.epicCard2.scImageView.setImageResource(R.drawable.delivery_on_ebike)
+        binding.homepageButtonLayout.epicCard3.scImageView.setImageResource(R.drawable.safety_gear)
+        binding.homepageButtonLayout.epicCard4.scImageView.setImageResource(R.drawable.in_an_accident)
     }
 
     // raining animation
@@ -134,17 +134,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         if (isInitialRainingAnimation) {
             isInitialRainingAnimation = false
             isRaining = true
-            binding.vusik.setImages(rainingList).start()
-            binding.vusik.startNotesFall()
+            binding.homePageImages.vusik.setImages(rainingList).start()
+            binding.homePageImages.vusik.startNotesFall()
         } else {
             if (isRaining) {
                 isRaining = false
-                binding.vusik.pauseNotesFall()
-                binding.vusik.visibility = View.INVISIBLE
+                binding.homePageImages.vusik.pauseNotesFall()
+                binding.homePageImages.vusik.visibility = View.INVISIBLE
             } else {
                 isRaining = true
-                binding.vusik.resumeNotesFall()
-                binding.vusik.visibility = View.VISIBLE
+                binding.homePageImages.vusik.resumeNotesFall()
+                binding.homePageImages.vusik.visibility = View.VISIBLE
             }
         }
     }
@@ -152,17 +152,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // add animation for the individual image
     private fun imageAnimations() {
         var objectAnimator1: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.backpack, "translationX", -100f, binding.backpack.translationX)
+            ObjectAnimator.ofFloat(binding.homePageImages.backpack, "translationX", -100f, binding.homePageImages.backpack.translationX)
         Log.d("height", binding.homeFragmentXML.width.toString())
         var objectAnimator2: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.backpack, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(binding.homePageImages.backpack, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.helmet, "translationY", -120f, binding.helmet.translationY)
+            ObjectAnimator.ofFloat(binding.homePageImages.helmet, "translationY", -120f, binding.homePageImages.helmet.translationY)
         Log.d("width", binding.homeFragmentXML.height.toString())
         var objectAnimator4: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.helmet, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(binding.homePageImages.helmet, "alpha", 0f, 1f)
         var objectAnimator5: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.headlight, "alpha", 0f, 1f).setDuration(500)
+            ObjectAnimator.ofFloat(binding.homePageImages.headlight, "alpha", 0f, 1f).setDuration(500)
 
         animatorSetLight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
             .before(objectAnimator4)
@@ -179,7 +179,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun imagesDrivingAnimation() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                binding.images,
+                binding.homePageImages.images,
                 "translationX",
                 0f,
                 4 * (view?.width ?: 1500) / 5.toFloat()
@@ -188,7 +188,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         Log.d("width", view?.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                binding.images,
+                binding.homePageImages.images,
                 "translationX",
                 -4 * (view?.width ?: 1500) / 5.toFloat(),
                 0f
@@ -212,22 +212,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // config onClickListener for navigation
     private fun configOnClickListener() {
-        binding.epicCard1.scCard.setOnClickListener() {
+        binding.homepageButtonLayout.epicCard1.scCard.setOnClickListener() {
             recordPosition(0)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        binding.epicCard2.scCard.setOnClickListener() {
+        binding.homepageButtonLayout.epicCard2.scCard.setOnClickListener() {
             recordPosition(1)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        binding.epicCard3.scCard.setOnClickListener() {
+        binding.homepageButtonLayout.epicCard3.scCard.setOnClickListener() {
             recordPosition(2)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        binding.epicCard4.scCard.setOnClickListener() {
+        binding.homepageButtonLayout.epicCard4.scCard.setOnClickListener() {
             recordPosition(3)
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
@@ -259,7 +259,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             "night" -> animatorSetNight.start()
         }
 
-        binding.images.setOnClickListener {
+        binding.homePageImages.images.setOnClickListener {
             if (animatorDriving.isRunning) {
                 animatorDriving.cancel()
                 animatorDriving.start()
@@ -343,11 +343,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
 
         val fifthTarget = Target.Builder()
-            .setAnchor(binding.epicCard1.scCard)
+            .setAnchor(binding.homepageButtonLayout.epicCard1.scCard)
             .setShape(
                 RoundedRectangle(
-                    binding.epicCard1.scCard.height * 1.2.toFloat(),
-                    binding.epicCard1.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard1.scCard.height * 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard1.scCard.width* 1.2.toFloat(),
                     10f
                 )
             )
@@ -363,11 +363,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
 
         val sixthTarget = Target.Builder()
-            .setAnchor(binding.epicCard1.scCard)
+            .setAnchor(binding.homepageButtonLayout.epicCard1.scCard)
             .setShape(
                 RoundedRectangle(
-                    binding.epicCard2.scCard.height * 1.2.toFloat(),
-                    binding.epicCard2.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard2.scCard.height * 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard2.scCard.width* 1.2.toFloat(),
                     10f
                 )
             )
@@ -377,8 +377,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         targets.add(sixthTarget)
 
 
-        val height =  (binding.epicCard4.scCard.height
-                       - binding.epicCard4.scCard.top*2).toFloat()
+        val height =  (binding.homepageButtonLayout.epicCard4.scCard.height
+                       - binding.homepageButtonLayout.epicCard4.scCard.top*2).toFloat()
 
         // seventh target
         val seventhRoot = FrameLayout(requireContext())
@@ -389,8 +389,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .setAnchor((binding.root.width/2).toFloat(),(requireActivity().findViewById<View>(R.id.bottom_navigation).top - height*3))
             .setShape(
                 RoundedRectangle(
-                    binding.epicCard3.scCard.height * 1.2.toFloat(),
-                    binding.epicCard3.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard3.scCard.height * 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard3.scCard.width* 1.2.toFloat(),
                     10f
                 )
             )
@@ -411,8 +411,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             .setAnchor((binding.root.width/2).toFloat(),(requireActivity().findViewById<View>(R.id.bottom_navigation).top - height))
             .setShape(
                 RoundedRectangle(
-                    binding.epicCard4.scCard.height * 1.2.toFloat(),
-                    binding.epicCard4.scCard.width* 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard4.scCard.height * 1.2.toFloat(),
+                    binding.homepageButtonLayout.epicCard4.scCard.width* 1.2.toFloat(),
                     10f
                 )
             )
@@ -494,9 +494,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        var scroll = binding.epicCard1.scCard.top + binding.epicCard1.scCard.bottom
+        var scroll = binding.homepageButtonLayout.epicCard1.scCard.top + binding.homepageButtonLayout.epicCard1.scCard.bottom
         fifth.findViewById<View>(R.id.next_target).setOnClickListener {
-
             binding.homeScrollView.scrollTo(0,scroll)
             spotlight.next()
         }
@@ -505,7 +504,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             spotlight.next()
         }
         seventh.findViewById<View>(R.id.next_target).setOnClickListener{
-
             spotlight.next()
         }
         eighth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
@@ -581,26 +579,26 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             "light" -> {
                 binding.darkModeLayout.visibility = View.INVISIBLE
                 binding.lightModeLayout.visibility = View.VISIBLE
-                binding.coordinatorLayout.setBackgroundResource(R.color.white)
-                binding.headlight.visibility = View.INVISIBLE
-                binding.backpack.alpha = 0f
-                binding.backpack.setImageResource(R.drawable.backpack_light)
-                binding.helmet.alpha = 0f
-                binding.headlight.alpha = 0f
-                binding.groundForDriver.visibility = View.VISIBLE
+                binding.homePageImages.coordinatorLayout.setBackgroundResource(R.color.white)
+                binding.homePageImages.headlight.visibility = View.INVISIBLE
+                binding.homePageImages.backpack.alpha = 0f
+                binding.homePageImages.backpack.setImageResource(R.drawable.backpack_light)
+                binding.homePageImages.helmet.alpha = 0f
+                binding.homePageImages.headlight.alpha = 0f
+                binding.homePageImages.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
                 setToolbarBasic(toolbar)
             }
             "night" -> {
                 binding.lightModeLayout.visibility = View.INVISIBLE
                 binding.darkModeLayout.visibility = View.VISIBLE
-                binding.coordinatorLayout.setBackgroundResource(R.color.darkSky)
-                binding.headlight.visibility = View.VISIBLE
-                binding.backpack.alpha = 0f
-                binding.backpack.setImageResource(R.drawable.backpack_dark)
-                binding.helmet.alpha = 0f
-                binding.headlight.alpha = 0f
-                binding.groundForDriver.visibility = View.INVISIBLE
+                binding.homePageImages.coordinatorLayout.setBackgroundResource(R.color.darkSky)
+                binding.homePageImages.headlight.visibility = View.VISIBLE
+                binding.homePageImages.backpack.alpha = 0f
+                binding.homePageImages.backpack.setImageResource(R.drawable.backpack_dark)
+                binding.homePageImages.helmet.alpha = 0f
+                binding.homePageImages.headlight.alpha = 0f
+                binding.homePageImages.groundForDriver.visibility = View.INVISIBLE
                 startAnimation("night")
                 setToolbarWhite(toolbar)
             }
