@@ -1,11 +1,8 @@
 package com.example.safodel.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R
@@ -82,6 +79,34 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
+    }
+
+    /**
+     *  Contain basic nav and light mode two more actions icon
+     */
+    fun setToolbarLightMode(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationOnClickListener {
+            mainActivity.openDrawer()
+        }
+        toolbar.setNavigationIcon(R.drawable.menu_green)
+        toolbar.inflateMenu(R.menu.nav_icon_menu_light_mode)
+    }
+
+    /**
+     *  Contain basic nav and dark mode two more actions icon
+     */
+    fun setToolbarDarkMode(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationOnClickListener {
+            mainActivity.openDrawer()
+        }
+        toolbar.setNavigationIcon(R.drawable.menu_white)
+        toolbar.inflateMenu(R.menu.nav_icon_menu_dark_mode)
     }
 
 

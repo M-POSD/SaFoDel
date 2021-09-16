@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
@@ -42,10 +43,10 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
-        val left_header = binding.leftNavigation.getHeaderView(0)
-        val left_header_text = left_header.findViewById<View>(R.id.left_header_text)
-        left_header_text.isClickable = true
-        left_header_text.setOnClickListener {
+        val leftHeader = binding.leftNavigation.getHeaderView(0)
+        val leftHeaderText = leftHeader.findViewById<View>(R.id.left_header_text)
+        leftHeaderText.isClickable = true
+        leftHeaderText.setOnClickListener {
             binding.drawerLayout.closeDrawers()
         }
 

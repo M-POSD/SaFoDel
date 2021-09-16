@@ -40,6 +40,9 @@
     <string name="exam">Quiz</string>
 <!--    <string name="analysis">Accident Trends</string>-->
     <string name="analysis">Trends</string>
+    <string name="raining">Raining</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
 
     <!--  slang heading for each page  -->
     <string name="home_page_slang_1">Preparing you for safer food deliveries on bicycle in Victoria</string>
@@ -246,5 +249,6 @@
 
     <!--  about developer  -->
     <string name="know_more">KNOW MORE</string>
+
 
 </resources>

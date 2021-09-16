@@ -29,6 +29,8 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 import androidx.core.widget.NestedScrollView
+import android.view.MenuInflater
+import com.example.safodel.databinding.ActivityMainBinding
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -52,6 +54,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private var currentToast: Toast? = null
     private var isRaining = false
     private var isInitialRainingAnimation = true
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
 
     override fun onCreateView(
@@ -77,16 +84,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         configDefaultTextView()
         configDefaultImageView()
         configOnClickListener()
+//        setToolbarBasic(toolbar)
+        toolbar.fitsSystemWindows = true
 
-        setToolbarBasic(toolbar)
         imageAnimations()
         imagesDrivingAnimation()
         if (getCurrentTime() > 18 || getCurrentTime() < 7) {
             configTheme("night")
+
         } else {
             configTheme("light")
         }
-        configScrollingListener()
 
         isBeginnerMode = false
 
@@ -112,6 +120,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.nav_icon_menu_dark_mode, menu)
     }
 
     // set up default text view
@@ -265,23 +279,28 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
         }
 
-        binding.lightMode.setOnClickListener {
-            if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
-                configTheme("night")
-            }
-        }
+        toolbar.setOnMenuItemClickListener{
+            when (it.itemId) {
+                R.id.action_item_two_light -> {
+                    if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
+                        configTheme("light")
 
-        binding.darkMode.setOnClickListener {
-            if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
-                configTheme("light")
-            }
-        }
+                    }
+                    true
+                }
+                R.id.action_item_two_dark -> {
+                    if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
+                        configTheme("night")
 
-        binding.weatherLightMode.setOnClickListener {
-            rainingAnimation()
-        }
-        binding.weatherDarkMode.setOnClickListener {
-            rainingAnimation()
+                    }
+                    true
+                }
+                R.id.action_item_one_dark, R.id.action_item_one_light -> {
+                    rainingAnimation()
+                    true
+                }
+                else ->  false
+            }
         }
     }
 
@@ -616,8 +635,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun configTheme(mode: String) {
         when (mode) {
             "light" -> {
-                binding.darkModeLayout.visibility = View.INVISIBLE
-                binding.lightModeLayout.visibility = View.VISIBLE
+//                binding.darkModeLayout.visibility = View.INVISIBLE
+//                binding.lightModeLayout.visibility = View.VISIBLE
+
                 binding.homePageImages.coordinatorLayout.setBackgroundResource(R.color.white)
                 binding.homePageImages.headlight.visibility = View.INVISIBLE
                 binding.homePageImages.backpack.alpha = 0f
@@ -626,11 +646,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.homePageImages.headlight.alpha = 0f
                 binding.homePageImages.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
-                setToolbarBasic(toolbar)
+                setToolbarLightMode(toolbar)
+//                setToolbarBasic(toolbar)
             }
             "night" -> {
-                binding.lightModeLayout.visibility = View.INVISIBLE
-                binding.darkModeLayout.visibility = View.VISIBLE
+//                binding.lightModeLayout.visibility = View.INVISIBLE
+//                binding.darkModeLayout.visibility = View.VISIBLE
+
                 binding.homePageImages.coordinatorLayout.setBackgroundResource(R.color.darkSky)
                 binding.homePageImages.headlight.visibility = View.VISIBLE
                 binding.homePageImages.backpack.alpha = 0f
@@ -639,7 +661,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 binding.homePageImages.headlight.alpha = 0f
                 binding.homePageImages.groundForDriver.visibility = View.INVISIBLE
                 startAnimation("night")
-                setToolbarWhite(toolbar)
+                setToolbarDarkMode(toolbar)
+//                setToolbarWhite(toolbar)
             }
         }
     }

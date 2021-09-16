@@ -101,6 +101,9 @@
         <entry key="app/src/main/res/layout/small_card.xml" value="0.1676385498046875" />
         <entry key="app/src/main/res/layout/small_cards.xml" value="0.335" />
         <entry key="app/src/main/res/layout/start_button.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/menu/nav_icon_menu.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/nav_icon_menu_dark_mode.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/nav_icon_menu_light_mode.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/nav_menu_bottom.xml" value="0.17324561403508773" />
         <entry key="app/src/main/res/menu/nav_menu_left.xml" value="0.36041666666666666" />
