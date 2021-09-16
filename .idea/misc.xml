@@ -27,8 +27,8 @@
         <entry key="app/src/main/res/layout-v28/fragment_app_intro.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout-v28/fragment_home.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13804457953394123" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18840579710144928" />
-        <entry key="app/src/main/res/layout/activity_start.xml" value="0.20780128984454221" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_start.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/appinfo_about.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/appinfo_audience.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/big_button.xml" value="0.21197916666666666" />
@@ -63,7 +63,7 @@
         <entry key="app/src/main/res/layout/fragment_exam.xml" value="0.24697035051982488" />
         <entry key="app/src/main/res/layout/fragment_exam1.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_gear3.xml" value="0.16847826086956522" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19967173702210847" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
@@ -71,28 +71,20 @@
         <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.1649122807017544" />
         <entry key="app/src/main/res/layout/fragment_quiz_page.xml" value="0.2118421052631579" />
         <entry key="app/src/main/res/layout/fragment_quiz_resault.xml" value="0.1649122807017544" />
-        <entry key="app/src/main/res/layout/fragment_road_sign.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/fragment_safodel.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_safodel_information.xml" value="0.21354166666666666" />
-        <entry key="app/src/main/res/layout/fragment_safodel_information1.xml" value="0.21354166666666666" />
-        <entry key="app/src/main/res/layout/fragment_safodel_information2.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_tip.xml" value="0.2884963768115942" />
         <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.12030075187969924" />
         <entry key="app/src/main/res/layout/fragment_tip2.xml" value="0.2884963768115942" />
-        <entry key="app/src/main/res/layout/fragment_welcome_safodel.xml" value="0.19051974381688813" />
         <entry key="app/src/main/res/layout/group_card_v1.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/group_card_v2.xml" value="0.22239583333333332" />
-        <entry key="app/src/main/res/layout/horizontal_scrolling_icon.xml" value="0.26096491228070173" />
         <entry key="app/src/main/res/layout/items_lga.xml" value="0.2234375" />
-        <entry key="app/src/main/res/layout/large_button.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/left_nav_header.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/medium_btn.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/medium_card.xml" value="0.537109375" />
         <entry key="app/src/main/res/layout/option_and_info.xml" value="0.20989583333333334" />
-        <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.15219298245614035" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
         <entry key="app/src/main/res/layout/small_cards.xml" value="0.10866261398176291" />

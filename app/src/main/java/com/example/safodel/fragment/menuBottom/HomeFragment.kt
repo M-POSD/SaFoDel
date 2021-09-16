@@ -336,6 +336,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         targets.add(fourthTarget)
 
+
         // fifth target
         val fifthRoot = FrameLayout(requireContext())
         val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
@@ -355,13 +356,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         targets.add(fifthTarget)
 
+
         // sixth target
         val sixthRoot = FrameLayout(requireContext())
         val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
         sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
 
         val sixthTarget = Target.Builder()
-            .setAnchor(binding.homePageSlang2)
+            .setAnchor(binding.epicCard1.scCard)
             .setShape(
                 RoundedRectangle(
                     binding.epicCard2.scCard.height * 1.2.toFloat(),
@@ -374,13 +376,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         targets.add(sixthTarget)
 
+
+        val height =  (binding.epicCard4.scCard.height
+                       - binding.epicCard4.scCard.top*2).toFloat()
+
         // seventh target
         val seventhRoot = FrameLayout(requireContext())
         val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
         seventh.findViewById<TextView>(R.id.custom_text).text = getString(R.string.seventh_target)
 
         val seventhTarget = Target.Builder()
-            .setAnchor(binding.epicCard1.scCard)
+            .setAnchor((binding.root.width/2).toFloat(),(requireActivity().findViewById<View>(R.id.bottom_navigation).top - height*3))
             .setShape(
                 RoundedRectangle(
                     binding.epicCard3.scCard.height * 1.2.toFloat(),
@@ -393,13 +399,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         targets.add(seventhTarget)
 
+
+
         // eighth target
         val eighthRoot = FrameLayout(requireContext())
         val eighth = layoutInflater.inflate(R.layout.layout_target, eighthRoot)
         eighth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.eighth_target)
 
+
         val eighthTarget = Target.Builder()
-            .setAnchor(binding.epicCard2.scCard)
+            .setAnchor((binding.root.width/2).toFloat(),(requireActivity().findViewById<View>(R.id.bottom_navigation).top - height))
             .setShape(
                 RoundedRectangle(
                     binding.epicCard4.scCard.height * 1.2.toFloat(),
@@ -477,17 +486,28 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(true)
         }
 
-        v0.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        v0.findViewById<View>(R.id.next_target).setOnClickListener{
+            binding.homeScrollView.scrollTo(0,0)
+            spotlight.next()
+        }
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        var scroll = binding.epicCard1.scCard.top + binding.epicCard1.scCard.bottom
         fifth.findViewById<View>(R.id.next_target).setOnClickListener {
+
+            binding.homeScrollView.scrollTo(0,scroll)
+            spotlight.next()
+        }
+        sixth.findViewById<View>(R.id.next_target).setOnClickListener {
             binding.homeScrollView.fullScroll(ScrollView.FOCUS_DOWN)
             spotlight.next()
         }
-        sixth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        seventh.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        seventh.findViewById<View>(R.id.next_target).setOnClickListener{
+
+            spotlight.next()
+        }
         eighth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
         v0.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
