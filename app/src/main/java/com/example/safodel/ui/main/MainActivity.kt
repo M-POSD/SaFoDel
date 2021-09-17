@@ -208,8 +208,7 @@ class MainActivity : AppCompatActivity() {
      fun getStatusHeight(): Int{
         val rec = Rect()
         getWindow().decorView.getWindowVisibleDisplayFrame(rec)
-        val statusBarHeight = rec.top // this one is 0 ,but bottom is too big.
-        Log.d("Hello this is your dad",statusBarHeight.toString())
+        val statusBarHeight = rec.top
         return statusBarHeight
     }
 }

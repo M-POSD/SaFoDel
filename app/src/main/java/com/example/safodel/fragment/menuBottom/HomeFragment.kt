@@ -105,7 +105,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             // try to get the height of status bar and then marggin top
             val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
             while (toolbarHeight.topMargin == 0)
-                toolbarHeight.topMargin = mainActivity.getStatusHeight() // this always return 0, i don't know why
+                toolbarHeight.topMargin = mainActivity.getStatusHeight()
             toolbar.layoutParams = toolbarHeight
             this.cancel()
         }
