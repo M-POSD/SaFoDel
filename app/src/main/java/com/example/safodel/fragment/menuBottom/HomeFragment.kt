@@ -84,8 +84,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         configDefaultTextView()
         configDefaultImageView()
         configOnClickListener()
-//        setToolbarBasic(toolbar)
-        toolbar.fitsSystemWindows = true
+
 
         imageAnimations()
         imagesDrivingAnimation()
