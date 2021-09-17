@@ -32,6 +32,9 @@ import kotlin.collections.ArrayList
 import androidx.core.widget.NestedScrollView
 import android.view.MenuInflater
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -98,15 +101,21 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         isBeginnerMode = false
 
+        GlobalScope.launch {
+            // try to get the height of status bar and then marggin top
+            val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
+            while (toolbarHeight.topMargin == 0)
+                toolbarHeight.topMargin = mainActivity.getStatusHeight() // this always return 0, i don't know why
+            toolbar.layoutParams = toolbarHeight
+            this.cancel()
+        }
 
-        // try to get the height of status bar and then marggin top
-        val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
-        toolbarHeight.topMargin = mainActivity.getStatusHeight() // this always return 0, i don't know why
-        toolbar.layoutParams = toolbarHeight
+
 
         return binding.root
 
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -121,7 +130,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         }
 
+
+
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -303,6 +316,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 }
                 R.id.action_item_one_dark, R.id.action_item_one_light -> {
                     rainingAnimation()
+
                     true
                 }
                 else ->  false
