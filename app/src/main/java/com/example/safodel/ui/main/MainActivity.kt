@@ -2,13 +2,16 @@ package com.example.safodel.ui.main
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -200,6 +203,14 @@ class MainActivity : AppCompatActivity() {
         val spEditor = sharedPref.edit()
         spEditor.putBoolean("isLearningMode", isLearningMode)
         spEditor.apply()
+    }
+
+     fun getStatusHeight(): Int{
+        val rec = Rect()
+        getWindow().decorView.getWindowVisibleDisplayFrame(rec)
+        val statusBarHeight = rec.top // this one is 0 ,but bottom is too big.
+        Log.d("Hello this is your dad",statusBarHeight.toString())
+        return statusBarHeight
     }
 }
 

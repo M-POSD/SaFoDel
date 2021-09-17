@@ -8,21 +8,8 @@
     android:layout_height="match_parent"
     android:clickable="true"
     tools:context=".fragment.menuBottom.HomeFragment">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
-        android:layout_width="match_parent"
-        android:background="@null"
-        app:elevation="0dp"
-        android:translationZ="0.1dp"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/simple_toolbar"
-                />
 
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/homeCoordinatorLayout1"
@@ -30,10 +17,17 @@
         android:layout_height="match_parent"
         android:clickable="true">
 
+
         <include
             android:id="@+id/home_page_images"
             layout="@layout/homepage_images" />
 
+
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/simple_toolbar"
+                app:layout_collapseMode="pin"/>
 
 
         <androidx.core.widget.NestedScrollView

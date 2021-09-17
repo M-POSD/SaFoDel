@@ -3,6 +3,7 @@ package com.example.safodel.fragment.menuBottom
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -30,7 +31,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import androidx.core.widget.NestedScrollView
 import android.view.MenuInflater
-import com.example.safodel.databinding.ActivityMainBinding
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -96,6 +97,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         isBeginnerMode = false
+
+
+        // try to get the height of status bar and then marggin top
+        val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
+        toolbarHeight.topMargin = mainActivity.getStatusHeight() // this always return 0, i don't know why
+        toolbar.layoutParams = toolbarHeight
 
         return binding.root
 
