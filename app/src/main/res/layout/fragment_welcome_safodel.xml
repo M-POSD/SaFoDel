@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    android:weightSum="10"
     tools:context=".fragment.safodelStart.WelcomeSafoDelFragment">
 
     <include android:id="@+id/welcome_information_1"

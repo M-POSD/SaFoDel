@@ -6,44 +6,27 @@
     android:background="@color/snow"
     android:weightSum="10">
 
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="0.8" />-->
-
-    <TextView
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:fontFamily="@font/notosansjp_black"
-        android:gravity="center"
-        android:paddingHorizontal="30dp"
-        android:text="@string/home_page_slang_1"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textColor="@color/primary_green"
-        android:textSize="20dp" />
+        android:layout_below="@id/linearLayout"
+        android:layout_weight="3.5"
+        android:background="@color/snow" />
 
-    <TextView
-        android:id="@+id/home_page_slang_2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:fontFamily="@font/notosansjp_bold"
-        android:gravity="center"
-        android:text="@string/home_page_slang_2"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textColor="@color/primary_green"
-        android:textSize="14dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2" />
+    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+        android:id="@+id/worm_dots_indicator_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        style="@style/worm_dot_indicator"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7.7"
+        android:layout_weight="6.5"
         android:orientation="vertical">
 
         <include

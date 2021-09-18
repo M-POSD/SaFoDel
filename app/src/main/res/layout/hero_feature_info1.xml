@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/intro1_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="@color/snow">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:weightSum="10"
+       android:orientation="vertical">
+       <com.google.android.material.card.MaterialCardView
+           android:id="@+id/card"
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="3.5"
+           android:layout_marginHorizontal="10dp"
+           android:layout_marginVertical="10dp"
+           android:checkable="true"
+           android:clickable="true"
+           android:focusable="true"
+           app:cardPreventCornerOverlap="false"
+           app:cardUseCompatPadding="true"
+           app:cardBackgroundColor="@color/white"
+           app:cardCornerRadius="5dp">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical">
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="@font/notosansjp_black"
+                   android:gravity="center"
+                   android:paddingHorizontal="30dp"
+                   android:text="@string/home_page_slang_1"
+                   android:textAppearance="?attr/textAppearanceHeadline6"
+                   android:textColor="@color/primary_green"
+                   android:textSize="20dp" />
+
+               <TextView
+                   android:id="@+id/home_page_slang_2"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="@font/notosansjp_bold"
+                   android:gravity="center"
+                   android:text="@string/home_page_slang_2"
+                   android:textAppearance="?attr/textAppearanceHeadline6"
+                   android:textColor="@color/primary_green"
+                   android:textSize="14dp" />
+           </LinearLayout>
+
+       </com.google.android.material.card.MaterialCardView>
+   </LinearLayout>
+
+</LinearLayout>

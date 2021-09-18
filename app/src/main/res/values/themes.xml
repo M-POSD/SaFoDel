@@ -69,18 +69,21 @@
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/notosansjp_bold</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/primary_green</item>
     </style>
 
     <style name="textStyle16">
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/notosansjp_bold</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/primary_green</item>
     </style>
 
     <style name="textStyle20_black">
         <item name="android:textSize">20dp</item>
         <item name="android:fontFamily">@font/notosansjp_black</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/primary_green</item>
     </style>
 
     <style name="worm_dot_indicator">

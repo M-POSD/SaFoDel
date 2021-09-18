@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.HeroFeatureFragment">
+
+    <include android:id="@+id/hero_feature_info1"
+        layout="@layout/hero_feature_info1"/>
+    <include android:id="@+id/hero_feature_info2"
+        layout="@layout/hero_feature_info2"/>
+    <include android:id="@+id/hero_feature_info3"
+        layout="@layout/hero_feature_info3"/>
+    <include android:id="@+id/hero_feature_info4"
+        layout="@layout/hero_feature_info4"/>
+    <include android:id="@+id/hero_feature_info5"
+        layout="@layout/hero_feature_info5"/>
+    <include android:id="@+id/hero_feature_info6"
+        layout="@layout/hero_feature_info6"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

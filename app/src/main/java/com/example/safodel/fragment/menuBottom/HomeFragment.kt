@@ -34,6 +34,8 @@ import android.view.MenuInflater
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.setFitsSystemWindows
+import com.example.safodel.adapter.EpicStyle2Adapter
+import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageImagesBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
@@ -62,6 +64,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private var currentToast: Toast? = null
     private var isRaining = false
     private var isInitialRainingAnimation = true
+
+    private lateinit var adapter: HomeViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +98,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         configDefaultImageView()
         configOnClickListener()
 
-
         imageAnimations()
         imagesDrivingAnimation()
         if (getCurrentTime() > 18 || getCurrentTime() < 7) {
@@ -116,6 +119,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         binding.toolbar.simpleToolbar.fitsSystemWindows = false
+
+        adapter = HomeViewAdapter(requireActivity())
+        binding.homepageButtonLayout.viewPager2Home.adapter = adapter
+        binding.homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(binding.homepageButtonLayout.viewPager2Home)
 
         return binding.root
 

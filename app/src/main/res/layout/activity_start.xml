@@ -11,7 +11,6 @@
         android:id="@+id/start_viewPager2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/linearLayout"
         android:layout_weight="7"
         android:background="@color/snow" />
 
@@ -29,12 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            app:dotsColor="@color/secondary_yellow"
-            app:dotsStrokeColor="@color/secondary_green"
-            app:dotsCornerRadius="8dp"
-            app:dotsSize="12dp"
-            app:dotsSpacing="4dp"
-            app:dotsStrokeWidth="2dp"
+            style="@style/worm_dot_indicator"
             />
 
 <!--        <include layout="@layout/horizontal_scrolling_icon"/>-->
