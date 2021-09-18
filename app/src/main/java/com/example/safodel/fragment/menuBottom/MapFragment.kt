@@ -388,8 +388,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
 
-//            it.addSource(GeoJsonSource("line-source", Feature.fromGeometry(LineString.fromLngLats(
-//                locationList))))
+            it.addSource(GeoJsonSource("line-source", Feature.fromGeometry(LineString.fromLngLats(
+                locationList))))
 
             /*-- Add layer --*/
 //            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
@@ -438,10 +438,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             symbolIconLayer.minZoom = 15f
             it.addLayer(symbolIconLayer)
 
-            val routeLayer = LineLayer("line_layer","source")
-            routeLayer.withProperties(lineCap(Property.LINE_CAP_ROUND),
-                lineDasharray(arrayOf(0.01f, 2f)),
-            lineJoin(Property.LINE_JOIN_ROUND),  lineWidth(7f),
+            val routeLayer = LineLayer("line_layer","line-source")
+            routeLayer.withProperties(lineCap(Property.LINE_CAP_SQUARE),
+            lineJoin(Property.LINE_JOIN_MITER), lineOpacity(.7f), lineWidth(7f),
             lineColor(parseColor("#FF0000")))
             it.addLayer(routeLayer)
 
