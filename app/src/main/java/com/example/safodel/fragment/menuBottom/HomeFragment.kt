@@ -32,6 +32,7 @@ import kotlin.collections.ArrayList
 import androidx.core.widget.NestedScrollView
 import android.view.MenuInflater
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.example.safodel.databinding.HomepageImagesBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -53,6 +54,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var animatorSetNight: AnimatorSet
     private lateinit var animatorDriving: AnimatorSet
     private lateinit var rainingList: IntArray
+    private lateinit var homePageImage: HomepageImagesBinding
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
@@ -77,6 +79,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
+        homePageImage = binding.homePageImages
         mainActivity = activity as MainActivity
 
         animatorSetLight = AnimatorSet()
@@ -169,17 +172,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         if (isInitialRainingAnimation) {
             isInitialRainingAnimation = false
             isRaining = true
-            binding.homePageImages.vusik.setImages(rainingList).start()
-            binding.homePageImages.vusik.startNotesFall()
+            homePageImage.vusik.setImages(rainingList).start()
+            homePageImage.vusik.startNotesFall()
         } else {
             if (isRaining) {
                 isRaining = false
-                binding.homePageImages.vusik.pauseNotesFall()
-                binding.homePageImages.vusik.visibility = View.INVISIBLE
+                homePageImage.vusik.pauseNotesFall()
+                homePageImage.vusik.visibility = View.INVISIBLE
             } else {
                 isRaining = true
-                binding.homePageImages.vusik.resumeNotesFall()
-                binding.homePageImages.vusik.visibility = View.VISIBLE
+                homePageImage.vusik.resumeNotesFall()
+                homePageImage.vusik.visibility = View.VISIBLE
             }
         }
     }
@@ -188,26 +191,26 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun imageAnimations() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                binding.homePageImages.backpack,
+                homePageImage.backpack,
                 "translationX",
                 -100f,
-                binding.homePageImages.backpack.translationX
+                homePageImage.backpack.translationX
             )
         Log.d("height", binding.homeFragmentXML.width.toString())
         var objectAnimator2: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.homePageImages.backpack, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(homePageImage.backpack, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                binding.homePageImages.helmet,
+                homePageImage.helmet,
                 "translationY",
                 -120f,
-                binding.homePageImages.helmet.translationY
+                homePageImage.helmet.translationY
             )
         Log.d("width", binding.homeFragmentXML.height.toString())
         var objectAnimator4: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.homePageImages.helmet, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(homePageImage.helmet, "alpha", 0f, 1f)
         var objectAnimator5: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.homePageImages.headlight, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(homePageImage.headlight, "alpha", 0f, 1f)
                 .setDuration(500)
 
         animatorSetLight.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
@@ -225,7 +228,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun imagesDrivingAnimation() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                binding.homePageImages.images,
+                homePageImage.images,
                 "translationX",
                 0f,
                 4 * (view?.width ?: 1500) / 5.toFloat()
@@ -234,7 +237,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         Log.d("width", view?.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                binding.homePageImages.images,
+                homePageImage.images,
                 "translationX",
                 -4 * (view?.width ?: 1500) / 5.toFloat(),
                 0f
@@ -331,7 +334,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             "night" -> animatorSetNight.start()
         }
 
-        binding.homePageImages.images.setOnClickListener {
+        homePageImage.images.setOnClickListener {
             if (animatorDriving.isRunning) {
                 animatorDriving.cancel()
                 animatorDriving.start()
@@ -658,13 +661,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //                binding.darkModeLayout.visibility = View.INVISIBLE
 //                binding.lightModeLayout.visibility = View.VISIBLE
 
-                binding.homePageImages.coordinatorLayout.setBackgroundResource(R.color.white)
-                binding.homePageImages.headlight.visibility = View.INVISIBLE
-                binding.homePageImages.backpack.alpha = 0f
-                binding.homePageImages.backpack.setImageResource(R.drawable.backpack_light)
-                binding.homePageImages.helmet.alpha = 0f
-                binding.homePageImages.headlight.alpha = 0f
-                binding.homePageImages.groundForDriver.visibility = View.VISIBLE
+                homePageImage.coordinatorLayout.setBackgroundResource(R.color.white)
+                homePageImage.headlight.visibility = View.INVISIBLE
+                homePageImage.backpack.alpha = 0f
+                homePageImage.backpack.setImageResource(R.drawable.backpack_light)
+                homePageImage.helmet.alpha = 0f
+                homePageImage.headlight.alpha = 0f
+                homePageImage.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
                 setToolbarLightMode(toolbar)
 //                setToolbarBasic(toolbar)
@@ -673,13 +676,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //                binding.lightModeLayout.visibility = View.INVISIBLE
 //                binding.darkModeLayout.visibility = View.VISIBLE
 
-                binding.homePageImages.coordinatorLayout.setBackgroundResource(R.color.darkSky)
-                binding.homePageImages.headlight.visibility = View.VISIBLE
-                binding.homePageImages.backpack.alpha = 0f
-                binding.homePageImages.backpack.setImageResource(R.drawable.backpack_dark)
-                binding.homePageImages.helmet.alpha = 0f
-                binding.homePageImages.headlight.alpha = 0f
-                binding.homePageImages.groundForDriver.visibility = View.INVISIBLE
+                homePageImage.coordinatorLayout.setBackgroundResource(R.color.darkSky)
+                homePageImage.headlight.visibility = View.VISIBLE
+                homePageImage.backpack.alpha = 0f
+                homePageImage.backpack.setImageResource(R.drawable.backpack_dark)
+                homePageImage.helmet.alpha = 0f
+                homePageImage.headlight.alpha = 0f
+                homePageImage.groundForDriver.visibility = View.INVISIBLE
                 startAnimation("night")
                 setToolbarDarkMode(toolbar)
 //                setToolbarWhite(toolbar)
