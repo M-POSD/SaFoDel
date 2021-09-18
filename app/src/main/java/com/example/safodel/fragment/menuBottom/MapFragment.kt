@@ -34,6 +34,7 @@ import com.mapbox.api.directions.v5.models.RouteOptions
 import com.mapbox.bindgen.Expected
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
+import com.mapbox.geojson.LineString
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
@@ -49,9 +50,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
-import com.mapbox.mapboxsdk.style.layers.CircleLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import com.mapbox.mapboxsdk.utils.BitmapUtils
 import com.mapbox.navigation.core.MapboxNavigation
@@ -68,7 +67,7 @@ import java.net.URL
 import kotlin.collections.ArrayList
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
-import com.mapbox.mapboxsdk.style.layers.Property
+import com.mapbox.mapboxsdk.style.layers.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
 import com.mapbox.maps.CameraOptions
@@ -355,7 +354,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         this.mapboxMap.setStyle(Style.LIGHT){
 
             /*-- Camera auto zoom to the LGA area --*/
-            if(feature.size != 0){
+            if(feature.size != 0 && locationList.size != 0){
                 LGAPoint = locationList[0]
                 val position = CameraPosition.Builder()
                     .target(LatLng(LGAPoint.latitude(),LGAPoint.longitude()))
@@ -368,7 +367,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             enableLocationComponent(it)
 
             // Make a toast when data is updating
-            if(feature.size == 0){
+            if(feature.size == 0 && locationList.size == 0){
                 toast.setText("Data is updating...")
                 toast.show()
             }
@@ -388,41 +387,44 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             /*-- Add source --*/
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
-            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
-                circleColor(Color.parseColor("#FF0000")),
-                visibility(Property.VISIBLE),
-                iconIgnorePlacement(false),
-                iconAllowOverlap(false),
-                circleRadius(
-                    interpolate(
-                        linear(), zoom(),
-                        stop(11f, 4f),
-                        stop(12f, 4f),
-                        stop(15f,4f),
-                        stop(15.1f,0f)
-                )
-            ))
+
+//            it.addSource(GeoJsonSource("line-source", Feature.fromGeometry(LineString.fromLngLats(
+//                locationList))))
 
             /*-- Add layer --*/
-            it.addLayer(basicCircle)
+//            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
+//                circleColor(Color.parseColor("#FF0000")),
+//                visibility(Property.VISIBLE),
+//                iconIgnorePlacement(false),
+//                iconAllowOverlap(false),
+//                circleRadius(
+//                    interpolate(
+//                        linear(), zoom(),
+//                        stop(11f, 4f),
+//                        stop(12f, 4f),
+//                        stop(15f,4f),
+//                        stop(15.1f,0f)
+//                )
+//            ))
+//            it.addLayer(basicCircle)
 
             /*-- Add circle layer --*/
-            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
-                .withProperties(
-                    circleColor(parseColor("#FC9C9C")),
-                    circleRadius(6f),
-                    visibility(Property.VISIBLE),
-                    circleOpacity(
-                        interpolate(
-                            linear(), zoom(),
-                            stop(11f, .5f),
-                            stop(15f,0f)
-                        )
-                    ),
-                    iconIgnorePlacement(false),
-                    iconAllowOverlap(false)
-                )
-            it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
+//            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
+//                .withProperties(
+//                    circleColor(parseColor("#FC9C9C")),
+//                    circleRadius(6f),
+//                    visibility(Property.VISIBLE),
+//                    circleOpacity(
+//                        interpolate(
+//                            linear(), zoom(),
+//                            stop(11f, .5f),
+//                            stop(15f,0f)
+//                        )
+//                    ),
+//                    iconIgnorePlacement(false),
+//                    iconAllowOverlap(false)
+//                )
+//            it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
             /*-- Add symbol layer --*/
             val symbolIconLayer = SymbolLayer("icon_layer", "source")
@@ -435,6 +437,13 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
             symbolIconLayer.minZoom = 15f
             it.addLayer(symbolIconLayer)
+
+            val routeLayer = LineLayer("line_layer","source")
+            routeLayer.withProperties(lineCap(Property.LINE_CAP_ROUND),
+                lineDasharray(arrayOf(0.01f, 2f)),
+            lineJoin(Property.LINE_JOIN_ROUND),  lineWidth(7f),
+            lineColor(parseColor("#FF0000")))
+            it.addLayer(routeLayer)
 
             /*-- Set the camera's animation --*/
             mapboxMap.animateCamera(
