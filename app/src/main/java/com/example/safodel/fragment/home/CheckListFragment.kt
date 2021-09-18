@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import com.example.safodel.R
-import com.example.safodel.databinding.FragmentGear2Binding
+import com.example.safodel.databinding.FragmentChecklistBinding
 import com.example.safodel.fragment.BasicFragment
 
-class CheckListFragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::inflate) {
+class CheckListFragment :
+    BasicFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGear2Binding.inflate(inflater, container, false)
+        _binding = FragmentChecklistBinding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
 
         setToolbarReturn(toolbar)
@@ -44,17 +45,23 @@ class CheckListFragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Bindi
         binding.gear2.currentPageText.text = getString(R.string.gear2_name)
         binding.gear2.notification.text = getString(R.string.gear2_slang)
 
-        binding.gear2.detailCardV3.checkbox1.checkbox.text = getString(R.string.gear_check_list_item1)
+        binding.gear2.detailCardV3.checkbox1.checkbox.text =
+            getString(R.string.gear_check_list_item1)
         binding.gear2.detailCardV3.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)
-        binding.gear2.detailCardV3.checkbox2.checkbox.text = getString(R.string.gear_check_list_item2)
+        binding.gear2.detailCardV3.checkbox2.checkbox.text =
+            getString(R.string.gear_check_list_item2)
         binding.gear2.detailCardV3.checkbox2.checkboxImage.setImageResource(R.drawable.bicycle_with_light)
-        binding.gear2.detailCardV3.checkbox3.checkbox.text = getString(R.string.gear_check_list_item3)
+        binding.gear2.detailCardV3.checkbox3.checkbox.text =
+            getString(R.string.gear_check_list_item3)
         binding.gear2.detailCardV3.checkbox3.checkboxImage.setImageResource(R.drawable.mask)
-        binding.gear2.detailCardV3.checkbox4.checkbox.text = getString(R.string.gear_check_list_item4)
+        binding.gear2.detailCardV3.checkbox4.checkbox.text =
+            getString(R.string.gear_check_list_item4)
         binding.gear2.detailCardV3.checkbox4.checkboxImage.setImageResource(R.drawable.vest)
-        binding.gear2.detailCardV3.checkbox5.checkbox.text = getString(R.string.gear_check_list_item5)
+        binding.gear2.detailCardV3.checkbox5.checkbox.text =
+            getString(R.string.gear_check_list_item5)
         binding.gear2.detailCardV3.checkbox5.checkboxImage.setImageResource(R.drawable.gloves)
-        binding.gear2.detailCardV3.checkbox6.checkbox.text = getString(R.string.gear_check_list_item6)
+        binding.gear2.detailCardV3.checkbox6.checkbox.text =
+            getString(R.string.gear_check_list_item6)
         binding.gear2.detailCardV3.checkbox6.checkboxImage.setImageResource(R.drawable.hand_sanitizer)
     }
 

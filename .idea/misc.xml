@@ -85,6 +85,7 @@
         <entry key="app/src/main/res/layout/fragment_welcome_safodel.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/group_card_v1.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/group_card_v2.xml" value="0.22239583333333332" />
+        <entry key="app/src/main/res/layout/homepage_button_layout.xml" value="0.225" />
         <entry key="app/src/main/res/layout/homepage_images.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/items_lga.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />

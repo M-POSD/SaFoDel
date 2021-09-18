@@ -1,96 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:context=".fragment.home.Epic4Fragment">
 
-    <LinearLayout
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/simple_toolbar"
+        app:layout_collapseMode="pin" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/snow"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/simple_toolbar"
-            app:layout_collapseMode="pin" />
-
-        <TextView
-            android:id="@+id/tip1_heading"
-            style="@style/textStyle14"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Demo" />
+            android:background="@color/snow"
+            android:orientation="vertical">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2_section1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/snow" />
+            <TextView
+                android:id="@+id/tip1_heading"
+                style="@style/textStyle14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Demo" />
 
-        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-            android:id="@+id/worm_dots_indicator_section1"
-            style="@style/worm_dot_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2_section1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/snow" />
 
-        <TextView
-            android:id="@+id/tip2_heading"
-            style="@style/textStyle14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Demo" />
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/worm_dots_indicator_section1"
+                style="@style/worm_dot_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2_section2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/snow" />
+            <TextView
+                android:id="@+id/tip2_heading"
+                style="@style/textStyle14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Demo" />
 
-        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-            android:id="@+id/worm_dots_indicator_section2"
-            style="@style/worm_dot_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2_section2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/snow" />
 
-        <TextView
-            android:id="@+id/tip3_heading"
-            style="@style/textStyle14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Demo" />
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/worm_dots_indicator_section2"
+                style="@style/worm_dot_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2_section3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/snow" />
+            <TextView
+                android:id="@+id/tip3_heading"
+                style="@style/textStyle14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Demo" />
 
-        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-            android:id="@+id/worm_dots_indicator_section3"
-            style="@style/worm_dot_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="75dp"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2_section3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/snow" />
 
-    </LinearLayout>
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/worm_dots_indicator_section3"
+                style="@style/worm_dot_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
 
-</ScrollView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="75dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+
+
 
 
 

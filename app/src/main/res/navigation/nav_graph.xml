@@ -103,7 +103,7 @@
         android:id="@+id/gear2Fragment"
         android:name="com.example.safodel.fragment.home.CheckListFragment"
         android:label="fragment_gear2"
-        tools:layout="@layout/fragment_gear2" />
+        tools:layout="@layout/fragment_checklist" />
     <fragment
         android:id="@+id/analysisFragment"
         android:name="com.example.safodel.fragment.menuBottom.AnalysisFragment"

@@ -16,7 +16,6 @@
         android:layout_height="match_parent"
         android:clickable="true">
 
-
         <include
             android:id="@+id/home_page_images"
             layout="@layout/homepage_images" />

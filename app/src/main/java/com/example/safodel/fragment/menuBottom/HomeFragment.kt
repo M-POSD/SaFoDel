@@ -107,7 +107,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         isBeginnerMode = false
 
         GlobalScope.launch {
-            // try to get the height of status bar and then marggin top
+            // try to get the height of status bar and then margin top
             val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
             while (toolbarHeight.topMargin == 0)
                 toolbarHeight.topMargin = mainActivity.getStatusHeight()
@@ -256,26 +256,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val spEditor = sharedPref.edit()
         spEditor.putString("epicPosition", "" + position)
         spEditor.apply()
-    }
-
-    private fun configScrollingListener() {
-        if (binding.homeScrollView!=null) {
-            Log.d("configScrollingListener", binding.homeScrollView.toString())
-            binding.homeScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-                if (scrollY > oldScrollY) {
-                    Log.d("scroll down", "Scroll DOWN")
-                }
-                if (scrollY < oldScrollY) {
-                    Log.d("scroll up", "Scroll UP")
-                }
-//                if (scrollY == 0) {
-//                    Log.i("top scroll", "TOP SCROLL")
-//                }
-//                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
-//                    Log.i("bottom scroll", "BOTTOM SCROLL")
-//                }
-            })
-        }
     }
 
     // config onClickListener for navigation
@@ -660,7 +640,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //                binding.darkModeLayout.visibility = View.INVISIBLE
 //                binding.lightModeLayout.visibility = View.VISIBLE
 
-                homePageImage.coordinatorLayout.setBackgroundResource(R.color.white)
+                homePageImage.homepageAppBar.setBackgroundResource(R.color.white)
                 homePageImage.headlight.visibility = View.INVISIBLE
                 homePageImage.backpack.alpha = 0f
                 homePageImage.backpack.setImageResource(R.drawable.backpack_light)
@@ -675,7 +655,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //                binding.lightModeLayout.visibility = View.INVISIBLE
 //                binding.darkModeLayout.visibility = View.VISIBLE
 
-                homePageImage.coordinatorLayout.setBackgroundResource(R.color.darkSky)
+                homePageImage.homepageAppBar.setBackgroundResource(R.color.darkSky)
                 homePageImage.headlight.visibility = View.VISIBLE
                 homePageImage.backpack.alpha = 0f
                 homePageImage.backpack.setImageResource(R.drawable.backpack_dark)
