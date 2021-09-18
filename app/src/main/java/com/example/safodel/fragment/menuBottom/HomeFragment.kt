@@ -120,7 +120,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         binding.toolbar.simpleToolbar.fitsSystemWindows = false
 
-        adapter = HomeViewAdapter(requireActivity())
+        adapter = HomeViewAdapter(requireActivity(), this)
         binding.homepageButtonLayout.viewPager2Home.adapter = adapter
         binding.homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(binding.homepageButtonLayout.viewPager2Home)
 

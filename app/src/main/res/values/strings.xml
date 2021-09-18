@@ -253,6 +253,7 @@
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
     <string name="generic_information_description">Placeholder</string>
+    <string name="checklist">Checklist</string>
 
 
 </resources>

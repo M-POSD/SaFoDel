@@ -4,15 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.home.CheckListFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".fragment.menuBottom.CheckListFragment">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/simple_toolbar" />
 
-    <include layout="@layout/detail_page_layout2"
-        android:id="@+id/gear2"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+
+        <include
+            android:id="@+id/checklist"
+            layout="@layout/detail_card_checklist" />
+    </LinearLayout>
 
 
 </LinearLayout>

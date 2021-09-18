@@ -4,10 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
+import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHeroFeatureBinding
 
-class HomeViewAdapter(val context: Context): RecyclerView.Adapter<HomeViewAdapter.ViewHolder>() {
+class HomeViewAdapter(val context: Context, private val parentFragment: Fragment): RecyclerView.Adapter<HomeViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: FragmentHeroFeatureBinding =
@@ -25,15 +28,27 @@ class HomeViewAdapter(val context: Context): RecyclerView.Adapter<HomeViewAdapte
             }
             2 -> {
                 setVisibility(viewHolder,2)
+                viewHolder.binding.heroFeatureInfo3.card.setOnClickListener{
+                    parentFragment.findNavController().navigate(R.id.mapfragment)
+                }
             }
             3 -> {
                 setVisibility(viewHolder,3)
+                viewHolder.binding.heroFeatureInfo4.card.setOnClickListener{
+                    parentFragment.findNavController().navigate(R.id.analysisFragment)
+                }
             }
             4 -> {
                 setVisibility(viewHolder,4)
+                viewHolder.binding.heroFeatureInfo5.card.setOnClickListener{
+                    parentFragment.findNavController().navigate(R.id.checklistFragment)
+                }
             }
             5 -> {
                 setVisibility(viewHolder,5)
+                viewHolder.binding.heroFeatureInfo6.card.setOnClickListener{
+                    parentFragment.findNavController().navigate(R.id.examFragment)
+                }
             }
         }
     }

@@ -19,7 +19,8 @@
         android:layout_weight="7.5"
         android:focusable="true"
         android:text="Helmet"
-        android:textSize="16dp"
+        style="@style/textStyle20_black"
+        android:textColor="@color/black"
         android:theme="@style/Widget.App.CheckBox" />
 
     <ImageView

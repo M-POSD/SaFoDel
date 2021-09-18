@@ -26,5 +26,10 @@
             android:icon="@drawable/exam"
             android:title="@string/exam"/>
 
+        <item
+            android:id="@+id/navCheckList"
+            android:icon="@drawable/checklist"
+            android:title="@string/checklist"/>
+
     </group>
 </menu>

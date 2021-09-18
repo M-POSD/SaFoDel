@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,8 +18,6 @@ import com.example.safodel.databinding.ActivityMainBinding
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
-
-
 
 
 
@@ -84,7 +80,8 @@ class MainActivity : AppCompatActivity() {
 
         if(navController.currentDestination?.id == R.id.mapfragment ||
             navController.currentDestination?.id == R.id.examFragment ||
-            navController.currentDestination?.id == R.id.analysisFragment){
+            navController.currentDestination?.id == R.id.analysisFragment ||
+            navController.currentDestination?.id == R.id.checklistFragment){
             binding.bottomNavigation.selectedItemId = R.id.navHome
             return
         }
@@ -132,6 +129,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.navAnalysis -> {
                     if(navController.currentDestination?.id != R.id.navAnalysis){
                         navController.navigate(R.id.analysisFragment)
+                    }
+                    true
+                }
+                R.id.navCheckList -> {
+                    if(navController.currentDestination?.id != R.id.navCheckList){
+                        navController.navigate(R.id.checklistFragment)
                     }
                     true
                 }
