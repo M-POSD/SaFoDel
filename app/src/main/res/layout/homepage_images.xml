@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homepage_app_bar"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="300dp"
     android:background="@color/snow">
 
     <com.google.android.material.appbar.CollapsingToolbarLayout

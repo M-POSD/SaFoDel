@@ -10,7 +10,6 @@
     tools:context=".fragment.menuBottom.HomeFragment">
 
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/homeCoordinatorLayout1"
         android:layout_width="match_parent"
@@ -22,12 +21,10 @@
             android:id="@+id/home_page_images"
             layout="@layout/homepage_images" />
 
-
-
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/simple_toolbar"
-                app:layout_collapseMode="pin"/>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/simple_toolbar"
+            app:layout_collapseMode="pin" />
 
 
         <androidx.core.widget.NestedScrollView
