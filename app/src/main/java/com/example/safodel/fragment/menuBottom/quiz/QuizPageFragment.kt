@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuLeft.quiz
+package com.example.safodel.fragment.menuBottom.quiz
 
 import android.graphics.Typeface
 import android.os.Bundle

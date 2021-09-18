@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuLeft.quiz
+package com.example.safodel.fragment.menuBottom.quiz
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/examFragment"
-        android:name="com.example.safodel.fragment.menuLeft.QuizFragment"
+        android:name="com.example.safodel.fragment.menuBottom.QuizFragment"
         android:label="fragment_school"
         tools:layout="@layout/fragment_quiz" />
     <fragment
@@ -32,13 +32,13 @@
         <action
             android:id="@+id/action_homeFragment_to_developerFragment"
             app:destination="@id/developerFragment"/>
-        <action
-            android:id="@+id/action_homeFragment_to_epicsFragment"
-            app:destination="@id/epicsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_epicsFragment"-->
+<!--            app:destination="@id/epicsFragment"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right"/>-->
         <action
             android:id="@+id/action_homeFragment_to_appIntroFragment"
             app:destination="@id/appIntroFragment"/>
@@ -53,25 +53,8 @@
         android:id="@+id/epic1Fragment"
         android:name="com.example.safodel.fragment.home.Epic1Fragment"
         android:label="fragment_epic1"
-        tools:layout="@layout/fragment_epic1_old" >
-        <action
-            android:id="@+id/action_epic1Fragment_to_tip1Fragment"
-            app:destination="@id/tip1Fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+        tools:layout="@layout/fragment_epic1" >
     </fragment>
-    <fragment
-        android:id="@+id/epic2Fragment"
-        android:name="com.example.safodel.fragment.home.Epic2Fragment"
-        android:label="fragment_epic2"
-        tools:layout="@layout/fragment_epic2_old" />
-    <fragment
-        android:id="@+id/epic3Fragment"
-        android:name="com.example.safodel.fragment.home.Epic3Fragment"
-        android:label="fragment_epic3"
-        tools:layout="@layout/fragment_epic3_old" />
     <fragment
         android:id="@+id/appIntroFragment"
         android:name="com.example.safodel.fragment.menuLeft.AppIntroFragment"
@@ -81,118 +64,74 @@
         android:id="@+id/developerFragment"
         android:name="com.example.safodel.fragment.menuLeft.DeveloperFragment"
         android:label="DeveloperFragment" />
-    <fragment
-        android:id="@+id/tip1Fragment"
-        android:name="com.example.safodel.fragment.home.epic1.Tip1Fragment"
-        android:label="Tip1Fragment" />
-    <fragment
-        android:id="@+id/epicsFragment"
-        android:name="com.example.safodel.fragment.EpicsFragment"
-        android:label="fragment_epics"
-        tools:layout="@layout/fragment_epics" >
-        <action
-            android:id="@+id/action_epicsFragment_to_epic3Fragment"
-            app:destination="@id/epic3Fragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_out"
-            app:popExitAnim="@anim/fade_in"/>
-        <action
-            android:id="@+id/action_epicsFragment_to_epic2Fragment"
-            app:destination="@id/epic2Fragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_out"
-            app:popExitAnim="@anim/fade_in"/>
-        <action
-            android:id="@+id/action_epicsFragment_to_epic1Fragment"
-            app:destination="@id/epic1Fragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_out"
-            app:popExitAnim="@anim/fade_in"/>
-    </fragment>
-    <fragment
-        android:id="@+id/info1Fragment"
-        android:name="com.example.safodel.fragment.home.epic2.Info1Fragment"
-        android:label="fragment_info1"
-        tools:layout="@layout/fragment_info1" />
-    <fragment
-        android:id="@+id/gear1Fragment"
-        android:name="com.example.safodel.fragment.home.epic3.Gear1Fragment"
-        android:label="fragment_gear1"
-        tools:layout="@layout/fragment_gear1" />
+<!--    <fragment-->
+<!--        android:id="@+id/epicsFragment"-->
+<!--        android:name="com.example.safodel.fragment.EpicsFragment"-->
+<!--        android:label="fragment_epics"-->
+<!--        tools:layout="@layout/fragment_epics" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_epicsFragment_to_epic3Fragment"-->
+<!--            app:destination="@id/epic3Fragment"-->
+<!--            app:enterAnim="@anim/fade_in"-->
+<!--            app:exitAnim="@anim/fade_out"-->
+<!--            app:popEnterAnim="@anim/fade_out"-->
+<!--            app:popExitAnim="@anim/fade_in"/>-->
+<!--        <action-->
+<!--            android:id="@+id/action_epicsFragment_to_epic2Fragment"-->
+<!--            app:destination="@id/epic2Fragment"-->
+<!--            app:enterAnim="@anim/fade_in"-->
+<!--            app:exitAnim="@anim/fade_out"-->
+<!--            app:popEnterAnim="@anim/fade_out"-->
+<!--            app:popExitAnim="@anim/fade_in"/>-->
+<!--        <action-->
+<!--            android:id="@+id/action_epicsFragment_to_epic1Fragment"-->
+<!--            app:destination="@id/epic1Fragment"-->
+<!--            app:enterAnim="@anim/fade_in"-->
+<!--            app:exitAnim="@anim/fade_out"-->
+<!--            app:popEnterAnim="@anim/fade_out"-->
+<!--            app:popExitAnim="@anim/fade_in"/>-->
+<!--    </fragment>-->
     <activity
         android:id="@+id/startActivity"
         android:name="com.example.safodel.ui.main.StartActivity"
         android:label="StartActivity" />
-    <fragment
-        android:id="@+id/tip2Fragment"
-        android:name="com.example.safodel.fragment.home.epic1.Tip2Fragment"
-        android:label="fragment_tip2"
-        tools:layout="@layout/fragment_tip2" />
-    <fragment
-        android:id="@+id/info2Fragment"
-        android:name="com.example.safodel.fragment.home.epic2.Info2Fragment"
-        android:label="fragment_info2"
-        tools:layout="@layout/fragment_info2" />
-    <fragment
-        android:id="@+id/info3Fragment"
-        android:name="com.example.safodel.fragment.home.epic2.Info3Fragment"
-        android:label="fragment_info3"
-        tools:layout="@layout/fragment_info3" />
-    <fragment
-        android:id="@+id/gear3Fragment"
-        android:name="com.example.safodel.fragment.home.epic3.Gear3Fragment"
-        android:label="fragment_gear3"
-        tools:layout="@layout/fragment_gear3" />
     <fragment
         android:id="@+id/basicFragment"
         android:name="com.example.safodel.fragment.BasicFragment"
         android:label="BasicFragment" />
     <fragment
         android:id="@+id/gear2Fragment"
-        android:name="com.example.safodel.fragment.home.epic3.Gear2Fragment"
+        android:name="com.example.safodel.fragment.home.CheckListFragment"
         android:label="fragment_gear2"
         tools:layout="@layout/fragment_gear2" />
     <fragment
         android:id="@+id/analysisFragment"
-        android:name="com.example.safodel.fragment.menuLeft.AnalysisFragment"
+        android:name="com.example.safodel.fragment.menuBottom.AnalysisFragment"
         android:label="fragment_analysis"
         tools:layout="@layout/fragment_analysis" />
     <fragment
         android:id="@+id/exam1Fragment"
-        android:name="com.example.safodel.fragment.menuLeft.quiz.QuizPageFragment"
+        android:name="com.example.safodel.fragment.menuBottom.quiz.QuizPageFragment"
         android:label="fragment_exam1"
         tools:layout="@layout/fragment_quiz_page" />
     <fragment
         android:id="@+id/examFinishFragment"
-        android:name="com.example.safodel.fragment.menuLeft.quiz.QuizResultFragment"
+        android:name="com.example.safodel.fragment.menuBottom.quiz.QuizResultFragment"
         android:label="fragment_exam_finish"
         tools:layout="@layout/fragment_quiz_resault" />
-    <fragment
-        android:id="@+id/accident1Fragment"
-        android:name="com.example.safodel.fragment.home.epic4.Accident1Fragment"
-        android:label="fragment_accident1"
-        tools:layout="@layout/fragment_accident1" />
-    <fragment
-        android:id="@+id/accident2Fragment"
-        android:name="com.example.safodel.fragment.home.epic4.Accident2Fragment"
-        android:label="fragment_accident2"
-        tools:layout="@layout/fragment_accident2" />
-    <fragment
-        android:id="@+id/accident3Fragment"
-        android:name="com.example.safodel.fragment.home.epic4.Accident3Fragment"
-        android:label="fragment_accident3"
-        tools:layout="@layout/fragment_accident3" />
-    <fragment
-        android:id="@+id/roadSignFragment"
-        android:name="com.example.safodel.fragment.home.epic1.RoadSignFragment"
-        android:label="fragment_road_sign"
-        tools:layout="@layout/fragment_road_sign" />
     <fragment
         android:id="@+id/epic4Fragment"
         android:name="com.example.safodel.fragment.home.Epic4Fragment"
         android:label="Epic4Fragment" />
+    <fragment
+        android:id="@+id/epic2Fragment"
+        android:name="com.example.safodel.fragment.home.Epic2Fragment"
+        android:label="fragment_epic2"
+        tools:layout="@layout/fragment_epic2" />
+    <fragment
+        android:id="@+id/epic3Fragment"
+        android:name="com.example.safodel.fragment.home.Epic3Fragment"
+        android:label="fragment_epic3"
+        tools:layout="@layout/fragment_epic3" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.menuLeft
+package com.example.safodel.fragment.menuBottom
 
 import android.os.Bundle
 import android.util.Log

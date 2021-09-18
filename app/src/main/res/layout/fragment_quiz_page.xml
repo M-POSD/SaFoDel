@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="1"
     android:background="@color/snow"
-    tools:context=".fragment.menuLeft.quiz.QuizPageFragment">
+    tools:context=".fragment.menuBottom.quiz.QuizPageFragment">
 
     <include
         android:id="@+id/toolbar"

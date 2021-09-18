@@ -1,4 +1,4 @@
-package com.example.safodel.fragment.home.epic3
+package com.example.safodel.fragment.home
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentGear2Binding
 import com.example.safodel.fragment.BasicFragment
 
-class Gear2Fragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::inflate) {
+class CheckListFragment : BasicFragment<FragmentGear2Binding>(FragmentGear2Binding::inflate) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
