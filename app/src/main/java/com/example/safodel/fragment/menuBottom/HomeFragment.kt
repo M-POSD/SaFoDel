@@ -279,23 +279,23 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // config onClickListener for navigation
     private fun configOnClickListener() {
         binding.homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
-            recordPosition(0)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+//            recordPosition(0)
+            findNavController().navigate(R.id.epic1Fragment, null, navAnimationLeftToRight())
         }
 
         binding.homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
-            recordPosition(1)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+//            recordPosition(1)
+            findNavController().navigate(R.id.epic2Fragment, null, navAnimationLeftToRight())
         }
 
         binding.homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
-            recordPosition(2)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+//            recordPosition(2)
+            findNavController().navigate(R.id.epic3Fragment, null, navAnimationLeftToRight())
         }
 
         binding.homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
-            recordPosition(3)
-            findNavController().navigate(R.id.epicsFragment, null, navAnimationLeftToRight())
+//            recordPosition(3)
+            findNavController().navigate(R.id.epic4Fragment, null, navAnimationLeftToRight())
         }
 
         toolbar.setOnMenuItemClickListener{

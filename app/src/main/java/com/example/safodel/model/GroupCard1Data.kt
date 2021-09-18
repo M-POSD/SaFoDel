@@ -114,10 +114,10 @@ class GroupCard1Data(
                 )
             )
 
-            // gear data
+            // gear1 data
             groupCard1Data.add(
                 GroupCard1Data(
-                    "gear",
+                    "gear1",
                     R.string.gear1_1_description,
                     R.drawable.gear1_1,
                     3
@@ -125,7 +125,7 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "gear",
+                    "gear1",
                     R.string.gear1_2_description,
                     R.drawable.gear1_2,
                     1
@@ -133,7 +133,7 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "gear",
+                    "gear1",
                     R.string.gear1_3_description,
                     R.drawable.gear1_3,
                     2
@@ -141,9 +141,43 @@ class GroupCard1Data(
             )
             groupCard1Data.add(
                 GroupCard1Data(
-                    "gear",
+                    "gear1",
                     R.string.gear1_4_description,
                     R.drawable.gear1_4,
+                    1
+                )
+            )
+
+            // gear2 data
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "gear2",
+                    R.string.gear_standard_bsi,
+                    R.drawable.bsi,
+                    2
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "gear2",
+                    R.string.gear_standard_global_mark,
+                    R.drawable.global_mark,
+                    1
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "gear2",
+                    R.string.gear_standard_sai_global,
+                    R.drawable.sai_global,
+                    1
+                )
+            )
+            groupCard1Data.add(
+                GroupCard1Data(
+                    "gear2",
+                    R.string.gear_standard_aus,
+                    R.drawable.aus,
                     1
                 )
             )

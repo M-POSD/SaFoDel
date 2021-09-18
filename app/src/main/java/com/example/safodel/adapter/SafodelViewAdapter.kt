@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.safodel.databinding.FragmentWelcomeSafodelBinding
 
 class SafodelViewAdapter(val context: Context): RecyclerView.Adapter<SafodelViewAdapter.ViewHolder>() {

@@ -53,7 +53,7 @@
         android:id="@+id/epic1Fragment"
         android:name="com.example.safodel.fragment.home.Epic1Fragment"
         android:label="fragment_epic1"
-        tools:layout="@layout/fragment_epic1" >
+        tools:layout="@layout/fragment_epic1_old" >
         <action
             android:id="@+id/action_epic1Fragment_to_tip1Fragment"
             app:destination="@id/tip1Fragment"
@@ -66,12 +66,12 @@
         android:id="@+id/epic2Fragment"
         android:name="com.example.safodel.fragment.home.Epic2Fragment"
         android:label="fragment_epic2"
-        tools:layout="@layout/fragment_epic2" />
+        tools:layout="@layout/fragment_epic2_old" />
     <fragment
         android:id="@+id/epic3Fragment"
         android:name="com.example.safodel.fragment.home.Epic3Fragment"
         android:label="fragment_epic3"
-        tools:layout="@layout/fragment_epic3" />
+        tools:layout="@layout/fragment_epic3_old" />
     <fragment
         android:id="@+id/appIntroFragment"
         android:name="com.example.safodel.fragment.menuLeft.AppIntroFragment"
@@ -190,5 +190,9 @@
         android:name="com.example.safodel.fragment.home.epic1.RoadSignFragment"
         android:label="fragment_road_sign"
         tools:layout="@layout/fragment_road_sign" />
+    <fragment
+        android:id="@+id/epic4Fragment"
+        android:name="com.example.safodel.fragment.home.Epic4Fragment"
+        android:label="Epic4Fragment" />
 
 </navigation>

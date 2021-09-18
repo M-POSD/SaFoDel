@@ -65,4 +65,30 @@
         <item name="colorAccent">@color/secondary_green</item>
     </style>
 
+    <style name="textStyle14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+    </style>
+
+    <style name="textStyle16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+    </style>
+
+    <style name="textStyle20_black">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/notosansjp_black</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+    </style>
+
+    <style name="worm_dot_indicator">
+        <item name="dotsColor">@color/secondary_yellow</item>
+        <item name="dotsStrokeColor">@color/primary_green</item>
+        <item name="dotsCornerRadius">8dp</item>
+        <item name="dotsSize">12dp</item>
+        <item name="dotsSpacing">4dp</item>
+        <item name="dotsStrokeWidth">2dp</item>
+    </style>
 </resources>

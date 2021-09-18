@@ -1,43 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:id="@+id/epicLayout">
+    android:fitsSystemWindows="true"
+    tools:context=".fragment.home.Epic1Fragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:background="@color/snow"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/bottom_sheet"
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/simple_toolbar"
+            app:layout_collapseMode="pin" />
+
+        <TextView
+            android:id="@+id/tip1_heading"
+            style="@style/textStyle14"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="75dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Demo" />
 
-            <include
-                android:id="@+id/tip1Card"
-                layout="@layout/medium_card" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2_section1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/snow" />
 
-            <include
-                android:id="@+id/tip2Card"
-                layout="@layout/medium_card" />
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/worm_dots_indicator_section1"
+            style="@style/worm_dot_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp" />
 
-            <include
-                android:id="@+id/tip3Card"
-                layout="@layout/medium_card" />
+        <TextView
+            android:id="@+id/tip2_heading"
+            style="@style/textStyle14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Demo" />
 
-        </LinearLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2_section2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/snow" />
 
-    </androidx.core.widget.NestedScrollView>
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/worm_dots_indicator_section2"
+            style="@style/worm_dot_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tip3_heading"
+            style="@style/textStyle14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Demo" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2_section3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/snow" />
+
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/worm_dots_indicator_section3"
+            style="@style/worm_dot_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="75dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
 
 
 

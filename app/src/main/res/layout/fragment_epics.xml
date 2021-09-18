@@ -4,21 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".fragment.EpicsFragment">
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/simple_toolbar" />
+        layout="@layout/simple_toolbar"
+        app:layout_collapseMode="pin" />
+
 
     <include
         android:id="@+id/tabbar"
         layout="@layout/simple_tabbar" />
 
 </LinearLayout>
-
-
 
 
 

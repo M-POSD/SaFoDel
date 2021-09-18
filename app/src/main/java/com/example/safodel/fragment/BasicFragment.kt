@@ -2,6 +2,10 @@ package com.example.safodel.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding

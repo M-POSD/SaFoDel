@@ -1,19 +1,21 @@
 package com.example.safodel.fragment.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.AnimationUtils
-import androidx.navigation.fragment.findNavController
+import android.view.*
 import com.example.safodel.R
+import com.example.safodel.adapter.EpicStyle1Adapter
+import com.example.safodel.adapter.EpicStyle2Adapter
 import com.example.safodel.databinding.FragmentEpic2Binding
 import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.GroupCard1Data
+import com.example.safodel.model.GroupCard2Data
+
 
 class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::inflate) {
+    private lateinit var adapter1: EpicStyle1Adapter
+    private lateinit var adapter2: EpicStyle1Adapter
+    private lateinit var adapter3: EpicStyle2Adapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,22 +23,12 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
     ): View {
         _binding = FragmentEpic2Binding.inflate(inflater, container, false)
 
-        configDefaultView()
+        configSection1()
+        configSection2()
+        configSection3()
 
-        binding.info1Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.info1Fragment, null, navAnimationLeftToRight())
-        }
-
-        binding.info2Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.info2Fragment, null, navAnimationLeftToRight())
-        }
-
-        binding.info3Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.info3Fragment, null, navAnimationLeftToRight())
-        }
-
-        contentsAnimation()
-
+        val toolbar = binding.toolbar.root
+        setToolbarReturn(toolbar)
         return binding.root
     }
 
@@ -45,26 +37,60 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         _binding = null
     }
 
-    private fun configDefaultView() {
-        binding.info1Card.title.text = getString(R.string.info1_name)
-        binding.info2Card.title.text = getString(R.string.info2_name)
-        binding.info3Card.title.text = getString(R.string.info3_name)
-        binding.info1Card.mediumCardImage.setImageResource(R.drawable.info1)
-        binding.info2Card.mediumCardImage.setImageResource(R.drawable.info2)
-        binding.info3Card.mediumCardImage.setImageResource(R.drawable.info3)
+    private fun configSection1() {
+        binding.tip1Heading.text = getString(R.string.info1_name)
+        adapter1 = EpicStyle1Adapter(requireActivity(), getSection1Data())
+        binding.viewPager2Section1.adapter = adapter1
+        binding.wormDotsIndicatorSection1.setViewPager2(binding.viewPager2Section1)
     }
 
-    // contents animation slide in from bottom
-    private fun contentsAnimation() {
-        val slideIn: Animation =
-            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
-        slideIn.interpolator = AccelerateDecelerateInterpolator()
-        slideIn.duration = 1500
-
-        val animation = AnimationSet(false)
-        animation.addAnimation(slideIn)
-        animation.repeatCount = 1;
-        binding.epicLayout.animation = animation
+    private fun configSection2() {
+        binding.tip2Heading.text = getString(R.string.info2_name)
+        adapter2 = EpicStyle1Adapter(requireActivity(), getSection2Data())
+        binding.viewPager2Section2.adapter = adapter2
+        binding.wormDotsIndicatorSection2.setViewPager2(binding.viewPager2Section2)
     }
 
+    private fun configSection3() {
+        binding.tip3Heading.text = getString(R.string.info3_name)
+        adapter3 = EpicStyle2Adapter(requireActivity(), getSection3Data())
+        binding.viewPager2Section3.adapter = adapter3
+        binding.wormDotsIndicatorSection3.setViewPager2(binding.viewPager2Section3)
+    }
+
+    private fun getSection1Data(): MutableList<GroupCard1Data> {
+        val data = GroupCard1Data.init()
+        var i = 0
+        while (i < data.size) {
+            when (data[i].dataType) {
+                "eBikeInfo1" -> i++
+                else -> data.removeAt(i)
+            }
+        }
+        return data
+    }
+
+    private fun getSection2Data(): MutableList<GroupCard1Data> {
+        val data = GroupCard1Data.init()
+        var i = 0
+        while (i < data.size) {
+            when (data[i].dataType) {
+                "eBikeInfo2" -> i++
+                else -> data.removeAt(i)
+            }
+        }
+        return data
+    }
+
+    private fun getSection3Data(): MutableList<GroupCard2Data> {
+        val data = GroupCard2Data.init()
+        var i = 0
+        while (i < data.size) {
+            when (data[i].dataType) {
+                "eBikeInfo3" -> i++
+                else -> data.removeAt(i)
+            }
+        }
+        return data
+    }
 }
