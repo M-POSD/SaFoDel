@@ -7,12 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/snow">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="10"
-        android:orientation="vertical">
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
@@ -40,5 +34,3 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-
-</LinearLayout>
