@@ -137,5 +137,15 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             .setPopEnterAnim(R.anim.slide_in_left)
             .setPopExitAnim(R.anim.slide_out_right).build()
     }
+
+    /**
+     * build the navigation animation from bottom to top
+     */
+    fun navAnimationBottomToTop(): NavOptions {
+        return NavOptions.Builder().setEnterAnim(R.anim.slide_in_bottom)
+            .setExitAnim(R.anim.slide_out_top)
+            .setPopEnterAnim(R.anim.slide_in_top)
+            .setPopExitAnim(R.anim.slide_out_bottom).build()
+    }
 }
 
