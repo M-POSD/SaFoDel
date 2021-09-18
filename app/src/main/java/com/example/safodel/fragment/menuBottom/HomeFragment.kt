@@ -32,6 +32,8 @@ import kotlin.collections.ArrayList
 import androidx.core.widget.NestedScrollView
 import android.view.MenuInflater
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewCompat.setFitsSystemWindows
 import com.example.safodel.databinding.HomepageImagesBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
@@ -113,7 +115,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             this.cancel()
         }
 
-
+        binding.toolbar.simpleToolbar.fitsSystemWindows = false
 
         return binding.root
 
@@ -132,9 +134,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 ).edit().putBoolean("isLearningMode", false).apply()
             }
         }
-
-
-
     }
 
 

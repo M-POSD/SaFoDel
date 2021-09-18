@@ -67,10 +67,12 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
      * Press the return navigation icon to go back to previous page
      */
     open fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
-        setToolbarBasic(toolbar)
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
         toolbar.setNavigationIcon(R.drawable.arrow_left_circle)
         toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
+            mainActivity.onBackPressed()
         }
     }
 
@@ -78,10 +80,12 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
      * Press the cancelled navigation icon to go back to previous page
      */
     fun setToolbarCancel(toolbar: androidx.appcompat.widget.Toolbar) {
-        setToolbarBasic(toolbar)
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
         toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel)
         toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
+            mainActivity.onBackPressed()
         }
     }
 
