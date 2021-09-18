@@ -71,6 +71,7 @@ Follow Mapbox's [docs](https://docs.mapbox.com/help/getting-started/access-token
 | Module              | Description
 | ------------------- | -----------
 | [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize) | Auto size the screen
+| [DotsIndicator](https://github.com/tommybuonomo/dotsindicator) | Material View Pager Dots Indicator
 | [Explosionfield](https://github.com/tyrantgit/ExplosionField)  | Explosive dust effect for views
 | [Material-dialogs](https://github.com/afollestad/material-dialogs) | Create dialog
 | [Spotlight](https://github.com/TakuSemba/Spotlight)              | Lights wherever we want
