@@ -223,7 +223,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun unlockSwipeDrawer(){
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 }
 
