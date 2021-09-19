@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
@@ -42,6 +43,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlin.concurrent.schedule
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import java.lang.Exception
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -69,6 +73,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private var isInitialRainingAnimation = true
 
     private lateinit var adapter: HomeViewAdapter
+    private lateinit var runnable: Runnable
+    private lateinit var handler: Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,10 +130,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         binding.toolbar.simpleToolbar.fitsSystemWindows = false
 
+
         adapter = HomeViewAdapter(requireActivity(), this)
         homepageButtonLayout.viewPager2Home.adapter = adapter
         homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
         setViewPager2AutoIncrementPosition()
+
         return binding.root
 
     }
@@ -154,19 +162,39 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     private fun setViewPager2AutoIncrementPosition() {
-        val handler = Handler()
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                if (homepageButtonLayout.viewPager2Home.currentItem == 5) {
-                    homepageButtonLayout.viewPager2Home.currentItem -= 5
-                } else {
-                    Log.d("cuurent position", homepageButtonLayout.viewPager2Home.currentItem.toString())
-                    homepageButtonLayout.viewPager2Home.currentItem += 1
-                }
-
-                handler.postDelayed(this, 5000)//1 sec delay
+        handler = Handler(Looper.getMainLooper())
+        runnable = Runnable {
+            if (homepageButtonLayout.viewPager2Home.currentItem == 5) {
+                homepageButtonLayout.viewPager2Home.currentItem -= 5
+            } else {
+                Log.d(
+                    "current position",
+                    homepageButtonLayout.viewPager2Home.currentItem.toString()
+                )
+                homepageButtonLayout.viewPager2Home.currentItem += 1
             }
-        }, 5000)
+            handler.postDelayed(runnable, 5000) //5 sec delay
+        }
+        handler.postDelayed(runnable, 5000)
+
+        homepageButtonLayout.viewPager2Home.registerOnPageChangeCallback(object :
+            OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//                handler.removeCallbacks(runnable)
+                Log.e("onPageScrolled", position.toString())
+            }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+//                handler.postDelayed(runnable, 5000)
+                Log.e("Selected_Page", position.toString())
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
