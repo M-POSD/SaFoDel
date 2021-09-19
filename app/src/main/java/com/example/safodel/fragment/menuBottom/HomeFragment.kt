@@ -36,6 +36,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.setFitsSystemWindows
 import com.example.safodel.adapter.EpicStyle2Adapter
 import com.example.safodel.adapter.HomeViewAdapter
+import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
@@ -60,6 +61,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var animatorDriving: AnimatorSet
     private lateinit var rainingList: IntArray
     private lateinit var homePageImage: HomepageImagesBinding
+    private lateinit var homepageButtonLayout: HomepageButtonLayoutBinding
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
@@ -87,6 +89,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
         homePageImage = binding.homePageImages
+        homepageButtonLayout = binding.homepageButtonLayout
         mainActivity = activity as MainActivity
 
         animatorSetLight = AnimatorSet()
@@ -122,8 +125,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.toolbar.simpleToolbar.fitsSystemWindows = false
 
         adapter = HomeViewAdapter(requireActivity(), this)
-        binding.homepageButtonLayout.viewPager2Home.adapter = adapter
-        binding.homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(binding.homepageButtonLayout.viewPager2Home)
+        homepageButtonLayout.viewPager2Home.adapter = adapter
+        homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
         setViewPager2AutoIncrementPosition()
         return binding.root
 
@@ -154,11 +157,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val handler = Handler()
         handler.postDelayed(object : Runnable {
             override fun run() {
-                if (binding.homepageButtonLayout.viewPager2Home.currentItem == 5) {
-                    binding.homepageButtonLayout.viewPager2Home.currentItem -= 5
+                if (homepageButtonLayout.viewPager2Home.currentItem == 5) {
+                    homepageButtonLayout.viewPager2Home.currentItem -= 5
                 } else {
-                    Log.d("cuurent position", binding.homepageButtonLayout.viewPager2Home.currentItem.toString())
-                    binding.homepageButtonLayout.viewPager2Home.currentItem += 1
+                    Log.d("cuurent position", homepageButtonLayout.viewPager2Home.currentItem.toString())
+                    homepageButtonLayout.viewPager2Home.currentItem += 1
                 }
 
                 handler.postDelayed(this, 5000)//1 sec delay
@@ -174,20 +177,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // set up default text view
     private fun configDefaultTextView() {
-        binding.homepageButtonLayout.epicCard12.scEditTextLeft.text = getString(R.string.epic1_name)
-        binding.homepageButtonLayout.epicCard12.scEditTextRight.text =
+        homepageButtonLayout.epicCard12.scEditTextLeft.text = getString(R.string.epic1_name)
+        homepageButtonLayout.epicCard12.scEditTextRight.text =
             getString(R.string.epic2_name)
-        binding.homepageButtonLayout.epicCard34.scEditTextLeft.text = getString(R.string.epic3_name)
-        binding.homepageButtonLayout.epicCard34.scEditTextRight.text =
+        homepageButtonLayout.epicCard34.scEditTextLeft.text = getString(R.string.epic3_name)
+        homepageButtonLayout.epicCard34.scEditTextRight.text =
             getString(R.string.epic4_name)
     }
 
     // set up default image view
     private fun configDefaultImageView() {
-        binding.homepageButtonLayout.epicCard12.scImageViewLeft.setImageResource(R.drawable.tip)
-        binding.homepageButtonLayout.epicCard12.scImageViewRight.setImageResource(R.drawable.delivery_on_ebike)
-        binding.homepageButtonLayout.epicCard34.scImageViewLeft.setImageResource(R.drawable.safety_gear)
-        binding.homepageButtonLayout.epicCard34.scImageViewRight.setImageResource(R.drawable.in_an_accident)
+        homepageButtonLayout.epicCard12.scImageViewLeft.setImageResource(R.drawable.tip)
+        homepageButtonLayout.epicCard12.scImageViewRight.setImageResource(R.drawable.delivery_on_ebike)
+        homepageButtonLayout.epicCard34.scImageViewLeft.setImageResource(R.drawable.safety_gear)
+        homepageButtonLayout.epicCard34.scImageViewRight.setImageResource(R.drawable.in_an_accident)
     }
 
     // raining animation
@@ -285,22 +288,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // config onClickListener for navigation
     private fun configOnClickListener() {
-        binding.homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
 //            recordPosition(0)
             findNavController().navigate(R.id.epic1Fragment, null, navAnimationBottomToTop())
         }
 
-        binding.homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
 //            recordPosition(1)
             findNavController().navigate(R.id.epic2Fragment, null, navAnimationBottomToTop())
         }
 
-        binding.homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
 //            recordPosition(2)
             findNavController().navigate(R.id.epic3Fragment, null, navAnimationBottomToTop())
         }
 
-        binding.homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
 //            recordPosition(3)
             findNavController().navigate(R.id.epic4Fragment, null, navAnimationBottomToTop())
         }
@@ -422,11 +425,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
 
         val fifthTarget = Target.Builder()
-            .setAnchor(binding.homepageButtonLayout.epicCard12.cardLeft)
+            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
             .setShape(
                 RoundedRectangle(
-                    binding.homepageButtonLayout.epicCard12.cardLeft.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard12.cardLeft.width * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard12.cardLeft.height * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard12.cardLeft.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -442,11 +445,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
 
         val sixthTarget = Target.Builder()
-            .setAnchor(binding.homepageButtonLayout.epicCard12.cardLeft)
+            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
             .setShape(
                 RoundedRectangle(
-                    binding.homepageButtonLayout.epicCard12.cardRight.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard12.cardRight.width * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard12.cardRight.height * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard12.cardRight.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -456,8 +459,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         targets.add(sixthTarget)
 
 
-        val height = (binding.homepageButtonLayout.epicCard34.cardRight.height
-                - binding.homepageButtonLayout.epicCard34.cardRight.top * 2).toFloat()
+        val height = (homepageButtonLayout.epicCard34.cardRight.height
+                - homepageButtonLayout.epicCard34.cardRight.top * 2).toFloat()
 
         // seventh target
         val seventhRoot = FrameLayout(requireContext())
@@ -471,8 +474,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             )
             .setShape(
                 RoundedRectangle(
-                    binding.homepageButtonLayout.epicCard34.cardLeft.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard34.cardLeft.width * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard34.cardLeft.height * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard34.cardLeft.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -495,8 +498,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             )
             .setShape(
                 RoundedRectangle(
-                    binding.homepageButtonLayout.epicCard34.cardRight.height * 1.2.toFloat(),
-                    binding.homepageButtonLayout.epicCard34.cardRight.width * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard34.cardRight.height * 1.2.toFloat(),
+                    homepageButtonLayout.epicCard34.cardRight.width * 1.2.toFloat(),
                     10f
                 )
             )
@@ -579,7 +582,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         var scroll =
-            binding.homepageButtonLayout.epicCard12.cardLeft.top + binding.homepageButtonLayout.epicCard12.cardLeft.bottom
+            homepageButtonLayout.epicCard12.cardLeft.top + homepageButtonLayout.epicCard12.cardLeft.bottom
         fifth.findViewById<View>(R.id.next_target).setOnClickListener {
             binding.homeScrollView.scrollTo(0, scroll)
             spotlight.next()
