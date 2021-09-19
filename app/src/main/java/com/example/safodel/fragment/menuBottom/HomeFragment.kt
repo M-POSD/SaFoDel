@@ -3,6 +3,7 @@ package com.example.safodel.fragment.menuBottom
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -693,9 +694,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun configTheme(mode: String) {
         when (mode) {
             "light" -> {
-//                binding.darkModeLayout.visibility = View.INVISIBLE
-//                binding.lightModeLayout.visibility = View.VISIBLE
-
                 homePageImage.homepageAppBar.setBackgroundResource(R.color.white)
                 homePageImage.headlight.visibility = View.INVISIBLE
                 homePageImage.backpack.alpha = 0f
@@ -708,10 +706,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //                setToolbarBasic(toolbar)
             }
             "night" -> {
-//                binding.lightModeLayout.visibility = View.INVISIBLE
-//                binding.darkModeLayout.visibility = View.VISIBLE
+//               val gd = GradientDrawable(
+//                    GradientDrawable.Orientation.TOP_BOTTOM,
+//                intArrayOf(R.color.darkSky, R.color.snow))
+//                gd.cornerRadius = 0f
 
-                homePageImage.homepageAppBar.setBackgroundResource(R.color.darkSky)
+//                homePageImage.homepageAppBar.background = gd
+                homePageImage.homepageAppBar.setBackgroundResource(R.drawable.darksky_snow_gradient)
                 homePageImage.headlight.visibility = View.VISIBLE
                 homePageImage.backpack.alpha = 0f
                 homePageImage.backpack.setImageResource(R.drawable.backpack_dark)
