@@ -62,6 +62,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.openDrawer()
         }
         toolbar.setNavigationIcon(R.drawable.menu_white)
+        mainActivity.unlockSwipeDrawer()
     }
 
     /**
@@ -89,6 +90,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationOnClickListener {
             mainActivity.onBackPressed()
         }
+        mainActivity.lockSwipeDrawer()
     }
 
     /**
@@ -102,6 +104,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.openDrawer()
         }
         toolbar.setNavigationIcon(R.drawable.menu_green)
+        mainActivity.unlockSwipeDrawer()
         toolbar.inflateMenu(R.menu.nav_icon_menu_light_mode)
     }
 
@@ -116,6 +119,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.openDrawer()
         }
         toolbar.setNavigationIcon(R.drawable.menu_white)
+        mainActivity.unlockSwipeDrawer()
         toolbar.inflateMenu(R.menu.nav_icon_menu_dark_mode)
     }
 
