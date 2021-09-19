@@ -376,74 +376,75 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
 
             /*-- Add inmage --*/
-            it.addImage(
-                "icon_image",
-                BitmapUtils.getBitmapFromDrawable(
-                    context?.let { it1 ->
-                        ContextCompat.getDrawable(
-                            it1,
-                            R.drawable.crash_location
-                        )
-                    }
-                )!!)
+//            it.addImage(
+//                "icon_image",
+//                BitmapUtils.getBitmapFromDrawable(
+//                    context?.let { it1 ->
+//                        ContextCompat.getDrawable(
+//                            it1,
+//                            R.drawable.crash_location
+//                        )
+//                    }
+//                )!!)
 
             /*-- Add source --*/
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
 
-            it.addSource(GeoJsonSource("line-source", Feature.fromGeometry(LineString.fromLngLats(
-                locationList))))
 
             trafficPlugin = TrafficPlugin(mapView,mapboxMap,it)
             trafficPlugin.setVisibility(true)
 
 
             /*-- Add layer --*/
-//            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
-//                circleColor(Color.parseColor("#FF0000")),
-//                visibility(Property.VISIBLE),
-//                iconIgnorePlacement(false),
-//                iconAllowOverlap(false),
-//                circleRadius(
-//                    interpolate(
-//                        linear(), zoom(),
+            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
+                circleColor(Color.parseColor("#ff0015")),
+                visibility(Property.VISIBLE),
+                iconIgnorePlacement(false),
+                iconAllowOverlap(false),
+                circleRadius(
+                    interpolate(
+                        linear(), zoom(),
 //                        stop(11f, 4f),
 //                        stop(12f, 4f),
 //                        stop(15f,4f),
 //                        stop(15.1f,0f)
-//                )
-//            ))
-//            it.addLayer(basicCircle)
+                        stop(10, 1.0f),
+                        stop(15, 4.0f),
+                        stop(20, 16f)
+                )
+            ))
+            it.addLayer(basicCircle)
 
             /*-- Add circle layer --*/
-//            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
-//                .withProperties(
-//                    circleColor(parseColor("#FC9C9C")),
-//                    circleRadius(6f),
-//                    visibility(Property.VISIBLE),
-//                    circleOpacity(
-//                        interpolate(
-//                            linear(), zoom(),
-//                            stop(11f, .5f),
-//                            stop(15f,0f)
-//                        )
-//                    ),
-//                    iconIgnorePlacement(false),
-//                    iconAllowOverlap(false)
-//                )
-//            it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
+            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
+                .withProperties(
+                    circleColor(parseColor("#bd0010")),
+                    visibility(Property.VISIBLE),
+                    circleOpacity(
+                        interpolate(
+                            linear(), zoom(),
+                            stop(10, 0.75f),
+                            stop(15, 6f),
+                            stop(20.0f, 18.0f)
+                        )
+                    ),
+                    iconIgnorePlacement(false),
+                    iconAllowOverlap(false)
+                )
+            it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
             /*-- Add symbol layer --*/
-            val symbolIconLayer = SymbolLayer("icon_layer", "source")
-            symbolIconLayer.withProperties(
-                visibility(Property.VISIBLE),
-                iconImage("icon_image"),
-                iconSize(1.5f),
-                iconIgnorePlacement(false),
-                iconAllowOverlap(false)
-            )
-            symbolIconLayer.minZoom = 15f
-            it.addLayer(symbolIconLayer)
+//            val symbolIconLayer = SymbolLayer("icon_layer", "source")
+//            symbolIconLayer.withProperties(
+//                visibility(Property.VISIBLE),
+//                iconImage("icon_image"),
+//                iconSize(1.5f),
+//                iconIgnorePlacement(false),
+//                iconAllowOverlap(false)
+//            )
+//            symbolIconLayer.minZoom = 15f
+//            it.addLayer(symbolIconLayer)
 
 //            val routeLayer = LineLayer("line_layer","line-source")
 //            routeLayer.withProperties(lineCap(Property.LINE_CAP_SQUARE),
@@ -578,7 +579,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val bcLayer =  it.getLayer("basic_circle_cayer")
             val scLayer = it.getLayer("shadow_circle_cayer")
             val siLayer = it.getLayer("icon_layer")
-            if(siLayer != null){
+            if(bcLayer != null){
                 if(View.VISIBLE.equals(mapView.visibility)){
                     setToolbarReturn(toolbar)
                     mainActivity.isBottomNavigationVisible(false)
@@ -590,9 +591,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
                     binding.spinner.visibility = View.INVISIBLE
                     binding.updateMap.visibility = View.INVISIBLE
-                    bcLayer?.setProperties(visibility(Property.NONE))
+                    bcLayer.setProperties(visibility(Property.NONE))
                     scLayer?.setProperties(visibility(Property.NONE))
-                    siLayer.setProperties(visibility(Property.NONE))
+                    siLayer?.setProperties(visibility(Property.NONE))
 
                 }
             else {
@@ -606,9 +607,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
                     binding.spinner.visibility = View.VISIBLE
                     binding.updateMap.visibility = View.VISIBLE
-                    bcLayer?.setProperties(visibility(Property.VISIBLE))
+                    bcLayer.setProperties(visibility(Property.VISIBLE))
                     scLayer?.setProperties(visibility(Property.VISIBLE))
-                    siLayer.setProperties(visibility(Property.VISIBLE))
+                    siLayer?.setProperties(visibility(Property.VISIBLE))
 
             }
             }
