@@ -65,25 +65,46 @@
         <item name="colorAccent">@color/secondary_green</item>
     </style>
 
-    <style name="textStyle14">
+    <style name="textStyle14_green">
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/notosansjp_bold</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/primary_green</item>
     </style>
 
-    <style name="textStyle16">
+    <style name="textStyle14_black">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textStyle16_green">
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/notosansjp_bold</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/primary_green</item>
     </style>
 
-    <style name="textStyle20_black">
+    <style name="textStyle16_black">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textStyle20_bold_green">
         <item name="android:textSize">20dp</item>
         <item name="android:fontFamily">@font/notosansjp_black</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/primary_green</item>
+    </style>
+
+    <style name="textStyle20_bold_black">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/notosansjp_black</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="worm_dot_indicator">

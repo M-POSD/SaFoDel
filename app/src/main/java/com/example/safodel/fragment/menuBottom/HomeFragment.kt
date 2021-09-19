@@ -218,7 +218,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun configDefaultImageView() {
         homepageButtonLayout.epicCard12.scImageViewLeft.setImageResource(R.drawable.tip)
         homepageButtonLayout.epicCard12.scImageViewRight.setImageResource(R.drawable.delivery_on_ebike)
-        homepageButtonLayout.epicCard34.scImageViewLeft.setImageResource(R.drawable.safety_gear)
+        homepageButtonLayout.epicCard34.scImageViewLeft.setImageResource(R.drawable.road_sign)
         homepageButtonLayout.epicCard34.scImageViewRight.setImageResource(R.drawable.in_an_accident)
     }
 

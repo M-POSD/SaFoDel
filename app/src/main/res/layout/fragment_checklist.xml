@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="@string/checklist_notification_unprepared"
             android:justificationMode="inter_word"
-            style="@style/textStyle16"/>
+            style="@style/textStyle16_green"/>
 
     </LinearLayout>
 

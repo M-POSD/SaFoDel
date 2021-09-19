@@ -160,7 +160,7 @@ class   GroupCard2Data(
                     0,
                     R.string.road_sign1_description,
                     R.drawable.road_sign_1,
-                    2)
+                    1)
             )
 
             groupCard2Data.add(
@@ -178,7 +178,7 @@ class   GroupCard2Data(
                     0,
                     R.string.road_sign3_description,
                     R.drawable.road_sign_3,
-                    2)
+                    1)
             )
 
             groupCard2Data.add(
@@ -196,7 +196,7 @@ class   GroupCard2Data(
                     0,
                     R.string.road_sign5_description,
                     R.drawable.road_sign_5,
-                    2)
+                    1)
             )
 
             groupCard2Data.add(

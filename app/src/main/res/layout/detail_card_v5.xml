@@ -30,11 +30,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/notosansjp_black"
                 android:text="Demo"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
+                style="@style/textStyle20_bold_black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,12 +71,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/notosansjp_bold"
                             android:text="Demo"
                             android:justificationMode="inter_word"
-                            android:textAppearance="?attr/textAppearanceHeadline6"
-                            android:textColor="@color/black"
-                            android:textSize="14dp" />
+                            style="@style/textStyle14_black"/>
 
                     </LinearLayout>
 

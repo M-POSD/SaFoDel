@@ -25,7 +25,7 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
 
         configSection1()
         configSection2()
-        configSection3()
+//        configSection3()
 
         val toolbar = binding.toolbar.root
         setToolbarReturn(toolbar)
@@ -38,25 +38,25 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
     }
 
     private fun configSection1() {
-        binding.tip1Heading.text = getString(R.string.tip1_name_v2)
+        binding.heading1.text = getString(R.string.tip1_name)
         adapter1 = EpicStyle2Adapter(requireActivity(), getSection1Data())
         binding.viewPager2Section1.adapter = adapter1
         binding.wormDotsIndicatorSection1.setViewPager2(binding.viewPager2Section1)
     }
 
     private fun configSection2() {
-        binding.tip2Heading.text = getString(R.string.tip2_name_v2)
+        binding.heading2.text = getString(R.string.tip2_name)
         adapter2 = EpicStyle1Adapter(requireActivity(), getSection2Data())
         binding.viewPager2Section2.adapter = adapter2
         binding.wormDotsIndicatorSection2.setViewPager2(binding.viewPager2Section2)
     }
 
-    private fun configSection3() {
-        binding.tip3Heading.text = getString(R.string.tip3_name_v2)
-        adapter3 = EpicStyle2Adapter(requireActivity(), getSection3Data())
-        binding.viewPager2Section3.adapter = adapter3
-        binding.wormDotsIndicatorSection3.setViewPager2(binding.viewPager2Section3)
-    }
+//    private fun configSection3() {
+//        binding.tip3Heading.text = getString(R.string.tip3_name)
+//        adapter3 = EpicStyle2Adapter(requireActivity(), getSection3Data())
+//        binding.viewPager2Section3.adapter = adapter3
+//        binding.wormDotsIndicatorSection3.setViewPager2(binding.viewPager2Section3)
+//    }
 
     private fun getSection1Data(): MutableList<GroupCard2Data> {
         val data = GroupCard2Data.init()
@@ -82,15 +82,15 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         return data
     }
 
-    private fun getSection3Data(): MutableList<GroupCard2Data> {
-        val data = GroupCard2Data.init()
-        var i = 0
-        while (i < data.size) {
-            when (data[i].dataType) {
-                "roadSign" -> i++
-                else -> data.removeAt(i)
-            }
-        }
-        return data
-    }
+//    private fun getSection3Data(): MutableList<GroupCard2Data> {
+//        val data = GroupCard2Data.init()
+//        var i = 0
+//        while (i < data.size) {
+//            when (data[i].dataType) {
+//                "roadSign" -> i++
+//                else -> data.removeAt(i)
+//            }
+//        }
+//        return data
+//    }
 }

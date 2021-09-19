@@ -32,17 +32,14 @@
                 android:id="@+id/generic_info_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosansjp_black"
                 android:gravity="center"
                 android:paddingHorizontal="30dp"
                 android:text="@string/generic_information_heading"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/primary_green"
-                android:textSize="20dp" />
+                style="@style/textStyle20_bold_green"/>
 
             <TextView
                 android:id="@+id/generic_info_description"
-                style="@style/textStyle14"
+                style="@style/textStyle14_green"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

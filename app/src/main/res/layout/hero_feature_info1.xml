@@ -32,24 +32,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosansjp_black"
                 android:gravity="center"
                 android:paddingHorizontal="30dp"
                 android:text="@string/home_page_slang_1"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/primary_green"
-                android:textSize="20dp" />
+                 style="@style/textStyle20_bold_green"/>
 
             <TextView
                 android:id="@+id/home_page_slang_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosansjp_bold"
                 android:gravity="center"
                 android:text="@string/home_page_slang_2"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/primary_green"
-                android:textSize="14dp" />
+                style="@style/textStyle14_green" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

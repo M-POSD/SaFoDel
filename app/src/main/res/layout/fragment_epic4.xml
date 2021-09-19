@@ -24,8 +24,8 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tip1_heading"
-                style="@style/textStyle14"
+                android:id="@+id/heading1"
+                style="@style/textStyle20_bold_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -46,8 +46,8 @@
                 android:layout_margin="10dp" />
 
             <TextView
-                android:id="@+id/tip2_heading"
-                style="@style/textStyle14"
+                android:id="@+id/heading2"
+                style="@style/textStyle20_bold_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -68,8 +68,8 @@
                 android:layout_margin="10dp" />
 
             <TextView
-                android:id="@+id/tip3_heading"
-                style="@style/textStyle14"
+                android:id="@+id/heading3"
+                style="@style/textStyle20_bold_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"

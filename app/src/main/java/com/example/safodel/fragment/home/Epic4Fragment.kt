@@ -38,21 +38,21 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
     }
 
     private fun configSection1() {
-        binding.tip1Heading.text = getString(R.string.in_an_accident1_name)
+        binding.heading1.text = getString(R.string.in_an_accident1_name)
         adapter1 = EpicStyle2Adapter(requireActivity(), getSection1Data())
         binding.viewPager2Section1.adapter = adapter1
         binding.wormDotsIndicatorSection1.setViewPager2(binding.viewPager2Section1)
     }
 
     private fun configSection2() {
-        binding.tip2Heading.text = getString(R.string.in_an_accident2_name)
+        binding.heading2.text = getString(R.string.in_an_accident2_name)
         adapter2 = EpicStyle2Adapter(requireActivity(), getSection2Data())
         binding.viewPager2Section2.adapter = adapter2
         binding.wormDotsIndicatorSection2.setViewPager2(binding.viewPager2Section2)
     }
 
     private fun configSection3() {
-        binding.tip3Heading.text = getString(R.string.in_an_accident3_name)
+        binding.heading3.text = getString(R.string.in_an_accident3_name)
         adapter3 = EpicStyle1Adapter(requireActivity(), getSection3Data())
         binding.viewPager2Section3.adapter = adapter3
         binding.wormDotsIndicatorSection3.setViewPager2(binding.viewPager2Section3)

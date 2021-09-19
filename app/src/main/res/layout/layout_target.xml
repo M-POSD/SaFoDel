@@ -39,12 +39,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
                 android:fontFamily="@font/notosansjp_bold"
                 android:text="Next"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/primary_green"
+                android:textColor="@color/white"
                 android:textSize="10dp"
                 app:cornerRadius="50dp" />
 
@@ -53,12 +53,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
                 android:fontFamily="@font/notosansjp_bold"
                 android:text="Close"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/primary_green"
+                android:textColor="@color/white"
                 android:textSize="10dp"
                 app:cornerRadius="50dp" />
         </LinearLayout>
