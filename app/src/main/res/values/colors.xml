@@ -36,5 +36,5 @@
     <color name="spotlightBackground">#BF000000</color>
     <color name="correct_border_color">#8AD0AB</color>
     <color name="wrong_border_color">#D08A8A</color>
-
+    <color name="bottom_nav_gray">#696565</color>
 </resources>

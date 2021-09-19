@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_item_one_dark"
-        android:icon="@drawable/rain_black"
+        android:icon="@drawable/rain_gray"
         app:showAsAction="always"
         android:title="@string/raining" />
 
