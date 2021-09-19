@@ -13,20 +13,51 @@
         android:id="@+id/toolbar"
         layout="@layout/simple_toolbar" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8">
+        android:layout_height="wrap_content">
 
         <include
             android:id="@+id/checklist"
             layout="@layout/detail_card_checklist" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"/>
+
+        <ImageView
+            android:id="@+id/checklist_notification_icon"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:src="@drawable/not_cool"
+            android:scaleY="2"
+            android:scaleX="2"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+        <TextView
+            android:id="@+id/checklist_notification_text"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:text="@string/checklist_notification_unprepared"
+            android:justificationMode="inter_word"
+            style="@style/textStyle16"/>
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

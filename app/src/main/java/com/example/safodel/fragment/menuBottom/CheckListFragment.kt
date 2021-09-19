@@ -2,16 +2,25 @@ package com.example.safodel.fragment.menuBottom
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.R
+import com.example.safodel.databinding.DetailCardChecklistBinding
 import com.example.safodel.databinding.FragmentChecklistBinding
 import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.ui.main.MainActivity
+import com.example.safodel.viewModel.CheckListViewModel
 
 class CheckListFragment :
     BasicFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
+    private lateinit var checklist: DetailCardChecklistBinding
+    private lateinit var model: CheckListViewModel
+    private lateinit var mainActivity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +28,13 @@ class CheckListFragment :
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChecklistBinding.inflate(inflater, container, false)
+        mainActivity = activity as MainActivity
+
         val toolbar = binding.toolbar.root
+        checklist = binding.checklist
+        model = ViewModelProvider(requireActivity()).get(CheckListViewModel::class.java)
+
+        configNotificationView()
 
         setToolbarReturn(toolbar)
 
@@ -31,6 +46,20 @@ class CheckListFragment :
 
         // set up when the check box is clicked, the record will be recorded in share preference
         configCheckboxClickListener()
+
+
+        model.getCheck().observe(viewLifecycleOwner, { t ->
+            if (t == true) {
+                binding.checklistNotificationIcon.setImageResource(R.drawable.well_down)
+                binding.checklistNotificationText.text =
+                    getString(R.string.checklist_notification_prepared)
+            } else {
+                binding.checklistNotificationIcon.setImageResource(R.drawable.not_cool)
+                binding.checklistNotificationText.text =
+                    getString(R.string.checklist_notification_unprepared)
+            }
+            mainActivity.changeCheckListIcon(t)
+        })
 
         return binding.root
     }
@@ -45,101 +74,97 @@ class CheckListFragment :
 //        binding.gear2.currentPageText.text = getString(R.string.gear2_name)
 //        binding.gear2.notification.text = getString(R.string.gear2_slang)
 
-        binding.checklist.checkbox1.checkbox.text =
+        checklist.checkbox1.checkbox.text =
             getString(R.string.gear_check_list_item1)
-        binding.checklist.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)
-        binding.checklist.checkbox2.checkbox.text =
+        checklist.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)
+        checklist.checkbox2.checkbox.text =
             getString(R.string.gear_check_list_item2)
-        binding.checklist.checkbox2.checkboxImage.setImageResource(R.drawable.bicycle_with_light)
-        binding.checklist.checkbox3.checkbox.text =
+        checklist.checkbox2.checkboxImage.setImageResource(R.drawable.bicycle_with_light)
+        checklist.checkbox3.checkbox.text =
             getString(R.string.gear_check_list_item3)
-        binding.checklist.checkbox3.checkboxImage.setImageResource(R.drawable.mask)
-        binding.checklist.checkbox4.checkbox.text =
+        checklist.checkbox3.checkboxImage.setImageResource(R.drawable.mask)
+        checklist.checkbox4.checkbox.text =
             getString(R.string.gear_check_list_item4)
-        binding.checklist.checkbox4.checkboxImage.setImageResource(R.drawable.vest)
-        binding.checklist.checkbox5.checkbox.text =
+        checklist.checkbox4.checkboxImage.setImageResource(R.drawable.vest)
+        checklist.checkbox5.checkbox.text =
             getString(R.string.gear_check_list_item5)
-        binding.checklist.checkbox5.checkboxImage.setImageResource(R.drawable.gloves)
-        binding.checklist.checkbox6.checkbox.text =
+        checklist.checkbox5.checkboxImage.setImageResource(R.drawable.gloves)
+        checklist.checkbox6.checkbox.text =
             getString(R.string.gear_check_list_item6)
-        binding.checklist.checkbox6.checkboxImage.setImageResource(R.drawable.hand_sanitizer)
+        checklist.checkbox6.checkboxImage.setImageResource(R.drawable.hand_sanitizer)
     }
 
-    // keep the record of the checkbox clicked
-    private fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
-        val checkbox = "checkbox$checkbox_num"
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            checkbox, Context.MODE_PRIVATE
-        )
+    private fun configNotificationView() {
+        if (mainActivity.getCheckboxSharePrefer(1) && mainActivity.getCheckboxSharePrefer(2)
+            && mainActivity.getCheckboxSharePrefer(3) && mainActivity.getCheckboxSharePrefer(4)
+            && mainActivity.getCheckboxSharePrefer(5) && mainActivity.getCheckboxSharePrefer(6)
+        ) {
+            model.setCheck(true)
+        } else {
+            model.setCheck(false)
+        }
 
-        val spEditor = sharedPref.edit()
-        spEditor.putBoolean(checkbox, isChecked)
-        spEditor.apply()
-    }
-
-    // get the previous checkbox clicked by the user
-    private fun getCheckboxSharePrefer(checkbox_num: Int): Boolean {
-        val checkbox = "checkbox$checkbox_num"
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            checkbox,
-            Context.MODE_PRIVATE
-        )
-        return sharedPref.getBoolean(checkbox, false)
     }
 
     // set the checkbox was clicked by user or not
     private fun configCheckboxClicked() {
-        binding.checklist.checkbox1.checkbox.isChecked = getCheckboxSharePrefer(1)
-        binding.checklist.checkbox2.checkbox.isChecked = getCheckboxSharePrefer(2)
-        binding.checklist.checkbox3.checkbox.isChecked = getCheckboxSharePrefer(3)
-        binding.checklist.checkbox4.checkbox.isChecked = getCheckboxSharePrefer(4)
-        binding.checklist.checkbox5.checkbox.isChecked = getCheckboxSharePrefer(5)
-        binding.checklist.checkbox6.checkbox.isChecked = getCheckboxSharePrefer(6)
+        checklist.checkbox1.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(1)
+        checklist.checkbox2.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(2)
+        checklist.checkbox3.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(3)
+        checklist.checkbox4.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(4)
+        checklist.checkbox5.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(5)
+        checklist.checkbox6.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(6)
     }
 
     // record if the user tick the check box
     private fun configCheckboxClickListener() {
-        binding.checklist.checkbox1.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.checkbox1.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                keepCheckboxSharePrefer(1, true)
+                mainActivity.keepCheckboxSharePrefer(1, true)
             } else {
-                keepCheckboxSharePrefer(1, false)
+                mainActivity.keepCheckboxSharePrefer(1, false)
             }
+            configNotificationView()
         })
-        binding.checklist.checkbox2.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.checkbox2.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                keepCheckboxSharePrefer(2, true)
+                mainActivity.keepCheckboxSharePrefer(2, true)
             } else {
-                keepCheckboxSharePrefer(2, false)
+                mainActivity.keepCheckboxSharePrefer(2, false)
             }
+            configNotificationView()
         })
-        binding.checklist.checkbox3.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.checkbox3.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                keepCheckboxSharePrefer(3, true)
+                mainActivity.keepCheckboxSharePrefer(3, true)
             } else {
-                keepCheckboxSharePrefer(3, false)
+                mainActivity.keepCheckboxSharePrefer(3, false)
             }
+            configNotificationView()
         })
-        binding.checklist.checkbox4.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.checkbox4.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                keepCheckboxSharePrefer(4, true)
+                mainActivity.keepCheckboxSharePrefer(4, true)
             } else {
-                keepCheckboxSharePrefer(4, false)
+                mainActivity.keepCheckboxSharePrefer(4, false)
             }
+            configNotificationView()
         })
-        binding.checklist.checkbox5.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.checkbox5.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                keepCheckboxSharePrefer(5, true)
+                mainActivity.keepCheckboxSharePrefer(5, true)
             } else {
-                keepCheckboxSharePrefer(5, false)
+                mainActivity.keepCheckboxSharePrefer(5, false)
             }
+            configNotificationView()
         })
-        binding.checklist.checkbox6.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.checkbox6.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                keepCheckboxSharePrefer(6, true)
+                mainActivity.keepCheckboxSharePrefer(6, true)
             } else {
-                keepCheckboxSharePrefer(6, false)
+                mainActivity.keepCheckboxSharePrefer(6, false)
             }
+            configNotificationView()
         })
     }
 }

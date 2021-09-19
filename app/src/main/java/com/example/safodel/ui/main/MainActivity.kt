@@ -12,10 +12,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
+import com.example.safodel.viewModel.CheckListViewModel
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var toastMain: Toast
     private lateinit var drawer : DrawerLayout
+    private lateinit var bottomMenu: Menu
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         drawer = binding.drawerLayout
-
+        bottomMenu = binding.bottomNavigation.menu
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
@@ -51,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         leftHeaderText.setOnClickListener {
             drawer.closeDrawers()
         }
+
+        configCheckListIcon()
 
         recordLearningMode()
     }
@@ -160,8 +165,6 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                     R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-//                    R.id.navExam -> navController.navigate(R.id.examFragment)
-//                    R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
                 }
             }
             drawer.closeDrawers() // close the drawer of the left navigation.
@@ -213,7 +216,7 @@ class MainActivity : AppCompatActivity() {
 
      fun getStatusHeight(): Int{
         val rec = Rect()
-        getWindow().decorView.getWindowVisibleDisplayFrame(rec)
+        window.decorView.getWindowVisibleDisplayFrame(rec)
         val statusBarHeight = rec.top
         return statusBarHeight
     }
@@ -224,6 +227,47 @@ class MainActivity : AppCompatActivity() {
 
     fun unlockSwipeDrawer(){
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    }
+
+    fun changeCheckListIcon(isChecked: Boolean) {
+        when(isChecked) {
+            true -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_finish)
+            false -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_not_finish)
+        }
+
+    }
+
+    // keep the record of the checkbox clicked
+    fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
+        val checkbox = "checkbox$checkbox_num"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            checkbox, Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putBoolean(checkbox, isChecked)
+        spEditor.apply()
+    }
+
+    // get the previous checkbox clicked by the user
+    fun getCheckboxSharePrefer(checkbox_num: Int): Boolean {
+        val checkbox = "checkbox$checkbox_num"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            checkbox,
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getBoolean(checkbox, false)
+    }
+
+    private fun configCheckListIcon() {
+            if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
+                && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
+                && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
+            ) {
+                changeCheckListIcon(true)
+            } else {
+                changeCheckListIcon(false)
+            }
     }
 }
 

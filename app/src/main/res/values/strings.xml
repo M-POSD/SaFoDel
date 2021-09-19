@@ -243,6 +243,10 @@
 
     <!--  map  -->
 
+    <!-- checklist -->
+    <string name="checklist_notification_unprepared">Please make sure you prepare everyting on the checklist</string>
+    <string name="checklist_notification_prepared">Awesome! Time to start your journey !</string>
+
     <!--  about app  -->
     <string name="about">ABOUT</string>
     <string name="audience">AUDIENCE</string>
@@ -254,6 +258,7 @@
     <string name="generic_information_heading">Notification</string>
     <string name="generic_information_description">Placeholder</string>
     <string name="checklist">Checklist</string>
+
 
 
 </resources>

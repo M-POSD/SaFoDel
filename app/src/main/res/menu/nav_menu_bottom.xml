@@ -28,7 +28,7 @@
 
         <item
             android:id="@+id/navCheckList"
-            android:icon="@drawable/checklist"
+            android:icon="@drawable/checklist_not_finish"
             android:title="@string/checklist"/>
 
     </group>
