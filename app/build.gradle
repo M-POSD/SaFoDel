@@ -67,7 +67,6 @@ dependencies {
     implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.18" // Search with UI
     implementation "com.mapbox.navigation:android:2.0.0-beta.24" // SDK Navigation
     implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:0.5.1'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic-v9:0.10.0'
 
     // Security
     implementation("androidx.security:security-crypto:1.0.0")
