@@ -3,8 +3,8 @@ package com.example.safodel.fragment.menuBottom
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
@@ -40,6 +40,7 @@ import com.example.safodel.databinding.HomepageImagesBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlin.concurrent.schedule
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -123,7 +124,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         adapter = HomeViewAdapter(requireActivity(), this)
         binding.homepageButtonLayout.viewPager2Home.adapter = adapter
         binding.homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(binding.homepageButtonLayout.viewPager2Home)
-
+        setViewPager2AutoIncrementPosition()
         return binding.root
 
     }
@@ -144,10 +145,25 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setViewPager2AutoIncrementPosition() {
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                if (binding.homepageButtonLayout.viewPager2Home.currentItem == 5) {
+                    binding.homepageButtonLayout.viewPager2Home.currentItem -= 5
+                } else {
+                    Log.d("cuurent position", binding.homepageButtonLayout.viewPager2Home.currentItem.toString())
+                    binding.homepageButtonLayout.viewPager2Home.currentItem += 1
+                }
+
+                handler.postDelayed(this, 5000)//1 sec delay
+            }
+        }, 5000)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -159,9 +175,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // set up default text view
     private fun configDefaultTextView() {
         binding.homepageButtonLayout.epicCard12.scEditTextLeft.text = getString(R.string.epic1_name)
-        binding.homepageButtonLayout.epicCard12.scEditTextRight.text = getString(R.string.epic2_name)
+        binding.homepageButtonLayout.epicCard12.scEditTextRight.text =
+            getString(R.string.epic2_name)
         binding.homepageButtonLayout.epicCard34.scEditTextLeft.text = getString(R.string.epic3_name)
-        binding.homepageButtonLayout.epicCard34.scEditTextRight.text = getString(R.string.epic4_name)
+        binding.homepageButtonLayout.epicCard34.scEditTextRight.text =
+            getString(R.string.epic4_name)
     }
 
     // set up default image view
@@ -287,7 +305,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             findNavController().navigate(R.id.epic4Fragment, null, navAnimationBottomToTop())
         }
 
-        toolbar.setOnMenuItemClickListener{
+        toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_item_two_light -> {
                     if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
@@ -308,7 +326,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
                     true
                 }
-                else ->  false
+                else -> false
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.example.safodel.adapter
 
 import android.content.Context
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHeroFeatureBinding
+import java.util.*
+import kotlin.concurrent.schedule
 
-class HomeViewAdapter(val context: Context, private val parentFragment: Fragment): RecyclerView.Adapter<HomeViewAdapter.ViewHolder>() {
+class HomeViewAdapter(val context: Context, private val parentFragment: Fragment):
+    RecyclerView.Adapter<HomeViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: FragmentHeroFeatureBinding =
