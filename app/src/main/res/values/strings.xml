@@ -244,8 +244,8 @@
     <!--  map  -->
 
     <!-- checklist -->
-    <string name="checklist_notification_unprepared">Please make sure you prepare everyting on the checklist</string>
-    <string name="checklist_notification_prepared">Awesome! Time to start your journey !</string>
+    <string name="checklist_notification_unprepared">Please make sure you prepare everything on the checklist</string>
+    <string name="checklist_notification_prepared">Awesome! It\'s time to start your food delivering journey!</string>
 
     <!--  about app  -->
     <string name="about">ABOUT</string>
