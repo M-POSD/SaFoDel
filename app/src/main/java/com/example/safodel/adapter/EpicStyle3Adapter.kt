@@ -20,6 +20,16 @@ class EpicStyle3Adapter(val context: Context, group2Data: MutableList<GroupCard2
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val data: GroupCard2Data = group2[position]
 
+        when (data.cardType) {
+            8 -> {
+                viewHolder.binding.roadSignImage.scaleX = 1.3f
+                viewHolder.binding.roadSignImage.scaleY = 1.3f
+            }
+            9 -> {
+                viewHolder.binding.roadSignImage.scaleX = 1.2f
+                viewHolder.binding.roadSignImage.scaleY = 1.2f
+            }
+        }
         viewHolder.binding.roadSignImage.setImageResource(data.image)
         viewHolder.binding.roadSignTitle.text = context.getString(data.title_id)
         viewHolder.binding.roadSignDescription.text = context.getString(data.description_id)

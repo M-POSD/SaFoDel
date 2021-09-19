@@ -178,17 +178,17 @@
     <!--  epic5  -->
     <string name="epic3_name" >Road Signs</string>
     <string name="road_sign1_title" >Slippery when wet</string>
-    <string name="road_sign1_description" >These signs indicate roads that get particularly slippery in wet weather, cyclists also take care, reducing your speed\nRemember to remain visibility in wet weather, and be careful of tram tracks that can get very slippery</string>
+    <string name="road_sign1_description" >Roads that get especially slippery with wet weather, reduce your speed and be careful</string>
     <string name="road_sign2_title" >Construction related signs</string>
-    <string name="road_sign2_description" >These signs indicate road construction is ahead, be prepared to be slow down, stop or be directed by traffic controllers or potential detours</string>
+    <string name="road_sign2_description" >Roadwork or construction ahead, be prepared to be slow down, stop, encounter detours or traffic control</string>
     <string name="road_sign3_title" >Biking parking related signs</string>
-    <string name="road_sign3_description" >It\'s important to keep an eye out for these signs, be sure not to park in these areas as it may result in being fined or having your bike seized</string>
+    <string name="road_sign3_description" >Keep an eye out for signs that prohibit bike parking, not following these signs could have you fined or your bike seized</string>
     <string name="road_sign4_title" >Shared paths</string>
-    <string name="road_sign4_description" >These paths are for both cyclists and pedestrians, it\'s expected pedestrians stick to the left and cyclists provide a warning when approaching pedestrians (i.e. ring your bell, or call out)</string>
+    <string name="road_sign4_description" >Paths that are for both cyclists and pedestrians, it\'s expected pedestrians stay to the left and cyclists warn when they\'re approaching</string>
     <string name="road_sign5_title" >Hook turns</string>
-    <string name="road_sign5_description" >These signs mean that the only way to turn right at this intersection is via a hook turn. However, unless stated otherwise, it is recommended cyclists hook turn at intersections rather than turning right from the right lane as it is often safer.</string>
+    <string name="road_sign5_description" >An intersection where you can only turn right with a hook turn though it is recommended cyclists do hook turns rather than directly turn right at as it is often safer</string>
     <string name="road_sign6_title" >Dismount signs</string>
-    <string name="road_sign6_description" >These signs indicate cyclists must dismount their bike and walk across the specific path, typically these are at pedestrian crossings or bridges</string>
+    <string name="road_sign6_description" >Places where cyclists must dismount and walk instead of ride (usually at pedestrian crossings or bridges)</string>
 
     <!--  question  -->
     <string name="yes">Yes</string>
