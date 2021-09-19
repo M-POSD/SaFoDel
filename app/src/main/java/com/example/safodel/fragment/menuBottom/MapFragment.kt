@@ -5,8 +5,6 @@ import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.location.Location
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +15,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
-import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.LGAList
 import com.example.safodel.model.SuburbMapResponse
-import com.example.safodel.model.SuburbResponse
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.ui.main.MainActivity
@@ -35,7 +31,6 @@ import com.mapbox.api.directions.v5.models.RouteOptions
 import com.mapbox.bindgen.Expected
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
-import com.mapbox.geojson.LineString
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
@@ -53,18 +48,8 @@ import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
-import com.mapbox.mapboxsdk.utils.BitmapUtils
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.MapboxNavigationProvider
-import org.json.JSONArray
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
 import kotlin.collections.ArrayList
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
@@ -107,11 +92,10 @@ import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
-import org.angmarch.views.NiceSpinner
+import com.mapbox.search.ui.view.SearchBottomSheetView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.URI
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -280,6 +264,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView = binding.mapView
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
+//        val searchSheet = binding.searchSheet
+//        searchSheet.initializeSearch(savedInstanceState,SearchBottomSheetView.Configuration())
         setToolbarBasic(toolbar)
 
         // request permission of user location
@@ -345,6 +331,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
 
     /*
         update the map when call getMapAsync()
@@ -352,6 +342,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onMapReady(mapboxMap: MapboxMap) {
         mapboxMap.setMaxZoomPreference(20.0)
         mapboxMap.setMinZoomPreference(5.0)
+
 
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT){
@@ -376,74 +367,75 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
 
             /*-- Add inmage --*/
-            it.addImage(
-                "icon_image",
-                BitmapUtils.getBitmapFromDrawable(
-                    context?.let { it1 ->
-                        ContextCompat.getDrawable(
-                            it1,
-                            R.drawable.crash_location
-                        )
-                    }
-                )!!)
+//            it.addImage(
+//                "icon_image",
+//                BitmapUtils.getBitmapFromDrawable(
+//                    context?.let { it1 ->
+//                        ContextCompat.getDrawable(
+//                            it1,
+//                            R.drawable.crash_location
+//                        )
+//                    }
+//                )!!)
 
             /*-- Add source --*/
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
 
-            it.addSource(GeoJsonSource("line-source", Feature.fromGeometry(LineString.fromLngLats(
-                locationList))))
 
             trafficPlugin = TrafficPlugin(mapView,mapboxMap,it)
             trafficPlugin.setVisibility(true)
 
 
             /*-- Add layer --*/
-//            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
-//                circleColor(Color.parseColor("#FF0000")),
-//                visibility(Property.VISIBLE),
-//                iconIgnorePlacement(false),
-//                iconAllowOverlap(false),
-//                circleRadius(
-//                    interpolate(
-//                        linear(), zoom(),
+            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
+                circleColor(Color.parseColor("#ff0015")),
+                visibility(Property.VISIBLE),
+                iconIgnorePlacement(false),
+                iconAllowOverlap(false),
+                circleRadius(
+                    interpolate(
+                        linear(), zoom(),
 //                        stop(11f, 4f),
 //                        stop(12f, 4f),
 //                        stop(15f,4f),
 //                        stop(15.1f,0f)
-//                )
-//            ))
-//            it.addLayer(basicCircle)
+                        stop(10, 1.0f),
+                        stop(15, 4.0f),
+                        stop(20, 16f)
+                )
+            ), circleOpacity(0.5f))
+            it.addLayer(basicCircle)
 
             /*-- Add circle layer --*/
-//            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
-//                .withProperties(
-//                    circleColor(parseColor("#FC9C9C")),
-//                    circleRadius(6f),
-//                    visibility(Property.VISIBLE),
-//                    circleOpacity(
-//                        interpolate(
-//                            linear(), zoom(),
-//                            stop(11f, .5f),
-//                            stop(15f,0f)
-//                        )
-//                    ),
-//                    iconIgnorePlacement(false),
-//                    iconAllowOverlap(false)
-//                )
-//            it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
+            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
+                .withProperties(
+                    circleColor(parseColor("#bd0010")),
+                    visibility(Property.VISIBLE),
+                    circleOpacity(
+                        interpolate(
+                            linear(), zoom(),
+                            stop(10, 0.75f),
+                            stop(15, 6f),
+                            stop(20.0f, 18.0f)
+                        )
+                    ),
+                    iconIgnorePlacement(false),
+                    iconAllowOverlap(false), circleOpacity(0.5f)
+                )
+            it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
             /*-- Add symbol layer --*/
-            val symbolIconLayer = SymbolLayer("icon_layer", "source")
-            symbolIconLayer.withProperties(
-                visibility(Property.VISIBLE),
-                iconImage("icon_image"),
-                iconSize(1.5f),
-                iconIgnorePlacement(false),
-                iconAllowOverlap(false)
-            )
-            symbolIconLayer.minZoom = 15f
-            it.addLayer(symbolIconLayer)
+//            val symbolIconLayer = SymbolLayer("icon_layer", "source")
+//            symbolIconLayer.withProperties(
+//                visibility(Property.VISIBLE),
+//                iconImage("icon_image"),
+//                iconSize(1.5f),
+//                iconIgnorePlacement(false),
+//                iconAllowOverlap(false)
+//            )
+//            symbolIconLayer.minZoom = 15f
+//            it.addLayer(symbolIconLayer)
 
 //            val routeLayer = LineLayer("line_layer","line-source")
 //            routeLayer.withProperties(lineCap(Property.LINE_CAP_SQUARE),
@@ -578,7 +570,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val bcLayer =  it.getLayer("basic_circle_cayer")
             val scLayer = it.getLayer("shadow_circle_cayer")
             val siLayer = it.getLayer("icon_layer")
-            if(siLayer != null){
+            if(bcLayer != null){
                 if(View.VISIBLE.equals(mapView.visibility)){
                     setToolbarReturn(toolbar)
                     mainActivity.isBottomNavigationVisible(false)
@@ -590,9 +582,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
                     binding.spinner.visibility = View.INVISIBLE
                     binding.updateMap.visibility = View.INVISIBLE
-                    bcLayer?.setProperties(visibility(Property.NONE))
+                    bcLayer.setProperties(visibility(Property.NONE))
                     scLayer?.setProperties(visibility(Property.NONE))
-                    siLayer.setProperties(visibility(Property.NONE))
+                    siLayer?.setProperties(visibility(Property.NONE))
 
                 }
             else {
@@ -606,9 +598,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
                     binding.spinner.visibility = View.VISIBLE
                     binding.updateMap.visibility = View.VISIBLE
-                    bcLayer?.setProperties(visibility(Property.VISIBLE))
+                    bcLayer.setProperties(visibility(Property.VISIBLE))
                     scLayer?.setProperties(visibility(Property.VISIBLE))
-                    siLayer.setProperties(visibility(Property.VISIBLE))
+                    siLayer?.setProperties(visibility(Property.VISIBLE))
 
             }
             }
