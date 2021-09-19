@@ -49,6 +49,7 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
@@ -110,6 +111,7 @@ import org.angmarch.views.NiceSpinner
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.URI
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -140,6 +142,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapView: MapView
     private lateinit var mapView2 : MapView2
     private lateinit var LGAPoint:Point
+    private lateinit var trafficPlugin: TrafficPlugin
 
 
 
@@ -391,6 +394,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             it.addSource(GeoJsonSource("line-source", Feature.fromGeometry(LineString.fromLngLats(
                 locationList))))
 
+            trafficPlugin = TrafficPlugin(mapView,mapboxMap,it)
+            trafficPlugin.setVisibility(true)
+
+
             /*-- Add layer --*/
 //            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
 //                circleColor(Color.parseColor("#FF0000")),
@@ -438,11 +445,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             symbolIconLayer.minZoom = 15f
             it.addLayer(symbolIconLayer)
 
-            val routeLayer = LineLayer("line_layer","line-source")
-            routeLayer.withProperties(lineCap(Property.LINE_CAP_SQUARE),
-            lineJoin(Property.LINE_JOIN_MITER), lineOpacity(.7f), lineWidth(7f),
-            lineColor(parseColor("#FF0000")))
-            it.addLayer(routeLayer)
+//            val routeLayer = LineLayer("line_layer","line-source")
+//            routeLayer.withProperties(lineCap(Property.LINE_CAP_SQUARE),
+//            lineJoin(Property.LINE_JOIN_MITER), lineOpacity(.7f), lineWidth(1f),
+//            lineColor(parseColor("#FF0000")))
+//            it.addLayer(routeLayer)
 
             /*-- Set the camera's animation --*/
             mapboxMap.animateCamera(
@@ -571,7 +578,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val bcLayer =  it.getLayer("basic_circle_cayer")
             val scLayer = it.getLayer("shadow_circle_cayer")
             val siLayer = it.getLayer("icon_layer")
-            if(bcLayer != null && scLayer != null && siLayer != null){
+            if(siLayer != null){
                 if(View.VISIBLE.equals(mapView.visibility)){
                     setToolbarReturn(toolbar)
                     mainActivity.isBottomNavigationVisible(false)
@@ -583,8 +590,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
                     binding.spinner.visibility = View.INVISIBLE
                     binding.updateMap.visibility = View.INVISIBLE
-                    bcLayer.setProperties(visibility(Property.NONE))
-                    scLayer.setProperties(visibility(Property.NONE))
+                    bcLayer?.setProperties(visibility(Property.NONE))
+                    scLayer?.setProperties(visibility(Property.NONE))
                     siLayer.setProperties(visibility(Property.NONE))
 
                 }
@@ -599,8 +606,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
                     binding.spinner.visibility = View.VISIBLE
                     binding.updateMap.visibility = View.VISIBLE
-                    bcLayer.setProperties(visibility(Property.VISIBLE))
-                    scLayer.setProperties(visibility(Property.VISIBLE))
+                    bcLayer?.setProperties(visibility(Property.VISIBLE))
+                    scLayer?.setProperties(visibility(Property.VISIBLE))
                     siLayer.setProperties(visibility(Property.VISIBLE))
 
             }
