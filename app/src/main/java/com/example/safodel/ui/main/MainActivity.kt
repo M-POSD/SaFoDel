@@ -11,6 +11,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
@@ -26,12 +27,14 @@ class MainActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
     private lateinit var toastMain: Toast
+    private lateinit var drawer : DrawerLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        drawer = binding.drawerLayout
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val leftHeaderText = leftHeader.findViewById<View>(R.id.left_header_text)
         leftHeaderText.isClickable = true
         leftHeaderText.setOnClickListener {
-            binding.drawerLayout.closeDrawers()
+            drawer.closeDrawers()
         }
 
         recordLearningMode()
@@ -60,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            android.R.id.home -> binding.drawerLayout.openDrawer(GravityCompat.START)
+            android.R.id.home -> drawer.openDrawer(GravityCompat.START)
         }
         return true
     }
@@ -161,13 +164,13 @@ class MainActivity : AppCompatActivity() {
 //                    R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
                 }
             }
-            binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
+            drawer.closeDrawers() // close the drawer of the left navigation.
             true
         }
     }
 
     fun openDrawer() {
-        binding.drawerLayout.openDrawer(GravityCompat.START)
+        drawer.openDrawer(GravityCompat.START)
     }
 
     override fun getResources(): Resources {
@@ -213,6 +216,14 @@ class MainActivity : AppCompatActivity() {
         getWindow().decorView.getWindowVisibleDisplayFrame(rec)
         val statusBarHeight = rec.top
         return statusBarHeight
+    }
+
+    fun lockSwipeDrawer(){
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    fun unlockSwipeDrawer(){
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
     }
 }
 
