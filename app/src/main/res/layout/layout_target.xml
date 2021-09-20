@@ -21,12 +21,12 @@
                 android:id="@+id/custom_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosansjp_bold"
+                android:fontFamily="@font/rubik_medium"
                 android:justificationMode="inter_word"
                 android:maxWidth="230dp"
                 android:text="I am the Demoddddddddddddddddd"
                 android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -41,7 +41,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
-                android:fontFamily="@font/notosansjp_bold"
+                android:fontFamily="@font/rubik_bold"
                 android:text="Next"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/white"
@@ -55,7 +55,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
-                android:fontFamily="@font/notosansjp_bold"
+                android:fontFamily="@font/rubik_bold"
                 android:text="Close"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/white"

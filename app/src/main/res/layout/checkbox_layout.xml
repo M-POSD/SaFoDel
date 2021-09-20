@@ -20,8 +20,7 @@
         android:focusable="true"
         android:text="Helmet"
         android:padding="5dp"
-        style="@style/textStyle16_black"
-        android:textColor="@color/black"
+        style="@style/textStyle16_gray"
         android:theme="@style/Widget.App.CheckBox" />
 
     <ImageView

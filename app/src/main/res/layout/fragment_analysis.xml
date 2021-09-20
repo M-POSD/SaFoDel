@@ -52,7 +52,7 @@
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/blue_outline">
 
@@ -69,13 +69,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="MELBOURNE"
-                            android:textSize="16dp" />
-
+                            style="@style/textStyle16_gray"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:textSize="16dp"
+                            style="@style/textStyle16_gray"
                             android:text="Total Accidents:"/>
 
                         <TextView
@@ -84,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:text="Numbeer"
-                            android:textSize="16dp" />
+                            style="@style/textStyle16_gray"/>
 
                     </LinearLayout>
 
@@ -101,7 +100,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Top 5 Roads by Accident Total"/>
+                        android:text="Top 5 Roads by Accident Total"
+                        style="@style/textStyle14_gray"/>
 
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/barChart"
@@ -130,7 +130,8 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:paddingHorizontal="10dp"/>
+                        android:paddingHorizontal="10dp"
+                        style="@style/textStyle14_gray"/>
                 </LinearLayout>
 
             </LinearLayout>
