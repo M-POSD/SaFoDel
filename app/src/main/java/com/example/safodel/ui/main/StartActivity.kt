@@ -9,14 +9,9 @@ import com.example.safodel.databinding.ActivityStartBinding
 
 import me.jessyan.autosize.AutoSizeConfig
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
-import android.os.Build
-import android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import android.view.animation.*
-import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
-import com.example.safodel.adapter.EpicViewAdapter
 import com.example.safodel.adapter.SafodelViewAdapter
 
 

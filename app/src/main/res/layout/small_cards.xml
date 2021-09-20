@@ -23,7 +23,7 @@
             android:clickable="true"
             android:focusable="true"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="0dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
 
             <LinearLayout
@@ -44,7 +44,7 @@
                     android:gravity="center"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/primary_green"
+                    android:textColor="@color/black"
                     android:textSize="20dp" />
 
                 <ImageView
@@ -76,7 +76,7 @@
             android:clickable="true"
             android:focusable="true"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="0dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
 
             <LinearLayout
@@ -97,7 +97,7 @@
                     android:gravity="center"
                     android:text="Demo"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/primary_green"
+                    android:textColor="@color/black"
                     android:textSize="20dp" />
 
                 <ImageView
