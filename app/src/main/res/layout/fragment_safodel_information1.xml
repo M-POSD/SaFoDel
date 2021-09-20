@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="@string/SaFo"
                 android:textColor="@color/primary_green"
-                android:textSize="60dp" />
+                android:textSize="70dp" />
 
             <TextView
                 android:id="@+id/del"
@@ -59,7 +59,7 @@
                 android:gravity="center"
                 android:text="@string/Del"
                 android:textColor="@color/wrong_border_color"
-                android:textSize="60dp" />
+                android:textSize="70dp" />
 
 <!--            <TextView-->
 <!--                android:id="@+id/safodel"-->

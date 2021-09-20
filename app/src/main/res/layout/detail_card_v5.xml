@@ -51,7 +51,7 @@
                     android:padding="5dp"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/red"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                             android:layout_gravity="center"
                             android:text="Demo"
                             android:justificationMode="inter_word"
-                            style="@style/textStyle14_black"/>
+                            style="@style/textStyle16_gray"/>
 
                     </LinearLayout>
 

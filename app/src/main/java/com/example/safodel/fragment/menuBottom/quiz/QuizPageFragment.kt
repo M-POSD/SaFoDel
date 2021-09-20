@@ -104,7 +104,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 
         for (option in options) {
             option.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.default_option_icon,0)
-            option.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray2))
+            option.setTextColor(ContextCompat.getColor(requireActivity(), R.color.bottom_nav_gray))
             var typeface: Typeface? =
                 ResourcesCompat.getFont(requireActivity(), R.font.notosansjp_bold)
             option.typeface = typeface

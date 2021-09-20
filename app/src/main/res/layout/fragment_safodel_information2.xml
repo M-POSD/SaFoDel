@@ -19,12 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:fontFamily="@font/rubik_medium"
             android:justificationMode="inter_word"
+            android:paddingVertical="20dp"
             android:paddingHorizontal="40dp"
             android:text="@string/v1"
-            android:textColor="@color/primary_green"
-            android:paddingVertical="20dp"
+            android:textColor="@color/bottom_nav_gray"
+            android:fontFamily="@font/rubik_medium"
             android:textSize="16dp" />
 
         <ImageView
@@ -46,7 +46,7 @@
             android:paddingVertical="20dp"
             android:text="@string/v2_title"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            style="@style/textStyle20_bold_green"/>
+            style="@style/textStyle20_bold_black"/>
         <TextView
             android:id="@+id/section2_description"
             android:layout_width="match_parent"
@@ -55,6 +55,8 @@
             android:justificationMode="inter_word"
             android:paddingHorizontal="40dp"
             android:text="@string/v2_description"
-            style="@style/textStyle16_green" />
+            android:textColor="@color/bottom_nav_gray"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="16dp" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -72,6 +72,13 @@
         <item name="android:textColor">@color/primary_green</item>
     </style>
 
+    <style name="textStyle14_gray">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/bottom_nav_gray</item>
+    </style>
+
     <style name="textStyle14_black">
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/rubik_medium</item>
@@ -84,6 +91,13 @@
         <item name="android:fontFamily">@font/rubik_medium</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/primary_green</item>
+    </style>
+
+    <style name="textStyle16_gray">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/bottom_nav_gray</item>
     </style>
 
     <style name="textStyle16_black">
@@ -108,7 +122,7 @@
     </style>
 
     <style name="worm_dot_indicator">
-        <item name="dotsColor">@color/secondary_yellow</item>
+        <item name="dotsColor">@color/primary_green</item>
         <item name="dotsStrokeColor">@color/primary_green</item>
         <item name="dotsCornerRadius">8dp</item>
         <item name="dotsSize">12dp</item>
