@@ -23,6 +23,9 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -129,80 +132,94 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         /*
             Get the number for the total Text in the card
          */
-        val callAsync: Call<SuburbResponse> = suburbInterface.totalRepos(
-            "total",
-            suburbName
-        )
 
-        callAsync.enqueue(object : Callback<SuburbResponse?> {
-            override fun onResponse(call: Call<SuburbResponse?>?, response: Response<SuburbResponse?>) {
-                if (response.isSuccessful) {
-                    dialog.dismiss()
-                    val resultList = response.body()?.suburbAccidents
-                    if(resultList?.isNotEmpty() == true){
-                        accidentsNumber.text = resultList[0].accidents.toString()
+        val job = GlobalScope.launch {
+            val callAsync: Call<SuburbResponse> = suburbInterface.totalRepos(
+                "total",
+                suburbName
+            )
+
+            callAsync.enqueue(object : Callback<SuburbResponse?> {
+                override fun onResponse(call: Call<SuburbResponse?>?, response: Response<SuburbResponse?>) {
+                    if (response.isSuccessful) {
+                        val resultList = response.body()?.suburbAccidents
+                        if(resultList?.isNotEmpty() == true){
+                            accidentsNumber.text = resultList[0].accidents.toString()
+                        }
+                    } else {
+                        Log.i("Error ", "Response failed")
                     }
-                } else {
-                    Log.i("Error ", "Response failed")
                 }
-            }
-            override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
-                dialog.dismiss()
-                toast1.cancel()
-                toast1.setText(t.message)
-                toast1.show()
+                override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
+                    toast1.cancel()
+                    toast1.setText(t.message)
+                    toast1.show()
 
-                Log.i("suburbAccidents ", t.message.toString())
-            }
-        })
-
-        /*
-            Get the data for first bar -- bar2
-         */
-        val callTime: Call<SuburbTimeResponse> = suburbInterface.timeRepos(
-            "time",
-            suburbName
-        )
-        callTime.enqueue(object : Callback<SuburbTimeResponse?> {
-            override fun onResponse(call: Call<SuburbTimeResponse?>?, response: Response<SuburbTimeResponse?>) {
-                if (response.isSuccessful) {
-                    val resultList = response.body()!!.suburbTimeAccidents
-                    setLineChart(resultList)
-                } else {
-                    Log.i("Error ", "Response failed")
+                    Log.i("suburbAccidents ", t.message.toString())
                 }
-            }
-            override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
-                toast2.cancel()
-                toast2.setText(t.message)
-                toast2.show()
-                Log.i("suburbTimeAccidents ",  t.message.toString())
-            }
-        })
+            })
+            delay(1000L)
+        }
+
 
         /*
             Get the data for first bar -- bar2
          */
-        val callStreet: Call<SuburbStreetsResponse> = suburbInterface.streetRepos(
-            "streets",
-            suburbName
-        )
-        callStreet.enqueue(object : Callback<SuburbStreetsResponse?> {
-            override fun onResponse(call: Call<SuburbStreetsResponse?>?, response: Response<SuburbStreetsResponse?>) {
-                if (response.isSuccessful) {
-                    val resultList = response.body()!!.suburbStreetsAccidents
-                    setStreetsBarChat(resultList)
-                } else {
-                    Log.i("Error ", "Response failed")
+        val job2 = GlobalScope.launch {
+            job.join()
+            val callTime: Call<SuburbTimeResponse> = suburbInterface.timeRepos(
+                "time",
+                suburbName
+            )
+            callTime.enqueue(object : Callback<SuburbTimeResponse?> {
+                override fun onResponse(call: Call<SuburbTimeResponse?>?, response: Response<SuburbTimeResponse?>) {
+                    if (response.isSuccessful) {
+                        val resultList = response.body()!!.suburbTimeAccidents
+                        setLineChart(resultList)
+                    } else {
+                        Log.i("Error ", "Response failed")
+                    }
                 }
-            }
-            override fun onFailure(call: Call<SuburbStreetsResponse?>?, t: Throwable) {
-                toast3.cancel()
-                toast3.setText(t.message)
-                toast3.show()
-                Log.i("suburbStreetsAccidents ", t.localizedMessage.toString())
-            }
-        })
+                override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
+                    toast2.cancel()
+                    toast2.setText(t.message)
+                    toast2.show()
+                    Log.i("suburbTimeAccidents ",  t.message.toString())
+                }
+            })
+            delay(1000L)
+        }
+
+
+        /*
+            Get the data for first bar -- bar2
+         */
+        GlobalScope.launch {
+            job2.join()
+            val callStreet: Call<SuburbStreetsResponse> = suburbInterface.streetRepos(
+                "streets",
+                suburbName
+            )
+            callStreet.enqueue(object : Callback<SuburbStreetsResponse?> {
+                override fun onResponse(call: Call<SuburbStreetsResponse?>?, response: Response<SuburbStreetsResponse?>) {
+                    if (response.isSuccessful) {
+                        dialog.dismiss()
+                        val resultList = response.body()!!.suburbStreetsAccidents
+                        setStreetsBarChat(resultList)
+                    } else {
+                        Log.i("Error ", "Response failed")
+                    }
+                }
+                override fun onFailure(call: Call<SuburbStreetsResponse?>?, t: Throwable) {
+                    dialog.dismiss()
+                    toast3.cancel()
+                    toast3.setText(t.message)
+                    toast3.show()
+                    Log.i("suburbStreetsAccidents ", t.localizedMessage.toString())
+                }
+            })
+        }
+
 
 
     }
