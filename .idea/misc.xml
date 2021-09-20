@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/drawable/wrong_info_border_bg.xml" value="0.240625" />
         <entry key="app/src/main/res/drawable/wrong_option_border_bg.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/font/notosansjp.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/font/ubuntu.xml" value="0.2574074074074074" />
         <entry key="app/src/main/res/layout-v28/fragment_app_intro.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout-v28/fragment_home.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13804457953394123" />
@@ -77,8 +78,8 @@
         <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.1649122807017544" />
         <entry key="app/src/main/res/layout/fragment_quiz_page.xml" value="0.2118421052631579" />
         <entry key="app/src/main/res/layout/fragment_quiz_resault.xml" value="0.1649122807017544" />
-        <entry key="app/src/main/res/layout/fragment_safodel_information1.xml" value="0.1094224924012158" />
-        <entry key="app/src/main/res/layout/fragment_safodel_information2.xml" value="0.1094224924012158" />
+        <entry key="app/src/main/res/layout/fragment_safodel_information1.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_safodel_information2.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_tip.xml" value="0.2884963768115942" />
         <entry key="app/src/main/res/layout/fragment_tip1.xml" value="0.12030075187969924" />
@@ -94,7 +95,7 @@
         <entry key="app/src/main/res/layout/homepage_button_layout.xml" value="0.1094224924012158" />
         <entry key="app/src/main/res/layout/homepage_images.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/items_lga.xml" value="0.2234375" />
-        <entry key="app/src/main/res/layout/large_button.xml" value="0.1094224924012158" />
+        <entry key="app/src/main/res/layout/large_button.xml" value="0.25" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/left_nav_header.xml" value="0.15070921985815602" />
@@ -105,7 +106,7 @@
         <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.15219298245614035" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/small_cards.xml" value="0.10866261398176291" />
+        <entry key="app/src/main/res/layout/small_cards.xml" value="0.165" />
         <entry key="app/src/main/res/layout/start_button.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/menu/nav_icon_menu_dark_mode.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/menu/nav_icon_menu_light_mode.xml" value="0.31145833333333334" />

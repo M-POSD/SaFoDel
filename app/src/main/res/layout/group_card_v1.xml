@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <include layout="@layout/detail_card_v1"
-        android:id="@+id/image_left"/>
+<!--    <include layout="@layout/detail_card_v1"-->
+<!--        android:id="@+id/image_left"/>-->
     <include layout="@layout/detail_card_v2"
         android:id="@+id/image_right"/>
     <include layout="@layout/detail_card_v3"

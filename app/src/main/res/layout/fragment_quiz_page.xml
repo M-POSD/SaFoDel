@@ -66,7 +66,8 @@
             android:layout_gravity="center"
             android:justificationMode="inter_word"
             android:layout_marginHorizontal="10dp"
-            android:fontFamily="@font/notosansjp_black"
+            android:padding="20dp"
+            android:fontFamily="@font/rubik_bold"
             android:text="What is this?"
             android:textColor="@color/dark"
             android:textSize="16dp" />
@@ -99,13 +100,11 @@
                 android:layout_marginHorizontal="10dp"
                 android:justificationMode="inter_word"
                 android:background="@drawable/default_option_border_bg"
-                android:fontFamily="@font/notosansjp_bold"
+                style="@style/textStyle14_black"
                 android:padding="10dp"
                 android:visibility="gone"
                 android:layout_marginBottom="5dp"
-                android:text="Apple1"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:text="Apple1" />
 
         </LinearLayout>
 
@@ -119,6 +118,6 @@
 
         <include
             android:id="@+id/submitBtn"
-            layout="@layout/medium_btn" />
+            layout="@layout/large_button" />
     </LinearLayout>
 </LinearLayout>

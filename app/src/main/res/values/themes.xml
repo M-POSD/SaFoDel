@@ -30,7 +30,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
     </style>
 
     <style name="NavigationbarLeftTextStyle" parent="TextAppearance.Design.Tab">
@@ -38,7 +38,7 @@
         <item name="colorPrimaryVariant">@color/green_blue</item>
         <item name="colorOnPrimary">@color/light_green</item>
         <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
     </style>
 
     <style name="TabStyle" parent="TextAppearance.Design.Tab">
@@ -46,13 +46,13 @@
         <item name="colorPrimaryVariant">@color/green_blue</item>
         <item name="colorOnPrimary">@color/light_green</item>
         <item name="android:textSize">14dp</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
     </style>
 
     <style name="Widget.App.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="buttonTint">@color/button_tint</item>
         <item name="android:textSize">14dp</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_regular</item>
     </style>
 
     <style name="MapboxCustomManeuverStyle" parent="MapboxStyleManeuverView">
@@ -67,42 +67,42 @@
 
     <style name="textStyle14_green">
         <item name="android:textSize">14dp</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/primary_green</item>
     </style>
 
     <style name="textStyle14_black">
         <item name="android:textSize">14dp</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="textStyle16_green">
         <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/primary_green</item>
     </style>
 
     <style name="textStyle16_black">
         <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">@font/notosansjp_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="textStyle20_bold_green">
         <item name="android:textSize">20dp</item>
-        <item name="android:fontFamily">@font/notosansjp_black</item>
+        <item name="android:fontFamily">@font/rubik_bold</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/primary_green</item>
     </style>
 
     <style name="textStyle20_bold_black">
         <item name="android:textSize">20dp</item>
-        <item name="android:fontFamily">@font/notosansjp_black</item>
+        <item name="android:fontFamily">@font/rubik_bold</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
         <item name="android:textColor">@color/black</item>
     </style>

@@ -25,7 +25,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1.5"
-            android:fontFamily="@font/notosansjp_black"
+            android:fontFamily="@font/rubik_bold"
             android:gravity="center"
             android:text="@string/result"
             android:textColor="@color/primary_green"
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2.3"
-                    android:fontFamily="@font/notosansjp_bold"
+                    android:fontFamily="@font/rubik_medium"
                     android:gravity="center"
                     android:text="Champion"
                     android:textColor="@color/white"
@@ -76,7 +76,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.8"
                     android:layout_marginTop="-10dp"
-                    android:fontFamily="@font/notosansjp_bold"
+                    android:fontFamily="@font/rubik_medium"
                     android:textColor="@color/white"
                     android:gravity="center"
                     android:text="5/5"
@@ -87,7 +87,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
 
-                <include layout="@layout/medium_btn"
+                <include layout="@layout/large_button"
                     android:id="@+id/return_button"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

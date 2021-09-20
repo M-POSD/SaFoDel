@@ -9,7 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="230dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="4dp"
         app:cardElevation="5dp"
@@ -20,14 +20,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:orientation="vertical">
 
@@ -36,8 +37,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/notosansjp_bold"
+                    android:fontFamily="@font/rubik_medium"
                     android:text="Demo"
+                    android:padding="5dp"
                     android:justificationMode="inter_word"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/red"
@@ -49,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Demo"
+                    android:padding="5dp"
                     android:justificationMode="inter_word"
                     android:visibility="gone"
                     style="@style/textStyle14_black"/>

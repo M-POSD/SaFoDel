@@ -19,11 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:fontFamily="@font/notosansjp_medium"
+            android:fontFamily="@font/rubik_medium"
             android:justificationMode="inter_word"
             android:paddingHorizontal="40dp"
             android:text="@string/v1"
             android:textColor="@color/primary_green"
+            android:paddingVertical="20dp"
             android:textSize="18dp" />
 
         <ImageView
@@ -41,9 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:fontFamily="@font/notosansjp_medium"
+            android:fontFamily="@font/rubik_medium"
             android:justificationMode="inter_word"
             android:paddingHorizontal="40dp"
+            android:paddingVertical="20dp"
             android:text="@string/v2"
             android:textColor="@color/primary_green"
             android:textSize="18dp" />

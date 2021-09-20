@@ -23,14 +23,6 @@
             android:background="@color/snow"
             android:orientation="vertical">
 
-<!--            <TextView-->
-<!--                android:id="@+id/heading1"-->
-<!--                style="@style/textStyle14"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginHorizontal="10dp"-->
-<!--                android:text="Demo" />-->
-
             <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
                 android:id="@+id/worm_dots_indicator_section1"
                 style="@style/worm_dot_indicator"

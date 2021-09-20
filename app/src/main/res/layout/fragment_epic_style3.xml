@@ -10,7 +10,12 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="5dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +44,7 @@
                 <TextView
                     android:id="@+id/road_sign_description"
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
+                    android:layout_height="100dp"
                     android:layout_marginTop="16dp"
                     android:text="Demo"
                     android:justificationMode="inter_word"

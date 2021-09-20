@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:layout_gravity="center"
-            android:fontFamily="@font/notosansjp_bold"
+            android:fontFamily="@font/rubik_bold"
             android:text="@string/know_more"
             android:textColor="@color/primary_green"
             android:textSize="20dp" />

@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingHorizontal="30dp"
+                android:paddingVertical="20dp"
                 android:text="@string/home_page_slang_1"
                  style="@style/textStyle20_bold_green"/>
 
@@ -42,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="@string/home_page_slang_2"
                 style="@style/textStyle14_green" />
         </LinearLayout>
