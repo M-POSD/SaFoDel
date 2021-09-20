@@ -36,11 +36,11 @@
                 android:paddingVertical="20dp"
                 android:paddingHorizontal="30dp"
                 android:text="@string/generic_information_heading"
-                style="@style/textStyle20_bold_green"/>
+                style="@style/textStyle20_bold_black"/>
 
             <TextView
                 android:id="@+id/generic_info_description"
-                style="@style/textStyle14_green"
+                style="@style/textStyle14_black"
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -36,7 +36,7 @@
                 android:paddingHorizontal="30dp"
                 android:paddingVertical="20dp"
                 android:text="@string/home_page_slang_1"
-                 style="@style/textStyle20_bold_green"/>
+                 style="@style/textStyle20_bold_black"/>
 
             <TextView
                 android:id="@+id/home_page_slang_2"
@@ -45,7 +45,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/home_page_slang_2"
-                style="@style/textStyle14_green" />
+                style="@style/textStyle14_black" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
