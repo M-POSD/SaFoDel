@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/safodel_heading"
+            android:id="@+id/section1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -25,7 +25,7 @@
             android:text="@string/v1"
             android:textColor="@color/primary_green"
             android:paddingVertical="20dp"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
         <ImageView
             android:id="@+id/image"
@@ -36,18 +36,25 @@
             android:scaleX="2"
             android:scaleY="2"
             android:src="@drawable/food_map_without_background" />
-
         <TextView
-            android:id="@+id/subtitle"
+            android:id="@+id/section2_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/rubik_medium"
             android:justificationMode="inter_word"
             android:paddingHorizontal="40dp"
             android:paddingVertical="20dp"
-            android:text="@string/v2"
-            android:textColor="@color/primary_green"
-            android:textSize="18dp" />
+            android:text="@string/v2_title"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            style="@style/textStyle20_bold_green"/>
+        <TextView
+            android:id="@+id/section2_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:justificationMode="inter_word"
+            android:paddingHorizontal="40dp"
+            android:text="@string/v2_description"
+            style="@style/textStyle16_green" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -67,7 +67,8 @@
     <!--  spotlight description  -->
     <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\nClick Next for the next step\nClick Close for leaving this mode</string>
     <string name="v1">Food delivery riders are not given enough safety training and local traffic knowledge, making them unacceptably vulnerable</string>
-    <string name="v2">What is SaFoDel?\nWe help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders</string>
+    <string name="v2_title">What is SaFoDel ?</string>
+    <string name="v2_description">We help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders</string>
     <string name="first_target">Home button allows you to return home page directly</string>
     <string name="second_target">Map button allows you to see the historical accident locations in Victoria with details</string>
     <string name="third_target">ACCIDENT-TRENDS button allows to check the trends in historical accident in different suburbs</string>
