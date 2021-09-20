@@ -168,10 +168,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             if (homepageButtonLayout.viewPager2Home.currentItem == 5) {
                 homepageButtonLayout.viewPager2Home.currentItem -= 5
             } else {
-                Log.d(
-                    "current position",
-                    homepageButtonLayout.viewPager2Home.currentItem.toString()
-                )
+//                Log.d(
+//                    "current position",
+//                    homepageButtonLayout.viewPager2Home.currentItem.toString()
+//                )
                 homepageButtonLayout.viewPager2Home.currentItem += 1
             }
             handler.postDelayed(runnable, 5000) //5 sec delay
@@ -187,13 +187,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
 //                handler.removeCallbacks(runnable)
-                Log.e("onPageScrolled", position.toString())
+//                Log.e("onPageScrolled", position.toString())
             }
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 //                handler.postDelayed(runnable, 5000)
-                Log.e("Selected_Page", position.toString())
+//                Log.e("Selected_Page", position.toString())
             }
         })
     }

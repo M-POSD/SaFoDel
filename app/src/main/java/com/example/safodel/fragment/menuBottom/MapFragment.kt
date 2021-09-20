@@ -266,7 +266,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
 //        val searchSheet = binding.searchSheet
 //        searchSheet.initializeSearch(savedInstanceState,SearchBottomSheetView.Configuration())
-        setToolbarBasic(toolbar)
+        setToolbarGray(toolbar)
 
         // request permission of user location
         permissionsManager = PermissionsManager(this)

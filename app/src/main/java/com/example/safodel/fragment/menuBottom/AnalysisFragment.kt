@@ -82,12 +82,11 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         start()
-
     }
 
     fun start(){
         setDialog()
-        callSuburbClient("melbourne")
+        callSuburbClient(suburbName)
     }
 
     /*
@@ -145,6 +144,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
                 dialog.dismiss()
                 Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                Log.i("suburbAccidents ", t.message.toString())
             }
         })
 
@@ -166,6 +166,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             }
             override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
                 Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                Log.i("suburbTimeAccidents ",  t.message.toString())
             }
         })
 
@@ -187,6 +188,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             }
             override fun onFailure(call: Call<SuburbStreetsResponse?>?, t: Throwable) {
                 Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                Log.i("suburbStreetsAccidents ", "Response failed")
             }
         })
 

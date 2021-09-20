@@ -66,6 +66,20 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     }
 
     /**
+     *  Press the gray navigation icon to pop up the navigation window
+     */
+    fun setToolbarGray(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationOnClickListener {
+            mainActivity.openDrawer()
+        }
+        toolbar.setNavigationIcon(R.drawable.menu_gray)
+        mainActivity.unlockSwipeDrawer()
+    }
+
+    /**
      * Press the return navigation icon to go back to previous page
      */
     open fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
