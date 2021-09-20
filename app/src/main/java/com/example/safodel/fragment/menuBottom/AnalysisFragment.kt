@@ -23,7 +23,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,6 +37,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var bar: HorizontalBarChart
     private lateinit var accidentsNumber : TextView
     private var suburbName = "MELBOURNE"
+    private lateinit var toast1: Toast
+    private lateinit var toast2: Toast
+    private lateinit var toast3: Toast
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +47,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAnalysisBinding.inflate(inflater, container, false)
-
+        toast1 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
+        toast2 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
+        toast3 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
 
         // Set Dialog
         dialog = MaterialDialog(requireContext())
@@ -67,7 +71,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         initSpinner()
 
         // Retrofit get data
-        suburbInterface = SuburbClient.getRetrofitService()
+        suburbInterface = SuburbClient.getSuburbService()
 
         // Open page set default value
 
@@ -97,9 +101,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         spProvince.item = suburbList
         spProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
-                    setDialog()
-                    callSuburbClient(spProvince.item[position].toString())
-                    binding.suburbName.text = spProvince.item[position].toString()
+                setDialog()
+                callSuburbClient(spProvince.item[position].toString())
+                binding.suburbName.text = spProvince.item[position].toString()
             }
             override fun onNothingSelected(adapterView: AdapterView<*>) {}
         }
@@ -129,6 +133,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             "total",
             suburbName
         )
+
         callAsync.enqueue(object : Callback<SuburbResponse?> {
             override fun onResponse(call: Call<SuburbResponse?>?, response: Response<SuburbResponse?>) {
                 if (response.isSuccessful) {
@@ -143,7 +148,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             }
             override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
                 dialog.dismiss()
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                toast1.cancel()
+                toast1.setText(t.message)
+                toast1.show()
+
                 Log.i("suburbAccidents ", t.message.toString())
             }
         })
@@ -165,7 +173,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                 }
             }
             override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                toast2.cancel()
+                toast2.setText(t.message)
+                toast2.show()
                 Log.i("suburbTimeAccidents ",  t.message.toString())
             }
         })
@@ -187,8 +197,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                 }
             }
             override fun onFailure(call: Call<SuburbStreetsResponse?>?, t: Throwable) {
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
-                Log.i("suburbStreetsAccidents ", "Response failed")
+                toast3.cancel()
+                toast3.setText(t.message)
+                toast3.show()
+                Log.i("suburbStreetsAccidents ", t.localizedMessage.toString())
             }
         })
 

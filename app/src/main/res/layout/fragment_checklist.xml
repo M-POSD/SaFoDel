@@ -1,67 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/snow"
-    android:weightSum="10"
+    android:orientation="vertical"
     tools:context=".fragment.menuBottom.CheckListFragment">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/simple_toolbar" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include
-            android:id="@+id/checklist"
-            layout="@layout/detail_card_checklist" />
-    </LinearLayout>
+        layout="@layout/simple_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:weightSum="10">
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/checklist_notification_icon"
+            <include
+                android:id="@+id/checklist"
+                layout="@layout/detail_card_checklist" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:src="@drawable/not_cool"
-            android:scaleY="1"
-            android:scaleX="1"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
-        <TextView
-            android:id="@+id/checklist_notification_text"
-            android:layout_width="0dp"
-            android:layout_weight="4.9"
-            android:layout_height="wrap_content"
-            android:text="@string/checklist_notification_unprepared"
-            android:justificationMode="inter_word"
-            style="@style/textStyle16_green"/>
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2" />
+
+            <ImageView
+                android:id="@+id/checklist_notification_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:src="@drawable/not_cool" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <TextView
+                android:id="@+id/checklist_notification_text"
+                style="@style/textStyle16_green"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.9"
+                android:justificationMode="inter_word"
+                android:text="@string/checklist_notification_unprepared" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

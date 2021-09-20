@@ -92,7 +92,6 @@ import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
-import com.mapbox.search.ui.view.SearchBottomSheetView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -294,7 +293,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
 
-        suburbInterface = SuburbClient.getRetrofitService()
+        suburbInterface = SuburbClient.getSuburbService()
 
         // change the float button height
         changeFloatButtonHeight()
@@ -588,7 +587,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
                 }
             else {
-                    setToolbarBasic(toolbar)
+                    setToolbarGray(toolbar)
                     mainActivity.isBottomNavigationVisible(true)
                     mapView2.visibility = View.INVISIBLE
                     binding.floatButtonStop.visibility = View.INVISIBLE

@@ -718,7 +718,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.backpack.setImageResource(R.drawable.backpack_dark)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
-                homePageImage.groundForDriver.visibility = View.INVISIBLE
+//                homePageImage.groundForDriver.visibility = View.INVISIBLE
                 startAnimation("night")
                 setToolbarDarkMode(toolbar)
 //                setToolbarWhite(toolbar)
