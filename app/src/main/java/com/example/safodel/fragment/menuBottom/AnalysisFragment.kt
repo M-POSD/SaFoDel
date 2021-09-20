@@ -158,7 +158,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     Log.i("suburbAccidents ", t.message.toString())
                 }
             })
-            delay(100L)
+            delay(60L)
         }
 
 
@@ -187,7 +187,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     Log.i("suburbTimeAccidents ",  t.message.toString())
                 }
             })
-            delay(100L)
+            delay(60L)
         }
 
 
