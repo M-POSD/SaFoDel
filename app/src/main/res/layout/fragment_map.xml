@@ -148,5 +148,11 @@
         android:src="@drawable/outline_highlight_off_black_36"
         />
 
+    <com.mapbox.search.ui.view.SearchBottomSheetView
+        android:id="@+id/searchSheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="8dp"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

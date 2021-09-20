@@ -624,6 +624,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
             setLocationProvider(navigationLocationProvider)
             enabled = true
+
+
         }
 
         // move the camera to current location on the first update
