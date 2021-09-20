@@ -1,6 +1,7 @@
 package com.example.safodel.fragment.menuBottom
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.location.Location
@@ -45,6 +46,8 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
@@ -262,8 +265,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapView = binding.mapView
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
-//        val searchSheet = binding.searchSheet
-//        searchSheet.initializeSearch(savedInstanceState,SearchBottomSheetView.Configuration())
         setToolbarGray(toolbar)
 
         // request permission of user location
@@ -394,10 +395,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 circleRadius(
                     interpolate(
                         linear(), zoom(),
-//                        stop(11f, 4f),
-//                        stop(12f, 4f),
-//                        stop(15f,4f),
-//                        stop(15.1f,0f)
                         stop(10, 1.0f),
                         stop(15, 4.0f),
                         stop(20, 16f)
@@ -435,11 +432,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 //            symbolIconLayer.minZoom = 15f
 //            it.addLayer(symbolIconLayer)
 
-//            val routeLayer = LineLayer("line_layer","line-source")
-//            routeLayer.withProperties(lineCap(Property.LINE_CAP_SQUARE),
-//            lineJoin(Property.LINE_JOIN_MITER), lineOpacity(.7f), lineWidth(1f),
-//            lineColor(parseColor("#FF0000")))
-//            it.addLayer(routeLayer)
 
             /*-- Set the camera's animation --*/
             mapboxMap.animateCamera(
@@ -623,7 +615,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             setLocationProvider(navigationLocationProvider)
             enabled = true
 
-
         }
 
         // move the camera to current location on the first update
@@ -711,6 +702,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.recenter.setOnClickListener {
             navigationCamera.requestNavigationCameraToFollowing()
         }
+
+        binding.floatButtonSearch.setOnClickListener {
+            val intent: Intent = PlaceAutocomplete.IntentBuilder()
+                .accessToken(getString(R.string.mapbox_access_token))
+                .placeOptions(PlaceOptions.builder()
+                 .backgroundColor(Color.parseColor("#EEEEEE"))
+                    .limit(10)
+                    .build(PlaceOptions.MODE_CARDS))
+                .build(mainActivity)
+        }
+
         mapboxNavigation.startTripSession()
     }
 
