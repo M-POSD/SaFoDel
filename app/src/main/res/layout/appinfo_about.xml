@@ -19,7 +19,7 @@
             android:fontFamily="@font/rubik_bold"
             android:padding="5dp"
             android:textSize="20dp"
-            android:text="Topic"/>
+            android:text="@string/about"/>
 
     </LinearLayout>
 
@@ -29,11 +29,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginHorizontal="20dp"
         android:textSize="16dp"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/rubik_medium"
-        android:text="Educating Food Delivery Bike Riders."/>
+        android:text="@string/about_description"/>
 
 
 

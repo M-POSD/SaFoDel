@@ -43,6 +43,8 @@
         app:itemTextAppearance="@style/NavigationbarLeftTextStyle"
         app:menu="@menu/nav_menu_left"
         android:background="@color/snow"
+        app:itemTextColor="@color/bottom_nav_gray"
+        app:itemIconTint="@color/bottom_nav_gray"
         app:headerLayout="@layout/left_nav_header">
 
     </com.google.android.material.navigation.NavigationView>

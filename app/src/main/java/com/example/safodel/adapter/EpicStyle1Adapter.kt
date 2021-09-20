@@ -56,7 +56,7 @@ class EpicStyle1Adapter(val context: Context, group1Data: MutableList<GroupCard1
                     viewHolder.binding.imageRight.description.setTextColor(
                         ContextCompat.getColor(
                             context,
-                            R.color.red
+                            R.color.wrong_border_color
                         )
                     )
                 }

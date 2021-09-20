@@ -247,7 +247,10 @@
 
     <!--  about app  -->
     <string name="about">ABOUT</string>
+    <string name="about_description">Educating Food Delivery Bike Riders</string>
+
     <string name="audience">AUDIENCE</string>
+    <string name="audience_description">Potential and existing food delivery bike riders</string>
 
     <!--  about developer  -->
     <string name="know_more">KNOW MORE</string>
@@ -257,8 +260,6 @@
     <string name="generic_information_description">Placeholder</string>
     <string name="checklist">Checklist</string>
 
-
     <string name="content_description_media">testing</string>
-
 
 </resources>

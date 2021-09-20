@@ -32,7 +32,8 @@
                 android:layout_marginHorizontal="10dp"
                 android:text="Demo"
                 android:paddingVertical="20dp"
-                style="@style/textStyle16_black"/>
+                style="@style/textStyle20_bold_black"
+                android:fontFamily="@font/rubik_medium"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,7 +51,7 @@
                     android:text="Demo"
                     android:padding="5dp"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/red"
+                    android:textColor="@color/wrong_border_color"
                     android:textSize="16dp" />
 
                 <LinearLayout
