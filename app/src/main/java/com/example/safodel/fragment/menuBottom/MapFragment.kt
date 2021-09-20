@@ -104,7 +104,6 @@ private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var lga: String = "MELBOURNE"
 private var spinnerTimes = 0
-//private lateinit var mThread:Thread
 
 // Retrofit
 private lateinit var suburbInterface: SuburbInterface
