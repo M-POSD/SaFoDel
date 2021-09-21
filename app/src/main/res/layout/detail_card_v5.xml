@@ -47,7 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="7">
+                    android:layout_weight="6.5">
 
                     <TextView
                         android:id="@+id/statistics"
@@ -81,6 +81,11 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"/>
+
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="0dp"
@@ -89,7 +94,6 @@
                     android:layout_gravity="center"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:background="@color/primary_green"
                     android:src="@drawable/book" />
             </LinearLayout>
         </LinearLayout>
