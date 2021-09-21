@@ -51,7 +51,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="5"
                     android:layout_marginHorizontal="20dp"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_bold"
                     android:gravity="center"
                     android:text="@string/quiz_heading"
                     android:textColor="@color/white"

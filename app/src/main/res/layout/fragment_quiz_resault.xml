@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2.3"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_bold"
                     android:gravity="center"
                     android:text="Champion"
                     android:textColor="@color/white"
