@@ -18,7 +18,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
@@ -34,7 +33,6 @@ import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.api.directions.v5.models.RouteOptions
-import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.mapbox.bindgen.Expected
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
@@ -54,9 +52,6 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions
-import com.mapbox.mapboxsdk.plugins.places.autocomplete.ui.PlaceAutocompleteFragment
-import com.mapbox.mapboxsdk.plugins.places.autocomplete.ui.PlaceAutocompleteFragment.TAG
-import com.mapbox.mapboxsdk.plugins.places.autocomplete.ui.PlaceSelectionListener
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
@@ -69,7 +64,6 @@ import com.mapbox.mapboxsdk.style.layers.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
 import com.mapbox.maps.CameraOptions
-import com.mapbox.maps.extension.style.sources.getSourceAs
 import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.animation.camera
 import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
@@ -139,6 +133,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mainActivity : MainActivity
     private lateinit var mapView: MapView
     private lateinit var mapView2 : MapView2
+    private lateinit var searchBarMap1: FrameLayout
     private lateinit var LGAPoint:Point
     private lateinit var trafficPlugin: TrafficPlugin
     private lateinit var searchBar: FrameLayout
@@ -278,6 +273,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         toolbar = binding.toolbar.root
         mapView = binding.mapView
         searchBar = binding.searchBar
+        searchBarMap1 = binding.searchMap1
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         setToolbarGray(toolbar)
@@ -319,10 +315,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         setDialog()
         callSuburbClient()
 
-        // update the map
-        binding.updateMap.setOnClickListener {
-            mapView.getMapAsync(this)
-        }
 
         // go to the user's current location
         binding.floatButton.setOnClickListener {
@@ -342,6 +334,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         )
 
 
+        fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this) // update the map
         return binding.root
@@ -589,7 +582,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
                     binding.spinner.visibility = View.INVISIBLE
-                    binding.updateMap.visibility = View.INVISIBLE
                     bcLayer.setProperties(visibility(Property.NONE))
                     scLayer?.setProperties(visibility(Property.NONE))
                     siLayer?.setProperties(visibility(Property.NONE))
@@ -616,7 +608,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     mapView.getMapAsync(this)
                     binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
                     binding.spinner.visibility = View.VISIBLE
-                    binding.updateMap.visibility = View.VISIBLE
                     bcLayer.setProperties(visibility(Property.VISIBLE))
                     scLayer?.setProperties(visibility(Property.VISIBLE))
                     siLayer?.setProperties(visibility(Property.VISIBLE))
@@ -864,6 +855,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         Collect the data
      */
     private fun callSuburbClient() {
+        val fragmentNow = this
         feature.clear()
         locationList.clear()
         val callAsync: Call<SuburbMapResponse> = suburbInterface.mapRepos(
@@ -884,7 +876,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     for(each in 0..locationList.size-1){
                         feature.add(Feature.fromGeometry(locationList[each]))
                     }
-
+                    mapView.getMapAsync(fragmentNow)
                 } else {
                     Log.i("Error ", "Response failed")
                 }
@@ -905,6 +897,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             message(text = "loading.. Please wait.")
             cancelable(false)
             cancelOnTouchOutside(false)
+        }
+    }
+
+    private fun fitSearchMap1(){
+        GlobalScope.launch {
+            // try to get the height of status bar and then margin top
+            val searchBarMap1Height = searchBarMap1.layoutParams as CoordinatorLayout.LayoutParams
+            while (searchBarMap1Height.topMargin == 0)
+                searchBarMap1Height.topMargin = mainActivity.getStatusHeight()
+            searchBarMap1.layoutParams = searchBarMap1Height
+            this.cancel()
         }
     }
 }
