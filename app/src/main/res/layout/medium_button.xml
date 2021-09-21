@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_weight="0.7"
-        android:backgroundTint="@color/primary_green"
+        android:backgroundTint="@color/white"
         android:elevation="5dp"
         android:fontFamily="@font/rubik_bold"
         android:paddingHorizontal="15dp"
         android:paddingVertical="15dp"
         android:text="@string/start_button"
         android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textColor="@color/white"
+        android:textColor="@color/primary_green"
         android:textSize="20dp"
         app:cornerRadius="50dp" />
 </LinearLayout>

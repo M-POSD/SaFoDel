@@ -115,13 +115,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         imageAnimations()
         imagesDrivingAnimation()
-        if (getCurrentTime() > 18 || getCurrentTime() < 7) {
-            configTheme("night")
+//        if (getCurrentTime() > 18 || getCurrentTime() < 7) {
+//            configTheme("night")
+//
+//        } else {
+//            configTheme("light")
+//        }
 
-        } else {
-            configTheme("light")
-        }
-
+        configTheme("light")
         isBeginnerMode = false
 
         GlobalScope.launch {
@@ -710,8 +711,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.headlight.alpha = 0f
                 homePageImage.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
-                setToolbarLightMode(toolbar)
-//                setToolbarBasic(toolbar)
+//                setToolbarLightMode(toolbar)
+                setToolbarBasic(toolbar)
             }
             "night" -> {
 //               val gd = GradientDrawable(
@@ -728,8 +729,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.headlight.alpha = 0f
 //                homePageImage.groundForDriver.visibility = View.INVISIBLE
                 startAnimation("night")
-                setToolbarDarkMode(toolbar)
-//                setToolbarWhite(toolbar)
+//                setToolbarDarkMode(toolbar)
+                setToolbarWhite(toolbar)
             }
         }
     }

@@ -2,16 +2,19 @@
 <resources>
 <!--    <color name="primary_green">#5DBE8A</color>-->
 <!--    <color name="primary_green">#66DE93</color>-->
-    <color name="primary_green">#61D4B3</color>
+    <color name="primary_green">#46AF2F</color>
+<!--    <color name="white">#FFFFFFFF</color>-->
     <color name="white">#FFFFFFFF</color>
     <color name="snow">#FFFEF9</color>
     <color name="gray2">#7A8089</color>
     <color name="spotlightBackground">#BF000000</color>
     <color name="correct_border_color">#8AD0AB</color>
-    <color name="wrong_border_color">#A61128</color>
-    <color name="bottom_nav_gray">#696565</color>
-    <color name="secondary_color">#FDD365</color>
+    <color name="wrong_border_color">#DD4747</color>
+<!--    <color name="bottom_nav_gray">#696565</color>-->
+    <color name="bottom_nav_gray">#FF000000</color>
+    <color name="secondary_color">#46AF2F</color>
     <color name="darkSky">#161b36</color>
+
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
