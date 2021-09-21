@@ -48,7 +48,8 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
-        toolbar.setNavigationIcon(R.drawable.menu_green)
+//        toolbar.setNavigationIcon(R.drawable.menu_green)
+        toolbar.setNavigationIcon(R.drawable.menu_green2)
         mainActivity.unlockSwipeDrawer()
     }
 
@@ -101,7 +102,8 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
+//        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
+        toolbar.setNavigationIcon(R.drawable.back_green2)
         toolbar.setNavigationOnClickListener {
             mainActivity.onBackPressed()
         }
