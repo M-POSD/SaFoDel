@@ -28,7 +28,7 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
         configSection3()
 
         val toolbar = binding.toolbar.root
-        setToolbarReturn(toolbar)
+        setToolbarReturnUnTransparent(toolbar)
         return binding.root
     }
 

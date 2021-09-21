@@ -6,6 +6,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding
@@ -86,7 +87,21 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
+        toolbar.setNavigationOnClickListener {
+            mainActivity.onBackPressed()
+        }
+        mainActivity.lockSwipeDrawer()
+    }
+
+    /**
+     * Press the return navigation icon to go back to previous page
+     */
+    open fun setToolbarReturnUnTransparent(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
         toolbar.setNavigationOnClickListener {
             mainActivity.onBackPressed()
         }

@@ -23,7 +23,7 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
         toast = Toast.makeText(requireActivity(),null,Toast.LENGTH_SHORT)
         configDefaultView()
         val toolbar = binding.toolbar.root
-        setToolbarWhite(toolbar)
+        setToolbarBasic(toolbar)
         configBtnOnClickListener()
 
         return binding.root
