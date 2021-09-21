@@ -31,6 +31,7 @@ import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.ui.map.TrafficPlugin
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.api.directions.v5.models.RouteOptions
 import com.mapbox.api.geocoding.v5.models.CarmenFeature
@@ -782,6 +783,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
     private fun findRoute(destination: Point) {
+        setDialog()
         val origin = navigationLocationProvider.lastLocation?.let {
             Point.fromLngLat(it.longitude, it.latitude)
         } ?: return
@@ -789,6 +791,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapboxNavigation.requestRoutes(
             RouteOptions.builder()
                 .applyDefaultNavigationOptions()
+                .profile(DirectionsCriteria.PROFILE_CYCLING)
                 .applyLanguageAndVoiceUnitOptions(mainActivity)
                 .coordinatesList(listOf(origin, destination))
                 .build(),
@@ -797,16 +800,20 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     routes: List<DirectionsRoute>,
                     routerOrigin: RouterOrigin
                 ) {
+                    dialog.dismiss()
                     setRouteAndStartNavigation(routes.first())
                 }
 
                 override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
+                    dialog.dismiss()
                      toast.setText("You can't go to that address!")
                      toast.show()
+
                 }
 
                 override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
                     // no impl
+                    dialog.dismiss()
                 }
             }
         )
