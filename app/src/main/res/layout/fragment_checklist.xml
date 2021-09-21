@@ -60,14 +60,14 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.4" />
 
             <TextView
                 android:id="@+id/checklist_notification_text"
                 style="@style/textStyle16_gray"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.9"
+                android:layout_weight="4.8"
                 android:justificationMode="inter_word"
                 android:text="@string/checklist_notification_unprepared" />
 
