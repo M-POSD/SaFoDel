@@ -21,7 +21,7 @@
             android:id="@+id/quiz_text"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1.5"
             android:fontFamily="@font/rubik_bold"
             android:gravity="center"
@@ -36,14 +36,14 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             app:cardCornerRadius="30dp"
-            android:backgroundTint="@color/primary_green"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:weightSum="10"
+                android:background="@drawable/pri_sec_gradient"
                 android:padding="16dp">
 
                 <TextView

@@ -23,7 +23,7 @@
             android:id="@+id/quiz_text"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1.5"
             android:fontFamily="@font/rubik_bold"
             android:gravity="center"
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/primary_green"
+                android:background="@drawable/pri_sec_gradient"
                 android:padding="16dp"
                 android:weightSum="10">
 
@@ -75,7 +75,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1.8"
-                    android:layout_marginTop="-10dp"
                     android:fontFamily="@font/rubik_medium"
                     android:textColor="@color/white"
                     android:gravity="center"

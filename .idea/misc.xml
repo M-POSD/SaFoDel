@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new.xml" value="0.1868421052631579" />
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.10462962962962963" />
+        <entry key="app/src/main/res/drawable/ic_baseline_circle_24.xml" value="0.2324074074074074" />
         <entry key="app/src/main/res/drawable/ic_baseline_dark_mode.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/ic_baseline_light_mode.xml" value="0.3260416666666667" />
@@ -22,6 +23,7 @@
         <entry key="app/src/main/res/drawable/left_nav_selector.xml" value="0.2324074074074074" />
         <entry key="app/src/main/res/drawable/mapbox_ic_end_navigation.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/drawable/mapbox_ic_start_navigation.xml" value="0.17291666666666666" />
+        <entry key="app/src/main/res/drawable/pri_sec_gradient.xml" value="0.2324074074074074" />
         <entry key="app/src/main/res/drawable/selected_option_border_bg.xml" value="0.28703703703703703" />
         <entry key="app/src/main/res/drawable/tab_color_selector.xml" value="0.270995670995671" />
         <entry key="app/src/main/res/drawable/white_shape.xml" value="0.24722222222222223" />
