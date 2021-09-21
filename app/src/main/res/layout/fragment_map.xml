@@ -59,6 +59,7 @@
             app:smsp_floatingLabelColor="@color/deep_green"
             app:smsp_floatingLabelText="Accident Prone Location:"
             app:smsp_hint="Select the suburb"
+            mapbox:smsp_hintSize="16dp"
             app:smsp_hintColor="#388E3C"
             app:smsp_isSearchable="true"
             app:smsp_itemColor="@color/deep_green"

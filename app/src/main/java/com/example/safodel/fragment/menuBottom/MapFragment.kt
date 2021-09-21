@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
@@ -277,6 +278,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         // spinner init
         val spinner = binding.spinner
         spinner.item  = LGAlist
+        spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.rubik_medium)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
