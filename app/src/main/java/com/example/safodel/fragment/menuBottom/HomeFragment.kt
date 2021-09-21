@@ -703,6 +703,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             "light" -> {
                 homePageImage.homepageAppBar.setBackgroundResource(R.color.white)
                 homePageImage.headlight.visibility = View.INVISIBLE
+//                homePageImage.homepageAppBar.setBackgroundResource(R.drawable.bluesky_snow_gradient)
                 homePageImage.backpack.alpha = 0f
                 homePageImage.backpack.setImageResource(R.drawable.backpack_light)
                 homePageImage.helmet.alpha = 0f
