@@ -51,9 +51,11 @@ class CheckListFragment :
         model.getCheck().observe(viewLifecycleOwner, { t ->
             if (t == true) {
                 binding.checklistNotificationIcon.setImageResource(R.drawable.well_down)
+                binding.checklistNotificationText.setBackgroundResource(R.drawable.correct_info_border_bg)
                 binding.checklistNotificationText.text =
                     getString(R.string.checklist_notification_prepared)
             } else {
+                binding.checklistNotificationText.setBackgroundResource(R.drawable.wrong_info_border_bg)
                 binding.checklistNotificationIcon.setImageResource(R.drawable.not_cool)
                 binding.checklistNotificationText.text =
                     getString(R.string.checklist_notification_unprepared)

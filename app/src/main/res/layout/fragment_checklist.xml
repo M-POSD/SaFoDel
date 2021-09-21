@@ -64,10 +64,13 @@
 
             <TextView
                 android:id="@+id/checklist_notification_text"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
+                android:background="@drawable/wrong_info_border_bg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.8"
+                android:layout_weight="5"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="5dp"
                 android:justificationMode="inter_word"
                 android:text="@string/checklist_notification_unprepared" />
 
