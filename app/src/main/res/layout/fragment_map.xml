@@ -151,6 +151,7 @@
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
         android:backgroundTint="@color/white"
+        mapbox:backgroundTint="@color/white"
         android:contentDescription="desc"
         android:src="@drawable/baseline_gps_fixed_black_36"
         />
@@ -163,6 +164,7 @@
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
         android:backgroundTint="@color/white"
+        mapbox:backgroundTint="@color/white"
         android:contentDescription="desc"
         android:src="@drawable/baseline_assistant_direction_black_36"
         />
@@ -173,6 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
+        mapbox:backgroundTint="@color/white"
         android:layout_margin="20dp"
         android:backgroundTint="@color/white"
         android:contentDescription="desc"
