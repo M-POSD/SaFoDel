@@ -61,6 +61,7 @@
                     android:layout_weight="0.3"
                     android:scaleX="1"
                     android:scaleY="1"
+                    android:background="@color/primary_green"
                     android:src="@drawable/book" />
             </LinearLayout>
         </LinearLayout>
