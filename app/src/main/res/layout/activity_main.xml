@@ -27,7 +27,7 @@
             android:layout_gravity="bottom"
             app:labelVisibilityMode="labeled"
             app:elevation="0dp"
-            android:theme="@style/NavigationbarBottomStyle"
+
             android:background="@color/snow"
             app:itemIconTint="@drawable/bottom_nav_selector"
             app:itemTextColor="@drawable/bottom_nav_selector"
