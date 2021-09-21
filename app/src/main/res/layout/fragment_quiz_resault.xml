@@ -87,7 +87,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
 
-                <include layout="@layout/large_button"
+                <include layout="@layout/medium_button"
                     android:id="@+id/return_button"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
