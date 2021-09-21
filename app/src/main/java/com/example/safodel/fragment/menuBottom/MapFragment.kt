@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -103,6 +104,9 @@ import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -136,6 +140,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapView2 : MapView2
     private lateinit var LGAPoint:Point
     private lateinit var trafficPlugin: TrafficPlugin
+    private lateinit var searchBar: FrameLayout
 
 
 
@@ -271,6 +276,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mainActivity = activity as MainActivity
         toolbar = binding.toolbar.root
         mapView = binding.mapView
+        searchBar = binding.searchBar
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         setToolbarGray(toolbar)
@@ -333,6 +339,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .accessToken(getString(R.string.mapbox_access_token))
                 .build()
         )
+
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this) // update the map
@@ -576,6 +583,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     mapView2.visibility = View.VISIBLE
                     mapView.visibility = View.INVISIBLE
                     binding.recenter.visibility = View.VISIBLE
+                    binding.searchBar.visibility = View.VISIBLE
                     binding.floatButtonStop.visibility = View.VISIBLE
                     initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
@@ -585,12 +593,23 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     scLayer?.setProperties(visibility(Property.NONE))
                     siLayer?.setProperties(visibility(Property.NONE))
 
+                    /*--    Edit the Search bar    --*/
+                    GlobalScope.launch {
+                        // try to get the height of status bar and then margin top
+                        val searchBarHeight = searchBar.layoutParams as CoordinatorLayout.LayoutParams
+                        while (searchBarHeight.topMargin == 0)
+                            searchBarHeight.topMargin = mainActivity.getStatusHeight()
+                        searchBar.layoutParams = searchBarHeight
+                        this.cancel()
+                    }
+
                 }
             else {
                     setToolbarGray(toolbar)
                     mainActivity.isBottomNavigationVisible(true)
                     mapView2.visibility = View.INVISIBLE
                     binding.floatButtonStop.visibility = View.INVISIBLE
+                    binding.searchBar.visibility = View.INVISIBLE
                     mapView.visibility = View.VISIBLE
                     binding.recenter.visibility = View.INVISIBLE
                     mapView.getMapAsync(this)
@@ -712,7 +731,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             navigationCamera.requestNavigationCameraToFollowing()
         }
 
-        binding.floatButtonSearch.setOnClickListener {
+        searchBar.setOnClickListener {
             val intent: Intent = PlaceAutocomplete.IntentBuilder()
                 .accessToken(getString(R.string.mapbox_access_token))
                 .placeOptions(PlaceOptions.builder()
