@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:weightSum="10"
-                android:background="@drawable/pri_sec_gradient"
+                android:background="@color/primary_green"
                 android:padding="16dp">
 
                 <TextView

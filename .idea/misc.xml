@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/correct_option_border_bg.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/drawable/darksky_snow_gradient.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/drawable/default_option_border_bg.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/green_red_gradient.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new.xml" value="0.1868421052631579" />
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.10462962962962963" />
@@ -23,7 +24,7 @@
         <entry key="app/src/main/res/drawable/left_nav_selector.xml" value="0.2324074074074074" />
         <entry key="app/src/main/res/drawable/mapbox_ic_end_navigation.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/drawable/mapbox_ic_start_navigation.xml" value="0.17291666666666666" />
-        <entry key="app/src/main/res/drawable/pri_sec_gradient.xml" value="0.2324074074074074" />
+        <entry key="app/src/main/res/drawable/pri_sec_gradient.xml" value="0.12649109225534766" />
         <entry key="app/src/main/res/drawable/selected_option_border_bg.xml" value="0.28703703703703703" />
         <entry key="app/src/main/res/drawable/tab_color_selector.xml" value="0.270995670995671" />
         <entry key="app/src/main/res/drawable/white_shape.xml" value="0.24722222222222223" />
@@ -44,7 +45,7 @@
         <entry key="app/src/main/res/layout/detail_card_standard.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card_v0.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/detail_card_v1.xml" value="0.26096491228070173" />
-        <entry key="app/src/main/res/layout/detail_card_v2.xml" value="0.22447916666666667" />
+        <entry key="app/src/main/res/layout/detail_card_v2.xml" value="0.45356924762691947" />
         <entry key="app/src/main/res/layout/detail_card_v3.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/detail_card_v4.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/detail_card_v5.xml" value="0.22239583333333332" />
@@ -67,6 +68,7 @@
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_epic4.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/fragment_epic_style1.xml" value="0.1094224924012158" />
+        <entry key="app/src/main/res/layout/fragment_epic_style3.xml" value="0.21240942028985507" />
         <entry key="app/src/main/res/layout/fragment_epics.xml" value="0.15789473684210525" />
         <entry key="app/src/main/res/layout/fragment_exam.xml" value="0.24697035051982488" />
         <entry key="app/src/main/res/layout/fragment_exam1.xml" value="0.3098958333333333" />
@@ -77,7 +79,7 @@
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.1649122807017544" />
+        <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_quiz_page.xml" value="0.2118421052631579" />
         <entry key="app/src/main/res/layout/fragment_quiz_resault.xml" value="0.1649122807017544" />
         <entry key="app/src/main/res/layout/fragment_safodel_information1.xml" value="0.1094224924012158" />
@@ -105,7 +107,7 @@
         <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.15219298245614035" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/small_cards.xml" value="0.10866261398176291" />
+        <entry key="app/src/main/res/layout/small_cards.xml" value="0.25" />
         <entry key="app/src/main/res/layout/start_button.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/menu/nav_icon_menu_dark_mode.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/menu/nav_icon_menu_light_mode.xml" value="0.31145833333333334" />

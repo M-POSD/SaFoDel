@@ -41,30 +41,31 @@
                     android:text="SAFETY GEAR\n CHECKLIST"
                     style="@style/textStyle20_bold_black" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:weightSum="10">-->
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
-                        android:textSize="14dp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.9"-->
+<!--                        android:textSize="14dp" />-->
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="2dp"
-                        android:layout_weight="8.2"
-                        android:background="#9E9E9E" />
-                </LinearLayout>
+<!--                    <View-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="2dp"-->
+<!--                        android:layout_weight="8.2"-->
+<!--                        android:background="#9E9E9E" />-->
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="15dp"
+                    android:background="@color/primary_green_10"
                     android:orientation="vertical">
 
                     <include

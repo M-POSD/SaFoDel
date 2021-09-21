@@ -49,7 +49,8 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.openDrawer()
         }
 //        toolbar.setNavigationIcon(R.drawable.menu_green)
-        toolbar.setNavigationIcon(R.drawable.menu_green2)
+//        toolbar.setNavigationIcon(R.drawable.menu_green2)
+        toolbar.setNavigationIcon(R.drawable.menu_gray)
         mainActivity.unlockSwipeDrawer()
     }
 
