@@ -119,6 +119,7 @@ private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var lga: String = "MELBOURNE"
 private var spinnerTimes = 0
+private lateinit var toast: Toast
 
 // Retrofit
 private lateinit var suburbInterface: SuburbInterface
@@ -128,7 +129,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     OnMapReadyCallback,PermissionsListener {
 
     // View
-    private lateinit var toast: Toast
     private lateinit var toolbar: Toolbar
     private lateinit var dialog: MaterialDialog
 
@@ -801,7 +801,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 }
 
                 override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
-                    // no impl
+                     toast.setText("You can't go to that address!")
+                     toast.show()
                 }
 
                 override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
