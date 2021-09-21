@@ -26,7 +26,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginHorizontal="40dp">
 
             <TextView
                 android:id="@+id/generic_info_heading"
@@ -39,13 +40,26 @@
                 style="@style/textStyle20_bold_black"/>
 
             <TextView
-                android:id="@+id/generic_info_description"
+                android:id="@+id/generic_info_description1"
                 style="@style/textStyle16_gray"
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/generic_information_description" />
+                android:text="@string/generic_information_description1" />
+            <TextView
+                android:id="@+id/generic_info_description2"
+                style="@style/textStyle16_gray"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_information_description2" />
+            <TextView
+                android:id="@+id/generic_info_description3"
+                style="@style/textStyle16_gray"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_information_description3" />
         </LinearLayout>
 
 

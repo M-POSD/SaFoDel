@@ -259,6 +259,28 @@ class MainActivity : AppCompatActivity() {
         return sharedPref.getBoolean(checkbox, false)
     }
 
+    // keep the record of the checkbox clicked
+    fun keepWeatherSharePrefer(currentWeather: String) {
+        val weather = "weather"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            weather, Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putString(weather, currentWeather)
+        spEditor.apply()
+    }
+
+    // get the previous checkbox clicked by the user
+    fun getWeatherSharePrefer(): String? {
+        val weather = "weather"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            weather,
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getString(weather, "Placeholder")
+    }
+
     private fun configCheckListIcon() {
             if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
                 && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)

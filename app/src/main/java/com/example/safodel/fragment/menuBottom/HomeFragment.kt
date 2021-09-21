@@ -36,6 +36,7 @@ import android.view.MenuInflater
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.setFitsSystemWindows
+import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.adapter.EpicStyle2Adapter
 import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
@@ -46,6 +47,7 @@ import kotlinx.coroutines.launch
 import kotlin.concurrent.schedule
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.safodel.viewModel.WeatherViewModel
 import java.lang.Exception
 
 
@@ -76,6 +78,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var adapter: HomeViewAdapter
     private lateinit var runnable: Runnable
     private lateinit var handler: Handler
+
+    private lateinit var model: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,6 +140,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         homepageButtonLayout.viewPager2Home.adapter = adapter
         homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
         setViewPager2AutoIncrementPosition()
+
+        model = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
 
         return binding.root
 
@@ -672,6 +678,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                             rainingAnimation()
                         }
                         Log.d("currentWeather", weather)
+                        model.setWeather(weather)
                     }
                 } else {
                     Log.i("Error ", "Response failed")
