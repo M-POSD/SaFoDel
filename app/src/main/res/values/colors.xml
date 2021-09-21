@@ -14,7 +14,7 @@
 <!--    <color name="darkSky">#161b36</color>-->
 <!--    <color name="black">#FF000000</color>-->
 
-    <color name="primary_green">#46AF2F</color>
+    <color name="primary_green">#8AD0AB</color>
     <color name="white">#FFFFFFFF</color>
     <color name="snow">#FFFEF9</color>
     <color name="gray2">#7A8089</color>
@@ -22,7 +22,7 @@
     <color name="correct_border_color">#8AD0AB</color>
     <color name="wrong_border_color">#DD4747</color>
     <color name="bottom_nav_gray">#414a4c</color>
-    <color name="secondary_color">#46AF2F</color>
+    <color name="secondary_color">#8AD0AB</color>
     <color name="darkSky">#161b36</color>
     <color name="black">#414a4c</color>
 
