@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_item_one_dark"
+        android:icon="@drawable/rain_gray"
+        app:showAsAction="always"
+        android:title="@string/raining" />
+
+    <item
+        android:id="@+id/action_item_two_dark"
+        android:icon="@drawable/ic_baseline_light_mode"
+        android:title="@string/light_mode"
+        app:showAsAction="always" />
+</menu>

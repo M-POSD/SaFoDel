@@ -2,6 +2,7 @@ package com.example.safodel.ui.main
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,15 +11,16 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
+import com.example.safodel.viewModel.CheckListViewModel
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
-
-
 
 
 
@@ -27,12 +29,16 @@ class MainActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
     private lateinit var toastMain: Toast
+    private lateinit var drawer : DrawerLayout
+    private lateinit var bottomMenu: Menu
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        drawer = binding.drawerLayout
+        bottomMenu = binding.bottomNavigation.menu
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
@@ -41,6 +47,15 @@ class MainActivity : AppCompatActivity() {
         AutoSizeConfig.getInstance().isBaseOnWidth = false
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
+
+        val leftHeader = binding.leftNavigation.getHeaderView(0)
+        val leftHeaderText = leftHeader.findViewById<View>(R.id.left_header_text)
+        leftHeaderText.isClickable = true
+        leftHeaderText.setOnClickListener {
+            drawer.closeDrawers()
+        }
+
+        configCheckListIcon()
 
         recordLearningMode()
     }
@@ -53,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            android.R.id.home -> binding.drawerLayout.openDrawer(GravityCompat.START)
+            android.R.id.home -> drawer.openDrawer(GravityCompat.START)
         }
         return true
     }
@@ -71,8 +86,21 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if (doubleBackToExitPressedOnce || (navController.currentDestination?.id != R.id.homeFragment)
-        ) {
+        if(navController.currentDestination?.id == R.id.mapfragment ||
+            navController.currentDestination?.id == R.id.examFragment ||
+            navController.currentDestination?.id == R.id.analysisFragment ||
+            navController.currentDestination?.id == R.id.checklistFragment){
+            binding.bottomNavigation.selectedItemId = R.id.navHome
+            return
+        }
+
+        if(navController.currentDestination?.id != R.id.homeFragment)
+        {
+            super.onBackPressed()
+            return
+        }
+
+        if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
             return
         }
@@ -95,10 +123,34 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navMap -> {
-                    navController.navigate(R.id.mapfragment)
+                    if(navController.currentDestination?.id != R.id.navMap){
+                        navController.navigate(R.id.mapfragment)
+                    }
                     true
                 }
-                else -> false
+                R.id.navExam -> {
+                    if(navController.currentDestination?.id != R.id.navExam){
+                        navController.navigate(R.id.examFragment)
+                    }
+                    true
+                }
+                R.id.navAnalysis -> {
+                    if(navController.currentDestination?.id != R.id.navAnalysis){
+                        navController.navigate(R.id.analysisFragment)
+                    }
+                    true
+                }
+                R.id.navCheckList -> {
+                    if(navController.currentDestination?.id != R.id.navCheckList){
+                        navController.navigate(R.id.checklistFragment)
+                    }
+                    true
+                }
+                else -> {
+                    navController.popBackStack()
+                    binding.bottomNavigation.selectedItemId = R.id.navHome
+                    true
+                }
             }
         }
 
@@ -113,17 +165,15 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
                     R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-                    R.id.navExam -> navController.navigate(R.id.examFragment)
-                    R.id.navAnalysis -> navController.navigate(R.id.analysisFragment)
                 }
             }
-            binding.drawerLayout.closeDrawers() // close the drawer of the left navigation.
+            drawer.closeDrawers() // close the drawer of the left navigation.
             true
         }
     }
 
     fun openDrawer() {
-        binding.drawerLayout.openDrawer(GravityCompat.START)
+        drawer.openDrawer(GravityCompat.START)
     }
 
     override fun getResources(): Resources {
@@ -162,6 +212,84 @@ class MainActivity : AppCompatActivity() {
         val spEditor = sharedPref.edit()
         spEditor.putBoolean("isLearningMode", isLearningMode)
         spEditor.apply()
+    }
+
+     fun getStatusHeight(): Int{
+        val rec = Rect()
+        window.decorView.getWindowVisibleDisplayFrame(rec)
+        val statusBarHeight = rec.top
+        return statusBarHeight
+    }
+
+    fun lockSwipeDrawer(){
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    fun unlockSwipeDrawer(){
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    }
+
+    fun changeCheckListIcon(isChecked: Boolean) {
+        when(isChecked) {
+            true -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_finish)
+            false -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_not_finish)
+        }
+
+    }
+
+    // keep the record of the checkbox clicked
+    fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
+        val checkbox = "checkbox$checkbox_num"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            checkbox, Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putBoolean(checkbox, isChecked)
+        spEditor.apply()
+    }
+
+    // get the previous checkbox clicked by the user
+    fun getCheckboxSharePrefer(checkbox_num: Int): Boolean {
+        val checkbox = "checkbox$checkbox_num"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            checkbox,
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getBoolean(checkbox, false)
+    }
+
+    // keep the record of the checkbox clicked
+    fun keepWeatherSharePrefer(currentWeather: String) {
+        val weather = "weather"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            weather, Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putString(weather, currentWeather)
+        spEditor.apply()
+    }
+
+    // get the previous checkbox clicked by the user
+    fun getWeatherSharePrefer(): String? {
+        val weather = "weather"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            weather,
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getString(weather, "Placeholder")
+    }
+
+    private fun configCheckListIcon() {
+            if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
+                && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
+                && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
+            ) {
+                changeCheckListIcon(true)
+            } else {
+                changeCheckListIcon(false)
+            }
     }
 }
 

@@ -36,9 +36,6 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
             }
         }
 
-
-
-
         setToolbarBasic(toolbar)
         return binding.root
     }

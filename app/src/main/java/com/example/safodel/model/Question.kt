@@ -8,14 +8,14 @@ import kotlin.random.Random.Default.nextInt
 
 class Question(
     var id: Int,
-    var question: String,
+    var question: Int,
     var image: Int,
-    var option1: String,
-    var option2: String,
-    var option3: String,
-    var option4: String,
+    var option1: Int,
+    var option2: Int,
+    var option3: Int,
+    var option4: Int,
     var answer: Int,
-    var information: String
+    var information: Int
 
 ) {
     companion object {
@@ -23,84 +23,75 @@ class Question(
             var questions: MutableList<Question> = ArrayList()
 
             questions.add(Question(
-                    1, "What is the maximum speed you can ride your e-bike?",
+                    1,
+                R.string.question1_heading,
                 0,
-                "25 KM/H",
-                "30 KM/H",
-                "35 KM/H",
-                "50 KM/H",
+                R.string.question1_option1,
+                R.string.question1_option2,
+                R.string.question1_option3,
+                R.string.question1_option4,
                 1,
-                "The Australian government has set a strict speed limit of 25 Km/h on e-bikes."
+                R.string.question1_information
             ))
             questions.add(Question(
-                2, "Even if a road has a bike lane, can you ignore riding on it?",
+                2, R.string.question2_heading,
                 0,
-                "Yes",
-                "No",
-                "",
-                "",
+                R.string.yes,
+                R.string.no,
+                0,
+                0,
                 2,
-                "Ride in bike lanes where they are provided, unless impractical to do so."
+                R.string.question2_information
             ))
             questions.add(Question(
-                3, "As a delivery rider, should you stop when you see tram passengers " +
-                        "getting off? ",
+                3, R.string.question3_heading,
                 0,
-                "Yes",
-                "No",
-                "",
-                "",
+                R.string.yes,
+                R.string.no,
+                0,
+                0,
                 1,
-                "Bike riders must stop behind a tram that has stopped at a tram stop, " +
-                        "to allow passengers to get on and off safely."
+                R.string.question3_information
             ))
             questions.add(Question(
-                4, "Should you signal when turning right?",
+                4, R.string.question4_heading,
                 0,
-                "Yes",
-                "No",
-                "",
-                "",
+                R.string.yes,
+                R.string.no,
+                0,
+                0,
                 1,
-                "Bike riders must signal when turning right, " +
-                        "and can help share the road more safely by riding predictably, " +
-                        "using eye contact and indicating all changes of direction."
+                R.string.question4_information
             ))
             questions.add(Question(
-                5, "Are you allowed to ride on a footpath while delivering food?",
+                5, R.string.question5_heading,
                 0,
-                "Yes",
-                "No",
-                "",
-                "",
+                R.string.yes,
+                R.string.no,
+                0,
+                0,
                 2,
-                "Any bike rider must use a front light, rear light (flashing or steady), " +
-                        "and a rear red reflector when riding at night or " +
-                        "in conditions where visibility is poor."
+                R.string.question5_information
             ))
             questions.add(Question(
-                6, "Whenever you are changing lanes, " +
-                        "is it not your responsibility to give way and look for vehicles already " +
-                        "in that lane?",
+                6, R.string.question6_heading,
                 0,
-                "Yes",
-                "No",
-                "",
-                "",
+                R.string.yes,
+                R.string.no,
+                0,
+                0,
                 2,
-                "Whenever you change lanes from one marked lane or line of traffic to another, " +
-                        "you must give way to vehicles already in that lane or line of traffic.."
+                R.string.question6_information
             ))
             questions.add(Question(
-                7, "You can wear any helmet while delivering, regardless of its ratings.",
+                7, R.string.question7_heading,
                 0,
-                "True",
-                "False",
-                "",
-                "",
+                R.string.true_text,
+                R.string.false_text,
+                0,
+                0,
                 2,
-                "Cyclists need to wear a securely fitted and " +
-                        "fastened helmet with a mark of compliance with the Australian Standard"
+                R.string.question7_information
             ))
 
             var questionList: MutableList<Question> = ArrayList()

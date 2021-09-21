@@ -15,6 +15,21 @@
             android:id="@+id/navMap"
             android:icon="@drawable/ic_baseline_location_on_24"
             android:title="@string/map" />
+        <item
+            android:id="@+id/navAnalysis"
+            android:icon="@drawable/analysis"
+            android:title="@string/analysis"/>
+
+
+        <item
+            android:id="@+id/navExam"
+            android:icon="@drawable/exam"
+            android:title="@string/exam"/>
+
+        <item
+            android:id="@+id/navCheckList"
+            android:icon="@drawable/checklist_not_finish"
+            android:title="@string/checklist"/>
 
     </group>
 </menu>

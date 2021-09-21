@@ -9,24 +9,39 @@ import com.example.safodel.databinding.ActivityStartBinding
 
 import me.jessyan.autosize.AutoSizeConfig
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
-import android.os.Build
-import android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import android.view.animation.*
+import androidx.viewpager2.widget.ViewPager2
 import com.example.safodel.R
+import com.example.safodel.adapter.SafodelViewAdapter
 
 
 class StartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
+    private lateinit var viewPage2: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.startButton.button.alpha = 0f
-//        imageAnimation()
-//        buttonAnimation()
+
+        viewPage2 = binding.startViewPager2
+        val adapter = SafodelViewAdapter(this)
+        binding.startViewPager2.adapter = adapter
+        binding.wormDotsIndicator.setViewPager2(binding.startViewPager2)
+
         configAllAnimations()
+        configOnClickListener()
+
+
+        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty_12,0,
+            R.drawable.baseline_chevron_right_green_12,0)
+
+        AutoSizeConfig.getInstance().isBaseOnWidth = false
+
+    }
+
+    private fun configOnClickListener() {
         binding.startButton.button.setOnClickListener {
             val intent = Intent()
             intent.putExtra("isLearningMode", false)
@@ -38,8 +53,6 @@ class StartActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
-        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty_12,0,
-            R.drawable.baseline_chevron_right_green_12,0)
         binding.learningMode.setOnClickListener {
             val intent = Intent()
             intent.putExtra("isLearningMode", true)
@@ -50,66 +63,27 @@ class StartActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
-        AutoSizeConfig.getInstance().isBaseOnWidth = false
-
     }
 
     // confi all animations in the start activity
     private fun configAllAnimations() {
-        var objectAnimator1: ObjectAnimator =
-            ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
-        var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
+//        var objectAnimator1: ObjectAnimator =
+//            ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
+//        var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.startButton.button, "alpha", 0f, 1f)
         var objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.learningMode, "alpha", 0f, 1f)
-        objectAnimator1.duration = 1300
-        objectAnimator2.duration = 1300
-        objectAnimator3.duration = 500
-        objectAnimator4.duration = 500
+//        objectAnimator1.duration = 1300
+//        objectAnimator2.duration = 1300
+        objectAnimator3.duration = 1300
+        objectAnimator4.duration = 1300
 
         val animatorSet = AnimatorSet()
-        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
+//        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
         animatorSet.play(objectAnimator3).before(objectAnimator4)
         animatorSet.start()
     }
 
-    /////////////////////////////////////////////// temporarily useless methods below
-    private fun imageAnimation() {
-        val slideInRight: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
-
-        slideInRight.interpolator = DecelerateInterpolator()
-        slideInRight.duration = 2000
-
-        val animation = AnimationSet(false)
-        animation.addAnimation(slideInRight)
-
-        animation.repeatCount = 1;
-        binding.image.animation = animation
-    }
-
-    private fun buttonAnimation() {
-
-        val fadeIn: Animation = AlphaAnimation(0.0F, 1.0F)
-        fadeIn.interpolator = AccelerateDecelerateInterpolator()
-        fadeIn.duration = 1000
-
-        val animation = AnimationSet(false)
-        animation.addAnimation(fadeIn)
-        animation.startTime = 1000
-        animation.repeatCount = 1;
-        binding.startButton.button.animation = animation
-    }
-
-    private fun subTitleAnimation() {
-        val slideInLeft: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_left)
-        slideInLeft.interpolator = DecelerateInterpolator()
-        slideInLeft.duration = 3000
-
-        val animation = AnimationSet(false)
-        animation.addAnimation(slideInLeft)
-        animation.repeatCount = 1;
-        binding.subtitle.animation = animation
-    }
 }
 

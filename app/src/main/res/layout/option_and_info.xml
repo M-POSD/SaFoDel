@@ -11,13 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/default_option_border_bg"
-        android:fontFamily="@font/notosansjp_bold"
         android:paddingVertical="10dp"
         android:paddingHorizontal="20dp"
         android:layout_marginBottom="10dp"
         android:text="Apple1"
-        android:textColor="@color/black"
-        android:textSize="14dp"
+        style="@style/textStyle16_gray"
         android:drawableRight="@drawable/default_option_icon"/>
 
     <TextView
@@ -25,13 +23,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:background="@drawable/default_option_border_bg"
-        android:fontFamily="@font/notosansjp_black"
         android:gravity="center"
         android:padding="10dp"
         android:layout_marginBottom="10dp"
         android:visibility="gone"
         android:text="Apple1"
-        android:textColor="@color/black"
-        android:textSize="14dp" />
+        style="@style/textStyle14_black"/>
 </LinearLayout>

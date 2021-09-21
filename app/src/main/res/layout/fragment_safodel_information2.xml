@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/welcome_information2_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/snow"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/section1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:justificationMode="inter_word"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="40dp"
+            android:text="@string/v1"
+            android:textColor="@color/bottom_nav_gray"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="50dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/food_map_without_background" />
+        <TextView
+            android:id="@+id/section2_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:justificationMode="inter_word"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="20dp"
+            android:text="@string/v2_title"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            style="@style/textStyle20_bold_black"/>
+        <TextView
+            android:id="@+id/section2_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:justificationMode="inter_word"
+            android:paddingHorizontal="40dp"
+            android:text="@string/v2_description"
+            android:textColor="@color/bottom_nav_gray"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="16dp" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

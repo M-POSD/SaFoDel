@@ -19,8 +19,14 @@
         android:theme="@style/Theme.SaFoDel"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.main.LoginActivity"
+            android:name=".ui.main.StartActivity"
             android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
 
         </activity>
@@ -28,15 +34,11 @@
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.StartActivity"
+            android:name=".ui.main.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 

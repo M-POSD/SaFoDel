@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/snow"
+    android:orientation="vertical">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/pure_text"
+            layout="@layout/detail_card_v3" />
+
+        <include
+            android:id="@+id/image_right"
+            layout="@layout/detail_card_v2" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

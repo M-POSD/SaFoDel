@@ -9,222 +9,36 @@
     android:clickable="true"
     tools:context=".fragment.menuBottom.HomeFragment">
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/homeCoordinatorLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
-            android:orientation="vertical"
-            android:weightSum="10">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4.3"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <androidx.coordinatorlayout.widget.CoordinatorLayout
-                    android:id="@+id/coordinatorLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center">
-
-                    <dyanamitechetan.vusikview.VusikView
-                        android:id="@+id/vusik"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:fallCount="50"
-                        app:fallSpeed="0.3" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/images"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/driver"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:scaleX="1.25"
-                            android:scaleY="1.25"
-                            android:src="@drawable/wear_nothing"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.498"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.786" />
-
-                        <ImageView
-                            android:id="@+id/helmet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="137dp"
-                            android:alpha="0"
-                            android:scaleX="1.6"
-                            android:scaleY="1.6"
-                            android:src="@drawable/helmet"
-                            app:layout_constraintBottom_toBottomOf="@+id/driver"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.531"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.916" />
-
-                        <ImageView
-                            android:id="@+id/backpack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
-                            android:layout_marginEnd="127dp"
-                            android:layout_marginBottom="101dp"
-                            android:alpha="0"
-                            android:scaleX="1.25"
-                            android:scaleY="1.3"
-                            android:src="@drawable/backpack"
-                            android:translationX="25dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/driver"
-                            app:layout_constraintEnd_toEndOf="@+id/driver"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/driver"
-                            app:layout_constraintVertical_bias="1.0" />
-
-                        <ImageView
-                            android:id="@+id/headlight"
-                            android:layout_width="239dp"
-                            android:layout_height="202dp"
-                            android:alpha="0"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
-                            android:src="@drawable/headlight3"
-                            android:visibility="invisible"
-                            app:layout_constraintBottom_toBottomOf="@+id/driver"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.557"
-                            app:layout_constraintStart_toEndOf="@+id/driver"
-                            app:layout_constraintTop_toTopOf="@+id/driver"
-                            app:layout_constraintVertical_bias="0.0" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.coordinatorlayout.widget.CoordinatorLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="6"
-                android:background="@color/primary_green"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/notosansjp_bold"
-                    android:gravity="center"
-                    android:paddingHorizontal="20dp"
-                    android:text="@string/home_page_slang_1"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/notosansjp_bold"
-                    android:gravity="center"
-                    android:text="@string/home_page_slang_2"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
-                    android:textSize="14dp" />
-
-                <include
-                    android:id="@+id/epicCard12"
-                    layout="@layout/small_cards" />
-
-                <include
-                    android:id="@+id/epicCard34"
-                    layout="@layout/small_cards" />
-
-                <!--                <TextView-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginBottom="10dp"-->
-                <!--                    android:fontFamily="@font/notosansjp_bold"-->
-                <!--                    android:gravity="center"-->
-                <!--                    android:text="Click map to see accident locations for your suburb"-->
-                <!--                    android:textAppearance="?attr/textAppearanceHeadline6"-->
-                <!--                    android:textColor="@color/white"-->
-                <!--                    android:textSize="14dp" />-->
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <include
+            android:id="@+id/home_page_images"
+            layout="@layout/homepage_images" />
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/simple_toolbar" />
+            layout="@layout/simple_toolbar"
+            app:layout_collapseMode="pin" />
 
-        <LinearLayout
-            android:id="@+id/light_mode_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/weather_light_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="1dp"
-                android:src="@drawable/rain_black" />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/home_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <ImageView
-                android:id="@+id/light_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="1dp"
-                android:src="@drawable/ic_baseline_light_mode" />
+            <include
+                android:id="@+id/homepage_button_layout"
+                layout="@layout/homepage_button_layout" />
 
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-        <LinearLayout
-            android:id="@+id/dark_mode_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="30dp"
-            android:visibility="invisible"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/weather_dark_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="1dp"
-                android:src="@drawable/rain_white" />
-
-            <ImageView
-                android:id="@+id/dark_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_dark_mode"
-                android:padding="1dp" />
-        </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
     <FrameLayout
         android:id="@+id/container"

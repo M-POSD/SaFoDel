@@ -4,9 +4,9 @@ import com.example.safodel.R
 
 class   GroupCard2Data(
     var dataType: String,
-    var title: String,
-    var statistics: String,
-    var description: String,
+    var title_id: Int,
+    var statistics_id: Int,
+    var description_id: Int,
     var image: Int,
     var cardType: Int
 ) {
@@ -17,56 +17,55 @@ class   GroupCard2Data(
             // tip1 data
             groupCard2Data.add(
                 GroupCard2Data("tip1",
-                    "RIDE CAREFULLY AT INTERSECTIONS",
-                        "Bicycle crashes are marginally more common (55%) at intersections",
-                    "TIP: If you want to turn right at any intersection, " +
-                            "doing a hook turn is often a safer option (unless a sign prohibits it)",
+                    R.string.tip1_1_title,
+                    R.string.tip1_1_statistics,
+                    R.string.tip1_1_description,
                     R.drawable.tip1_1,2)
             )
             groupCard2Data.add(
                 GroupCard2Data("tip1",
-                    "STOP AND GIVE WAY",
-                    "15% of bike rider casualties occur when a driver or rider who is turning right fails to give way to an oncoming vehicle travelling straight through",
-                    "TIP: If you are at intersections without traffic lights, signs or road lines, give way to any vehicle entering or approaching the intersection from your right",
+                    R.string.tip1_2_title,
+                    R.string.tip1_2_statistics,
+                    R.string.tip1_2_description,
                     R.drawable.tip1_2,1)
             )
             groupCard2Data.add(
                 GroupCard2Data("tip1",
-                    "AVOID DOORING",
-                    "8% of bike rider casualties occur when a driver opens their door into the path of a bike rider.",
-                    "TIP: While it is never the rider’s fault when hit by an opening door, you must be aware of the risk and position themselves so that any chance of a collision is reduced",
+                    R.string.tip1_3_title,
+                    R.string.tip1_3_statistics,
+                    R.string.tip1_3_description,
                     R.drawable.tip1_3,2)
             )
             groupCard2Data.add(
                 GroupCard2Data("tip1",
-                    "STAY AWARE",
-                    "Delivery Partners recommend you not to listen to music while delivering",
-                    "Don’t be distracted by the use of phone or listening to music while delivering. Instead use hands-free GPS",
+                    R.string.tip1_4_title,
+                    R.string.tip1_4_statistics,
+                    R.string.tip1_4_description,
                     R.drawable.tip1_4,1)
             )
 
             // eBikeInfo3 data
             groupCard2Data.add(
                 GroupCard2Data("eBikeInfo3",
-                    "HIGH SPEED DANGER",
-                    "Buying a high-speed e-bike may lead to faster deliveries but it is illegal",
-                    "TIP: Be sure to check the government guidelines before buying an e-bike",
+                    R.string.info3_1_title,
+                    R.string.info3_1_statistics,
+                    R.string.info3_1_description,
                     R.drawable.info1_2,
                     2)
             )
             groupCard2Data.add(
                 GroupCard2Data("eBikeInfo3",
-                    "HIGH THROTTLE",
-                    "Too much initial throttle can cause injury",
-                    "TIP: Get accustomed to riding an e-bike before actually going out for your first delivery",
+                    R.string.info3_2_title,
+                    R.string.info3_2_statistics,
+                    R.string.info3_2_description,
                     R.drawable.info1_3,
                     1)
             )
             groupCard2Data.add(
                 GroupCard2Data("eBikeInfo3",
-                    "MORE THEFT",
-                    "The higher price for e-bikes has seen more thefts of e-bikes over regular bikes",
-                    "TIP: Make sure you lock your bike properly",
+                    R.string.info3_3_title,
+                    R.string.info3_3_statistics,
+                    R.string.info3_3_description,
                     R.drawable.info1_1,
                     2)
             )
@@ -74,49 +73,45 @@ class   GroupCard2Data(
             // inAnAccident1 data
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
-                    "This is general advice only",
-                    "",
-                    "In the unfortunate event of a bike accident these are some steps to look after yourself",
+                    R.string.in_an_accident1_0_title,
+                    0,
+                    R.string.in_an_accident1_0_description,
                     0,
                     4)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
-                    "Check on Yourself",
-                    "",
-                    "Make sure you’re okay, contact help if needed and try place yourself in a safe location " +
-                            "if your accident was on the road",
+                    R.string.in_an_accident1_1_title,
+                    0,
+                    R.string.in_an_accident1_1_description,
                     R.drawable.inanaccident1_1,
                     2)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
-                    "Collect Details & Take Photos",
-                    "",
-                    "Collect details of those involved in accident and any witnesses " +
-                            "as they may be necessary for insurance purposes later on",
+                    R.string.in_an_accident1_2_title,
+                    0,
+                    R.string.in_an_accident1_2_description,
                     R.drawable.inanaccident1_2,
                     1)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
-                    "See a Doctor",
-                    "",
-                    "Always give priority to your health and safety. " +
-                            "Even if you feel it is only a small incident, it’s best to see a doctor",
+                    R.string.in_an_accident1_3_title,
+                    0,
+                    R.string.in_an_accident1_3_description,
                     R.drawable.inanaccident1_3,
                     2)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
-                    "Report Incident to Police & Platform",
-                    "",
-                    "Report the incident to the police as well as let your platform know " +
-                            "you’ve been in an accident as they may offer assistance",
+                    R.string.in_an_accident1_4_title,
+                    0,
+                    R.string.in_an_accident1_4_description,
                     R.drawable.inanaccident1_4,
                     1)
             )
@@ -124,40 +119,36 @@ class   GroupCard2Data(
             // inAnAccident2 data
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident2",
-                    "",
-                    "",
-                    "Typically gig economy workers are treated as independent contractors and " +
-                            "therefore lack some ordinary working protections and benefits",
+                    0,
+                    0,
+                    R.string.in_an_accident2_0_description,
                     0,
                     4)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident2",
-                    "Inconsistent Rules",
-                    "",
-                    "It is important to know that  food delivery platforms have different working contracts and " +
-                            "manage the working relationship differently",
+                    R.string.in_an_accident2_1_title,
+                    0,
+                    R.string.in_an_accident2_2_description,
                     R.drawable.inanaccident2_1,
                     2)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident2",
-                    "Employee or Not?",
-                    "",
-                    "Uber Eats treats it’s riders as independent contractors while " +
-                            "a recent ruling Deliveroo drivers as  employees",
+                    R.string.in_an_accident2_2_title,
+                    0,
+                    R.string.in_an_accident2_2_description,
                     R.drawable.inanaccident2_2,
                     1)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident2",
-                    "Growing Area",
-                    "",
-                    "How gig workers are treated is a growing area, " +
-                            "groups like the transport workers union (TWU) are fighting for gig workers to have more rights",
+                    R.string.in_an_accident2_3_title,
+                    0,
+                    R.string.in_an_accident2_3_description,
                     R.drawable.inanaccident2_3,
                     2)
             )
@@ -165,65 +156,56 @@ class   GroupCard2Data(
             // roadSign data -> for tip3 currently
             groupCard2Data.add(
                 GroupCard2Data("roadSign",
-                    "Slippery when wet",
-                    "",
-                    "These signs indicate roads that get particularly slippery in wet weather, " +
-                            "cyclists also take care, reducing your speed\n" +
-                            "Remember to remain visibility in wet weather, " +
-                            "and be careful of tram tracks that can get very slippery",
+                    R.string.road_sign1_title,
+                    0,
+                    R.string.road_sign1_description,
                     R.drawable.road_sign_1,
-                    2)
+                    8)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("roadSign",
-                    "Construction related signs",
-                    "",
-                    "These signs indicate road construction is ahead, " +
-                            "be prepared to be slow down, stop or be directed by traffic controllers or potential detours",
+                    R.string.road_sign2_title,
+                    0,
+                    R.string.road_sign2_description,
                     R.drawable.road_sign_2,
-                    1)
+                    10)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("roadSign",
-                    "Biking parking related signs",
-                    "",
-                    "It’s important to keep an eye out for these signs, " +
-                            "be sure not to park in these areas as it may result in being fined or having your bike seized",
+                    R.string.road_sign3_title,
+                    0,
+                    R.string.road_sign3_description,
                     R.drawable.road_sign_3,
-                    2)
+                    9)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("roadSign",
-                    "Biking parking related signs",
-                    "",
-                    "It’s important to keep an eye out for these signs, " +
-                            "be sure not to park in these areas as it may result in being fined or having your bike seized",
+                    R.string.road_sign4_title,
+                    0,
+                    R.string.road_sign4_description,
                     R.drawable.road_sign_4,
-                    1)
+                    8)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("roadSign",
-                    "Hook turns",
-                    "",
-                    "These signs mean that the only way to turn right at this intersection is via a hook turn. " +
-                            "However, unless stated otherwise, it is recommended cyclists hook turn at intersections " +
-                            "rather than turning right from the right lane as it is often safer.",
+                    R.string.road_sign5_title,
+                    0,
+                    R.string.road_sign5_description,
                     R.drawable.road_sign_5,
-                    2)
+                    8)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("roadSign",
-                    "Dismount signs",
-                    "",
-                    "These signs indicate cyclists must dismount their bike and walk across the specific path, " +
-                            "typically these are at pedestrian crossings or bridges",
+                    R.string.road_sign6_title,
+                    0,
+                    R.string.road_sign6_description,
                     R.drawable.road_sign_6,
-                    1)
+                    8)
             )
 
 

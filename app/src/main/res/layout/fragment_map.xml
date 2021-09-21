@@ -59,6 +59,7 @@
             app:smsp_floatingLabelColor="@color/deep_green"
             app:smsp_floatingLabelText="Accident Prone Location:"
             app:smsp_hint="Select the suburb"
+            mapbox:smsp_hintSize="16dp"
             app:smsp_hintColor="#388E3C"
             app:smsp_isSearchable="true"
             app:smsp_itemColor="@color/deep_green"
@@ -129,7 +130,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:visibility="invisible"
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
         android:backgroundTint="@color/third_green"
@@ -146,8 +146,18 @@
         android:layout_margin="20dp"
         android:backgroundTint="@color/third_green"
         android:contentDescription="desc"
-        android:src="@drawable/outline_highlight_off_black_36"
-        />
+        android:src="@drawable/outline_highlight_off_black_36" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButtonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/third_green"
+        android:contentDescription="desc"
+        android:src="@drawable/outline_search_black_36" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

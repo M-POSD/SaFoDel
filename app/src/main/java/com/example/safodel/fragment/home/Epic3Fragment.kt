@@ -1,19 +1,20 @@
 package com.example.safodel.fragment.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.AnimationUtils
-import androidx.navigation.fragment.findNavController
+import android.view.*
 import com.example.safodel.R
+import com.example.safodel.adapter.EpicStyle1Adapter
+import com.example.safodel.adapter.EpicStyle2Adapter
+import com.example.safodel.adapter.EpicStyle3Adapter
 import com.example.safodel.databinding.FragmentEpic3Binding
 import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.GroupCard1Data
+import com.example.safodel.model.GroupCard2Data
+
 
 class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::inflate) {
+    private lateinit var adapter1: EpicStyle3Adapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,22 +22,10 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
     ): View {
         _binding = FragmentEpic3Binding.inflate(inflater, container, false)
 
-        configDefaultTextView()
+        configSection1()
 
-        binding.gear1Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.gear1Fragment, null, navAnimationLeftToRight())
-        }
-
-        binding.gear2Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.gear2Fragment, null, navAnimationLeftToRight())
-        }
-
-        binding.gear3Card.card.setOnClickListener() {
-            findNavController().navigate(R.id.gear3Fragment, null, navAnimationLeftToRight())
-        }
-
-        contentsAnimation()
-
+        val toolbar = binding.toolbar.root
+        setToolbarReturn(toolbar)
         return binding.root
     }
 
@@ -45,23 +34,21 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         _binding = null
     }
 
-    private fun configDefaultTextView() {
-        binding.gear1Card.title.text = getString(R.string.gear1_name)
-        binding.gear2Card.title.text = getString(R.string.gear2_name)
-        binding.gear3Card.title.text = getString(R.string.gear3_name)
+    private fun configSection1() {
+        adapter1 = EpicStyle3Adapter(requireActivity(), getSection1Data())
+        binding.viewPager2Section1.adapter = adapter1
+        binding.wormDotsIndicatorSection1.setViewPager2(binding.viewPager2Section1)
     }
 
-    // contents animation slide in from bottom
-    private fun contentsAnimation() {
-        val slideIn: Animation =
-            AnimationUtils.loadAnimation(requireActivity(), R.anim.slide_in_bottom)
-        slideIn.interpolator = AccelerateDecelerateInterpolator()
-        slideIn.duration = 1500
-
-        val animation = AnimationSet(false)
-        animation.addAnimation(slideIn)
-        animation.repeatCount = 1;
-        binding.epicLayout.animation = animation
+    private fun getSection1Data(): MutableList<GroupCard2Data> {
+        val data = GroupCard2Data.init()
+        var i = 0
+        while (i < data.size) {
+            when (data[i].dataType) {
+                "roadSign" -> i++
+                else -> data.removeAt(i)
+            }
+        }
+        return data
     }
-
 }

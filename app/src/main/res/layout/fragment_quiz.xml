@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.menuLeft.QuizFragment">
-
-
+    tools:context=".fragment.menuBottom.QuizFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primary_green"
+        android:background="@color/snow"
         android:layout_gravity="center"
         android:weightSum="10"
         android:orientation="vertical">
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -26,20 +23,20 @@
             android:layout_height="0dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1.5"
-            android:fontFamily="@font/notosansjp_black"
+            android:fontFamily="@font/rubik_bold"
             android:gravity="center"
-            android:text="Quiz"
-            android:textColor="@color/white"
+            android:text="@string/quiz"
+            android:textColor="@color/primary_green"
             android:textSize="30dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4.5"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/white"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             app:cardCornerRadius="30dp"
+            android:backgroundTint="@color/primary_green"
             app:cardElevation="5dp">
 
             <LinearLayout
@@ -53,53 +50,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
-                    android:fontFamily="@font/notosansjp_bold"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/rubik_bold"
                     android:gravity="center"
-                    android:text="Take a quick quiz to test your understanding"
-                    android:textColor="@color/black"
-                    android:textSize="23dp" />
+                    android:text="@string/quiz_heading"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"/>
+                    android:layout_weight="4.7"/>
 
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="@font/notosansjp_bold"-->
-<!--                    android:gravity="center"-->
-<!--                    android:text="Please enter your name"-->
-<!--                    android:textColor="@color/deep_gray"-->
-<!--                    android:textSize="16dp" />-->
+                <include android:id="@+id/startBtn"
+                    layout="@layout/medium_button"/>
 
-<!--                <com.google.android.material.textfield.TextInputLayout-->
-<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="10dp">-->
-
-<!--                    <androidx.appcompat.widget.AppCompatEditText-->
-<!--                        android:id="@+id/editText"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:hint="Name"-->
-<!--                        android:textSize="20dp"-->
-<!--                        android:textColor="@color/deep_gray"/>-->
-<!--                </com.google.android.material.textfield.TextInputLayout>-->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/startBtn"
-                    android:layout_margin="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3.5"
-                    android:backgroundTint="@color/primary_green"
-                    android:elevation="5dp"
-                    android:fontFamily="@font/notosansjp_black"
-                    android:text="Start"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    app:cornerRadius="30dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

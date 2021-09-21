@@ -1,12 +1,11 @@
 package com.example.safodel.fragment.menuBottom
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.location.Location
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +15,17 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.LGAList
+import com.example.safodel.model.SuburbMapResponse
+import com.example.safodel.retrofit.SuburbClient
+import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.ui.main.MainActivity
+import com.example.safodel.ui.map.TrafficPlugin
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.models.DirectionsRoute
@@ -42,27 +47,17 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
-import com.mapbox.mapboxsdk.style.layers.CircleLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
-import com.mapbox.mapboxsdk.utils.BitmapUtils
 import com.mapbox.navigation.core.MapboxNavigation
 import com.mapbox.navigation.core.MapboxNavigationProvider
-import org.json.JSONArray
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
 import kotlin.collections.ArrayList
 import com.mapbox.mapboxsdk.style.expressions.Expression.stop
 import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
-import com.mapbox.mapboxsdk.style.layers.Property
+import com.mapbox.mapboxsdk.style.layers.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
 import com.mapbox.maps.CameraOptions
@@ -101,7 +96,9 @@ import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
-import org.angmarch.views.NiceSpinner
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -111,7 +108,9 @@ private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var lga: String = "MELBOURNE"
 private var spinnerTimes = 0
-private lateinit var mThread:Thread
+
+// Retrofit
+private lateinit var suburbInterface: SuburbInterface
 
 
 class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -120,6 +119,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     // View
     private lateinit var toast: Toast
     private lateinit var toolbar: Toolbar
+    private lateinit var dialog: MaterialDialog
 
     // Map
     private lateinit var mapboxMap: MapboxMap
@@ -128,6 +128,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapView: MapView
     private lateinit var mapView2 : MapView2
     private lateinit var LGAPoint:Point
+    private lateinit var trafficPlugin: TrafficPlugin
+
+
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -252,6 +255,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     ): View {
         activity?.let { Mapbox.getInstance(it.application,getString(R.string.mapbox_access_token)) }
         _binding = FragmentMapBinding.inflate(inflater,container,false)
+
+        // init the toast (it will not show)
         toast = Toast.makeText(context,"message",Toast.LENGTH_SHORT)
 
         // init the view
@@ -259,36 +264,46 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mainActivity = activity as MainActivity
         toolbar = binding.toolbar.root
         mapView = binding.mapView
-        mapView2 = binding.mapView2
-        mapboxMap2 = mapView2.getMapboxMap()
-        setToolbarBasic(toolbar)
+        mapView2 = binding.mapView2  // for navigation
+        mapboxMap2 = mapView2.getMapboxMap() // for navigation
+        setToolbarGray(toolbar)
 
         // request permission of user location
         permissionsManager = PermissionsManager(this)
         permissionsManager.requestLocationPermissions(activity)
 
+        // Set Dialog
+        dialog = MaterialDialog(requireContext())
+
         // spinner init
         val spinner = binding.spinner
         spinner.item  = LGAlist
+        spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.rubik_medium)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
+                setDialog()
                 spinnerTimes++ // calculate the times to test
                 if(spinnerTimes >= 1){
                     lga = parent?.getItemAtPosition(position).toString()
-                    mThread = fetchdata()
-                    mThread.start()
+                    callSuburbClient()
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+
+
+        suburbInterface = SuburbClient.getSuburbService()
+
         // change the float button height
         changeFloatButtonHeight()
         // basic location and position
-        mThread = fetchdata()
-        mThread.start()
+
+        // Update data
+        setDialog()
+        callSuburbClient()
 
         // update the map
         binding.updateMap.setOnClickListener {
@@ -317,6 +332,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
 
     /*
         update the map when call getMapAsync()
@@ -325,11 +344,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapboxMap.setMaxZoomPreference(20.0)
         mapboxMap.setMinZoomPreference(5.0)
 
+
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT){
 
             /*-- Camera auto zoom to the LGA area --*/
-            if(feature.size != 0){
+            if(feature.size != 0 && locationList.size != 0){
                 LGAPoint = locationList[0]
                 val position = CameraPosition.Builder()
                     .target(LatLng(LGAPoint.latitude(),LGAPoint.longitude()))
@@ -342,73 +362,78 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             enableLocationComponent(it)
 
             // Make a toast when data is updating
-            if(feature.size == 0){
+            if(feature.size == 0 && locationList.size == 0){
                 toast.setText("Data is updating...")
                 toast.show()
             }
 
             /*-- Add inmage --*/
-            it.addImage(
-                "icon_image",
-                BitmapUtils.getBitmapFromDrawable(
-                    context?.let { it1 ->
-                        ContextCompat.getDrawable(
-                            it1,
-                            R.drawable.crash_location
-                        )
-                    }
-                )!!)
+//            it.addImage(
+//                "icon_image",
+//                BitmapUtils.getBitmapFromDrawable(
+//                    context?.let { it1 ->
+//                        ContextCompat.getDrawable(
+//                            it1,
+//                            R.drawable.crash_location
+//                        )
+//                    }
+//                )!!)
 
             /*-- Add source --*/
             it.addSource(GeoJsonSource("source", FeatureCollection.fromFeatures(ArrayList<Feature>(
                 feature))))
-            val baseicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
-                circleColor(Color.parseColor("#FF0000")),
+
+
+            trafficPlugin = TrafficPlugin(mapView,mapboxMap,it)
+            trafficPlugin.setVisibility(true)
+
+
+            /*-- Add layer --*/
+            val basicCircle:CircleLayer = CircleLayer("basic_circle_cayer","source").withProperties(
+                circleColor(Color.parseColor("#ff0015")),
                 visibility(Property.VISIBLE),
                 iconIgnorePlacement(false),
                 iconAllowOverlap(false),
                 circleRadius(
                     interpolate(
                         linear(), zoom(),
-                        stop(11f, 4f),
-                        stop(12f, 4f),
-                        stop(15f,4f),
-                        stop(15.1f,0f)
+                        stop(10, 1.0f),
+                        stop(15, 4.0f),
+                        stop(20, 16f)
                 )
-            ))
-
-            /*-- Add layer --*/
-            it.addLayer(baseicCircle)
+            ), circleOpacity(0.5f))
+            it.addLayer(basicCircle)
 
             /*-- Add circle layer --*/
             val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
                 .withProperties(
-                    circleColor(parseColor("#FC9C9C")),
-                    circleRadius(6f),
+                    circleColor(parseColor("#bd0010")),
                     visibility(Property.VISIBLE),
                     circleOpacity(
                         interpolate(
                             linear(), zoom(),
-                            stop(11f, .5f),
-                            stop(15f,0f)
+                            stop(10, 0.75f),
+                            stop(15, 6f),
+                            stop(20.0f, 18.0f)
                         )
                     ),
                     iconIgnorePlacement(false),
-                    iconAllowOverlap(false)
+                    iconAllowOverlap(false), circleOpacity(0.5f)
                 )
             it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
             /*-- Add symbol layer --*/
-            val symbolIconLayer = SymbolLayer("icon_layer", "source")
-            symbolIconLayer.withProperties(
-                visibility(Property.VISIBLE),
-                iconImage("icon_image"),
-                iconSize(1.5f),
-                iconIgnorePlacement(false),
-                iconAllowOverlap(false)
-            )
-            symbolIconLayer.minZoom = 15f
-            it.addLayer(symbolIconLayer)
+//            val symbolIconLayer = SymbolLayer("icon_layer", "source")
+//            symbolIconLayer.withProperties(
+//                visibility(Property.VISIBLE),
+//                iconImage("icon_image"),
+//                iconSize(1.5f),
+//                iconIgnorePlacement(false),
+//                iconAllowOverlap(false)
+//            )
+//            symbolIconLayer.minZoom = 15f
+//            it.addLayer(symbolIconLayer)
+
 
             /*-- Set the camera's animation --*/
             mapboxMap.animateCamera(
@@ -475,13 +500,13 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onPause() {
         super.onPause()
-        mThread.interrupt()
+        //mThread.interrupt()
         mapView.onPause()
     }
 
     override fun onStop() {
         super.onStop()
-        mThread.interrupt()
+        //mThread.interrupt()
         mapView.onStop()
     }
 
@@ -498,7 +523,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mThread.interrupt()
+        //mThread.interrupt()
         mapView.onDestroy()
         mapboxNavigation.onDestroy()
         if (::mapboxNavigation.isInitialized){
@@ -526,13 +551,18 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    /* -- Hide or Show the crash relative view. -- */
+
+
+
+    /* --
+            UI part - Hide or Show the crash relative view.
+    -- */
     fun changeToNav(){
         mapboxMap.getStyle {
             val bcLayer =  it.getLayer("basic_circle_cayer")
             val scLayer = it.getLayer("shadow_circle_cayer")
             val siLayer = it.getLayer("icon_layer")
-            if(bcLayer != null && scLayer != null && siLayer != null){
+            if(bcLayer != null){
                 if(View.VISIBLE.equals(mapView.visibility)){
                     setToolbarReturn(toolbar)
                     mainActivity.isBottomNavigationVisible(false)
@@ -545,12 +575,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.spinner.visibility = View.INVISIBLE
                     binding.updateMap.visibility = View.INVISIBLE
                     bcLayer.setProperties(visibility(Property.NONE))
-                    scLayer.setProperties(visibility(Property.NONE))
-                    siLayer.setProperties(visibility(Property.NONE))
+                    scLayer?.setProperties(visibility(Property.NONE))
+                    siLayer?.setProperties(visibility(Property.NONE))
 
                 }
             else {
-                    setToolbarBasic(toolbar)
+                    setToolbarGray(toolbar)
                     mainActivity.isBottomNavigationVisible(true)
                     mapView2.visibility = View.INVISIBLE
                     binding.floatButtonStop.visibility = View.INVISIBLE
@@ -561,13 +591,18 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     binding.spinner.visibility = View.VISIBLE
                     binding.updateMap.visibility = View.VISIBLE
                     bcLayer.setProperties(visibility(Property.VISIBLE))
-                    scLayer.setProperties(visibility(Property.VISIBLE))
-                    siLayer.setProperties(visibility(Property.VISIBLE))
+                    scLayer?.setProperties(visibility(Property.VISIBLE))
+                    siLayer?.setProperties(visibility(Property.VISIBLE))
 
             }
             }
         }
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    ///                                  Navigation                                    ////
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     @SuppressWarnings("MissingPermission")
     private fun initNav(){
@@ -581,6 +616,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
             setLocationProvider(navigationLocationProvider)
             enabled = true
+
         }
 
         // move the camera to current location on the first update
@@ -668,6 +704,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.recenter.setOnClickListener {
             navigationCamera.requestNavigationCameraToFollowing()
         }
+
+        binding.floatButtonSearch.setOnClickListener {
+            val intent: Intent = PlaceAutocomplete.IntentBuilder()
+                .accessToken(getString(R.string.mapbox_access_token))
+                .placeOptions(PlaceOptions.builder()
+                 .backgroundColor(Color.parseColor("#EEEEEE"))
+                    .limit(10)
+                    .build(PlaceOptions.MODE_CARDS))
+                .build(mainActivity)
+        }
+
         mapboxNavigation.startTripSession()
     }
 
@@ -762,54 +809,55 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.floatButtonStop.layoutParams = FBHeightStop
     }
 
-}
 
 
     /*
-     *  Collect data
+        Collect the data
      */
-    class fetchdata(): Thread() {
-        var data: String = ""
-        override fun run() {
-          try {
-            feature.clear()
-            /*---    Fetch the data from team's API  ---*/
-            val url = URL("http://13.211.206.2/accidents?location=" + lga)
-            val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
-            val inputStream: InputStream = httpURLConnection.inputStream
-            val bufferReader = BufferedReader(InputStreamReader(inputStream))
-            data = bufferReader.readLine()
+    private fun callSuburbClient() {
+        feature.clear()
+        locationList.clear()
+        val callAsync: Call<SuburbMapResponse> = suburbInterface.mapRepos(
+            "accidents",
+            lga
+        )
+        callAsync.enqueue(object : Callback<SuburbMapResponse?> {
+            override fun onResponse(call: Call<SuburbMapResponse?>?, response: Response<SuburbMapResponse?>) {
+                if (response.isSuccessful) {
+                    dialog.dismiss()
+                    val resultList = response.body()?.suburbMapAccidents
+                    if (resultList?.isNotEmpty() == true) {
+                        for(each in resultList){
+                            val eachPoint = Point.fromLngLat(each.point_long,each.point_lat)
+                            locationList.add(eachPoint)
+                        }
+                    }
+                    for(each in 0..locationList.size-1){
+                        feature.add(Feature.fromGeometry(locationList[each]))
+                    }
 
-            if(data.isNotEmpty()){
-                val jsonObject = JSONObject(data)
-                val points: JSONArray = jsonObject.getJSONArray("results")
-                locationList.clear()
-                for(point in 0..points.length()-1){
-                    val location: JSONObject = points.getJSONObject(point)
-                    val eachPoint = Point.fromLngLat(location.get("long").
-                    toString().toDouble(),
-                        location.get("lat").toString().toDouble())
-                    locationList.add(eachPoint)
+                } else {
+                    Log.i("Error ", "Response failed")
                 }
             }
-        }catch(e: MalformedURLException){
-            e.printStackTrace()
-
-        }catch(e: IOException){
-            e.printStackTrace()
-        }
-
-        Handler(Looper.getMainLooper()).post {
-            run {
-                for(each in 0..locationList.size-1){
-                    Log.d("Hello Handler Locationlist Size is:", locationList.size.toString())
-                    feature.add(Feature.fromGeometry(locationList[each]))
-                }
+            override fun onFailure(call: Call<SuburbMapResponse?>?, t: Throwable) {
+                dialog.dismiss()
+                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
             }
-        }
+        })
     }
 
 
+    /*
+        Setting the dialog when item select
+     */
+    private fun setDialog(){
+        dialog.show {
+            message(text = "loading.. Please wait.")
+            cancelable(false)
+            cancelOnTouchOutside(false)
+        }
+    }
 }
 
 

@@ -3,49 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary_green"
+    android:background="@color/snow"
+    android:padding="4dp"
     android:orientation="horizontal"
     android:weightSum="1">
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25" />
+        android:layout_weight="0.1" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardLeft"
+        android:id="@+id/sc_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="4dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="8dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.8"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="25dp"
         app:cardElevation="5dp">
 
         <LinearLayout
-            android:id="@+id/cardLayoutL"
+            android:id="@+id/sc_cardLayoutL"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:gravity="center"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:weightSum="10"
             android:padding="8dp">
 
-            <TextView
-                android:id="@+id/editTextLeft"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/sc_image_view"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:src="@drawable/tip"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:layout_weight="3"/>
+
+            <TextView
+                android:id="@+id/sc_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:gravity="center"
                 android:fontFamily="@font/notosansjp_bold"
                 android:text="Demo"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/primary_green"
-                android:textSize="16dp" />
+                android:textSize="20dp" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -4,34 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="@color/snow"
     tools:context=".fragment.menuLeft.AppIntroFragment">
+
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginBottom="200dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:elevation="10dp"
         android:outlineAmbientShadowColor="@color/deep_gray"
         android:scaleX="1.25"
         android:scaleY="1.25"
-        android:elevation="10dp"
+        android:src="@mipmap/ic_launcher"
         android:translationZ="10dp"
-        app:layout_constraintRight_toRightOf="parent" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
 
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:fontFamily="@font/notosansjp_bold"
-        android:text="SaFoDel"
-        android:textSize="25dp"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/rubik_bold"
+        android:text="@string/SaFoDel"
+        android:textSize="20dp"
+        android:textColor="@color/bottom_nav_gray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/logo" />
@@ -41,20 +44,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.547">
+        app:layout_constraintTop_toBottomOf="@+id/appName"
+        app:layout_constraintVertical_bias="0.098">
 
         <TextView
             android:id="@+id/about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:fontFamily="@font/notosansjp_bold"
-            android:text="About"
-            android:textColor="@color/green_blue"
-            android:textSize="20dp" />
+            android:text="@string/about"
+            style="@style/textStyle16_green" />
 
         <TextView
             android:id="@+id/audience"
@@ -62,10 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:clickable="true"
-            android:fontFamily="@font/notosansjp_bold"
-            android:text="Audience"
-            android:textColor="@color/green_blue"
-            android:textSize="20dp" />
+            android:text="@string/audience"
+            style="@style/textStyle16_green" />
 
     </LinearLayout>
 

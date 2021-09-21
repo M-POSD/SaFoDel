@@ -1,11 +1,12 @@
 package com.example.safodel.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R
@@ -47,6 +48,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.openDrawer()
         }
         toolbar.setNavigationIcon(R.drawable.menu_green)
+        mainActivity.unlockSwipeDrawer()
     }
 
     /**
@@ -60,28 +62,79 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.openDrawer()
         }
         toolbar.setNavigationIcon(R.drawable.menu_white)
+        mainActivity.unlockSwipeDrawer()
+    }
+
+    /**
+     *  Press the gray navigation icon to pop up the navigation window
+     */
+    fun setToolbarGray(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationOnClickListener {
+            mainActivity.openDrawer()
+        }
+        toolbar.setNavigationIcon(R.drawable.menu_gray)
+        mainActivity.unlockSwipeDrawer()
     }
 
     /**
      * Press the return navigation icon to go back to previous page
      */
     open fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
-        setToolbarBasic(toolbar)
-        toolbar.setNavigationIcon(R.drawable.arrow_left_circle)
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
         toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
+            mainActivity.onBackPressed()
         }
+        mainActivity.lockSwipeDrawer()
     }
 
     /**
      * Press the cancelled navigation icon to go back to previous page
      */
     fun setToolbarCancel(toolbar: androidx.appcompat.widget.Toolbar) {
-        setToolbarBasic(toolbar)
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
         toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel)
         toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
+            mainActivity.onBackPressed()
         }
+        mainActivity.lockSwipeDrawer()
+    }
+
+    /**
+     *  Contain basic nav and light mode two more actions icon
+     */
+    fun setToolbarLightMode(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationOnClickListener {
+            mainActivity.openDrawer()
+        }
+        toolbar.setNavigationIcon(R.drawable.menu_gray)
+        mainActivity.unlockSwipeDrawer()
+        toolbar.inflateMenu(R.menu.nav_icon_menu_light_mode)
+    }
+
+    /**
+     *  Contain basic nav and dark mode two more actions icon
+     */
+    fun setToolbarDarkMode(toolbar: androidx.appcompat.widget.Toolbar) {
+        val mainActivity = activity as MainActivity
+        toolbar.inflateMenu(R.menu.nav_menu_left)
+        toolbar.menu.clear() // delete 3 dots in the right of toolbar
+        toolbar.setNavigationOnClickListener {
+            mainActivity.openDrawer()
+        }
+        toolbar.setNavigationIcon(R.drawable.menu_white)
+        mainActivity.unlockSwipeDrawer()
+        toolbar.inflateMenu(R.menu.nav_icon_menu_dark_mode)
     }
 
 
@@ -103,6 +156,16 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             .setExitAnim(R.anim.slide_out_left)
             .setPopEnterAnim(R.anim.slide_in_left)
             .setPopExitAnim(R.anim.slide_out_right).build()
+    }
+
+    /**
+     * build the navigation animation from bottom to top
+     */
+    fun navAnimationBottomToTop(): NavOptions {
+        return NavOptions.Builder().setEnterAnim(R.anim.slide_in_bottom)
+            .setExitAnim(R.anim.slide_out_top)
+            .setPopEnterAnim(R.anim.slide_in_top)
+            .setPopExitAnim(R.anim.slide_out_bottom).build()
     }
 }
 
