@@ -1,5 +1,6 @@
 package com.example.safodel.fragment.menuBottom
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.widget.AdapterView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.get
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
@@ -101,6 +104,8 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
      */
     private fun initSpinner() {
         spProvince = binding.spinner
+        val typeFace = ResourcesCompat.getFont(requireContext(), R.font.rubik_medium)
+        spProvince.typeface = typeFace
         spProvince.item = suburbList
         spProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {

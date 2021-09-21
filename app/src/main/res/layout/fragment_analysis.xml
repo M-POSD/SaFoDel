@@ -29,6 +29,7 @@
             app:smsp_floatingLabelText="Suburb:"
             app:smsp_hint="Select the suburb"
             app:smsp_hintColor="#388E3C"
+            app:smsp_hintSize="16dp"
             app:smsp_isSearchable="true"
             app:smsp_itemColor="@color/deep_green"
             app:smsp_itemListColor="@color/third_green"
