@@ -233,7 +233,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Set the Bar Chart of Accident time in this Suburb.
      */
     private fun setLineChart(list: List<SuburbTimeAccidents>){
-        val color  = ContextCompat.getColor(requireContext(), R.color.third_green)
+        val color  = ContextCompat.getColor(requireContext(), R.color.primary_green)
         val colorList = ArrayList<Int>()
         colorList.add(ColorTemplate.rgb("#8AD0AB"))
         val data2: MutableList<Entry> = ArrayList()
@@ -255,7 +255,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     }
 
     private fun setStreetsBarChat(list: List<SuburbStreetsAccidents>){
-        val color  = ContextCompat.getColor(requireContext(), R.color.third_green)
+        val color  = ContextCompat.getColor(requireContext(), R.color.primary_green)
         val rawList = list.sortedBy {
             it.accidentsNumber
         }

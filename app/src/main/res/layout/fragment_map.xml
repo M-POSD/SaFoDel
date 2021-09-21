@@ -98,11 +98,11 @@
             app:smsp_hintColor="#388E3C"
             app:smsp_isSearchable="true"
             app:smsp_itemColor="@color/deep_green"
-            app:smsp_itemListColor="@color/third_green"
+            app:smsp_itemListColor="@color/primary_green"
             app:smsp_itemListHintBackgroundColor="#808080"
             app:smsp_itemListHintColor="#FFFFFF"
             app:smsp_multilineError="false"
-            app:smsp_searchHeaderBackgroundColor="@color/third_green"
+            app:smsp_searchHeaderBackgroundColor="@color/primary_green"
             app:smsp_selectedItemListColor="@color/black"
             android:fitsSystemWindows="true"/>
 
@@ -155,7 +155,7 @@
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/third_green"
+        android:backgroundTint="@color/primary_green"
         android:contentDescription="desc"
         android:src="@drawable/baseline_gps_fixed_black_36"
         />
@@ -167,7 +167,7 @@
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/third_green"
+        android:backgroundTint="@color/primary_green"
         android:contentDescription="desc"
         android:src="@drawable/baseline_assistant_direction_black_36"
         />
@@ -179,7 +179,7 @@
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/third_green"
+        android:backgroundTint="@color/primary_green"
         android:contentDescription="desc"
         android:src="@drawable/outline_highlight_off_black_36" />
 

@@ -32,11 +32,11 @@
             app:smsp_hintSize="16dp"
             app:smsp_isSearchable="true"
             app:smsp_itemColor="@color/deep_green"
-            app:smsp_itemListColor="@color/third_green"
+            app:smsp_itemListColor="@color/primary_green"
             app:smsp_itemListHintBackgroundColor="#808080"
             app:smsp_itemListHintColor="#FFFFFF"
             app:smsp_multilineError="false"
-            app:smsp_searchHeaderBackgroundColor="@color/third_green"
+            app:smsp_searchHeaderBackgroundColor="@color/primary_green"
             app:smsp_selectedItemListColor="@color/black" />
 
         <ScrollView

@@ -30,7 +30,7 @@
         android:id="@+id/login"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/third_green"
+        android:backgroundTint="@color/primary_green"
         android:layout_gravity="center_horizontal"
         android:text="Login" />
 

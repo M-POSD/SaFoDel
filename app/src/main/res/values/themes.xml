@@ -19,7 +19,7 @@
     <style name="NavigationbarBottomStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <!--        <item name="colorPrimary">#83BE9E</item>-->
-        <item name="colorPrimary">@color/secondary_green</item>
+        <item name="colorPrimary">@color/primary_green</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -56,13 +56,13 @@
     </style>
 
     <style name="MapboxCustomManeuverStyle" parent="MapboxStyleManeuverView">
-        <item name="maneuverViewBackgroundColor">@color/third_green</item>
+        <item name="maneuverViewBackgroundColor">@color/primary_green</item>
         <item name="subManeuverViewBackgroundColor">@color/green</item>
         <item name="upcomingManeuverViewBackgroundColor">@color/green</item>
     </style>
 
     <style name="ProgressBarStyle">
-        <item name="colorAccent">@color/secondary_green</item>
+        <item name="colorAccent">@color/primary_green</item>
     </style>
 
     <style name="textStyle14_green">
@@ -122,8 +122,8 @@
     </style>
 
     <style name="worm_dot_indicator">
-        <item name="dotsColor">@color/primary_green</item>
-        <item name="dotsStrokeColor">@color/primary_green</item>
+        <item name="dotsColor">@color/secondary_color</item>
+        <item name="dotsStrokeColor">@color/secondary_color</item>
         <item name="dotsCornerRadius">8dp</item>
         <item name="dotsSize">12dp</item>
         <item name="dotsSpacing">4dp</item>

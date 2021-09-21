@@ -29,6 +29,8 @@
             app:elevation="0dp"
             android:theme="@style/NavigationbarBottomStyle"
             android:background="@color/snow"
+            app:itemIconTint="@drawable/bottom_nav_selector"
+            app:itemTextColor="@drawable/bottom_nav_selector"
             app:menu="@menu/nav_menu_bottom">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -43,6 +45,8 @@
         app:itemTextAppearance="@style/NavigationbarLeftTextStyle"
         app:menu="@menu/nav_menu_left"
         android:background="@color/snow"
+        app:itemIconTint="@drawable/left_nav_selector"
+        app:itemTextColor="@drawable/left_nav_selector"
         app:headerLayout="@layout/left_nav_header">
 
     </com.google.android.material.navigation.NavigationView>
