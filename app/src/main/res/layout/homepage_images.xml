@@ -53,13 +53,13 @@
                         android:layout_gravity="bottom"
                         android:scaleX="1.6"
                         android:scaleY="1.6"
-                        android:src="@drawable/driver_riding3"
+                        android:src="@drawable/driver_riding"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintHorizontal_bias="0.619"
-                        app:layout_constraintVertical_bias="0.765" />
+                        app:layout_constraintHorizontal_bias="0.618"
+                        app:layout_constraintVertical_bias="0.767" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver2"
+                        android:src="@drawable/driver"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
                         android:layout_marginBottom="137dp"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver_helmet3"
+                        android:src="@drawable/driver_helmet"
                         android:translationY="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
@@ -106,7 +106,7 @@
                         android:layout_marginBottom="101dp"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver_backpack3"
+                        android:src="@drawable/driver_backpack"
                         android:translationX="26dp"
                         android:translationY="11dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
