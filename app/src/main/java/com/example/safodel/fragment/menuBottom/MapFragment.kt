@@ -21,6 +21,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.checkAllItems
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
+import com.afollestad.materialdialogs.list.toggleAllItemsChecked
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
@@ -128,7 +129,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     // View
     private lateinit var toolbar: Toolbar
     private lateinit var dialog: MaterialDialog
+    private lateinit var diaglogFilter : MaterialDialog
     private lateinit var recenter: View
+
 
     // Map
     private lateinit var mapboxMap: MapboxMap
@@ -291,6 +294,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         buttonFilter = binding.floatButtonFilter
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
+        diaglogFilter = MaterialDialog(mainActivity)
         setToolbarGray(toolbar)
         setfilterListener()
 
@@ -422,7 +426,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
             /*-- Add layer --*/
-            val basicCircle: CircleLayer =
+            var basicCircle: CircleLayer =
                 CircleLayer("basic_circle_cayer", "source").withProperties(
                     circleColor(Color.parseColor("#ff0015")),
                     visibility(Property.VISIBLE),
@@ -440,7 +444,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             it.addLayer(basicCircle)
 
             /*-- Add circle layer --*/
-            val shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
+            var shadowTransitionCircleLayer = CircleLayer("shadow_circle_cayer", "source")
                 .withProperties(
                     circleColor(parseColor("#bd0010")),
                     visibility(Property.VISIBLE),
@@ -964,16 +968,26 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     @SuppressLint("CheckResult")
     private fun showDialogFilter() {
+        val fragmentNow = this
         val myItems = listOf("Traffic Status", "Crash Point")
-        val diaglogFilter = MaterialDialog(mainActivity)
+        diaglogFilter = MaterialDialog(mainActivity)
         diaglogFilter.show {
             message(text = "Filter")
             listItemsMultiChoice(items = myItems,waitForPositiveButton = true,allowEmptySelection = true){dialog, indices, items ->
-//                Toast.makeText(mainActivity,items[indices],Toast.LENGTH_SHORT).show()
+                Toast.makeText(mainActivity,items.toString(),Toast.LENGTH_SHORT).show()
+                if(items.contains(myItems[0]))
+                    trafficPlugin.setVisibility(true)
+                else trafficPlugin.setVisibility(false)
+                if(items.contains(myItems[1])){
+                    mapView.getMapAsync(fragmentNow)
+                }
+                else{
+                    mapboxMap.style?.removeLayer("basic_circle_cayer")
+                    mapboxMap.style?.removeLayer("shadow_circle_cayer")
+                }
             }
             positiveButton(R.string.select)
         }
-        diaglogFilter.checkAllItems()
     }
 }
 
