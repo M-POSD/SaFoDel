@@ -84,18 +84,15 @@
     <string name="tip1_name">Safety Tips</string>
     <string name="tip2_name" >Delivering at Night</string>
 
-    <string name="tip1_1_title">RIDE CAREFULLY AT INTERSECTIONS</string>
+    <string name="tip1_1_title">Hook turn at intersections</string>
     <string name="tip1_1_statistics" >Bicycle crashes are marginally more common (55%) at intersections</string>
-    <string name="tip1_1_description" >TIP: If you want to turn right at any intersection, doing a hook turn is often a safer option (unless a sign prohibits it)</string>
-    <string name="tip1_2_title">STOP AND GIVE WAY</string>
-    <string name="tip1_2_statistics">15% of bike rider casualties occur when a driver or rider who is turning right fails to give way to an oncoming vehicle travelling straight through</string>
-    <string name="tip1_2_description">TIP: If you are at intersections without traffic lights, signs or road lines, give way to any vehicle entering or approaching the intersection from your right</string>
-    <string name="tip1_3_title">AVOID DOORING</string>
+    <string name="tip1_1_description" >It’s often safer to perform a hook turn at an intersection rather than turn right from the right lane</string>
+    <string name="tip1_2_title">Blind spots</string>
+    <string name="tip1_2_statistics"></string>
+    <string name="tip1_2_description">Avoid riding in a vehicle’s blind spots and beware larger vehicles have bigger blind spots</string>
+    <string name="tip1_3_title">Watch out for dooring</string>
     <string name="tip1_3_statistics">8% of bike rider casualties occur when a driver opens their door into the path of a bike rider</string>
-    <string name="tip1_3_description">TIP: While it is never the rider\'s fault when hit by an opening door, you must be aware of the risk and position themselves so that any chance of a collision is reduced</string>
-    <string name="tip1_4_title">STAY AWARE</string>
-    <string name="tip1_4_statistics">Delivery Partners recommend you not to listen to music while delivering</string>
-    <string name="tip1_4_description">Don’t be distracted by the use of phone or listening to music while delivering. Instead use hands-free GPS</string>
+    <string name="tip1_3_description">Be careful around parked vehicles where people may be getting in or out, reduce speed, be vigilant</string>
     <string name="tip2_0_description">Take extra care when cycling at night. It is harder for drivers to see you and for you to see hazards</string>
     <string name="tip2_1_description">Try to ride on well-lit roads and wear bright or light coloured clothing or a reflective vest</string>
     <string name="tip2_2_description">Always use front and rear lights</string>

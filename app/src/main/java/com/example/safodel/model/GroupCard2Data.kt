@@ -36,13 +36,13 @@ class   GroupCard2Data(
                     R.string.tip1_3_description,
                     R.drawable.tip1_3,2)
             )
-            groupCard2Data.add(
-                GroupCard2Data("tip1",
-                    R.string.tip1_4_title,
-                    R.string.tip1_4_statistics,
-                    R.string.tip1_4_description,
-                    R.drawable.tip1_4,1)
-            )
+//            groupCard2Data.add(
+//                GroupCard2Data("tip1",
+//                    R.string.tip1_4_title,
+//                    R.string.tip1_4_statistics,
+//                    R.string.tip1_4_description,
+//                    R.drawable.tip1_4,1)
+//            )
 
             // eBikeInfo3 data
             groupCard2Data.add(

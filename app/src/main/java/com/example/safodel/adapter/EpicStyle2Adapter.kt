@@ -38,9 +38,13 @@ class EpicStyle2Adapter(val context: Context, group2Data: MutableList<GroupCard2
                 viewHolder.binding.imageRight.title.text = context.getString(data.title_id)
                 if (data.statistics_id == 0) {
                     viewHolder.binding.imageRight.statistics.visibility = View.GONE
-                } else {
+                } else if (context.getString(data.statistics_id).isEmpty()) {
+                    viewHolder.binding.imageRight.statistics.visibility = View.GONE
+                }
+                else {
                     viewHolder.binding.imageRight.statistics.text = context.getString(data.statistics_id)
                 }
+
                 viewHolder.binding.imageRight.description.text = context.getString(data.description_id)
                 viewHolder.binding.imageRight.image.setImageResource(data.image)
                 viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
