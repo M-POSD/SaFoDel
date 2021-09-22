@@ -18,6 +18,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.viewModel.CheckListViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toastMain: Toast
     private lateinit var drawer : DrawerLayout
     private lateinit var bottomMenu: Menu
+    private lateinit var bottomNavigationView: BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         drawer = binding.drawerLayout
         bottomMenu = binding.bottomNavigation.menu
+        bottomNavigationView = binding.bottomNavigation
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
@@ -290,6 +293,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 changeCheckListIcon(false)
             }
+    }
+
+
+     fun callOnNav(index:Int){
+        bottomNavigationView.menu.getItem(index).setChecked(true)
     }
 }
 
