@@ -53,13 +53,13 @@
                         android:layout_gravity="bottom"
                         android:scaleX="1.6"
                         android:scaleY="1.6"
-                        android:src="@drawable/driver_riding2"
+                        android:src="@drawable/driver_riding3"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintHorizontal_bias="0.619"
-                        app:layout_constraintVertical_bias="0.816" />
+                        app:layout_constraintVertical_bias="0.832" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -88,11 +88,11 @@
                         android:layout_marginBottom="137dp"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver_helmet2"
-                        android:translationY="8dp"
+                        android:src="@drawable/driver_helmet3"
+                        android:translationY="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
-                        app:layout_constraintHorizontal_bias="0.605"
+                        app:layout_constraintHorizontal_bias="0.63"
                         app:layout_constraintStart_toStartOf="@+id/driver"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="1" />
@@ -106,9 +106,9 @@
                         android:layout_marginBottom="101dp"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver_backpack2"
-                        android:translationX="21dp"
-                        android:translationY="9dp"
+                        android:src="@drawable/driver_backpack3"
+                        android:translationX="26dp"
+                        android:translationY="11dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
                         app:layout_constraintHorizontal_bias="1.0"
