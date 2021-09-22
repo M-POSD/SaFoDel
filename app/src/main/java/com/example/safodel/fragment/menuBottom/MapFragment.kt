@@ -982,8 +982,17 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     mapView.getMapAsync(fragmentNow)
                 }
                 else{
-                    mapboxMap.style?.removeLayer("basic_circle_cayer")
-                    mapboxMap.style?.removeLayer("shadow_circle_cayer")
+                    mapboxMap.getStyle {
+                        val layer1 = it.getLayer("basic_circle_cayer")
+                        val layer2 = it.getLayer("shadow_circle_cayer")
+                        if(layer1 != null && layer2 != null){
+                            if(layer1.visibility.getValue()!!.equals(Property.VISIBLE)){
+                                layer1.setProperties(visibility(Property.NONE))
+                                layer2.setProperties(visibility(Property.NONE))
+                            }
+                        }
+                    }
+
                 }
             }
             positiveButton(R.string.select)
