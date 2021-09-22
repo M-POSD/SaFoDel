@@ -14,7 +14,7 @@ import com.example.safodel.model.GroupCard2Data
 class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::inflate) {
     private lateinit var adapter1: EpicStyle1Adapter
     private lateinit var adapter2: EpicStyle1Adapter
-    private lateinit var adapter3: EpicStyle2Adapter
+    private lateinit var adapter3: EpicStyle1Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +53,7 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
 
     private fun configSection3() {
         binding.heading3.text = getString(R.string.info3_name)
-        adapter3 = EpicStyle2Adapter(requireActivity(), getSection3Data())
+        adapter3 = EpicStyle1Adapter(requireActivity(), getSection3Data())
         binding.viewPager2Section3.adapter = adapter3
         binding.wormDotsIndicatorSection3.setViewPager2(binding.viewPager2Section3)
     }
@@ -82,8 +82,8 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         return data
     }
 
-    private fun getSection3Data(): MutableList<GroupCard2Data> {
-        val data = GroupCard2Data.init()
+    private fun getSection3Data(): MutableList<GroupCard1Data> {
+        val data = GroupCard1Data.init()
         var i = 0
         while (i < data.size) {
             when (data[i].dataType) {

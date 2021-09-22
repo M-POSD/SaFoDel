@@ -1,10 +1,16 @@
 package com.example.safodel.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Paint
+import android.net.Uri
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safodel.R
 import com.example.safodel.databinding.FragmentEpicStyle2Binding
 import com.example.safodel.model.GroupCard2Data
 
@@ -34,15 +40,35 @@ class EpicStyle2Adapter(val context: Context, group2Data: MutableList<GroupCard2
                 viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
             }
 
+            5 -> {
+                viewHolder.binding.imageRight.statistics.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
+                viewHolder.binding.imageRight.statistics.setOnClickListener {
+                    val url = context.getString(data.statistics_id)
+                    val internetAct = Intent(Intent.ACTION_VIEW)
+                    internetAct.data = Uri.parse(url)
+                    context.startActivity(internetAct)
+                }
+                viewHolder.binding.imageRight.statistics.text = context.getString(R.string.click_to_know_more)
+                viewHolder.binding.imageRight.statistics.gravity = Gravity.CENTER
+                viewHolder.binding.imageRight.statistics.setTextColor(ContextCompat.getColor(context, R.color.black))
+                viewHolder.binding.imageRight.title.text = context.getString(data.title_id)
+                viewHolder.binding.imageRight.description.text = context.getString(data.description_id)
+                viewHolder.binding.imageRight.image.setImageResource(data.image)
+                viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
+            }
+
             else -> {
                 viewHolder.binding.imageRight.title.text = context.getString(data.title_id)
-                if (data.statistics_id == 0) {
-                    viewHolder.binding.imageRight.statistics.visibility = View.GONE
-                } else if (context.getString(data.statistics_id).isEmpty()) {
-                    viewHolder.binding.imageRight.statistics.visibility = View.GONE
-                }
-                else {
-                    viewHolder.binding.imageRight.statistics.text = context.getString(data.statistics_id)
+                when {
+                    data.statistics_id == 0 -> {
+                        viewHolder.binding.imageRight.statistics.visibility = View.GONE
+                    }
+                    context.getString(data.statistics_id).isEmpty() -> {
+                        viewHolder.binding.imageRight.statistics.visibility = View.GONE
+                    }
+                    else -> {
+                        viewHolder.binding.imageRight.statistics.text = context.getString(data.statistics_id)
+                    }
                 }
 
                 viewHolder.binding.imageRight.description.text = context.getString(data.description_id)

@@ -36,44 +36,54 @@ class   GroupCard2Data(
                     R.string.tip1_3_description,
                     R.drawable.tip1_3,2)
             )
-//            groupCard2Data.add(
-//                GroupCard2Data("tip1",
-//                    R.string.tip1_4_title,
-//                    R.string.tip1_4_statistics,
-//                    R.string.tip1_4_description,
-//                    R.drawable.tip1_4,1)
-//            )
 
-            // eBikeInfo3 data
+            // tip2 data
             groupCard2Data.add(
-                GroupCard2Data("eBikeInfo3",
-                    R.string.info3_1_title,
-                    R.string.info3_1_statistics,
-                    R.string.info3_1_description,
-                    R.drawable.info1_2,
-                    2)
+                GroupCard2Data(
+                    "tip2",
+                    0,
+                    0,
+                    R.string.tip2_0_description,
+                    0,
+                    4
+                )
             )
             groupCard2Data.add(
-                GroupCard2Data("eBikeInfo3",
-                    R.string.info3_2_title,
-                    R.string.info3_2_statistics,
-                    R.string.info3_2_description,
-                    R.drawable.info1_3,
-                    1)
+                GroupCard2Data(
+                    "tip2",
+                    R.string.tip2_1_title,
+                    R.string.tip2_1_statistics,
+                    R.string.tip2_1_description,
+                    R.drawable.tip2_1,
+                    2
+                )
             )
             groupCard2Data.add(
-                GroupCard2Data("eBikeInfo3",
-                    R.string.info3_3_title,
-                    R.string.info3_3_statistics,
-                    R.string.info3_3_description,
-                    R.drawable.info1_1,
-                    2)
+                GroupCard2Data(
+                    "tip2",
+                    R.string.tip2_2_title,
+                    R.string.tip2_2_statistics,
+                    R.string.tip2_2_description,
+                    R.drawable.tip2_2,
+                    1
+                )
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data(
+                    "tip2",
+                    R.string.tip2_3_title,
+                    R.string.tip2_3_statistics,
+                    R.string.tip2_3_description,
+                    R.drawable.tip2_3,
+                    1
+                )
             )
 
             // inAnAccident1 data
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
-                    R.string.in_an_accident1_0_title,
+                    0,
                     0,
                     R.string.in_an_accident1_0_description,
                     0,
@@ -100,6 +110,15 @@ class   GroupCard2Data(
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident1",
+                    R.string.in_an_accident1_2_title2,
+                    0,
+                    R.string.in_an_accident1_2_description2,
+                    R.drawable.inanaccident1_2_2,
+                    1)
+            )
+
+            groupCard2Data.add(
+                GroupCard2Data("inAnAccident1",
                     R.string.in_an_accident1_3_title,
                     0,
                     R.string.in_an_accident1_3_description,
@@ -119,18 +138,18 @@ class   GroupCard2Data(
             // inAnAccident2 data
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident2",
-                    0,
-                    0,
+                    R.string.in_an_accident2_0_title,
+                    R.string.in_an_accident2_0_source,
                     R.string.in_an_accident2_0_description,
-                    0,
-                    4)
+                    R.drawable.in_an_accident2_0,
+                    5)
             )
 
             groupCard2Data.add(
                 GroupCard2Data("inAnAccident2",
                     R.string.in_an_accident2_1_title,
                     0,
-                    R.string.in_an_accident2_2_description,
+                    R.string.in_an_accident2_1_description,
                     R.drawable.inanaccident2_1,
                     2)
             )

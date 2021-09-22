@@ -37,8 +37,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/rubik_medium"
-                    android:text="Demo"
                     android:justificationMode="inter_word"
+                    android:padding="5dp"
+                    android:text="Demo"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/wrong_border_color"
                     android:textSize="16dp" />
 

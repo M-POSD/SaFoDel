@@ -13,8 +13,7 @@ import com.example.safodel.model.GroupCard2Data
 
 class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::inflate) {
     private lateinit var adapter1: EpicStyle2Adapter
-    private lateinit var adapter2: EpicStyle1Adapter
-    private lateinit var adapter3: EpicStyle1Adapter
+    private lateinit var adapter2: EpicStyle2Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +24,6 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
 
         configSection1()
         configSection2()
-        configSection3()
 
         val toolbar = binding.toolbar.root
         setToolbarReturn(toolbar)
@@ -46,16 +44,9 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
 
     private fun configSection2() {
         binding.heading2.text = getString(R.string.tip2_name)
-        adapter2 = EpicStyle1Adapter(requireActivity(), getSection2Data())
+        adapter2 = EpicStyle2Adapter(requireActivity(), getSection2Data())
         binding.viewPager2Section2.adapter = adapter2
         binding.wormDotsIndicatorSection2.setViewPager2(binding.viewPager2Section2)
-    }
-
-    private fun configSection3() {
-        binding.heading3.text = getString(R.string.gear1_name)
-        adapter3 = EpicStyle1Adapter(requireActivity(), getSection3Data())
-        binding.viewPager2Section3.adapter = adapter3
-        binding.wormDotsIndicatorSection3.setViewPager2(binding.viewPager2Section3)
     }
 
     private fun getSection1Data(): MutableList<GroupCard2Data> {
@@ -70,24 +61,12 @@ class Epic1Fragment : BasicFragment<FragmentEpic1Binding>(FragmentEpic1Binding::
         return data
     }
 
-    private fun getSection2Data(): MutableList<GroupCard1Data> {
-        val data = GroupCard1Data.init()
+    private fun getSection2Data(): MutableList<GroupCard2Data> {
+        val data = GroupCard2Data.init()
         var i = 0
         while (i < data.size) {
             when (data[i].dataType) {
                 "tip2" -> i++
-                else -> data.removeAt(i)
-            }
-        }
-        return data
-    }
-
-    private fun getSection3Data(): MutableList<GroupCard1Data> {
-        val data = GroupCard1Data.init()
-        var i = 0
-        while (i < data.size) {
-            when (data[i].dataType) {
-                "gear1" -> i++
                 else -> data.removeAt(i)
             }
         }

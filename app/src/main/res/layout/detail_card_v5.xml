@@ -9,7 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="260dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="4dp"
         app:cardBackgroundColor="@color/white"
@@ -32,13 +32,14 @@
                 android:layout_marginHorizontal="10dp"
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="center"
-                android:paddingVertical="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
                 android:text="Demo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="15dp"
                 android:orientation="horizontal"
                 android:weightSum="10">
@@ -46,8 +47,9 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="6.5">
+                    android:layout_weight="6.5"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/statistics"
@@ -55,44 +57,35 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/rubik_medium"
-                        android:padding="5dp"
                         android:justificationMode="inter_word"
+                        android:padding="5dp"
                         android:text="Demo"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         android:textColor="@color/wrong_border_color"
                         android:textSize="16dp" />
 
-                    <LinearLayout
-                        android:id="@+id/cardLayout"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/description"
+                        style="@style/textStyle16_gray"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:id="@+id/description"
-                            style="@style/textStyle16_gray"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:justificationMode="inter_word"
-                            android:text="Demo" />
-
-                    </LinearLayout>
+                        android:padding="5dp"
+                        android:justificationMode="inter_word"
+                        android:text="Demo" />
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.3"/>
+                    android:layout_weight="0.3" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:layout_weight="3.2"
                     android:background="@color/primary_green_10"
-                    android:layout_weight="3.2">
+                    android:gravity="center">
 
                     <ImageView
                         android:id="@+id/image"

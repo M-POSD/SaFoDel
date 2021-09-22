@@ -12,48 +12,6 @@ class GroupCard1Data(
         fun init(): MutableList<GroupCard1Data> {
             var groupCard1Data: MutableList<GroupCard1Data> = ArrayList()
 
-            // tip2 data
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "tip2",
-                    R.string.tip2_0_description,
-                    0,
-                    0
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "tip2",
-                    R.string.tip2_1_description,
-                    R.drawable.tip2_1,
-                    2
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "tip2",
-                    R.string.tip2_2_description,
-                    R.drawable.tip2_2,
-                    1
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "tip2",
-                    R.string.tip2_3_description,
-                    R.drawable.tip2_3,
-                    2
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "tip2",
-                    R.string.tip2_4_description,
-                    R.drawable.tip2_4,
-                    1
-                )
-            )
-
             // eBikeInfo1 data
             groupCard1Data.add(
                 GroupCard1Data(
@@ -114,73 +72,65 @@ class GroupCard1Data(
                 )
             )
 
-            // gear1 data
+            // eBikeInfo3 data
             groupCard1Data.add(
-                GroupCard1Data(
-                    "gear1",
-                    R.string.gear1_1_description,
-                    R.drawable.gear1_1,
-                    3
-                )
+                GroupCard1Data("eBikeInfo3",
+                    R.string.info3_1_description,
+                    R.drawable.info1_2,
+                    2)
             )
             groupCard1Data.add(
-                GroupCard1Data(
-                    "gear1",
-                    R.string.gear1_2_description,
-                    R.drawable.gear1_2,
-                    1
-                )
+                GroupCard1Data("eBikeInfo3",
+                    R.string.info3_2_description,
+                    R.drawable.info1_3,
+                    1)
             )
             groupCard1Data.add(
-                GroupCard1Data(
-                    "gear1",
-                    R.string.gear1_3_description,
-                    R.drawable.gear1_3,
-                    2
-                )
+                GroupCard1Data("eBikeInfo3",
+                    R.string.info3_3_description,
+                    R.drawable.info1_4,
+                    2)
             )
             groupCard1Data.add(
-                GroupCard1Data(
-                    "gear1",
-                    R.string.gear1_4_description,
-                    R.drawable.gear1_4,
-                    1
-                )
+                GroupCard1Data("eBikeInfo3",
+                    R.string.info3_4_description,
+                    R.drawable.info1_1,
+                    2)
             )
 
-            // gear2 data
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "gear2",
-                    R.string.gear_standard_bsi,
-                    R.drawable.bsi,
-                    2
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "gear2",
-                    R.string.gear_standard_global_mark,
-                    R.drawable.global_mark,
-                    1
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "gear2",
-                    R.string.gear_standard_sai_global,
-                    R.drawable.sai_global,
-                    1
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "gear2",
-                    R.string.gear_standard_aus,
-                    R.drawable.aus,
-                    1
-                )
-            )
+//            // gear2 data
+//            groupCard1Data.add(
+//                GroupCard1Data(
+//                    "gear2",
+//                    R.string.gear_standard_bsi,
+//                    R.drawable.bsi,
+//                    2
+//                )
+//            )
+//            groupCard1Data.add(
+//                GroupCard1Data(
+//                    "gear2",
+//                    R.string.gear_standard_global_mark,
+//                    R.drawable.global_mark,
+//                    1
+//                )
+//            )
+//            groupCard1Data.add(
+//                GroupCard1Data(
+//                    "gear2",
+//                    R.string.gear_standard_sai_global,
+//                    R.drawable.sai_global,
+//                    1
+//                )
+//            )
+//            groupCard1Data.add(
+//                GroupCard1Data(
+//                    "gear2",
+//                    R.string.gear_standard_aus,
+//                    R.drawable.aus,
+//                    1
+//                )
+//            )
 
             // inAnAccident3 data
             groupCard1Data.add(
