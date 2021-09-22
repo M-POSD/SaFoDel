@@ -85,7 +85,7 @@
                         android:scaleY="1"
                         android:src="@drawable/driver_backpack2"
                         android:translationX="21dp"
-                        android:translationY="10dp"
+                        android:translationY="9dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
                         app:layout_constraintHorizontal_bias="1.0"
