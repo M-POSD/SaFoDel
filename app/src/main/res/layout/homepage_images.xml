@@ -135,7 +135,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,6 +157,7 @@
                     android:background="@color/black"
                     android:textSize="2dp" />
             </LinearLayout>
+            -->
         </LinearLayout>
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 </com.google.android.material.appbar.AppBarLayout>

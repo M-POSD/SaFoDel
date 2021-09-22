@@ -722,7 +722,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.backpack.setImageResource(R.drawable.driver_backpack2)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
-                homePageImage.groundForDriver.visibility = View.VISIBLE
+               // homePageImage.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
 //                setToolbarLightMode(toolbar)
                 setToolbarGray(toolbar)
