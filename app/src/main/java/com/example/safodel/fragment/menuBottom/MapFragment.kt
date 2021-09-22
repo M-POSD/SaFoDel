@@ -126,6 +126,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     // View
     private lateinit var toolbar: Toolbar
     private lateinit var dialog: MaterialDialog
+    private lateinit var recenter : View
 
     // Map
     private lateinit var mapboxMap: MapboxMap
@@ -271,6 +272,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.floatButtonStop.visibility = View.INVISIBLE
         mainActivity = activity as MainActivity
         toolbar = binding.toolbar.root
+        recenter = binding.recenter
         mapView = binding.mapView
         searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
@@ -598,19 +600,32 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
                 }
             else {
-                    setToolbarGray(toolbar)
-                    mainActivity.isBottomNavigationVisible(true)
-                    mapView2.visibility = View.INVISIBLE
-                    binding.floatButtonStop.visibility = View.INVISIBLE
-                    binding.searchBar.visibility = View.INVISIBLE
-                    mapView.visibility = View.VISIBLE
-                    binding.recenter.visibility = View.INVISIBLE
-                    mapView.getMapAsync(this)
-                    binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
-                    binding.spinner.visibility = View.VISIBLE
-                    bcLayer.setProperties(visibility(Property.VISIBLE))
-                    scLayer?.setProperties(visibility(Property.VISIBLE))
-                    siLayer?.setProperties(visibility(Property.VISIBLE))
+                    val dialog2 = MaterialDialog(mainActivity)
+                    val fragmentNow = this
+                    dialog2.show {
+                        message(text = "Do you want to leave?")
+                        positiveButton(R.string.yes){
+                            setToolbarGray(toolbar)
+                            mainActivity.isBottomNavigationVisible(true)
+                            mapView2.visibility = View.INVISIBLE
+                            binding.floatButtonStop.visibility = View.INVISIBLE
+                            binding.searchBar.visibility = View.INVISIBLE
+                            mapView.visibility = View.VISIBLE
+                            recenter.visibility = View.INVISIBLE
+                            mapView.getMapAsync(fragmentNow)
+                            binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
+                            binding.spinner.visibility = View.VISIBLE
+                            bcLayer.setProperties(visibility(Property.VISIBLE))
+                            scLayer?.setProperties(visibility(Property.VISIBLE))
+                            siLayer?.setProperties(visibility(Property.VISIBLE))
+                            clearRouteAndStopNavigation()
+                        }
+                        negativeButton(R.string.no){
+                            // do nothing
+                        }
+                        cancelOnTouchOutside(false)
+                    }
+
 
             }
             }
@@ -659,10 +674,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     // shows/hide the recenter button depending on the camera state
                         when (navigationCameraState) {
                             NavigationCameraState.TRANSITION_TO_FOLLOWING,
-                            NavigationCameraState.FOLLOWING -> binding.recenter.visibility = View.INVISIBLE
+                            NavigationCameraState.FOLLOWING -> recenter.visibility = View.INVISIBLE
                             NavigationCameraState.TRANSITION_TO_OVERVIEW,
                             NavigationCameraState.OVERVIEW,
-                            NavigationCameraState.IDLE -> binding.recenter.visibility =
+                            NavigationCameraState.IDLE -> recenter.visibility =
                                 View.VISIBLE
                         }
                 }
