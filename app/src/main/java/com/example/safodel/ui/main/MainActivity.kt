@@ -297,7 +297,7 @@ class MainActivity : AppCompatActivity() {
 
 
      fun callOnNav(index:Int){
-        bottomNavigationView.menu.getItem(index).setChecked(true)
+         bottomNavigationView.menu.getItem(index).isChecked = true
     }
 }
 
