@@ -962,12 +962,15 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun showDialogFilter() {
         val myItems = listOf("Traffic Status", "Crash Point")
         val diaglogFilter = MaterialDialog(mainActivity)
         diaglogFilter.show {
             message(text = "Filter")
-            listItemsMultiChoice(items = myItems)
+            listItemsMultiChoice(items = myItems,waitForPositiveButton = true,allowEmptySelection = true){dialog, indices, items ->
+//                Toast.makeText(mainActivity,items[indices],Toast.LENGTH_SHORT).show()
+            }
             positiveButton(R.string.select)
         }
         diaglogFilter.checkAllItems()
