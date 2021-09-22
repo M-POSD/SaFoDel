@@ -34,6 +34,7 @@ import kotlin.collections.ArrayList
 import androidx.core.widget.NestedScrollView
 import android.view.MenuInflater
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.animation.doOnEnd
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.setFitsSystemWindows
 import androidx.lifecycle.ViewModelProvider
@@ -291,7 +292,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun imagesDrivingAnimation() {
         var objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                homePageImage.images,
+                homePageImage.images2,
                 "translationX",
                 0f,
                 4 * (view?.width ?: 1500) / 5.toFloat()
@@ -300,7 +301,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         Log.d("width", view?.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
-                homePageImage.images,
+                homePageImage.images2,
                 "translationX",
                 -4 * (view?.width ?: 1500) / 5.toFloat(),
                 0f
@@ -309,6 +310,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         objectAnimator2.duration = 1500
 
         animatorDriving.play(objectAnimator1).before(objectAnimator2)
+        animatorDriving.doOnEnd {
+            homePageImage.images.visibility = View.VISIBLE
+            homePageImage.images2.visibility = View.GONE
+        }
     }
 
     // record the button position clicked to match the tab selected next page
@@ -378,12 +383,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         homePageImage.images.setOnClickListener {
-            if (animatorDriving.isRunning) {
-                animatorDriving.cancel()
-                animatorDriving.start()
-            }
+//            if (animatorDriving.isRunning) {
+//                animatorDriving.cancel()
+//                animatorDriving.start()
+//            }
 
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning) {
+                homePageImage.images.visibility = View.INVISIBLE
+                homePageImage.images2.visibility = View.VISIBLE
+                animatorDriving.start()
+            }
+        }
+        homePageImage.images2.setOnClickListener{
+            if (animatorDriving.isRunning) {
+                animatorDriving.cancel()
                 animatorDriving.start()
             }
         }

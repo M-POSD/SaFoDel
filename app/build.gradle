@@ -107,4 +107,7 @@ dependencies {
     // Page indicator view
     implementation 'com.tbuonomo:dotsindicator:4.2'
 
+    // Gif file
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+
 }
