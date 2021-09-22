@@ -394,12 +394,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 animatorDriving.start()
             }
         }
-        homePageImage.images2.setOnClickListener{
-            if (animatorDriving.isRunning) {
-                animatorDriving.cancel()
-                animatorDriving.start()
-            }
-        }
+//        homePageImage.images2.setOnClickListener{
+//            if (animatorDriving.isRunning) {
+//                animatorDriving.cancel()
+//                animatorDriving.start()
+//            }
+//        }
     }
 
     // for the learning mode for the beginner of the application
