@@ -37,7 +37,6 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_weight="4.5"
-            android:background="@color/primary_green"
             app:cardCornerRadius="30dp"
             app:cardElevation="5dp">
 
@@ -45,8 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/pri_sec_gradient"
                 android:padding="16dp"
+                android:background="@color/primary_green"
                 android:weightSum="10">
 
                 <ImageView

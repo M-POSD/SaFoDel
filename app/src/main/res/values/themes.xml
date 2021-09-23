@@ -3,7 +3,7 @@
     <style name="Theme.SaFoDel" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
 <!--        <item name="colorPrimary">#83BE9E</item>-->
-        <item name="colorPrimary">@color/deep_green</item>
+        <item name="colorPrimary">@color/primary_green</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

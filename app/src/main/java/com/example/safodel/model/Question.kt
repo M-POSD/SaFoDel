@@ -80,7 +80,7 @@ class Question(
                 R.string.no,
                 0,
                 0,
-                2,
+                1,
                 R.string.question6_information
             ))
             questions.add(Question(
@@ -92,6 +92,26 @@ class Question(
                 0,
                 2,
                 R.string.question7_information
+            ))
+            questions.add(Question(
+                8, R.string.question8_heading,
+                0,
+                R.string.yes,
+                R.string.no,
+                0,
+                0,
+                2,
+                R.string.question8_information
+            ))
+            questions.add(Question(
+                9, R.string.question9_heading,
+                0,
+                R.string.question9_option1,
+                R.string.question9_option2,
+                R.string.question9_option3,
+                R.string.question9_option4,
+                1,
+                R.string.question9_information
             ))
 
             var questionList: MutableList<Question> = ArrayList()
