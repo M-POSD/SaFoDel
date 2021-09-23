@@ -1047,11 +1047,10 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         val targetLay = layoutInflater.inflate(R.layout.filter_target,spotlightRoot)
         val target = Target.Builder()
-            .setAnchor(binding.floatButtonFilter)
-            .setShape(Circle(100f))
-            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
+            .setShape(Circle(0f))
             .setOverlay(targetLay)
             .build()
+
 
         val spotlight = Spotlight.Builder(mainActivity)
         .setTargets(target)
