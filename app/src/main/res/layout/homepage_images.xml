@@ -54,20 +54,21 @@
                         android:layout_gravity="bottom"
                         android:scaleX="1.6"
                         android:scaleY="1.6"
-                        android:src="@drawable/driver_riding"
+                        android:src="@drawable/driver_riding_home"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintHorizontal_bias="0.617"
-                        app:layout_constraintVertical_bias="0.777" />
+                        app:layout_constraintHorizontal_bias="0.516"
+                        app:layout_constraintVertical_bias="0.781" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/images"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    >
 
                     <ImageView
                         android:id="@+id/driver"
@@ -75,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver"
+                        android:src="@drawable/driver_home"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +90,7 @@
                         android:layout_marginBottom="137dp"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver_helmet"
+                        android:src="@drawable/driver_helmet_home"
                         android:translationY="7dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
@@ -107,9 +108,9 @@
                         android:layout_marginBottom="101dp"
                         android:scaleX="1"
                         android:scaleY="1"
-                        android:src="@drawable/driver_backpack"
-                        android:translationX="24.5dp"
-                        android:translationY="8dp"
+                        android:src="@drawable/driver_backpack_home"
+                        android:translationX="23dp"
+                        android:translationY="13dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
                         app:layout_constraintHorizontal_bias="1.0"

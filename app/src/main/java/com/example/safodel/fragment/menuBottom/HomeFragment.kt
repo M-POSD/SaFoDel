@@ -719,7 +719,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.headlight.visibility = View.INVISIBLE
 //                homePageImage.homepageAppBar.setBackgroundResource(R.drawable.bluesky_snow_gradient)
                 homePageImage.backpack.alpha = 0f
-                homePageImage.backpack.setImageResource(R.drawable.driver_backpack)
+                homePageImage.backpack.setImageResource(R.drawable.driver_backpack_home)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
                // homePageImage.groundForDriver.visibility = View.VISIBLE
