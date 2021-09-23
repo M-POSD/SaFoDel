@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.Color.parseColor
 import android.location.Location
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import android.widget.AdapterView
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -18,6 +20,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.doOnPreDraw
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.checkAllItems
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
@@ -25,7 +28,7 @@ import com.afollestad.materialdialogs.list.toggleAllItemsChecked
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.LGAList
+import com.example.safodel.model.SuburbList
 import com.example.safodel.model.SuburbMapResponse
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
@@ -102,6 +105,10 @@ import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
+import com.takusemba.spotlight.Spotlight
+import com.takusemba.spotlight.Target
+import com.takusemba.spotlight.effet.RippleEffect
+import com.takusemba.spotlight.shape.Circle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -116,7 +123,7 @@ import com.mapbox.maps.Style as Style2
 
 private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
-private var lga: String = "MELBOURNE"
+private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private lateinit var toast: Toast
 
@@ -132,6 +139,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var dialog: MaterialDialog
     private lateinit var diaglogFilter : MaterialDialog
     private lateinit var recenter: View
+    private lateinit var spotlightRoot: FrameLayout
 
 
     // Map
@@ -141,7 +149,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapView: MapView
     private lateinit var mapView2: MapView2
     private lateinit var searchBarMap1: FrameLayout
-    private lateinit var LGAPoint: Point
+    private lateinit var suburbPoint: Point
     private lateinit var trafficPlugin: TrafficPlugin
     private lateinit var searchBar: FrameLayout
     private lateinit var buttonFilter: View
@@ -169,7 +177,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
-    private val LGAlist = LGAList.init()
+    private val suburbList = SuburbList.init()
 
     /* ----- Location and route progress callbacks ----- */
     private val locationObserver = object : LocationObserver {
@@ -293,9 +301,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
         buttonFilter = binding.floatButtonFilter
+
+        buttonFilter.doOnPreDraw {
+            spotlight()
+        }
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         diaglogFilter = MaterialDialog(mainActivity)
+        spotlightRoot = FrameLayout(requireContext())
         setToolbarGray(toolbar)
         setfilterListener()
 
@@ -309,7 +322,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         // spinner init
         val spinner = binding.spinner
-        spinner.item = LGAlist
+        spinner.item = suburbList
         spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.rubik_medium)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -318,7 +331,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 setDialog()
                 spinnerTimes++ // calculate the times to test
                 if (spinnerTimes >= 1) {
-                    lga = parent?.getItemAtPosition(position).toString()
+                    suburb = parent?.getItemAtPosition(position).toString()
                     callSuburbClient()
                 }
             }
@@ -368,6 +381,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
+
     /*
         update the map when call getMapAsync()
      */
@@ -379,11 +393,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT) {
 
-            /*-- Camera auto zoom to the LGA area --*/
+            /*-- Camera auto zoom to the suburb area --*/
             if (feature.size != 0 && locationList.size != 0) {
-                LGAPoint = locationList[0]
+                suburbPoint = locationList[0]
                 val position = CameraPosition.Builder()
-                    .target(LatLng(LGAPoint.latitude(), LGAPoint.longitude()))
+                    .target(LatLng(suburbPoint.latitude(), suburbPoint.longitude()))
                     .zoom(9.0)
                     .build()
                 mapboxMap.cameraPosition = position
@@ -394,7 +408,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             // Make a toast when data is updating
             if (feature.size == 0 && locationList.size == 0) {
-                toast.setText("Data is updating...")
+                toast.setText(getString(R.string.no_data))
                 toast.show()
             }
 
@@ -554,6 +568,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
+
+
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
@@ -626,6 +642,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
 
                 } else {
+
                     val dialog2 = MaterialDialog(mainActivity)
                     val fragmentNow = this
                     dialog2.show {
@@ -902,7 +919,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         locationList.clear()
         val callAsync: Call<SuburbMapResponse> = suburbInterface.mapRepos(
             "accidents",
-            lga
+            suburb
         )
         callAsync.enqueue(object : Callback<SuburbMapResponse?> {
             override fun onResponse(
@@ -914,7 +931,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     val resultList = response.body()?.suburbMapAccidents
                     if (resultList?.isNotEmpty() == true) {
                         for (each in resultList) {
-                            val eachPoint = Point.fromLngLat(each.point_long, each.point_lat)
+                            val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
                             locationList.add(eachPoint)
                         }
                     }
@@ -961,6 +978,31 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+    /*****
+     * *****
+     * *****
+     * *****███████████████████████████████████████████████████████████████████████████████████████████
+     * *****█░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░░░█████████░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░███
+     * *****█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███
+     * *****█░░▄▀░░░░░░░░░░█░░░░▄▀░░░░█░░▄▀░░█████████░░░░░░▄▀░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███
+     * *****█░░▄▀░░███████████░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░█████████░░▄▀░░████░░▄▀░░███
+     * *****█░░▄▀░░░░░░░░░░███░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███
+     * *****█░░▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███
+     * *****█░░▄▀░░░░░░░░░░███░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░░░███
+     * *****█░░▄▀░░███████████░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████
+     * *****█░░▄▀░░█████████░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█████░░▄▀░░█████░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░░░█
+     * *****█░░▄▀░░█████████░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█
+     * *****█░░░░░░█████████░░░░░░░░░░█░░░░░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█
+     * *****███████████████████████████████████████████████████████████████████████████████████████████
+     * *****
+     * *****
+     * *****
+     * *****/
+
+
+    /*
+            Filter
+     */
     private fun setfilterListener() {
         buttonFilter.setOnClickListener {
             showDialogFilter()
@@ -998,6 +1040,32 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
             positiveButton(R.string.select)
         }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun spotlight(){
+
+        val targetLay = layoutInflater.inflate(R.layout.filter_target,spotlightRoot)
+        val target = Target.Builder()
+            .setShape(Circle(0f))
+            .setOverlay(targetLay)
+            .build()
+
+
+        val spotlight = Spotlight.Builder(mainActivity)
+        .setTargets(target)
+        .setBackgroundColor(R.color.spotlightBackground)
+            .setDuration(1000L)
+            .setAnimation(DecelerateInterpolator(2f))
+            .build()
+
+        spotlight.start()
+
+        targetLay.findViewById<View>(R.id.filter_target_page).setOnClickListener {
+            spotlight.finish()
+        }
+
+
     }
 }
 
