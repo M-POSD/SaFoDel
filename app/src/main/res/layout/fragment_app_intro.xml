@@ -4,40 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:background="@color/snow"
+    android:background="@color/snow"
     tools:context=".fragment.menuLeft.AppIntroFragment">
 
 
-    <ImageView
-        android:id="@+id/logo"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/logo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="200dp"
-        android:elevation="10dp"
-        android:outlineAmbientShadowColor="@color/deep_gray"
-        android:scaleX="1.25"
-        android:scaleY="1.25"
-        android:src="@mipmap/ic_launcher"
-        android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintVertical_bias="0.466">
+
+<!--        <pl.droidsonroids.gif.GifImageView-->
+<!--            android:id="@+id/logo_shaking"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/driver_helmet_shaking"-->
+<!--            android:scaleX="1.6"-->
+<!--            android:scaleY="1.6"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_gravity="center"/>-->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:src="@drawable/driver_helmet"
+            android:translationZ="10dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="76dp"
         android:fontFamily="@font/rubik_bold"
         android:text="@string/SaFoDel"
-        android:textSize="20dp"
         android:textColor="@color/bottom_nav_gray"
+        android:textSize="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/logo" />
+        app:layout_constraintTop_toTopOf="@id/logo_image" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -52,20 +66,20 @@ android:background="@color/snow"
 
         <TextView
             android:id="@+id/about"
+            style="@style/textStyle16_green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:text="@string/about"
-            style="@style/textStyle16_green" />
+            android:text="@string/about" />
 
         <TextView
             android:id="@+id/audience"
+            style="@style/textStyle16_green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:clickable="true"
-            android:text="@string/audience"
-            style="@style/textStyle16_green" />
+            android:text="@string/audience" />
 
     </LinearLayout>
 
