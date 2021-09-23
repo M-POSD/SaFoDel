@@ -94,7 +94,7 @@
             android:layout_gravity="center_horizontal"
             app:smsp_enableDismissSearch="true"
             app:smsp_enableErrorLabel="false"
-            app:smsp_errorText="ERROR"
+            app:smsp_errorText="@string/error"
             app:smsp_hint="@string/select_area"
             mapbox:smsp_showDropdownHint="false"
             mapbox:smsp_hintSize="10dp"
