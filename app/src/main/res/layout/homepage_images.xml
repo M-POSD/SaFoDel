@@ -25,6 +25,7 @@
             android:orientation="vertical"
             android:scaleType="centerCrop"
             android:weightSum="10"
+            android:background="@color/snow"
             app:layout_collapseMode="parallax">
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -58,8 +59,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintHorizontal_bias="0.618"
-                        app:layout_constraintVertical_bias="0.767" />
+                        app:layout_constraintHorizontal_bias="0.617"
+                        app:layout_constraintVertical_bias="0.776" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -89,7 +90,7 @@
                         android:scaleX="1"
                         android:scaleY="1"
                         android:src="@drawable/driver_helmet"
-                        android:translationY="12dp"
+                        android:translationY="7dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
                         app:layout_constraintHorizontal_bias="0.63"
@@ -107,8 +108,8 @@
                         android:scaleX="1"
                         android:scaleY="1"
                         android:src="@drawable/driver_backpack"
-                        android:translationX="26dp"
-                        android:translationY="11dp"
+                        android:translationX="24dp"
+                        android:translationY="9dp"
                         app:layout_constraintBottom_toBottomOf="@+id/driver"
                         app:layout_constraintEnd_toEndOf="@+id/driver"
                         app:layout_constraintHorizontal_bias="1.0"
