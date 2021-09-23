@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="8"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="20dp"
+                    android:text="SAFETY GEAR\n CHECKLIST"
+                    style="@style/textStyle20_bold_black" />
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="2dp"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    android:weightSum="10">-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_weight="0.9"-->
+                <!--                        android:textSize="14dp" />-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="2dp"-->
+                <!--                        android:layout_weight="8.2"-->
+                <!--                        android:background="#9E9E9E" />-->
+                <!--                </LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="15dp"
+                    android:background="@color/primary_green_10"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/checkbox1"
+                        layout="@layout/checkbox_layout2" />
+
+                    <include
+                        android:id="@+id/checkbox2"
+                        layout="@layout/checkbox_layout2" />
+
+                    <include
+                        android:id="@+id/checkbox3"
+                        layout="@layout/checkbox_layout2" />
+
+                    <include
+                        android:id="@+id/checkbox4"
+                        layout="@layout/checkbox_layout2" />
+
+                    <include
+                        android:id="@+id/checkbox5"
+                        layout="@layout/checkbox_layout2" />
+
+                    <include
+                        android:id="@+id/checkbox6"
+                        layout="@layout/checkbox_layout2" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

@@ -1,5 +1,7 @@
 package com.example.safodel.fragment.menuBottom
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.R
@@ -22,6 +25,14 @@ class CheckListFragment :
     private lateinit var model: CheckListViewModel
     private lateinit var mainActivity: MainActivity
 
+    private lateinit var helmetImageView: ImageView
+    private lateinit var maskImageView: ImageView
+    private lateinit var glovesImageView: ImageView
+    private lateinit var lightImageView: ImageView
+    private lateinit var sanitizerImageView: ImageView
+    private lateinit var vestImageView: ImageView
+    private lateinit var backpackImageView: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,18 +45,21 @@ class CheckListFragment :
         checklist = binding.checklist
         model = ViewModelProvider(requireActivity()).get(CheckListViewModel::class.java)
 
-        configNotificationView()
-
         setToolbarReturn(toolbar)
 
-        // set up the default text and image view
-        configDefaultView()
+        configNotificationView()
 
         // set up the checkbox on the checkbox list has been clicked by users or not
         configCheckboxClicked()
 
+        // set up the default text and image view
+        configDefaultView()
+
         // set up when the check box is clicked, the record will be recorded in share preference
         configCheckboxClickListener()
+
+        // set up image view
+        configImageView()
 
 
         model.getCheck().observe(viewLifecycleOwner, { t ->
@@ -71,35 +85,65 @@ class CheckListFragment :
         _binding = null
     }
 
+    private fun configImageView() {
+        helmetImageView = binding.checklist.clHelmet
+        maskImageView = binding.checklist.clMask
+        glovesImageView = binding.checklist.clGloves
+        lightImageView = binding.checklist.clLight
+        sanitizerImageView = binding.checklist.clSanitizer
+        vestImageView = binding.checklist.clVest
+        backpackImageView = binding.checklist.clBackpack
+
+        if(checklist.helmetCheckbox1.checkbox.isChecked) {
+            helmetImageView.alpha = 1f
+        }
+        if(checklist.maskCheckbox2.checkbox.isChecked) {
+            maskImageView.alpha = 1f
+        }
+        if(checklist.glovesCheckbox3.checkbox.isChecked) {
+            glovesImageView.alpha = 1f
+        }
+        if(checklist.lightCheckbox4.checkbox.isChecked) {
+            lightImageView.alpha = 1f
+        }
+        if(checklist.sanitizerCheckbox5.checkbox.isChecked) {
+            sanitizerImageView.alpha = 1f
+        }
+        if(checklist.helmetCheckbox1.checkbox.isChecked) {
+            helmetImageView.alpha = 1f
+        }
+        if(checklist.vestCheckbox6.checkbox.isChecked) {
+            vestImageView.alpha = 1f
+        }
+
+        if(checklist.backpackCheckbox7.checkbox.isChecked) {
+            backpackImageView.alpha = 1f
+        }
+    }
+
     // made up the check list to display
     private fun configDefaultView() {
-//        binding.gear2.currentPageText.text = getString(R.string.gear2_name)
-//        binding.gear2.notification.text = getString(R.string.gear2_slang)
-
-        checklist.checkbox1.checkbox.text =
-            getString(R.string.gear_check_list_item1)
-        checklist.checkbox1.checkboxImage.setImageResource(R.drawable.helmet2)
-        checklist.checkbox2.checkbox.text =
-            getString(R.string.gear_check_list_item2)
-        checklist.checkbox2.checkboxImage.setImageResource(R.drawable.bicycle_with_light)
-        checklist.checkbox3.checkbox.text =
-            getString(R.string.gear_check_list_item3)
-        checklist.checkbox3.checkboxImage.setImageResource(R.drawable.mask)
-        checklist.checkbox4.checkbox.text =
-            getString(R.string.gear_check_list_item4)
-        checklist.checkbox4.checkboxImage.setImageResource(R.drawable.vest)
-        checklist.checkbox5.checkbox.text =
-            getString(R.string.gear_check_list_item5)
-        checklist.checkbox5.checkboxImage.setImageResource(R.drawable.gloves)
-        checklist.checkbox6.checkbox.text =
-            getString(R.string.gear_check_list_item6)
-        checklist.checkbox6.checkboxImage.setImageResource(R.drawable.hand_sanitizer)
+        checklist.helmetCheckbox1.checkbox.text =
+            getString(R.string.helmet_checkbox_1)
+        checklist.maskCheckbox2.checkbox.text =
+            getString(R.string.mask_checkbox_2)
+        checklist.glovesCheckbox3.checkbox.text =
+            getString(R.string.gloves_checkbox_3)
+        checklist.lightCheckbox4.checkbox.text =
+            getString(R.string.light_checkbox_4)
+        checklist.sanitizerCheckbox5.checkbox.text =
+            getString(R.string.sanitizer_checkbox_5)
+        checklist.vestCheckbox6.checkbox.text =
+            getString(R.string.vest_checkbox_6)
+        checklist.backpackCheckbox7.checkbox.text =
+            getString(R.string.backpack_checkbox_7)
     }
 
     private fun configNotificationView() {
         if (mainActivity.getCheckboxSharePrefer(1) && mainActivity.getCheckboxSharePrefer(2)
             && mainActivity.getCheckboxSharePrefer(3) && mainActivity.getCheckboxSharePrefer(4)
             && mainActivity.getCheckboxSharePrefer(5) && mainActivity.getCheckboxSharePrefer(6)
+            && mainActivity.getCheckboxSharePrefer(7)
         ) {
             model.setCheck(true)
         } else {
@@ -110,63 +154,96 @@ class CheckListFragment :
 
     // set the checkbox was clicked by user or not
     private fun configCheckboxClicked() {
-        checklist.checkbox1.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(1)
-        checklist.checkbox2.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(2)
-        checklist.checkbox3.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(3)
-        checklist.checkbox4.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(4)
-        checklist.checkbox5.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(5)
-        checklist.checkbox6.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(6)
+        checklist.helmetCheckbox1.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(1)
+        checklist.maskCheckbox2.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(2)
+        checklist.glovesCheckbox3.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(3)
+        checklist.lightCheckbox4.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(4)
+        checklist.sanitizerCheckbox5.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(5)
+        checklist.vestCheckbox6.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(6)
+        checklist.backpackCheckbox7.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(7)
     }
 
     // record if the user tick the check box
     private fun configCheckboxClickListener() {
-        checklist.checkbox1.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.helmetCheckbox1.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 mainActivity.keepCheckboxSharePrefer(1, true)
+                imageAnimation(helmetImageView)
             } else {
                 mainActivity.keepCheckboxSharePrefer(1, false)
+                helmetImageView.alpha = 0f
             }
             configNotificationView()
         })
-        checklist.checkbox2.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.maskCheckbox2.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 mainActivity.keepCheckboxSharePrefer(2, true)
+                imageAnimation(maskImageView)
             } else {
                 mainActivity.keepCheckboxSharePrefer(2, false)
+                maskImageView.alpha = 0f
             }
             configNotificationView()
         })
-        checklist.checkbox3.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.glovesCheckbox3.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 mainActivity.keepCheckboxSharePrefer(3, true)
+                imageAnimation(glovesImageView)
             } else {
                 mainActivity.keepCheckboxSharePrefer(3, false)
+                glovesImageView.alpha = 0f
             }
             configNotificationView()
         })
-        checklist.checkbox4.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.lightCheckbox4.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 mainActivity.keepCheckboxSharePrefer(4, true)
+                imageAnimation(lightImageView)
             } else {
                 mainActivity.keepCheckboxSharePrefer(4, false)
+                lightImageView.alpha = 0f
             }
             configNotificationView()
         })
-        checklist.checkbox5.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.sanitizerCheckbox5.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 mainActivity.keepCheckboxSharePrefer(5, true)
+                imageAnimation(sanitizerImageView)
             } else {
                 mainActivity.keepCheckboxSharePrefer(5, false)
+                sanitizerImageView.alpha = 0f
             }
             configNotificationView()
         })
-        checklist.checkbox6.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        checklist.vestCheckbox6.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 mainActivity.keepCheckboxSharePrefer(6, true)
+                imageAnimation(vestImageView)
             } else {
                 mainActivity.keepCheckboxSharePrefer(6, false)
+                vestImageView.alpha = 0f
+            }
+            configNotificationView()
+        })
+
+        checklist.backpackCheckbox7.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                mainActivity.keepCheckboxSharePrefer(7, true)
+                imageAnimation(backpackImageView)
+            } else {
+                mainActivity.keepCheckboxSharePrefer(7, false)
+                backpackImageView.alpha = 0f
             }
             configNotificationView()
         })
     }
+
+    private fun imageAnimation(imageView: ImageView) {
+        var objectAnimator: ObjectAnimator =
+            ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f).setDuration(500)
+        var animatorSet = AnimatorSet()
+        animatorSet.play(objectAnimator)
+        animatorSet.start()
+    }
+
 }

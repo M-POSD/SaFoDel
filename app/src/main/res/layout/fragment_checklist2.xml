@@ -32,7 +32,7 @@
 
             <include
                 android:id="@+id/checklist"
-                layout="@layout/detail_card_checklist" />
+                layout="@layout/detail_card_checklist2" />
         </LinearLayout>
 
         <LinearLayout

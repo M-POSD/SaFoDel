@@ -288,13 +288,13 @@ class MainActivity : AppCompatActivity() {
             if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
                 && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
                 && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
+                && getCheckboxSharePrefer(6)
             ) {
                 changeCheckListIcon(true)
             } else {
                 changeCheckListIcon(false)
             }
     }
-
 
      fun callOnNav(index:Int){
          bottomNavigationView.menu.getItem(index).isChecked = true
