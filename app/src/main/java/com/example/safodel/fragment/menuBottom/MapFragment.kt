@@ -108,6 +108,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -574,7 +575,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-        Toast.makeText(context, "Need the user location permission", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, getString(R.string.need_premission), Toast.LENGTH_LONG).show()
     }
 
     override fun onPermissionResult(granted: Boolean) {
@@ -583,7 +584,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 enableLocationComponent(it)
             }
         } else {
-            Toast.makeText(context, "user location permission not granted", Toast.LENGTH_LONG)
+            Toast.makeText(context, getString(R.string.loation_granted), Toast.LENGTH_LONG)
                 .show()
         }
     }
@@ -628,7 +629,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     val dialog2 = MaterialDialog(mainActivity)
                     val fragmentNow = this
                     dialog2.show {
-                        message(text = "Do you want to leave?")
+                        message(text = getString(R.string.ask_leave))
                         positiveButton(R.string.yes) {
                             setToolbarGray(toolbar)
                             mainActivity.isBottomNavigationVisible(true)
@@ -839,7 +840,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
                 override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
                     dialog.dismiss()
-                    toast.setText("You can't go to that address!")
+                    toast.setText(getString(R.string.can_not_go))
                     toast.show()
 
                 }
@@ -922,7 +923,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                     mapView.getMapAsync(fragmentNow)
                 } else {
-                    Log.i("Error ", "Response failed")
+                    Timber.i(getString(R.string.response_failed))
                 }
             }
 
@@ -939,7 +940,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
      */
     private fun setDialog() {
         dialog.show {
-            message(text = "loading.. Please wait.")
+            message(text = getString(R.string.loading))
             cancelable(false)
             cancelOnTouchOutside(false)
         }
@@ -969,12 +970,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     @SuppressLint("CheckResult")
     private fun showDialogFilter() {
         val fragmentNow = this
-        val myItems = listOf("Traffic Status", "Crash Point")
+        val myItems = listOf(getString(R.string.traffic_status), getString(R.string.accident_point))
         diaglogFilter = MaterialDialog(mainActivity)
         diaglogFilter.show {
-            message(text = "Filter")
+            message(text = getString(R.string.filter))
             listItemsMultiChoice(items = myItems,waitForPositiveButton = true,allowEmptySelection = true){dialog, indices, items ->
-                Toast.makeText(mainActivity,items.toString(),Toast.LENGTH_SHORT).show()
+                //Toast.makeText(mainActivity,items.toString(),Toast.LENGTH_SHORT).show()
                 if(items.contains(myItems[0]))
                     trafficPlugin.setVisibility(true)
                 else trafficPlugin.setVisibility(false)

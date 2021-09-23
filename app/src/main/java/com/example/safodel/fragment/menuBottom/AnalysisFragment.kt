@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 
 class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysisBinding::inflate) {
@@ -122,7 +123,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
      */
     private fun setDialog(){
         dialog.show {
-            message(text = "loading.. Please wait.")
+            message(text = getString(R.string.loading))
             cancelable(false)
             cancelOnTouchOutside(false)
         }
@@ -152,7 +153,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                             accidentsNumber.text = resultList[0].accidents.toString()
                         }
                     } else {
-                        Log.i("Error ", "Response failed")
+                        Timber.i("Response failed")
                     }
                 }
                 override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
@@ -160,7 +161,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     toast1.setText(t.message)
                     toast1.show()
 
-                    Log.i("suburbAccidents ", t.message.toString())
+                    Timber.i(t.message.toString())
                 }
             })
             delay(100L)
@@ -182,14 +183,14 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                         val resultList = response.body()!!.suburbTimeAccidents
                         setLineChart(resultList)
                     } else {
-                        Log.i("Error ", "Response failed")
+                        Timber.i("Response failed")
                     }
                 }
                 override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
                     toast2.cancel()
                     toast2.setText(t.message)
                     toast2.show()
-                    Log.i("suburbTimeAccidents ",  t.message.toString())
+                    Timber.i(t.message.toString())
                 }
             })
             delay(100L)
@@ -212,7 +213,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                         val resultList = response.body()!!.suburbStreetsAccidents
                         setStreetsBarChat(resultList)
                     } else {
-                        Log.i("Error ", "Response failed")
+                        Timber.i("Response failed")
                     }
                 }
                 override fun onFailure(call: Call<SuburbStreetsResponse?>?, t: Throwable) {
@@ -220,7 +221,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     toast3.cancel()
                     toast3.setText(t.message)
                     toast3.show()
-                    Log.i("suburbStreetsAccidents ", t.localizedMessage.toString())
+                    Timber.i(t.localizedMessage.toString())
                 }
             })
         }
@@ -241,7 +242,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         for(each in list){
             data2.add(Entry(each.accidentHours.toFloat(),each.accidentsNumber.toFloat()))
         }
-        val lineDataset = LineDataSet(data2,"Accident Times")
+        val lineDataset = LineDataSet(data2,getString(R.string.accident_times))
         lineDataset.setColor(color)
         lineDataset.valueFormatter = IntegerFormatter()
         lineDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -267,7 +268,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             data.add(BarEntry(count.toFloat(),each.accidentsNumber.toFloat()))
             count++
         }
-        val barDataset = BarDataSet(data,"Accident Times")
+        val barDataset = BarDataSet(data,getString(R.string.accident_times))
         barDataset.setColor(color)
         val barData = BarData(barDataset)
         bar.data = barData

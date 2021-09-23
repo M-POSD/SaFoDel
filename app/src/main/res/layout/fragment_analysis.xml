@@ -24,10 +24,10 @@
             android:layout_marginTop="?attr/actionBarSize"
             app:smsp_enableDismissSearch="true"
             app:smsp_enableErrorLabel="false"
-            app:smsp_errorText="ERROR"
+            app:smsp_errorText="@string/error"
             app:smsp_floatingLabelColor="@color/deep_green"
             app:smsp_floatingLabelText="Suburb:"
-            app:smsp_hint="Select the suburb"
+            app:smsp_hint="@string/select_suburb"
             app:smsp_hintColor="#388E3C"
             app:smsp_hintSize="16dp"
             app:smsp_isSearchable="true"
@@ -76,14 +76,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             style="@style/textStyle16_gray"
-                            android:text="Total Accidents:"/>
+                            android:text="@string/total_accidents"/>
 
                         <TextView
                             android:id="@+id/accidentNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Numbeer"
+                            android:text="@string/number"
                             style="@style/textStyle16_gray"/>
 
                     </LinearLayout>
@@ -101,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Top 5 Roads by Accident Total"/>
+                        android:text="@string/top_5_roads_by_accident_total"/>
 
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/barChart"
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Accident times for different hourly periods of the day"/>
+                        android:text="@string/accident_times_for_different_hourly_periods_of_the_day"/>
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"

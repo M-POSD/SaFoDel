@@ -68,7 +68,7 @@
             android:maxLines="1"
             android:textSize="16dp"
             android:fontFamily="@font/rubik_medium"
-            android:hint="tap to search address" />
+            android:hint="@string/tap_to_search_address" />
 
     </FrameLayout>
 
@@ -95,7 +95,7 @@
             app:smsp_enableDismissSearch="true"
             app:smsp_enableErrorLabel="false"
             app:smsp_errorText="ERROR"
-            app:smsp_hint="Select the area:"
+            app:smsp_hint="@string/select_area"
             mapbox:smsp_showDropdownHint="false"
             mapbox:smsp_hintSize="10dp"
             app:smsp_hintColor="#388E3C"

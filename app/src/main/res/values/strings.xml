@@ -258,8 +258,27 @@
 
     <!-- map -->
     <string name="select">Select</string>
-
+    <string name="traffic_status">Traffic Status</string>
+    <string name="accident_point">Accident Point</string>
+    <string name="filter">Filter</string>
+    <string name="loading">loading.. Please wait.</string>
+    <string name="response_failed">Response failed</string>
+    <string name="can_not_go">You can\'t go to that address!</string>
+    <string name="ask_leave">Do you want to leave?</string>
+    <string name="need_premission">Need the user location permission</string>
+    <string name="loation_granted">user location permission not granted</string>
+    <string name="select_area">Select the area:</string>
     <string name="content_description_media">testing</string>
+    <string name="tap_to_search_address">tap to search address</string>
+
+    <!--  Analysis  -->
+    <string name="error">ERROR</string>
+    <string name="select_suburb">Select the suburb</string>
+    <string name="total_accidents">Total Accidents:</string>
+    <string name="number">Number</string>
+    <string name="top_5_roads_by_accident_total">Top 5 Roads by Accident Total</string>
+    <string name="accident_times_for_different_hourly_periods_of_the_day">Accident times for different hourly periods of the day</string>
+    <string name="accident_times">Accident Times</string>
 
 
 </resources>
