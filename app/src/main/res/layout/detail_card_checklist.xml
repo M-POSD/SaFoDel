@@ -19,6 +19,19 @@
         app:layout_constraintVertical_bias="0.646" />
 
     <ImageView
+        android:id="@+id/cl_mask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:src="@drawable/mask_checklist"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_driver"
+        app:layout_constraintEnd_toEndOf="@+id/cl_driver"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toStartOf="@+id/cl_driver"
+        app:layout_constraintTop_toTopOf="@+id/cl_driver"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <ImageView
         android:id="@+id/cl_helmet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,18 +45,6 @@
         app:layout_constraintTop_toTopOf="@+id/cl_driver"
         app:layout_constraintVertical_bias="0" />
 
-    <ImageView
-        android:id="@+id/cl_mask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:src="@drawable/mask_checklist"
-        app:layout_constraintBottom_toBottomOf="@+id/cl_driver"
-        app:layout_constraintEnd_toEndOf="@+id/cl_driver"
-        app:layout_constraintHorizontal_bias="0.59"
-        app:layout_constraintStart_toStartOf="@+id/cl_driver"
-        app:layout_constraintTop_toTopOf="@+id/cl_driver"
-        app:layout_constraintVertical_bias="0.126" />
 
     <ImageView
         android:id="@+id/cl_vest"
