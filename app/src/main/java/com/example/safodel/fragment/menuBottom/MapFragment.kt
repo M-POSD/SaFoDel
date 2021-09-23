@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.Color.parseColor
 import android.location.Location
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import android.widget.AdapterView
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -18,6 +20,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.doOnPreDraw
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.checkAllItems
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
@@ -102,6 +105,10 @@ import com.mapbox.navigation.ui.maps.route.line.model.*
 import com.mapbox.navigation.ui.tripprogress.api.MapboxTripProgressApi
 import com.mapbox.navigation.ui.tripprogress.model.*
 import com.mapbox.navigation.utils.internal.ifNonNull
+import com.takusemba.spotlight.Spotlight
+import com.takusemba.spotlight.Target
+import com.takusemba.spotlight.effet.RippleEffect
+import com.takusemba.spotlight.shape.Circle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -132,6 +139,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var dialog: MaterialDialog
     private lateinit var diaglogFilter : MaterialDialog
     private lateinit var recenter: View
+    private lateinit var spotlightRoot: FrameLayout
 
 
     // Map
@@ -293,9 +301,14 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
         buttonFilter = binding.floatButtonFilter
+
+        buttonFilter.doOnPreDraw {
+            spotlight()
+        }
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         diaglogFilter = MaterialDialog(mainActivity)
+        spotlightRoot = FrameLayout(requireContext())
         setToolbarGray(toolbar)
         setfilterListener()
 
@@ -366,6 +379,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
 
 
     /*
@@ -554,6 +568,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
+
+
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
@@ -626,6 +642,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
 
                 } else {
+
                     val dialog2 = MaterialDialog(mainActivity)
                     val fragmentNow = this
                     dialog2.show {
@@ -961,6 +978,31 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+    /*****
+     * *****
+     * *****
+     * *****███████████████████████████████████████████████████████████████████████████████████████████
+     * *****█░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░░░█████████░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░███
+     * *****█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███
+     * *****█░░▄▀░░░░░░░░░░█░░░░▄▀░░░░█░░▄▀░░█████████░░░░░░▄▀░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███
+     * *****█░░▄▀░░███████████░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░█████████░░▄▀░░████░░▄▀░░███
+     * *****█░░▄▀░░░░░░░░░░███░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███
+     * *****█░░▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███
+     * *****█░░▄▀░░░░░░░░░░███░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░░░███
+     * *****█░░▄▀░░███████████░░▄▀░░███░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████
+     * *****█░░▄▀░░█████████░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█████░░▄▀░░█████░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░░░█
+     * *****█░░▄▀░░█████████░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█
+     * *****█░░░░░░█████████░░░░░░░░░░█░░░░░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█
+     * *****███████████████████████████████████████████████████████████████████████████████████████████
+     * *****
+     * *****
+     * *****
+     * *****/
+
+
+    /*
+            Filter
+     */
     private fun setfilterListener() {
         buttonFilter.setOnClickListener {
             showDialogFilter()
@@ -998,6 +1040,33 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
             positiveButton(R.string.select)
         }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun spotlight(){
+
+        val targetLay = layoutInflater.inflate(R.layout.filter_target,spotlightRoot)
+        val target = Target.Builder()
+            .setAnchor(binding.floatButtonFilter)
+            .setShape(Circle(100f))
+            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
+            .setOverlay(targetLay)
+            .build()
+
+        val spotlight = Spotlight.Builder(mainActivity)
+        .setTargets(target)
+        .setBackgroundColor(R.color.spotlightBackground)
+            .setDuration(1000L)
+            .setAnimation(DecelerateInterpolator(2f))
+            .build()
+
+        spotlight.start()
+
+        targetLay.findViewById<View>(R.id.filter_target_page).setOnClickListener {
+            spotlight.finish()
+        }
+
+
     }
 }
 

@@ -289,6 +289,7 @@
     <string name="top_5_roads_by_accident_total">Top 5 Roads by Accident Total</string>
     <string name="accident_times_for_different_hourly_periods_of_the_day">Accident times for different hourly periods of the day</string>
     <string name="accident_times">Accident Times</string>
+    <string name="filter_spotlight">This is the filter.</string>
 
 
 </resources>
