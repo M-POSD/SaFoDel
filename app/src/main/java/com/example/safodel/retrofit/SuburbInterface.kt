@@ -27,6 +27,6 @@ interface SuburbInterface {
 
     @GET("{key}?")
     fun mapRepos(@Path("key") key : String?,
-                    @Query("location") location_name: String)
+                    @Query("suburb") location_name: String)
             : Call<SuburbMapResponse>
 }

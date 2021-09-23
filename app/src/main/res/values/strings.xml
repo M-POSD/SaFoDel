@@ -290,6 +290,7 @@
     <string name="accident_times_for_different_hourly_periods_of_the_day">Accident times for different hourly periods of the day</string>
     <string name="accident_times">Accident Times</string>
     <string name="filter_spotlight">This is the filter.</string>
+    <string name="no_data">This suburb do not have any data.</string>
 
 
 </resources>

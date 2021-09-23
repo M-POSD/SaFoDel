@@ -28,7 +28,7 @@ import com.afollestad.materialdialogs.list.toggleAllItemsChecked
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.model.LGAList
+import com.example.safodel.model.SuburbList
 import com.example.safodel.model.SuburbMapResponse
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
@@ -123,7 +123,7 @@ import com.mapbox.maps.Style as Style2
 
 private val locationList: ArrayList<Point> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
-private var lga: String = "MELBOURNE"
+private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private lateinit var toast: Toast
 
@@ -149,7 +149,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var mapView: MapView
     private lateinit var mapView2: MapView2
     private lateinit var searchBarMap1: FrameLayout
-    private lateinit var LGAPoint: Point
+    private lateinit var suburbPoint: Point
     private lateinit var trafficPlugin: TrafficPlugin
     private lateinit var searchBar: FrameLayout
     private lateinit var buttonFilter: View
@@ -177,7 +177,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
-    private val LGAlist = LGAList.init()
+    private val suburbList = SuburbList.init()
 
     /* ----- Location and route progress callbacks ----- */
     private val locationObserver = object : LocationObserver {
@@ -322,7 +322,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         // spinner init
         val spinner = binding.spinner
-        spinner.item = LGAlist
+        spinner.item = suburbList
         spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.rubik_medium)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -331,7 +331,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 setDialog()
                 spinnerTimes++ // calculate the times to test
                 if (spinnerTimes >= 1) {
-                    lga = parent?.getItemAtPosition(position).toString()
+                    suburb = parent?.getItemAtPosition(position).toString()
                     callSuburbClient()
                 }
             }
@@ -393,11 +393,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         this.mapboxMap = mapboxMap
         this.mapboxMap.setStyle(Style.LIGHT) {
 
-            /*-- Camera auto zoom to the LGA area --*/
+            /*-- Camera auto zoom to the suburb area --*/
             if (feature.size != 0 && locationList.size != 0) {
-                LGAPoint = locationList[0]
+                suburbPoint = locationList[0]
                 val position = CameraPosition.Builder()
-                    .target(LatLng(LGAPoint.latitude(), LGAPoint.longitude()))
+                    .target(LatLng(suburbPoint.latitude(), suburbPoint.longitude()))
                     .zoom(9.0)
                     .build()
                 mapboxMap.cameraPosition = position
@@ -408,7 +408,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             // Make a toast when data is updating
             if (feature.size == 0 && locationList.size == 0) {
-                toast.setText("Data is updating...")
+                toast.setText(getString(R.string.no_data))
                 toast.show()
             }
 
@@ -919,7 +919,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         locationList.clear()
         val callAsync: Call<SuburbMapResponse> = suburbInterface.mapRepos(
             "accidents",
-            lga
+            suburb
         )
         callAsync.enqueue(object : Callback<SuburbMapResponse?> {
             override fun onResponse(
@@ -931,7 +931,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     val resultList = response.body()?.suburbMapAccidents
                     if (resultList?.isNotEmpty() == true) {
                         for (each in resultList) {
-                            val eachPoint = Point.fromLngLat(each.point_long, each.point_lat)
+                            val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
                             locationList.add(eachPoint)
                         }
                     }
