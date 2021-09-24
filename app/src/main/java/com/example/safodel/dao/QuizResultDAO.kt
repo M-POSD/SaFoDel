@@ -9,7 +9,7 @@ interface QuizResultDAO {
     @Query("SELECT * FROM quiz_result ORDER BY time_entry ASC")
     fun getAll(): Flow<List<QuizResult>>
 
-    @Query("SELECT * FROM quiz_result WHERE uid = :customerId LIMIT 1")
+    @Query("SELECT * FROM quiz_result WHERE uid = :quizResultId LIMIT 1")
     suspend fun findByID(quizResultId: Int): QuizResult?
 
     @Query("SELECT * FROM quiz_result WHERE time_entry = :timeEntry LIMIT 1")
