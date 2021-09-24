@@ -69,6 +69,7 @@ import com.mapbox.mapboxsdk.style.expressions.Expression.zoom
 import com.mapbox.mapboxsdk.style.layers.*
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
+import com.mapbox.mapboxsdk.utils.BitmapUtils
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.animation.camera
@@ -413,16 +414,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
 
             /*-- Add inmage --*/
-//            it.addImage(
-//                "icon_image",
-//                BitmapUtils.getBitmapFromDrawable(
-//                    context?.let { it1 ->
-//                        ContextCompat.getDrawable(
-//                            it1,
-//                            R.drawable.crash_location
-//                        )
-//                    }
-//                )!!)
+            it.addImage(
+                "icon_image",
+                BitmapUtils.getBitmapFromDrawable(
+                    context?.let { it1 ->
+                        ContextCompat.getDrawable(
+                            it1,
+                            R.drawable.crash_location
+                        )
+                    }
+                )!!)
 
             /*-- Add source --*/
             it.addSource(
@@ -477,16 +478,16 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
             /*-- Add symbol layer --*/
-//            val symbolIconLayer = SymbolLayer("icon_layer", "source")
-//            symbolIconLayer.withProperties(
-//                visibility(Property.VISIBLE),
-//                iconImage("icon_image"),
-//                iconSize(1.5f),
-//                iconIgnorePlacement(false),
-//                iconAllowOverlap(false)
-//            )
-//            symbolIconLayer.minZoom = 15f
-//            it.addLayer(symbolIconLayer)
+            val symbolIconLayer = SymbolLayer("icon_layer", "source")
+            symbolIconLayer.withProperties(
+                visibility(Property.VISIBLE),
+                iconImage("icon_image"),
+                iconSize(1.5f),
+                iconIgnorePlacement(false),
+                iconAllowOverlap(false)
+            )
+            symbolIconLayer.minZoom = 15f
+            it.addLayer(symbolIconLayer)
 
 
             /*-- Set the camera's animation --*/
@@ -552,13 +553,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onPause() {
         super.onPause()
-        //mThread.interrupt()
         mapView.onPause()
     }
 
     override fun onStop() {
         super.onStop()
-        //mThread.interrupt()
         mapView.onStop()
     }
 
@@ -577,7 +576,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
-        //mThread.interrupt()
         mapView.onDestroy()
         mapboxNavigation.onDestroy()
         if (::mapboxNavigation.isInitialized) {
@@ -1028,10 +1026,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     mapboxMap.getStyle {
                         val layer1 = it.getLayer("basic_circle_cayer")
                         val layer2 = it.getLayer("shadow_circle_cayer")
-                        if(layer1 != null && layer2 != null){
+                        val layer3 = it.getLayer("icon_layer")
+                        if(layer1 != null && layer2 != null && layer3 != null){
                             if(layer1.visibility.getValue()!!.equals(Property.VISIBLE)){
                                 layer1.setProperties(visibility(Property.NONE))
                                 layer2.setProperties(visibility(Property.NONE))
+                                layer3.setProperties(visibility(Property.NONE))
                             }
                         }
                     }
