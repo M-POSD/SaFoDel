@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.menuBottom.quiz.QuizHistoryFragment">
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/simple_toolbar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:scrollbars="vertical" />
+
+    <include android:id="@+id/history_detail"
+        layout="@layout/fragment_quiz_history_detail"/>
+
+</LinearLayout>
