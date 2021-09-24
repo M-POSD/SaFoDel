@@ -1,9 +1,6 @@
 package com.example.safodel.retrofit
 
-import com.example.safodel.model.SuburbMapResponse
-import com.example.safodel.model.SuburbResponse
-import com.example.safodel.model.SuburbStreetsResponse
-import com.example.safodel.model.SuburbTimeResponse
+import com.example.safodel.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,4 +26,7 @@ interface SuburbInterface {
     fun mapRepos(@Path("key") key : String?,
                     @Query("suburb") location_name: String)
             : Call<SuburbMapResponse>
+
+    @GET("{key}")
+    fun alertsRepos(@Path("key") key: String?):Call<SuburbAlertsResponse>
 }
