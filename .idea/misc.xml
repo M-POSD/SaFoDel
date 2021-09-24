@@ -86,9 +86,9 @@
         <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_quiz_history.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_quiz_history_date.xml" value="0.225" />
-        <entry key="app/src/main/res/layout/fragment_quiz_history_detail.xml" value="0.225" />
+        <entry key="app/src/main/res/layout/fragment_quiz_history_detail.xml" value="0.24993264803940818" />
         <entry key="app/src/main/res/layout/fragment_quiz_page.xml" value="0.2118421052631579" />
-        <entry key="app/src/main/res/layout/fragment_quiz_resault.xml" value="0.1649122807017544" />
+        <entry key="app/src/main/res/layout/fragment_quiz_resault.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_safodel_information1.xml" value="0.1094224924012158" />
         <entry key="app/src/main/res/layout/fragment_safodel_information2.xml" value="0.1094224924012158" />
         <entry key="app/src/main/res/layout/fragment_school.xml" value="0.18840579710144928" />

@@ -133,5 +133,10 @@
         android:name="com.example.safodel.fragment.home.Epic3Fragment"
         android:label="fragment_epic3"
         tools:layout="@layout/fragment_epic3" />
+    <fragment
+        android:id="@+id/quizHistoryFragment"
+        android:name="com.example.safodel.fragment.menuBottom.quiz.QuizHistoryFragment"
+        android:label="fragment_quiz_history"
+        tools:layout="@layout/fragment_quiz_history" />
 
 </navigation>

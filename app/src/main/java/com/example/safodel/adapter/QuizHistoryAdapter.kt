@@ -35,20 +35,15 @@ class QuizHistoryAdapter(results: MutableList<QuizResult>, context: Context) :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val record = quizResults[position]
         viewHolder.binding.tvRvDate.text = record.timeEntry.toString()
-        viewHolder.binding.ivItemDelete.setOnClickListener {
-            quizResults.remove(record)
-            notifyDataSetChanged()
-        }
+//        viewHolder.binding.ivItemDelete.setOnClickListener {
+//            quizResults.remove(record)
+//            notifyDataSetChanged()
+//        }
         val model: HistoryDetailViewModel = (myContext as MainActivity).getHistoryDetailViewModel()
 
         viewHolder.binding.ivDetailButton.setOnClickListener {
             model.setResult(record)
         }
-    }
-
-    fun addQuizResults(quizResults: MutableList<QuizResult>) {
-        this.quizResults = quizResults
-        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = quizResults.size

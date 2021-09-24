@@ -27,6 +27,9 @@ class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inf
 
         configBtnOnClickListener()
 
+        binding.historyBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty_12,0,
+            R.drawable.ic_baseline_navigate_next_24,0)
+
         return binding.root
     }
 
@@ -38,6 +41,10 @@ class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inf
     private fun configBtnOnClickListener() {
         binding.startBtn.button.setOnClickListener {
             findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
+        }
+
+        binding.historyBtn.setOnClickListener {
+            findNavController().navigate(R.id.quizHistoryFragment, null, navAnimationLeftToRight())
         }
     }
 }

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="20dp"
+    android:background="@color/snow"
     android:orientation="vertical">
 
     <TextView
@@ -16,18 +17,17 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Detail:"
-        android:textColor="@color/black"
-        android:textSize="35sp" />
+        style="@style/textStyle20_bold_black" />
 
     <TextView
         android:id="@+id/detail"
-        android:layout_width="300sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="20dp"
         android:gravity="left"
         android:text="Detail:\n\n\n\n\n\n\n\n"
-        android:textColor="@color/black"
-
-        android:textSize="25sp" />
+        style="@style/textStyle16_gray" />
 
 </LinearLayout>

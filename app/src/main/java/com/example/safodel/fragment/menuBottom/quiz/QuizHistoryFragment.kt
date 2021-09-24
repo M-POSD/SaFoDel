@@ -32,7 +32,7 @@ class QuizHistoryFragment : BasicFragment<FragmentQuizHistoryBinding>(FragmentQu
     ): View {
         _binding = FragmentQuizHistoryBinding.inflate(inflater, container, false)
         val toolbar = binding.toolbar.root
-        setToolbarGray(toolbar)
+        setToolbarReturn(toolbar)
 
         mainActivity = activity as MainActivity
 
@@ -60,9 +60,9 @@ class QuizHistoryFragment : BasicFragment<FragmentQuizHistoryBinding>(FragmentQu
         historyViewModel.getResult().observe(viewLifecycleOwner,{
             var detail = ""
             if (it != null) {
-                detail += "Time: ${it.timeEntry}\n" +
-                        "Question: ${it.question_heading}\n" +
-                        "Information: ${it.question_info}\n" +
+                detail += "Time: ${it.timeEntry}\n\n" +
+                        "Question: ${getString(it.question_heading)}\n\n" +
+                        "Information: ${getString(it.question_info)}\n\n" +
                         "User's answer is correct: ${it.isCorrect}"
             }
             binding.historyDetail.detail.text = detail

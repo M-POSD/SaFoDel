@@ -87,6 +87,24 @@
 
                 <include layout="@layout/medium_button"
                     android:id="@+id/return_button"/>
+
+                <TextView
+                    android:id="@+id/history_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/see_history"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:cornerRadius="50dp"
+                    android:focusable="true" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

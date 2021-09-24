@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/snow"
     tools:context=".fragment.menuBottom.quiz.QuizHistoryFragment">
 
     <include android:id="@+id/toolbar"

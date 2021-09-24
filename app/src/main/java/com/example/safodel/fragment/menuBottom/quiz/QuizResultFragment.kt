@@ -54,11 +54,18 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
                 binding.title.text = getString(R.string.result_heading_3)
             }
         }
+
+        binding.historyBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty_12,0,
+            R.drawable.ic_baseline_navigate_next_24,0)
     }
 
     private fun configBtnOnClickListener() {
         binding.returnButton.button.setOnClickListener {
             findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
+        }
+
+        binding.historyBtn.setOnClickListener {
+            findNavController().navigate(R.id.quizHistoryFragment, null, navAnimationLeftToRight())
         }
     }
 
