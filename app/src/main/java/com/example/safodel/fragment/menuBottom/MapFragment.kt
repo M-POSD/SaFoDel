@@ -413,7 +413,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 toast.show()
             }
 
-            /*-- Add inmage --*/
+            /*-- Add location image --*/
             it.addImage(
                 "icon_image",
                 BitmapUtils.getBitmapFromDrawable(
@@ -424,6 +424,20 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         )
                     }
                 )!!)
+
+            /*--   Add alerts image   --*/
+            it.addImage(
+                "alert_image",
+                BitmapUtils.getBitmapFromDrawable(
+                    context?.let { it1 ->
+                        ContextCompat.getDrawable(
+                            it1,
+                            R.drawable.alerts_icon
+                        )
+                    }
+                )!!
+
+            )
 
             /*-- Add source --*/
             it.addSource(
@@ -488,6 +502,18 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
             symbolIconLayer.minZoom = 15f
             it.addLayer(symbolIconLayer)
+
+            /*-- Add alerts layer --*/
+            val alertIconLayer = SymbolLayer("alert_layer", "source")
+            alertIconLayer.withProperties(
+                visibility(Property.VISIBLE),
+                iconImage("alert_image"),
+                iconSize(1.5f),
+                iconIgnorePlacement(false),
+                iconAllowOverlap(false)
+            )
+            //alertIconLayer.minZoom = 15f
+            it.addLayer(alertIconLayer)
 
 
             /*-- Set the camera's animation --*/
