@@ -18,6 +18,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.viewModel.CheckListViewModel
+import com.example.safodel.viewModel.QuizResultViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import me.jessyan.autosize.AutoSizeCompat
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer : DrawerLayout
     private lateinit var bottomMenu: Menu
     private lateinit var bottomNavigationView: BottomNavigationView
+
+    private lateinit var quizResultViewModel: QuizResultViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +64,12 @@ class MainActivity : AppCompatActivity() {
         configCheckListIcon()
 
         recordLearningMode()
+
+        quizResultViewModel = ViewModelProvider
+            .AndroidViewModelFactory
+            .getInstance(application)
+            .create(QuizResultViewModel::class. java)
+
     }
 
 
@@ -298,6 +307,10 @@ class MainActivity : AppCompatActivity() {
 
      fun callOnNav(index:Int){
          bottomNavigationView.menu.getItem(index).isChecked = true
+    }
+
+    fun getQuizResultViewModel():  QuizResultViewModel{
+        return quizResultViewModel
     }
 }
 

@@ -17,6 +17,11 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentQuizPageBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Question
+import com.example.safodel.entity.QuizResult
+import com.example.safodel.ui.main.MainActivity
+import com.example.safodel.viewModel.QuizResultViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPageBinding::inflate),
@@ -26,6 +31,8 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
     private var mSelectedOptionPosition: Int = 0
     private var totalScore = 0
     private lateinit var toast: Toast
+    private lateinit var results: MutableList<QuizResult>
+    private lateinit var quizResultViewModel: QuizResultViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,9 +45,12 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         setToolbarBasic(toolbar)
 
         mQuestions = Question.init()
+        results = ArrayList()
 
         configOnClickListener()
         setQuestions()
+
+        quizResultViewModel = (activity as MainActivity).getQuizResultViewModel()
 
         return binding.root
     }
@@ -134,7 +144,6 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                 if (mSelectedOptionPosition == 0) {
                     if (binding.submitBtn.button.text == "SUBMIT") {
                         toast.cancel()
-                        Log.d("139", getString(R.string.notify_select_option))
                         toast.setText(getString(R.string.notify_select_option))
                         toast.show()
                     } else {
@@ -149,6 +158,12 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 //                                binding.submitBtn.button.text = "RETURN"
 
 //                                findNavController().popBackStack(R.id.examFinishFragment, true)
+                                var timeEntry = Calendar.getInstance().time
+                                for (item in results) {
+                                    item.timeEntry = timeEntry
+                                    quizResultViewModel.insert(item)
+                                }
+
                                 var arg = bundleOf(
                                     Pair("score", totalScore),
                                     Pair("numOfQuestions", mQuestions.size)
@@ -162,15 +177,18 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg, R.color.wrong_border_color, R.drawable.error_icon)
+                        results.add(QuizResult(null, question.question, question.information, false))
+                    } else {
+                        results.add(QuizResult(null, question.question, question.information, true))
                     }
+
+
                     answerView(question!!.answer, R.drawable.correct_option_border_bg, R.color.correct_border_color, R.drawable.success_icon)
                     infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
 
                     if (mCurrentPosition == mQuestions!!.size) {
-                        Log.d("172", getString(R.string.finish_button))
                         binding.submitBtn.button.text = getString(R.string.finish_button)
                     } else {
-                        Log.d("175", getString(R.string.finish_button))
                         binding.submitBtn.button.text = getString(R.string.go_next_button)
                     }
                     mSelectedOptionPosition = 0
