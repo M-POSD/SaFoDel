@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.databinding.FragmentQuizHistoryBinding
@@ -19,6 +20,7 @@ import com.example.safodel.adapter.QuizHistoryAdapter
 import com.example.safodel.entity.QuizResult
 import com.example.safodel.entity.TimeEntryWithQuizResult
 import com.example.safodel.util.DateStringConverter
+import timber.log.Timber
 
 
 class QuizHistoryFragment :
@@ -56,11 +58,16 @@ class QuizHistoryFragment :
                         it as MutableList<TimeEntryWithQuizResult>,
                         fragmentActivity
                     )
-                    recyclerView.addItemDecoration(
-                        DividerItemDecoration(
-                            activity, LinearLayoutManager.VERTICAL
+                    try {
+                        recyclerView.addItemDecoration(
+                            DividerItemDecoration(
+                                activity, LinearLayoutManager.VERTICAL
+                            )
                         )
-                    )
+                    }catch (e:Exception){
+                        Timber.d(e.message)
+                    }
+
                     recyclerView.adapter = adapter
                     layoutManager = LinearLayoutManager(activity)
                     recyclerView.layoutManager = layoutManager

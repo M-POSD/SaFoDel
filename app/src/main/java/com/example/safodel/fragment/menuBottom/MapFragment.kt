@@ -7,9 +7,6 @@ import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.location.Location
 import android.os.Bundle
-import android.os.Looper
-import android.util.JsonReader
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -386,6 +383,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState)
+        setDialog()
         mapView.getMapAsync(this) // update the map
         return binding.root
     }
@@ -1041,8 +1039,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 }
 
-
-
             }catch (e: Throwable) {
                 dialog.dismiss()
                 toast.setText(e.message)
@@ -1053,10 +1049,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
 
         }
-
-
-
-
 //        val callAsync2: Call<SuburbMapResponse> = SuburbClient.getSuburbService().mapRepos(
 //                        "accidents",
 //                        suburb
