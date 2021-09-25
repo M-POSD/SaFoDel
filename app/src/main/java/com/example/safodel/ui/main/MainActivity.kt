@@ -8,14 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.viewModel.HistoryDetailViewModel
@@ -125,64 +129,85 @@ class MainActivity : AppCompatActivity() {
 
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
+            val menuItem = it
+            var isItemSelected = false
             if (navController.currentDestination?.id == R.id.examPageFragment) {
-                toastMain.cancel()
-                toastMain.setText("You are not allowed to exit")
-                toastMain.show()
-                false
-            } else {
-                when (it.itemId) {
-                    R.id.navHome -> {
-                        navController.popBackStack(
-                            R.id.homeFragment,
-                            true
-                        ) // Previous fragment out of stack
-                        navController.navigate(R.id.homeFragment)
-                        true
-                    }
-                    R.id.navMap -> {
-                        if (navController.currentDestination?.id != R.id.navMap) {
-                            navController.navigate(R.id.mapfragment)
-                        }
-                        true
-                    }
-                    R.id.navExam -> {
-                        if (navController.currentDestination?.id != R.id.navExam) {
-                            navController.navigate(R.id.examFragment)
-                        }
-                        true
-                    }
-                    R.id.navAnalysis -> {
-                        if (navController.currentDestination?.id != R.id.navAnalysis) {
-                            navController.navigate(R.id.analysisFragment)
-                        }
-                        true
-                    }
-                    R.id.navCheckList -> {
-                        if (navController.currentDestination?.id != R.id.navCheckList) {
-                            navController.navigate(R.id.checklistFragment)
-                        }
-                        true
-                    }
-                    else -> {
-                        navController.popBackStack()
-                        binding.bottomNavigation.selectedItemId = R.id.navHome
-                        true
+                MaterialDialog(this).show {
+                    message(text = "${getString(R.string.check_leave)}" +
+                            "\n${getString(R.string.warning_msg)}" )
+                    positiveButton(R.string.no)
+                    negativeButton(R.string.yes)
+                    this.negativeButton {
+                        bottomNav(menuItem)
+                        isItemSelected = true
                     }
                 }
+                isItemSelected
+            } else {
+                bottomNav(it)
+                true
             }
         }
 
     }
 
+    private fun bottomNav(item: MenuItem) {
+        when (item.itemId) {
+            R.id.navHome -> {
+                navController.popBackStack(
+                    R.id.homeFragment,
+                    true
+                ) // Previous fragment out of stack
+                navController.navigate(R.id.homeFragment)
+            }
+            R.id.navMap -> {
+                if (navController.currentDestination?.id != R.id.navMap) {
+                    navController.navigate(R.id.mapfragment)
+                }
+            }
+            R.id.navExam -> {
+                if (navController.currentDestination?.id != R.id.navExam) {
+                    navController.navigate(R.id.examFragment)
+                }
+            }
+            R.id.navAnalysis -> {
+                if (navController.currentDestination?.id != R.id.navAnalysis) {
+                    navController.navigate(R.id.analysisFragment)
+                }
+            }
+            R.id.navCheckList -> {
+                if (navController.currentDestination?.id != R.id.navCheckList) {
+                    navController.navigate(R.id.checklistFragment)
+                }
+            }
+            else -> {
+                navController.popBackStack()
+                binding.bottomNavigation.selectedItemId = R.id.navHome
+            }
+        }
+    }
+
     private fun configLeftNavigation() {
         binding.leftNavigation.setCheckedItem(R.id.left_navigation)
         binding.leftNavigation.setNavigationItemSelectedListener {
+            val menuItem = it
+            var isItemSelected = false
             if (navController.currentDestination?.id == R.id.examPageFragment) {
-                toastMain.cancel()
-                toastMain.setText("You are not allowed to exit")
-                toastMain.show()
-                false
+                MaterialDialog(this).show {
+                    message(text = "${getString(R.string.check_leave)}" +
+                            "\n${getString(R.string.warning_msg)}" )
+                    positiveButton(R.string.no)
+                    negativeButton(R.string.yes)
+                    this.negativeButton {
+                        when (menuItem.itemId) {
+                            R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+                            R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
+                        }
+                        isItemSelected = true
+                    }
+                }
+
+                isItemSelected
             } else {
                 if (!navController.popBackStack(it.itemId, false)) {
                     if (navController.currentDestination?.id == R.id.appIntroFragment

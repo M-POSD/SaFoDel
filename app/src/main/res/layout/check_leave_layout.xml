@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/rubik_medium"
         android:text="@string/check_leave"
         android:textSize="16dp" />
@@ -20,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/rubik_medium"
         android:text="@string/warning_msg"
         android:textSize="16dp" />
@@ -30,13 +29,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:weightSum="10">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:gravity="center">
+            android:gravity="right">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/yes"
@@ -50,6 +50,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/white"
                 android:textSize="16dp"
+                android:layout_marginRight="5dp"
                 app:cornerRadius="50dp" />
         </LinearLayout>
 
@@ -57,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:gravity="center">
+            android:gravity="left">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/no"
@@ -71,6 +72,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/white"
                 android:textSize="16dp"
+                android:layout_marginLeft="5dp"
                 app:cornerRadius="50dp" />
         </LinearLayout>
     </LinearLayout>
