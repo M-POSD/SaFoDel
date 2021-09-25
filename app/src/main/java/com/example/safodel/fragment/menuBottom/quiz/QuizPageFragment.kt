@@ -158,10 +158,6 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                                 setQuestions()
                             }
                             else -> {
-//                                configDialog("Success", "You have successfully completed the Quiz")
-//                                binding.submitBtn.button.text = "RETURN"
-
-//                                findNavController().popBackStack(R.id.examFinishFragment, true)
                                 var timeEntry = TimeEntry(Calendar.getInstance().time)
 
                                 Log.d("num of results", results.size.toString())

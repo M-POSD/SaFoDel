@@ -3,7 +3,6 @@ package com.example.safodel.adapter
 import androidx.recyclerview.widget.RecyclerView
 
 import android.content.Context
-import android.util.Log
 
 import android.view.LayoutInflater
 
@@ -12,10 +11,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.databinding.QuizHistoryRvBinding
 import com.example.safodel.entity.TimeEntryWithQuizResult
-import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.util.DateStringConverter
 import com.example.safodel.viewModel.HistoryDetailViewModel
-import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 
 
 class QuizHistoryAdapter(results: MutableList<TimeEntryWithQuizResult>, context: Context) :

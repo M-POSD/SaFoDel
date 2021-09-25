@@ -1,16 +1,13 @@
 package com.example.safodel.fragment.menuBottom.quiz
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.databinding.FragmentQuizHistoryBinding
 import com.example.safodel.fragment.BasicFragment
-import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.viewModel.HistoryDetailViewModel
 import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,27 +49,28 @@ class QuizHistoryFragment :
         recyclerView = binding.recyclerView
 
 
-        timeEntryWithQuizResultViewModel.allQuizResults.observe(requireActivity(), Observer {
-            Log.d("all results", it.isNullOrEmpty().toString())
-            if (!it.isNullOrEmpty()) {
-                val adapter = QuizHistoryAdapter(
-                    it as MutableList<TimeEntryWithQuizResult>,
-                    requireActivity()
-                )
-                recyclerView.addItemDecoration(
-                    DividerItemDecoration(
-                        activity, LinearLayoutManager.VERTICAL
+        activity?.let { fragmentActivity ->
+            timeEntryWithQuizResultViewModel.allQuizResults.observe(fragmentActivity, Observer {
+                if (!it.isNullOrEmpty()) {
+                    val adapter = QuizHistoryAdapter(
+                        it as MutableList<TimeEntryWithQuizResult>,
+                        fragmentActivity
                     )
-                )
-                recyclerView.adapter = adapter
-                layoutManager = LinearLayoutManager(activity)
-                recyclerView.layoutManager = layoutManager
-            } else {
-//                Toast.makeText(activity, "Quiz Result Did Not Exist", Toast.LENGTH_SHORT).show()
-                binding.historyDetail.timeDetail.text = getString(R.string.none)
-                binding.historyDetail.detail.visibility = View.GONE
-            }
-        })
+                    recyclerView.addItemDecoration(
+                        DividerItemDecoration(
+                            activity, LinearLayoutManager.VERTICAL
+                        )
+                    )
+                    recyclerView.adapter = adapter
+                    layoutManager = LinearLayoutManager(activity)
+                    recyclerView.layoutManager = layoutManager
+                } else {
+                    //                Toast.makeText(activity, "Quiz Result Did Not Exist", Toast.LENGTH_SHORT).show()
+                    binding.historyDetail.timeDetail.text = getString(R.string.none)
+                    binding.historyDetail.detail.visibility = View.GONE
+                }
+            })
+        }
 
         historyViewModel.getResult().observe(viewLifecycleOwner, {
             if (it != null) {
@@ -104,6 +102,7 @@ class QuizHistoryFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
+        historyViewModel.setResult(null)
         _binding = null
     }
 
