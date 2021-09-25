@@ -11,9 +11,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.DecelerateInterpolator
 import android.widget.AdapterView
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -57,6 +59,8 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerView
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
@@ -156,7 +160,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var trafficPlugin: TrafficPlugin
     private lateinit var searchBar: FrameLayout
     private lateinit var buttonFilter: View
-
+    private lateinit var markerViewManager: MarkerViewManager
+    private lateinit var alertMarkerBubble: MarkerView
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -398,6 +403,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
         this.mapboxMap = mapboxMap
+        markerViewManager = MarkerViewManager(mapView,mapboxMap)
         this.mapboxMap.setStyle(Style.LIGHT) {
 
             /*-- Camera auto zoom to the suburb area --*/
@@ -539,6 +545,21 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             //alertIconLayer.minZoom = 15f
             it.addLayer(alertIconLayer)
 
+//            val alertsWindowLayer = SymbolLayer("alert_window_layer","alertSource")
+//            alertsWindowLayer.withProperties(
+//                iconImage("{name}"),
+//                iconAnchor(Property.ICON_ANCHOR_BOTTOM),
+//                iconAllowOverlap(true),
+//                iconOffset(floatArrayOf(-2f,-28f).toTypedArray())
+//            )
+//            it.addLayer(alertsWindowLayer)
+
+            mapboxMap.addOnMapClickListener {
+                handleClickAlert(Point.fromLngLat(it.longitude,it.latitude))
+                false
+            }
+
+
 
             /*-- Set the camera's animation --*/
             mapboxMap.animateCamera(
@@ -559,6 +580,23 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
     }
+
+    fun handleClickAlert(point: Point){
+        //markerViewManager.removeMarker(alertMarkerBubble)
+        val alertBubble = LayoutInflater.from(mainActivity).inflate(
+            R.layout.marker_alert_bubble, null)
+        alertBubble.setLayoutParams(FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
+        var title = alertBubble.findViewById<TextView>(R.id.marker_alert_title)
+        var snippet = alertBubble.findViewById<TextView>(R.id.marker_alert_snippet)
+        title.text = point.longitude().toString()
+        snippet.text = point.latitude().toString()
+        alertMarkerBubble = MarkerView(LatLng(point.latitude(),point.longitude()),alertBubble)
+
+        markerViewManager.addMarker(alertMarkerBubble)
+    }
+
+
+
 
     @SuppressWarnings("MissingPermission")
     fun enableLocationComponent(loadMapStyle: Style) {
@@ -1053,7 +1091,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     response: Response<SuburbMapResponse?>
                 ) {
                     if (response.isSuccessful) {
-                        val resultList = response.body()?.suburbMapAccidents
+                        val resultList = response.body()    ?.suburbMapAccidents
                         if (resultList?.isNotEmpty() == true) {
                             for (each in resultList) {
                                 val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
