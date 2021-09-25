@@ -110,7 +110,7 @@
         android:label="fragment_analysis"
         tools:layout="@layout/fragment_analysis" />
     <fragment
-        android:id="@+id/exam1Fragment"
+        android:id="@+id/examPageFragment"
         android:name="com.example.safodel.fragment.menuBottom.quiz.QuizPageFragment"
         android:label="fragment_exam1"
         tools:layout="@layout/fragment_quiz_page" />

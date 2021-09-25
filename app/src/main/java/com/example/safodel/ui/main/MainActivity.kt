@@ -20,10 +20,10 @@ import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.viewModel.HistoryDetailViewModel
 import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mapbox.maps.extension.style.expressions.dsl.generated.length
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
     private lateinit var toastMain: Toast
-    private lateinit var drawer : DrawerLayout
+    private lateinit var drawer: DrawerLayout
     private lateinit var bottomMenu: Menu
     private lateinit var bottomNavigationView: BottomNavigationView
 
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     /**
      * Press the navigation icon to pop up the navigation window
      */
@@ -83,23 +82,25 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // stop users to go back if they are in the following fragment,
         // giving the warning message at the same time
-        if (navController.currentDestination?.id == R.id.exam1Fragment ||
-            navController.currentDestination?.id == R.id.examFinishFragment) {
+        if (navController.currentDestination?.id == R.id.examPageFragment ||
+            navController.currentDestination?.id == R.id.examFinishFragment
+        ) {
+            toastMain.cancel()
             toastMain.setText("Not allow go back in the page")
             toastMain.show()
             return
         }
 
-        if(navController.currentDestination?.id == R.id.mapfragment ||
+        if (navController.currentDestination?.id == R.id.mapfragment ||
             navController.currentDestination?.id == R.id.examFragment ||
             navController.currentDestination?.id == R.id.analysisFragment ||
-            navController.currentDestination?.id == R.id.checklistFragment){
+            navController.currentDestination?.id == R.id.checklistFragment
+        ) {
             binding.bottomNavigation.selectedItemId = R.id.navHome
             return
         }
 
-        if(navController.currentDestination?.id != R.id.homeFragment)
-        {
+        if (navController.currentDestination?.id != R.id.homeFragment) {
             super.onBackPressed()
             return
         }
@@ -110,7 +111,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+        toastMain.cancel()
+        toastMain.setText("Please click BACK again to exit")
+        toastMain.show()
 
         // give user three seconds to leave without re-notification
         Handler(Looper.getMainLooper()).postDelayed(Runnable {
@@ -120,40 +123,50 @@ class MainActivity : AppCompatActivity() {
 
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.navHome -> {
-                    navController.popBackStack(R.id.homeFragment, true) // Previous fragment out of stack
-                    navController.navigate(R.id.homeFragment)
-                    true
-                }
-                R.id.navMap -> {
-                    if(navController.currentDestination?.id != R.id.navMap){
-                        navController.navigate(R.id.mapfragment)
+            if (navController.currentDestination?.id == R.id.examPageFragment) {
+                toastMain.cancel()
+                toastMain.setText("You are not allowed to exit")
+                toastMain.show()
+                false
+            } else {
+                when (it.itemId) {
+                    R.id.navHome -> {
+                        navController.popBackStack(
+                            R.id.homeFragment,
+                            true
+                        ) // Previous fragment out of stack
+                        navController.navigate(R.id.homeFragment)
+                        true
                     }
-                    true
-                }
-                R.id.navExam -> {
-                    if(navController.currentDestination?.id != R.id.navExam){
-                        navController.navigate(R.id.examFragment)
+                    R.id.navMap -> {
+                        if (navController.currentDestination?.id != R.id.navMap) {
+                            navController.navigate(R.id.mapfragment)
+                        }
+                        true
                     }
-                    true
-                }
-                R.id.navAnalysis -> {
-                    if(navController.currentDestination?.id != R.id.navAnalysis){
-                        navController.navigate(R.id.analysisFragment)
+                    R.id.navExam -> {
+                        if (navController.currentDestination?.id != R.id.navExam) {
+                            navController.navigate(R.id.examFragment)
+                        }
+                        true
                     }
-                    true
-                }
-                R.id.navCheckList -> {
-                    if(navController.currentDestination?.id != R.id.navCheckList){
-                        navController.navigate(R.id.checklistFragment)
+                    R.id.navAnalysis -> {
+                        if (navController.currentDestination?.id != R.id.navAnalysis) {
+                            navController.navigate(R.id.analysisFragment)
+                        }
+                        true
                     }
-                    true
-                }
-                else -> {
-                    navController.popBackStack()
-                    binding.bottomNavigation.selectedItemId = R.id.navHome
-                    true
+                    R.id.navCheckList -> {
+                        if (navController.currentDestination?.id != R.id.navCheckList) {
+                            navController.navigate(R.id.checklistFragment)
+                        }
+                        true
+                    }
+                    else -> {
+                        navController.popBackStack()
+                        binding.bottomNavigation.selectedItemId = R.id.navHome
+                        true
+                    }
                 }
             }
         }
@@ -163,16 +176,26 @@ class MainActivity : AppCompatActivity() {
     private fun configLeftNavigation() {
         binding.leftNavigation.setCheckedItem(R.id.left_navigation)
         binding.leftNavigation.setNavigationItemSelectedListener {
-            if (!navController.popBackStack(it.itemId, false)) {
-                if (navController.currentDestination?.id == R.id.appIntroFragment)
-                    navController.popBackStack() // Previous fragment out of stack
-                when (it.itemId) {
-                    R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
-                    R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
+            if (navController.currentDestination?.id == R.id.examPageFragment) {
+                toastMain.cancel()
+                toastMain.setText("You are not allowed to exit")
+                toastMain.show()
+                false
+            } else {
+                if (!navController.popBackStack(it.itemId, false)) {
+                    if (navController.currentDestination?.id == R.id.appIntroFragment
+                        || navController.currentDestination?.id == R.id.developerFragment
+                    ) {
+                        navController.popBackStack() // Previous fragment out of stack
+                    }
+                    when (it.itemId) {
+                        R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+                        R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
+                    }
                 }
+                drawer.closeDrawers() // close the drawer of the left navigation.
+                true
             }
-            drawer.closeDrawers() // close the drawer of the left navigation.
-            true
         }
     }
 
@@ -196,7 +219,7 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.visibility = View.VISIBLE
     }
 
-    fun bottomNavHeight(): Int{
+    fun bottomNavHeight(): Int {
         return binding.bottomNavigation.height
     }
 
@@ -218,23 +241,23 @@ class MainActivity : AppCompatActivity() {
         spEditor.apply()
     }
 
-     fun getStatusHeight(): Int{
+    fun getStatusHeight(): Int {
         val rec = Rect()
         window.decorView.getWindowVisibleDisplayFrame(rec)
         val statusBarHeight = rec.top
         return statusBarHeight
     }
 
-    fun lockSwipeDrawer(){
+    fun lockSwipeDrawer() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
-    fun unlockSwipeDrawer(){
+    fun unlockSwipeDrawer() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
     fun changeCheckListIcon(isChecked: Boolean) {
-        when(isChecked) {
+        when (isChecked) {
             true -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_finish)
             false -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_not_finish)
         }
@@ -286,19 +309,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configCheckListIcon() {
-            if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
-                && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
-                && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
-                && getCheckboxSharePrefer(6)
-            ) {
-                changeCheckListIcon(true)
-            } else {
-                changeCheckListIcon(false)
-            }
+        if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
+            && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
+            && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
+            && getCheckboxSharePrefer(6)
+        ) {
+            changeCheckListIcon(true)
+        } else {
+            changeCheckListIcon(false)
+        }
     }
 
-     fun callOnNav(index:Int){
-         bottomNavigationView.menu.getItem(index).isChecked = true
+    fun callOnNav(index: Int) {
+        bottomNavigationView.menu.getItem(index).isChecked = true
     }
 }
 

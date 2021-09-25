@@ -249,6 +249,9 @@
     <string name="information">Information</string>
     <string name="is_correct">"Is Correct: "</string>
 
+    <string name="check_leave">Are you sure to leave?</string>
+    <string name="warning_msg">All current behaviour will be removed</string>
+
     <!-- checklist -->
     <string name="checklist_notification_unprepared">Please make sure you prepare everything on the checklist</string>
     <string name="checklist_notification_prepared">Awesome! It\'s time to start your food delivering journey!</string>

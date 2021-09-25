@@ -61,7 +61,7 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
 
     private fun configBtnOnClickListener() {
         binding.returnButton.button.setOnClickListener {
-            findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.examPageFragment, null, navAnimationLeftToRight())
         }
 
         binding.historyBtn.setOnClickListener {
