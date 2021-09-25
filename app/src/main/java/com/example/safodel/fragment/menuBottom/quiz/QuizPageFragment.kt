@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
@@ -18,8 +19,9 @@ import com.example.safodel.databinding.FragmentQuizPageBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Question
 import com.example.safodel.entity.QuizResult
+import com.example.safodel.entity.TimeEntry
 import com.example.safodel.ui.main.MainActivity
-import com.example.safodel.viewModel.QuizResultViewModel
+import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -32,7 +34,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
     private var totalScore = 0
     private lateinit var toast: Toast
     private lateinit var results: MutableList<QuizResult>
-    private lateinit var quizResultViewModel: QuizResultViewModel
+    private lateinit var timeEntryWithQuizResultViewModel: TimeEntryWithQuizResultViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +52,10 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         configOnClickListener()
         setQuestions()
 
-        quizResultViewModel = (activity as MainActivity).getQuizResultViewModel()
+        timeEntryWithQuizResultViewModel = ViewModelProvider
+            .AndroidViewModelFactory
+            .getInstance(requireActivity().application)
+            .create(TimeEntryWithQuizResultViewModel::class. java)
 
         return binding.root
     }
@@ -76,7 +81,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         binding.progressBar.progress = mCurrentPosition
         binding.progress.text = "$mCurrentPosition/${binding.progressBar.max}"
 
-        Log.d("69:", getString(question!!.question))
+
         binding.question.text = getString(question!!.question)
 
         if (question.image != 0) {
@@ -134,7 +139,6 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
     }
 
     override fun onClick(v: View?) {
-        Log.d("onClick", v.toString())
         when (v) {
             binding.opt1.option -> selectedOptionView(binding.opt1.option, 1)
             binding.opt2.option -> selectedOptionView(binding.opt2.option, 2)
@@ -158,11 +162,11 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 //                                binding.submitBtn.button.text = "RETURN"
 
 //                                findNavController().popBackStack(R.id.examFinishFragment, true)
-                                var timeEntry = Calendar.getInstance().time
-                                for (item in results) {
-                                    item.timeEntry = timeEntry
-                                    quizResultViewModel.insert(item)
-                                }
+                                var timeEntry = TimeEntry(Calendar.getInstance().time)
+
+                                Log.d("num of results", results.size.toString())
+
+                                timeEntryWithQuizResultViewModel.addTimeEntryWithQuizResults(timeEntry, results)
 
                                 var arg = bundleOf(
                                     Pair("score", totalScore),
@@ -177,11 +181,10 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg, R.color.wrong_border_color, R.drawable.error_icon)
-                        results.add(QuizResult(null, question.question, question.information, false))
+                        results.add(QuizResult(0, question.question, question.information, false))
                     } else {
-                        results.add(QuizResult(null, question.question, question.information, true))
+                        results.add(QuizResult(1, question.question, question.information, true))
                     }
-
 
                     answerView(question!!.answer, R.drawable.correct_option_border_bg, R.color.correct_border_color, R.drawable.success_icon)
                     infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
@@ -240,7 +243,6 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 
             }
             1 -> {
-                Log.d("227", getString(question.information))
                 binding.opt1.info.text = getString(question.information)
                 binding.opt1.info.visibility = View.VISIBLE
             }

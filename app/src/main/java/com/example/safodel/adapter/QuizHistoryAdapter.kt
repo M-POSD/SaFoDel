@@ -2,27 +2,23 @@ package com.example.safodel.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 
-import android.R
 import android.content.Context
-
-import androidx.fragment.app.FragmentActivity
-
-import androidx.lifecycle.ViewModelProvider
-
-import androidx.annotation.NonNull
+import android.util.Log
 
 import android.view.LayoutInflater
 
 import android.view.ViewGroup
-import com.example.safodel.databinding.FragmentQuizHistoryBinding
-import com.example.safodel.databinding.FragmentWelcomeSafodelBinding
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.databinding.QuizHistoryRvBinding
-import com.example.safodel.entity.QuizResult
+import com.example.safodel.entity.TimeEntryWithQuizResult
 import com.example.safodel.ui.main.MainActivity
+import com.example.safodel.util.DateStringConverter
 import com.example.safodel.viewModel.HistoryDetailViewModel
+import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 
 
-class QuizHistoryAdapter(results: MutableList<QuizResult>, context: Context) :
+class QuizHistoryAdapter(results: MutableList<TimeEntryWithQuizResult>, context: Context) :
     RecyclerView.Adapter<QuizHistoryAdapter.ViewHolder?>() {
     private var quizResults = results
     private val myContext = context
@@ -34,15 +30,22 @@ class QuizHistoryAdapter(results: MutableList<QuizResult>, context: Context) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val record = quizResults[position]
-        viewHolder.binding.tvRvDate.text = record.timeEntry.toString()
+
+        viewHolder.binding.tvRvDate.text =
+            DateStringConverter().parseDateToStr("dd-MM-yyyy hh:mm:ss", record.timeEntry.time)
+
 //        viewHolder.binding.ivItemDelete.setOnClickListener {
 //            quizResults.remove(record)
 //            notifyDataSetChanged()
 //        }
-        val model: HistoryDetailViewModel = (myContext as MainActivity).getHistoryDetailViewModel()
+
+        val model: HistoryDetailViewModel = ViewModelProvider(myContext as FragmentActivity).get(
+            HistoryDetailViewModel::class.java
+        )
 
         viewHolder.binding.ivDetailButton.setOnClickListener {
             model.setResult(record)
+            notifyDataSetChanged()
         }
     }
 

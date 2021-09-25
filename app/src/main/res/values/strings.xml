@@ -233,7 +233,6 @@
     <string name="question9_option3">Turning right</string>
     <string name="question9_option4">Merging right</string>
     <string name="question9_information">Any bike rider must use a front light, rear light (flashing or steady), and a rear red reflector when riding at night or in conditions where visibility is poor</string>
-    <!--  analysis  -->
 
     <!--  quiz  -->
     <string name="quiz">QUIZ</string>
@@ -244,8 +243,11 @@
     <string name="result_heading_3">Perfect !!!</string>
 
     <string name="see_history">View History</string>
-
-    <!--  map  -->
+    <string name="detail">Detail:</string>
+    <string name="none">No Historical Data</string>
+    <string name="question">Question</string>
+    <string name="information">Information</string>
+    <string name="is_correct">"Is Correct: "</string>
 
     <!-- checklist -->
     <string name="checklist_notification_unprepared">Please make sure you prepare everything on the checklist</string>
@@ -300,6 +302,5 @@
     <string name="accident_times">Accident Times</string>
     <string name="filter_spotlight">This is the filter.</string>
     <string name="no_data">This suburb do not have any data.</string>
-
 
 </resources>
