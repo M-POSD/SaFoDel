@@ -23,10 +23,10 @@ interface SuburbInterface {
                     : Call<SuburbStreetsResponse>
 
     @GET("{key}?")
-     fun mapRepos(@Path("key") key : String?,
+     suspend fun mapRepos(@Path("key") key : String?,
                     @Query("suburb") location_name: String)
-            : Call<SuburbMapResponse>
+            : SuburbMapResponse
 
     @GET("{key}")
-     fun alertsRepos(@Path("key") key: String?):Call<SuburbAlertsResponse>
+     suspend fun alertsRepos(@Path("key") key: String?):SuburbAlertsResponse
 }

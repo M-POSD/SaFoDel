@@ -17,7 +17,6 @@ class MapAccidentViewModel: ViewModel()  {
     fun launchIt(block:suspend CoroutineScope.()->Unit){
         viewModelScope.launch {
             withContext(Dispatchers.IO){ block()}
-
         }
     }
 }
