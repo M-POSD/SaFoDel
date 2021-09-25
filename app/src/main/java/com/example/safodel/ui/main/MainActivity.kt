@@ -1,6 +1,7 @@
 package com.example.safodel.ui.main
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         configCheckListIcon()
 
         recordLearningMode()
+        setMapLearningMode()
 
     }
 
@@ -322,6 +324,13 @@ class MainActivity : AppCompatActivity() {
 
     fun callOnNav(index: Int) {
         bottomNavigationView.menu.getItem(index).isChecked = true
+    }
+
+    fun setMapLearningMode(){
+        val sf = getPreferences(Context.MODE_PRIVATE)
+        val editor = sf.edit()
+        editor.putBoolean("mapLeaningMode",true)
+        editor.apply()
     }
 }
 

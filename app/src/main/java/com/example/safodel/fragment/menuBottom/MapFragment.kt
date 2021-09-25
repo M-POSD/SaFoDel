@@ -2,6 +2,7 @@ package com.example.safodel.fragment.menuBottom
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.parseColor
@@ -142,7 +143,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private lateinit var diaglogFilter : MaterialDialog
     private lateinit var recenter: View
     private lateinit var spotlightRoot: FrameLayout
-    private var updateMapNow = false
 
 
     // Map
@@ -338,8 +338,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 if (spinnerTimes >= 1) {
                     suburb = parent?.getItemAtPosition(position).toString()
                     callSuburbClient()
-                    while(!updateMapNow) continue
-                    mapView.getMapAsync(fragmentNow)
+                    //mapView.getMapAsync(fragmentNow)
                 }
             }
 
@@ -358,10 +357,6 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         setDialog()
         callAlertsClient()
         callSuburbClient()
-
-
-
-
 
         // go to the user's current location
         binding.floatButton.setOnClickListener {
@@ -383,8 +378,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState)
-        setDialog()
-        mapView.getMapAsync(this) // update the map
+        //setDialog()
+        //mapView.getMapAsync(this) // update the map
         return binding.root
     }
 
@@ -560,9 +555,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             binding.floatButtonNav.setOnClickListener {
                 changeToNav()
             }
+            dialog.dismiss()
         }
-        updateMapNow = false
-        dialog.dismiss()
+
     }
 
     @SuppressWarnings("MissingPermission")
@@ -966,34 +961,34 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private fun callAlertsClient(){
         //val fragmentNow = this
-//        GlobalScope.launch {
-//            val callAsync: Call<SuburbAlertsResponse> = suburbInterface.alertsRepos(
-//                "alerts"
-//            )
-//            callAsync.enqueue(object : Callback<SuburbAlertsResponse?> {
-//                override fun onResponse(
-//                    call: Call<SuburbAlertsResponse?>?,
-//                    response: Response<SuburbAlertsResponse?>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        val resultList = response.body()?.suburbAlertsAccidents
-//                        if (resultList?.isNotEmpty() == true) {
-//                            for (each in resultList) {
-//                                val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
-//                                alertsFeature.add(Feature.fromGeometry(eachPoint))
-//                            }
-//                        }
-//                        //mapView.getMapAsync(fragmentNow)
-//                    } else {
-//                        Timber.i(getString(R.string.response_failed))
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<SuburbAlertsResponse?>?, t: Throwable) {
-//                    Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//        }
+        GlobalScope.launch {
+            val callAsync: Call<SuburbAlertsResponse> = suburbInterface.alertsRepos(
+                "alerts"
+            )
+            callAsync.enqueue(object : Callback<SuburbAlertsResponse?> {
+                override fun onResponse(
+                    call: Call<SuburbAlertsResponse?>?,
+                    response: Response<SuburbAlertsResponse?>
+                ) {
+                    if (response.isSuccessful) {
+                        val resultList = response.body()?.suburbAlertsAccidents
+                        if (resultList?.isNotEmpty() == true) {
+                            for (each in resultList) {
+                                val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
+                                alertsFeature.add(Feature.fromGeometry(eachPoint))
+                            }
+                        }
+                        //mapView.getMapAsync(fragmentNow)
+                    } else {
+                        Timber.i(getString(R.string.response_failed))
+                    }
+                }
+
+                override fun onFailure(call: Call<SuburbAlertsResponse?>?, t: Throwable) {
+                    Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
 
     /*
@@ -1002,86 +997,83 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private fun callSuburbClient() {
             feature.clear()
             locationList.clear()
-        mapViewModel.launchIt {
-            try {
-                val callAsync2 = async {
-                    suburbInterface.mapRepos(
-                        "accidents",
-                        suburb
-                    )
-                }
-
-                val callAsyncAlert = async {
-                    callAsync2.join()
-                    suburbInterface.alertsRepos(
-                        "alerts"
-                    )
-
-                }
-                val resultList = callAsync2.await().suburbMapAccidents
-                callAsync2.await().run {
-                    updateMapNow = true
-                }
-                if (resultList.isNotEmpty() == true) {
-                    for (each in resultList) {
-                        val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
-                        locationList.add(eachPoint)
-                    }
-                }
-                for (each in 0..locationList.size - 1) {
-                    feature.add(Feature.fromGeometry(locationList[each]))
-                }
-                val resultListAlert = callAsyncAlert.await().suburbAlertsAccidents
-                if (resultListAlert.isNotEmpty() == true) {
-                    for (each in resultListAlert) {
-                        val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
-                        alertsFeature.add(Feature.fromGeometry(eachPoint))
-                    }
-                }
-
-            }catch (e: Throwable) {
-                dialog.dismiss()
-                toast.setText(e.message)
-                toast.show()
-                Timber.d(e.message.toString())
-            }finally {
-                this.cancel()
-            }
-
-        }
-//        val callAsync2: Call<SuburbMapResponse> = SuburbClient.getSuburbService().mapRepos(
+//        mapViewModel.launchIt {
+//            try {
+//                val callAsync2 = async {
+//                    suburbInterface.mapRepos(
 //                        "accidents",
 //                        suburb
 //                    )
+//                }
 //
-//            callAsync2.enqueue(object : Callback<SuburbMapResponse?> {
-//                override fun onResponse(
-//                    call: Call<SuburbMapResponse?>?,
-//                    response: Response<SuburbMapResponse?>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        dialog.dismiss()
-//                        val resultList = response.body()?.suburbMapAccidents
-//                        if (resultList?.isNotEmpty() == true) {
-//                            for (each in resultList) {
-//                                val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
-//                                locationList.add(eachPoint)
-//                            }
-//                        }
-//                        for (each in 0..locationList.size - 1) {
-//                            feature.add(Feature.fromGeometry(locationList[each]))
-//                        }
-//                        mapView.getMapAsync(fragmentNow)
-//                    } else {
-//                        Timber.i(getString(R.string.response_failed))
+//                val callAsyncAlert = async {
+//                    callAsync2.join()
+//                    suburbInterface.alertsRepos(
+//                        "alerts"
+//                    )
+//                }
+//                val resultList = callAsync2.await().suburbMapAccidents
+//                callAsync2.await().run {
+//                }
+//                if (resultList.isNotEmpty() == true) {
+//                    for (each in resultList) {
+//                        val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
+//                        locationList.add(eachPoint)
+//                    }
+//                }
+//                for (each in 0..locationList.size - 1) {
+//                    feature.add(Feature.fromGeometry(locationList[each]))
+//                }
+//                val resultListAlert = callAsyncAlert.await().suburbAlertsAccidents
+//                if (resultListAlert.isNotEmpty() == true) {
+//                    for (each in resultListAlert) {
+//                        val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
+//                        alertsFeature.add(Feature.fromGeometry(eachPoint))
 //                    }
 //                }
 //
-//                override fun onFailure(call: Call<SuburbMapResponse?>?, t: Throwable) {
-//                    dialog.dismiss()
-//                    Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
-//                }
-//            })
+//            }catch (e: Throwable) {
+//                dialog.dismiss()
+//                toast.setText(e.message)
+//                toast.show()
+//                Timber.d(e.message.toString())
+//            }finally {
+//                this.cancel()
+//            }
+//
+//        }
+        val callAsync2: Call<SuburbMapResponse> = SuburbClient.getSuburbService().mapRepos(
+                        "accidents",
+                        suburb
+                    )
+
+            callAsync2.enqueue(object : Callback<SuburbMapResponse?> {
+                override fun onResponse(
+                    call: Call<SuburbMapResponse?>?,
+                    response: Response<SuburbMapResponse?>
+                ) {
+                    if (response.isSuccessful) {
+                        val resultList = response.body()?.suburbMapAccidents
+                        if (resultList?.isNotEmpty() == true) {
+                            for (each in resultList) {
+                                val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
+                                locationList.add(eachPoint)
+                            }
+                        }
+                        for (each in 0..locationList.size - 1) {
+                            feature.add(Feature.fromGeometry(locationList[each]))
+                        }
+                        mapView.getMapAsync(fragmentNow)
+                    } else {
+                        Timber.i(getString(R.string.response_failed))
+                    }
+                }
+
+                override fun onFailure(call: Call<SuburbMapResponse?>?, t: Throwable) {
+                    dialog.dismiss()
+                    Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
 
     }
 
@@ -1178,29 +1170,35 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+
+    /*
+           show the learning mode while open the map in first time.
+     */
     @SuppressLint("ResourceAsColor")
     private fun spotlight(){
+        val sf = mainActivity.getPreferences(Context.MODE_PRIVATE)
+        var go = sf.getBoolean("mapLeaningMode",false)
+        if(go){
+            val targetLay = layoutInflater.inflate(R.layout.filter_target,spotlightRoot)
+            val target = Target.Builder()
+                .setShape(Circle(0f))
+                .setOverlay(targetLay)
+                .build()
 
-        val targetLay = layoutInflater.inflate(R.layout.filter_target,spotlightRoot)
-        val target = Target.Builder()
-            .setShape(Circle(0f))
-            .setOverlay(targetLay)
-            .build()
 
+            val spotlight = Spotlight.Builder(mainActivity)
+                .setTargets(target)
+                .setBackgroundColor(R.color.spotlightBackground)
+                .setDuration(1000L)
+                .setAnimation(DecelerateInterpolator(2f))
+                .build()
 
-        val spotlight = Spotlight.Builder(mainActivity)
-        .setTargets(target)
-        .setBackgroundColor(R.color.spotlightBackground)
-            .setDuration(1000L)
-            .setAnimation(DecelerateInterpolator(2f))
-            .build()
-
-        spotlight.start()
-
-        targetLay.findViewById<View>(R.id.filter_target_page).setOnClickListener {
-            spotlight.finish()
+            spotlight.start()
+            sf.edit().putBoolean("mapLeaningMode",false).apply()
+            targetLay.findViewById<View>(R.id.filter_target_page).setOnClickListener {
+                spotlight.finish()
+            }
         }
-
 
     }
 }
