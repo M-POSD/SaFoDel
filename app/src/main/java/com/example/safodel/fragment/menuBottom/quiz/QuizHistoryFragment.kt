@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -72,7 +73,6 @@ class QuizHistoryFragment :
                     layoutManager = LinearLayoutManager(activity)
                     recyclerView.layoutManager = layoutManager
                 } else {
-                    //                Toast.makeText(activity, "Quiz Result Did Not Exist", Toast.LENGTH_SHORT).show()
                     binding.historyDetail.timeDetail.text = getString(R.string.none)
                     binding.historyDetail.detail.visibility = View.GONE
                 }
@@ -82,9 +82,10 @@ class QuizHistoryFragment :
         historyViewModel.getResult().observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.historyDetail.detail.visibility = View.VISIBLE
+                binding.historyDetail.historyDetailScrollView.fullScroll(ScrollView.FOCUS_UP)
                 val result = it.quizResults
                 binding.historyDetail.timeDetail.text =
-                    DateStringConverter().parseDateToStr("dd-mm-yyyy hh:mm:ss", it.timeEntry.time)
+                    DateStringConverter().parseDateToStr("dd-MM-yyyy hh:mm:ss", it.timeEntry.time)
 
                 var count = 1
                 for (i in result) {
