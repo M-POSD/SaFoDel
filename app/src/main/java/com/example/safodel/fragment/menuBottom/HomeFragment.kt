@@ -103,7 +103,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         callWeatherService()
 
         suburbService = SuburbClient.getSuburbService()
-        test()
+//        test()
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root

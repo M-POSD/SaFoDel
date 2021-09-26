@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 class SuburbPathsLatLong {
     @SerializedName("lat")
-    var lat = 0f
+    var lat: Double = 0.0
 
     @SerializedName("long")
-    var lng = 0f
+    var lng: Double = 0.0
 }
