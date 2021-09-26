@@ -623,11 +623,11 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     fun getAlertPointString(point:Point)
     : String {
         val sb = StringBuilder()
-        sb.append('[')
+        sb.append('(')
         sb.append(point.longitude().toBigDecimal().setScale(3,RoundingMode.HALF_EVEN).toString())
         sb.append(", ")
         sb.append(point.latitude().toBigDecimal().setScale(3,RoundingMode.HALF_EVEN).toString())
-        sb.append(']')
+        sb.append(')')
         return sb.toString()
     }
 
