@@ -121,7 +121,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import java.math.RoundingMode
 import kotlin.Exception
+import kotlin.math.roundToLong
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
@@ -341,6 +343,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
+                removeAlertBubble()
                 setDialog()
                 spinnerTimes++ // calculate the times to test
                 if (spinnerTimes >= 1) {
@@ -561,9 +564,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 val pointHere = Point.fromLngLat(it.longitude,it.latitude)
                 val pointFHere = mapboxMap.projection.toScreenLocation(it)
                 val featureAlert = mapboxMap.queryRenderedFeatures(pointFHere,"alert_layer")
-                if(featureAlert.isNotEmpty())
-                    handleClickAlert(pointHere,true)
-                else handleClickAlert(pointHere,false)
+
+                if(featureAlert.isNotEmpty()){
+                    val type = featureAlert[0].getStringProperty("type")
+                    handleClickAlert(type,pointHere,true)
+                }
+                else handleClickAlert("",pointHere,false)
                 false
             }
 
@@ -589,9 +595,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
-    fun handleClickAlert(point: Point,boolean: Boolean){
+    fun handleClickAlert(type:String,point: Point,boolean: Boolean){
         //markerViewManager.removeMarker(alertMarkerBubble)
-        if(alertClickTimes >0) markerViewManager.removeMarker(alertMarkerBubble)
+        removeAlertBubble()
 
         if(boolean){
             val alertBubble = LayoutInflater.from(mainActivity).inflate(
@@ -599,14 +605,38 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             alertBubble.setLayoutParams(FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
             var title = alertBubble.findViewById<TextView>(R.id.marker_alert_title)
             var snippet = alertBubble.findViewById<TextView>(R.id.marker_alert_snippet)
-            title.text = point.longitude().toString()
-            snippet.text = point.latitude().toString()
+            title.text = type
+            snippet.text = getAlertPointString(point)
             alertMarkerBubble = MarkerView(LatLng(point.latitude(),point.longitude()),alertBubble)
 
             markerViewManager.addMarker(alertMarkerBubble)
             alertClickTimes++
         }
+    }
 
+    fun removeAlertBubble(){
+        if(alertClickTimes >0) {
+            markerViewManager.removeMarker(alertMarkerBubble)
+            alertClickTimes--
+        }
+    }
+
+    fun getTypeString(type:String):String{
+        val sb = StringBuilder()
+        sb.append("type: ")
+        sb.append(type)
+        return sb.toString()
+    }
+
+    fun getAlertPointString(point:Point)
+    : String {
+        val sb = StringBuilder()
+        sb.append('(')
+        sb.append(point.longitude().toBigDecimal().setScale(3,RoundingMode.HALF_EVEN).toString())
+        sb.append(", ")
+        sb.append(point.latitude().toBigDecimal().setScale(3,RoundingMode.HALF_EVEN).toString())
+        sb.append(')')
+        return sb.toString()
     }
 
 
@@ -680,7 +710,8 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
-        markerViewManager?.onDestroy()
+        if(this::markerViewManager.isInitialized)
+            markerViewManager.onDestroy()
         mapView.onDestroy()
         mapboxNavigation.onDestroy()
         if (::mapboxNavigation.isInitialized) {
@@ -690,6 +721,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
         MapboxNavigationProvider.destroy()
         mainActivity.isBottomNavigationVisible(true)
+        alertClickTimes = 0
         _binding = null
     }
 
@@ -713,6 +745,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             UI part - Hide or Show the crash relative view.
     -- */
     fun changeToNav() {
+        removeAlertBubble()
         mapboxMap.getStyle {
             val bcLayer = it.getLayer("basic_circle_cayer")
             val scLayer = it.getLayer("shadow_circle_cayer")
@@ -1028,7 +1061,9 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         if (resultList?.isNotEmpty() == true) {
                             for (each in resultList) {
                                 val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
-                                alertsFeature.add(Feature.fromGeometry(eachPoint))
+                                val eachFeature = Feature.fromGeometry(eachPoint)
+                                eachFeature.addStringProperty("type",each.type.toString())
+                                alertsFeature.add(eachFeature)
                             }
                         }
                         //mapView.getMapAsync(fragmentNow)
@@ -1219,6 +1254,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
                 }
             }
+            removeAlertBubble()
             positiveButton(R.string.select)
         }
     }

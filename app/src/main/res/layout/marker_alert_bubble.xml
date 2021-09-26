@@ -19,7 +19,7 @@
             android:padding="8dp"
             tools:text="marker title"
             android:textStyle="bold"
-            android:textColor="@color/primary_green"
+            android:textColor="@color/gray2"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:padding="8dp"
             tools:text="marker snippet"
-            android:textColor="@color/primary_green"
+            android:textColor="@color/gray"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
