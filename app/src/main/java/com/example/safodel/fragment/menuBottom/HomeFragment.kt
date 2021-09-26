@@ -48,6 +48,9 @@ import kotlinx.coroutines.launch
 import kotlin.concurrent.schedule
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.safodel.model.SuburbPathsResponse
+import com.example.safodel.retrofit.SuburbClient
+import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.viewModel.WeatherViewModel
 import java.lang.Exception
 
@@ -58,6 +61,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private val CITY_NAME = "clayton,AU"
 
     private lateinit var weatherService: RetrofitInterface
+    private lateinit var suburbService: SuburbInterface
 
     // Basic value
     private lateinit var toast: Toast
@@ -97,6 +101,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         weatherService = RetrofitClient.getRetrofitService()
         callWeatherService()
+
+        suburbService = SuburbClient.getSuburbService()
+        test()
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
@@ -722,7 +729,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.backpack.setImageResource(R.drawable.driver_backpack_home)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
-               // homePageImage.groundForDriver.visibility = View.VISIBLE
+                // homePageImage.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
 //                setToolbarLightMode(toolbar)
                 setToolbarBasic(toolbar)
@@ -768,5 +775,38 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         return currentWeatherIcons
+    }
+
+    private fun test() {
+        val callAsync: Call<SuburbPathsResponse> = suburbService.pathsRepos(
+            "paths",
+            "melbourne"
+        )
+
+        callAsync.enqueue(object : Callback<SuburbPathsResponse?> {
+            override fun onResponse(
+                call: Call<SuburbPathsResponse?>?,
+                response: Response<SuburbPathsResponse?>
+            ) {
+                if (response.isSuccessful) {
+                    val geometries = response.body()!!.pathResults
+                    if (geometries.isNotEmpty()) {
+                        for (geometry in geometries) {
+                            var locations = geometry.geometries
+                            for (location in locations) {
+                                Log.d("testing...", "lat = ${location.lat}, long = ${location.lng}")
+                            }
+                        }
+                    }
+
+                } else {
+                    Log.d("Error ", "Response failed")
+                }
+            }
+
+            override fun onFailure(call: Call<SuburbPathsResponse?>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }
