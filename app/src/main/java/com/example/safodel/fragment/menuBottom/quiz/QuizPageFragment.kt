@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
@@ -168,7 +169,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                                     Pair("score", totalScore),
                                     Pair("numOfQuestions", mQuestions.size)
                                 )
-                                findNavController().navigate(R.id.examFinishFragment, arg, navAnimationLeftToRight())
+                                findNavController().navigate(R.id.quizResultFragment, arg, navAnimationLeftToRight())
                             }
 
                         }
@@ -308,6 +309,15 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
             message(text = info)
         }
     }
+
+//    override fun navAnimationLeftToRight(): NavOptions {
+//        super.navAnimationLeftToRight()
+//        return NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
+//            .setExitAnim(R.anim.slide_out_left)
+//            .setPopEnterAnim(R.anim.slide_in_left)
+//            .setPopExitAnim(R.anim.slide_out_right)
+//            .setPopUpTo(R.id.examFragment,true).build()
+//    }
 }
 
 /*

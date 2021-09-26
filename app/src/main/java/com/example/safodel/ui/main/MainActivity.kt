@@ -14,7 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomMenu: Menu
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var navHostFragment: NavHostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         drawer = binding.drawerLayout
         bottomMenu = binding.bottomNavigation.menu
         bottomNavigationView = binding.bottomNavigation
-        val navHostFragment =
+        navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
         configBottomNavigation() //method to set up bottom nav
@@ -88,17 +91,25 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // stop users to go back if they are in the following fragment,
         // giving the warning message at the same time
-        if (navController.currentDestination?.id == R.id.examPageFragment ||
-            navController.currentDestination?.id == R.id.examFinishFragment
+        if (navController.currentDestination?.id == R.id.quizPageFragment
         ) {
-            toastMain.cancel()
-            toastMain.setText("Not allow go back in the page")
-            toastMain.show()
+            MaterialDialog(this).show {
+                message(
+                    text = "${getString(R.string.check_leave)}" +
+                            "\n${getString(R.string.warning_msg)}"
+                )
+                positiveButton(R.string.no)
+                negativeButton(R.string.yes)
+                this.negativeButton {
+                    removeQuizPageFragment()
+                    super.onBackPressed()
+                }
+            }
             return
         }
 
         if (navController.currentDestination?.id == R.id.mapfragment ||
-            navController.currentDestination?.id == R.id.examFragment ||
+            navController.currentDestination?.id == R.id.quizFragment ||
             navController.currentDestination?.id == R.id.analysisFragment ||
             navController.currentDestination?.id == R.id.checklistFragment
         ) {
@@ -107,11 +118,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (navController.currentDestination?.id != R.id.homeFragment) {
+            removeQuizPageFragment()
             super.onBackPressed()
             return
         }
 
         if (doubleBackToExitPressedOnce) {
+            removeQuizPageFragment()
             super.onBackPressed()
             return
         }
@@ -122,25 +135,31 @@ class MainActivity : AppCompatActivity() {
         toastMain.show()
 
         // give user three seconds to leave without re-notification
-        Handler(Looper.getMainLooper()).postDelayed(Runnable {
-            doubleBackToExitPressedOnce = false
-        }, 3000)
+        Handler(Looper.getMainLooper()).postDelayed(
+            Runnable
+            {
+                doubleBackToExitPressedOnce = false
+            }, 3000
+        )
     }
 
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             val menuItem = it
             var isItemSelected = false
-            if (navController.currentDestination?.id == R.id.examPageFragment) {
+            if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
-                    message(text = "${getString(R.string.check_leave)}" +
-                            "\n${getString(R.string.warning_msg)}" )
+                    message(
+                        text = "${getString(R.string.check_leave)}" +
+                                "\n${getString(R.string.warning_msg)}"
+                    )
                     positiveButton(R.string.no)
                     negativeButton(R.string.yes)
                     this.negativeButton {
                         bottomNav(menuItem)
                         isItemSelected = true
                     }
+                    closeDrawer()
                 }
                 isItemSelected
             } else {
@@ -152,6 +171,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bottomNav(item: MenuItem) {
+        item.isChecked = true
         when (item.itemId) {
             R.id.navHome -> {
                 navController.popBackStack(
@@ -167,7 +187,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navExam -> {
                 if (navController.currentDestination?.id != R.id.navExam) {
-                    navController.navigate(R.id.examFragment)
+                    navController.navigate(R.id.quizFragment)
                 }
             }
             R.id.navAnalysis -> {
@@ -192,19 +212,24 @@ class MainActivity : AppCompatActivity() {
         binding.leftNavigation.setNavigationItemSelectedListener {
             val menuItem = it
             var isItemSelected = false
-            if (navController.currentDestination?.id == R.id.examPageFragment) {
+            if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
-                    message(text = "${getString(R.string.check_leave)}" +
-                            "\n${getString(R.string.warning_msg)}" )
+                    message(
+                        text = "${getString(R.string.check_leave)}" +
+                                "\n${getString(R.string.warning_msg)}"
+                    )
                     positiveButton(R.string.no)
                     negativeButton(R.string.yes)
                     this.negativeButton {
                         when (menuItem.itemId) {
                             R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+
                             R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
                         }
                         isItemSelected = true
+                        menuItem.isChecked = true
                     }
+                    closeDrawer()
                 }
 
                 isItemSelected
@@ -226,8 +251,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun removeQuizPageFragment() {
+        val fragmentLabel = navController.previousBackStackEntry?.destination?.label
+        if (fragmentLabel == "fragment_exam_page") {
+            navController.popBackStack(
+                R.id.quizPageFragment,
+                false
+            )
+        }
+    }
+
     fun openDrawer() {
         drawer.openDrawer(GravityCompat.START)
+    }
+
+    fun closeDrawer() {
+        drawer.closeDrawer(GravityCompat.START)
     }
 
     override fun getResources(): Resources {
@@ -351,12 +390,22 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.menu.getItem(index).isChecked = true
     }
 
-    fun setMapLearningMode(){
+    fun setMapLearningMode() {
         val sf = getPreferences(Context.MODE_PRIVATE)
         val editor = sf.edit()
-        editor.putBoolean("mapLeaningMode",true)
+        editor.putBoolean("mapLeaningMode", true)
         editor.apply()
     }
+
+    fun cleanLeftMenuIsChecked() {
+        val numOfItems = binding.leftNavigation.menu.size
+        var times = 0
+        while (times < numOfItems) {
+            binding.leftNavigation.menu.getItem(times).isChecked = false
+            times ++
+        }
+    }
+
 }
 
 
