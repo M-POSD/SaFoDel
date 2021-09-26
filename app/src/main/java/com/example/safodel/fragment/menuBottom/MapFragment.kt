@@ -343,6 +343,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
+                removeAlertBubble()
                 setDialog()
                 spinnerTimes++ // calculate the times to test
                 if (spinnerTimes >= 1) {
@@ -596,7 +597,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     fun handleClickAlert(type:String,point: Point,boolean: Boolean){
         //markerViewManager.removeMarker(alertMarkerBubble)
-        if(alertClickTimes >0) markerViewManager.removeMarker(alertMarkerBubble)
+        removeAlertBubble()
 
         if(boolean){
             val alertBubble = LayoutInflater.from(mainActivity).inflate(
@@ -610,6 +611,13 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             markerViewManager.addMarker(alertMarkerBubble)
             alertClickTimes++
+        }
+    }
+
+    fun removeAlertBubble(){
+        if(alertClickTimes >0) {
+            markerViewManager.removeMarker(alertMarkerBubble)
+            alertClickTimes--
         }
     }
 
@@ -713,6 +721,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
         MapboxNavigationProvider.destroy()
         mainActivity.isBottomNavigationVisible(true)
+        alertClickTimes = 0
         _binding = null
     }
 
@@ -736,6 +745,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             UI part - Hide or Show the crash relative view.
     -- */
     fun changeToNav() {
+        removeAlertBubble()
         mapboxMap.getStyle {
             val bcLayer = it.getLayer("basic_circle_cayer")
             val scLayer = it.getLayer("shadow_circle_cayer")
@@ -1244,6 +1254,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
                 }
             }
+            removeAlertBubble()
             positiveButton(R.string.select)
         }
     }
