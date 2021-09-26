@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.parseColor
+import android.graphics.PointF
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
 import com.example.safodel.R
@@ -130,6 +132,7 @@ private var feature: ArrayList<Feature> = ArrayList()
 private var alertsFeature: ArrayList<Feature> = ArrayList()
 private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
+private var alertClickTimes = 0
 private lateinit var toast: Toast
 private lateinit var fragmentNow : OnMapReadyCallback
 private lateinit var mapViewModel: MapAccidentViewModel
@@ -555,7 +558,12 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 //            it.addLayer(alertsWindowLayer)
 
             mapboxMap.addOnMapClickListener {
-                handleClickAlert(Point.fromLngLat(it.longitude,it.latitude))
+                val pointHere = Point.fromLngLat(it.longitude,it.latitude)
+                val pointFHere = mapboxMap.projection.toScreenLocation(it)
+                val featureAlert = mapboxMap.queryRenderedFeatures(pointFHere,"alert_layer")
+                if(featureAlert.isNotEmpty())
+                    handleClickAlert(pointHere,true)
+                else handleClickAlert(pointHere,false)
                 false
             }
 
@@ -581,18 +589,24 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
-    fun handleClickAlert(point: Point){
+    fun handleClickAlert(point: Point,boolean: Boolean){
         //markerViewManager.removeMarker(alertMarkerBubble)
-        val alertBubble = LayoutInflater.from(mainActivity).inflate(
-            R.layout.marker_alert_bubble, null)
-        alertBubble.setLayoutParams(FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
-        var title = alertBubble.findViewById<TextView>(R.id.marker_alert_title)
-        var snippet = alertBubble.findViewById<TextView>(R.id.marker_alert_snippet)
-        title.text = point.longitude().toString()
-        snippet.text = point.latitude().toString()
-        alertMarkerBubble = MarkerView(LatLng(point.latitude(),point.longitude()),alertBubble)
+        if(alertClickTimes >0) markerViewManager.removeMarker(alertMarkerBubble)
 
-        markerViewManager.addMarker(alertMarkerBubble)
+        if(boolean){
+            val alertBubble = LayoutInflater.from(mainActivity).inflate(
+                R.layout.marker_alert_bubble, null)
+            alertBubble.setLayoutParams(FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
+            var title = alertBubble.findViewById<TextView>(R.id.marker_alert_title)
+            var snippet = alertBubble.findViewById<TextView>(R.id.marker_alert_snippet)
+            title.text = point.longitude().toString()
+            snippet.text = point.latitude().toString()
+            alertMarkerBubble = MarkerView(LatLng(point.latitude(),point.longitude()),alertBubble)
+
+            markerViewManager.addMarker(alertMarkerBubble)
+            alertClickTimes++
+        }
+
     }
 
 
@@ -666,6 +680,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onDestroyView() {
         super.onDestroyView()
+        markerViewManager?.onDestroy()
         mapView.onDestroy()
         mapboxNavigation.onDestroy()
         if (::mapboxNavigation.isInitialized) {
