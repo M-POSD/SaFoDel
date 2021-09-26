@@ -2,11 +2,6 @@ package com.example.safodel.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.AnimationUtils
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.viewbinding.ViewBinding
@@ -169,7 +164,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      * build the navigation animation from left to right
      */
-    fun navAnimationLeftToRight(): NavOptions {
+    open fun navAnimationLeftToRight(): NavOptions {
         return NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
             .setExitAnim(R.anim.slide_out_left)
             .setPopEnterAnim(R.anim.slide_in_left)

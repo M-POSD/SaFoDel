@@ -78,7 +78,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
             5 -> {
                 setVisibility(viewHolder,5)
                 viewHolder.binding.heroFeatureInfo6.card.setOnClickListener{
-                    parentFragment.findNavController().navigate(R.id.examFragment)
+                    parentFragment.findNavController().navigate(R.id.quizFragment)
                     mainActivity.callOnNav(3)
                 }
             }
