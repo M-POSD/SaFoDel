@@ -26,20 +26,25 @@ class EpicStyle2Adapter(val context: Context, group2Data: MutableList<GroupCard2
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val data: GroupCard2Data = group2[position]
+
+        // set the default for all view visible
         viewHolder.binding.imageRight.linearLayout2.visibility = View.VISIBLE
         viewHolder.binding.pureText.linearLayout3.visibility = View.VISIBLE
         viewHolder.binding.imageRight.statistics.visibility = View.VISIBLE
 
         when(data.cardType) {
+
+            // 4 for for display pure notification only without any image
             4 -> {
                 viewHolder.binding.pureText.description.text = context.getString(data.description_id)
-                if (data.title_id != 0) {
-                    viewHolder.binding.pureText.description2.text = context.getString(data.title_id)
-                    viewHolder.binding.pureText.description2.visibility = View.VISIBLE
-                }
+//                if (data.title_id != 0) {
+//                    viewHolder.binding.pureText.description2.text = context.getString(data.title_id)
+//                    viewHolder.binding.pureText.description2.visibility = View.VISIBLE
+//                }
                 viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
             }
 
+            // 5 for the information contains links
             5 -> {
                 viewHolder.binding.imageRight.statistics.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
                 viewHolder.binding.imageRight.statistics.setOnClickListener {
@@ -57,8 +62,11 @@ class EpicStyle2Adapter(val context: Context, group2Data: MutableList<GroupCard2
                 viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
             }
 
+            // all other information display (contains an image)
             else -> {
                 viewHolder.binding.imageRight.title.text = context.getString(data.title_id)
+
+                // if statistics_id is invalid -> set view is gone
                 when {
                     data.statistics_id == 0 -> {
                         viewHolder.binding.imageRight.statistics.visibility = View.GONE

@@ -10,6 +10,7 @@ import com.example.safodel.entity.QuizResult
 import com.example.safodel.entity.TimeEntry
 import com.example.safodel.util.DateLongConverter
 
+// type converters for date and long switching when writing in and reading out from the database
 @Database(entities = [QuizResult::class, TimeEntry::class], version = 1, exportSchema = false)
 @TypeConverters(DateLongConverter::class)
 abstract class QuizDatabase : RoomDatabase() {

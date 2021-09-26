@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.databinding.FragmentQuizHistoryBinding
@@ -52,6 +51,11 @@ class QuizHistoryFragment :
         recyclerView = binding.recyclerView
 
 
+        /*
+            Observing all quiz results store in the local database
+            Set these data to recycle view
+            If no data in the database, set the view gone
+         */
         activity?.let { fragmentActivity ->
             timeEntryWithQuizResultViewModel.allQuizResults.observe(fragmentActivity, Observer {
                 if (!it.isNullOrEmpty()) {
@@ -79,6 +83,7 @@ class QuizHistoryFragment :
             })
         }
 
+        // history view model for observing the one user selected
         historyViewModel.getResult().observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.historyDetail.detail.visibility = View.VISIBLE
@@ -114,6 +119,9 @@ class QuizHistoryFragment :
         _binding = null
     }
 
+    /**
+     * display the all details for the specific quiz result
+     */
     private fun configQuizResultView(num: Int, quizResult: QuizResult) {
         val question = getString(R.string.question)
         val questionHeading = getString(quizResult.question_heading)

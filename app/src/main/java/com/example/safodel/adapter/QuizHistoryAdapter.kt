@@ -40,6 +40,7 @@ class QuizHistoryAdapter(results: MutableList<TimeEntryWithQuizResult>, context:
             HistoryDetailViewModel::class.java
         )
 
+        // set the live data for the quiz result history user selected
         viewHolder.binding.ivDetailButton.setOnClickListener {
             model.setResult(record)
             notifyDataSetChanged()

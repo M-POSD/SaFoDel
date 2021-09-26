@@ -25,15 +25,20 @@ class EpicStyle1Adapter(val context: Context, group1Data: MutableList<GroupCard1
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val data: GroupCard1Data = group1[position]
+
+        // set the default for all view visible
         viewHolder.binding.imageRight.linearLayout2.visibility = View.VISIBLE
         viewHolder.binding.pureText.linearLayout3.visibility = View.VISIBLE
 
         when(data.cardType) {
+
+            // 0 for display pure notification only without any image
             0 -> {
                 viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
                 viewHolder.binding.pureText.description.text = context.getString(data.description_id)
             }
 
+            // -1 for the information contains links
             -1 -> {
                 viewHolder.binding.imageRight.description.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
                 viewHolder.binding.imageRight.description.setOnClickListener {
@@ -46,6 +51,7 @@ class EpicStyle1Adapter(val context: Context, group1Data: MutableList<GroupCard1
                 viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
             }
 
+            // all other information display (contains an image)
             else -> {
                 viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
                 viewHolder.binding.imageRight.description.text = context.getString(data.description_id)

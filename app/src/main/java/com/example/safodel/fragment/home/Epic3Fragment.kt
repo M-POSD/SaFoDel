@@ -22,7 +22,7 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
     ): View {
         _binding = FragmentEpic3Binding.inflate(inflater, container, false)
 
-        configSection1()
+        configRoadSignView()
 
         val toolbar = binding.toolbar.root
         setToolbarReturn(toolbar)
@@ -34,13 +34,21 @@ class Epic3Fragment : BasicFragment<FragmentEpic3Binding>(FragmentEpic3Binding::
         _binding = null
     }
 
-    private fun configSection1() {
-        adapter1 = EpicStyle3Adapter(requireActivity(), getSection1Data())
+    /**
+     * 1. set the view for road sign
+     * 2. config the view with recycle view adapter
+     * 3. connect the indicator view with view pager2
+     */
+    private fun configRoadSignView() {
+        adapter1 = EpicStyle3Adapter(requireActivity(), getRoadSignData())
         binding.viewPager2Section1.adapter = adapter1
         binding.wormDotsIndicatorSection1.setViewPager2(binding.viewPager2Section1)
     }
 
-    private fun getSection1Data(): MutableList<GroupCard2Data> {
+    /**
+     *  get road sign data
+     */
+    private fun getRoadSignData(): MutableList<GroupCard2Data> {
         val data = GroupCard2Data.init()
         var i = 0
         while (i < data.size) {

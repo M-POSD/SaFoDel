@@ -20,6 +20,8 @@ class DeveloperFragment : BasicFragment<FragmentDeveloperBinding>(FragmentDevelo
         _binding = FragmentDeveloperBinding.inflate(inflater,container,false)
 
         binding.knowMore.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
+
+        // connect to TA27 Mahara page
         binding.knowMore.setOnClickListener {
             val url = "https://bit.ly/ta27-safodel"
             val internetAct = Intent(Intent.ACTION_VIEW)

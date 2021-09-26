@@ -109,24 +109,6 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     }
 
     /**
-     * Press the cancelled navigation icon to go back to previous page
-     */
-    fun setToolbarCancel(toolbar: androidx.appcompat.widget.Toolbar) {
-        val mainActivity = activity as MainActivity
-        toolbar.inflateMenu(R.menu.nav_menu_left)
-        toolbar.menu.clear() // delete 3 dots in the right of toolbar
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_cancel)
-        toolbar.setNavigationOnClickListener {
-            mainActivity.onBackPressed()
-        }
-        mainActivity.lockSwipeDrawer()
-        if (findNavController().currentDestination?.id != R.id.developerFragment &&
-            findNavController().currentDestination?.id != R.id.appIntroFragment) {
-            mainActivity.cleanLeftMenuIsChecked()
-        }
-    }
-
-    /**
      *  Contain basic nav and light mode two more actions icon
      */
     fun setToolbarLightMode(toolbar: androidx.appcompat.widget.Toolbar) {

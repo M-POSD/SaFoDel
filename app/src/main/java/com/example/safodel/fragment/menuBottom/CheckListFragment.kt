@@ -24,7 +24,6 @@ class CheckListFragment :
     private lateinit var checklist: DetailCardChecklistBinding
     private lateinit var model: CheckListViewModel
     private lateinit var mainActivity: MainActivity
-
     private lateinit var helmetImageView: ImageView
     private lateinit var maskImageView: ImageView
     private lateinit var glovesImageView: ImageView
@@ -48,20 +47,13 @@ class CheckListFragment :
         setToolbarBasic(toolbar)
 
         configNotificationView()
-
-        // set up the checkbox on the checkbox list has been clicked by users or not
         configCheckboxClicked()
-
-        // set up the default text and image view
-        configDefaultView()
-
-        // set up when the check box is clicked, the record will be recorded in share preference
+        configDefaultTextView()
+        configImageView()
         configCheckboxClickListener()
 
-        // set up image view
-        configImageView()
 
-
+        // observe the livedata for the list of items user is selected or not
         model.getCheck().observe(viewLifecycleOwner, { t ->
             if (t == true) {
                 binding.checklistNotificationIcon.setImageResource(R.drawable.well_down)
@@ -86,6 +78,9 @@ class CheckListFragment :
         _binding = null
     }
 
+    /**
+     * set images is visible when the user tick the relevant check box
+     */
     private fun configImageView() {
         helmetImageView = binding.checklist.clHelmet
         maskImageView = binding.checklist.clMask
@@ -95,51 +90,32 @@ class CheckListFragment :
         vestImageView = binding.checklist.clVest
         backpackImageView = binding.checklist.clBackpack
 
-        if(checklist.helmetCheckbox1.checkbox.isChecked) {
-            helmetImageView.alpha = 1f
-        }
-        if(checklist.maskCheckbox2.checkbox.isChecked) {
-            maskImageView.alpha = 1f
-        }
-        if(checklist.glovesCheckbox3.checkbox.isChecked) {
-            glovesImageView.alpha = 1f
-        }
-        if(checklist.lightCheckbox4.checkbox.isChecked) {
-            lightImageView.alpha = 1f
-        }
-        if(checklist.sanitizerCheckbox5.checkbox.isChecked) {
-            sanitizerImageView.alpha = 1f
-        }
-        if(checklist.helmetCheckbox1.checkbox.isChecked) {
-            helmetImageView.alpha = 1f
-        }
-        if(checklist.vestCheckbox6.checkbox.isChecked) {
-            vestImageView.alpha = 1f
-        }
-
-        if(checklist.backpackCheckbox7.checkbox.isChecked) {
-            backpackImageView.alpha = 1f
-        }
+        if(checklist.helmetCheckbox1.checkbox.isChecked) { helmetImageView.alpha = 1f }
+        if(checklist.maskCheckbox2.checkbox.isChecked) { maskImageView.alpha = 1f }
+        if(checklist.glovesCheckbox3.checkbox.isChecked) { glovesImageView.alpha = 1f }
+        if(checklist.lightCheckbox4.checkbox.isChecked) { lightImageView.alpha = 1f }
+        if(checklist.sanitizerCheckbox5.checkbox.isChecked) { sanitizerImageView.alpha = 1f }
+        if(checklist.helmetCheckbox1.checkbox.isChecked) { helmetImageView.alpha = 1f }
+        if(checklist.vestCheckbox6.checkbox.isChecked) { vestImageView.alpha = 1f }
+        if(checklist.backpackCheckbox7.checkbox.isChecked) { backpackImageView.alpha = 1f }
     }
 
-    // made up the check list to display
-    private fun configDefaultView() {
-        checklist.helmetCheckbox1.checkbox.text =
-            getString(R.string.helmet_checkbox_1)
-        checklist.maskCheckbox2.checkbox.text =
-            getString(R.string.mask_checkbox_2)
-        checklist.glovesCheckbox3.checkbox.text =
-            getString(R.string.gloves_checkbox_3)
-        checklist.lightCheckbox4.checkbox.text =
-            getString(R.string.light_checkbox_4)
-        checklist.sanitizerCheckbox5.checkbox.text =
-            getString(R.string.sanitizer_checkbox_5)
-        checklist.vestCheckbox6.checkbox.text =
-            getString(R.string.vest_checkbox_6)
-        checklist.backpackCheckbox7.checkbox.text =
-            getString(R.string.backpack_checkbox_7)
+    /**
+     * set the default text view
+     */
+    private fun configDefaultTextView() {
+        checklist.helmetCheckbox1.checkbox.text = getString(R.string.helmet_checkbox_1)
+        checklist.maskCheckbox2.checkbox.text = getString(R.string.mask_checkbox_2)
+        checklist.glovesCheckbox3.checkbox.text = getString(R.string.gloves_checkbox_3)
+        checklist.lightCheckbox4.checkbox.text = getString(R.string.light_checkbox_4)
+        checklist.sanitizerCheckbox5.checkbox.text = getString(R.string.sanitizer_checkbox_5)
+        checklist.vestCheckbox6.checkbox.text = getString(R.string.vest_checkbox_6)
+        checklist.backpackCheckbox7.checkbox.text = getString(R.string.backpack_checkbox_7)
     }
 
+    /**
+     * set the notification view (the area below the checklist image)
+     */
     private fun configNotificationView() {
         if (mainActivity.getCheckboxSharePrefer(1) && mainActivity.getCheckboxSharePrefer(2)
             && mainActivity.getCheckboxSharePrefer(3) && mainActivity.getCheckboxSharePrefer(4)
@@ -153,7 +129,9 @@ class CheckListFragment :
 
     }
 
-    // set the checkbox was clicked by user or not
+    /**
+     * set up the checkbox on the checkbox list has been clicked by users or not
+     */
     private fun configCheckboxClicked() {
         checklist.helmetCheckbox1.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(1)
         checklist.maskCheckbox2.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(2)
@@ -164,7 +142,9 @@ class CheckListFragment :
         checklist.backpackCheckbox7.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(7)
     }
 
-    // record if the user tick the check box
+    /**
+     * set up when the check box is clicked, the record will be recorded in share preference
+     */
     private fun configCheckboxClickListener() {
         checklist.helmetCheckbox1.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -239,6 +219,9 @@ class CheckListFragment :
         })
     }
 
+    /**
+     * set the image animation from transparent to visible
+     */
     private fun imageAnimation(imageView: ImageView) {
         var objectAnimator: ObjectAnimator =
             ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f).setDuration(500)

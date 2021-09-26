@@ -2,6 +2,9 @@ package com.example.safodel.model
 
 import com.example.safodel.R
 
+/**
+ * for the static info contains title, statics(might empty), description and image
+ */
 class   GroupCard2Data(
     var dataType: String,
     var title_id: Int,

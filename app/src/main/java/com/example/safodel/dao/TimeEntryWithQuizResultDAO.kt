@@ -1,6 +1,5 @@
 package com.example.safodel.dao
 
-import android.util.Log
 import androidx.room.*
 import com.example.safodel.entity.QuizResult
 import com.example.safodel.entity.TimeEntry
@@ -33,12 +32,6 @@ interface TimeEntryWithQuizResultDAO {
     @Query("DELETE FROM time_entry")
     suspend fun deleteAllTimeEntry()
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun addQuizResults(quizResult: QuizResult)
-//
-//    @Insert
-//    suspend fun deleteQuizResult(quizResults: QuizResult)
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addQuizResults(quizResults: List<QuizResult>)
 
@@ -49,14 +42,8 @@ interface TimeEntryWithQuizResultDAO {
     @Insert
     suspend fun addTimeEntryWithQuizResults(timeEntry: TimeEntry, quizResults: List<QuizResult>) {
         val id = addTimeEntry(timeEntry)
-        Log.d("addTimeEntryWithQuizResults", quizResults.size.toString())
         quizResults.forEach { it.timeEntryId = id.toInt() }
-        Log.d("testing", quizResults.toString() )
         addQuizResults(quizResults)
-
-        Log.d("testing", addQuizResults(quizResults).toString() )
-
-
     }
 
     @Transaction

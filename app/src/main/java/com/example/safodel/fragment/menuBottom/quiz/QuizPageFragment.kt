@@ -66,6 +66,9 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         _binding = null
     }
 
+    /**
+     * set questions to the view
+     */
     private fun setQuestions() {
         // default image view
         binding.image.visibility = View.GONE
@@ -76,7 +79,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         val question = mQuestions!![mCurrentPosition - 1]
 
         // set info view isGone
-        infoView(0, question)
+        infoView(0)
 
 
         binding.progressBar.progress = mCurrentPosition
@@ -94,6 +97,9 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 
     }
 
+    /**
+     * setup the default option view in each question
+     */
     private fun configDefaultOptionsView() {
         val options = ArrayList<TextView>()
         val question = mQuestions!![mCurrentPosition - 1]
@@ -102,6 +108,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         options.add(1, binding.opt2.option)
         binding.opt2.option.text = getString(question.option2)
 
+        // if the question does not have the third option, view gone
         if (question.option3 == 0) {
             binding.opt3.option.visibility = View.GONE
         } else {
@@ -110,6 +117,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
             binding.opt3.option.visibility = View.VISIBLE
         }
 
+        // if the question does not have the fourth option, view gone
         if (question.option4 == 0) {
             binding.opt4.option.visibility = View.GONE
         } else {
@@ -118,6 +126,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
             binding.opt4.option.visibility = View.VISIBLE
         }
 
+        // set the default view for each option
         for (option in options) {
             option.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.default_option_icon,0)
             option.setTextColor(ContextCompat.getColor(requireActivity(), R.color.bottom_nav_gray))
@@ -131,6 +140,9 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         }
     }
 
+    /**
+     * config all OnClickListener this fragment
+     */
     private fun configOnClickListener() {
         binding.opt1.option.setOnClickListener(this)
         binding.opt2.option.setOnClickListener(this)
@@ -139,14 +151,24 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         binding.submitBtn.button.setOnClickListener(this)
     }
 
+    /**
+     * override the onClick listener
+     */
     override fun onClick(v: View?) {
         when (v) {
             binding.opt1.option -> selectedOptionView(binding.opt1.option, 1)
             binding.opt2.option -> selectedOptionView(binding.opt2.option, 2)
             binding.opt3.option -> selectedOptionView(binding.opt3.option, 3)
             binding.opt4.option -> selectedOptionView(binding.opt4.option, 4)
+
             binding.submitBtn.button -> {
+                /*
+                 the option have not been selected || need to go to the next page
+                 || need to go to other frag
+                 */
                 if (mSelectedOptionPosition == 0) {
+
+                    // no option has been selected, give a warning message
                     if (binding.submitBtn.button.text == "SUBMIT") {
                         toast.cancel()
                         toast.setText(getString(R.string.notify_select_option))
@@ -161,8 +183,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                             else -> {
                                 var timeEntry = TimeEntry(Calendar.getInstance().time)
 
-                                Log.d("num of results", results.size.toString())
-
+                                // store quiz results to database
                                 timeEntryWithQuizResultViewModel.addTimeEntryWithQuizResults(timeEntry, results)
 
                                 var arg = bundleOf(
@@ -174,7 +195,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
 
                         }
                     }
-                } else {
+                } else { // user has selected the option and just clicked the submit
                     val question = mQuestions?.get(mCurrentPosition - 1)
                     if (question!!.answer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg, R.color.wrong_border_color, R.drawable.error_icon)
@@ -184,7 +205,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                     }
 
                     answerView(question!!.answer, R.drawable.correct_option_border_bg, R.color.correct_border_color, R.drawable.success_icon)
-                    infoView(if (question!!.answer == mSelectedOptionPosition) 5 else 6, question)
+                    infoView(if (question!!.answer == mSelectedOptionPosition) 1 else 2)
 
                     if (mCurrentPosition == mQuestions!!.size) {
                         binding.submitBtn.button.text = getString(R.string.finish_button)
@@ -200,6 +221,9 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         }
     }
 
+    /**
+     * display answer view (correct or incorrect) with the border, background and icon received
+     */
     private fun answerView(answer: Int, drawableView: Int, color: Int,icon: Int) {
         when (answer) {
             1 -> {
@@ -229,41 +253,23 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         }
     }
 
-    private fun infoView(infoPosition: Int, question: Question) {
+    /**
+     * display the information of the question with different border
+     */
+    private fun infoView(infoPosition: Int) {
         when (infoPosition) {
             0 -> {
-                binding.opt1.info.visibility = View.GONE
-                binding.opt2.info.visibility = View.GONE
-                binding.opt3.info.visibility = View.GONE
-                binding.opt4.info.visibility = View.GONE
                 binding.questionInfo.visibility = View.GONE
-
-            }
-            1 -> {
-                binding.opt1.info.text = getString(question.information)
-                binding.opt1.info.visibility = View.VISIBLE
-            }
-            2 -> {
-                binding.opt2.info.text = getString(question.information)
-                binding.opt2.info.visibility = View.VISIBLE
-            }
-            3 -> {
-                binding.opt3.info.text = getString(question.information)
-                binding.opt3.info.visibility = View.VISIBLE
-            }
-            4 -> {
-                binding.opt4.info.text = getString(question.information)
-                binding.opt4.info.visibility = View.VISIBLE
             }
             // correct answer info
-            5 -> {
+            1 -> {
                 binding.questionInfo.background =
                     ContextCompat.getDrawable(requireActivity(), R.drawable.correct_info_border_bg)
                 binding.questionInfo.visibility = View.VISIBLE
                 totalScore++
             }
             // wrong answer info
-            6 -> {
+            2 -> {
                 binding.questionInfo.background =
                     ContextCompat.getDrawable(requireActivity(), R.drawable.wrong_info_border_bg)
                 binding.questionInfo.visibility = View.VISIBLE
@@ -272,6 +278,9 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         }
     }
 
+    /**
+     * set the selected option view in different style
+     */
     private fun selectedOptionView(textView: TextView, selectedOption: Int) {
         configDefaultOptionsView()
         mSelectedOptionPosition = selectedOption
@@ -294,30 +303,15 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         )
     }
 
-    // set all options isClickable
+    /**
+     * set all options isClickable
+     */
     private fun setOptionClickable(isClickable: Boolean) {
         binding.opt1.option.isClickable = isClickable
         binding.opt2.option.isClickable = isClickable
         binding.opt3.option.isClickable = isClickable
         binding.opt4.option.isClickable = isClickable
-
     }
-
-    private fun configDialog(type: String, info: String) {
-        MaterialDialog(requireContext()).show {
-            title(text = type)
-            message(text = info)
-        }
-    }
-
-//    override fun navAnimationLeftToRight(): NavOptions {
-//        super.navAnimationLeftToRight()
-//        return NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
-//            .setExitAnim(R.anim.slide_out_left)
-//            .setPopEnterAnim(R.anim.slide_in_left)
-//            .setPopExitAnim(R.anim.slide_out_right)
-//            .setPopUpTo(R.id.examFragment,true).build()
-//    }
 }
 
 /*
