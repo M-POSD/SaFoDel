@@ -543,20 +543,31 @@ public final class TrafficPlugin {
     }
 
     private static class TrafficColor {
-        static final int BASE_GREEN = Color.parseColor("#39c66d");
-        static final int CASE_GREEN = Color.parseColor("#059441");
-        static final int BASE_YELLOW = Color.parseColor("#ff8c1a");
-        static final int CASE_YELLOW = Color.parseColor("#d66b00");
-        static final int BASE_ORANGE = Color.parseColor("#ff0015");
-        static final int CASE_ORANGE = Color.parseColor("#bd0010");
-        static final int BASE_RED = Color.parseColor("#981b25");
-        static final int CASE_RED = Color.parseColor("#5f1117");
+//        static final int BASE_GREEN = Color.parseColor("#39c66d");
+//        static final int CASE_GREEN = Color.parseColor("#059441");
+//        static final int BASE_YELLOW = Color.parseColor("#ff8c1a");
+//        static final int CASE_YELLOW = Color.parseColor("#d66b00");
+//        static final int BASE_ORANGE = Color.parseColor("#ff0015");
+//        static final int CASE_ORANGE = Color.parseColor("#bd0010");
+//        static final int BASE_RED = Color.parseColor("#981b25");
+//        static final int CASE_RED = Color.parseColor("#5f1117");
 //        static final int BASE_YELLOW = Color.parseColor("#39c66d");
 //        static final int CASE_YELLOW = Color.parseColor("#059441");
 //        static final int BASE_ORANGE = Color.parseColor("#39c66d");
 //        static final int CASE_ORANGE = Color.parseColor("#059441");
 //        static final int BASE_RED = Color.parseColor("#39c66d");
 //        static final int CASE_RED = Color.parseColor("#059441");
+
+
+        // Gray
+        static final int BASE_GREEN = Color.parseColor("#BDBDBD");
+        static final int CASE_GREEN = Color.parseColor("#BDBDBD");
+        static final int BASE_YELLOW = Color.parseColor("#757575");
+        static final int CASE_YELLOW = Color.parseColor("#757575");
+        static final int BASE_ORANGE = Color.parseColor("#616161");
+        static final int CASE_ORANGE = Color.parseColor("#616161");
+        static final int BASE_RED = Color.parseColor("#212121");
+        static final int CASE_RED = Color.parseColor("#212121");
     }
 
     private static class StyleLoadHandler implements MapView.OnDidFinishLoadingStyleListener {
