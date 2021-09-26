@@ -322,7 +322,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         diaglogFilter = MaterialDialog(mainActivity)
         spotlightRoot = FrameLayout(requireContext())
-        setToolbarGray(toolbar)
+        setToolbarBasic(toolbar)
         setfilterListener()
 
 
@@ -751,7 +751,7 @@ class MapFragment: BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     dialog2.show {
                         message(text = getString(R.string.ask_leave))
                         positiveButton(R.string.yes) {
-                            setToolbarGray(toolbar)
+                            setToolbarBasic(toolbar)
                             mainActivity.isBottomNavigationVisible(true)
                             mapView2.visibility = View.INVISIBLE
                             binding.floatButtonStop.visibility = View.INVISIBLE

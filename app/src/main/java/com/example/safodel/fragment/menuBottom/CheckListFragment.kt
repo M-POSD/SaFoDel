@@ -45,7 +45,7 @@ class CheckListFragment :
         checklist = binding.checklist
         model = ViewModelProvider(requireActivity()).get(CheckListViewModel::class.java)
 
-        setToolbarReturn(toolbar)
+        setToolbarBasic(toolbar)
 
         configNotificationView()
 

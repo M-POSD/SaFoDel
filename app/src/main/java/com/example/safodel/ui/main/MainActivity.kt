@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -134,10 +135,11 @@ class MainActivity : AppCompatActivity() {
         toastMain.show()
 
         // give user three seconds to leave without re-notification
-        Handler(Looper.getMainLooper()).postDelayed(Runnable
-        {
-            doubleBackToExitPressedOnce = false
-        }, 3000
+        Handler(Looper.getMainLooper()).postDelayed(
+            Runnable
+            {
+                doubleBackToExitPressedOnce = false
+            }, 3000
         )
     }
 
@@ -157,6 +159,7 @@ class MainActivity : AppCompatActivity() {
                         bottomNav(menuItem)
                         isItemSelected = true
                     }
+                    closeDrawer()
                 }
                 isItemSelected
             } else {
@@ -168,6 +171,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bottomNav(item: MenuItem) {
+        item.isChecked = true
         when (item.itemId) {
             R.id.navHome -> {
                 navController.popBackStack(
@@ -219,10 +223,13 @@ class MainActivity : AppCompatActivity() {
                     this.negativeButton {
                         when (menuItem.itemId) {
                             R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+
                             R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
                         }
                         isItemSelected = true
+                        menuItem.isChecked = true
                     }
+                    closeDrawer()
                 }
 
                 isItemSelected
@@ -256,6 +263,10 @@ class MainActivity : AppCompatActivity() {
 
     fun openDrawer() {
         drawer.openDrawer(GravityCompat.START)
+    }
+
+    fun closeDrawer() {
+        drawer.closeDrawer(GravityCompat.START)
     }
 
     override fun getResources(): Resources {
@@ -385,6 +396,16 @@ class MainActivity : AppCompatActivity() {
         editor.putBoolean("mapLeaningMode", true)
         editor.apply()
     }
+
+    fun cleanLeftMenuIsChecked() {
+        val numOfItems = binding.leftNavigation.menu.size
+        var times = 0
+        while (times < numOfItems) {
+            binding.leftNavigation.menu.getItem(times).isChecked = false
+            times ++
+        }
+    }
+
 }
 
 

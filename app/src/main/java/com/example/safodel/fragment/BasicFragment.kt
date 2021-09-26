@@ -2,8 +2,10 @@ package com.example.safodel.fragment
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R
 import com.example.safodel.ui.main.MainActivity
@@ -43,10 +45,12 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
-//        toolbar.setNavigationIcon(R.drawable.menu_green)
-//        toolbar.setNavigationIcon(R.drawable.menu_green2)
         toolbar.setNavigationIcon(R.drawable.menu_gray)
         mainActivity.unlockSwipeDrawer()
+        if (findNavController().currentDestination?.id != R.id.developerFragment &&
+                findNavController().currentDestination?.id != R.id.appIntroFragment) {
+            mainActivity.cleanLeftMenuIsChecked()
+        }
     }
 
     /**
@@ -61,20 +65,10 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         }
         toolbar.setNavigationIcon(R.drawable.menu_white)
         mainActivity.unlockSwipeDrawer()
-    }
-
-    /**
-     *  Press the gray navigation icon to pop up the navigation window
-     */
-    fun setToolbarGray(toolbar: androidx.appcompat.widget.Toolbar) {
-        val mainActivity = activity as MainActivity
-        toolbar.inflateMenu(R.menu.nav_menu_left)
-        toolbar.menu.clear() // delete 3 dots in the right of toolbar
-        toolbar.setNavigationOnClickListener {
-            mainActivity.openDrawer()
+        if (findNavController().currentDestination?.id != R.id.developerFragment &&
+            findNavController().currentDestination?.id != R.id.appIntroFragment) {
+            mainActivity.cleanLeftMenuIsChecked()
         }
-        toolbar.setNavigationIcon(R.drawable.menu_gray)
-        mainActivity.unlockSwipeDrawer()
     }
 
     /**
@@ -89,6 +83,10 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.onBackPressed()
         }
         mainActivity.lockSwipeDrawer()
+        if (findNavController().currentDestination?.id != R.id.developerFragment &&
+            findNavController().currentDestination?.id != R.id.appIntroFragment) {
+            mainActivity.cleanLeftMenuIsChecked()
+        }
     }
 
     /**
@@ -104,6 +102,10 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.onBackPressed()
         }
         mainActivity.lockSwipeDrawer()
+        if (findNavController().currentDestination?.id != R.id.developerFragment &&
+            findNavController().currentDestination?.id != R.id.appIntroFragment) {
+            mainActivity.cleanLeftMenuIsChecked()
+        }
     }
 
     /**
@@ -118,6 +120,10 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             mainActivity.onBackPressed()
         }
         mainActivity.lockSwipeDrawer()
+        if (findNavController().currentDestination?.id != R.id.developerFragment &&
+            findNavController().currentDestination?.id != R.id.appIntroFragment) {
+            mainActivity.cleanLeftMenuIsChecked()
+        }
     }
 
     /**
@@ -133,6 +139,10 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationIcon(R.drawable.menu_gray)
         mainActivity.unlockSwipeDrawer()
         toolbar.inflateMenu(R.menu.nav_icon_menu_light_mode)
+        if (findNavController().currentDestination?.id != R.id.developerFragment &&
+            findNavController().currentDestination?.id != R.id.appIntroFragment) {
+            mainActivity.cleanLeftMenuIsChecked()
+        }
     }
 
     /**
@@ -148,6 +158,10 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationIcon(R.drawable.menu_white)
         mainActivity.unlockSwipeDrawer()
         toolbar.inflateMenu(R.menu.nav_icon_menu_dark_mode)
+        if (findNavController().currentDestination?.id != R.id.developerFragment &&
+            findNavController().currentDestination?.id != R.id.appIntroFragment) {
+            mainActivity.cleanLeftMenuIsChecked()
+        }
     }
 
 

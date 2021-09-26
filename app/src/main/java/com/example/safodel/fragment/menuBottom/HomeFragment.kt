@@ -725,7 +725,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                // homePageImage.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
 //                setToolbarLightMode(toolbar)
-                setToolbarGray(toolbar)
+                setToolbarBasic(toolbar)
             }
             "night" -> {
 //               val gd = GradientDrawable(
