@@ -497,6 +497,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             trafficPlugin.setVisibility(true)
 
 
+
             /*-- Add layer --*/
             var basicCircle: CircleLayer =
                 CircleLayer("basic_circle_cayer", "source").withProperties(
@@ -539,7 +540,14 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     lineOpacity(.7f),
                     lineCap(Property.LINE_CAP_SQUARE),
                     lineJoin(Property.LINE_JOIN_ROUND),
-                    lineWidth(3f),
+                    lineWidth(
+                        interpolate(
+                            exponential(6f), zoom(),
+                            stop(10,3f),
+                            stop(15,12f),
+                            stop(20,48f)
+                        )
+                    ),
                     lineColor(ContextCompat.getColor(requireActivity(), R.color.blueSky))
                 )
             )
