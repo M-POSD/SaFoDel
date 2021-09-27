@@ -189,9 +189,9 @@
     <string name="result_heading_1">再一次測驗</string>
     <string name="result_heading_2">查看規則</string>
     <string name="result_heading_3">完美的</string>
-    <string name="checklist_notification_unprepared">查看歷史</string>
-    <string name="checklist_notification_prepared">請確保您準備好清單上的所有內容</string>
-    <string name="about">棒極了！是時候開始你的送餐之旅了！</string>
+    <string name="checklist_notification_unprepared">請確保您準備好清單上的所有內容</string>
+    <string name="checklist_notification_prepared">棒極了！是時候開始你的送餐之旅了！</string>
+    <string name="about">關於</string>
     <string name="about_description">教育自行車送餐騎手</string>
     <string name="audience">觀眾</string>
     <string name="audience_description">潛在和現有的自行車送餐騎手</string>

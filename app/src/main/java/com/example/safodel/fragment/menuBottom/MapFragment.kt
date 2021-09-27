@@ -533,6 +533,16 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
             /*-- Add symbol layer --*/
+            it.addLayer(
+                LineLayer("multi_line_layer", "pathsSource").withProperties(
+                    lineOpacity(.7f),
+                    lineCap(Property.LINE_CAP_SQUARE),
+                    lineJoin(Property.LINE_JOIN_ROUND),
+                    lineWidth(3f),
+                    lineColor(ContextCompat.getColor(requireActivity(), R.color.blueSky))
+                )
+            )
+
             val symbolIconLayer = SymbolLayer("icon_layer", "source")
             symbolIconLayer.withProperties(
                 visibility(Property.VISIBLE),
@@ -572,15 +582,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 //            )
 //            it.addLayer(alertsWindowLayer)
 
-            it.addLayer(
-                LineLayer("multi_line_layer", "pathsSource").withProperties(
-                    lineDasharray(arrayOf(0.01f, 2f)),
-                    lineCap(Property.LINE_CAP_ROUND),
-                    lineJoin(Property.LINE_JOIN_ROUND),
-                    lineWidth(5f),
-                    lineColor(parseColor("#3333ff"))
-                )
-            )
 
 
             mapboxMap.addOnMapClickListener {
