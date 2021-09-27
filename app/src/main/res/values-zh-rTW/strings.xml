@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <resources>
     <string name="app_name"></string>
-    <string name="mapbox_access_token"></string>
-    <string name="password"></string>
-    <string name="app_id_weather_api"></string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiamF6MjAyMTA4MjciLCJhIjoiY2tzdTI5NWttMWJ5NzJua3R4Ynd5aG5sOSJ9.5zTN0BjRVD-NBfNe32sAaw</string>
+    <string name="password">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
+    <string name="app_id_weather_api">898ef19b846722554449f6068e7c7253</string>
     <string name="city_name"></string>
     <string name="start_learning_mode"></string>
     <string name="end_learning_mode">謝謝觀看</string>
