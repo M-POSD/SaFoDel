@@ -277,9 +277,10 @@
 
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
-    <string name="generic_information_description1">"Current Time: "</string>
-    <string name="generic_information_description2">"Current Weather: "</string>
-    <string name="generic_information_description3">"Current Traffic: Placeholder"</string>
+    <string name="current_time">"Time: "</string>
+    <string name="current_weather">"Weather: "</string>
+    <string name="current_traffic">Traffic:</string>
+    <string name="current_temperature">Temp:</string>
     <string name="checklist">Checklist</string>
 
     <!-- map -->
@@ -308,4 +309,5 @@
     <string name="filter_spotlight">This is the filter.</string>
     <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">SELECT LANGUAGE</string>
+    <string name="not_available">Not Available</string>
 </resources>

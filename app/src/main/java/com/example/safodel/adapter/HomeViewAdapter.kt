@@ -16,13 +16,13 @@ import java.util.*
 
 class HomeViewAdapter(val context: Context, private val parentFragment: Fragment):
     RecyclerView.Adapter<HomeViewAdapter.ViewHolder>() {
-    private lateinit var model: WeatherViewModel
+//    private lateinit var model: WeatherViewModel
     private lateinit var mainActivity: MainActivity
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: FragmentHeroFeatureBinding =
             FragmentHeroFeatureBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        model = ViewModelProvider(parentFragment.requireActivity()).get(WeatherViewModel::class.java)
+//        model = ViewModelProvider(parentFragment.requireActivity()).get(WeatherViewModel::class.java)
         mainActivity = parentFragment.activity as MainActivity
         return ViewHolder(binding)
     }
@@ -35,29 +35,29 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
                 setVisibility(viewHolder,0)
             }
 
-            // 1 -> display current weather, time, traffic info
-            1 -> {
-                setVisibility(viewHolder,1)
-                val calendar = Calendar.getInstance()
-                val hour = calendar.get(Calendar.HOUR_OF_DAY).toString()
-                var minute = calendar.get(Calendar.MINUTE).toString()
-                if(minute.length == 1) {
-                    minute = "0$minute"
-                }
-                viewHolder.binding.heroFeatureInfo2.genericInfoDescription1.text =
-                    context.getString(R.string.generic_information_description1) +
-                    "$hour : $minute"
-
-                // live data to change the weather in line with the one in home page
-                model.getWeather().observe(parentFragment.viewLifecycleOwner, { t ->
-                    viewHolder.binding.heroFeatureInfo2.genericInfoDescription2.text =
-                        context.getString(R.string.generic_information_description2) + t
-                })
-
-            }
+//            // 1 -> display current weather, time, traffic info
+//            1 -> {
+//                setVisibility(viewHolder,1)
+//                val calendar = Calendar.getInstance()
+//                val hour = calendar.get(Calendar.HOUR_OF_DAY).toString()
+//                var minute = calendar.get(Calendar.MINUTE).toString()
+//                if(minute.length == 1) {
+//                    minute = "0$minute"
+//                }
+//                viewHolder.binding.heroFeatureInfo2.genericInfoDescription1.text =
+//                    context.getString(R.string.current_time) +
+//                    "$hour : $minute"
+//
+//                // live data to change the weather in line with the one in home page
+//                model.getWeather().observe(parentFragment.viewLifecycleOwner, { t ->
+//                    viewHolder.binding.heroFeatureInfo2.genericInfoDescription2.text =
+//                        context.getString(R.string.current_weather) + t
+//                })
+//
+//            }
 
             // 2 -> map page info intro with navigation
-            2 -> {
+            1 -> {
                 setVisibility(viewHolder,2)
                 viewHolder.binding.heroFeatureInfo3.card.setOnClickListener{
                     parentFragment.findNavController().navigate(R.id.mapfragment)
@@ -66,7 +66,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
             }
 
             // 3 -> history trend page intro with navigation
-            3 -> {
+            2 -> {
                 setVisibility(viewHolder,3)
                 viewHolder.binding.heroFeatureInfo4.card.setOnClickListener{
                     parentFragment.findNavController().navigate(R.id.analysisFragment)
@@ -75,7 +75,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
             }
 
             // 4 -> checklist page intro with navigation
-            4 -> {
+            3 -> {
                 setVisibility(viewHolder,4)
                 viewHolder.binding.heroFeatureInfo5.card.setOnClickListener{
                     parentFragment.findNavController().navigate(R.id.checklistFragment)
@@ -84,7 +84,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
             }
 
             // 5 -> quiz page intro with navigation
-            5 -> {
+            4 -> {
                 setVisibility(viewHolder,5)
                 viewHolder.binding.heroFeatureInfo6.card.setOnClickListener{
                     parentFragment.findNavController().navigate(R.id.quizFragment)
@@ -94,7 +94,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
         }
     }
 
-    override fun getItemCount() = 6
+    override fun getItemCount() = 5
 
     /**
      * set view visible when the specific view is selected

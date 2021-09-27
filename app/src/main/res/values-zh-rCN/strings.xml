@@ -197,9 +197,9 @@
     <string name="audience_description">潜在和现有的自行车送餐骑手</string>
     <string name="know_more">了解更多</string>
     <string name="generic_information_heading">通知</string>
-    <string name="generic_information_description1">"&quot;当前时间：&quot; "</string>
-    <string name="generic_information_description2">&quot;当前天气： &quot;</string>
-    <string name="generic_information_description3">&quot;当前交通：占位符&quot;</string>
+    <string name="current_time">"&quot;当前时间：&quot; "</string>
+    <string name="current_weather">&quot;当前天气： &quot;</string>
+    <string name="current_traffic">&quot;当前交通：&quot;</string>
     <string name="checklist">清单</string>
     <string name="select">选择</string>
     <string name="traffic_status">交通状况</string>
@@ -241,4 +241,6 @@
     <string name="warning_msg">所有现在资料将会被移除</string>
     <string name="bike_lock_checkbox_8">自行车锁</string>
     <string name="language">语言</string>
+    <string name="current_temperature">当前温度：</string>
+    <string name="not_available">无法使用</string>
 </resources>

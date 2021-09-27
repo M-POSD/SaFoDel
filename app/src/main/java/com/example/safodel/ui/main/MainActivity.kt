@@ -336,7 +336,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // keep the record of the checkbox clicked
+    /**
+     * keep the record of the checkbox clicked
+     */
     fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
         val checkbox = "checkbox$checkbox_num"
         val sharedPref = this.applicationContext.getSharedPreferences(
@@ -348,7 +350,9 @@ class MainActivity : AppCompatActivity() {
         spEditor.apply()
     }
 
-    // get the previous checkbox clicked by the user
+    /**
+     * get the previous checkbox clicked by the user
+     */
     fun getCheckboxSharePrefer(checkbox_num: Int): Boolean {
         val checkbox = "checkbox$checkbox_num"
         val sharedPref = this.applicationContext.getSharedPreferences(
@@ -358,28 +362,10 @@ class MainActivity : AppCompatActivity() {
         return sharedPref.getBoolean(checkbox, false)
     }
 
-    // keep the record of the checkbox clicked
-    fun keepWeatherSharePrefer(currentWeather: String) {
-        val weather = "weather"
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            weather, Context.MODE_PRIVATE
-        )
 
-        val spEditor = sharedPref.edit()
-        spEditor.putString(weather, currentWeather)
-        spEditor.apply()
-    }
-
-    // get the previous checkbox clicked by the user
-    fun getWeatherSharePrefer(): String? {
-        val weather = "weather"
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            weather,
-            Context.MODE_PRIVATE
-        )
-        return sharedPref.getString(weather, "Placeholder")
-    }
-
+    /**
+     * change the clickList icon on the bottom menu based on whether user has ticked all checkbox on the checkList
+     */
     private fun configCheckListIcon() {
         if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
             && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
@@ -403,6 +389,9 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    /**
+     * clean the left menu item is selected before
+     */
     fun cleanLeftMenuIsChecked() {
         val numOfItems = binding.leftNavigation.menu.size
         var times = 0
@@ -412,6 +401,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * display the list of languages for user to select
+     * once option is selected the setLocale function will be called
+     */
     private fun switchLanguageList() {
         val listLanguages: Array<String> = arrayOf("English(AU)", "हिंदी", "中文(简体)", "中文(繁體)")
         val mBuilder = AlertDialog.Builder(this)
@@ -431,6 +424,11 @@ class MainActivity : AppCompatActivity() {
                     setLocale("zh_TW")
                 }
             }
+
+            if (navController.currentDestination?.id == R.id.quizPageFragment) {
+                navController.popBackStack()
+            }
+
             recreateActivity()
             dialog.dismiss()
         }
@@ -438,6 +436,9 @@ class MainActivity : AppCompatActivity() {
         mDialog.show()
     }
 
+    /**
+     * set the application language
+     */
     private fun setLocale(lang: String) {
         val locale = Locale(lang)
         Locale.setDefault(locale)
@@ -464,6 +465,9 @@ class MainActivity : AppCompatActivity() {
         keepLanguageToSharedPref(lang)
     }
 
+    /**
+     * keep the selected new language for app into sharedPreference
+     */
     private fun keepLanguageToSharedPref(lang: String) {
         val spEditor =
             this.applicationContext.getSharedPreferences("language", Activity.MODE_PRIVATE).edit()
@@ -471,6 +475,9 @@ class MainActivity : AppCompatActivity() {
         spEditor.apply()
     }
 
+    /**
+     * Recreate the activity
+     */
     private fun recreateActivity() {
         if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.HONEYCOMB) {
             super.recreate()
@@ -478,6 +485,45 @@ class MainActivity : AppCompatActivity() {
             finish()
             startActivity(intent)
         }
+    }
+
+    /**
+     * keep the record of the current weather
+     */
+    fun keepWeatherSharePrefer(currentWeather: String) {
+        val weather = "weather"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            weather, Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putString(weather, currentWeather)
+        spEditor.apply()
+    }
+
+    /**
+     * get the weather store in sharedPreference
+     */
+    fun getWeatherSharePrefer(): String? {
+        val weather = "weather"
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            weather,
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getString(weather, "Placeholder")
+    }
+
+    /**
+     * update the menu footer information
+     */
+    fun updateMenuFooterInfo(weather: String) {
+        when (weather) {
+            "Clear" -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear_black)
+            "Clouds" -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clouds_black)
+            "Rain" -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.rain_black)
+            else -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.error_icon)
+        }
+        binding.leftNavFooter.currentWeatherInfo.text = weather
     }
 }
 

@@ -176,8 +176,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun setViewPager2AutoIncrementPosition() {
         handler = Handler(Looper.getMainLooper())
         runnable = Runnable {
-            if (homepageButtonLayout.viewPager2Home.currentItem == 5) {
-                homepageButtonLayout.viewPager2Home.currentItem -= 5
+            if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
+                homepageButtonLayout.viewPager2Home.currentItem -= 4
             } else {
 //                Log.d(
 //                    "current position",
@@ -695,6 +695,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                             rainingAnimation()
                         }
                         Log.d("currentWeather", weather)
+                        mainActivity.keepWeatherSharePrefer(weather)
                         model.setWeather(weather)
                     }
                 } else {
