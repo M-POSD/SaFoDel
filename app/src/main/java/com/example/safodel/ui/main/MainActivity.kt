@@ -420,22 +420,18 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 0 -> {
                     setLocale("en_AU")
-                    recreateActivity()
                 }
                 1 -> {
                     setLocale("hi")
-                    recreateActivity()
-
                 }
                 2 -> {
                     setLocale("zh_CN")
-                    recreateActivity()
                 }
                 3 -> {
                     setLocale("zh_TW")
-                    recreateActivity()
                 }
             }
+            recreateActivity()
             dialog.dismiss()
         }
         val mDialog = mBuilder.create()
@@ -476,12 +472,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun recreateActivity() {
-        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.HONEYCOMB)
-        {
+        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.HONEYCOMB) {
             super.recreate()
-        }
-        else
-        {
+        } else {
             finish()
             startActivity(intent)
         }
