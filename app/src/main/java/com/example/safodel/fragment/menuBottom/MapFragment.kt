@@ -117,16 +117,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
 import java.math.RoundingMode
-import kotlin.Exception
-import kotlin.math.roundToLong
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
-
-import android.R.style
 import com.mapbox.geojson.*
-import com.mapbox.geojson.utils.PolylineUtils
-import org.w3c.dom.Text
 
 
 private val locationList: ArrayList<Point> = ArrayList()
@@ -167,6 +161,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var trafficPlugin: TrafficPlugin
     private lateinit var searchBar: FrameLayout
     private lateinit var buttonFilter: View
+    private lateinit var filterCards : View
     private lateinit var markerViewManager: MarkerViewManager
     private lateinit var alertMarkerBubble: MarkerView
     private lateinit var accidentMarkerBubble: MarkerView
@@ -317,6 +312,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
         buttonFilter = binding.floatButtonFilter
+        filterCards = binding.filterCards.root
         fragmentNow = this
         mapViewModel = MapAccidentViewModel()
 
@@ -394,6 +390,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
         fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState)
+        filterTrafficListener()
         //setDialog()
         //mapView.getMapAsync(this) // update the map
         return binding.root
@@ -623,6 +620,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             dialog.dismiss()
         }
 
+        filterTrafficListener()
+
     }
 
     fun handleClickAlert(type: String, point: Point, boolean: Boolean) {
@@ -817,6 +816,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
                     binding.spinner.visibility = View.INVISIBLE
+                    binding.filterCards.root.visibility = View.INVISIBLE
                     bcLayer.setProperties(visibility(Property.NONE))
                     scLayer?.setProperties(visibility(Property.NONE))
                     siLayer?.setProperties(visibility(Property.NONE))
@@ -850,6 +850,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             mapView.getMapAsync(fragmentNow)
                             binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
                             binding.spinner.visibility = View.VISIBLE
+                            binding.filterCards.root.visibility = View.VISIBLE
                             bcLayer.setProperties(visibility(Property.VISIBLE))
                             scLayer?.setProperties(visibility(Property.VISIBLE))
                             siLayer?.setProperties(visibility(Property.VISIBLE))
@@ -1287,12 +1288,16 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             // try to get the height of status bar and then margin top
             val searchBarMap1Height = searchBarMap1.layoutParams as CoordinatorLayout.LayoutParams
             val buttonFilterHeight = buttonFilter.layoutParams as CoordinatorLayout.LayoutParams
+            val filterCardsHeight = filterCards.layoutParams as CoordinatorLayout.LayoutParams
             while (searchBarMap1Height.topMargin == 0)
                 searchBarMap1Height.topMargin = mainActivity.getStatusHeight()
             while (buttonFilterHeight.topMargin == 0)
                 buttonFilterHeight.topMargin = mainActivity.getStatusHeight() + 10
+            while (filterCardsHeight.topMargin == 0)
+                filterCardsHeight.topMargin = buttonFilterHeight.topMargin + buttonFilter.measuredHeight
             searchBarMap1.layoutParams = searchBarMap1Height
             buttonFilter.layoutParams = buttonFilterHeight
+            filterCards.layoutParams = filterCardsHeight
             this.cancel()
         }
     }
@@ -1398,6 +1403,28 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
 
     }
+
+    fun filterTrafficListener(){
+        val filterTraffic =  binding.filterCards.filterTraffic
+        filterTraffic.setOnClickListener {
+            if(trafficPlugin.isVisible == false){
+                trafficPlugin.setVisibility(true)
+                filterTraffic.setTextColor(ContextCompat.getColor(mainActivity, R.color.black))
+            }
+
+            else {
+                trafficPlugin.setVisibility(false)
+                filterTraffic.setTextColor(ContextCompat.getColor(mainActivity, R.color.gray))
+            }
+        }
+    }
+
+//    fun updateTrafficStatus(){
+//        val filterTraffic =  binding.filterCards.filterTraffic
+//        val trafficStatus = when(filterTraffic.textColors){
+//            ContextCompat.getColor(mainActivity, R.color.gray) ->
+//        }
+//    }
 }
 
 

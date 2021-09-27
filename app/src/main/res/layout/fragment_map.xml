@@ -123,6 +123,10 @@
         android:contentDescription="desc"
         android:src="@drawable/outline_filter_alt_black_36" />
 
+    <include
+        layout="@layout/filter_cards"
+        android:id="@+id/filterCards"/>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/tripProgressCard"
         android:layout_width="match_parent"
