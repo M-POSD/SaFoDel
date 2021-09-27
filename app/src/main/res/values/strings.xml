@@ -7,7 +7,7 @@
     <string name="city_name" translatable="false">Caulfield,AU</string>
 
     <!--  toast  -->
-    <string name="start_learning_mode" translatable="false">Welcome to the SaFoDel learning mode</string>
+    <string name="start_learning_mode">Welcome to the SaFoDel learning mode</string>
     <string name="end_learning_mode">Thanks for watching</string>
     <string name="notify_select_option">Please select an option</string>
 
@@ -72,7 +72,7 @@
     <string name="first_target">Home button allows you to return home page directly</string>
     <string name="second_target">Map button allows you to see the historical accident locations in Victoria with details</string>
     <string name="third_target">ACCIDENT-TRENDS button allows to check the trends in historical accident in different suburbs</string>
-    <string name="fourth_target">QUIZ-YOURSELF button allows you to test your understanding of road rules while delivering food</string>
+    <string name="fourth_target">QUIZ-YOURSELF button allows you to test your understanding of road rules before delivering food</string>
     <string name="fifth_target">Ride-Safer button allows you to find out how to ride safely while delivering food</string>
     <string name="sixth_target">Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery</string>
     <string name="seventh_target">Safety-Gear button allows you to find out the cycling gear you need to deliver safe</string>
@@ -131,10 +131,10 @@
     <string name="gear_check_list_item4">Reflective vest</string>
     <string name="gear_check_list_item5">Gloves</string>
     <string name="gear_check_list_item6">Hand sanitiser</string>
-    <string name="gear_standard_bsi">BSI</string>
-    <string name="gear_standard_global_mark">Global-Mark</string>
-    <string name="gear_standard_sai_global">SAI Global</string>
-    <string name="gear_standard_aus">AUS</string>
+    <string name="gear_standard_bsi" translatable="false">BSI</string>
+    <string name="gear_standard_global_mark" translatable="false">Global-Mark</string>
+    <string name="gear_standard_sai_global" translatable="false">SAI Global</string>
+    <string name="gear_standard_aus" translatable="false">AUS</string>
 
     <!--  epic4  -->
     <string name="epic4_name">In an Accident</string>
@@ -304,6 +304,6 @@
     <string name="accident_times_for_different_hourly_periods_of_the_day">Accident times for different hourly periods of the day</string>
     <string name="accident_times">Accident Times</string>
     <string name="filter_spotlight">This is the filter.</string>
-    <string name="no_data">This suburb do not have any data.</string>
+    <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">Select Language</string>
 </resources>

@@ -13,6 +13,7 @@ import me.jessyan.autosize.AutoSizeConfig
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.LocaleList
 import android.util.Log
 import android.view.animation.*
 import androidx.appcompat.app.AlertDialog
@@ -21,7 +22,7 @@ import com.example.safodel.R
 import com.example.safodel.adapter.SafodelViewAdapter
 import java.util.*
 import android.util.DisplayMetrics
-
+import android.os.Build
 
 
 
@@ -33,10 +34,10 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.startButton.button.alpha = 0f
 
         configPrefLanguageFromSharedPref()
 
+        binding.startButton.button.alpha = 0f
         viewPage2 = binding.startViewPager2
         val adapter = SafodelViewAdapter(this)
         binding.startViewPager2.adapter = adapter
@@ -113,21 +114,30 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun switchLanguageList() {
-        val listLanguages: Array<String> = arrayOf("English(AU)", "中文(简体)", "हिंदी")
+        val listLanguages: Array<String> = arrayOf("English(AU)", "हिंदी", "中文(简体)", "中文(繁體)")
         val mBuilder = AlertDialog.Builder(this)
         mBuilder.setTitle(getString(R.string.select_language))
         mBuilder.setSingleChoiceItems(listLanguages, -1) { dialog, it ->
             when (it) {
                 0 -> {
-                    setLocate("en_rAU")
+                    setLocale("en_AU")
                     recreate()
                 }
                 1 -> {
-                    setLocate("zh_rCN")
+                    setLocale("hi")
                     recreate()
+
                 }
                 2 -> {
-                    setLocate("zh_rCN")
+                    setLocale("zh_CN")
+                    recreate()
+                }
+                3 -> {
+                    setLocale("zh_TW")
+                    recreate()
+                }
+                else -> {
+                    setLocale("en")
                     recreate()
                 }
             }
@@ -137,20 +147,28 @@ class StartActivity : AppCompatActivity() {
         mDialog.show()
     }
 
-    private fun setLocate(lang: String) {
-        val resources: Resources = resources
-        val dm: DisplayMetrics = resources.displayMetrics
-        val config: Configuration = resources.configuration
+    private fun setLocale(lang: String) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val resources: Resources = this.resources
+        val dm: DisplayMetrics = this.resources.displayMetrics
+        val config: Configuration = this.resources.configuration
 
         when (lang) {
-            "zh_rCN" -> {
-                config.locale = Locale.SIMPLIFIED_CHINESE
-            }
-            "en_rAU" -> {
+            "en_AU" -> {
                 config.locale = Locale.ENGLISH
             }
-            else -> {
+            "hi" -> {
+                config.locale = locale
+            }
+            "zh_CN" -> {
                 config.locale = Locale.SIMPLIFIED_CHINESE
+            }
+            "zh_TW" -> {
+                config.locale = Locale.TRADITIONAL_CHINESE
+            }
+            else -> {
+                config.locale = Locale.ENGLISH
             }
         }
 
@@ -170,7 +188,7 @@ class StartActivity : AppCompatActivity() {
             this.applicationContext.getSharedPreferences("language", Activity.MODE_PRIVATE)
         val language = mSharePreferences.getString("lang", "")
         if (language != null) {
-            setLocate(language)
+            setLocale(language)
         }
     }
 }
