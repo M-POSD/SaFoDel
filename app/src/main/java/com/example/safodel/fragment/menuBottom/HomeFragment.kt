@@ -42,9 +42,6 @@ import com.example.safodel.adapter.EpicStyle2Adapter
 import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import kotlin.concurrent.schedule
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -52,7 +49,9 @@ import com.example.safodel.model.SuburbPathsResponse
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.viewModel.WeatherViewModel
+import kotlinx.coroutines.*
 import java.lang.Exception
+import java.lang.Runnable
 
 
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -129,7 +128,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         configTheme("light")
         isBeginnerMode = false
 
-        GlobalScope.launch {
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        coroutineScope.launch {
             // try to get the height of status bar and then margin top
             val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
             while (toolbarHeight.topMargin == 0)

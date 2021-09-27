@@ -338,6 +338,7 @@ public final class TrafficPlugin {
             LineLayer lineLayer = new LineLayer(lineLayerId, TrafficData.SOURCE_ID);
             lineLayer.setSourceLayer(TrafficData.SOURCE_LAYER);
             lineLayer.setProperties(
+                    lineOpacity(0.1f),
                     lineCap(Property.LINE_CAP_ROUND),
                     lineJoin(Property.LINE_JOIN_ROUND),
                     lineColor(lineColorExpression),
@@ -471,7 +472,7 @@ public final class TrafficPlugin {
 
         static final Expression FUNCTION_LINE_OPACITY_CASE = interpolate(exponential(1.0f), zoom(),
                 stop(11, 0.0f),
-                stop(12, 1.0f)
+                stop(12, 0.2f)
         );
     }
 
@@ -507,7 +508,7 @@ public final class TrafficPlugin {
 
         static final Expression FUNCTION_LINE_OPACITY_CASE = interpolate(exponential(1.0f), zoom(),
                 stop(13, 0.0f),
-                stop(14, 1.0f)
+                stop(14, 0.2f)
         );
     }
 
@@ -538,19 +539,19 @@ public final class TrafficPlugin {
 
         static final Expression FUNCTION_LINE_OPACITY_CASE = interpolate(exponential(1.0f), zoom(),
                 stop(15, 0.0f),
-                stop(16, 1.0f)
+                stop(16, 0.2f)
         );
     }
 
     private static class TrafficColor {
-//        static final int BASE_GREEN = Color.parseColor("#39c66d");
-//        static final int CASE_GREEN = Color.parseColor("#059441");
-//        static final int BASE_YELLOW = Color.parseColor("#ff8c1a");
-//        static final int CASE_YELLOW = Color.parseColor("#d66b00");
-//        static final int BASE_ORANGE = Color.parseColor("#ff0015");
-//        static final int CASE_ORANGE = Color.parseColor("#bd0010");
-//        static final int BASE_RED = Color.parseColor("#981b25");
-//        static final int CASE_RED = Color.parseColor("#5f1117");
+        static final int BASE_GREEN = Color.parseColor("#39c66d");
+        static final int CASE_GREEN = Color.parseColor("#059441");
+        static final int BASE_YELLOW = Color.parseColor("#ff8c1a");
+        static final int CASE_YELLOW = Color.parseColor("#d66b00");
+        static final int BASE_ORANGE = Color.parseColor("#ff0015");
+        static final int CASE_ORANGE = Color.parseColor("#bd0010");
+        static final int BASE_RED = Color.parseColor("#981b25");
+        static final int CASE_RED = Color.parseColor("#5f1117");
 //        static final int BASE_YELLOW = Color.parseColor("#39c66d");
 //        static final int CASE_YELLOW = Color.parseColor("#059441");
 //        static final int BASE_ORANGE = Color.parseColor("#39c66d");
@@ -560,14 +561,14 @@ public final class TrafficPlugin {
 
 
         // Gray
-        static final int BASE_GREEN = Color.parseColor("#BDBDBD");
-        static final int CASE_GREEN = Color.parseColor("#BDBDBD");
-        static final int BASE_YELLOW = Color.parseColor("#757575");
-        static final int CASE_YELLOW = Color.parseColor("#757575");
-        static final int BASE_ORANGE = Color.parseColor("#616161");
-        static final int CASE_ORANGE = Color.parseColor("#616161");
-        static final int BASE_RED = Color.parseColor("#212121");
-        static final int CASE_RED = Color.parseColor("#212121");
+//        static final int BASE_GREEN = Color.parseColor("#BDBDBD");
+//        static final int CASE_GREEN = Color.parseColor("#BDBDBD");
+//        static final int BASE_YELLOW = Color.parseColor("#757575");
+//        static final int CASE_YELLOW = Color.parseColor("#757575");
+//        static final int BASE_ORANGE = Color.parseColor("#616161");
+//        static final int CASE_ORANGE = Color.parseColor("#616161");
+//        static final int BASE_RED = Color.parseColor("#212121");
+//        static final int CASE_RED = Color.parseColor("#212121");
     }
 
     private static class StyleLoadHandler implements MapView.OnDidFinishLoadingStyleListener {
