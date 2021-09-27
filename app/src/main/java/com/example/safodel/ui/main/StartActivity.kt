@@ -30,12 +30,13 @@ class StartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
     private lateinit var viewPage2: ViewPager2
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        configPrefLanguageFromSharedPref()
+
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        configPrefLanguageFromSharedPref()
 
         binding.startButton.button.alpha = 0f
         viewPage2 = binding.startViewPager2

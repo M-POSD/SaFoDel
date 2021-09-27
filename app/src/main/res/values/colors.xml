@@ -15,6 +15,7 @@
 <!--    <color name="black">#FF000000</color>-->
 
     <color name="primary_green">#8AD0AB</color>
+    <color name="primary_green_50">#808AD0AB</color>
     <color name="primary_green_10">#1A8AD0AB</color>
     <color name="yellow">#FCFF71</color>
     <color name="yellow_10">#1AFCFF71</color>
