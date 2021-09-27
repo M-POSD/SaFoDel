@@ -43,7 +43,7 @@
         <entry key="app/src/main/res/layout/checkbox_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/checkbox_layout2.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/detail_card_checklist.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/detail_card_checklist.xml" value="0.335" />
         <entry key="app/src/main/res/layout/detail_card_checklist2.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card_standard.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card_v0.xml" value="0.2930253623188406" />
@@ -83,7 +83,7 @@
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
-        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_quiz_history.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_quiz_history_date.xml" value="0.225" />
@@ -113,6 +113,7 @@
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/left_nav_footer.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/left_nav_header.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.23324275362318841" />
         <entry key="app/src/main/res/layout/medium_btn.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/medium_button.xml" value="0.1094224924012158" />
