@@ -31,6 +31,7 @@ class CheckListFragment :
     private lateinit var sanitizerImageView: ImageView
     private lateinit var vestImageView: ImageView
     private lateinit var backpackImageView: ImageView
+    private lateinit var bikeLockImageView: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,15 +90,35 @@ class CheckListFragment :
         sanitizerImageView = binding.checklist.clSanitizer
         vestImageView = binding.checklist.clVest
         backpackImageView = binding.checklist.clBackpack
+        bikeLockImageView = binding.checklist.clBikeLock
 
-        if(checklist.helmetCheckbox1.checkbox.isChecked) { helmetImageView.alpha = 1f }
-        if(checklist.maskCheckbox2.checkbox.isChecked) { maskImageView.alpha = 1f }
-        if(checklist.glovesCheckbox3.checkbox.isChecked) { glovesImageView.alpha = 1f }
-        if(checklist.lightCheckbox4.checkbox.isChecked) { lightImageView.alpha = 1f }
-        if(checklist.sanitizerCheckbox5.checkbox.isChecked) { sanitizerImageView.alpha = 1f }
-        if(checklist.helmetCheckbox1.checkbox.isChecked) { helmetImageView.alpha = 1f }
-        if(checklist.vestCheckbox6.checkbox.isChecked) { vestImageView.alpha = 1f }
-        if(checklist.backpackCheckbox7.checkbox.isChecked) { backpackImageView.alpha = 1f }
+        if (checklist.helmetCheckbox1.checkbox.isChecked) {
+            helmetImageView.alpha = 1f
+        }
+        if (checklist.maskCheckbox2.checkbox.isChecked) {
+            maskImageView.alpha = 1f
+        }
+        if (checklist.glovesCheckbox3.checkbox.isChecked) {
+            glovesImageView.alpha = 1f
+        }
+        if (checklist.lightCheckbox4.checkbox.isChecked) {
+            lightImageView.alpha = 1f
+        }
+        if (checklist.sanitizerCheckbox5.checkbox.isChecked) {
+            sanitizerImageView.alpha = 1f
+        }
+        if (checklist.helmetCheckbox1.checkbox.isChecked) {
+            helmetImageView.alpha = 1f
+        }
+        if (checklist.vestCheckbox6.checkbox.isChecked) {
+            vestImageView.alpha = 1f
+        }
+        if (checklist.backpackCheckbox7.checkbox.isChecked) {
+            backpackImageView.alpha = 1f
+        }
+        if (checklist.bikeLockCheckbox8.checkbox.isChecked) {
+            bikeLockImageView.alpha = 1f
+        }
     }
 
     /**
@@ -111,6 +132,7 @@ class CheckListFragment :
         checklist.sanitizerCheckbox5.checkbox.text = getString(R.string.sanitizer_checkbox_5)
         checklist.vestCheckbox6.checkbox.text = getString(R.string.vest_checkbox_6)
         checklist.backpackCheckbox7.checkbox.text = getString(R.string.backpack_checkbox_7)
+        checklist.bikeLockCheckbox8.checkbox.text = getString(R.string.bike_lock_checkbox_8)
     }
 
     /**
@@ -120,7 +142,7 @@ class CheckListFragment :
         if (mainActivity.getCheckboxSharePrefer(1) && mainActivity.getCheckboxSharePrefer(2)
             && mainActivity.getCheckboxSharePrefer(3) && mainActivity.getCheckboxSharePrefer(4)
             && mainActivity.getCheckboxSharePrefer(5) && mainActivity.getCheckboxSharePrefer(6)
-            && mainActivity.getCheckboxSharePrefer(7)
+            && mainActivity.getCheckboxSharePrefer(7) && mainActivity.getCheckboxSharePrefer(8)
         ) {
             model.setCheck(true)
         } else {
@@ -140,6 +162,7 @@ class CheckListFragment :
         checklist.sanitizerCheckbox5.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(5)
         checklist.vestCheckbox6.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(6)
         checklist.backpackCheckbox7.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(7)
+        checklist.bikeLockCheckbox8.checkbox.isChecked = mainActivity.getCheckboxSharePrefer(8)
     }
 
     /**
@@ -214,6 +237,16 @@ class CheckListFragment :
             } else {
                 mainActivity.keepCheckboxSharePrefer(7, false)
                 backpackImageView.alpha = 0f
+            }
+            configNotificationView()
+        })
+        checklist.bikeLockCheckbox8.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                mainActivity.keepCheckboxSharePrefer(8, true)
+                imageAnimation(bikeLockImageView)
+            } else {
+                mainActivity.keepCheckboxSharePrefer(8, false)
+                bikeLockImageView.alpha = 0f
             }
             configNotificationView()
         })

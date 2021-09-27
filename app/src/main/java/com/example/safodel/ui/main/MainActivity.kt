@@ -378,7 +378,7 @@ class MainActivity : AppCompatActivity() {
         if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
             && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
             && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
-            && getCheckboxSharePrefer(6)
+            && getCheckboxSharePrefer(7) && getCheckboxSharePrefer(8)
         ) {
             changeCheckListIcon(true)
         } else {

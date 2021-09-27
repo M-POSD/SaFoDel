@@ -306,4 +306,5 @@
     <string name="filter_spotlight">This is the filter.</string>
     <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">Select Language</string>
+    <string name="bike_lock_checkbox_8">Bike lock</string>
 </resources>

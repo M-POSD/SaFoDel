@@ -239,4 +239,5 @@
     <string name="filter_spotlight">यह फिल्टर है।</string>
     <string name="no_data">इस उपनगर में कोई डेटा नहीं है।</string>
     <string name="select_language">भाषा चुने</string>
+    <string name="bike_lock_checkbox_8">साइकिल का ताला</string>
 </resources>

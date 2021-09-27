@@ -262,6 +262,7 @@
     <string name="sanitizer_checkbox_5">Hand sanitiser</string>
     <string name="vest_checkbox_6">Reflective vest</string>
     <string name="backpack_checkbox_7">Delivery bag</string>
+    <string name="bike_lock_checkbox_8">Bike lock</string>
 
     <!--  about app  -->
     <string name="about">ABOUT</string>

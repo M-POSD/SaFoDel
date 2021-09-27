@@ -110,6 +110,18 @@
         app:layout_constraintStart_toStartOf="@+id/cl_driver"
         app:layout_constraintTop_toTopOf="@+id/cl_driver"
         app:layout_constraintVertical_bias="0.37" />
+    <ImageView
+        android:id="@+id/cl_bike_lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:src="@drawable/bike_lock_checklist"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_driver"
+        app:layout_constraintEnd_toEndOf="@+id/cl_driver"
+        app:layout_constraintHorizontal_bias="0.69"
+        app:layout_constraintStart_toStartOf="@+id/cl_driver"
+        app:layout_constraintTop_toTopOf="@+id/cl_driver"
+        app:layout_constraintVertical_bias="0.63" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -148,6 +160,10 @@
 
         <include
             android:id="@+id/backpack_checkbox_7"
+            layout="@layout/checkbox_layout" />
+
+        <include
+            android:id="@+id/bike_lock_checkbox_8"
             layout="@layout/checkbox_layout" />
     </LinearLayout>
 

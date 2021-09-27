@@ -239,4 +239,5 @@
     <string name="is_correct">是否答對</string>
     <string name="check_leave">你確定要離開嗎?</string>
     <string name="warning_msg">所有現在資料將會被移除</string>
+    <string name="bike_lock_checkbox_8">自行車鎖</string>
 </resources>
