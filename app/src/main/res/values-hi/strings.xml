@@ -197,9 +197,9 @@
     <string name="audience_description">संभावित और मौजूदा खाद्य वितरण बाइक सवार</string>
     <string name="know_more">अधिक जानिए</string>
     <string name="generic_information_heading">अधिसूचना</string>
-    <string name="generic_information_description1">&quot;वर्तमान समय: &quot;</string>
-    <string name="generic_information_description2">&quot;वर्तमान मौसम: &quot;</string>
-    <string name="generic_information_description3">&quot;वर्तमान ट्रैफ़िक: प्लेसहोल्डर&quot;</string>
+    <string name="current_time">&quot;वर्तमान समय: &quot;</string>
+    <string name="current_weather">&quot;वर्तमान मौसम: &quot;</string>
+    <string name="current_traffic">&quot;वर्तमान ट्रैफ़िक: प्लेसहोल्डर&quot;</string>
     <string name="checklist">जांच सूची</string>
     <string name="select">चुनते हैं</string>
     <string name="traffic_status">यातायात की स्थिति</string>
@@ -222,7 +222,7 @@
     <string name="accident_times_for_different_hourly_periods_of_the_day">दिन के अलग-अलग घंटे की अवधि के लिए दुर्घटना का समय</string>
     <string name="accident_times">दुर्घटना का समय</string>
     <string name="see_history">इतिहास देखे</string>
-    <string name="detail">विवरण:</string>
+    <string name="detail">विवरण</string>
     <string name="none">कोई ऐतिहासिक डेटा नहीं</string>
     <string name="question">प्रश्न</string>
     <string name="information">जानकारी</string>
@@ -240,4 +240,7 @@
     <string name="no_data">इस उपनगर में कोई डेटा नहीं है।</string>
     <string name="select_language">भाषा चुने</string>
     <string name="bike_lock_checkbox_8">साइकिल का ताला</string>
+    <string name="language">भाषा</string>
+    <string name="current_temperature">वर्तमान तापमान:</string>
+    <string name="not_available">उपलब्ध नहीं है</string>
 </resources>

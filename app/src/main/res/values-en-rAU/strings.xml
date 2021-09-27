@@ -243,7 +243,7 @@
     <string name="result_heading_3">Perfect !!!</string>
 
     <string name="see_history">View History</string>
-    <string name="detail">Detail:</string>
+    <string name="detail">DETAIL</string>
     <string name="none">No Historical Data</string>
     <string name="question">Question</string>
     <string name="information">Information</string>
@@ -275,9 +275,9 @@
 
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
-    <string name="generic_information_description1">"Current Time: "</string>
-    <string name="generic_information_description2">"Current Weather: "</string>
-    <string name="generic_information_description3">"Current Traffic: Placeholder"</string>
+    <string name="current_time">"Current Time: "</string>
+    <string name="current_weather">"Current Weather: "</string>
+    <string name="current_traffic">Current Traffic:</string>
     <string name="checklist">Checklist</string>
 
     <!-- map -->
@@ -307,4 +307,7 @@
     <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">Select Language</string>
     <string name="bike_lock_checkbox_8">Bike lock</string>
+    <string name="language">Language</string>
+    <string name="current_temperature">Current Temperature:</string>
+    <string name="not_available">Not Available</string>
 </resources>

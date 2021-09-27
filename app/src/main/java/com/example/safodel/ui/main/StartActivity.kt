@@ -122,26 +122,19 @@ class StartActivity : AppCompatActivity() {
             when (it) {
                 0 -> {
                     setLocale("en_AU")
-                    recreate()
                 }
                 1 -> {
                     setLocale("hi")
-                    recreate()
 
                 }
                 2 -> {
                     setLocale("zh_CN")
-                    recreate()
                 }
                 3 -> {
                     setLocale("zh_TW")
-                    recreate()
-                }
-                else -> {
-                    setLocale("en")
-                    recreate()
                 }
             }
+            recreateActivity()
             dialog.dismiss()
         }
         val mDialog = mBuilder.create()
@@ -168,9 +161,6 @@ class StartActivity : AppCompatActivity() {
             "zh_TW" -> {
                 config.locale = Locale.TRADITIONAL_CHINESE
             }
-            else -> {
-                config.locale = Locale.ENGLISH
-            }
         }
 
         resources.updateConfiguration(config, dm)
@@ -190,6 +180,19 @@ class StartActivity : AppCompatActivity() {
         val language = mSharePreferences.getString("lang", "")
         if (!language.isNullOrEmpty()) {
             setLocale(language)
+        }
+    }
+
+    private fun recreateActivity() {
+        try {
+        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.HONEYCOMB) {
+            super.recreate()
+        } else {
+            finish()
+            startActivity(intent)
+        }
+        } catch (e: NullPointerException) {
+            Log.d("NullPointerException", e.message.toString())
         }
     }
 }

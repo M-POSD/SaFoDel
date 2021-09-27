@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.safodel.R
 import com.example.safodel.ui.main.MainActivity
+import com.example.safodel.viewModel.WeatherViewModel
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -16,6 +18,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     Fragment() {
     protected var _binding: TBinding? = null
     val binding get() = _binding!!
+    private lateinit var model: WeatherViewModel
     override fun onCreateView(
 
         inflater: LayoutInflater,
@@ -23,6 +26,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         savedInstanceState: Bundle?
     ): View? {
         _binding = inflate.invoke(inflater, container, false)
+
         return binding.root
     }
 
@@ -42,6 +46,9 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
+
+        observeWeather()
+
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
@@ -60,6 +67,9 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
+
+        observeWeather()
+
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
@@ -78,6 +88,9 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
+
+        observeWeather()
+
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
         toolbar.setNavigationOnClickListener {
             mainActivity.onBackPressed()
@@ -96,6 +109,9 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
+
+        observeWeather()
+
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_new)
         toolbar.setNavigationIcon(R.drawable.back_green2)
         toolbar.setNavigationOnClickListener {
@@ -115,6 +131,9 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
+
+        observeWeather()
+
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
@@ -134,6 +153,9 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
+
+        observeWeather()
+
         toolbar.setNavigationOnClickListener {
             mainActivity.openDrawer()
         }
@@ -175,6 +197,17 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
             .setExitAnim(R.anim.slide_out_top)
             .setPopEnterAnim(R.anim.slide_in_top)
             .setPopExitAnim(R.anim.slide_out_bottom).build()
+    }
+
+    /**
+     * observe the current weather
+     */
+    fun observeWeather() {
+        model = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
+        model.getWeather().observe(viewLifecycleOwner, { t ->
+            val mainActivity = activity as MainActivity
+            mainActivity.updateMenuFooterInfo(t)
+        })
     }
 }
 

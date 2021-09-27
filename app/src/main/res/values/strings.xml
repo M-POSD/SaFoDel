@@ -43,6 +43,7 @@
     <string name="raining">Raining</string>
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
 
     <!--  slang heading for each page  -->
     <string name="home_page_slang_1">Preparing you for safer food deliveries on bicycle in Victoria</string>
@@ -243,7 +244,7 @@
     <string name="result_heading_3">Perfect !!!</string>
 
     <string name="see_history">View History</string>
-    <string name="detail">Detail:</string>
+    <string name="detail">DETAIL</string>
     <string name="none">No Historical Data</string>
     <string name="question">Question</string>
     <string name="information">Information</string>
@@ -276,9 +277,10 @@
 
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
-    <string name="generic_information_description1">"Current Time: "</string>
-    <string name="generic_information_description2">"Current Weather: "</string>
-    <string name="generic_information_description3">"Current Traffic: Placeholder"</string>
+    <string name="current_time">"Time: "</string>
+    <string name="current_weather">"Weather: "</string>
+    <string name="current_traffic">Traffic:</string>
+    <string name="current_temperature">Temp:</string>
     <string name="checklist">Checklist</string>
 
     <!-- map -->
@@ -307,4 +309,5 @@
     <string name="filter_spotlight">This is the filter.</string>
     <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">SELECT LANGUAGE</string>
+    <string name="not_available">Not Available</string>
 </resources>

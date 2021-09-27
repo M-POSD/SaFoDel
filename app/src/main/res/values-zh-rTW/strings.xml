@@ -188,18 +188,18 @@
     <string name="result">結果</string>
     <string name="result_heading_1">再一次測驗</string>
     <string name="result_heading_2">查看規則</string>
-    <string name="result_heading_3">完美的</string>
+    <string name="result_heading_3">完美 ！！！</string>
     <string name="checklist_notification_unprepared">請確保您準備好清單上的所有內容</string>
-    <string name="checklist_notification_prepared">棒極了！是時候開始你的送餐之旅了！</string>
+    <string name="checklist_notification_prepared">太棒了！是時候開始你的送餐之旅了！</string>
     <string name="about">關於</string>
     <string name="about_description">教育自行車送餐騎手</string>
     <string name="audience">觀眾</string>
     <string name="audience_description">潛在和現有的自行車送餐騎手</string>
     <string name="know_more">了解更多</string>
     <string name="generic_information_heading">通知</string>
-    <string name="generic_information_description1">&quot;現在天氣:  &quot;</string>
-    <string name="generic_information_description2">&quot;現在時間:  &quot;</string>
-    <string name="generic_information_description3">&quot;現在路況:  佔位符&quot;</string>
+    <string name="current_time">&quot;現在時間:  &quot;</string>
+    <string name="current_weather">&quot;現在天氣:  &quot;</string>
+    <string name="current_traffic">&quot;現在路況:  &quot;</string>
     <string name="checklist">清單</string>
     <string name="select">選擇</string>
     <string name="traffic_status">交通狀況</string>
@@ -240,4 +240,7 @@
     <string name="check_leave">你確定要離開嗎?</string>
     <string name="warning_msg">所有現在資料將會被移除</string>
     <string name="bike_lock_checkbox_8">自行車鎖</string>
+    <string name="language">語言</string>
+    <string name="current_temperature">現在溫度：</string>
+    <string name="not_available">無法使用</string>
 </resources>

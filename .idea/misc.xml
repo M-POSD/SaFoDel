@@ -101,6 +101,7 @@
         <entry key="app/src/main/res/layout/group_card_v1.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/group_card_v2.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/hero_feature_info1.xml" value="0.1094224924012158" />
+        <entry key="app/src/main/res/layout/hero_feature_info2.xml" value="0.19655797101449277" />
         <entry key="app/src/main/res/layout/hero_feature_info3.xml" value="0.25" />
         <entry key="app/src/main/res/layout/hero_feature_info4.xml" value="0.25" />
         <entry key="app/src/main/res/layout/hero_feature_info5.xml" value="0.16666666666666666" />
@@ -111,6 +112,7 @@
         <entry key="app/src/main/res/layout/large_button.xml" value="0.1094224924012158" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/left_nav_footer.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/left_nav_header.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.23324275362318841" />
