@@ -349,6 +349,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 if (spinnerTimes >= 1) {
                     suburb = parent?.getItemAtPosition(position).toString()
                     callSuburbClient()
+                    callPathsClient()
                     //mapView.getMapAsync(fragmentNow)
                 }
             }
@@ -532,7 +533,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 )
             it.addLayerBelow(shadowTransitionCircleLayer, "basic_circle_cayer")
 
-            /*-- Add symbol layer --*/
+            /*-- Add Paths layer --*/
             it.addLayer(
                 LineLayer("multi_line_layer", "pathsSource").withProperties(
                     lineOpacity(.7f),
@@ -1066,6 +1067,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     }
 
     private fun callAlertsClient() {
+        alertsFeature.clear()
         //val fragmentNow = this
         GlobalScope.launch {
             val callAsync: Call<SuburbAlertsResponse> = suburbInterface.alertsRepos(
@@ -1190,6 +1192,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
      * get the paths data by calling retrofit to connect to the server
      */
     private fun callPathsClient() {
+        pathsList.clear()
         val callAsync: Call<SuburbPathsResponse> = suburbInterface.pathsRepos(
             "paths",
             suburb
@@ -1212,15 +1215,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             }
                             pathsList.add(coordinates)
                         }
-//                        for (num in 0..5) {
-//                            var locations = geometries[num].geometries
-//                            var coordinates = ArrayList<Point>()
-//                            for (location in locations) {
-//                                val eachPoint = Point.fromLngLat(location.lng, location.lat)
-//                                coordinates.add(eachPoint)
-//                            }
-//                            pathsList.add(coordinates)
-//                        }
 
                     }
                     Log.d("testing", pathsList.size.toString())
