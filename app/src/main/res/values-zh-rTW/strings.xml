@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">SaFoDel</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiamF6MjAyMTA4MjciLCJhIjoiY2tzdTI5NWttMWJ5NzJua3R4Ynd5aG5sOSJ9.5zTN0BjRVD-NBfNe32sAaw</string>
     <string name="password">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
     <string name="app_id_weather_api">898ef19b846722554449f6068e7c7253</string>
-    <string name="city_name"></string>
-    <string name="start_learning_mode"></string>
+    <string name="city_name">Caulfield,AU</string>
+    <string name="start_learning_mode">Welcome to the SaFoDel learning mode</string>
     <string name="end_learning_mode">謝謝觀看</string>
     <string name="notify_select_option">請選擇一個選項</string>
     <string name="start_button">開始</string>
@@ -125,7 +125,7 @@
     <string name="in_an_accident1_4_description">向警方以及您當時工作的平台報告事故</string>
     <string name="in_an_accident2_0_title">誰是臨時工？</string>
     <string name="in_an_accident2_0_description">臨時工是通過移動應用程序平台提供服務的人，從法律上講，他們通常具有獨立承包商的身份</string>
-    <string name="in_an_accident2_0_source"></string>
+    <string name="in_an_accident2_0_source">https://www.fairwork.gov.au/find-help-for/independent-contractors/gig-economy</string>
     <string name="in_an_accident2_1_title">不一致的做法</string>
     <string name="in_an_accident2_1_description">這個行業的法規很少，所以每個平台對他們的工人都有不同的要求和條件</string>
     <string name="in_an_accident2_2_title">僱員與否？</string>
@@ -136,10 +136,10 @@
     <string name="in_an_accident3_1_description">要了解您的外賣平台提供的保險詳情，請選擇您的合作夥伴下一步</string>
     <string name="in_an_accident3_2_description">TAC（運輸事故委員會）在某些條款和條件下提供無故障賠償</string>
     <string name="click_to_know_more">點擊了解更多</string>
-    <string name="uber_link"></string>
-    <string name="deliveroo_link"></string>
-    <string name="doordash_link"></string>
-    <string name="easi_link"></string>
+    <string name="uber_link">https://www.uber.com/au/en/drive/insurance/injury-protection/</string>
+    <string name="deliveroo_link">https://riders.deliveroo.com.au/en/news/your-free-deliveroo-rider-insurance</string>
+    <string name="doordash_link">https://help.doordash.com/dashers/s/article/Requirements-for-Dashing?language=en_AU</string>
+    <string name="easi_link">https://www.easi.com.au/delivery-user/</string>
     <string name="epic3_name">路標</string>
     <string name="road_sign1_title">小心地滑</string>
     <string name="road_sign1_description">在潮濕天氣下變得特別濕滑的道路，請降低車速並小心</string>

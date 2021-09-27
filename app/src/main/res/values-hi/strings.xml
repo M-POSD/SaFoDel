@@ -4,7 +4,7 @@
     <string name="mapbox_access_token">pk.eyJ1IjoiamF6MjAyMTA4MjciLCJhIjoiY2tzdTI5NWttMWJ5NzJua3R4Ynd5aG5sOSJ9.5zTN0BjRVD-NBfNe32sAaw</string>
     <string name="password">80854365343587668507554409661299615981564318692495966332079859859680949422633</string>
     <string name="app_id_weather_api">898ef19b846722554449f6068e7c7253</string>
-    <string name="city_name">कौलफील्ड, एयू</string>
+    <string name="city_name">Caulfield,AU</string>
     <string name="start_learning_mode">SaFoDel लर्निंग मोड में आपका स्वागत है</string>
     <string name="end_learning_mode">देखने के लिए धन्यवाद</string>
     <string name="notify_select_option">कृपया एक विकल्प चुनें</string>

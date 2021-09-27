@@ -188,7 +188,7 @@ class StartActivity : AppCompatActivity() {
         val mSharePreferences =
             this.applicationContext.getSharedPreferences("language", Activity.MODE_PRIVATE)
         val language = mSharePreferences.getString("lang", "")
-        if (language != null) {
+        if (!language.isNullOrEmpty()) {
             setLocale(language)
         }
     }
