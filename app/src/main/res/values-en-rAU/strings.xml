@@ -243,7 +243,7 @@
     <string name="result_heading_3">Perfect !!!</string>
 
     <string name="see_history">View History</string>
-    <string name="detail">Detail:</string>
+    <string name="detail">DETAIL</string>
     <string name="none">No Historical Data</string>
     <string name="question">Question</string>
     <string name="information">Information</string>
@@ -307,4 +307,5 @@
     <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">Select Language</string>
     <string name="bike_lock_checkbox_8">Bike lock</string>
+    <string name="language">Language</string>
 </resources>

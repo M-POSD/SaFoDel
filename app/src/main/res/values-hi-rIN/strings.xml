@@ -222,7 +222,7 @@
     <string name="accident_times_for_different_hourly_periods_of_the_day">दिन के अलग-अलग घंटे की अवधि के लिए दुर्घटना का समय</string>
     <string name="accident_times">दुर्घटना का समय</string>
     <string name="see_history">इतिहास देखे</string>
-    <string name="detail">विवरण:</string>
+    <string name="detail">विवरण</string>
     <string name="none">कोई ऐतिहासिक डेटा नहीं</string>
     <string name="question">प्रश्न</string>
     <string name="information">जानकारी</string>
@@ -240,4 +240,5 @@
     <string name="no_data">इस उपनगर में कोई डेटा नहीं है।</string>
     <string name="select_language">भाषा चुने</string>
     <string name="bike_lock_checkbox_8">साइकिल का ताला</string>
+    <string name="language">भाषा</string>
 </resources>

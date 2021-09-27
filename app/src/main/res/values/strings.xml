@@ -43,6 +43,7 @@
     <string name="raining">Raining</string>
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
 
     <!--  slang heading for each page  -->
     <string name="home_page_slang_1">Preparing you for safer food deliveries on bicycle in Victoria</string>
@@ -243,7 +244,7 @@
     <string name="result_heading_3">Perfect !!!</string>
 
     <string name="see_history">View History</string>
-    <string name="detail">Detail:</string>
+    <string name="detail">DETAIL</string>
     <string name="none">No Historical Data</string>
     <string name="question">Question</string>
     <string name="information">Information</string>

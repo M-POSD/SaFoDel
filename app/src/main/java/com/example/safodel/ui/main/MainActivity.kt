@@ -1,16 +1,21 @@
 package com.example.safodel.ui.main
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Rect
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
@@ -31,6 +36,7 @@ import com.mapbox.maps.extension.style.expressions.dsl.generated.length
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -170,9 +176,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun bottomNav(item: MenuItem) {
-        item.isChecked = true
-        when (item.itemId) {
+    private fun bottomNav(menuItem: MenuItem) {
+        menuItem.isChecked = true
+        when (menuItem.itemId) {
             R.id.navHome -> {
                 navController.popBackStack(
                     R.id.homeFragment,
@@ -221,12 +227,8 @@ class MainActivity : AppCompatActivity() {
                     positiveButton(R.string.no)
                     negativeButton(R.string.yes)
                     this.negativeButton {
-                        when (menuItem.itemId) {
-                            R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
-
-                            R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-                        }
                         isItemSelected = true
+                        leftNav(menuItem)
                         menuItem.isChecked = true
                     }
                     closeDrawer()
@@ -240,14 +242,19 @@ class MainActivity : AppCompatActivity() {
                     ) {
                         navController.popBackStack() // Previous fragment out of stack
                     }
-                    when (it.itemId) {
-                        R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
-                        R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
-                    }
+                    leftNav(it)
                 }
                 drawer.closeDrawers() // close the drawer of the left navigation.
                 true
             }
+        }
+    }
+
+    private fun leftNav(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
+            R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
+            R.id.navLanguage -> switchLanguageList()
         }
     }
 
@@ -310,8 +317,7 @@ class MainActivity : AppCompatActivity() {
     fun getStatusHeight(): Int {
         val rec = Rect()
         window.decorView.getWindowVisibleDisplayFrame(rec)
-        val statusBarHeight = rec.top
-        return statusBarHeight
+        return rec.top
     }
 
     fun lockSwipeDrawer() {
@@ -406,6 +412,80 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun switchLanguageList() {
+        val listLanguages: Array<String> = arrayOf("English(AU)", "हिंदी", "中文(简体)", "中文(繁體)")
+        val mBuilder = AlertDialog.Builder(this)
+        mBuilder.setTitle(getString(R.string.select_language))
+        mBuilder.setSingleChoiceItems(listLanguages, -1) { dialog, it ->
+            when (it) {
+                0 -> {
+                    setLocale("en_AU")
+                    recreateActivity()
+                }
+                1 -> {
+                    setLocale("hi")
+                    recreateActivity()
+
+                }
+                2 -> {
+                    setLocale("zh_CN")
+                    recreateActivity()
+                }
+                3 -> {
+                    setLocale("zh_TW")
+                    recreateActivity()
+                }
+            }
+            dialog.dismiss()
+        }
+        val mDialog = mBuilder.create()
+        mDialog.show()
+    }
+
+    private fun setLocale(lang: String) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val resources: Resources = this.resources
+        val dm: DisplayMetrics = this.resources.displayMetrics
+        val config: Configuration = this.resources.configuration
+
+        when (lang) {
+            "en_AU" -> {
+                config.locale = Locale.ENGLISH
+            }
+            "hi" -> {
+                config.locale = locale
+            }
+            "zh_CN" -> {
+                config.locale = Locale.SIMPLIFIED_CHINESE
+            }
+            "zh_TW" -> {
+                config.locale = Locale.TRADITIONAL_CHINESE
+            }
+        }
+
+        resources.updateConfiguration(config, dm)
+        keepLanguageToSharedPref(lang)
+    }
+
+    private fun keepLanguageToSharedPref(lang: String) {
+        val spEditor =
+            this.applicationContext.getSharedPreferences("language", Activity.MODE_PRIVATE).edit()
+        spEditor.putString("lang", lang)
+        spEditor.apply()
+    }
+
+    private fun recreateActivity() {
+        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.HONEYCOMB)
+        {
+            super.recreate()
+        }
+        else
+        {
+            finish()
+            startActivity(intent)
+        }
+    }
 }
 
 

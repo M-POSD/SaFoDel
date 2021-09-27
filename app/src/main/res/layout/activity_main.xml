@@ -48,6 +48,10 @@
         app:itemIconTint="@drawable/left_nav_selector"
         app:itemTextColor="@drawable/left_nav_selector"
         app:headerLayout="@layout/left_nav_header">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="testing"/>
 
     </com.google.android.material.navigation.NavigationView>
 
