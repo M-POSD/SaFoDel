@@ -822,7 +822,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     siLayer?.setProperties(visibility(Property.NONE))
 
                     /*--    Edit the Search bar    --*/
-                    GlobalScope.launch {
+                    val coroutineScope = CoroutineScope(Dispatchers.Main)
+                    coroutineScope.launch {
                         // try to get the height of status bar and then margin top
                         val searchBarHeight =
                             searchBar.layoutParams as CoordinatorLayout.LayoutParams
@@ -1103,7 +1104,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private fun callAlertsClient() {
         alertsFeature.clear()
         //val fragmentNow = this
-        GlobalScope.launch {
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        coroutineScope.launch {
             val callAsync: Call<SuburbAlertsResponse> = suburbInterface.alertsRepos(
                 "alerts"
             )
@@ -1280,7 +1282,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     }
 
     private fun fitSearchMap1() {
-        GlobalScope.launch {
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        coroutineScope.launch {
             // try to get the height of status bar and then margin top
             val searchBarMap1Height = searchBarMap1.layoutParams as CoordinatorLayout.LayoutParams
             val buttonFilterHeight = buttonFilter.layoutParams as CoordinatorLayout.LayoutParams
