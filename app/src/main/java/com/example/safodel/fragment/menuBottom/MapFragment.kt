@@ -126,6 +126,7 @@ import com.mapbox.maps.Style as Style2
 import android.R.style
 import com.mapbox.geojson.*
 import com.mapbox.geojson.utils.PolylineUtils
+import org.w3c.dom.Text
 
 
 private val locationList: ArrayList<Point> = ArrayList()
@@ -135,6 +136,7 @@ private var alertsFeature: ArrayList<Feature> = ArrayList()
 private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private var alertClickTimes = 0
+private var accidentClickTimes = 0
 private lateinit var toast: Toast
 private lateinit var fragmentNow: OnMapReadyCallback
 private lateinit var mapViewModel: MapAccidentViewModel
@@ -167,6 +169,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var buttonFilter: View
     private lateinit var markerViewManager: MarkerViewManager
     private lateinit var alertMarkerBubble: MarkerView
+    private lateinit var accidentMarkerBubble: MarkerView
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -582,23 +585,19 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             //alertIconLayer.minZoom = 15f
             it.addLayer(alertIconLayer)
 
-//            val alertsWindowLayer = SymbolLayer("alert_window_layer","alertSource")
-//            alertsWindowLayer.withProperties(
-//                iconImage("{name}"),
-//                iconAnchor(Property.ICON_ANCHOR_BOTTOM),
-//                iconAllowOverlap(true),
-//                iconOffset(floatArrayOf(-2f,-28f).toTypedArray())
-//            )
-//            it.addLayer(alertsWindowLayer)
-
-
-
             mapboxMap.addOnMapClickListener {
                 val pointHere = Point.fromLngLat(it.longitude, it.latitude)
                 val pointFHere = mapboxMap.projection.toScreenLocation(it)
                 val featureAlert = mapboxMap.queryRenderedFeatures(pointFHere, "alert_layer")
+                val featureAccident = mapboxMap.queryRenderedFeatures(pointFHere,"basic_circle_cayer")
 
-                if (featureAlert.isNotEmpty()) {
+                if(featureAccident.isNotEmpty()){
+                    val type = featureAccident[0].getStringProperty("type")
+                    val road = featureAccident[0].getStringProperty("road")
+                    val severity = featureAccident[0].getStringProperty("severity")
+                    handleClickAccident(type,road,severity,pointHere,true)
+                }
+                else if (featureAlert.isNotEmpty()) {
                     val type = featureAlert[0].getStringProperty("type")
                     handleClickAlert(type, pointHere, true)
                 } else handleClickAlert("", pointHere, false)
@@ -634,11 +633,14 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             val alertBubble = LayoutInflater.from(mainActivity).inflate(
                 R.layout.marker_alert_bubble, null
             )
+
             alertBubble.setLayoutParams(FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
-            var title = alertBubble.findViewById<TextView>(R.id.marker_alert_title)
-            var snippet = alertBubble.findViewById<TextView>(R.id.marker_alert_snippet)
-            title.text = type
-            snippet.text = getAlertPointString(point)
+
+            val alertTitle = alertBubble.findViewById<TextView>(R.id.marker_alert_title)
+            val alertSnippet = alertBubble.findViewById<TextView>(R.id.marker_alert_snippet)
+
+            alertTitle.text = type
+            alertSnippet.text = getAlertPointString(point)
             alertMarkerBubble = MarkerView(LatLng(point.latitude(), point.longitude()), alertBubble)
 
             markerViewManager.addMarker(alertMarkerBubble)
@@ -651,13 +653,11 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             markerViewManager.removeMarker(alertMarkerBubble)
             alertClickTimes--
         }
-    }
 
-    fun getTypeString(type: String): String {
-        val sb = StringBuilder()
-        sb.append("type: ")
-        sb.append(type)
-        return sb.toString()
+        if (accidentClickTimes > 0) {
+            markerViewManager.removeMarker(accidentMarkerBubble)
+            accidentClickTimes--
+        }
     }
 
     fun getAlertPointString(point: Point)
@@ -670,6 +670,32 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         sb.append(')')
         return sb.toString()
     }
+
+    fun handleClickAccident(type: String, road: String, severity: String,point: Point,boolean: Boolean) {
+        //markerViewManager.removeMarker(alertMarkerBubble)
+        removeAlertBubble()
+
+        if (boolean) {
+            val accidentBubble = LayoutInflater.from(mainActivity).inflate(
+                R.layout.marker_accident_bubble,null
+            )
+
+            accidentBubble.layoutParams = FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+
+            val accidentTitle = accidentBubble.findViewById<TextView>(R.id.marker_accident_title)
+            val accidentRoad = accidentBubble.findViewById<TextView>(R.id.marker_accident_road)
+            val accidentSeverity  = accidentBubble.findViewById<TextView>(R.id.marker_accident_severity)
+
+            accidentTitle.text = type
+            accidentRoad.text = road
+            accidentSeverity.text = severity
+            accidentMarkerBubble = MarkerView(LatLng(point.latitude(), point.longitude()), accidentBubble)
+
+            markerViewManager.addMarker(accidentMarkerBubble)
+            accidentClickTimes++
+        }
+    }
+
 
 
     @SuppressWarnings("MissingPermission")
@@ -1093,7 +1119,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                                 val eachPoint =
                                     Point.fromLngLat(each.location.long, each.location.lat)
                                 val eachFeature = Feature.fromGeometry(eachPoint)
-                                eachFeature.addStringProperty("type", each.type.toString())
+                                eachFeature.addStringProperty("type", each.type)
                                 alertsFeature.add(eachFeature)
                             }
                         }
@@ -1177,10 +1203,12 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                         for (each in resultList) {
                             val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
                             locationList.add(eachPoint)
+                            val eachFeature = Feature.fromGeometry(eachPoint)
+                            eachFeature.addStringProperty("type",each.type)
+                            eachFeature.addStringProperty("road",each.road_name)
+                            eachFeature.addStringProperty("severity",each.severity.toString())
+                            feature.add(eachFeature)
                         }
-                    }
-                    for (each in 0..locationList.size - 1) {
-                        feature.add(Feature.fromGeometry(locationList[each]))
                     }
                     mapView.getMapAsync(fragmentNow)
                 } else {
