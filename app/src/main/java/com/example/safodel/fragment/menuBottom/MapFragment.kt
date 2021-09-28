@@ -1420,6 +1420,12 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 filterCardsHeight.topMargin = searchBarMap1Height.topMargin + searchBarMap1.measuredHeight + 10
             searchBarMap1.layoutParams = searchBarMap1Height
             filterCards.layoutParams = filterCardsHeight
+
+            binding.filterCards.filterPaths.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.filter_path, 0,
+                0, 0
+            )
+
             this.cancel()
         }
     }
