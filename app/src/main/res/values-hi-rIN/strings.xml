@@ -250,4 +250,8 @@
     <string name="miles_per_hour">मील/घंटा</string>
     <string name="current_location">मैं</string>
     <string name="location_granted">उपयोगकर्ता स्थान की अनुमति नहीं दी गई</string>
+    <string name="map_intro">अपने क्षेत्र से परिचित हों</string>
+    <string name="analysis_intro">दुर्घटना रुझान</string>
+    <string name="checklist_intro">डिलीवर करने के लिए तैयार हो जाएं</string>
+    <string name="quiz_intro">अपनी समझ की जांच करें</string>
 </resources>

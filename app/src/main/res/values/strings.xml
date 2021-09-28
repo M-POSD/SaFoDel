@@ -48,6 +48,12 @@
     <!--  slang heading for each page  -->
     <string name="home_page_slang_1">Preparing you for safer food deliveries on bicycle in Victoria</string>
     <string name="home_page_slang_2">\'Don\'t put your life at risk for other\'s convenience\'</string>
+
+    <string name="map_intro">Get Familiar with your area</string>
+    <string name="analysis_intro">Accident Trends</string>
+    <string name="checklist_intro">Get ready for delivering</string>
+    <string name="quiz_intro">Check your understanding</string>
+
     <string name="epic1_slang">Find out how to ride safely while delivering food</string>
     <string name="epic2_slang">Find information on using E-Bikes for food delivery</string>
     <string name="epic3_slang">Find out the cycling gear you need to deliver safe</string>

@@ -317,4 +317,8 @@
     <string name="miles_per_hour">miles/hr</string>
     <string name="current_location">Location:</string>
     <string name="location_granted">user location permission not granted</string>
+    <string name="map_intro">Get Familiar with your area</string>
+    <string name="analysis_intro">Accident Trends</string>
+    <string name="checklist_intro">Get ready for delivering</string>
+    <string name="quiz_intro">Check your understanding</string>
 </resources>

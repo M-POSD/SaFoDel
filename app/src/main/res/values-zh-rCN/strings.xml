@@ -250,4 +250,8 @@
     <string name="miles_per_hour">英里/小时</string>
     <string name="current_location">位置：</string>
     <string name="location_granted">用户位置权限未授予</string>
+    <string name="map_intro">熟悉你所在的地区</string>
+    <string name="analysis_intro">事故趋势</string>
+    <string name="quiz_intro">检查你的理解</string>
+    <string name="checklist_intro">做好送外卖的准备</string>
 </resources>
