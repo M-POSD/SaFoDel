@@ -160,35 +160,13 @@ class GroupCard1Data(
 //                    2
 //                )
 //            )
+
+            /* For the connection between icons and websites  */
             groupCard1Data.add(
                 GroupCard1Data(
                     "inAnAccident3",
-                    R.string.uber_link,
-                    R.drawable.food_delivery_2,
-                    -1
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "inAnAccident3",
-                    R.string.deliveroo_link,
-                    R.drawable.food_delivery_3,
-                    -1
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "inAnAccident3",
-                    R.string.doordash_link,
-                    R.drawable.food_delivery_4,
-                    -1
-                )
-            )
-            groupCard1Data.add(
-                GroupCard1Data(
-                    "inAnAccident3",
-                    R.string.easi_link,
-                    R.drawable.food_delivery_5,
+                    0,
+                    0,
                     -1
                 )
             )

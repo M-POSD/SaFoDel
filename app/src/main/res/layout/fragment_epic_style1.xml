@@ -16,5 +16,9 @@
         <include
             android:id="@+id/image_right"
             layout="@layout/detail_card_v2" />
+
+        <include android:id="@+id/food_delivery_image"
+            layout="@layout/detail_card_v1"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
