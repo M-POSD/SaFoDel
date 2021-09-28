@@ -122,6 +122,7 @@ import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
 import com.mapbox.geojson.*
 import com.mapbox.mapboxsdk.style.sources.Source
+import com.mapbox.navigation.ui.maps.internal.route.line.MapboxRouteLineApiExtensions.setRoutes
 
 
 private val locationList: ArrayList<Point> = ArrayList()
@@ -161,7 +162,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var suburbPoint: Point
     private lateinit var trafficPlugin: TrafficPlugin
     private lateinit var searchBar: FrameLayout
-    private lateinit var buttonFilter: View
     private lateinit var filterCards : View
     private lateinit var markerViewManager: MarkerViewManager
     private lateinit var alertMarkerBubble: MarkerView
@@ -312,12 +312,11 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         mapView = binding.mapView
         searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
-        buttonFilter = binding.floatButtonFilter
         filterCards = binding.filterCards.root
         fragmentNow = this
         mapViewModel = MapAccidentViewModel()
 
-        buttonFilter.doOnPreDraw {
+        searchBarMap1.doOnPreDraw {
             spotlight()
         }
         mapView2 = binding.mapView2  // for navigation
@@ -325,7 +324,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         diaglogFilter = MaterialDialog(mainActivity)
         spotlightRoot = FrameLayout(requireContext())
         setToolbarBasic(toolbar)
-        setfilterListener()
 
 
         // request permission of user location
@@ -349,7 +347,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 if (spinnerTimes >= 1) {
                     suburb = parent?.getItemAtPosition(position).toString()
                     callAllClient(true)
-                    //mapView.getMapAsync(fragmentNow)
                 }
             }
 
@@ -609,6 +606,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
 
         filterTrafficListener()
+        filterPathsListener()
         filterAccidentListener()
 
     }
@@ -906,7 +904,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             binding.searchBar.visibility = View.INVISIBLE
                             mapView.visibility = View.VISIBLE
                             recenter.visibility = View.INVISIBLE
-                            mapView.getMapAsync(fragmentNow)
                             binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
                             binding.spinner.visibility = View.VISIBLE
                             binding.filterCards.root.visibility = View.VISIBLE
@@ -1185,7 +1182,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                                 alertsFeature.add(eachFeature)
                             }
                         }
-                        //mapView.getMapAsync(fragmentNow)
                     } else {
                         Timber.i(getString(R.string.response_failed))
                     }
@@ -1417,16 +1413,12 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         coroutineScope.launch {
             // try to get the height of status bar and then margin top
             val searchBarMap1Height = searchBarMap1.layoutParams as CoordinatorLayout.LayoutParams
-            val buttonFilterHeight = buttonFilter.layoutParams as CoordinatorLayout.LayoutParams
             val filterCardsHeight = filterCards.layoutParams as CoordinatorLayout.LayoutParams
             while (searchBarMap1Height.topMargin == 0)
                 searchBarMap1Height.topMargin = mainActivity.getStatusHeight()
-            while (buttonFilterHeight.topMargin == 0)
-                buttonFilterHeight.topMargin = mainActivity.getStatusHeight() + 10
             while (filterCardsHeight.topMargin == 0)
-                filterCardsHeight.topMargin = buttonFilterHeight.topMargin + buttonFilter.measuredHeight
+                filterCardsHeight.topMargin = searchBarMap1Height.topMargin + searchBarMap1.measuredHeight + 10
             searchBarMap1.layoutParams = searchBarMap1Height
-            buttonFilter.layoutParams = buttonFilterHeight
             filterCards.layoutParams = filterCardsHeight
             this.cancel()
         }
@@ -1454,14 +1446,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
      * *****/
 
 
-    /*
-            Filter
-     */
-    private fun setfilterListener() {
-        buttonFilter.setOnClickListener {
-            showDialogFilter()
-        }
-    }
 
     @SuppressLint("CheckResult")
     private fun showDialogFilter() {
@@ -1545,6 +1529,33 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             else {
                 trafficPlugin.setVisibility(false)
                 filterTraffic.setTextColor(ContextCompat.getColor(mainActivity, R.color.gray))
+            }
+        }
+    }
+
+    fun filterPathsListener(){
+        val filterPaths = binding.filterCards.filterPaths
+        var filterStatus = true
+        filterPaths.setOnClickListener {
+            if(filterStatus){
+                mapboxMap.getStyle {
+                    val layer = it.getLayer("multi_line_layer")
+                    if(layer != null){
+                        layer.setProperties(visibility(Property.NONE))
+                        filterPaths.setTextColor(ContextCompat.getColor(mainActivity, R.color.gray))
+                        filterStatus = false
+                    }
+                }
+            }
+            else{
+                mapboxMap.getStyle {
+                    val layer = it.getLayer("multi_line_layer")
+                    if(layer != null){
+                        layer.setProperties(visibility(Property.VISIBLE))
+                        filterPaths.setTextColor(ContextCompat.getColor(mainActivity, R.color.black))
+                        filterStatus = true
+                    }
+                }
             }
         }
     }

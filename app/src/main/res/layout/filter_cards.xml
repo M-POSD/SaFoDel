@@ -28,4 +28,16 @@
         android:background="@drawable/white_shape"
         android:focusable="true" />
 
+    <TextView
+        android:id="@+id/filter_paths"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bicycle Route"
+        android:layout_marginStart="10dp"
+        android:padding="10dp"
+        android:clickable="true"
+        style="@style/textStyle16_black"
+        android:background="@drawable/white_shape"
+        android:focusable="true" />
+
 </LinearLayout>
