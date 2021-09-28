@@ -347,8 +347,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 spinnerTimes++ // calculate the times to test
                 if (spinnerTimes >= 1) {
                     suburb = parent?.getItemAtPosition(position).toString()
-                    callSuburbClient()
-                    callPathsClient()
+                    callAllClient()
                     //mapView.getMapAsync(fragmentNow)
                 }
             }
@@ -366,9 +365,10 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
 
         setDialog()
-        callAlertsClient()
-        callSuburbClient()
-        callPathsClient()
+//        callAlertsClient()
+//        callSuburbClient()
+//        callPathsClient()
+        callAllClient()
 
         // go to the user's current location
         binding.floatButton.setOnClickListener {
@@ -1266,6 +1266,79 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 toast.cancel()
                 toast.setText("${t.message}")
                 toast.show()
+            }
+        })
+    }
+
+    fun callAllClient(){
+        alertsFeature.clear()
+        feature.clear()
+        locationList.clear()
+        pathsList.clear()
+        val callAsync: Call<SuburbAllResponse> = suburbInterface.allRepos(
+            "all",
+            suburb
+        )
+
+        callAsync.enqueue(object : Callback<SuburbAllResponse?> {
+            override fun onResponse(
+                call: Call<SuburbAllResponse?>?,
+                response: Response<SuburbAllResponse?>
+            ) {
+                if (response.isSuccessful) {
+                    val allresult = response.body()!!.suburbAllAccidents
+
+                            val accidents = allresult.accidents
+                            val paths = allresult.paths
+                            val alerts = allresult.alerts
+                            if (alerts.isNotEmpty()) {
+                                for (each in alerts) {
+                                    val eachPoint =
+                                        Point.fromLngLat(each.location.long, each.location.lat)
+                                    val eachFeature = Feature.fromGeometry(eachPoint)
+                                    eachFeature.addStringProperty("type", each.type)
+                                    alertsFeature.add(eachFeature)
+                                }
+                            }
+
+                            if (accidents.isNotEmpty()) {
+                                for (each in accidents) {
+                                    val eachPoint = Point.fromLngLat(each.location.long, each.location.lat)
+                                    locationList.add(eachPoint)
+                                    val eachFeature = Feature.fromGeometry(eachPoint)
+                                    eachFeature.addStringProperty("type",each.type)
+                                    eachFeature.addStringProperty("road",each.road_name)
+                                    eachFeature.addStringProperty("severity",each.severity.toString())
+                                    feature.add(eachFeature)
+                                }
+                            }
+
+                            if (paths.isNotEmpty()) {
+                                for (geometry in paths) {
+                                    val locations = geometry.geometries
+                                    val coordinates = ArrayList<Point>()
+                                    for (location in locations) {
+                                        val eachPoint = Point.fromLngLat(location.lng, location.lat)
+                                        coordinates.add(eachPoint)
+                                    }
+                                    pathsList.add(coordinates)
+                                }
+                            }
+
+                            mapView.getMapAsync(fragmentNow)
+
+
+
+
+                } else {
+                    dialog.dismiss()
+                    Timber.d("Response failed")
+                }
+            }
+
+            override fun onFailure(call: Call<SuburbAllResponse?>, t: Throwable) {
+                dialog.dismiss()
+                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }

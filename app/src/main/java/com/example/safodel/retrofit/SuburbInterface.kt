@@ -44,4 +44,11 @@ interface SuburbInterface {
         @Query("suburb") suburb_name: String
     )
             : Call<SuburbPathsResponse>
+
+    @GET("{key}")
+    fun allRepos(
+        @Path("key") key: String?,
+        @Query("suburb") suburb_name: String
+    )
+            : Call<SuburbAllResponse>
 }
