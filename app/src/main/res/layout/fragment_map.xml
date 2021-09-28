@@ -111,17 +111,6 @@
 
     </FrameLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatButtonFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        mapbox:fabSize="mini"
-        mapbox:backgroundTint="@color/white"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/white"
-        android:contentDescription="desc"
-        android:src="@drawable/outline_filter_alt_black_36" />
 
     <include
         layout="@layout/filter_cards"
