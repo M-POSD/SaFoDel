@@ -5,7 +5,6 @@
     android:id="@+id/homepage_app_bar"
     android:layout_width="match_parent"
     android:layout_height="300dp"
-    android:background="@color/snow"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,6 +33,15 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="9.9">
+
+<!--                <ImageView-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:scaleY="1.5"-->
+<!--                    android:scaleX="1.5"-->
+<!--                    android:src="@drawable/home_background"/>-->
 
                 <dyanamitechetan.vusikview.VusikView
                     android:id="@+id/vusik"
