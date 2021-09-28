@@ -1422,8 +1422,15 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             filterCards.layoutParams = filterCardsHeight
 
             binding.filterCards.filterPaths.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.filter_path, 0,
-                0, 0
+                R.drawable.filter_path, 0, 0, 0
+            )
+
+            binding.filterCards.filterTraffic.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.filter_traffic,0,0,0
+            )
+
+            binding.filterCards.filterAccidents.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.filter_accident,0,0,0
             )
 
             this.cancel()
