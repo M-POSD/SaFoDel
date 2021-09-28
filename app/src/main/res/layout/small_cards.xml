@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_weight="5"
+                    android:layout_weight="4.3"
                     android:fontFamily="@font/rubik_bold"
                     android:gravity="center"
                     android:text="Demo"
@@ -50,7 +50,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5"
+                    android:layout_weight="5.7"
                     android:gravity="center_horizontal">
 
                     <ImageView
@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_weight="5"
+                    android:layout_weight="4.3"
                     android:fontFamily="@font/rubik_bold"
                     android:gravity="center"
                     android:text="Demo"
@@ -111,7 +111,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5"
+                    android:layout_weight="5.7"
                     android:gravity="center_horizontal">
 
                     <ImageView
