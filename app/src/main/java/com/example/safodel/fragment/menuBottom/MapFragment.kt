@@ -391,7 +391,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
         fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState)
-        filterTrafficListener()
         //setDialog()
         //mapView.getMapAsync(this) // update the map
         return binding.root
@@ -610,6 +609,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
 
         filterTrafficListener()
+        filterAccidentListener()
 
     }
 
@@ -1545,6 +1545,41 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             else {
                 trafficPlugin.setVisibility(false)
                 filterTraffic.setTextColor(ContextCompat.getColor(mainActivity, R.color.gray))
+            }
+        }
+    }
+
+    fun filterAccidentListener(){
+        val filterAccidents = binding.filterCards.filterAccidents
+        var filterStatus = true
+        filterAccidents.setOnClickListener {
+            if(filterStatus){
+                mapboxMap.getStyle {
+                    val layer1 = it.getLayer("basic_circle_cayer")
+                    val layer2 = it.getLayer("shadow_circle_cayer")
+                    val layer3 = it.getLayer("icon_layer")
+                    if (layer1 != null && layer2 != null && layer3 != null) {
+                            layer1.setProperties(visibility(Property.NONE))
+                            layer2.setProperties(visibility(Property.NONE))
+                            layer3.setProperties(visibility(Property.NONE))
+                        filterAccidents.setTextColor(ContextCompat.getColor(mainActivity, R.color.gray))
+                        filterStatus = false
+                    }
+                }
+            }
+            else{
+                mapboxMap.getStyle {
+                    val layer1 = it.getLayer("basic_circle_cayer")
+                    val layer2 = it.getLayer("shadow_circle_cayer")
+                    val layer3 = it.getLayer("icon_layer")
+                    if (layer1 != null && layer2 != null && layer3 != null) {
+                            layer1.setProperties(visibility(Property.VISIBLE))
+                            layer2.setProperties(visibility(Property.VISIBLE))
+                            layer3.setProperties(visibility(Property.VISIBLE))
+                        filterAccidents.setTextColor(ContextCompat.getColor(mainActivity, R.color.black))
+                        filterStatus = true
+                    }
+                }
             }
         }
     }
