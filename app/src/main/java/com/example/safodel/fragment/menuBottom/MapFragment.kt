@@ -789,7 +789,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 enableLocationComponent(it)
             }
         } else {
-            Toast.makeText(context, getString(R.string.loation_granted), Toast.LENGTH_LONG)
+            Toast.makeText(context, getString(R.string.location_granted), Toast.LENGTH_LONG)
                 .show()
         }
     }

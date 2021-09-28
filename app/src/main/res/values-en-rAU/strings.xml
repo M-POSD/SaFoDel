@@ -275,9 +275,9 @@
 
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
-    <string name="current_time">"Current Time: "</string>
-    <string name="current_weather">"Current Weather: "</string>
-    <string name="current_traffic">Current Traffic:</string>
+    <string name="current_time">"Time: "</string>
+    <string name="current_weather">"Weather: "</string>
+    <string name="current_traffic">Traffic:</string>
     <string name="checklist">Checklist</string>
 
     <!-- map -->
@@ -290,7 +290,6 @@
     <string name="can_not_go">You can\'t go to that address!</string>
     <string name="ask_leave">Do you want to leave?</string>
     <string name="need_premission">Need the user location permission</string>
-    <string name="loation_granted">user location permission not granted</string>
     <string name="select_area">Select the area:</string>
     <string name="content_description_media">testing</string>
     <string name="tap_to_search_address">tap to search address</string>
@@ -308,6 +307,14 @@
     <string name="select_language">Select Language</string>
     <string name="bike_lock_checkbox_8">Bike lock</string>
     <string name="language">Language</string>
-    <string name="current_temperature">Current Temperature:</string>
+    <string name="current_temperature">Temp:</string>
     <string name="not_available">Not Available</string>
+    <string name="current_humidity">Humidity:</string>
+    <string name="weather_clear">Clear</string>
+    <string name="weather_clouds">Clouds</string>
+    <string name="weather_rain">Rain</string>
+    <string name="current_wind_speed">Wind Speed:</string>
+    <string name="miles_per_hour">miles/hr</string>
+    <string name="current_location">Location:</string>
+    <string name="location_granted">user location permission not granted</string>
 </resources>

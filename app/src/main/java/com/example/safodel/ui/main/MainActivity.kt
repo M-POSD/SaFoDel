@@ -29,6 +29,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
+import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.HistoryDetailViewModel
 import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -516,14 +517,28 @@ class MainActivity : AppCompatActivity() {
     /**
      * update the menu footer information
      */
-    fun updateMenuFooterInfo(weather: String) {
-        when (weather) {
-            "Clear" -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear_black)
-            "Clouds" -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clouds_black)
-            "Rain" -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.rain_black)
+    fun updateMenuFooterInfo(weatherObject: WeatherTemp) {
+        when (weatherObject.weather) {
+            "Clear" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear_black)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_clear)
+            }
+            "Clouds" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clouds_black)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_clouds)
+            }
+            "Rain" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.rain_black)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
             else -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.error_icon)
         }
-        binding.leftNavFooter.currentWeatherInfo.text = weather
+
+        binding.leftNavFooter.currentLocationInfo.text = weatherObject.location
+        binding.leftNavFooter.currentTempInfo.text = weatherObject.temp.toString() + "°C"
+        binding.leftNavFooter.currentHumidityInfo.text = weatherObject.humidity.toString() + "%"
+        binding.leftNavFooter.currentWindSpeedInfo.text = weatherObject.windSpeed.toString() + " " + getString(R.string.miles_per_hour)
+
     }
 }
 

@@ -188,8 +188,8 @@
 
     <!--  question  -->
 
-    <string name="question_heading" translatable="false"></string>
-    <string name="question_information" translatable="false"></string>
+<!--    <string name="question_heading" translatable="false"></string>-->
+<!--    <string name="question_information" translatable="false"></string>-->
     <!--    <string name="question_option1"></string>-->
     <!--    <string name="question_option2"></string>-->
     <!--    <string name="question_option3"></string>-->
@@ -277,10 +277,6 @@
 
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
-    <string name="current_time">"Time: "</string>
-    <string name="current_weather">"Weather: "</string>
-    <string name="current_traffic">Traffic:</string>
-    <string name="current_temperature">Temp:</string>
     <string name="checklist">Checklist</string>
 
     <!-- map -->
@@ -293,7 +289,7 @@
     <string name="can_not_go">You can\'t go to that address!</string>
     <string name="ask_leave">Do you want to leave?</string>
     <string name="need_premission">Need the user location permission</string>
-    <string name="loation_granted">user location permission not granted</string>
+    <string name="location_granted">User location permission not granted</string>
     <string name="select_area">Select the area:</string>
     <string name="content_description_media">testing</string>
     <string name="tap_to_search_address">tap to search address</string>
@@ -310,4 +306,19 @@
     <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">SELECT LANGUAGE</string>
     <string name="not_available">Not Available</string>
+
+    <!-- weather -->
+    <string name="current_time">Time:</string>
+    <string name="current_location">Location:</string>
+    <string name="current_weather">Weather:</string>
+    <string name="current_traffic">Traffic:</string>
+    <string name="current_humidity">Humidity:</string>
+    <string name="current_temperature">Temp:</string>
+    <string name="current_wind_speed">Wind Speed:</string>
+
+    <string name="weather_clear">Clear</string>
+    <string name="weather_clouds">Clouds</string>
+    <string name="weather_rain">Rain</string>
+
+    <string name="miles_per_hour">mi/hr</string>
 </resources>

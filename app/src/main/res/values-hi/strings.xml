@@ -210,7 +210,6 @@
     <string name="can_not_go">आप उस पते पर नहीं जा सकते!</string>
     <string name="ask_leave">क्या आप छोड़ना चाहते हैं?</string>
     <string name="need_premission">उपयोगकर्ता स्थान अनुमति की आवश्यकता है</string>
-    <string name="loation_granted">उपयोगकर्ता स्थान की अनुमति नहीं दी गई</string>
     <string name="select_area">क्षेत्र का चयन करें:</string>
     <string name="content_description_media">परिक्षण</string>
     <string name="tap_to_search_address">पता खोजने के लिए टैप करें</string>
@@ -243,4 +242,12 @@
     <string name="language">भाषा</string>
     <string name="current_temperature">वर्तमान तापमान:</string>
     <string name="not_available">उपलब्ध नहीं है</string>
+    <string name="current_humidity">वर्तमान आर्द्रता:</string>
+    <string name="current_wind_speed">हवा की गति:</string>
+    <string name="weather_clear">धूप</string>
+    <string name="weather_clouds">बादलों</string>
+    <string name="weather_rain">वर्षा</string>
+    <string name="miles_per_hour">मील/घंटा</string>
+    <string name="current_location">मैं</string>
+    <string name="location_granted">उपयोगकर्ता स्थान की अनुमति नहीं दी गई</string>
 </resources>

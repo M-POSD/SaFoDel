@@ -7,5 +7,11 @@ import com.google.gson.annotations.SerializedName
  */
 class WeatherResponse {
     @SerializedName("weather")
-    var weatherList: List<Weather> = ArrayList()
+    var weatherMainList: List<WeatherMain> = ArrayList()
+
+    @SerializedName("main")
+    var main = Main()
+
+    @SerializedName("wind")
+    var wind = Wind()
 }

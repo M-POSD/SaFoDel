@@ -3,7 +3,6 @@ package com.example.safodel.fragment.menuBottom
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -31,35 +30,36 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
-import androidx.core.widget.NestedScrollView
 import android.view.MenuInflater
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
-import androidx.core.view.ViewCompat
-import androidx.core.view.ViewCompat.setFitsSystemWindows
 import androidx.lifecycle.ViewModelProvider
-import com.example.safodel.adapter.EpicStyle2Adapter
 import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
-import kotlin.concurrent.schedule
-import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.example.safodel.model.SuburbPathsResponse
-import com.example.safodel.retrofit.SuburbClient
-import com.example.safodel.retrofit.SuburbInterface
+import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.WeatherViewModel
+import com.mapbox.android.core.permissions.PermissionsListener
+import com.mapbox.android.core.permissions.PermissionsManager
 import kotlinx.coroutines.*
-import java.lang.Exception
 import java.lang.Runnable
+import kotlin.math.roundToInt
 
 
-class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
+    PermissionsListener {
     // get weather
     private val APP_ID = "898ef19b846722554449f6068e7c7253"
-    private val CITY_NAME = "clayton,AU"
+    private val UNITS = "metric"
+    private var LAT = -37.840935f
+    private var LON = 144.946457f
+//    private val CITY_NAME = "clayton,AU"
 
     private lateinit var weatherService: RetrofitInterface
+
+    // Permission
+    private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
     private lateinit var toast: Toast
@@ -99,6 +99,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         weatherService = RetrofitClient.getRetrofitService()
         callWeatherService()
+
+        // request permission of user location
+        permissionsManager = PermissionsManager(this)
+        permissionsManager.requestLocationPermissions(activity)
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
@@ -678,8 +682,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun callWeatherService() {
         val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(
-            CITY_NAME,
-            APP_ID
+            LAT.toString(),
+            LON.toString(),
+            APP_ID,
+            UNITS
         )
 
         callAsync.enqueue(object : Callback<WeatherResponse?> {
@@ -688,15 +694,27 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 response: Response<WeatherResponse?>
             ) {
                 if (response.isSuccessful) {
-                    val list = response.body()!!.weatherList
-                    if (list != null) {
-                        val weather = list[0].main
+                    val weatherResponse = response.body()!!
+                    val weatherList = weatherResponse.weatherMainList
+
+                    LAT = (LAT * 100.0).roundToInt() / 100.0f
+                    LON = (LON * 100.0).roundToInt() / 100.0f
+                    val location = "$LAT, $LON"
+                    val temp = weatherResponse.main.temp
+                    val pressure = weatherResponse.main.pressure
+                    val humidity = weatherResponse.main.humidity
+                    var windSpeed = weatherResponse.wind.speed
+                    windSpeed = Math. round(windSpeed * 2.237 * 100.0) / 100.0f
+
+
+                    if (weatherList != null) {
+                        val weather = weatherList[0].main
                         if (weather == "Rain") {
                             rainingAnimation()
                         }
                         Log.d("currentWeather", weather)
                         mainActivity.keepWeatherSharePrefer(weather)
-                        model.setWeather(weather)
+                        model.setWeather(WeatherTemp(location, weather, temp, pressure, humidity, windSpeed))
                     }
                 } else {
                     Log.i("Error ", "Response failed")
@@ -772,6 +790,18 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         return currentWeatherIcons
+    }
+
+    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
+        Toast.makeText(context, getString(R.string.need_premission), Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPermissionResult(granted: Boolean) {
+        if (granted) {
+            Toast.makeText(context, "Granted", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(context, getString(R.string.location_granted), Toast.LENGTH_LONG).show()
+        }
     }
 
 }
