@@ -121,6 +121,7 @@ import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
 import com.mapbox.geojson.*
+import com.mapbox.mapboxsdk.style.sources.Source
 
 
 private val locationList: ArrayList<Point> = ArrayList()
@@ -347,7 +348,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 spinnerTimes++ // calculate the times to test
                 if (spinnerTimes >= 1) {
                     suburb = parent?.getItemAtPosition(position).toString()
-                    callAllClient()
+                    callAllClient(true)
                     //mapView.getMapAsync(fragmentNow)
                 }
             }
@@ -368,7 +369,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 //        callAlertsClient()
 //        callSuburbClient()
 //        callPathsClient()
-        callAllClient()
+        callAllClient(false)
 
         // go to the user's current location
         binding.floatButton.setOnClickListener {
@@ -413,24 +414,12 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         markerViewManager = MarkerViewManager(mapView, mapboxMap)
         this.mapboxMap.setStyle(Style.LIGHT) {
 
-            /*-- Camera auto zoom to the suburb area --*/
-            if (feature.size != 0 && locationList.size != 0) {
-                suburbPoint = locationList[0]
-                val position = CameraPosition.Builder()
-                    .target(LatLng(suburbPoint.latitude(), suburbPoint.longitude()))
-                    .zoom(9.0)
-                    .build()
-                mapboxMap.cameraPosition = position
-            }
+            cameraAutoZoomToSuburb()
 
             // get user location
             enableLocationComponent(it)
 
-            // Make a toast when data is updating
-            if (feature.size == 0 && locationList.size == 0) {
-                toast.setText(getString(R.string.no_data))
-                toast.show()
-            }
+            checkDataEmpty()
 
             /*-- Add location image --*/
             it.addImage(
@@ -695,6 +684,76 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
     }
 
+    fun onMapUpdate(){
+
+        cameraAutoZoomToSuburb()
+        checkDataEmpty()
+        mapboxMap.getStyle {
+
+            enableLocationComponent(it)
+
+            val source = it.getSourceAs<GeoJsonSource>("source")
+            if (source != null) {
+                source.setGeoJson(FeatureCollection.fromFeatures(
+                    ArrayList<Feature>(
+                        feature
+                    )
+                ))
+            }
+
+
+            val alertSource = it.getSourceAs<GeoJsonSource>("alertSource")
+            if (alertSource != null) {
+                alertSource.setGeoJson(FeatureCollection.fromFeatures(
+                    ArrayList<Feature>(
+                        alertsFeature
+                    )
+                ))
+            }
+
+            // paths source
+            val pathsSource = it.getSourceAs<GeoJsonSource>("pathsSource")
+            if (pathsSource != null) {
+                pathsSource.setGeoJson(FeatureCollection.fromFeatures(
+                    arrayOf(
+                        Feature.fromGeometry(
+                            MultiLineString.fromLngLats(pathsList as List<MutableList<Point>>)
+                        )
+                    )
+                ))
+            }
+        }
+        /*-- Set the camera's animation --*/
+        mapboxMap.animateCamera(
+            CameraUpdateFactory
+                .newCameraPosition(
+                    CameraPosition.Builder()
+                        .zoom(10.5)
+                        .build()
+                ), 3000
+        )
+        dialog.dismiss()
+    }
+
+    fun cameraAutoZoomToSuburb(){
+        /*-- Camera auto zoom to the suburb area --*/
+        if (feature.size != 0 && locationList.size != 0) {
+            suburbPoint = locationList[0]
+            val position = CameraPosition.Builder()
+                .target(LatLng(suburbPoint.latitude(), suburbPoint.longitude()))
+                .zoom(9.0)
+                .build()
+            mapboxMap.cameraPosition = position
+        }
+    }
+
+    fun checkDataEmpty(){
+        // Make a toast when data is updating
+        if (feature.size == 0 && locationList.size == 0) {
+            toast.setText(getString(R.string.no_data))
+            toast.show()
+        }
+    }
 
 
     @SuppressWarnings("MissingPermission")
@@ -1270,7 +1329,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         })
     }
 
-    fun callAllClient(){
+    fun callAllClient(boolean: Boolean){
         alertsFeature.clear()
         feature.clear()
         locationList.clear()
@@ -1325,11 +1384,9 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                                 }
                             }
 
-                            mapView.getMapAsync(fragmentNow)
-
-
-
-
+                    if(boolean)
+                        onMapUpdate()
+                    else mapView.getMapAsync(fragmentNow)
                 } else {
                     dialog.dismiss()
                     Timber.d("Response failed")
