@@ -313,6 +313,17 @@
     <string name="select_language">SELECT LANGUAGE</string>
     <string name="not_available">Not Available</string>
 
+    <string name="analysis_heading1">2000+</string>
+    <string name="analysis_description1">bicycle accidents have been reported in Victoria since 2019. </string>
+    <string name="analysis_heading2">~80%</string>
+    <string name="analysis_description2">bicycle accidents were reported in Clear atmospheric conditions</string>
+    <string name="analysis_heading3">上午 8-9 &amp; 下午 4-6</string>
+    <string name="analysis_description3">were the most accident-prone hours (also being office hours)</string>
+    <string name="analysis_heading4">~74%</string>
+    <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
+    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn</string>
+
     <!-- weather -->
     <string name="current_time">Time:</string>
     <string name="current_location">Location:</string>

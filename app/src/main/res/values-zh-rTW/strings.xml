@@ -254,4 +254,14 @@
     <string name="analysis_intro">事故趨勢</string>
     <string name="checklist_intro">做好送外賣的準備</string>
     <string name="quiz_intro">檢查你的理解</string>
+    <string name="analysis_heading1">2000+</string>
+    <string name="analysis_heading2">~80%</string>
+    <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
+    <string name="analysis_heading4">~74%</string>
+    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_description1">自 2019 年以來，維多利亞州已經紀錄自行車事故。</string>
+    <string name="analysis_description2">在晴朗的天氣條件下報告了自行車事故</string>
+    <string name="analysis_description3">是最容易發生事故的時間（也是辦公時間）</string>
+    <string name="analysis_description4">自行車事故發生在白天</string>
+    <string name="analysis_description5">在夜間或黃昏/黎明期間報告了自行車事故</string>
 </resources>

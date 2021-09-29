@@ -321,4 +321,14 @@
     <string name="analysis_intro">Accident Trends</string>
     <string name="checklist_intro">Get ready for delivering</string>
     <string name="quiz_intro">Check your understanding</string>
+    <string name="analysis_heading1">2000+</string>
+    <string name="analysis_heading2">~80%</string>
+    <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
+    <string name="analysis_heading4">~74%</string>
+    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_description1">"bicycle accidents have been reported in Victoria since 2019. "</string>
+    <string name="analysis_description2">bicycle accidents were reported in Clear atmospheric conditions</string>
+    <string name="analysis_description3">were the most accident-prone hours (also being office hours)</string>
+    <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
+    <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn</string>
 </resources>

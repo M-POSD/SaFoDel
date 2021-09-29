@@ -15,6 +15,8 @@ import androidx.core.view.get
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
+import com.example.safodel.adapter.AnalysisViewAdapter
+import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.FragmentAnalysisBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.*
@@ -42,8 +44,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var dialog: MaterialDialog
     private lateinit var lineChart: LineChart
     private lateinit var bar: HorizontalBarChart
-    private lateinit var accidentsNumber : TextView
+//    private lateinit var accidentsNumber : TextView
     private var suburbName = "MELBOURNE"
+    private lateinit var adapter: AnalysisViewAdapter
+
     private lateinit var toast1: Toast
     private lateinit var toast2: Toast
     private lateinit var toast3: Toast
@@ -66,7 +70,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         setToolbarBasic(toolbar)
 
         // Set text
-        accidentsNumber  = binding.accidentNumber
+//        accidentsNumber  = binding.accidentNumber
 
         // Set Chart
         lineChart = binding.lineChart
@@ -80,7 +84,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         // Retrofit get data
         suburbInterface = SuburbClient.getSuburbService()
 
-        // Open page set default value
+        // connect generic info view adapter
+        adapter = AnalysisViewAdapter(requireActivity())
+        binding.viewPager2Home.adapter = adapter
+        binding.wormDotsIndicatorHome.setViewPager2(binding.viewPager2Home)
 
         return binding.root
     }
@@ -112,7 +119,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
                 setDialog()
                 callSuburbClient(spProvince.item[position].toString())
-                binding.suburbName.text = spProvince.item[position].toString()
+//                binding.suburbName.text = spProvince.item[position].toString()
             }
             override fun onNothingSelected(adapterView: AdapterView<*>) {}
         }
@@ -150,10 +157,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     if (response.isSuccessful) {
                         val resultList = response.body()?.suburbAccidents
                         if(resultList?.isNotEmpty() == true){
-                            accidentsNumber.text = resultList[0].accidents.toString()
+//                            accidentsNumber.text = resultList[0].accidents.toString()
                         }
                     } else {
-                        Timber.i("Response failed")
+//                        Timber.i("Response failed")
                     }
                 }
                 override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
@@ -183,7 +190,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                         val resultList = response.body()!!.suburbTimeAccidents
                         setLineChart(resultList)
                     } else {
-                        Timber.i("Response failed")
+//                        Timber.i("Response failed")
                     }
                 }
                 override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {

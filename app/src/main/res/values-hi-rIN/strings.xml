@@ -254,4 +254,14 @@
     <string name="analysis_intro">दुर्घटना रुझान</string>
     <string name="checklist_intro">डिलीवर करने के लिए तैयार हो जाएं</string>
     <string name="quiz_intro">अपनी समझ की जांच करें</string>
+    <string name="analysis_heading1">2000+</string>
+    <string name="analysis_heading2">~80%</string>
+    <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
+    <string name="analysis_heading4">~74%</string>
+    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_description1">2019 से विक्टोरिया में साइकिल दुर्घटनाएं दर्ज की गई हैं।</string>
+    <string name="analysis_description2">स्पष्ट वायुमंडलीय परिस्थितियों में साइकिल दुर्घटनाओं की सूचना मिली</string>
+    <string name="analysis_description3">सबसे अधिक दुर्घटना-प्रवण घंटे थे (कार्यालय समय भी होने के कारण)</string>
+    <string name="analysis_description4">दिन के उजाले में साइकिल दुर्घटना की सूचना मिली</string>
+    <string name="analysis_description5">साइकिल दुर्घटनाओं की सूचना रात में या शाम/सुबह के दौरान दर्ज की गई थी</string>
 </resources>
