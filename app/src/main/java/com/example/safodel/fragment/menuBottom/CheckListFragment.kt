@@ -45,7 +45,6 @@ class CheckListFragment :
         configNotificationView()
         configDefaultTextView()
         configCheckboxClickListener()
-        Log.d("configCheckboxClickListener", "----------------------------------")
 
         return binding.root
     }
@@ -54,7 +53,6 @@ class CheckListFragment :
         super.onStart()
         configCheckboxClicked()
         configImageView()
-        Log.d("kjgjgjhgkjhgkjgjh", "----------------------------------")
     }
 
     override fun onDestroyView() {
