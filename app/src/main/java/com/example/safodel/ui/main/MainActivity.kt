@@ -37,6 +37,7 @@ import com.mapbox.maps.extension.style.expressions.dsl.generated.length
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
+import timber.log.Timber
 import java.util.*
 
 
@@ -342,8 +343,9 @@ class MainActivity : AppCompatActivity() {
      */
     fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
         val checkbox = "checkbox$checkbox_num"
+        Log.d("keepCheckboxSharePrefer","  $checkbox: $isChecked")
         val sharedPref = this.applicationContext.getSharedPreferences(
-            checkbox, Context.MODE_PRIVATE
+            checkbox, MODE_PRIVATE
         )
 
         val spEditor = sharedPref.edit()
@@ -360,6 +362,8 @@ class MainActivity : AppCompatActivity() {
             checkbox,
             Context.MODE_PRIVATE
         )
+
+        Log.d("getCheckboxSharePrefer","$checkbox: ${sharedPref.getBoolean(checkbox, false)}")
         return sharedPref.getBoolean(checkbox, false)
     }
 
