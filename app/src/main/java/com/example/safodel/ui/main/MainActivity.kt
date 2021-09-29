@@ -524,18 +524,30 @@ class MainActivity : AppCompatActivity() {
     fun updateMenuFooterInfo(weatherObject: WeatherTemp) {
         when (weatherObject.weather) {
             "Clear" -> {
-                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear_black)
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear)
                 binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_clear)
             }
             "Clouds" -> {
-                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clouds_black)
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clouds)
                 binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_clouds)
             }
             "Rain" -> {
-                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.rain_black)
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.rain)
                 binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
             }
-            else -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.error_icon)
+            "Thunderstorm" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.thunderstorm)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
+            "Drizzle" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.drizzle)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
+            "Snow" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.snow)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
+            else -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.dust)
         }
 
         binding.leftNavFooter.currentLocationInfo.text = weatherObject.location

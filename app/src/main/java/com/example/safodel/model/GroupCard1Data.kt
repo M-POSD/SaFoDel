@@ -101,40 +101,6 @@ class GroupCard1Data(
                     2)
             )
 
-//            // gear2 data
-//            groupCard1Data.add(
-//                GroupCard1Data(
-//                    "gear2",
-//                    R.string.gear_standard_bsi,
-//                    R.drawable.bsi,
-//                    2
-//                )
-//            )
-//            groupCard1Data.add(
-//                GroupCard1Data(
-//                    "gear2",
-//                    R.string.gear_standard_global_mark,
-//                    R.drawable.global_mark,
-//                    1
-//                )
-//            )
-//            groupCard1Data.add(
-//                GroupCard1Data(
-//                    "gear2",
-//                    R.string.gear_standard_sai_global,
-//                    R.drawable.sai_global,
-//                    1
-//                )
-//            )
-//            groupCard1Data.add(
-//                GroupCard1Data(
-//                    "gear2",
-//                    R.string.gear_standard_aus,
-//                    R.drawable.aus,
-//                    1
-//                )
-//            )
-
             // inAnAccident3 data
             groupCard1Data.add(
                 GroupCard1Data(
@@ -152,14 +118,6 @@ class GroupCard1Data(
                     2
                 )
             )
-//            groupCard1Data.add(
-//                GroupCard1Data(
-//                    "inAnAccident3",
-//                    R.string.uber_link,
-//                    R.drawable.food_delivery_1,
-//                    2
-//                )
-//            )
 
             /* For the connection between icons and websites  */
             groupCard1Data.add(

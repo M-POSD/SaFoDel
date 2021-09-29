@@ -49,6 +49,9 @@ class CheckListFragment :
         return binding.root
     }
 
+    /**
+     * when the language restart, the view will be called after this 
+     */
     override fun onStart() {
         super.onStart()
         configCheckboxClicked()

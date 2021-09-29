@@ -183,10 +183,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
                 homepageButtonLayout.viewPager2Home.currentItem -= 4
             } else {
-//                Log.d(
-//                    "current position",
-//                    homepageButtonLayout.viewPager2Home.currentItem.toString()
-//                )
                 homepageButtonLayout.viewPager2Home.currentItem += 1
             }
             handler.postDelayed(runnable, 5000) //5 sec delay
@@ -231,10 +227,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // set up default image view
     private fun configDefaultImageView() {
-        homepageButtonLayout.epicCard12.scImageViewLeft.setImageResource(R.drawable.tip)
-        homepageButtonLayout.epicCard12.scImageViewRight.setImageResource(R.drawable.delivery_on_ebike)
-        homepageButtonLayout.epicCard34.scImageViewLeft.setImageResource(R.drawable.road_sign)
-        homepageButtonLayout.epicCard34.scImageViewRight.setImageResource(R.drawable.in_an_accident)
+        homepageButtonLayout.epicCard12.scImageViewLeft.setImageResource(R.drawable.tipv2)
+        homepageButtonLayout.epicCard12.scImageViewRight.setImageResource(R.drawable.delivery_on_ebike2)
+        homepageButtonLayout.epicCard34.scImageViewLeft.setImageResource(R.drawable.road_sign2)
+        homepageButtonLayout.epicCard34.scImageViewRight.setImageResource(R.drawable.in_an_accident2)
     }
 
     // raining animation
@@ -337,22 +333,18 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // config onClickListener for navigation
     private fun configOnClickListener() {
         homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
-//            recordPosition(0)
             findNavController().navigate(R.id.epic1Fragment, null, navAnimationLeftToRight())
         }
 
         homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
-//            recordPosition(1)
             findNavController().navigate(R.id.epic2Fragment, null, navAnimationLeftToRight())
         }
 
         homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
-//            recordPosition(2)
             findNavController().navigate(R.id.epic3Fragment, null, navAnimationLeftToRight())
         }
 
         homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
-//            recordPosition(3)
             findNavController().navigate(R.id.epic4Fragment, null, navAnimationLeftToRight())
         }
 
@@ -361,20 +353,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 R.id.action_item_two_light -> {
                     if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
                         configTheme("light")
-
                     }
                     true
                 }
                 R.id.action_item_two_dark -> {
                     if (!animatorSetLight.isRunning && !animatorSetNight.isRunning && !animatorDriving.isRunning) {
                         configTheme("night")
-
                     }
                     true
                 }
                 R.id.action_item_one_dark, R.id.action_item_one_light -> {
                     rainingAnimation()
-
                     true
                 }
                 else -> false
@@ -390,23 +379,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         homePageImage.images.setOnClickListener {
-//            if (animatorDriving.isRunning) {
-//                animatorDriving.cancel()
-//                animatorDriving.start()
-//            }
-
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning) {
                 homePageImage.images.visibility = View.INVISIBLE
                 homePageImage.images2.visibility = View.VISIBLE
                 animatorDriving.start()
             }
         }
-//        homePageImage.images2.setOnClickListener{
-//            if (animatorDriving.isRunning) {
-//                animatorDriving.cancel()
-//                animatorDriving.start()
-//            }
-//        }
     }
 
     // for the learning mode for the beginner of the application
@@ -768,28 +746,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 setToolbarWhite(toolbar)
             }
         }
-    }
-
-    // currently this is just for getting Rain weather icons(different mode light/night)
-    private fun configWeatherIcons(): IntArray {
-        var currentWeatherIcons = IntArray(2)
-
-        when ("Rain") {
-            "Clear" -> {
-                currentWeatherIcons[0] = R.drawable.clear_black
-                currentWeatherIcons[1] = R.drawable.clear_white
-            }
-            "Rain" -> {
-                currentWeatherIcons[0] = R.drawable.rain_black
-                currentWeatherIcons[1] = R.drawable.rain_white
-            }
-            else -> {
-                currentWeatherIcons[0] = R.drawable.clouds_black
-                currentWeatherIcons[1] = R.drawable.clouds_white
-            }
-        }
-
-        return currentWeatherIcons
     }
 
     override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
