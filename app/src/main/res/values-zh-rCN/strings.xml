@@ -264,4 +264,8 @@
     <string name="analysis_description3">是最容易发生事故的时间（也是办公时间）</string>
     <string name="analysis_description5">在夜间或黄昏/黎明期间报告了自行车事故</string>
     <string name="analysis_description4">自行车事故发生在白天</string>
+    <string name="bike_paths">自行车道</string>
+    <string name="alerts">警报</string>
+    <string name="traffic">交通状况</string>
+    <string name="accidents">事故地点</string>
 </resources>

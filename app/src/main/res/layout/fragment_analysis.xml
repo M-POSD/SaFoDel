@@ -22,10 +22,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="?attr/actionBarSize"
+
             app:smsp_enableDismissSearch="true"
             app:smsp_enableErrorLabel="false"
             app:smsp_errorText="@string/error"
             app:smsp_floatingLabelColor="@color/deep_green"
+            android:background="@drawable/white_shape"
             app:smsp_floatingLabelText="Suburb:"
             app:smsp_hint="@string/select_suburb"
             app:smsp_hintColor="#388E3C"
@@ -37,7 +39,8 @@
             app:smsp_itemListHintColor="#FFFFFF"
             app:smsp_multilineError="false"
             app:smsp_searchHeaderBackgroundColor="@color/primary_green"
-            app:smsp_selectedItemListColor="@color/black" />
+            app:smsp_selectedItemListColor="@color/black"
+            app:smsp_underlineSize="0dp" />
 
         <ScrollView
             android:layout_width="match_parent"

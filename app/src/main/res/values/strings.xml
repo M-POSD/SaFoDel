@@ -300,6 +300,11 @@
     <string name="content_description_media">testing</string>
     <string name="tap_to_search_address">tap to search address</string>
 
+    <string name="bike_paths">Bike Paths</string>
+    <string name="alerts">Alerts</string>
+    <string name="traffic">Traffic</string>
+    <string name="accidents">Accidents</string>
+
     <!--  Analysis  -->
     <string name="error">ERROR</string>
     <string name="select_suburb">Select the suburb</string>
@@ -317,7 +322,7 @@
     <string name="analysis_description1">bicycle accidents have been reported in Victoria since 2019. </string>
     <string name="analysis_heading2">~80%</string>
     <string name="analysis_description2">bicycle accidents were reported in Clear atmospheric conditions</string>
-    <string name="analysis_heading3">上午 8-9 &amp; 下午 4-6</string>
+    <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
     <string name="analysis_description3">were the most accident-prone hours (also being office hours)</string>
     <string name="analysis_heading4">~74%</string>
     <string name="analysis_description4">bicycle accidents were reported in Daylight</string>

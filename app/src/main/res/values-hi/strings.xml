@@ -264,4 +264,8 @@
     <string name="analysis_description3">सबसे अधिक दुर्घटना-प्रवण घंटे थे (कार्यालय समय भी होने के कारण)</string>
     <string name="analysis_description4">दिन के उजाले में साइकिल दुर्घटना की सूचना मिली</string>
     <string name="analysis_description5">साइकिल दुर्घटनाओं की सूचना रात में या शाम/सुबह के दौरान दर्ज की गई थी</string>
+    <string name="bike_paths">बाइक पथ</string>
+    <string name="alerts">अलर्ट</string>
+    <string name="traffic">यातायात</string>
+    <string name="accidents">दुर्घटनाओं</string>
 </resources>

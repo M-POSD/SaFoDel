@@ -7,7 +7,7 @@
     <string name="city_name" translatable="false">Caulfield,AU</string>
 
     <!--  toast  -->
-    <string name="start_learning_mode" translatable="false">Welcome to the SaFoDel learning mode</string>
+    <string name="start_learning_mode">Welcome to the SaFoDel learning mode</string>
     <string name="end_learning_mode">Thanks for watching</string>
     <string name="notify_select_option">Please select an option</string>
 
@@ -43,10 +43,17 @@
     <string name="raining">Raining</string>
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
 
     <!--  slang heading for each page  -->
     <string name="home_page_slang_1">Preparing you for safer food deliveries on bicycle in Victoria</string>
     <string name="home_page_slang_2">\'Don\'t put your life at risk for other\'s convenience\'</string>
+
+    <string name="map_intro">Get Familiar with your area</string>
+    <string name="analysis_intro">Accident Trends</string>
+    <string name="checklist_intro">Get ready for delivering</string>
+    <string name="quiz_intro">Check your understanding</string>
+
     <string name="epic1_slang">Find out how to ride safely while delivering food</string>
     <string name="epic2_slang">Find information on using E-Bikes for food delivery</string>
     <string name="epic3_slang">Find out the cycling gear you need to deliver safe</string>
@@ -72,7 +79,7 @@
     <string name="first_target">Home button allows you to return home page directly</string>
     <string name="second_target">Map button allows you to see the historical accident locations in Victoria with details</string>
     <string name="third_target">ACCIDENT-TRENDS button allows to check the trends in historical accident in different suburbs</string>
-    <string name="fourth_target">QUIZ-YOURSELF button allows you to test your understanding of road rules while delivering food</string>
+    <string name="fourth_target">QUIZ-YOURSELF button allows you to test your understanding of road rules before delivering food</string>
     <string name="fifth_target">Ride-Safer button allows you to find out how to ride safely while delivering food</string>
     <string name="sixth_target">Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery</string>
     <string name="seventh_target">Safety-Gear button allows you to find out the cycling gear you need to deliver safe</string>
@@ -131,10 +138,10 @@
     <string name="gear_check_list_item4">Reflective vest</string>
     <string name="gear_check_list_item5">Gloves</string>
     <string name="gear_check_list_item6">Hand sanitiser</string>
-    <string name="gear_standard_bsi">BSI</string>
-    <string name="gear_standard_global_mark">Global-Mark</string>
-    <string name="gear_standard_sai_global">SAI Global</string>
-    <string name="gear_standard_aus">AUS</string>
+    <string name="gear_standard_bsi" translatable="false">BSI</string>
+    <string name="gear_standard_global_mark" translatable="false">Global-Mark</string>
+    <string name="gear_standard_sai_global" translatable="false">SAI Global</string>
+    <string name="gear_standard_aus" translatable="false">AUS</string>
 
     <!--  epic4  -->
     <string name="epic4_name">In an Accident</string>
@@ -187,8 +194,8 @@
 
     <!--  question  -->
 
-    <string name="question_heading" translatable="false"></string>
-    <string name="question_information" translatable="false"></string>
+    <!--    <string name="question_heading" translatable="false"></string>-->
+    <!--    <string name="question_information" translatable="false"></string>-->
     <!--    <string name="question_option1"></string>-->
     <!--    <string name="question_option2"></string>-->
     <!--    <string name="question_option3"></string>-->
@@ -262,6 +269,7 @@
     <string name="sanitizer_checkbox_5">Hand sanitiser</string>
     <string name="vest_checkbox_6">Reflective vest</string>
     <string name="backpack_checkbox_7">Delivery bag</string>
+    <string name="bike_lock_checkbox_8">Bike lock</string>
 
     <!--  about app  -->
     <string name="about">ABOUT</string>
@@ -275,9 +283,6 @@
 
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
-    <string name="current_time">"Time: "</string>
-    <string name="current_weather">"Weather: "</string>
-    <string name="current_traffic">Traffic:</string>
     <string name="checklist">Checklist</string>
 
     <!-- map -->
@@ -290,9 +295,15 @@
     <string name="can_not_go">You can\'t go to that address!</string>
     <string name="ask_leave">Do you want to leave?</string>
     <string name="need_premission">Need the user location permission</string>
+    <string name="location_granted">User location permission not granted</string>
     <string name="select_area">Select the area:</string>
     <string name="content_description_media">testing</string>
     <string name="tap_to_search_address">tap to search address</string>
+
+    <string name="bike_paths">Bike Paths</string>
+    <string name="alerts">Alerts</string>
+    <string name="traffic">Traffic</string>
+    <string name="accidents">Accidents</string>
 
     <!--  Analysis  -->
     <string name="error">ERROR</string>
@@ -304,31 +315,32 @@
     <string name="accident_times">Accident Times</string>
     <string name="filter_spotlight">This is the filter.</string>
     <string name="no_data">This suburb does not have any data.</string>
-    <string name="select_language">Select Language</string>
-    <string name="bike_lock_checkbox_8">Bike lock</string>
-    <string name="language">Language</string>
-    <string name="current_temperature">Temp:</string>
+    <string name="select_language">SELECT LANGUAGE</string>
     <string name="not_available">Not Available</string>
+
+    <string name="analysis_heading1">2000+</string>
+    <string name="analysis_description1">bicycle accidents have been reported in Victoria since 2019. </string>
+    <string name="analysis_heading2">~80%</string>
+    <string name="analysis_description2">bicycle accidents were reported in Clear atmospheric conditions</string>
+    <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
+    <string name="analysis_description3">were the most accident-prone hours (also being office hours)</string>
+    <string name="analysis_heading4">~74%</string>
+    <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
+    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn</string>
+
+    <!-- weather -->
+    <string name="current_time">Time:</string>
+    <string name="current_location">Location:</string>
+    <string name="current_weather">Weather:</string>
+    <string name="current_traffic">Traffic:</string>
     <string name="current_humidity">Humidity:</string>
+    <string name="current_temperature">Temp:</string>
+    <string name="current_wind_speed">Wind Speed:</string>
+
     <string name="weather_clear">Clear</string>
     <string name="weather_clouds">Clouds</string>
     <string name="weather_rain">Rain</string>
-    <string name="current_wind_speed">Wind Speed:</string>
-    <string name="miles_per_hour">miles/hr</string>
-    <string name="current_location">Location:</string>
-    <string name="location_granted">user location permission not granted</string>
-    <string name="map_intro">Get Familiar with your area</string>
-    <string name="analysis_intro">Accident Trends</string>
-    <string name="checklist_intro">Get ready for delivering</string>
-    <string name="quiz_intro">Check your understanding</string>
-    <string name="analysis_heading1">2000+</string>
-    <string name="analysis_heading2">~80%</string>
-    <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
-    <string name="analysis_heading4">~74%</string>
-    <string name="analysis_heading5">~20%</string>
-    <string name="analysis_description1">"bicycle accidents have been reported in Victoria since 2019. "</string>
-    <string name="analysis_description2">bicycle accidents were reported in Clear atmospheric conditions</string>
-    <string name="analysis_description3">were the most accident-prone hours (also being office hours)</string>
-    <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
-    <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn</string>
+
+    <string name="miles_per_hour">mi/hr</string>
 </resources>
