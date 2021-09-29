@@ -46,6 +46,18 @@
             android:padding="10dp"
             android:text="Bike Paths" />
 
+        <TextView
+            android:id="@+id/filter_alerts"
+            style="@style/textStyle14_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/white_shape"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:text="Alerts" />
+
     </LinearLayout>
 
 
