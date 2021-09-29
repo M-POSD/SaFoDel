@@ -327,4 +327,8 @@
     <string name="weather_rain">Rain</string>
 
     <string name="miles_per_hour">mi/hr</string>
+    <string name="bike_paths">Bike Paths</string>
+    <string name="alerts">Alerts</string>
+    <string name="traffic">Traffic</string>
+    <string name="accidents">Accidents</string>
 </resources>

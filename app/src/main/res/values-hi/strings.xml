@@ -254,4 +254,8 @@
     <string name="analysis_intro">दुर्घटना रुझान</string>
     <string name="checklist_intro">डिलीवर करने के लिए तैयार हो जाएं</string>
     <string name="quiz_intro">अपनी समझ की जांच करें</string>
+    <string name="bike_paths">बाइक पथ</string>
+    <string name="alerts">अलर्ट</string>
+    <string name="traffic">यातायात</string>
+    <string name="accidents">दुर्घटनाओं</string>
 </resources>

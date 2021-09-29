@@ -254,4 +254,8 @@
     <string name="analysis_intro">事故趋势</string>
     <string name="quiz_intro">检查你的理解</string>
     <string name="checklist_intro">做好送外卖的准备</string>
+    <string name="bike_paths">自行车道</string>
+    <string name="alerts">警告</string>
+    <string name="traffic">交通状况</string>
+    <string name="accidents">事件</string>
 </resources>

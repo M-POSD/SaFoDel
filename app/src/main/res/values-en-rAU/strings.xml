@@ -321,4 +321,8 @@
     <string name="analysis_intro">Accident Trends</string>
     <string name="checklist_intro">Get ready for delivering</string>
     <string name="quiz_intro">Check your understanding</string>
+    <string name="bike_paths">Bike Paths</string>
+    <string name="alerts">Alerts</string>
+    <string name="traffic">Traffic</string>
+    <string name="accidents">Accidents</string>
 </resources>
