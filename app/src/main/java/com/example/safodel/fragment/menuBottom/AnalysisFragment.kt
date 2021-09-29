@@ -26,9 +26,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,9 +38,9 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private var suburbList = SuburbList.init()
     private lateinit var suburbInterface: SuburbInterface
     private lateinit var dialog: MaterialDialog
-    private lateinit var lineChart: LineChart
+    //private lateinit var lineChart: LineChart
     private lateinit var bar: HorizontalBarChart
-    private lateinit var accidentsNumber : TextView
+    //private lateinit var accidentsNumber : TextView
     private var suburbName = "MELBOURNE"
     private lateinit var toast1: Toast
     private lateinit var toast2: Toast
@@ -66,10 +64,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         setToolbarBasic(toolbar)
 
         // Set text
-        accidentsNumber  = binding.accidentNumber
+        //accidentsNumber  = binding.accidentNumber
 
         // Set Chart
-        lineChart = binding.lineChart
+        //lineChart = binding.lineChart
         bar = binding.barChart
         bar.zoomOut()
         bar.xAxis.labelCount = 5
@@ -112,7 +110,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
                 setDialog()
                 callSuburbClient(spProvince.item[position].toString())
-                binding.suburbName.text = spProvince.item[position].toString()
+                //binding.suburbName.text = spProvince.item[position].toString()
             }
             override fun onNothingSelected(adapterView: AdapterView<*>) {}
         }
@@ -136,72 +134,11 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private fun callSuburbClient(suburbName: String){
 
         /*
-            Get the number for the total Text in the card
-         */
-
-        val job = GlobalScope.launch {
-            val callAsync: Call<SuburbResponse> = suburbInterface.totalRepos(
-                "total",
-                suburbName
-            )
-
-            callAsync.enqueue(object : Callback<SuburbResponse?> {
-                override fun onResponse(call: Call<SuburbResponse?>?, response: Response<SuburbResponse?>) {
-                    if (response.isSuccessful) {
-                        val resultList = response.body()?.suburbAccidents
-                        if(resultList?.isNotEmpty() == true){
-                            accidentsNumber.text = resultList[0].accidents.toString()
-                        }
-                    } else {
-                        Timber.i("Response failed")
-                    }
-                }
-                override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
-                    toast1.cancel()
-                    toast1.setText(t.message)
-                    toast1.show()
-
-                    Timber.i(t.message.toString())
-                }
-            })
-            delay(100L)
-        }
-
-
-        /*
             Get the data for first bar -- bar2
          */
-        val job2 = GlobalScope.launch {
-            job.join()
-            val callTime: Call<SuburbTimeResponse> = suburbInterface.timeRepos(
-                "time",
-                suburbName
-            )
-            callTime.enqueue(object : Callback<SuburbTimeResponse?> {
-                override fun onResponse(call: Call<SuburbTimeResponse?>?, response: Response<SuburbTimeResponse?>) {
-                    if (response.isSuccessful) {
-                        val resultList = response.body()!!.suburbTimeAccidents
-                        setLineChart(resultList)
-                    } else {
-                        Timber.i("Response failed")
-                    }
-                }
-                override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
-                    toast2.cancel()
-                    toast2.setText(t.message)
-                    toast2.show()
-                    Timber.i(t.message.toString())
-                }
-            })
-            delay(100L)
-        }
-
-
-        /*
-            Get the data for first bar -- bar2
-         */
-        GlobalScope.launch {
-            job2.join()
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        coroutineScope.launch {
+            //job2.join()
             val callStreet: Call<SuburbStreetsResponse> = suburbInterface.streetRepos(
                 "streets",
                 suburbName
@@ -230,30 +167,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
 
     }
 
-    /*
-        Set the Bar Chart of Accident time in this Suburb.
-     */
-    private fun setLineChart(list: List<SuburbTimeAccidents>){
-        val color  = ContextCompat.getColor(requireContext(), R.color.primary_green)
-        val colorList = ArrayList<Int>()
-        colorList.add(ColorTemplate.rgb("#8AD0AB"))
-        val data2: MutableList<Entry> = ArrayList()
 
-        for(each in list){
-            data2.add(Entry(each.accidentHours.toFloat(),each.accidentsNumber.toFloat()))
-        }
-        val lineDataset = LineDataSet(data2,getString(R.string.accident_times))
-        lineDataset.setColor(color)
-        lineDataset.valueFormatter = IntegerFormatter()
-        lineDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
-        lineDataset.lineWidth = 2f
-        lineDataset.circleColors = colorList
-        val lineData = LineData(lineDataset)
-
-        lineChart.data = lineData
-        setLineStyle(lineChart)
-        lineChart.invalidate()
-    }
 
     private fun setStreetsBarChat(list: List<SuburbStreetsAccidents>){
         val color  = ContextCompat.getColor(requireContext(), R.color.primary_green)
@@ -291,20 +205,105 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     }
 
 
+            /*
+            Get the number for the total Text in the card
+         */
+
+//        val job = GlobalScope.launch {
+//            val callAsync: Call<SuburbResponse> = suburbInterface.totalRepos(
+//                "total",
+//                suburbName
+//            )
+//
+//            callAsync.enqueue(object : Callback<SuburbResponse?> {
+//                override fun onResponse(call: Call<SuburbResponse?>?, response: Response<SuburbResponse?>) {
+//                    if (response.isSuccessful) {
+//                        val resultList = response.body()?.suburbAccidents
+//                        if(resultList?.isNotEmpty() == true){
+//                            accidentsNumber.text = resultList[0].accidents.toString()
+//                        }
+//                    } else {
+//                        Timber.i("Response failed")
+//                    }
+//                }
+//                override fun onFailure(call: Call<SuburbResponse?>?, t: Throwable) {
+//                    toast1.cancel()
+//                    toast1.setText(t.message)
+//                    toast1.show()
+//
+//                    Timber.i(t.message.toString())
+//                }
+//            })
+//            delay(100L)
+//        }
+
+    //        /*
+//            Get the data for first bar -- bar2
+//         */
+//        val job2 = GlobalScope.launch {
+//            job.join()
+//            val callTime: Call<SuburbTimeResponse> = suburbInterface.timeRepos(
+//                "time",
+//                suburbName
+//            )
+//            callTime.enqueue(object : Callback<SuburbTimeResponse?> {
+//                override fun onResponse(call: Call<SuburbTimeResponse?>?, response: Response<SuburbTimeResponse?>) {
+//                    if (response.isSuccessful) {
+//                        val resultList = response.body()!!.suburbTimeAccidents
+//                        setLineChart(resultList)
+//                    } else {
+//                        Timber.i("Response failed")
+//                    }
+//                }
+//                override fun onFailure(call: Call<SuburbTimeResponse?>?, t: Throwable) {
+//                    toast2.cancel()
+//                    toast2.setText(t.message)
+//                    toast2.show()
+//                    Timber.i(t.message.toString())
+//                }
+//            })
+//            delay(100L)
+//        }
+
+     /*
+        Set the Bar Chart of Accident time in this Suburb.
+     */
+//    private fun setLineChart(list: List<SuburbTimeAccidents>){
+//        val color  = ContextCompat.getColor(requireContext(), R.color.primary_green)
+//        val colorList = ArrayList<Int>()
+//        colorList.add(ColorTemplate.rgb("#8AD0AB"))
+//        val data2: MutableList<Entry> = ArrayList()
+//
+//        for(each in list){
+//            data2.add(Entry(each.accidentHours.toFloat(),each.accidentsNumber.toFloat()))
+//        }
+//        val lineDataset = LineDataSet(data2,getString(R.string.accident_times))
+//        lineDataset.setColor(color)
+//        lineDataset.valueFormatter = IntegerFormatter()
+//        lineDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
+//        lineDataset.lineWidth = 2f
+//        lineDataset.circleColors = colorList
+//        val lineData = LineData(lineDataset)
+//
+//        lineChart.data = lineData
+//        setLineStyle(lineChart)
+//        lineChart.invalidate()
+//    }
+
     /*
         Set the style of bar2
      */
-    private fun setLineStyle(lineChart:LineChart){
-        lineChart.axisLeft.setDrawGridLines(false)
-        lineChart.xAxis.setDrawGridLines(false)
-        lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        lineChart.axisRight.isEnabled = false
-        lineChart.xAxis.axisMinimum = 0f
-        lineChart.xAxis.axisMaximum = 23f
-        lineChart.axisLeft.valueFormatter = IntegerFormatter()
-        lineChart.description.text = ""
-        lineChart.zoomOut()
-    }
+//    private fun setLineStyle(lineChart:LineChart){
+//        lineChart.axisLeft.setDrawGridLines(false)
+//        lineChart.xAxis.setDrawGridLines(false)
+//        lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        lineChart.axisRight.isEnabled = false
+//        lineChart.xAxis.axisMinimum = 0f
+//        lineChart.xAxis.axisMaximum = 23f
+//        lineChart.axisLeft.valueFormatter = IntegerFormatter()
+//        lineChart.description.text = ""
+//        lineChart.zoomOut()
+//    }
 }
 
 

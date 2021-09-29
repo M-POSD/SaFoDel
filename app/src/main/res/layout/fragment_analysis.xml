@@ -22,10 +22,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="?attr/actionBarSize"
+
             app:smsp_enableDismissSearch="true"
             app:smsp_enableErrorLabel="false"
             app:smsp_errorText="@string/error"
             app:smsp_floatingLabelColor="@color/deep_green"
+            android:background="@drawable/white_shape"
             app:smsp_floatingLabelText="Suburb:"
             app:smsp_hint="@string/select_suburb"
             app:smsp_hintColor="#388E3C"
@@ -37,7 +39,8 @@
             app:smsp_itemListHintColor="#FFFFFF"
             app:smsp_multilineError="false"
             app:smsp_searchHeaderBackgroundColor="@color/primary_green"
-            app:smsp_selectedItemListColor="@color/black" />
+            app:smsp_selectedItemListColor="@color/black"
+            app:smsp_underlineSize="0dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -50,45 +53,45 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="350dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/blue_outline">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="350dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:background="@drawable/blue_outline">-->
 
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:orientation="horizontal">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginLeft="20dp"-->
+<!--                        android:orientation="horizontal">-->
 
-                        <TextView
-                            android:id="@+id/suburbName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="MELBOURNE"
-                            style="@style/textStyle16_gray"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            style="@style/textStyle16_gray"
-                            android:text="@string/total_accidents"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/suburbName"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="MELBOURNE"-->
+<!--                            style="@style/textStyle16_gray"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="16dp"-->
+<!--                            style="@style/textStyle16_gray"-->
+<!--                            android:text="@string/total_accidents"/>-->
 
-                        <TextView
-                            android:id="@+id/accidentNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:text="@string/number"
-                            style="@style/textStyle16_gray"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/accidentNumber"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="15dp"-->
+<!--                            android:text="@string/number"-->
+<!--                            style="@style/textStyle16_gray"/>-->
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
 
                 <LinearLayout
@@ -113,27 +116,27 @@
                         style="@style/textStyle16_green" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/accident_times_for_different_hourly_periods_of_the_day"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:text="@string/accident_times_for_different_hourly_periods_of_the_day"/>-->
 
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/lineChart"
-                        android:layout_width="400dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:paddingHorizontal="10dp"
-                        style="@style/textStyle14_gray"/>
-                </LinearLayout>
+<!--                    <com.github.mikephil.charting.charts.LineChart-->
+<!--                        android:id="@+id/lineChart"-->
+<!--                        android:layout_width="400dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:paddingHorizontal="10dp"-->
+<!--                        style="@style/textStyle14_gray"/>-->
+<!--                </LinearLayout>-->
 
             </LinearLayout>
         </ScrollView>
