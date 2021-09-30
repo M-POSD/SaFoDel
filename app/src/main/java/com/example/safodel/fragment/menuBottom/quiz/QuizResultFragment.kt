@@ -58,7 +58,7 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
 
             // answers all questions correctly
             accuracy == 1f -> {
-                binding.image.setImageResource(R.drawable.campion)
+                binding.image.setImageResource(R.drawable.champion)
                 binding.title.text = getString(R.string.result_heading_3)
             }
         }

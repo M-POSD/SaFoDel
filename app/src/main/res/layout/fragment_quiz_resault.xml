@@ -56,7 +56,7 @@
                     android:layout_gravity="center"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:src="@drawable/campion" />
+                    android:src="@drawable/champion" />
 
                 <TextView
                     android:id="@+id/title"
