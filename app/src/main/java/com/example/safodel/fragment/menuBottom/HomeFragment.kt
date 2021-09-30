@@ -52,14 +52,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // get weather
     private val APP_ID = "898ef19b846722554449f6068e7c7253"
     private val UNITS = "metric"
-    private var LAT = -37.840935f
-    private var LON = 144.946457f
+    private var LAT = -37.876823f
+    private var LON = 145.045837f
 //    private val CITY_NAME = "clayton,AU"
 
     private lateinit var weatherService: RetrofitInterface
 
-    // Permission
-    private lateinit var permissionsManager: PermissionsManager
+//    // Permission
+//    private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
     private lateinit var toast: Toast
@@ -100,9 +100,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         weatherService = RetrofitClient.getRetrofitService()
         callWeatherService()
 
-        // request permission of user location
-        permissionsManager = PermissionsManager(this)
-        permissionsManager.requestLocationPermissions(activity)
+//        // request permission of user location
+//        permissionsManager = PermissionsManager(this)
+//        permissionsManager.requestLocationPermissions(activity)
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root

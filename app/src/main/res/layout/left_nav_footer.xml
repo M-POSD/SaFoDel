@@ -22,7 +22,7 @@
             android:layout_marginBottom="10dp"
             android:scaleX="1"
             android:scaleY="1"
-            android:src="@drawable/clouds" />
+            android:src="@drawable/error_icon" />
 
         <LinearLayout
             android:layout_width="match_parent"
