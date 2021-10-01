@@ -151,11 +151,11 @@
             layout="@layout/checkbox_layout" />
 
         <include
-            android:id="@+id/sanitizer_checkbox_5"
+            android:id="@+id/vest_checkbox_6"
             layout="@layout/checkbox_layout" />
 
         <include
-            android:id="@+id/vest_checkbox_6"
+            android:id="@+id/sanitizer_checkbox_5"
             layout="@layout/checkbox_layout" />
 
         <include
