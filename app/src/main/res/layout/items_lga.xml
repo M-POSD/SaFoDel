@@ -15,8 +15,7 @@
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/lga_item"
         android:layout_centerVertical="true"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        style="@style/textStyle20_bold_black"
         tools:text="Choose the LGA Area"/>
 
     <ImageView

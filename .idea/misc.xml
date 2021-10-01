@@ -28,7 +28,6 @@
         <entry key="app/src/main/res/drawable/mapbox_ic_start_navigation.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/drawable/pri_sec_gradient.xml" value="0.12649109225534766" />
         <entry key="app/src/main/res/drawable/selected_option_border_bg.xml" value="0.28703703703703703" />
-        <entry key="app/src/main/res/drawable/snow_shape.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/drawable/tab_color_selector.xml" value="0.270995670995671" />
         <entry key="app/src/main/res/drawable/white_shape.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/drawable/wrong_info_border_bg.xml" value="0.240625" />
@@ -70,7 +69,7 @@
         <entry key="app/src/main/res/layout/filter_cards.xml" value="0.253125" />
         <entry key="app/src/main/res/layout/filter_target.xml" value="0.1506811538900023" />
         <entry key="app/src/main/res/layout/fragment_accident3.xml" value="0.17798913043478262" />
-        <entry key="app/src/main/res/layout/fragment_analysis.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_analysis.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_app_intro.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_checklist.xml" value="0.1651376146788991" />
         <entry key="app/src/main/res/layout/fragment_checklist2.xml" value="0.26096491228070173" />
@@ -121,8 +120,8 @@
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.25" />
         <entry key="app/src/main/res/layout/left_nav_footer.xml" value="0.125" />
         <entry key="app/src/main/res/layout/left_nav_header.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.2028985507246377" />
-        <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.23324275362318841" />
+        <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.25" />
         <entry key="app/src/main/res/layout/medium_btn.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/medium_button.xml" value="0.125" />
         <entry key="app/src/main/res/layout/medium_card.xml" value="0.537109375" />

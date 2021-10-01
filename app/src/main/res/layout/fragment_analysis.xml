@@ -30,27 +30,25 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/textStyle20_bold_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/did_you_know"
-                    style="@style/textStyle20_bold_black"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="@string/did_you_know" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/view_pager2_home"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3.8"
+                    android:layout_height="wrap_content"
                     android:background="@color/snow" />
 
                 <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
                     android:id="@+id/worm_dots_indicator_home"
+                    style="@style/worm_dot_indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    style="@style/worm_dot_indicator"
-                    />
+                    android:layout_margin="5dp" />
 
 
                 <FrameLayout
@@ -64,31 +62,32 @@
                         android:layout_width="220dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="7dp"
-                        android:translationZ="1dp"
                         android:alpha="0.9"
-                        android:background="@drawable/white_shape"/>
+                        android:background="@drawable/white_shape"
+                        android:translationZ="1dp" />
 
                     <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
                         android:id="@+id/spinner"
                         android:layout_width="200dp"
                         android:layout_height="56dp"
                         android:layout_gravity="center_horizontal"
+                        android:translationZ="1dp"
                         app:smsp_enableDismissSearch="true"
                         app:smsp_enableErrorLabel="false"
                         app:smsp_errorText="@string/error"
-                        android:translationZ="1dp"
-                        app:smsp_floatingLabelColor="@color/deep_green"
+                        app:smsp_floatingLabelColor="@color/black"
                         app:smsp_floatingLabelText="Suburb:"
                         app:smsp_hint="@string/select_suburb"
-                        app:smsp_hintColor="#388E3C"
+                        app:smsp_hintColor="@color/black"
                         app:smsp_hintSize="16dp"
                         app:smsp_isSearchable="true"
-                        app:smsp_itemColor="@color/deep_green"
-                        app:smsp_itemListColor="@color/primary_green"
+                        app:smsp_itemColor="@color/black"
+                        app:smsp_itemListColor="@color/black"
                         app:smsp_itemListHintBackgroundColor="#808080"
                         app:smsp_itemListHintColor="#FFFFFF"
                         app:smsp_multilineError="false"
                         app:smsp_searchHeaderBackgroundColor="@color/primary_green"
+                        app:smsp_searchHeaderText="@string/search_header"
                         app:smsp_selectedItemListColor="@color/black"
                         app:smsp_underlineSize="0dp" />
 
@@ -98,54 +97,53 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        style="@style/textStyle20_bold_black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        style="@style/textStyle20_bold_black"
-                        android:text="@string/top_5_roads_by_accident_total"/>
+                        android:text="@string/top_5_roads_by_accident_total" />
 
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/barChart"
+                        style="@style/textStyle16_green"
                         android:layout_width="400dp"
                         android:layout_height="250dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
-                        android:paddingHorizontal="10dp"
-                        style="@style/textStyle16_green" />
+                        android:layout_margin="10dp"
+                        android:paddingHorizontal="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="@string/accident_times_for_different_hourly_periods_of_the_day"/>
+                        android:text="@string/accident_times_for_different_hourly_periods_of_the_day" />
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"
+                        style="@style/textStyle14_gray"
                         android:layout_width="400dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:paddingHorizontal="10dp"
-                        style="@style/textStyle14_gray"/>
+                        android:paddingHorizontal="10dp" />
                 </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
 
     </LinearLayout>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

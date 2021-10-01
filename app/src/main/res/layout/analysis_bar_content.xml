@@ -11,7 +11,6 @@
         android:layout_centerHorizontal="true"
         android:text=""
         android:padding="10dp"
-        android:textColor="@color/gray"
         android:ellipsize="end"
         android:singleLine="true"
         android:textAppearance="@style/textStyle14_black" />

@@ -269,4 +269,5 @@
     <string name="traffic">यातायात</string>
     <string name="accidents">दुर्घटनाओं</string>
     <string name="did_you_know">क्या तुम्हें पता था?</string>
+    <string name="search_header">उपनगर खोजें/चुनें</string>
 </resources>

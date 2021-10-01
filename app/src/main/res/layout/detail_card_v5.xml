@@ -49,6 +49,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -68,7 +69,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:layout_gravity="center_vertical"
                         android:justificationMode="inter_word"
                         android:text="Demo" />
 

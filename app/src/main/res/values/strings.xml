@@ -329,6 +329,7 @@
     <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
     <string name="analysis_heading5">20%</string>
     <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn</string>
+    <string name="search_header">Search/Select Suburb</string>
 
     <!-- weather -->
     <string name="current_time">Time:</string>

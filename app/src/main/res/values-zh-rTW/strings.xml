@@ -269,4 +269,5 @@
     <string name="traffic">交通狀況</string>
     <string name="accidents">事故地點</string>
     <string name="did_you_know">你可知道？</string>
+    <string name="search_header">搜索/選擇郊區</string>
 </resources>
