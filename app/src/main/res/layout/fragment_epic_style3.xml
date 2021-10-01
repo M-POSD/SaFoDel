@@ -31,8 +31,8 @@
                 <ImageView
                     android:id="@+id/road_sign_image"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:padding="10dp"
+                    android:layout_height="270dp"
+                    android:padding="20dp"
                     android:src="@drawable/book" />
             </LinearLayout>
 

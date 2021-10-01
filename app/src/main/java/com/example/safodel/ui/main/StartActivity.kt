@@ -50,12 +50,12 @@ class StartActivity : AppCompatActivity() {
 
         binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(
             R.drawable.empty_12, 0,
-            R.drawable.baseline_chevron_right_green_12, 0
+            R.drawable.ic_baseline_navigate_next_24_gray, 0
         )
 
         binding.settingLanguages.setCompoundDrawablesWithIntrinsicBounds(
             R.drawable.empty_12, 0,
-            R.drawable.baseline_chevron_right_green_12, 0
+            R.drawable.ic_baseline_navigate_next_24_gray, 0
         )
 
         AutoSizeConfig.getInstance().isBaseOnWidth = false

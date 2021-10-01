@@ -126,7 +126,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
      */
     private fun initSpinner() {
         spProvince = binding.spinner
-        val typeFace = ResourcesCompat.getFont(requireContext(), R.font.rubik_medium)
+        val typeFace = ResourcesCompat.getFont(requireContext(), R.font.opensans_bold)
         spProvince.typeface = typeFace
         spProvince.item = suburbList
         spProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

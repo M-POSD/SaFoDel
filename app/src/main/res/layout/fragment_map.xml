@@ -67,7 +67,7 @@
             android:layout_gravity="center"
             android:maxLines="1"
             android:textSize="16dp"
-            android:fontFamily="@font/rubik_medium"
+            android:fontFamily="@font/opensans_bold"
             android:hint="@string/tap_to_search_address" />
 
     </FrameLayout>

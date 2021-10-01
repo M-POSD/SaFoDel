@@ -38,7 +38,6 @@
             android:id="@+id/section2_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_bold"
             android:justificationMode="inter_word"
             android:paddingVertical="20dp"
             android:paddingHorizontal="40dp"
