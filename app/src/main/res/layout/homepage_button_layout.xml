@@ -34,14 +34,6 @@
             android:id="@+id/epicCard34"
             layout="@layout/small_cards" />
 
-<!--        <include-->
-<!--            android:id="@+id/epicCard3"-->
-<!--            layout="@layout/small_card" />-->
-
-<!--        <include-->
-<!--            android:id="@+id/epicCard4"-->
-<!--            layout="@layout/small_card" />-->
-
     </LinearLayout>
 
 </LinearLayout>

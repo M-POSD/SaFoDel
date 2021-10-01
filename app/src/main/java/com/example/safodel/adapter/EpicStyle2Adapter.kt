@@ -31,6 +31,7 @@ class EpicStyle2Adapter(val context: Context, group2Data: MutableList<GroupCard2
         viewHolder.binding.imageRight.linearLayout2.visibility = View.VISIBLE
         viewHolder.binding.pureText.linearLayout3.visibility = View.VISIBLE
         viewHolder.binding.imageRight.statistics.visibility = View.VISIBLE
+        viewHolder.binding.imageRight.statistics.visibility = View.GONE
 
         when(data.cardType) {
 

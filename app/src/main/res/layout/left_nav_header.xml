@@ -17,11 +17,9 @@
             android:layout_marginLeft="30sp"
             android:layout_marginTop="80sp"
             android:layout_marginBottom="5sp"
-            android:fontFamily="@font/notosansjp_bold"
+            style="@style/textStyle20_bold_green"
             android:text="SaFoDel"
-            android:textColor="@color/primary_green"
-            android:textSize="30sp"
-            android:textStyle="bold"
+            android:textSize="40dp"
             android:clickable="true"/>
 
         <View

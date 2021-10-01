@@ -20,7 +20,7 @@
     <string name="SaFo">赛福</string>
     <string name="Del">多</string>
     <string name="welcome_to">欢迎</string>
-    <string name="start_subtitle">您的安全食品\n 送货伙伴</string>
+    <string name="start_subtitle">您的安全食品送货伙伴</string>
     <string name="learning_mode">学习模式</string>
     <string name="home">主页</string>
     <string name="map">地图</string>
@@ -234,7 +234,7 @@
     <string name="vest_checkbox_6">反光马甲</string>
     <string name="backpack_checkbox_7">送货袋</string>
     <string name="question">问题</string>
-    <string name="information">信息</string>
+    <string name="information">答案</string>
     <string name="is_correct">是否答对</string>
     <string name="check_leave">你确定要离开吗?</string>
     <string name="warning_msg">所有现在资料将会被移除</string>
@@ -254,11 +254,11 @@
     <string name="analysis_intro">事故趋势</string>
     <string name="quiz_intro">检查你的理解</string>
     <string name="checklist_intro">做好送外卖的准备</string>
-    <string name="analysis_heading1">2000+</string>
-    <string name="analysis_heading2">~80%</string>
+    <string name="analysis_heading1">2000~</string>
+    <string name="analysis_heading2">80%</string>
     <string name="analysis_heading3">上午 8-9 &amp; 下午 4-6</string>
-    <string name="analysis_heading4">~74%</string>
-    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_heading4">74%</string>
+    <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">自 2019 年以来，维多利亚州已经纪录自行车事故。</string>
     <string name="analysis_description2">在晴朗的天气条件下报告了自行车事故</string>
     <string name="analysis_description3">是最容易发生事故的时间（也是办公时间）</string>
@@ -268,4 +268,5 @@
     <string name="alerts">警报</string>
     <string name="traffic">交通状况</string>
     <string name="accidents">事故地点</string>
+    <string name="did_you_know">你可知道？</string>
 </resources>

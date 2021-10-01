@@ -20,7 +20,7 @@
     <string name="SaFo">सफो</string>
     <string name="Del">का</string>
     <string name="welcome_to">में स्वागत</string>
-    <string name="start_subtitle">आपका सुरक्षित भोजन\n डिलीवरी पार्टनर</string>
+    <string name="start_subtitle">आपका सुरक्षित भोजन डिलीवरी पार्टनर</string>
     <string name="learning_mode">सीखने का तरीका</string>
     <string name="home">घर</string>
     <string name="map">नक्शा</string>
@@ -224,7 +224,7 @@
     <string name="detail">विवरण</string>
     <string name="none">कोई ऐतिहासिक डेटा नहीं</string>
     <string name="question">प्रश्न</string>
-    <string name="information">जानकारी</string>
+    <string name="information">उत्तर</string>
     <string name="is_correct">सही है:</string>
     <string name="check_leave">क्या आपका जाना निश्चित है?</string>
     <string name="warning_msg">सभी मौजूदा डेटा हटा दिए जाएंगे</string>
@@ -254,11 +254,11 @@
     <string name="analysis_intro">दुर्घटना रुझान</string>
     <string name="checklist_intro">डिलीवर करने के लिए तैयार हो जाएं</string>
     <string name="quiz_intro">अपनी समझ की जांच करें</string>
-    <string name="analysis_heading1">2000+</string>
-    <string name="analysis_heading2">~80%</string>
+    <string name="analysis_heading1">2000~</string>
+    <string name="analysis_heading2">80%</string>
     <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
-    <string name="analysis_heading4">~74%</string>
-    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_heading4">74%</string>
+    <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">2019 से विक्टोरिया में साइकिल दुर्घटनाएं दर्ज की गई हैं।</string>
     <string name="analysis_description2">स्पष्ट वायुमंडलीय परिस्थितियों में साइकिल दुर्घटनाओं की सूचना मिली</string>
     <string name="analysis_description3">सबसे अधिक दुर्घटना-प्रवण घंटे थे (कार्यालय समय भी होने के कारण)</string>
@@ -268,4 +268,5 @@
     <string name="alerts">अलर्ट</string>
     <string name="traffic">यातायात</string>
     <string name="accidents">दुर्घटनाओं</string>
+    <string name="did_you_know">क्या तुम्हें पता था?</string>
 </resources>

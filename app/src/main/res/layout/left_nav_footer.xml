@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/current_location"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -58,7 +58,7 @@
 
             <TextView
                 android:id="@+id/current_location_info"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -74,7 +74,7 @@
 
             <TextView
                 android:id="@+id/current_weather"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -83,7 +83,7 @@
 
             <TextView
                 android:id="@+id/current_weather_info"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -99,7 +99,7 @@
 
             <TextView
                 android:id="@+id/current_temp"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -108,7 +108,7 @@
 
             <TextView
                 android:id="@+id/current_temp_info"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -124,7 +124,7 @@
 
             <TextView
                 android:id="@+id/current_humidity"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -133,7 +133,7 @@
 
             <TextView
                 android:id="@+id/current_humidity_info"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -149,7 +149,7 @@
 
             <TextView
                 android:id="@+id/current_wind_speed"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -158,7 +158,7 @@
 
             <TextView
                 android:id="@+id/current_wind_speed_info"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

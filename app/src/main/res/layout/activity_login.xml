@@ -14,7 +14,7 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textSize="18sp"
+            style="@style/textStyle16_black"
             android:text="Password:" />
 
         <EditText
@@ -32,6 +32,8 @@
         android:layout_height="60dp"
         android:backgroundTint="@color/primary_green"
         android:layout_gravity="center_horizontal"
-        android:text="Login" />
+        android:text="Login"
+        android:textSize="20dp"
+        android:fontFamily="@font/opensans_bold"/>
 
 </LinearLayout>

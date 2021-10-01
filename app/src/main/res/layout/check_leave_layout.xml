@@ -10,9 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="20dp"
-        android:fontFamily="@font/rubik_medium"
         android:text="@string/check_leave"
-        android:textSize="16dp" />
+        style="@style/textStyle16_black" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,9 +19,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/rubik_medium"
-        android:text="@string/warning_msg"
-        android:textSize="16dp" />
+        style="@style/textStyle16_black"
+        android:text="@string/warning_msg" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,11 +43,8 @@
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
-                android:fontFamily="@font/rubik_bold"
+                style="@style/textStyle16_white"
                 android:text="@string/yes"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/white"
-                android:textSize="16dp"
                 android:layout_marginRight="5dp"
                 app:cornerRadius="50dp" />
         </LinearLayout>
@@ -67,11 +62,8 @@
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
-                android:fontFamily="@font/rubik_bold"
+                style="@style/textStyle16_white"
                 android:text="@string/no"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/white"
-                android:textSize="16dp"
                 android:layout_marginLeft="5dp"
                 app:cornerRadius="50dp" />
         </LinearLayout>

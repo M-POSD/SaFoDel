@@ -17,7 +17,6 @@
         android:orientation="vertical">
 
 
-
         <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
@@ -29,6 +28,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/did_you_know"
+                    style="@style/textStyle20_bold_black"
+                    android:gravity="center"/>
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/view_pager2_home"
@@ -42,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     style="@style/worm_dot_indicator"
                     />
 

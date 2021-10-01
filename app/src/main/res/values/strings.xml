@@ -26,7 +26,7 @@
     <string name="SaFo">SaFo</string>
     <string name="Del">Del</string>
     <string name="welcome_to">WELCOME TO</string>
-    <string name="start_subtitle">YOUR SAFE FOOD\n DELIVERY PARTNER</string>
+    <string name="start_subtitle">YOUR SAFE FOOD DELIVERY PARTNER</string>
     <string name="learning_mode">LEARNING MODE</string>
 
 
@@ -49,13 +49,13 @@
     <string name="home_page_slang_1">Preparing you for safer food deliveries on bicycle in Victoria</string>
     <string name="home_page_slang_2">\'Don\'t put your life at risk for other\'s convenience\'</string>
 
-    <string name="map_intro">Get Familiar with your area</string>
-    <string name="analysis_intro">Accident Trends</string>
+    <string name="map_intro">Get familiar with your area</string>
+    <string name="analysis_intro">Accident trends</string>
     <string name="checklist_intro">Get ready for delivering</string>
     <string name="quiz_intro">Check your understanding</string>
 
     <string name="epic1_slang">Find out how to ride safely while delivering food</string>
-    <string name="epic2_slang">Find information on using E-Bikes for food delivery</string>
+    <string name="epic2_slang">Find information on using e-bikes for food delivery</string>
     <string name="epic3_slang">Find out the cycling gear you need to deliver safe</string>
     <string name="epic4_slang">Find out the measure for handling the bike accident</string>
     <string name="tip1_slang">Here are a few safety tips for delivering food on bicycle</string>
@@ -253,7 +253,7 @@
     <string name="detail">DETAIL</string>
     <string name="none">No Historical Data</string>
     <string name="question">Question</string>
-    <string name="information">Information</string>
+    <string name="information">Answer</string>
     <string name="is_correct">"Is Correct: "</string>
 
     <string name="check_leave">Are you sure to leave?</string>
@@ -317,16 +317,17 @@
     <string name="no_data">This suburb does not have any data.</string>
     <string name="select_language">SELECT LANGUAGE</string>
     <string name="not_available">Not Available</string>
+    <string name="did_you_know">Did you know?</string>
 
-    <string name="analysis_heading1">2000+</string>
-    <string name="analysis_description1">bicycle accidents have been reported in Victoria since 2019. </string>
-    <string name="analysis_heading2">~80%</string>
-    <string name="analysis_description2">bicycle accidents were reported in Clear atmospheric conditions</string>
+    <string name="analysis_heading1">2000~</string>
+    <string name="analysis_description1">bicycle accidents have been reported in Victoria since 2019.</string>
+    <string name="analysis_heading2">80%</string>
+    <string name="analysis_description2">of reported bicycle accidents occurred in clear conditions</string>
     <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
     <string name="analysis_description3">were the most accident-prone hours (also being office hours)</string>
-    <string name="analysis_heading4">~74%</string>
+    <string name="analysis_heading4">74%</string>
     <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
-    <string name="analysis_heading5">~20%</string>
+    <string name="analysis_heading5">20%</string>
     <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn</string>
 
     <!-- weather -->

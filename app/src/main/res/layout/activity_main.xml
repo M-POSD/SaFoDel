@@ -27,11 +27,10 @@
             android:layout_gravity="bottom"
             android:background="@color/snow"
             app:elevation="0dp"
-
             app:itemIconTint="@drawable/bottom_nav_selector"
             app:itemTextColor="@drawable/bottom_nav_selector"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/nav_menu_bottom"></com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/nav_menu_bottom"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

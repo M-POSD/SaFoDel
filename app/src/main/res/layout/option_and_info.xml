@@ -15,7 +15,7 @@
         android:paddingHorizontal="20dp"
         android:layout_marginBottom="10dp"
         android:text="Apple1"
-        style="@style/textStyle16_gray"
+        style="@style/textStyle16_black"
         android:drawableRight="@drawable/default_option_icon"/>
 
 <!--    <TextView-->

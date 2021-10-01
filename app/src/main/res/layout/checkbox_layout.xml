@@ -14,7 +14,7 @@
         android:paddingHorizontal="8dp"
         android:minWidth="0dp"
         android:minHeight="0dp"
-        style="@style/textStyle14_gray"
+        style="@style/textStyle16_black"
         android:theme="@style/Widget.App.CheckBox" />
 
 </LinearLayout>

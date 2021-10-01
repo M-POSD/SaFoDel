@@ -22,30 +22,18 @@
             android:scaleY="2"
             android:src="@drawable/home_activity_image" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/subtitle1"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="80dp"-->
-<!--            android:fontFamily="@font/rubik_medium"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/welcome_to"-->
-<!--            android:padding="5dp"-->
-<!--            android:textColor="@color/primary_green"-->
-<!--            android:textSize="16dp" />-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="100dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/safo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster_two_bold"
+                android:fontFamily="@font/opensans_bold"
                 android:gravity="center"
                 android:text="@string/SaFo"
                 android:textColor="@color/primary_green"
@@ -55,21 +43,11 @@
                 android:id="@+id/del"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster_two_bold"
+                android:fontFamily="@font/opensans_bold"
                 android:gravity="center"
                 android:text="@string/Del"
                 android:textColor="@color/wrong_border_color"
                 android:textSize="70dp" />
-
-<!--            <TextView-->
-<!--                android:id="@+id/safodel"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/lobster_two_bold_italic"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/SaFoDel"-->
-<!--                android:textColor="@color/primary_green"-->
-<!--                android:textSize="60dp" />-->
         </LinearLayout>
 
         <TextView
@@ -77,14 +55,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:fontFamily="@font/rubik_bold"
-            android:textAlignment="center"
             android:gravity="center"
-            android:paddingHorizontal="40dp"
             android:padding="5dp"
+            android:paddingHorizontal="40dp"
             android:text="@string/start_subtitle"
-            android:textColor="@color/primary_green"
-            android:textSize="16dp" />
+            android:textAlignment="center"
+            style="@style/textStyle16_black" />
     </LinearLayout>
 
 </LinearLayout>

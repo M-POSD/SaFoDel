@@ -21,12 +21,10 @@
                 android:id="@+id/custom_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rubik_medium"
+                style="@style/textStyle16_white"
                 android:justificationMode="inter_word"
                 android:maxWidth="230dp"
-                android:text="I am the Demoddddddddddddddddd"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:text="I am the Demoddddddddddddddddd" />
         </LinearLayout>
 
         <LinearLayout
@@ -41,11 +39,9 @@
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
-                android:fontFamily="@font/rubik_bold"
+                style="@style/textStyle16_white"
                 android:text="Next"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/white"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 app:cornerRadius="50dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -55,11 +51,9 @@
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/primary_green"
                 android:elevation="5dp"
-                android:fontFamily="@font/rubik_bold"
+                style="@style/textStyle16_white"
                 android:text="Close"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/white"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 app:cornerRadius="50dp" />
         </LinearLayout>
     </LinearLayout>

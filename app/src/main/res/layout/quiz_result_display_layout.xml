@@ -11,13 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="left"
-        android:textSize="18dp"
-        android:textColor="@color/bottom_nav_gray"
-        android:fontFamily="@font/rubik_bold"
-        android:textAppearance="?attr/textAppearanceHeadline6"/>
+        style="@style/textStyle20_bold_black"/>
     <TextView
         android:id="@+id/q_desc"
-        style="@style/textStyle16_gray"
+        style="@style/textStyle16_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:justificationMode="inter_word"
@@ -29,13 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="left"
-        android:textSize="18dp"
-        android:textColor="@color/bottom_nav_gray"
-        android:fontFamily="@font/rubik_bold"
-        android:textAppearance="?attr/textAppearanceHeadline6"/>
+        style="@style/textStyle20_bold_black"/>
     <TextView
         android:id="@+id/info_desc"
-        style="@style/textStyle16_gray"
+        style="@style/textStyle16_black"
         android:justificationMode="inter_word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,9 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="left"
-        android:textSize="18dp"
-        android:textColor="@color/bottom_nav_gray"
-        android:fontFamily="@font/rubik_bold"
-        android:textAppearance="?attr/textAppearanceHeadline6"/>
+        style="@style/textStyle20_bold_black"/>
 
 </LinearLayout>

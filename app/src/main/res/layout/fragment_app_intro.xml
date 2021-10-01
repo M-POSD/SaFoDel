@@ -42,12 +42,11 @@
 
     <TextView
         android:id="@+id/appName"
+        style="@style/textStyle20_bold_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:fontFamily="@font/rubik_bold"
+        android:layout_marginTop="68dp"
         android:text="@string/SaFoDel"
-        android:textColor="@color/bottom_nav_gray"
         android:textSize="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -58,15 +57,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appName"
-        app:layout_constraintVertical_bias="0.098">
+        app:layout_constraintVertical_bias="0.054">
 
         <TextView
             android:id="@+id/about"
-            style="@style/textStyle16_green"
+            style="@style/textStyle16_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -74,7 +73,7 @@
 
         <TextView
             android:id="@+id/audience"
-            style="@style/textStyle16_green"
+            style="@style/textStyle16_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
