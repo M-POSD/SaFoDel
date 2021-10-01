@@ -156,7 +156,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             val scrollHeight = binding.scrollView.layoutParams as LinearLayout.LayoutParams
 
             while (scrollHeight.topMargin == 0)
-                scrollHeight.topMargin = mainActivity.getStatusHeight() + toolbar.measuredHeight
+                scrollHeight.topMargin = toolbar.measuredHeight
             scrollView.layoutParams = scrollHeight
         }
     }
