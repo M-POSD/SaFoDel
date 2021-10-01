@@ -168,6 +168,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var alertMarkerBubble: MarkerView
     private lateinit var accidentMarkerBubble: MarkerView
     private lateinit var filterCardBinding: FilterCardsBinding
+    private lateinit var floatButtonZoomIn: View
+    private lateinit var floatButtonZoomOut: View
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -322,6 +324,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         diaglogFilter = MaterialDialog(mainActivity)
         spotlightRoot = FrameLayout(requireContext())
+        floatButtonZoomIn = binding.floatButtonZoomIn
+        floatButtonZoomOut = binding.floatButtonZoomOut
         setToolbarBasic(toolbar)
 
 
@@ -741,18 +745,18 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     fun setZoombutton(){
 
-        binding.floatButtonZoomIn.setOnClickListener {
+        floatButtonZoomIn.setOnClickListener {
             updateCamera(1.0)
         }
-        binding.floatButtonZoomIn.setOnLongClickListener {
+        floatButtonZoomIn.setOnLongClickListener {
             updateCamera(5.0)
             false
         }
 
-        binding.floatButtonZoomOut.setOnClickListener {
+        floatButtonZoomOut.setOnClickListener {
             updateCamera(-1.0)
         }
-        binding.floatButtonZoomOut.setOnLongClickListener {
+        floatButtonZoomOut.setOnLongClickListener {
             updateCamera(-5.0)
             false
         }
@@ -842,6 +846,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     override fun onPause() {
         super.onPause()
+        dialog.dismiss()
         mapView.onPause()
     }
 
