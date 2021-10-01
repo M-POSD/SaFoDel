@@ -24,15 +24,22 @@ import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.IMarker
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import com.example.safodel.ui.analysis.YourMarkerView
+
+
+
 
 
 class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysisBinding::inflate) {
@@ -200,6 +207,8 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Set the style of Horizontal Bar Chart
      */
     private fun setHBarStyle(bar:HorizontalBarChart, map:HashMap<Int,String>){
+        val marker: IMarker = YourMarkerView(activity,com.example.safodel.R.layout.analysis_bar_content)
+        bar.marker = marker
         bar.axisLeft.setDrawGridLines(false)
         bar.axisRight.setDrawGridLines(false)
         bar.xAxis.setDrawGridLines(false)
@@ -337,3 +346,5 @@ class StreetNameFormatter(bar: HorizontalBarChart, map: HashMap<Int,String>):Val
 
     }
 }
+
+

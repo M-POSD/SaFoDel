@@ -29,6 +29,7 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
 import com.example.safodel.R
+import com.example.safodel.databinding.FilterCardsBinding
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.*
@@ -166,6 +167,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var markerViewManager: MarkerViewManager
     private lateinit var alertMarkerBubble: MarkerView
     private lateinit var accidentMarkerBubble: MarkerView
+    private lateinit var filterCardBinding: FilterCardsBinding
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -313,12 +315,9 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
         filterCards = binding.filterCards.root
+        filterCardBinding = binding.filterCards
         fragmentNow = this
         mapViewModel = MapAccidentViewModel()
-
-        searchBarMap1.doOnPreDraw {
-            spotlight()
-        }
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         diaglogFilter = MaterialDialog(mainActivity)
@@ -1351,7 +1350,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                                     val eachFeature = Feature.fromGeometry(eachPoint)
                                     eachFeature.addStringProperty("type",each.type)
                                     eachFeature.addStringProperty("road",each.road_name)
-                                    eachFeature.addStringProperty("severity",each.severity.toString())
+                                    eachFeature.addStringProperty("severity",each.severity)
                                     feature.add(eachFeature)
                                 }
                             }
@@ -1434,36 +1433,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
     }
 
-    /*
-           show the learning mode while open the map in first time.
-     */
-    @SuppressLint("ResourceAsColor")
-    private fun spotlight() {
-        val sf = mainActivity.getPreferences(Context.MODE_PRIVATE)
-        var go = sf.getBoolean("mapLeaningMode", false)
-        if (go) {
-            val targetLay = layoutInflater.inflate(R.layout.filter_target, spotlightRoot)
-            val target = Target.Builder()
-                .setShape(Circle(0f))
-                .setOverlay(targetLay)
-                .build()
-
-
-            val spotlight = Spotlight.Builder(mainActivity)
-                .setTargets(target)
-                .setBackgroundColor(R.color.spotlightBackground)
-                .setDuration(1000L)
-                .setAnimation(DecelerateInterpolator(2f))
-                .build()
-
-            spotlight.start()
-            sf.edit().putBoolean("mapLeaningMode", false).apply()
-            targetLay.findViewById<View>(R.id.filter_target_page).setOnClickListener {
-                spotlight.finish()
-            }
-        }
-
-    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -1475,7 +1444,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         Setting the filter traffic listener and the reaction
      */
     fun filterTrafficListener(){
-        val filterTraffic =  binding.filterCards.filterTraffic
+        val filterTraffic =  filterCardBinding.filterTraffic
         filterTraffic.setOnClickListener {
             if(trafficPlugin.isVisible == false){
                 trafficPlugin.setVisibility(true)
@@ -1496,7 +1465,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         Setting the filter path listener and the reaction
      */
     fun filterPathsListener(){
-        val filterPaths = binding.filterCards.filterPaths
+        val filterPaths = filterCardBinding.filterPaths
         var filterStatus = true
         filterPaths.setOnClickListener {
             if(filterStatus){
@@ -1529,7 +1498,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         Setting the filter accidents listener and the reaction
      */
     fun filterAccidentListener(){
-        val filterAccidents = binding.filterCards.filterAccidents
+        val filterAccidents = filterCardBinding.filterAccidents
         var filterStatus = true
         filterAccidents.setOnClickListener {
             if(filterStatus){
@@ -1571,7 +1540,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
      */
     fun filterAlertsListener(){
         //alert_layer
-        val filterAlerts = binding.filterCards.filterAlerts
+        val filterAlerts = filterCardBinding.filterAlerts
         var filterStatus = true
         filterAlerts.setOnClickListener {
             if(filterStatus){
