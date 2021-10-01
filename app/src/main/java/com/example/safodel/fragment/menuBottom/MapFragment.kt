@@ -315,10 +315,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         filterCards = binding.filterCards.root
         fragmentNow = this
         mapViewModel = MapAccidentViewModel()
-
-        searchBarMap1.doOnPreDraw {
-            spotlight()
-        }
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         diaglogFilter = MaterialDialog(mainActivity)
@@ -1434,36 +1430,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
     }
 
-    /*
-           show the learning mode while open the map in first time.
-     */
-    @SuppressLint("ResourceAsColor")
-    private fun spotlight() {
-        val sf = mainActivity.getPreferences(Context.MODE_PRIVATE)
-        var go = sf.getBoolean("mapLeaningMode", false)
-        if (go) {
-            val targetLay = layoutInflater.inflate(R.layout.filter_target, spotlightRoot)
-            val target = Target.Builder()
-                .setShape(Circle(0f))
-                .setOverlay(targetLay)
-                .build()
-
-
-            val spotlight = Spotlight.Builder(mainActivity)
-                .setTargets(target)
-                .setBackgroundColor(R.color.spotlightBackground)
-                .setDuration(1000L)
-                .setAnimation(DecelerateInterpolator(2f))
-                .build()
-
-            spotlight.start()
-            sf.edit().putBoolean("mapLeaningMode", false).apply()
-            targetLay.findViewById<View>(R.id.filter_target_page).setOnClickListener {
-                spotlight.finish()
-            }
-        }
-
-    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////
