@@ -61,7 +61,7 @@
                     app:smsp_enableErrorLabel="false"
                     app:smsp_errorText="@string/error"
                     app:smsp_floatingLabelColor="@color/deep_green"
-                    android:background="@drawable/white_shape"
+                    android:background="@drawable/snow_shape"
                     app:smsp_floatingLabelText="Suburb:"
                     app:smsp_hint="@string/select_suburb"
                     app:smsp_hintColor="#388E3C"
