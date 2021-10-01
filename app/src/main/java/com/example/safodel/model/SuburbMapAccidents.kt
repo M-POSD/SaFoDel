@@ -10,5 +10,5 @@ class SuburbMapAccidents {
     @SerializedName("location")
     var location: AccidentLocation = AccidentLocation()
     @SerializedName("severity")
-    var severity: Int = 0
+    var severity: String = ""
 }

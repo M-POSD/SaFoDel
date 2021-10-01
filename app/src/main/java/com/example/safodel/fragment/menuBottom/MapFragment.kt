@@ -1351,7 +1351,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                                     val eachFeature = Feature.fromGeometry(eachPoint)
                                     eachFeature.addStringProperty("type",each.type)
                                     eachFeature.addStringProperty("road",each.road_name)
-                                    eachFeature.addStringProperty("severity",each.severity.toString())
+                                    eachFeature.addStringProperty("severity",each.severity)
                                     feature.add(eachFeature)
                                 }
                             }
