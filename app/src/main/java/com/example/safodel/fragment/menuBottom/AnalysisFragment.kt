@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.get
@@ -37,9 +40,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
 import com.example.safodel.ui.analysis.YourMarkerView
-
-
-
+import com.example.safodel.ui.main.MainActivity
 
 
 class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysisBinding::inflate) {
@@ -49,11 +50,14 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var dialog: MaterialDialog
 //    private lateinit var lineChart: LineChart
     private lateinit var bar: HorizontalBarChart
+    private lateinit var mainActivity: MainActivity
     //private lateinit var accidentsNumber : TextView
     private var suburbName = "MELBOURNE"
     private lateinit var toast1: Toast
     private lateinit var toast2: Toast
     private lateinit var toast3: Toast
+    private lateinit var scrollView: View
+    private lateinit var toolbar: Toolbar
 
     private lateinit var adapter: AnalysisViewAdapter
 
@@ -66,6 +70,8 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         toast1 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
         toast2 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
         toast3 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
+        scrollView = binding.scrollView
+        toolbar = binding.toolbar.root
 
         // Set Dialog
         dialog = MaterialDialog(requireContext())
@@ -86,12 +92,16 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         // Setting Spinner
         initSpinner()
 
+        // setting height of scroll view
+        setMarginView()
+
         // Retrofit get data
         suburbInterface = SuburbClient.getSuburbService()
 
         adapter = AnalysisViewAdapter(requireActivity())
         binding.viewPager2Home.adapter = adapter
         binding.wormDotsIndicatorHome.setViewPager2(binding.viewPager2Home)
+        mainActivity = activity as MainActivity
 
         return binding.root
     }
@@ -137,6 +147,17 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             message(text = getString(R.string.loading))
             cancelable(false)
             cancelOnTouchOutside(false)
+        }
+    }
+
+    fun setMarginView(){
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        coroutineScope.launch {
+            val scrollHeight = binding.scrollView.layoutParams as LinearLayout.LayoutParams
+
+            while (scrollHeight.topMargin == 0)
+                scrollHeight.topMargin = mainActivity.getStatusHeight() + toolbar.measuredHeight
+            scrollView.layoutParams = scrollHeight
         }
     }
 
