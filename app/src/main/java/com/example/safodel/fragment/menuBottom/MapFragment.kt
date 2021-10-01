@@ -168,6 +168,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var alertMarkerBubble: MarkerView
     private lateinit var accidentMarkerBubble: MarkerView
     private lateinit var filterCardBinding: FilterCardsBinding
+    private lateinit var floatButtonZoomIn: View
+    private lateinit var floatButtonZoomOut: View
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -322,6 +324,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         diaglogFilter = MaterialDialog(mainActivity)
         spotlightRoot = FrameLayout(requireContext())
+        floatButtonZoomIn = binding.floatButtonZoomIn
+        floatButtonZoomOut = binding.floatButtonZoomOut
         setToolbarBasic(toolbar)
 
 
@@ -604,6 +608,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             dialog.dismiss()
         }
 
+        setZoombutton()
+
         /*
             Setting filter card in the Mapview1
          */
@@ -736,6 +742,41 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         dialog.dismiss()
     }
 
+
+    fun setZoombutton(){
+
+        floatButtonZoomIn.setOnClickListener {
+            updateCamera(1.0)
+        }
+        floatButtonZoomIn.setOnLongClickListener {
+            updateCamera(5.0)
+            false
+        }
+
+        floatButtonZoomOut.setOnClickListener {
+            updateCamera(-1.0)
+        }
+        floatButtonZoomOut.setOnLongClickListener {
+            updateCamera(-5.0)
+            false
+        }
+    }
+
+    /*
+            Update the camera base on new zoom level.
+     */
+    fun updateCamera(zoomLevel: Double){
+        val currentZoomLevel = mapboxMap.cameraPosition.zoom
+        mapboxMap.animateCamera(
+            CameraUpdateFactory
+                .newCameraPosition(
+                    CameraPosition.Builder()
+                        .zoom(currentZoomLevel + zoomLevel)
+                        .build()
+                ),3000
+        )
+    }
+
     /*-- Camera auto zoom to the suburb area --*/
     fun cameraAutoZoomToSuburb(){
 
@@ -805,6 +846,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     override fun onPause() {
         super.onPause()
+        dialog.dismiss()
         mapView.onPause()
     }
 
@@ -1179,6 +1221,14 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         val FBHeightStop = binding.floatButtonStop.layoutParams as CoordinatorLayout.LayoutParams
         FBHeightStop.bottomMargin = FBHeight.bottomMargin * 3
         binding.floatButtonStop.layoutParams = FBHeightStop
+
+        val FBHeightZoomOut = binding.floatButtonZoomOut.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeightZoomOut.bottomMargin = FBHeight.bottomMargin * 3
+        binding.floatButtonZoomOut.layoutParams = FBHeightZoomOut
+
+        val FBHeightZoomIn = binding.floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeightZoomIn.bottomMargin = FBHeight.bottomMargin * 4
+        binding.floatButtonZoomIn.layoutParams = FBHeightZoomIn
     }
 
 
