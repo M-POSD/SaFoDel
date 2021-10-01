@@ -74,7 +74,7 @@
                     app:smsp_multilineError="false"
                     app:smsp_searchHeaderBackgroundColor="@color/primary_green"
                     app:smsp_selectedItemListColor="@color/black"
-                    app:smsp_underlineSize="0dp" />
+                     />
 
 
                 <LinearLayout
