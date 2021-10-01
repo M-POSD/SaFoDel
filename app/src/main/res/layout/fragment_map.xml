@@ -187,6 +187,30 @@
         android:contentDescription="desc"
         android:src="@drawable/outline_highlight_off_black_36" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButtonZoomIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        mapbox:backgroundTint="@color/white"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="desc"
+        android:src="@drawable/baseline_add_black_36" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButtonZoomOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        mapbox:backgroundTint="@color/white"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="desc"
+        android:src="@drawable/baseline_remove_black_36" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

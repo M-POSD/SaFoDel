@@ -604,6 +604,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             dialog.dismiss()
         }
 
+        setZoombutton()
+
         /*
             Setting filter card in the Mapview1
          */
@@ -734,6 +736,41 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 ), 3000
         )
         dialog.dismiss()
+    }
+
+
+    fun setZoombutton(){
+
+        binding.floatButtonZoomIn.setOnClickListener {
+            updateCamera(1.0)
+        }
+        binding.floatButtonZoomIn.setOnLongClickListener {
+            updateCamera(5.0)
+            false
+        }
+
+        binding.floatButtonZoomOut.setOnClickListener {
+            updateCamera(-1.0)
+        }
+        binding.floatButtonZoomOut.setOnLongClickListener {
+            updateCamera(-5.0)
+            false
+        }
+    }
+
+    /*
+            Update the camera base on new zoom level.
+     */
+    fun updateCamera(zoomLevel: Double){
+        val currentZoomLevel = mapboxMap.cameraPosition.zoom
+        mapboxMap.animateCamera(
+            CameraUpdateFactory
+                .newCameraPosition(
+                    CameraPosition.Builder()
+                        .zoom(currentZoomLevel + zoomLevel)
+                        .build()
+                ),3000
+        )
     }
 
     /*-- Camera auto zoom to the suburb area --*/
@@ -1179,6 +1216,14 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         val FBHeightStop = binding.floatButtonStop.layoutParams as CoordinatorLayout.LayoutParams
         FBHeightStop.bottomMargin = FBHeight.bottomMargin * 3
         binding.floatButtonStop.layoutParams = FBHeightStop
+
+        val FBHeightZoomOut = binding.floatButtonZoomOut.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeightZoomOut.bottomMargin = FBHeight.bottomMargin * 3
+        binding.floatButtonZoomOut.layoutParams = FBHeightZoomOut
+
+        val FBHeightZoomIn = binding.floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
+        FBHeightZoomIn.bottomMargin = FBHeight.bottomMargin * 4
+        binding.floatButtonZoomIn.layoutParams = FBHeightZoomIn
     }
 
 
