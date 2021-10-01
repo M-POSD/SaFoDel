@@ -47,19 +47,19 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
             // got less than two correct answer
             accuracy < 0.6 -> {
                 binding.image.setImageResource(R.drawable.failure)
-                binding.title.text = getString(R.string.result_heading_1)
+//                binding.title.text = getString(R.string.result_heading_1)
             }
 
             // got 3 or 4 correct answers
             accuracy < 1f -> {
                 binding.image.setImageResource(R.drawable.medal)
-                binding.title.text = getString(R.string.result_heading_2)
+//                binding.title.text = getString(R.string.result_heading_2)
             }
 
             // answers all questions correctly
             accuracy == 1f -> {
                 binding.image.setImageResource(R.drawable.champion)
-                binding.title.text = getString(R.string.result_heading_3)
+//                binding.title.text = getString(R.string.result_heading_3)
             }
         }
 
