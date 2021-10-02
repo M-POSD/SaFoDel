@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val leftHeader = binding.leftNavigation.getHeaderView(0)
         val leftHeaderSaFo = leftHeader.findViewById<View>(R.id.left_header_safo)
-        val leftHeaderDel = leftHeader.findViewById<View>(R.id.left_header_safo)
+        val leftHeaderDel = leftHeader.findViewById<View>(R.id.left_header_del)
 
 
         leftHeaderSaFo.isClickable = true
