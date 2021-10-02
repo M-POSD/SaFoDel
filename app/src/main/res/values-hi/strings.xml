@@ -68,7 +68,7 @@
     <string name="tip2_name">रात में वितरण</string>
     <string name="tip1_1_title">चौराहों पर हुक मोड़</string>
     <string name="tip1_1_statistics">चौराहों पर साइकिल दुर्घटनाएं थोड़ी अधिक आम हैं (55%)</string>
-    <string name="tip1_1_description">दाएं लेन से दाएं मुड़ने के बजाय चौराहे पर हुक मोड़ करना अक्सर अधिक सुरक्षित होता है</string>
+    <string name="tip1_1_description">एक चौराहे पर दाएं मुड़ने के लिए हुक मोड़ करना अक्सर सुरक्षित होता है</string>
     <string name="tip1_2_title">अंधा धब्बे</string>
     <string name="tip1_2_description">वाहन के ब्लाइंड स्पॉट में सवारी करने से बचें और सावधान रहें कि बड़े वाहनों में बड़े ब्लाइंड स्पॉट हों</string>
     <string name="tip1_3_title">डोरिंग पर ध्यान दें</string>
@@ -184,18 +184,21 @@
     <string name="question9_option4">सही विलय</string>
     <string name="question9_information">किसी भी बाइक सवार को रात में सवारी करते समय या खराब दृश्यता की स्थिति में फ्रंट लाइट, रियर लाइट (चमकती या स्थिर), और रियर रेड रिफ्लेक्टर का उपयोग करना चाहिए</string>
     <string name="quiz">प्रश्नोत्तरी</string>
-    <string name="quiz_heading">सड़क नियमों के लिए अपनी समझ का परीक्षण करें</string>
+    <string name="quiz_heading">सड़क नियमों के बारे में अपने ज्ञान का परीक्षण करने के लिए इस संक्षिप्त प्रश्नोत्तरी में भाग लें</string>
     <string name="result">नतीजा</string>
     <string name="result_heading_1">फिर से सीखने के नियम</string>
     <string name="result_heading_2">कभी-कभी नियमों की समीक्षा करें</string>
     <string name="result_heading_3">उत्तम !!!</string>
     <string name="checklist_notification_unprepared">कृपया सुनिश्चित करें कि आपने चेकलिस्ट पर सब कुछ तैयार कर लिया है</string>
     <string name="checklist_notification_prepared">बहुत बढ़िया! अपनी भोजन वितरण यात्रा शुरू करने का समय आ गया है!</string>
-    <string name="about">के बारे में</string>
-    <string name="about_description">खाद्य वितरण बाइक सवारों को शिक्षित करना</string>
-    <string name="audience">दर्शकों</string>
-    <string name="audience_description">संभावित और मौजूदा खाद्य वितरण बाइक सवार</string>
+    <string name="what">क्या</string>
+    <string name="what_description">COVID के प्रकोप ने खाद्य वितरण सेवाओं की लोकप्रियता को बढ़ावा दिया और साइकिल चालन की संख्या में तेजी से वृद्धि की। हालांकि, इसके साथ दुर्घटनाओं में शामिल होने वाले डिलीवरी सवारों की संख्या में वृद्धि हुई है।</string>
+    <string name="why">क्यों</string>
+    <string name="why_description">इस बढ़ती प्रवृत्ति के प्राथमिक कारणों में से एक यह है कि सवारों को पर्याप्त सुरक्षा प्रशिक्षण और स्थानीय यातायात ज्ञान नहीं दिया जाता है और यह उन्हें अस्वीकार्य रूप से कमजोर बनाता है। (उन्हें जोखिम में डालता है)</string>
+    <string name="how">कैसे</string>
+    <string name="how_description">SaFoDel मौजूदा और संभावित फूड डिलीवरी राइडर्स के लिए एक सुरक्षा साथी ऐप है, जिसका उद्देश्य विक्टोरिया में राइडर्स के लिए फूड डिलीवरी के अनुभव को सुरक्षित बनाना है।</string>
     <string name="know_more">अधिक जानिए</string>
+
     <string name="generic_information_heading">अधिसूचना</string>
     <string name="current_time">&quot;वर्तमान समय: &quot;</string>
     <string name="current_weather">&quot;वर्तमान मौसम: &quot;</string>
@@ -261,7 +264,7 @@
     <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">2019 से विक्टोरिया में साइकिल दुर्घटनाएं दर्ज की गई हैं।</string>
     <string name="analysis_description2">स्पष्ट वायुमंडलीय परिस्थितियों में साइकिल दुर्घटनाओं की सूचना मिली</string>
-    <string name="analysis_description3">सबसे अधिक दुर्घटना-प्रवण घंटे थे (कार्यालय समय भी होने के कारण)</string>
+    <string name="analysis_description3">सबसे अधिक दुर्घटनाओं की सूचना दी गई थी (पीक आवर ट्रैफिक)</string>
     <string name="analysis_description4">दिन के उजाले में साइकिल दुर्घटना की सूचना मिली</string>
     <string name="analysis_description5">साइकिल दुर्घटनाओं की सूचना रात में या शाम/सुबह के दौरान दर्ज की गई थी</string>
     <string name="bike_paths">बाइक पथ</string>
@@ -271,7 +274,10 @@
     <string name="did_you_know">क्या तुम्हें पता था?</string>
     <string name="search_header">उपनगर खोजें/चुनें</string>
 
+    <string name="about">के बारे में</string>
     <string name="about_us">
 हम सतत विकास (एम-पीओएसडी) के मोनाश प्रमोटर हैं। विभिन्न राष्ट्रीयताओं के छात्रों की एक उत्साही टीम के रूप में, हम अपने काम के माध्यम से सतत विकास को बढ़ावा देने के विचार में दृढ़ता से विश्वास करते हैं।
     </string>
+    <string name="checklist_heading">कृपया सुनिश्चित करें कि डिलीवरी के लिए बाहर जाने से पहले आप कम से कम निम्नलिखित गियर के साथ तैयार हैं</string>
+    <string name="road_sign_heading">भोजन पहुंचाने के लिए साइकिल की सवारी करते समय जागरूक होने के लिए यहां कुछ सड़क संकेत दिए गए हैं</string>
 </resources>

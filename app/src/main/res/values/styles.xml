@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <style name="textStyle14_green">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/opensans_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/primary_green</item>
+    </style>
+
+    <style name="textStyle14_white">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/opensans_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="textStyle14_black">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/opensans_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textStyle16_green">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/opensans_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/primary_green</item>
+    </style>
+
+    <style name="textStyle16_white">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/opensans_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="textStyle16_black">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/opensans_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textStyle16_red">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/opensans_medium</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:textColor">@color/wrong_border_color</item>
+    </style>
+
+    <style name="textStyle20_bold_green">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline1</item>
+        <item name="android:textColor">@color/primary_green</item>
+    </style>
+
+    <style name="textStyle20_bold_white">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline1</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="textStyle20_bold_black">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textStyle20_bold_red">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline1</item>
+        <item name="android:textColor">@color/wrong_border_color</item>
+    </style>
+
+    <style name="textStyle25_bold_black">
+        <item name="android:textSize">25dp</item>
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="worm_dot_indicator">
+        <item name="dotsColor">@color/secondary_color</item>
+        <item name="dotsStrokeColor">@color/secondary_color</item>
+        <item name="dotsCornerRadius">8dp</item>
+        <item name="dotsSize">12dp</item>
+        <item name="dotsSpacing">4dp</item>
+        <item name="dotsStrokeWidth">2dp</item>
+    </style>
+
+</resources>

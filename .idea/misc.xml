@@ -44,6 +44,8 @@
         <entry key="app/src/main/res/layout/analysis_generic_info.xml" value="0.335" />
         <entry key="app/src/main/res/layout/appinfo_about.xml" value="0.335" />
         <entry key="app/src/main/res/layout/appinfo_audience.xml" value="0.21784420289855072" />
+        <entry key="app/src/main/res/layout/appinfo_how.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/layout/appinfo_why.xml" value="0.22604166666666667" />
         <entry key="app/src/main/res/layout/big_button.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/check_leave_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/checkbox_layout.xml" value="0.15517241379310345" />
@@ -78,7 +80,7 @@
         <entry key="app/src/main/res/layout/fragment_developer.xml" value="0.22682283502033612" />
         <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
-        <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
+        <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_epic4.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/fragment_epic_style1.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_epic_style2.xml" value="0.12310030395136778" />
@@ -120,7 +122,7 @@
         <entry key="app/src/main/res/layout/large_button.xml" value="0.125" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/left_nav_footer.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/left_nav_footer.xml" value="0.375" />
         <entry key="app/src/main/res/layout/left_nav_header.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.23324275362318841" />

@@ -65,8 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:justificationMode="inter_word"
-            android:layout_marginHorizontal="20dp"
-            android:paddingBottom="10dp"
+            android:padding="10dp"
             style="@style/textStyle20_bold_black"
             android:text="What is this?" />
 

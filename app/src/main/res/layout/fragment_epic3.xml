@@ -23,6 +23,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/road_sign_heading"
+                style="@style/textStyle20_bold_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/road_sign_heading" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2_section1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/snow" />
+
             <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
                 android:id="@+id/worm_dots_indicator_section1"
                 style="@style/worm_dot_indicator"
@@ -30,12 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2_section1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/snow" />
 
             <View
                 android:layout_width="match_parent"

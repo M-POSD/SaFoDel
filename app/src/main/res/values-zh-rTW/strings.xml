@@ -68,7 +68,7 @@
     <string name="tip2_name">在夜間送餐</string>
     <string name="tip1_1_title">在十字路口的鉤子彎(兩段式轉彎)</string>
     <string name="tip1_1_statistics">自行車在十字路口發生碰撞更常見（55%）</string>
-    <string name="tip1_1_description">在十字路口進行鉤形轉彎通常比從右側車道右轉更安全</string>
+    <string name="tip1_1_description">在十字路口進行勾形轉彎以向右轉通常更安全</string>
     <string name="tip1_2_title">盲點</string>
     <string name="tip1_2_description">避免在車輛的盲點內騎行，並註意較大的車輛有更大的盲點</string>
     <string name="tip1_3_title">小心開車門</string>
@@ -184,17 +184,19 @@
     <string name="question9_option4">向右並道</string>
     <string name="question9_information">在夜間或能見度較差的條件下騎行時，任何騎自行車的人都必須使用前燈、尾燈（閃爍或常亮）和後紅色反光板</string>
     <string name="quiz">測驗</string>
-    <string name="quiz_heading">測試您對道路規則的理解</string>
+    <string name="quiz_heading">做個簡短的測驗來測試您對道路規則的了解</string>
     <string name="result">結果</string>
     <string name="result_heading_1">再一次測驗</string>
     <string name="result_heading_2">查看規則</string>
     <string name="result_heading_3">完美 ！！！</string>
     <string name="checklist_notification_unprepared">請確保您準備好清單上的所有內容</string>
     <string name="checklist_notification_prepared">太棒了！是時候開始你的送餐之旅了！</string>
-    <string name="about">關於</string>
-    <string name="about_description">教育自行車送餐騎手</string>
-    <string name="audience">觀眾</string>
-    <string name="audience_description">潛在和現有的自行車送餐騎手</string>
+    <string name="what">事件</string>
+    <string name="what_description">新冠病毒的爆發使得食物外送服務需求量大增並使外送員的需求大幅增長。 然而，隨之而來的是捲入事故的外送員數量不斷增加。</string>
+    <string name="why">原因</string>
+    <string name="why_description">這種增長趨勢的主要原因之一是外送員沒有得到足夠的安全培訓和當地交通知識，這使他們變得非常易受傷。 使他們處於危險之中）</string>
+    <string name="how">如何解決</string>
+    <string name="how_description">賽福多是一款面向現有和潛在外送員的安全配套應用程序，旨在為維多利亞州外送員提供更安全的送餐體驗。</string>
     <string name="know_more">了解更多</string>
     <string name="generic_information_heading">通知</string>
     <string name="current_time">&quot;現在時間：  &quot;</string>
@@ -261,7 +263,7 @@
     <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">自 2019 年以來，維多利亞州已經紀錄自行車事故。</string>
     <string name="analysis_description2">在晴朗的天氣條件下報告了自行車事故</string>
-    <string name="analysis_description3">是最容易發生事故的時間（也是辦公時間）</string>
+    <string name="analysis_description3">是紀錄最高事故的時間（高峰時段交通）</string>
     <string name="analysis_description4">自行車事故發生在白天</string>
     <string name="analysis_description5">在夜間或黃昏/黎明期間報告了自行車事故</string>
     <string name="bike_paths">自行車道</string>
@@ -271,7 +273,10 @@
     <string name="did_you_know">你可知道？</string>
     <string name="search_header">搜索/選擇郊區</string>
 
+    <string name="about">關於</string>
     <string name="about_us">
         我們是蒙納士可持續發展促進者 (M-POSD)。 作為一支由來自不同國籍的學生組成的熱情團隊，我們堅信通過我們的工作促進可持續發展的理念。
     </string>
+    <string name="checklist_heading">請確保您在外出送貨前至少準備好以下裝備</string>
+    <string name="road_sign_heading">以下是一些騎自行車送餐時需要注意的路標</string>
 </resources>

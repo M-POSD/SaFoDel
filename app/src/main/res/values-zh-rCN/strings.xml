@@ -68,7 +68,7 @@
     <string name="tip2_name">在夜间送餐</string>
     <string name="tip1_1_title">在十字路口的钩子弯</string>
     <string name="tip1_1_statistics">自行车在十字路口发生碰撞更常见（55%）</string>
-    <string name="tip1_1_description">在十字路口进行钩形转弯通常比从右侧车道右转更安全</string>
+    <string name="tip1_1_description">在十字路口进行勾形转弯以向右转通常更安全</string>
     <string name="tip1_2_title">盲点</string>
     <string name="tip1_2_description">避免在车辆的盲点内骑行，并注意较大的车辆有更大的盲点</string>
     <string name="tip1_3_title">小心开车门</string>
@@ -184,17 +184,20 @@
     <string name="question9_option4">向右并道</string>
     <string name="question9_information">在夜间或能见度较差的条件下骑行时，任何骑自行车的人都必须使用前灯、尾灯（闪烁或常亮）和后红色反光板</string>
     <string name="quiz">测验</string>
-    <string name="quiz_heading">测试您对道路规则的理解</string>
+    <string name="quiz_heading">做個簡短的測驗來測試您對道路規則的了解</string>
     <string name="result">结果</string>
     <string name="result_heading_1">再次学习规则</string>
     <string name="result_heading_2">查看规则</string>
     <string name="result_heading_3">完美的 ！！！</string>
     <string name="checklist_notification_unprepared">请确保您准备好清单上的所有内容</string>
     <string name="checklist_notification_prepared">棒极了！ 是时候开始你的送餐之旅了！</string>
-    <string name="about">关于</string>
-    <string name="about_description">教育自行车送餐骑手</string>
-    <string name="audience">观众</string>
-    <string name="audience_description">潜在和现有的自行车送餐骑手</string>
+    <string name="what">事件</string>
+    <string name="what_description">新冠病毒的爆发使得食物外送服务需求量大增并使外送员的需求大幅增长。然而，随之而来的是卷入事故的外送员数量不断增加。</string>
+    <string name="why">原由</string>
+    <string name="why_description">这种增长趋势的主要原因之一是外送员没有得到足够的安全培训和当地交通知识，这使他们变得非常易受伤。（使他们处于危险之中）</string>
+    <string name="how">如何解决</string>
+    <string name="how_description">赛福多是一款面向现有和潜在外送员的安全配套应用程序，旨在为维多利亚州外送员提供更安全的送餐体验。</string>
+
     <string name="know_more">了解更多</string>
     <string name="generic_information_heading">通知</string>
     <string name="current_time">"&quot;时间：&quot; "</string>
@@ -261,7 +264,7 @@
     <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">自 2019 年以来，维多利亚州已经纪录自行车事故。</string>
     <string name="analysis_description2">在晴朗的天气条件下报告了自行车事故</string>
-    <string name="analysis_description3">是最容易发生事故的时间（也是办公时间）</string>
+    <string name="analysis_description3">是最高记录事故的时间（高峰时段）</string>
     <string name="analysis_description5">在夜间或黄昏/黎明期间报告了自行车事故</string>
     <string name="analysis_description4">自行车事故发生在白天</string>
     <string name="bike_paths">自行车道</string>
@@ -271,7 +274,10 @@
     <string name="did_you_know">你可知道？</string>
     <string name="search_header">搜索/选择郊区</string>
 
+    <string name="about">关于</string>
     <string name="about_us">
         我们是莫纳什可持续发展促进会（M-POSD）。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
     </string>
+    <string name="checklist_heading">请确保您在外出送货前至少准备好以下装备</string>
+    <string name="road_sign_heading">以下是一些骑自行车送餐时需要注意的路标</string>
 </resources>

@@ -33,8 +33,11 @@
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleX="1"
-            android:scaleY="1"
+            android:paddingVertical="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             android:src="@drawable/driver_helmet"
             android:translationZ="10dp" />
 
@@ -45,7 +48,7 @@
         style="@style/textStyle20_bold_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="96dp"
         android:text="@string/SaFoDel"
         android:textSize="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,6 +56,7 @@
         app:layout_constraintTop_toTopOf="@id/logo_image" />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -63,23 +67,46 @@
         app:layout_constraintVertical_bias="0.054">
 
         <TextView
-            android:id="@+id/about"
+            android:id="@+id/what"
             style="@style/textStyle16_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:text="@string/about" />
+            android:text="@string/what" />
 
         <TextView
-            android:id="@+id/audience"
+            android:id="@+id/why"
             style="@style/textStyle16_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:clickable="true"
-            android:text="@string/audience" />
+            android:text="@string/why" />
+
+        <TextView
+            android:id="@+id/how"
+            style="@style/textStyle16_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:text="@string/how" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/app_intro_know_more"
+        style="@style/textStyle16_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="@string/know_more"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.067" />
 
     <include
         android:id="@+id/toolbar"
