@@ -185,28 +185,28 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             } else {
                 homepageButtonLayout.viewPager2Home.currentItem += 1
             }
-            handler.postDelayed(runnable, 5000) //5 sec delay
+            handler.postDelayed(runnable, 6000) //5 sec delay
         }
-        handler.postDelayed(runnable, 5000)
+        handler.postDelayed(runnable, 6000)
 
-        homepageButtonLayout.viewPager2Home.registerOnPageChangeCallback(object :
-            OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-//                handler.removeCallbacks(runnable)
-//                Log.e("onPageScrolled", position.toString())
-            }
-
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-//                handler.postDelayed(runnable, 5000)
-//                Log.e("Selected_Page", position.toString())
-            }
-        })
+//        homepageButtonLayout.viewPager2Home.registerOnPageChangeCallback(object :
+//            OnPageChangeCallback() {
+//            override fun onPageScrolled(
+//                position: Int,
+//                positionOffset: Float,
+//                positionOffsetPixels: Int
+//            ) {
+//                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+////                handler.removeCallbacks(runnable)
+////                Log.e("onPageScrolled", position.toString())
+//            }
+//
+//            override fun onPageSelected(position: Int) {
+//                super.onPageSelected(position)
+////                handler.postDelayed(runnable, 5000)
+////                Log.e("Selected_Page", position.toString())
+//            }
+//        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
