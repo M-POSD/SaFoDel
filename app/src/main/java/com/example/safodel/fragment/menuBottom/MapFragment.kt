@@ -122,6 +122,7 @@ import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
 import com.mapbox.geojson.*
+import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin
 import com.mapbox.mapboxsdk.style.sources.Source
 import com.mapbox.navigation.ui.maps.internal.route.line.MapboxRouteLineApiExtensions.setRoutes
 
@@ -414,6 +415,19 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         this.mapboxMap.setStyle(Style.LIGHT) {
 
             cameraAutoZoomToSuburb()
+            val localizationPlugin = LocalizationPlugin(mapView, mapboxMap, it)
+            try {
+                val sf = mainActivity.getSharedPreferences("language", Activity.MODE_PRIVATE)
+                var lang = sf.getString("lang", "name_en")
+                lang = when(lang){
+                    "zh_CN" -> "name_zh-Hans"
+                    "zh_TW" -> "name_zh"
+                    else -> "name_en"
+                }
+                localizationPlugin.setMapLanguage(lang)
+            } catch (exception: RuntimeException) {
+                Timber.d(exception.toString())
+            }
 
             // get user location
             enableLocationComponent(it)
