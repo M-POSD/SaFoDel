@@ -270,4 +270,8 @@
     <string name="accidents">事故地点</string>
     <string name="did_you_know">你可知道？</string>
     <string name="search_header">搜索/选择郊区</string>
+
+    <string name="about_us">
+        我们是莫纳什可持续发展促进会（M-POSD）。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
+    </string>
 </resources>

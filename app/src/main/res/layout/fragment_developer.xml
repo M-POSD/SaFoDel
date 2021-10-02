@@ -24,10 +24,20 @@
             android:layout_marginTop="30dp"
             android:src="@drawable/new_logo" />
 
+
+        <TextView
+            android:id="@+id/about"
+            style="@style/textStyle16_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/about" />
+
         <TextView
             android:id="@+id/know_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
             android:clickable="true"
             android:layout_gravity="center"
             android:text="@string/know_more"

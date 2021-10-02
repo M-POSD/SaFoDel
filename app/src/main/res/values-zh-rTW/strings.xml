@@ -270,4 +270,8 @@
     <string name="accidents">事故地點</string>
     <string name="did_you_know">你可知道？</string>
     <string name="search_header">搜索/選擇郊區</string>
+
+    <string name="about_us">
+        我們是蒙納士可持續發展促進者 (M-POSD)。 作為一支由來自不同國籍的學生組成的熱情團隊，我們堅信通過我們的工作促進可持續發展的理念。
+    </string>
 </resources>

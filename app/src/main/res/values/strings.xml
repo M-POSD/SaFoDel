@@ -345,4 +345,10 @@
     <string name="weather_rain">Rain</string>
 
     <string name="miles_per_hour">mi/hr</string>
+
+
+    <string name="about_us">
+        We are the Monash Promoters of Sustainable Development (M-POSD). As an enthusiastic team of students from different nationalities, we strongly believe in the idea of promoting sustainable development through our work.
+
+    </string>
 </resources>
