@@ -624,6 +624,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
         setZoombutton()
 
+        changeFloatButtonHeight()
         /*
             Setting filter card in the Mapview1
          */
