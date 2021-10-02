@@ -339,7 +339,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         // spinner init
         val spinner = binding.spinner
         spinner.item = suburbList
-        spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.opensans_bold)
+        spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.opensans_medium)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
