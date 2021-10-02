@@ -41,7 +41,7 @@
             android:clickable="true"
             android:layout_gravity="center"
             android:text="@string/know_more"
-            style="@style/textStyle20_bold_black" />
+            style="@style/textStyle16_black" />
 
     </LinearLayout>
 
