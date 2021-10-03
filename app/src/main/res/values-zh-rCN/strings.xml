@@ -278,6 +278,6 @@
     <string name="about_us">
         我们是莫纳什可持续发展促进会（M-POSD）。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
     </string>
-    <string name="checklist_heading">请确保您在外出送货前至少准备好以下装备</string>
-    <string name="road_sign_heading">以下是一些骑自行车送餐时需要注意的路标</string>
+    <string name="checklist_heading">出发前请携带：</string>
+    <string name="road_sign_heading">以下是重要的路标</string>
 </resources>

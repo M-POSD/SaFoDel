@@ -198,6 +198,7 @@
     <string name="how">कैसे</string>
     <string name="how_description">SaFoDel मौजूदा और संभावित फूड डिलीवरी राइडर्स के लिए एक सुरक्षा साथी ऐप है, जिसका उद्देश्य विक्टोरिया में राइडर्स के लिए फूड डिलीवरी के अनुभव को सुरक्षित बनाना है।</string>
     <string name="know_more">अधिक जानिए</string>
+
     <string name="generic_information_heading">अधिसूचना</string>
     <string name="current_time">&quot;वर्तमान समय: &quot;</string>
     <string name="current_weather">&quot;वर्तमान मौसम: &quot;</string>
@@ -246,8 +247,8 @@
     <string name="not_available">उपलब्ध नहीं है</string>
     <string name="current_humidity">वर्तमान आर्द्रता:</string>
     <string name="current_wind_speed">हवा की गति:</string>
-    <string name="weather_clouds">बादलों</string>
     <string name="weather_clear">धूप</string>
+    <string name="weather_clouds">बादलों</string>
     <string name="weather_rain">वर्षा</string>
     <string name="miles_per_hour">मील/घंटा</string>
     <string name="current_location">मैं</string>
@@ -275,8 +276,8 @@
 
     <string name="about">के बारे में</string>
     <string name="about_us">
-        हम सतत विकास (एम-पीओएसडी) के मोनाश प्रमोटर हैं। विभिन्न राष्ट्रीयताओं के छात्रों की एक उत्साही टीम के रूप में, हम अपने काम के माध्यम से सतत विकास को बढ़ावा देने के विचार में दृढ़ता से विश्वास करते हैं।
+हम सतत विकास (एम-पीओएसडी) के मोनाश प्रमोटर हैं। विभिन्न राष्ट्रीयताओं के छात्रों की एक उत्साही टीम के रूप में, हम अपने काम के माध्यम से सतत विकास को बढ़ावा देने के विचार में दृढ़ता से विश्वास करते हैं।
     </string>
-    <string name="checklist_heading">कृपया सुनिश्चित करें कि डिलीवरी के लिए बाहर जाने से पहले आप कम से कम निम्नलिखित गियर के साथ तैयार हैं</string>
-    <string name="road_sign_heading">भोजन पहुंचाने के लिए साइकिल की सवारी करते समय जागरूक होने के लिए यहां कुछ सड़क संकेत दिए गए हैं</string>
+    <string name="checklist_heading">जाने से पहले, ले आओ:</string>
+    <string name="road_sign_heading">जानने के लिए कुछ उपयोगी सड़क संकेतं</string>
 </resources>

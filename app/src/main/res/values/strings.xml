@@ -120,8 +120,8 @@
     <string name="info1_2_description">Good for uphill riding or long distances</string>
     <string name="info1_3_description">Promote sustainability</string>
     <string name="info1_4_description">Usually cheaper to rent</string>
-    <string name="info2_1_description">Maximum motor power of 250 watts in Victoria</string>
-    <string name="info2_2_description">Maximum speed of 25 km/h </string>
+    <string name="info2_1_description">Max motor power of 250 watts in Victoria</string>
+    <string name="info2_2_description">Max speed of 25 km/h </string>
     <string name="info2_3_description">All other rules regarding regular bicycles</string>
     <string name="info3_1_description">Higher speeds can be more dangerous</string>
     <string name="info3_2_description">Initial e-bike throttle leads to injuries</string>
@@ -179,7 +179,7 @@
 
     <!--  epic5  -->
     <string name="epic3_name">Road Signs</string>
-    <string name="road_sign_heading">Here are some road signs to be aware of while riding a bicycle for delivering food</string>
+    <string name="road_sign_heading">Some useful road signs to know</string>
     <string name="road_sign1_title">Slippery when wet</string>
     <string name="road_sign1_description">Roads that get especially slippery with wet weather, reduce your speed and be careful</string>
     <string name="road_sign2_title">Construction related signs</string>
@@ -207,7 +207,7 @@
     <string name="true_text">True</string>
     <string name="false_text">False</string>
 
-    <string name="question1_heading">What is the maximum speed you can ride your e-bike?</string>
+    <string name="question1_heading">What is the max speed you can ride your e-bike?</string>
     <string name="question1_option1">25 KM/H</string>
     <string name="question1_option2">30 KM/H</string>
     <string name="question1_option3">35 KM/H</string>
@@ -261,7 +261,7 @@
     <string name="warning_msg">All current data will be removed</string>
 
     <!-- checklist -->
-    <string name="checklist_heading">Please make sure you’re ready with at least the following gear before going out for delivery</string>
+    <string name="checklist_heading">Before you go, bring:</string>
     <string name="checklist_notification_unprepared">Please make sure you prepare everything on the checklist</string>
     <string name="checklist_notification_prepared">Awesome! It\'s time to start your food delivering journey!</string>
     <string name="helmet_checkbox_1">Helmet</string>
