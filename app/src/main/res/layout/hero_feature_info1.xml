@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"
-                    android:paddingVertical="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/home_page_slang_1" />
 
                 <TextView
