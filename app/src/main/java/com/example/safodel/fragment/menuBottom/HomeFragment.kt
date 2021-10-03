@@ -81,8 +81,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
-    private var isRaining = false
-    private var isInitialRainingAnimation = true
+//    private var isRaining = false
+//    private var isInitialRainingAnimation = true
 
     private lateinit var adapter: HomeViewAdapter
     private lateinit var runnable: Runnable
@@ -233,23 +233,24 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // raining animation
     private fun rainingAnimation() {
-//        binding.vusik.stopNotesFall()
-        if (isInitialRainingAnimation) {
-            isInitialRainingAnimation = false
-            isRaining = true
-            homePageImage.vusik.setImages(rainingList).start()
-            homePageImage.vusik.startNotesFall()
-        } else {
-            if (isRaining) {
-                isRaining = false
-                homePageImage.vusik.pauseNotesFall()
-                homePageImage.vusik.visibility = View.INVISIBLE
-            } else {
-                isRaining = true
-                homePageImage.vusik.resumeNotesFall()
-                homePageImage.vusik.visibility = View.VISIBLE
-            }
-        }
+        homePageImage.vusik.setImages(rainingList).start()
+        homePageImage.vusik.startNotesFall()
+//        if (isInitialRainingAnimation) {
+//            isInitialRainingAnimation = false
+//            isRaining = true
+//            homePageImage.vusik.setImages(rainingList).start()
+//            homePageImage.vusik.startNotesFall()
+//        } else {
+//            if (isRaining) {
+//                isRaining = false
+//                homePageImage.vusik.pauseNotesFall()
+//                homePageImage.vusik.visibility = View.INVISIBLE
+//            } else {
+//                isRaining = true
+//                homePageImage.vusik.resumeNotesFall()
+//                homePageImage.vusik.visibility = View.VISIBLE
+//            }
+//        }
     }
 
     // add animation for the individual image
