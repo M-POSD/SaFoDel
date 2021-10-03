@@ -131,7 +131,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
             option.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.default_option_icon,0)
             option.setTextColor(ContextCompat.getColor(requireActivity(), R.color.bottom_nav_gray))
             var typeface: Typeface? =
-                ResourcesCompat.getFont(requireActivity(), R.font.opensans_bold)
+                ResourcesCompat.getFont(requireActivity(), R.font.opensans_medium)
             option.typeface = typeface
             option.background = ContextCompat.getDrawable(
                 requireActivity(),
@@ -295,7 +295,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         textView.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.success_icon,0)
 
         var typeface: Typeface? =
-            ResourcesCompat.getFont(requireActivity(), R.font.opensans_bold)
+            ResourcesCompat.getFont(requireActivity(), R.font.opensans_medium)
         textView.typeface = typeface
         textView.background = ContextCompat.getDrawable(
             requireActivity(),

@@ -20,15 +20,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.466">
 
-<!--        <pl.droidsonroids.gif.GifImageView-->
-<!--            android:id="@+id/logo_shaking"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/driver_helmet_shaking"-->
-<!--            android:scaleX="1.6"-->
-<!--            android:scaleY="1.6"-->
-<!--            android:visibility="gone"-->
-<!--            android:layout_gravity="center"/>-->
+        <!--        <pl.droidsonroids.gif.GifImageView-->
+        <!--            android:id="@+id/logo_shaking"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:src="@drawable/driver_helmet_shaking"-->
+        <!--            android:scaleX="1.6"-->
+        <!--            android:scaleY="1.6"-->
+        <!--            android:visibility="gone"-->
+        <!--            android:layout_gravity="center"/>-->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
@@ -43,17 +43,31 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <TextView
-        android:id="@+id/appName"
-        style="@style/textStyle20_bold_black"
+    <LinearLayout
+        android:id="@+id/appNameLinearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
-        android:text="@string/SaFoDel"
-        android:textSize="25dp"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/logo_image" />
+        app:layout_constraintTop_toTopOf="@id/logo_image">
+
+        <TextView
+            android:id="@+id/appNameSaFo"
+            style="@style/textStyle20_bold_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SaFo"
+            android:textSize="40dp" />
+        <TextView
+            android:id="@+id/appNameDel"
+            style="@style/textStyle20_bold_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Del"
+            android:textSize="40dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -63,7 +77,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName"
+        app:layout_constraintTop_toBottomOf="@+id/appNameLinearLayout"
         app:layout_constraintVertical_bias="0.054">
 
         <TextView
@@ -79,7 +93,7 @@
             style="@style/textStyle16_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="25dp"
             android:clickable="true"
             android:text="@string/why" />
 
@@ -88,7 +102,7 @@
             style="@style/textStyle16_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="25dp"
             android:clickable="true"
             android:text="@string/how" />
 
@@ -106,7 +120,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.067" />
+        app:layout_constraintVertical_bias="0.087" />
 
     <include
         android:id="@+id/toolbar"
