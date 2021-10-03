@@ -35,6 +35,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
@@ -42,10 +43,12 @@ import com.example.safodel.databinding.HomepageImagesBinding
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.WeatherViewModel
+import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import kotlinx.coroutines.*
 import java.lang.Runnable
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 
@@ -74,6 +77,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var rainingList: IntArray
     private lateinit var homePageImage: HomepageImagesBinding
     private lateinit var homepageButtonLayout: HomepageButtonLayoutBinding
+    private lateinit var homeScrollView: NestedScrollView
 
     private var isBeginnerMode = false
     private var currentToast: Toast? = null
@@ -112,6 +116,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         toolbar = binding.toolbar.root
         homePageImage = binding.homePageImages
         homepageButtonLayout = binding.homepageButtonLayout
+        homeScrollView = binding.homeScrollView
         mainActivity = activity as MainActivity
 
         animatorSetLight = AnimatorSet()
@@ -200,26 +205,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
 
         isFirstCreated = false
-
-
-//        homepageButtonLayout.viewPager2Home.registerOnPageChangeCallback(object :
-//            OnPageChangeCallback() {
-//            override fun onPageScrolled(
-//                position: Int,
-//                positionOffset: Float,
-//                positionOffsetPixels: Int
-//            ) {
-//                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-////                handler.removeCallbacks(runnable)
-////                Log.e("onPageScrolled", position.toString())
-//            }
-//
-//            override fun onPageSelected(position: Int) {
-//                super.onPageSelected(position)
-////                handler.postDelayed(runnable, 5000)
-////                Log.e("Selected_Page", position.toString())
-//            }
-//        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -407,6 +392,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // for the learning mode for the beginner of the application
     // using open source git "spotlight" package
     private fun startSpotLight() {
+        homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+
+            when {
+                //  State Expanded
+                verticalOffset == 0 -> Log.d("homepage_app_bar", "Fully expended")
+                //  State Collapsed
+                abs(verticalOffset) == appBarLayout.totalScrollRange -> Log.d("homepage_app_bar", "Collapsed")
+                else -> Log.d("homepage_app_bar", "Failed")
+            }
+        })
+
 
         val targets = ArrayList<Target>()
 
@@ -424,10 +420,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         // first target
         val firstRoot = FrameLayout(requireContext())
         val first = layoutInflater.inflate(R.layout.layout_target, firstRoot)
+        val bottomNavigation = requireActivity().findViewById<View>(R.id.bottom_navigation)
         first.findViewById<TextView>(R.id.custom_text).text = getString(R.string.first_target)
         val firstTarget = Target.Builder()
-            .setAnchor(requireActivity().findViewById<View>(R.id.navHome))
-            .setShape(Circle(120f))
+            .setAnchor(bottomNavigation)
+            .setShape(
+                RoundedRectangle(
+                    bottomNavigation.height.toFloat(),
+                    bottomNavigation.width.toFloat(),
+                    10f
+                )
+            )
             .setOverlay(first)
             .build()
         targets.add(firstTarget)
@@ -436,10 +439,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val secondRoot = FrameLayout(requireContext())
         val second = layoutInflater.inflate(R.layout.layout_target, secondRoot)
         second.findViewById<TextView>(R.id.custom_text).text = getString(R.string.second_target)
-
+        val scrollingView = requireActivity().findViewById<View>(R.id.view_pager2_home)
         val secondTarget = Target.Builder()
-            .setAnchor(requireActivity().findViewById<View>(R.id.navMap))
-            .setShape(Circle(120f))
+            .setAnchor(scrollingView)
+            .setShape(
+                RoundedRectangle(
+                    scrollingView.height.toFloat(),
+                    scrollingView.width.toFloat(),
+                    10f
+                )
+            )
             .setOverlay(second)
             .build()
         targets.add(secondTarget)
@@ -470,94 +479,94 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         targets.add(fourthTarget)
 
 
-        // fifth target
-        val fifthRoot = FrameLayout(requireContext())
-        val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
-        fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
-
-        val fifthTarget = Target.Builder()
-            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
-            .setShape(
-                RoundedRectangle(
-                    homepageButtonLayout.epicCard12.cardLeft.height * 1.2.toFloat(),
-                    homepageButtonLayout.epicCard12.cardLeft.width * 1.2.toFloat(),
-                    10f
-                )
-            )
-            .setOverlay(fifth)
-            .build()
-
-        targets.add(fifthTarget)
-
-
-        // sixth target
-        val sixthRoot = FrameLayout(requireContext())
-        val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
-        sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
-
-        val sixthTarget = Target.Builder()
-            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
-            .setShape(
-                RoundedRectangle(
-                    homepageButtonLayout.epicCard12.cardRight.height * 1.2.toFloat(),
-                    homepageButtonLayout.epicCard12.cardRight.width * 1.2.toFloat(),
-                    10f
-                )
-            )
-            .setOverlay(sixth)
-            .build()
-
-        targets.add(sixthTarget)
+//        // fifth target
+//        val fifthRoot = FrameLayout(requireContext())
+//        val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
+//        fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
+//
+//        val fifthTarget = Target.Builder()
+//            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
+//            .setShape(
+//                RoundedRectangle(
+//                    homepageButtonLayout.epicCard12.cardLeft.height * 1.2.toFloat(),
+//                    homepageButtonLayout.epicCard12.cardLeft.width * 1.2.toFloat(),
+//                    10f
+//                )
+//            )
+//            .setOverlay(fifth)
+//            .build()
+//
+//        targets.add(fifthTarget)
 
 
-        val height = (homepageButtonLayout.epicCard34.cardRight.height
-                - homepageButtonLayout.epicCard34.cardRight.top * 2).toFloat()
-
-        // seventh target
-        val seventhRoot = FrameLayout(requireContext())
-        val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
-        seventh.findViewById<TextView>(R.id.custom_text).text = getString(R.string.seventh_target)
-
-        val seventhTarget = Target.Builder()
-            .setAnchor(
-                (binding.root.width / 2).toFloat(),
-                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height * 3)
-            )
-            .setShape(
-                RoundedRectangle(
-                    homepageButtonLayout.epicCard34.cardLeft.height * 1.2.toFloat(),
-                    homepageButtonLayout.epicCard34.cardLeft.width * 1.2.toFloat(),
-                    10f
-                )
-            )
-            .setOverlay(seventh)
-            .build()
-
-        targets.add(seventhTarget)
+//        // sixth target
+//        val sixthRoot = FrameLayout(requireContext())
+//        val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
+//        sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
+//
+//        val sixthTarget = Target.Builder()
+//            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
+//            .setShape(
+//                RoundedRectangle(
+//                    homepageButtonLayout.epicCard12.cardRight.height * 1.2.toFloat(),
+//                    homepageButtonLayout.epicCard12.cardRight.width * 1.2.toFloat(),
+//                    10f
+//                )
+//            )
+//            .setOverlay(sixth)
+//            .build()
+//
+//        targets.add(sixthTarget)
 
 
-        // eighth target
-        val eighthRoot = FrameLayout(requireContext())
-        val eighth = layoutInflater.inflate(R.layout.layout_target, eighthRoot)
-        eighth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.eighth_target)
+//        val height = (homepageButtonLayout.epicCard34.cardRight.height
+//                - homepageButtonLayout.epicCard34.cardRight.top * 2).toFloat()
+//
+//        // seventh target
+//        val seventhRoot = FrameLayout(requireContext())
+//        val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
+//        seventh.findViewById<TextView>(R.id.custom_text).text = getString(R.string.seventh_target)
+//
+//        val seventhTarget = Target.Builder()
+//            .setAnchor(
+//                (binding.root.width / 2).toFloat(),
+//                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height * 3)
+//            )
+//            .setShape(
+//                RoundedRectangle(
+//                    homepageButtonLayout.epicCard34.cardLeft.height * 1.2.toFloat(),
+//                    homepageButtonLayout.epicCard34.cardLeft.width * 1.2.toFloat(),
+//                    10f
+//                )
+//            )
+//            .setOverlay(seventh)
+//            .build()
+//
+//        targets.add(seventhTarget)
 
 
-        val eighthTarget = Target.Builder()
-            .setAnchor(
-                (binding.root.width / 2).toFloat(),
-                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height)
-            )
-            .setShape(
-                RoundedRectangle(
-                    homepageButtonLayout.epicCard34.cardRight.height * 1.2.toFloat(),
-                    homepageButtonLayout.epicCard34.cardRight.width * 1.2.toFloat(),
-                    10f
-                )
-            )
-            .setOverlay(eighth)
-            .build()
-
-        targets.add(eighthTarget)
+//        // eighth target
+//        val eighthRoot = FrameLayout(requireContext())
+//        val eighth = layoutInflater.inflate(R.layout.layout_target, eighthRoot)
+//        eighth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.eighth_target)
+//
+//
+//        val eighthTarget = Target.Builder()
+//            .setAnchor(
+//                (binding.root.width / 2).toFloat(),
+//                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height)
+//            )
+//            .setShape(
+//                RoundedRectangle(
+//                    homepageButtonLayout.epicCard34.cardRight.height * 1.2.toFloat(),
+//                    homepageButtonLayout.epicCard34.cardRight.width * 1.2.toFloat(),
+//                    10f
+//                )
+//            )
+//            .setOverlay(eighth)
+//            .build()
+//
+//        targets.add(eighthTarget)
 
         // ninth target
         val ninthRoot = FrameLayout(requireContext())
@@ -632,30 +641,30 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        var scroll =
-            homepageButtonLayout.epicCard12.cardLeft.top + homepageButtonLayout.epicCard12.cardLeft.bottom
-        fifth.findViewById<View>(R.id.next_target).setOnClickListener {
-            binding.homeScrollView.scrollTo(0, scroll)
-            spotlight.next()
-        }
-        sixth.findViewById<View>(R.id.next_target).setOnClickListener {
-            binding.homeScrollView.fullScroll(ScrollView.FOCUS_DOWN)
-            spotlight.next()
-        }
-        seventh.findViewById<View>(R.id.next_target).setOnClickListener {
-            spotlight.next()
-        }
-        eighth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+//        var scroll =
+//            homepageButtonLayout.epicCard12.cardLeft.top + homepageButtonLayout.epicCard12.cardLeft.bottom
+//        fifth.findViewById<View>(R.id.next_target).setOnClickListener {
+//            binding.homeScrollView.scrollTo(0, scroll)
+//            spotlight.next()
+//        }
+//        sixth.findViewById<View>(R.id.next_target).setOnClickListener {
+//            binding.homeScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+//            spotlight.next()
+//        }
+//        seventh.findViewById<View>(R.id.next_target).setOnClickListener {
+//            spotlight.next()
+//        }
+//        eighth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
 
         v0.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         fourth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-        fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-        sixth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-        seventh.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-        eighth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//        fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//        sixth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//        seventh.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//        eighth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         ninth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
 
     }
