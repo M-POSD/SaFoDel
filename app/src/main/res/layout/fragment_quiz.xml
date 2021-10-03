@@ -44,19 +44,23 @@
                 android:weightSum="10"
                 android:background="@color/primary_green"
                 android:padding="16dp">
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
                     style="@style/textStyle20_bold_white"
-                    android:gravity="center"
+                    android:justificationMode="inter_word"
+                    android:layout_marginHorizontal="10dp"
                     android:text="@string/quiz_heading"
                     />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="4"/>
+                    android:layout_weight="3.5"/>
 
                 <include android:id="@+id/startBtn"
                     layout="@layout/medium_button"/>
