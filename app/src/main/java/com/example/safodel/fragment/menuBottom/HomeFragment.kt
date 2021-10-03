@@ -3,6 +3,7 @@ package com.example.safodel.fragment.menuBottom
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -42,6 +43,7 @@ import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.safodel.model.WeatherTemp
+import com.example.safodel.viewModel.IsLearningModeViewModel
 import com.example.safodel.viewModel.WeatherViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
@@ -90,7 +92,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var runnable: Runnable
     private lateinit var handler: Handler
 
-    private lateinit var model: WeatherViewModel
+    private lateinit var weatherModel: WeatherViewModel
+    private lateinit var learningModeModel: IsLearningModeViewModel
     private var isFirstCreated = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -161,7 +164,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
 
         isBeginnerMode = mainActivity.isLearningMode()
-        model = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
+        weatherModel = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
+        learningModeModel = ViewModelProvider(requireActivity()).get(IsLearningModeViewModel::class.java)
+
         return binding.root
 
     }
@@ -173,7 +178,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         view.doOnPreDraw {
             Log.d("view.doOnPreDraw", isBeginnerMode.toString())
             if (isBeginnerMode) {
+                learningModeModel.setLearningMode(true)
                 startSpotLight()
+            } else {
+                learningModeModel.setLearningMode(false)
             }
             isBeginnerMode = false
             isFirstCreated = false
@@ -488,9 +496,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val ninth = layoutInflater.inflate(R.layout.layout_target, ninthRoot)
         ninth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.ninth_target)
 
+//        val location = binding.toolbar.simpleToolbar.getChildAt(1).getLocationOnScreen()
+//        val absX = location.x
+//        val absY = location.y + mainActivity.getStatusHeight()
 
         val ninthTarget = Target.Builder()
-            .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))   // get the image view position
+            .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))
             .setShape(Circle(120f))
             .setOverlay(ninth)
             .build()
@@ -538,6 +549,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             spotlight.finish()
             isAllEnable(true)
             mainActivity.setLearningMode(false)
+            learningModeModel.setLearningMode(false)
         }
 
         v0.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
@@ -568,6 +580,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun View.setAllEnabled(enabled: Boolean) {
         isEnabled = enabled
         if (this is ViewGroup) children.forEach { child -> child.setAllEnabled(enabled) }
+    }
+
+   private fun View.getLocationOnScreen(): Point
+    {
+        val location = IntArray(2)
+        this.getLocationOnScreen(location)
+        return Point(location[0],location[1])
     }
 
     private fun isAllEnable(isEnable: Boolean) {
@@ -613,7 +632,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                         }
                         Log.d("currentWeather", weather)
                         mainActivity.keepWeatherSharePrefer(weather)
-                        model.setWeather(
+                        weatherModel.setWeather(
                             WeatherTemp(
                                 location,
                                 weather,
@@ -709,21 +728,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun configScrollingViewActionCapture(numTarget:Int, view: View, spotLight: Spotlight) {
         when(numTarget) {
             3 -> {
-                homePageImage.homepageAppBar.setAllEnabled(true)
+//                homePageImage.homepageAppBar.setAllEnabled(true)
                 homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when (appBarLayout.totalScrollRange) {
                         //  State Collapsed
                         abs(verticalOffset) -> {
                             Log.d("homepage_app_bar", "Collapsed")
                             view.findViewById<TextView>(R.id.next_target).alpha = 1f
+//                            homePageImage.homepageAppBar.setAllEnabled(false)
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
                             view.findViewById<View>(R.id.next_target).setOnClickListener{
                                 spotLight.next()
-                                homePageImage.homepageAppBar.setAllEnabled(false)
                             }
                         }
                         else -> {
                             Log.d("homepage_app_bar", "Failed")
+//                            homePageImage.homepageAppBar.setAllEnabled(true)
                             view.findViewById<TextView>(R.id.next_target).alpha = 0f
                             view.findViewById<View>(R.id.next_target).isClickable = false
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
@@ -733,7 +753,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
 
             5 -> {
-                homePageImage.homepageAppBar.setAllEnabled(true)
+//                homePageImage.homepageAppBar.setAllEnabled(true)
                 homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when {
                         //  State Expanded
@@ -741,9 +761,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                             Log.d("homepage_app_bar", "Fully expended")
                             view.findViewById<TextView>(R.id.next_target).alpha = 1f
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
+//                            homePageImage.homepageAppBar.setAllEnabled(false)
                             view.findViewById<View>(R.id.next_target).setOnClickListener{
                                 spotLight.next()
-                                homePageImage.homepageAppBar.setAllEnabled(false)
                             }
                         }
 
@@ -754,6 +774,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
                         else -> {
                             Log.d("homepage_app_bar", "Failed")
+//                            homePageImage.homepageAppBar.setAllEnabled(true)
                             view.findViewById<TextView>(R.id.next_target).alpha = 0f
                             view.findViewById<View>(R.id.next_target).isClickable = false
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)

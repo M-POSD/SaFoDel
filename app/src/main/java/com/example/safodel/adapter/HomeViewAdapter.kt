@@ -11,25 +11,29 @@ import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHeroFeatureBinding
 import com.example.safodel.ui.main.MainActivity
+import com.example.safodel.viewModel.IsLearningModeViewModel
 import com.example.safodel.viewModel.WeatherViewModel
 import java.util.*
 
 class HomeViewAdapter(val context: Context, private val parentFragment: Fragment):
     RecyclerView.Adapter<HomeViewAdapter.ViewHolder>() {
 //    private lateinit var model: WeatherViewModel
+    private lateinit var learningModeModel: IsLearningModeViewModel
     private lateinit var mainActivity: MainActivity
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: FragmentHeroFeatureBinding =
             FragmentHeroFeatureBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 //        model = ViewModelProvider(parentFragment.requireActivity()).get(WeatherViewModel::class.java)
+        learningModeModel = ViewModelProvider(parentFragment.requireActivity()).get(IsLearningModeViewModel::class.java)
         mainActivity = parentFragment.activity as MainActivity
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        when(position) {
 
+
+        when(position) {
             // 0 -> for introduction home page view
             0 -> {
                 setVisibility(viewHolder,0)
@@ -92,6 +96,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
                 }
             }
         }
+        observeLearningMode(viewHolder)
     }
 
     override fun getItemCount() = 5
@@ -116,6 +121,15 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
             4 -> viewHolder.binding.heroFeatureInfo5.intro5Layout.visibility = View.VISIBLE
             5 -> viewHolder.binding.heroFeatureInfo6.intro6Layout.visibility = View.VISIBLE
         }
+    }
+
+    private fun observeLearningMode(viewHolder: ViewHolder) {
+        learningModeModel.isLearningMode().observe(parentFragment.viewLifecycleOwner, { isLearningMode ->
+               viewHolder.binding.heroFeatureInfo3.card.isEnabled = !isLearningMode
+               viewHolder.binding.heroFeatureInfo4.card.isEnabled = !isLearningMode
+               viewHolder.binding.heroFeatureInfo5.card.isEnabled = !isLearningMode
+               viewHolder.binding.heroFeatureInfo6.card.isEnabled = !isLearningMode
+        })
     }
 
     class ViewHolder(binding: FragmentHeroFeatureBinding) : RecyclerView.ViewHolder(binding.root) {
