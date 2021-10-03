@@ -42,7 +42,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      *  Press the navigation icon to pop up the navigation window
      */
-    fun setToolbarBasic(toolbar: androidx.appcompat.widget.Toolbar) {
+    fun setToolbarBasic(toolbar: Toolbar) {
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
@@ -55,7 +55,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         toolbar.setNavigationIcon(R.drawable.menu_gray)
         mainActivity.unlockSwipeDrawer()
         if (findNavController().currentDestination?.id != R.id.developerFragment &&
-                findNavController().currentDestination?.id != R.id.appIntroFragment) {
+                findNavController().currentDestination?.id != R.id.appIntroFragment ) {
             mainActivity.cleanLeftMenuIsChecked()
         }
     }
@@ -63,7 +63,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      *  Press the white navigation icon to pop up the navigation window
      */
-    fun setToolbarWhite(toolbar: androidx.appcompat.widget.Toolbar) {
+    fun setToolbarWhite(toolbar: Toolbar) {
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
@@ -84,7 +84,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      * Press the return navigation icon to go back to previous page
      */
-    open fun setToolbarReturn(toolbar: androidx.appcompat.widget.Toolbar) {
+    open fun setToolbarReturn(toolbar: Toolbar) {
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
@@ -105,7 +105,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      * Press the return navigation icon to go back to previous page
      */
-    open fun setToolbarReturnUnTransparent(toolbar: androidx.appcompat.widget.Toolbar) {
+    open fun setToolbarReturnUnTransparent(toolbar: Toolbar) {
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
@@ -127,7 +127,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      *  Contain basic nav and light mode two more actions icon
      */
-    fun setToolbarLightMode(toolbar: androidx.appcompat.widget.Toolbar) {
+    fun setToolbarLightMode(toolbar: Toolbar) {
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar
@@ -149,7 +149,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      *  Contain basic nav and dark mode two more actions icon
      */
-    fun setToolbarDarkMode(toolbar: androidx.appcompat.widget.Toolbar) {
+    fun setToolbarDarkMode(toolbar: Toolbar) {
         val mainActivity = activity as MainActivity
         toolbar.inflateMenu(R.menu.nav_menu_left)
         toolbar.menu.clear() // delete 3 dots in the right of toolbar

@@ -41,7 +41,7 @@ import timber.log.Timber
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
@@ -68,11 +68,15 @@ class MainActivity : AppCompatActivity() {
         toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
         val leftHeader = binding.leftNavigation.getHeaderView(0)
-        val leftHeaderText = leftHeader.findViewById<View>(R.id.left_header_text)
-        leftHeaderText.isClickable = true
-        leftHeaderText.setOnClickListener {
-            drawer.closeDrawers()
-        }
+        val leftHeaderSaFo = leftHeader.findViewById<View>(R.id.left_header_safo)
+        val leftHeaderDel = leftHeader.findViewById<View>(R.id.left_header_del)
+
+
+        leftHeaderSaFo.isClickable = true
+        leftHeaderDel.isClickable = true
+        leftHeaderSaFo.setOnClickListener(this)
+        leftHeaderDel.setOnClickListener(this)
+
 
         configCheckListIcon()
 
@@ -555,6 +559,14 @@ class MainActivity : AppCompatActivity() {
         binding.leftNavFooter.currentHumidityInfo.text = weatherObject.humidity.toString() + "%"
         binding.leftNavFooter.currentWindSpeedInfo.text = weatherObject.windSpeed.toString() + " " + getString(R.string.miles_per_hour)
 
+    }
+
+    override fun onClick(v: View) {
+        when(v.id) {
+            R.id.left_header_safo, R.id.left_header_del -> {
+                drawer.closeDrawers()
+            }
+        }
     }
 }
 

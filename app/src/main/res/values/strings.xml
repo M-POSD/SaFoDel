@@ -93,7 +93,7 @@
 
     <string name="tip1_1_title">Hook turn at intersections</string>
     <string name="tip1_1_statistics">Bicycle crashes are marginally more common (55%) at intersections</string>
-    <string name="tip1_1_description">It’s often safer to perform a hook turn at an intersection rather than turn right from the right lane</string>
+    <string name="tip1_1_description">It’s often safer to perform a hook turn at an intersection to turn right</string>
     <string name="tip1_2_title">Blind spots</string>
     <string name="tip1_2_statistics" translatable="false"></string>
     <string name="tip1_2_description">Avoid riding in a vehicle’s blind spots and beware larger vehicles have bigger blind spots</string>
@@ -179,6 +179,7 @@
 
     <!--  epic5  -->
     <string name="epic3_name">Road Signs</string>
+    <string name="road_sign_heading">Here are some road signs to be aware of while riding a bicycle for delivering food</string>
     <string name="road_sign1_title">Slippery when wet</string>
     <string name="road_sign1_description">Roads that get especially slippery with wet weather, reduce your speed and be careful</string>
     <string name="road_sign2_title">Construction related signs</string>
@@ -243,7 +244,7 @@
 
     <!--  quiz  -->
     <string name="quiz">QUIZ</string>
-    <string name="quiz_heading">Test your understanding for road rules</string>
+    <string name="quiz_heading">Take this short quiz to test your knowledge of the road rules</string>
     <string name="result">RESULT</string>
     <string name="result_heading_1">Learning rules again</string>
     <string name="result_heading_2">Review rules sometimes</string>
@@ -260,6 +261,7 @@
     <string name="warning_msg">All current data will be removed</string>
 
     <!-- checklist -->
+    <string name="checklist_heading">Please make sure you’re ready with at least the following gear before going out for delivery</string>
     <string name="checklist_notification_unprepared">Please make sure you prepare everything on the checklist</string>
     <string name="checklist_notification_prepared">Awesome! It\'s time to start your food delivering journey!</string>
     <string name="helmet_checkbox_1">Helmet</string>
@@ -272,14 +274,21 @@
     <string name="bike_lock_checkbox_8">Bike lock</string>
 
     <!--  about app  -->
-    <string name="about">ABOUT</string>
-    <string name="about_description">Educating Food Delivery Bike Riders</string>
+    <string name="what">WHAT</string>
+    <string name="what_description">The COVID outbreak propelled the popularity of food delivery services and accelerated growth in cycling numbers. However, this has been accompanied by a growing increase in the number of delivery riders being involved in accidents.</string>
 
-    <string name="audience">AUDIENCE</string>
-    <string name="audience_description">Potential and existing food delivery bike riders</string>
+    <string name="why">WHY</string>
+    <string name="why_description">One of the primary reasons for this increasing trend is that riders are not given adequate safety training and local traffic knowledge and this makes them unacceptably vulnerable. (puts them at risk) </string>
+
+    <string name="how">HOW</string>
+    <string name="how_description">SaFoDel is a safety companion app for existing and prospective food delivery riders which aims to make the food delivery experience safer for the riders in Victoria.</string>
 
     <!--  about developer  -->
     <string name="know_more">KNOW MORE</string>
+    <string name="about">ABOUT</string>
+    <string name="about_us">
+        We are the Monash Promoters of Sustainable Development (M-POSD). As an enthusiastic team of students from different nationalities, we strongly believe in the idea of promoting sustainable development through our work.
+    </string>
 
     <!-- home information -->
     <string name="generic_information_heading">Notification</string>
@@ -324,7 +333,7 @@
     <string name="analysis_heading2">80%</string>
     <string name="analysis_description2">of reported bicycle accidents occurred in clear conditions</string>
     <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
-    <string name="analysis_description3">were the most accident-prone hours (also being office hours)</string>
+    <string name="analysis_description3">were the times most accidents were reported (peak hour traffic)</string>
     <string name="analysis_heading4">74%</string>
     <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
     <string name="analysis_heading5">20%</string>
@@ -347,8 +356,4 @@
     <string name="miles_per_hour">mi/hr</string>
 
 
-    <string name="about_us">
-        We are the Monash Promoters of Sustainable Development (M-POSD). As an enthusiastic team of students from different nationalities, we strongly believe in the idea of promoting sustainable development through our work.
-
-    </string>
 </resources>
