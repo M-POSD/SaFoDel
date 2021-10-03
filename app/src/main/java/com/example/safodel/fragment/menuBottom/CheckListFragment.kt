@@ -9,12 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.R
 import com.example.safodel.databinding.DetailCardChecklistBinding
 import com.example.safodel.databinding.FragmentChecklistBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.ui.main.MainActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class CheckListFragment :
     BasicFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
@@ -28,6 +35,7 @@ class CheckListFragment :
     private lateinit var vestImageView: ImageView
     private lateinit var backpackImageView: ImageView
     private lateinit var bikeLockImageView: ImageView
+    private lateinit var checklistHeading: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +49,8 @@ class CheckListFragment :
         setToolbarBasic(toolbar)
 
         checklist = binding.checklist
+        checklistHeading = binding.checklistHeading
+        setHeaderHeight()
 
         configNotificationView()
         configDefaultTextView()
@@ -281,6 +291,18 @@ class CheckListFragment :
         var animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator)
         animatorSet.start()
+    }
+
+    private fun setHeaderHeight(){
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        coroutineScope.launch {
+            // try to get the height of status bar and then margin top
+            val headingHeight = checklistHeading.layoutParams as ConstraintLayout.LayoutParams
+            while (headingHeight.topMargin == 0)
+                headingHeight.topMargin = mainActivity.getStatusHeight() + 10
+            checklistHeading.layoutParams = headingHeight
+            this.cancel()
+        }
     }
 
 }
