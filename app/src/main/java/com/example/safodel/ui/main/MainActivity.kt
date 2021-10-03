@@ -242,14 +242,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 isItemSelected
             } else {
-                if (!navController.popBackStack(it.itemId, false)) {
-                    if (navController.currentDestination?.id == R.id.appIntroFragment
-                        || navController.currentDestination?.id == R.id.developerFragment
-                    ) {
-                        navController.popBackStack() // Previous fragment out of stack
-                    }
-                    leftNav(it)
-                }
+                leftNav(it)
                 drawer.closeDrawers() // close the drawer of the left navigation.
                 true
             }
@@ -258,8 +251,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun leftNav(menuItem: MenuItem) {
         when (menuItem.itemId) {
-            R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
-            R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
+            R.id.navAppIntro -> {
+                if (navController.currentDestination?.id == R.id.appIntroFragment) {
+                    navController.popBackStack()
+                }
+                navController.navigate(R.id.appIntroFragment)
+            }
+            R.id.navDeveloper -> {
+                if (navController.currentDestination?.id == R.id.developerFragment) {
+                    navController.popBackStack()
+                }
+                navController.navigate(R.id.developerFragment)
+            }
             R.id.navLanguage -> switchLanguageList()
         }
     }
@@ -342,7 +345,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      */
     fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
         val checkbox = "checkbox$checkbox_num"
-        Log.d("keepCheckboxSharePrefer","  $checkbox: $isChecked")
+        Log.d("keepCheckboxSharePrefer", "  $checkbox: $isChecked")
         val sharedPref = this.applicationContext.getSharedPreferences(
             checkbox, MODE_PRIVATE
         )
@@ -362,7 +365,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             Context.MODE_PRIVATE
         )
 
-        Log.d("getCheckboxSharePrefer","$checkbox: ${sharedPref.getBoolean(checkbox, false)}")
+        Log.d("getCheckboxSharePrefer", "$checkbox: ${sharedPref.getBoolean(checkbox, false)}")
         return sharedPref.getBoolean(checkbox, false)
     }
 
@@ -401,7 +404,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         var times = 0
         while (times < numOfItems) {
             binding.leftNavigation.menu.getItem(times).isChecked = false
-            times ++
+            times++
         }
     }
 
@@ -483,7 +486,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Recreate the activity
      */
     private fun recreateActivity() {
-        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             super.recreate()
         } else {
             finish()
@@ -552,12 +555,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.leftNavFooter.currentLocationInfo.text = weatherObject.location
         binding.leftNavFooter.currentTempInfo.text = weatherObject.temp.toString() + "°C"
         binding.leftNavFooter.currentHumidityInfo.text = weatherObject.humidity.toString() + "%"
-        binding.leftNavFooter.currentWindSpeedInfo.text = weatherObject.windSpeed.toString() + " " + getString(R.string.miles_per_hour)
+        binding.leftNavFooter.currentWindSpeedInfo.text =
+            weatherObject.windSpeed.toString() + " " + getString(R.string.miles_per_hour)
 
     }
 
     override fun onClick(v: View) {
-        when(v.id) {
+        when (v.id) {
             R.id.left_header_safo, R.id.left_header_del -> {
                 drawer.closeDrawers()
             }
