@@ -191,11 +191,11 @@
     <string name="result_heading_3">完美的 ！！！</string>
     <string name="checklist_notification_unprepared">请确保您准备好清单上的所有内容</string>
     <string name="checklist_notification_prepared">棒极了！ 是时候开始你的送餐之旅了！</string>
-    <string name="what">事件</string>
+    <string name="what">何谓</string>
     <string name="what_description">新冠病毒的爆发使得食物外送服务需求量大增并使外送员的需求大幅增长。然而，随之而来的是卷入事故的外送员数量不断增加。</string>
-    <string name="why">原由</string>
+    <string name="why">何故</string>
     <string name="why_description">这种增长趋势的主要原因之一是外送员没有得到足够的安全培训和当地交通知识，这使他们变得非常易受伤。（使他们处于危险之中）</string>
-    <string name="how">解决</string>
+    <string name="how">方法</string>
     <string name="how_description">我们以多种语言为骑自行车者提供相关的安全和骑行信息，通过交互式地图深入了解您所在的地区，深入了解历史趋势，并以交互式清单的形式提醒您交付必需品。</string>
 
     <string name="know_more">了解更多</string>
