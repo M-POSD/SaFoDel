@@ -72,19 +72,17 @@
     <string name="in_an_accident3_slang">Find out information regarding insurance claims</string>
 
     <!--  spotlight description  -->
-    <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\nClick Next for the next step\nClick Close for leaving this mode</string>
     <string name="v1">Food delivery riders are not given enough safety training and local traffic knowledge, making them unacceptably vulnerable</string>
     <string name="v2_title">What is SaFoDel ?</string>
     <string name="v2_description">We help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders</string>
-    <string name="first_target">Home button allows you to return home page directly</string>
-    <string name="second_target">Map button allows you to see the historical accident locations in Victoria with details</string>
-    <string name="third_target">ACCIDENT-TRENDS button allows to check the trends in historical accident in different suburbs</string>
-    <string name="fourth_target">QUIZ-YOURSELF button allows you to test your understanding of road rules before delivering food</string>
-    <string name="fifth_target">Ride-Safer button allows you to find out how to ride safely while delivering food</string>
-    <string name="sixth_target">Delivery-on-E-Bike button allows you to find information on using e-bike for food delivery</string>
-    <string name="seventh_target">Safety-Gear button allows you to find out the cycling gear you need to deliver safe</string>
-    <string name="eighth_target">In-an-Accident button allows you to find out the measure for handling the bike accident</string>
-    <string name="ninth_target">Left Menu has\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team</string>
+    <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\n\nClick Next for the next step\n\nClick Close for leaving this mode</string>
+    <string name="first_target">This area is the main feature of the application, you can click each button to quickly navigate to your destination</string>
+    <string name="second_target">This area is the main feature with some interesting image and details. Click the one with image to your destination</string>
+    <string name="third_target">Scroll up until the logo has been fully collapsed</string>
+    <string name="fourth_target">This area is the static information you need to be familiar with</string>
+    <string name="fifth_target">Scroll down until the logo has been fully extended</string>
+    <string name="ninth_target">Left Menu has\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team\n\nLanguage:\nSwitch preferred language</string>
+    <string name="click_next">Well down. Please click next</string>
 
     <!--  epic1  -->
     <string name="epic1_name">Ride Safer</string>

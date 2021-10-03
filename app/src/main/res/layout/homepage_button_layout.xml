@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/snow"
+    android:orientation="vertical"
     android:weightSum="10">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -18,21 +18,29 @@
         android:layout_height="0dp"
         android:layout_weight="6.5"
         android:orientation="vertical">
+
         <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
             android:id="@+id/worm_dots_indicator_home"
+            style="@style/worm_dot_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
-            style="@style/worm_dot_indicator"
-            />
-        <include
-            android:id="@+id/epicCard12"
-            layout="@layout/small_cards" />
+            android:layout_margin="5dp" />
 
-        <include
-            android:id="@+id/epicCard34"
-            layout="@layout/small_cards" />
+        <LinearLayout
+            android:id="@+id/static_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/epicCard12"
+                layout="@layout/small_cards" />
+
+            <include
+                android:id="@+id/epicCard34"
+                layout="@layout/small_cards" />
+        </LinearLayout>
 
     </LinearLayout>
 

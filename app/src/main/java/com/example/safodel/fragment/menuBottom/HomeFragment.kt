@@ -47,6 +47,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import kotlinx.coroutines.*
+import pl.droidsonroids.gif.GifImageView
 import java.lang.Runnable
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -77,6 +78,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var rainingList: IntArray
     private lateinit var homePageImage: HomepageImagesBinding
     private lateinit var homepageButtonLayout: HomepageButtonLayoutBinding
+    private lateinit var homepageButtonLayout2: HomepageButtonLayoutBinding
     private lateinit var homeScrollView: NestedScrollView
 
     private var isBeginnerMode = false
@@ -116,6 +118,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         toolbar = binding.toolbar.root
         homePageImage = binding.homePageImages
         homepageButtonLayout = binding.homepageButtonLayout
+        homepageButtonLayout2 = binding.homepageButtonLayout2
+
         homeScrollView = binding.homeScrollView
         mainActivity = activity as MainActivity
 
@@ -167,13 +171,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         super.onViewCreated(view, savedInstanceState)
         Log.d("onViewCreated", isBeginnerMode.toString())
         view.doOnPreDraw {
-
             Log.d("view.doOnPreDraw", isBeginnerMode.toString())
-            if (isBeginnerMode && isFirstCreated) {
+            if (isBeginnerMode) {
                 startSpotLight()
-                mainActivity.setLearningMode(false)
             }
-
             isBeginnerMode = false
             isFirstCreated = false
         }
@@ -259,7 +260,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 -100f,
                 homePageImage.backpack.translationX
             )
-        Log.d("height", binding.homeFragmentXML.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.backpack, "alpha", 0f, 1f)
         var objectAnimator3: ObjectAnimator =
@@ -269,7 +269,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 -120f,
                 homePageImage.helmet.translationY
             )
-        Log.d("width", binding.homeFragmentXML.height.toString())
+
         var objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.helmet, "alpha", 0f, 1f)
         var objectAnimator5: ObjectAnimator =
@@ -297,7 +297,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 4 * (view?.width ?: 1500) / 5.toFloat()
             )
 
-        Log.d("width", view?.width.toString())
         var objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.images2,
@@ -390,18 +389,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // for the learning mode for the beginner of the application
     // using open source git "spotlight" package
     private fun startSpotLight() {
-        homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-
-            when {
-                //  State Expanded
-                verticalOffset == 0 -> Log.d("homepage_app_bar", "Fully expended")
-                //  State Collapsed
-                abs(verticalOffset) == appBarLayout.totalScrollRange -> Log.d("homepage_app_bar", "Collapsed")
-                else -> Log.d("homepage_app_bar", "Failed")
-            }
-        })
-
-
         val targets = ArrayList<Target>()
 
         // v0 target
@@ -437,6 +424,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val secondRoot = FrameLayout(requireContext())
         val second = layoutInflater.inflate(R.layout.layout_target, secondRoot)
         second.findViewById<TextView>(R.id.custom_text).text = getString(R.string.second_target)
+//        val scrollingView = homepageButtonLayout2.viewPager2Home
         val scrollingView = requireActivity().findViewById<View>(R.id.view_pager2_home)
         val secondTarget = Target.Builder()
             .setAnchor(scrollingView)
@@ -455,130 +443,60 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val thirdRoot = FrameLayout(requireContext())
         val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
         third.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
-
+        third.findViewById<GifImageView>(R.id.scrolling_gif).visibility = View.VISIBLE
+//        val scrollingView = homepageButtonLayout2.viewPager2Home
         val thirdTarget = Target.Builder()
-            .setAnchor(requireActivity().findViewById<View>(R.id.navAnalysis))
-            .setShape(Circle(120f))
+            .setShape(Circle(0f))
             .setOverlay(third)
             .build()
+        third.findViewById<TextView>(R.id.next_target).alpha = 0f
         targets.add(thirdTarget)
 
         // fourth target
         val fourthRoot = FrameLayout(requireContext())
         val fourth = layoutInflater.inflate(R.layout.layout_target, fourthRoot)
         fourth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fourth_target)
-
+        val staticInfoBtnView = homepageButtonLayout2.staticInfoLayout
         val fourthTarget = Target.Builder()
-            .setAnchor(requireActivity().findViewById<View>(R.id.navExam))
-            .setShape(Circle(120f))
+            .setAnchor(staticInfoBtnView)
+            .setShape(
+                RoundedRectangle(
+                    staticInfoBtnView.height.toFloat(),
+                    staticInfoBtnView.width.toFloat(),
+                    10f
+                )
+            )
             .setOverlay(fourth)
             .build()
-
         targets.add(fourthTarget)
 
-
-//        // fifth target
-//        val fifthRoot = FrameLayout(requireContext())
-//        val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
-//        fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
-//
-//        val fifthTarget = Target.Builder()
-//            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
-//            .setShape(
-//                RoundedRectangle(
-//                    homepageButtonLayout.epicCard12.cardLeft.height * 1.2.toFloat(),
-//                    homepageButtonLayout.epicCard12.cardLeft.width * 1.2.toFloat(),
-//                    10f
-//                )
-//            )
-//            .setOverlay(fifth)
-//            .build()
-//
-//        targets.add(fifthTarget)
-
-
-//        // sixth target
-//        val sixthRoot = FrameLayout(requireContext())
-//        val sixth = layoutInflater.inflate(R.layout.layout_target, sixthRoot)
-//        sixth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.sixth_target)
-//
-//        val sixthTarget = Target.Builder()
-//            .setAnchor(homepageButtonLayout.epicCard12.cardLeft)
-//            .setShape(
-//                RoundedRectangle(
-//                    homepageButtonLayout.epicCard12.cardRight.height * 1.2.toFloat(),
-//                    homepageButtonLayout.epicCard12.cardRight.width * 1.2.toFloat(),
-//                    10f
-//                )
-//            )
-//            .setOverlay(sixth)
-//            .build()
-//
-//        targets.add(sixthTarget)
-
-
-//        val height = (homepageButtonLayout.epicCard34.cardRight.height
-//                - homepageButtonLayout.epicCard34.cardRight.top * 2).toFloat()
-//
-//        // seventh target
-//        val seventhRoot = FrameLayout(requireContext())
-//        val seventh = layoutInflater.inflate(R.layout.layout_target, seventhRoot)
-//        seventh.findViewById<TextView>(R.id.custom_text).text = getString(R.string.seventh_target)
-//
-//        val seventhTarget = Target.Builder()
-//            .setAnchor(
-//                (binding.root.width / 2).toFloat(),
-//                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height * 3)
-//            )
-//            .setShape(
-//                RoundedRectangle(
-//                    homepageButtonLayout.epicCard34.cardLeft.height * 1.2.toFloat(),
-//                    homepageButtonLayout.epicCard34.cardLeft.width * 1.2.toFloat(),
-//                    10f
-//                )
-//            )
-//            .setOverlay(seventh)
-//            .build()
-//
-//        targets.add(seventhTarget)
-
-
-//        // eighth target
-//        val eighthRoot = FrameLayout(requireContext())
-//        val eighth = layoutInflater.inflate(R.layout.layout_target, eighthRoot)
-//        eighth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.eighth_target)
-//
-//
-//        val eighthTarget = Target.Builder()
-//            .setAnchor(
-//                (binding.root.width / 2).toFloat(),
-//                (requireActivity().findViewById<View>(R.id.bottom_navigation).top - height)
-//            )
-//            .setShape(
-//                RoundedRectangle(
-//                    homepageButtonLayout.epicCard34.cardRight.height * 1.2.toFloat(),
-//                    homepageButtonLayout.epicCard34.cardRight.width * 1.2.toFloat(),
-//                    10f
-//                )
-//            )
-//            .setOverlay(eighth)
-//            .build()
-//
-//        targets.add(eighthTarget)
+        // fifth target
+        val fifthRoot = FrameLayout(requireContext())
+        val fifth = layoutInflater.inflate(R.layout.layout_target, fifthRoot)
+        fifth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
+        fifth.findViewById<GifImageView>(R.id.scrolling_gif).setImageResource(R.drawable.scrolling_down)
+        fifth.findViewById<GifImageView>(R.id.scrolling_gif).visibility = View.VISIBLE
+        val fifthTarget = Target.Builder()
+            .setShape(Circle(0f))
+            .setOverlay(fifth)
+            .build()
+        fifth.findViewById<TextView>(R.id.next_target).alpha = 0f
+        targets.add(fifthTarget)
 
         // ninth target
         val ninthRoot = FrameLayout(requireContext())
         val ninth = layoutInflater.inflate(R.layout.layout_target, ninthRoot)
         ninth.findViewById<TextView>(R.id.custom_text).text = getString(R.string.ninth_target)
 
-        ninth.findViewById<TextView>(R.id.next_target).alpha = 0f
+
         val ninthTarget = Target.Builder()
             .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))   // get the image view position
-            .setShape(Circle(110f))
+            .setShape(Circle(120f))
             .setOverlay(ninth)
             .build()
-
+        ninth.findViewById<TextView>(R.id.next_target).alpha = 0f
         targets.add(ninthTarget)
+
 
         // create spotlight
         val spotlight = Spotlight.Builder(requireActivity())
@@ -609,12 +527,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             })
             .build()
 
-        binding.homeCoordinatorLayout1.setAllEnabled(false)
-        requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(false)
-        requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(false)
-        requireActivity().findViewById<View>(R.id.navExam).setAllEnabled(false)
-        requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(false)
-
         spotlight.start()
 
         val nextTarget = View.OnClickListener {
@@ -624,45 +536,29 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val closeSpotlight = View.OnClickListener {
             binding.homeScrollView.fullScroll(ScrollView.FOCUS_UP)
             spotlight.finish()
-            binding.homeCoordinatorLayout1.setAllEnabled(true)
-            requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(true)
-            requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(true)
-            requireActivity().findViewById<View>(R.id.navExam).setAllEnabled(true)
-            requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(true)
+            isAllEnable(true)
+            mainActivity.setLearningMode(false)
         }
 
-        v0.findViewById<View>(R.id.next_target).setOnClickListener {
-            binding.homeScrollView.scrollTo(0, 0)
-            spotlight.next()
-        }
+        v0.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
         first.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        second.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        third.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-        fourth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
-//        var scroll =
-//            homepageButtonLayout.epicCard12.cardLeft.top + homepageButtonLayout.epicCard12.cardLeft.bottom
-//        fifth.findViewById<View>(R.id.next_target).setOnClickListener {
-//            binding.homeScrollView.scrollTo(0, scroll)
-//            spotlight.next()
-//        }
-//        sixth.findViewById<View>(R.id.next_target).setOnClickListener {
-//            binding.homeScrollView.fullScroll(ScrollView.FOCUS_DOWN)
-//            spotlight.next()
-//        }
-//        seventh.findViewById<View>(R.id.next_target).setOnClickListener {
-//            spotlight.next()
-//        }
-//        eighth.findViewById<View>(R.id.next_target).setOnClickListener(nextTarget)
+        second.findViewById<View>(R.id.next_target).setOnClickListener{
+            spotlight.next()
+            configScrollingViewActionCapture(3, third, spotlight)
+        }
+        fourth.findViewById<View>(R.id.next_target).setOnClickListener{
+            spotlight.next()
+            configScrollingViewActionCapture(5, fifth, spotlight)
+        }
+
+        isAllEnable(false)
 
         v0.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         fourth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        sixth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        seventh.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
-//        eighth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        fifth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
         ninth.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
 
     }
@@ -674,7 +570,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         if (this is ViewGroup) children.forEach { child -> child.setAllEnabled(enabled) }
     }
 
-
+    private fun isAllEnable(isEnable: Boolean) {
+        requireActivity().findViewById<View>(R.id.homeCoordinatorLayout1).setAllEnabled(isEnable)
+        homePageImage.homepageAppBar.setAllEnabled(isEnable)
+        requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(isEnable)
+        requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(isEnable)
+        requireActivity().findViewById<View>(R.id.navExam).setAllEnabled(isEnable)
+        requireActivity().findViewById<View>(R.id.navAnalysis).setAllEnabled(isEnable)
+    }
 
     private fun callWeatherService() {
         val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(
@@ -801,6 +704,65 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         } else {
             homepageButtonLayout.viewPager2Home.currentItem += 1
         }
+    }
+
+    private fun configScrollingViewActionCapture(numTarget:Int, view: View, spotLight: Spotlight) {
+        when(numTarget) {
+            3 -> {
+                homePageImage.homepageAppBar.setAllEnabled(true)
+                homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                    when (appBarLayout.totalScrollRange) {
+                        //  State Collapsed
+                        abs(verticalOffset) -> {
+                            Log.d("homepage_app_bar", "Collapsed")
+                            view.findViewById<TextView>(R.id.next_target).alpha = 1f
+                            view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
+                            view.findViewById<View>(R.id.next_target).setOnClickListener{
+                                spotLight.next()
+                                homePageImage.homepageAppBar.setAllEnabled(false)
+                            }
+                        }
+                        else -> {
+                            Log.d("homepage_app_bar", "Failed")
+                            view.findViewById<TextView>(R.id.next_target).alpha = 0f
+                            view.findViewById<View>(R.id.next_target).isClickable = false
+                            view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
+                        }
+                    }
+                })
+            }
+
+            5 -> {
+                homePageImage.homepageAppBar.setAllEnabled(true)
+                homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                    when {
+                        //  State Expanded
+                        verticalOffset == 0 -> {
+                            Log.d("homepage_app_bar", "Fully expended")
+                            view.findViewById<TextView>(R.id.next_target).alpha = 1f
+                            view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
+                            view.findViewById<View>(R.id.next_target).setOnClickListener{
+                                spotLight.next()
+                                homePageImage.homepageAppBar.setAllEnabled(false)
+                            }
+                        }
+
+                        //  State Collapsed
+                        abs(verticalOffset) == appBarLayout.totalScrollRange -> {
+                            Log.d("homepage_app_bar", "Collapsed")
+                        }
+
+                        else -> {
+                            Log.d("homepage_app_bar", "Failed")
+                            view.findViewById<TextView>(R.id.next_target).alpha = 0f
+                            view.findViewById<View>(R.id.next_target).isClickable = false
+                            view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
+                        }
+                    }
+                })
+            }
+        }
+
     }
 
 }

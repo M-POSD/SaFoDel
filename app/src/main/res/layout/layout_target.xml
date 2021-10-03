@@ -8,53 +8,67 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:gravity="right"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <TextView
                 android:id="@+id/custom_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 style="@style/textStyle16_white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:layout_marginLeft="20dp"
                 android:justificationMode="inter_word"
-                android:maxWidth="230dp"
                 android:text="I am the Demoddddddddddddddddd" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next_target"
+                    style="@style/textStyle16_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="@color/primary_green"
+                    android:elevation="5dp"
+                    android:text="Next"
+                    android:textSize="12dp"
+                    app:cornerRadius="50dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/close_spotlight"
+                    style="@style/textStyle16_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="@color/primary_green"
+                    android:elevation="5dp"
+                    android:text="Close"
+                    android:textSize="12dp"
+                    app:cornerRadius="50dp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/scrolling_gif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/next_target"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:backgroundTint="@color/primary_green"
-                android:elevation="5dp"
-                style="@style/textStyle16_white"
-                android:text="Next"
-                android:textSize="12dp"
-                app:cornerRadius="50dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/close_spotlight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:backgroundTint="@color/primary_green"
-                android:elevation="5dp"
-                style="@style/textStyle16_white"
-                android:text="Close"
-                android:textSize="12dp"
-                app:cornerRadius="50dp" />
-        </LinearLayout>
+            android:layout_gravity="right"
+            android:layout_marginTop="80dp"
+            android:padding="30dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/scrolling_up"
+            android:visibility="invisible" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
