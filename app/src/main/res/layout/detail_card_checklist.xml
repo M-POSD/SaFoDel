@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="480dp">
+    android:layout_height="400dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/driver_layout"
@@ -172,6 +172,10 @@
             layout="@layout/checkbox_layout" />
 
         <include
+            android:id="@+id/bike_lock_checkbox_8"
+            layout="@layout/checkbox_layout" />
+
+        <include
             android:id="@+id/vest_checkbox_6"
             layout="@layout/checkbox_layout" />
 
@@ -183,9 +187,6 @@
             android:id="@+id/backpack_checkbox_7"
             layout="@layout/checkbox_layout" />
 
-        <include
-            android:id="@+id/bike_lock_checkbox_8"
-            layout="@layout/checkbox_layout" />
     </LinearLayout>
 
 
