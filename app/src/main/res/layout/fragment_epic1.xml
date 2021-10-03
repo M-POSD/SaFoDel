@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/heading1"
-                style="@style/textStyle25_bold_black"
+                style="@style/textStyle20_bold_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
@@ -48,7 +48,7 @@
 
             <TextView
                 android:id="@+id/heading2"
-                style="@style/textStyle25_bold_black"
+                style="@style/textStyle20_bold_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

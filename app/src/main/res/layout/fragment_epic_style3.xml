@@ -44,7 +44,7 @@
 
                 <TextView
                     android:id="@+id/road_sign_title"
-                    style="@style/textStyle20_bold_black"
+                    style="@style/textStyle18_bold_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Title" />

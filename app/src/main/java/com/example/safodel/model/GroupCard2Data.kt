@@ -227,7 +227,7 @@ class   GroupCard2Data(
                     0,
                     R.string.road_sign6_description,
                     R.drawable.road_sign_6,
-                    8)
+                    7)
             )
 
 

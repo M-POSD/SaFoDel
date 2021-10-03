@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/textStyle20_bold_black"
+                style="@style/textStyle18_bold_black"
                 android:text="@string/click_to_know_more"
                 android:gravity="center"/>
 
