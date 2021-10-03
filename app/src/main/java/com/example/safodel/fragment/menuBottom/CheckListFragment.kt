@@ -299,7 +299,7 @@ class CheckListFragment :
             // try to get the height of status bar and then margin top
             val headingHeight = checklistHeading.layoutParams as ConstraintLayout.LayoutParams
             while (headingHeight.topMargin == 0)
-                headingHeight.topMargin = mainActivity.getStatusHeight() + 10
+                headingHeight.topMargin = mainActivity.getStatusHeight()
             checklistHeading.layoutParams = headingHeight
             this.cancel()
         }
