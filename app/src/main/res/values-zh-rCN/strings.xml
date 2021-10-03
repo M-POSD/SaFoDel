@@ -188,7 +188,7 @@
     <string name="result">结果</string>
     <string name="result_heading_1">再次学习规则</string>
     <string name="result_heading_2">查看规则</string>
-    <string name="result_heading_3">完美的 ！！！</string>
+    <string name="result_heading_3">完美的！！！</string>
     <string name="checklist_notification_unprepared">请确保您准备好清单上的所有内容</string>
     <string name="checklist_notification_prepared">棒极了！ 是时候开始你的送餐之旅了！</string>
     <string name="what">何谓</string>
@@ -202,7 +202,7 @@
     <string name="generic_information_heading">通知</string>
     <string name="current_time">"&quot;时间：&quot; "</string>
     <string name="current_weather">&quot;天气： &quot;</string>
-    <string name="current_traffic">&quot;路况：&quot;</string>
+    <string name="current_traffic">&quot;路况： &quot;</string>
     <string name="checklist">清单</string>
     <string name="select">选择</string>
     <string name="traffic_status">交通状况</string>
@@ -264,7 +264,7 @@
     <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">自 2019 年以来，维多利亚州已经纪录自行车事故。</string>
     <string name="analysis_description2">在晴朗的天气条件下报告了自行车事故</string>
-    <string name="analysis_description3">是最高记录事故的时间（高峰时段）</string>
+    <string name="analysis_description3">是最高记录事故的时间(高峰时段)</string>
     <string name="analysis_description5">在夜间或黄昏/黎明期间报告了自行车事故</string>
     <string name="analysis_description4">自行车事故发生在白天</string>
     <string name="bike_paths">自行车道</string>
@@ -276,7 +276,7 @@
 
     <string name="about">关于</string>
     <string name="about_us">
-        我们是莫纳什可持续发展促进会（M-POSD）。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
+        我们是莫纳什可持续发展促进会(M-POSD)。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
     </string>
     <string name="checklist_heading">出发前请携带</string>
     <string name="road_sign_heading">以下是重要的路标</string>
