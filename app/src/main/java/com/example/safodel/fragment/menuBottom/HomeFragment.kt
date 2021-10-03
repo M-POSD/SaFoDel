@@ -31,6 +31,8 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 import android.view.MenuInflater
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.ViewModelProvider
@@ -83,6 +85,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var handler: Handler
 
     private lateinit var model: WeatherViewModel
+    private var isFirstCreated = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +100,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        handler = Handler(Looper.getMainLooper())
         weatherService = RetrofitClient.getRetrofitService()
         callWeatherService()
 
@@ -148,7 +152,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         adapter = HomeViewAdapter(requireActivity(), this)
         homepageButtonLayout.viewPager2Home.adapter = adapter
         homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
-        setViewPager2AutoIncrementPosition()
 
         model = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
 
@@ -171,6 +174,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        setViewPager2AutoIncrementPosition()
+        Log.d("onStart", "setViewPager2AutoIncrementPosition()")
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -178,16 +186,21 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     private fun setViewPager2AutoIncrementPosition() {
-        handler = Handler(Looper.getMainLooper())
-        runnable = Runnable {
-            if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
-                homepageButtonLayout.viewPager2Home.currentItem -= 4
-            } else {
-                homepageButtonLayout.viewPager2Home.currentItem += 1
+        if (isFirstCreated) {
+            runnable = Runnable {
+                if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
+                    homepageButtonLayout.viewPager2Home.currentItem -= 4
+                } else {
+                    homepageButtonLayout.viewPager2Home.currentItem += 1
+                }
+                handler.postDelayed(runnable, 6000) //5 sec delay
             }
-            handler.postDelayed(runnable, 6000) //5 sec delay
+
+            handler.postDelayed(runnable, 6000)
         }
-        handler.postDelayed(runnable, 6000)
+
+        isFirstCreated = false
+
 
 //        homepageButtonLayout.viewPager2Home.registerOnPageChangeCallback(object :
 //            OnPageChangeCallback() {
@@ -333,18 +346,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // config onClickListener for navigation
     private fun configOnClickListener() {
         homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
+            setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic1Fragment, null, navAnimationLeftToRight())
         }
 
         homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
+            setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic2Fragment, null, navAnimationLeftToRight())
         }
 
         homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
+            setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic3Fragment, null, navAnimationLeftToRight())
         }
 
         homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
+            setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic4Fragment, null, navAnimationLeftToRight())
         }
 
@@ -682,7 +699,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     val pressure = weatherResponse.main.pressure
                     val humidity = weatherResponse.main.humidity
                     var windSpeed = weatherResponse.wind.speed
-                    windSpeed = Math. round(windSpeed * 2.237 * 100.0) / 100.0f
+                    windSpeed = Math.round(windSpeed * 2.237 * 100.0) / 100.0f
 
 
                     if (weatherList != null) {
@@ -692,7 +709,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                         }
                         Log.d("currentWeather", weather)
                         mainActivity.keepWeatherSharePrefer(weather)
-                        model.setWeather(WeatherTemp(location, weather, temp, pressure, humidity, windSpeed))
+                        model.setWeather(
+                            WeatherTemp(
+                                location,
+                                weather,
+                                temp,
+                                pressure,
+                                humidity,
+                                windSpeed
+                            )
+                        )
                     }
                 } else {
                     Log.i("Error ", "Response failed")
@@ -727,24 +753,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //                setToolbarLightMode(toolbar)
                 setToolbarBasic(toolbar)
             }
-            "night" -> {
-//               val gd = GradientDrawable(
-//                    GradientDrawable.Orientation.TOP_BOTTOM,
-//                intArrayOf(R.color.darkSky, R.color.snow))
-//                gd.cornerRadius = 0f
-
-//                homePageImage.homepageAppBar.background = gd
-                homePageImage.homepageAppBar.setBackgroundResource(R.drawable.darksky_snow_gradient)
-                homePageImage.headlight.visibility = View.VISIBLE
-                homePageImage.backpack.alpha = 0f
-                homePageImage.backpack.setImageResource(R.drawable.backpack_dark)
-                homePageImage.helmet.alpha = 0f
-                homePageImage.headlight.alpha = 0f
-//                homePageImage.groundForDriver.visibility = View.INVISIBLE
-                startAnimation("night")
-//                setToolbarDarkMode(toolbar)
-                setToolbarWhite(toolbar)
-            }
         }
     }
 
@@ -757,6 +765,40 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             Toast.makeText(context, "Granted", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(context, getString(R.string.location_granted), Toast.LENGTH_LONG).show()
+        }
+    }
+
+    /**
+     * keep the record of the checkbox clicked
+     */
+    private fun setViewPagerPosition(position: Int) {
+        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
+            "position", AppCompatActivity.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.putInt("position", position)
+        spEditor.apply()
+    }
+
+    /**
+     * get the previous checkbox clicked by the user
+     */
+    private fun getViewPagerPosition(): Int {
+        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
+            "position",
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPref.getInt("position", -1)
+    }
+
+    suspend fun runViewPager() {
+        delay(6000L)
+        if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
+            homepageButtonLayout.viewPager2Home.currentItem -= 4
+        } else {
+            homepageButtonLayout.viewPager2Home.currentItem += 1
         }
     }
 
