@@ -115,7 +115,7 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun switchLanguageList() {
-        val listLanguages: Array<String> = arrayOf("English(AU)", "हिंदी", "中文(简体)", "中文(繁體)")
+        val listLanguages: Array<String> = arrayOf("English", "हिंदी", "中文")
         val mBuilder = AlertDialog.Builder(this)
         mBuilder.setTitle(getString(R.string.select_language))
         mBuilder.setSingleChoiceItems(listLanguages, -1) { dialog, it ->
@@ -130,9 +130,9 @@ class StartActivity : AppCompatActivity() {
                 2 -> {
                     setLocale("zh_CN")
                 }
-                3 -> {
-                    setLocale("zh_TW")
-                }
+//                3 -> {
+//                    setLocale("zh_TW")
+//                }
             }
             recreateActivity()
             dialog.dismiss()
@@ -156,11 +156,11 @@ class StartActivity : AppCompatActivity() {
                 config.locale = locale
             }
             "zh_CN" -> {
-                config.locale = Locale.SIMPLIFIED_CHINESE
+                config.locale = Locale.CHINESE
             }
-            "zh_TW" -> {
-                config.locale = Locale.TRADITIONAL_CHINESE
-            }
+//            "zh_TW" -> {
+//                config.locale = Locale.TRADITIONAL_CHINESE
+//            }
         }
 
         resources.updateConfiguration(config, dm)

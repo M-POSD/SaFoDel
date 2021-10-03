@@ -24,9 +24,8 @@ class DeveloperFragment : BasicFragment<FragmentDeveloperBinding>(FragmentDevelo
 
         binding.about.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
         binding.about.setOnClickListener {
-            MaterialDialog(requireContext()).show{
-                title(text = getString(R.string.about))
-                message(text = getString(R.string.about_us))
+            MaterialDialog(requireContext()).show {
+                customView(R.layout.developer_info)
             }
         }
 

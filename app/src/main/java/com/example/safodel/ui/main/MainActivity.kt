@@ -415,7 +415,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * once option is selected the setLocale function will be called
      */
     private fun switchLanguageList() {
-        val listLanguages: Array<String> = arrayOf("English(AU)", "हिंदी", "中文(简体)", "中文(繁體)")
+        val listLanguages: Array<String> = arrayOf("English", "हिंदी", "中文")
         val mBuilder = AlertDialog.Builder(this)
         mBuilder.setTitle(getString(R.string.select_language))
         mBuilder.setSingleChoiceItems(listLanguages, -1) { dialog, it ->
@@ -429,9 +429,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 2 -> {
                     setLocale("zh_CN")
                 }
-                3 -> {
-                    setLocale("zh_TW")
-                }
+//                3 -> {
+//                    setLocale("zh_TW")
+//                }
             }
 
             if (navController.currentDestination?.id == R.id.quizPageFragment) {
@@ -463,11 +463,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 config.locale = locale
             }
             "zh_CN" -> {
-                config.locale = Locale.SIMPLIFIED_CHINESE
+                config.locale = Locale.CHINESE
             }
-            "zh_TW" -> {
-                config.locale = Locale.TRADITIONAL_CHINESE
-            }
+//            "zh_TW" -> {
+//                config.locale = Locale.TRADITIONAL_CHINESE
+//            }
         }
 
         resources.updateConfiguration(config, dm)
