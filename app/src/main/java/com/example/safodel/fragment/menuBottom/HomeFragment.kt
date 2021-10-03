@@ -139,8 +139,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //        }
 
         configTheme("light")
-        isBeginnerMode = false
-
         val coroutineScope = CoroutineScope(Dispatchers.Main)
         coroutineScope.launch {
             // try to get the height of status bar and then margin top
@@ -158,8 +156,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         homepageButtonLayout.viewPager2Home.adapter = adapter
         homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
 
+        isBeginnerMode = mainActivity.isLearningMode()
         model = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
-
         return binding.root
 
     }
@@ -167,22 +165,23 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("onViewCreated", isBeginnerMode.toString())
         view.doOnPreDraw {
-            if (isLearningMode()) {
+
+            Log.d("view.doOnPreDraw", isBeginnerMode.toString())
+            if (isBeginnerMode && isFirstCreated) {
                 startSpotLight()
-                requireActivity().applicationContext.getSharedPreferences(
-                    "isLearningMode",
-                    Context.MODE_PRIVATE
-                ).edit().putBoolean("isLearningMode", false).apply()
+                mainActivity.setLearningMode(false)
             }
+
+            isBeginnerMode = false
+            isFirstCreated = false
         }
     }
 
     override fun onStart() {
         super.onStart()
         setViewPager2AutoIncrementPosition()
-        Log.d("onStart", "setViewPager2AutoIncrementPosition()")
     }
 
     override fun onDestroyView() {
@@ -203,8 +202,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
             handler.postDelayed(runnable, 6000)
         }
-
-        isFirstCreated = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -677,13 +674,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         if (this is ViewGroup) children.forEach { child -> child.setAllEnabled(enabled) }
     }
 
-    private fun isLearningMode(): Boolean {
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            "isLearningMode",
-            Context.MODE_PRIVATE
-        )
-        return sharedPref.getBoolean("isLearningMode", false)
-    }
+
 
     private fun callWeatherService() {
         val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(

@@ -311,13 +311,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             "isLearningMode",
             false
         )
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            "isLearningMode", Context.MODE_PRIVATE
-        )
-
-        val spEditor = sharedPref.edit()
-        spEditor.putBoolean("isLearningMode", isLearningMode)
-        spEditor.apply()
+        intent.removeExtra("isLearningMode")
+        setLearningMode(isLearningMode)
     }
 
     fun getStatusHeight(): Int {
@@ -567,6 +562,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 drawer.closeDrawers()
             }
         }
+    }
+
+    /**
+     * get sharePref for key = isLearningMode
+     */
+    fun isLearningMode(): Boolean {
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            "isLearningMode",
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getBoolean("isLearningMode", false)
+    }
+
+    /**
+     * set sharePref for key = isLearningMode
+     */
+    fun setLearningMode(isLearningMode: Boolean) {
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            "isLearningMode",
+            Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.clear()
+        spEditor.putBoolean("isLearningMode", isLearningMode)
+        spEditor.apply()
     }
 }
 
