@@ -935,7 +935,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     binding.floatButtonStop.visibility = View.VISIBLE
                     initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
-                    binding.spinner.visibility = View.INVISIBLE
+                    binding.searchMap1.visibility = View.INVISIBLE
                     binding.filterCards.root.visibility = View.INVISIBLE
                     bcLayer.setProperties(visibility(Property.NONE))
                     scLayer?.setProperties(visibility(Property.NONE))
@@ -968,7 +968,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             mapView.visibility = View.VISIBLE
                             recenter.visibility = View.INVISIBLE
                             binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
-                            binding.spinner.visibility = View.VISIBLE
+                            binding.searchMap1.visibility = View.VISIBLE
                             binding.filterCards.root.visibility = View.VISIBLE
                             bcLayer.setProperties(visibility(Property.VISIBLE))
                             scLayer?.setProperties(visibility(Property.VISIBLE))
