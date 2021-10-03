@@ -592,6 +592,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun isAllEnable(isEnable: Boolean) {
         requireActivity().findViewById<View>(R.id.homeCoordinatorLayout1).setAllEnabled(isEnable)
         homePageImage.homepageAppBar.setAllEnabled(isEnable)
+        homepageButtonLayout.viewPager2Home.isUserInputEnabled = isEnable
         requireActivity().findViewById<View>(R.id.navHome).setAllEnabled(isEnable)
         requireActivity().findViewById<View>(R.id.navMap).setAllEnabled(isEnable)
         requireActivity().findViewById<View>(R.id.navExam).setAllEnabled(isEnable)
