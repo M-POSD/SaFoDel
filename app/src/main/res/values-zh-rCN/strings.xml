@@ -196,7 +196,7 @@
     <string name="why">原由</string>
     <string name="why_description">这种增长趋势的主要原因之一是外送员没有得到足够的安全培训和当地交通知识，这使他们变得非常易受伤。（使他们处于危险之中）</string>
     <string name="how">如何解决</string>
-    <string name="how_description">赛福多是一款面向现有和潜在外送员的安全配套应用程序，旨在为维多利亚州外送员提供更安全的送餐体验。</string>
+    <string name="how_description">我们以多种语言为骑自行车者提供相关的安全和骑行信息，通过交互式地图深入了解您所在的地区，深入了解历史趋势，并以交互式清单的形式提醒您交付必需品。</string>
 
     <string name="know_more">了解更多</string>
     <string name="generic_information_heading">通知</string>
@@ -278,6 +278,6 @@
     <string name="about_us">
         我们是莫纳什可持续发展促进会（M-POSD）。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
     </string>
-    <string name="checklist_heading">出发前请携带：</string>
+    <string name="checklist_heading">出发前请携带</string>
     <string name="road_sign_heading">以下是重要的路标</string>
 </resources>

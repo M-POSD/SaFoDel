@@ -261,7 +261,7 @@
     <string name="warning_msg">All current data will be removed</string>
 
     <!-- checklist -->
-    <string name="checklist_heading">Before you go, bring:</string>
+    <string name="checklist_heading">Before you go, bring</string>
     <string name="checklist_notification_unprepared">Please make sure you prepare everything on the checklist</string>
     <string name="checklist_notification_prepared">Awesome! It\'s time to start your food delivering journey!</string>
     <string name="helmet_checkbox_1">Helmet</string>
@@ -281,7 +281,7 @@
     <string name="why_description">One of the primary reasons for this increasing trend is that riders are not given adequate safety training and local traffic knowledge and this makes them unacceptably vulnerable. (puts them at risk) </string>
 
     <string name="how">HOW</string>
-    <string name="how_description">SaFoDel is a safety companion app for existing and prospective food delivery riders which aims to make the food delivery experience safer for the riders in Victoria.</string>
+    <string name="how_description">We provide relevant safety and cycling information for cyclists, in multiple languages, insights into your local area via an interactive map and insights into historical trends as well as remind you on delivery essentials in the form of an interactive checklist.</string>
 
     <!--  about developer  -->
     <string name="know_more">KNOW MORE</string>
