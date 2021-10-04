@@ -31,23 +31,10 @@ class SafodelViewAdapter(val context: Context) :
         return ViewHolder(binding)
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        // view is visible when it is selected
         when (position) {
             0 -> {
-//                val safodel = viewHolder.binding.welcomeInformation1.safodel
-//                val paint: Paint = safodel.paint
-//                val bound = Rect()
-//                paint.getTextBounds(safodel.text, 0, safodel.text.length, bound)
-//
-//                val shader = LinearGradient(0f, 0f,
-//                    bound.width().toFloat(),
-//                    bound.height().toFloat(),
-//                    ContextCompat.getColor(context, R.color.primary_green),
-//                    ContextCompat.getColor(context, R.color.wrong_border_color),
-//                    Shader.TileMode.CLAMP)
-//                viewHolder.binding.welcomeInformation1.safodel.paint.shader = shader
-
                 viewHolder.binding.welcomeInformation2.welcomeInformation2Layout.visibility =
                     View.GONE
             }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:orientation="horizontal"
+    android:background="@color/snow"
+    android:weightSum="10">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_rvDate"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="asdf"
+            android:justificationMode="inter_word"
+            android:padding="5dp"
+            style="@style/textStyle16_black"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/iv_detail_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="2.5"
+        android:gravity="center"
+        android:text="@string/detail"
+        style="@style/textStyle16_white" />
+
+</LinearLayout>

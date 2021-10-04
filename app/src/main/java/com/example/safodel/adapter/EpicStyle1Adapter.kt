@@ -25,28 +25,63 @@ class EpicStyle1Adapter(val context: Context, group1Data: MutableList<GroupCard1
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val data: GroupCard1Data = group1[position]
+
+        // set the default for all view visible
+        viewHolder.binding.foodDeliveryImage.linearLayout1.visibility = View.VISIBLE
         viewHolder.binding.imageRight.linearLayout2.visibility = View.VISIBLE
         viewHolder.binding.pureText.linearLayout3.visibility = View.VISIBLE
 
         when(data.cardType) {
+
+            // 0 for display pure notification only without any image
             0 -> {
+                viewHolder.binding.foodDeliveryImage.linearLayout1.visibility = View.INVISIBLE
                 viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
                 viewHolder.binding.pureText.description.text = context.getString(data.description_id)
             }
 
+            // -1 for the information contains links
             -1 -> {
-                viewHolder.binding.imageRight.description.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
-                viewHolder.binding.imageRight.description.setOnClickListener {
-                    val url = context.getString(data.description_id)
+                viewHolder.binding.foodDeliveryImage.uberImage.setOnClickListener {
+                    val url = context.getString(R.string.uber_link)
                     val internetAct = Intent(Intent.ACTION_VIEW)
                     internetAct.data = Uri.parse(url)
                     context.startActivity(internetAct)
                 }
-                viewHolder.binding.imageRight.image.setImageResource(data.image)
+                viewHolder.binding.foodDeliveryImage.deliverooImage.setOnClickListener {
+                    val url = context.getString(R.string.deliveroo_link)
+                    val internetAct = Intent(Intent.ACTION_VIEW)
+                    internetAct.data = Uri.parse(url)
+                    context.startActivity(internetAct)
+                }
+                viewHolder.binding.foodDeliveryImage.doorDashImage.setOnClickListener {
+                    val url = context.getString(R.string.doordash_link)
+                    val internetAct = Intent(Intent.ACTION_VIEW)
+                    internetAct.data = Uri.parse(url)
+                    context.startActivity(internetAct)
+                }
+                viewHolder.binding.foodDeliveryImage.easiImage.setOnClickListener {
+                    val url = context.getString(R.string.easi_link)
+                    val internetAct = Intent(Intent.ACTION_VIEW)
+                    internetAct.data = Uri.parse(url)
+                    context.startActivity(internetAct)
+                }
+
+//                viewHolder.binding.imageRight.description.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
+//                viewHolder.binding.imageRight.description.setOnClickListener {
+//                    val url = context.getString(data.description_id)
+//                    val internetAct = Intent(Intent.ACTION_VIEW)
+//                    internetAct.data = Uri.parse(url)
+//                    context.startActivity(internetAct)
+//                }
+//                viewHolder.binding.imageRight.image.setImageResource(data.image)
                 viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
+                viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
             }
 
+            // all other information display (contains an image)
             else -> {
+                viewHolder.binding.foodDeliveryImage.linearLayout1.visibility = View.INVISIBLE
                 viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
                 viewHolder.binding.imageRight.description.text = context.getString(data.description_id)
                 viewHolder.binding.imageRight.image.setImageResource(data.image)

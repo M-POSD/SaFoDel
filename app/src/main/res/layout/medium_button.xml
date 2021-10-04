@@ -10,17 +10,14 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_weight="0.7"
         android:backgroundTint="@color/white"
         android:elevation="5dp"
-        android:fontFamily="@font/rubik_bold"
+        style="@style/textStyle20_bold_green"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="20dp"
+        android:paddingVertical="15dp"
         android:text="@string/start_button"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textColor="@color/primary_green"
-        android:textSize="20dp"
         app:cornerRadius="50dp" />
 </LinearLayout>

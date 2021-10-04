@@ -16,30 +16,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
-            android:id="@+id/spinner"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="?attr/actionBarSize"
-            app:smsp_enableDismissSearch="true"
-            app:smsp_enableErrorLabel="false"
-            app:smsp_errorText="ERROR"
-            app:smsp_floatingLabelColor="@color/deep_green"
-            app:smsp_floatingLabelText="Suburb:"
-            app:smsp_hint="Select the suburb"
-            app:smsp_hintColor="#388E3C"
-            app:smsp_hintSize="16dp"
-            app:smsp_isSearchable="true"
-            app:smsp_itemColor="@color/deep_green"
-            app:smsp_itemListColor="@color/third_green"
-            app:smsp_itemListHintBackgroundColor="#808080"
-            app:smsp_itemListHintColor="#FFFFFF"
-            app:smsp_multilineError="false"
-            app:smsp_searchHeaderBackgroundColor="@color/third_green"
-            app:smsp_selectedItemListColor="@color/black" />
 
         <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="60dp"
@@ -50,68 +29,70 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="350dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/blue_outline">
+                <TextView
+                    style="@style/textStyle20_bold_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/did_you_know" />
 
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager2_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/snow" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/suburbName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="MELBOURNE"
-                            style="@style/textStyle16_gray"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            style="@style/textStyle16_gray"
-                            android:text="Total Accidents:"/>
-
-                        <TextView
-                            android:id="@+id/accidentNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:text="Numbeer"
-                            style="@style/textStyle16_gray"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
+                <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                    android:id="@+id/worm_dots_indicator_home"
+                    style="@style/worm_dot_indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="20dp">
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+
+                <FrameLayout
+                    android:id="@+id/spinner_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="220dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="7dp"
+                        android:alpha="0.9"
+                        android:background="@drawable/white_shape"
+                        android:translationZ="1dp" />
+
+                    <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                        android:id="@+id/spinner"
+                        android:layout_width="200dp"
+                        android:layout_height="56dp"
                         android:layout_gravity="center_horizontal"
-                        android:text="Top 5 Roads by Accident Total"/>
+                        android:translationZ="1dp"
+                        app:smsp_enableDismissSearch="true"
+                        app:smsp_enableErrorLabel="false"
+                        app:smsp_errorText="@string/error"
+                        app:smsp_floatingLabelColor="@color/black"
+                        app:smsp_floatingLabelText="Suburb:"
+                        app:smsp_hint="@string/select_suburb"
+                        app:smsp_hintColor="@color/black"
+                        app:smsp_hintSize="16dp"
+                        app:smsp_isSearchable="true"
+                        app:smsp_itemColor="@color/black"
+                        app:smsp_itemListColor="@color/black"
+                        app:smsp_itemListHintBackgroundColor="#808080"
+                        app:smsp_itemListHintColor="#FFFFFF"
+                        app:smsp_multilineError="false"
+                        app:smsp_searchHeaderBackgroundColor="@color/primary_green"
+                        app:smsp_searchHeaderText="@string/search_header"
+                        app:smsp_selectedItemListColor="@color/black"
+                        app:smsp_underlineSize="0dp" />
 
-                    <com.github.mikephil.charting.charts.HorizontalBarChart
-                        android:id="@+id/barChart"
-                        android:layout_width="400dp"
-                        android:layout_height="250dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:paddingHorizontal="10dp"
-                        style="@style/textStyle16_green" />
-                </LinearLayout>
+                </FrameLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -120,26 +101,49 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/textStyle20_bold_black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Accident times for different hourly periods of the day"/>
+                        android:text="@string/top_5_roads_by_accident_total" />
+
+                    <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:id="@+id/barChart"
+                        style="@style/textStyle16_green"
+                        android:layout_width="400dp"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:paddingHorizontal="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/accident_times_for_different_hourly_periods_of_the_day" />
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"
+                        style="@style/textStyle14_gray"
                         android:layout_width="400dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:paddingHorizontal="10dp"
-                        style="@style/textStyle14_gray"/>
+                        android:paddingHorizontal="10dp" />
                 </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
 
     </LinearLayout>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

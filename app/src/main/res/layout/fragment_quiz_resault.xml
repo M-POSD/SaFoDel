@@ -23,13 +23,12 @@
             android:id="@+id/quiz_text"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1.5"
-            android:fontFamily="@font/rubik_bold"
+            style="@style/textStyle20_bold_green"
             android:gravity="center"
             android:text="@string/result"
-            android:textColor="@color/primary_green"
-            android:textSize="30dp" />
+            android:textSize="45dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -37,7 +36,6 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_weight="4.5"
-            android:background="@color/primary_green"
             app:cardCornerRadius="30dp"
             app:cardElevation="5dp">
 
@@ -45,42 +43,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/primary_green"
                 android:padding="16dp"
+                android:background="@color/primary_green"
                 android:weightSum="10">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"/>
 
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="4"
+                    android:layout_weight="5"
                     android:layout_gravity="center"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:src="@drawable/campion" />
-
-                <TextView
-                    android:id="@+id/title"
+                    android:src="@drawable/champion" />
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2.3"
-                    android:fontFamily="@font/rubik_bold"
-                    android:gravity="center"
-                    android:text="Champion"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:layout_weight="0.8"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/title"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="2.3"-->
+<!--                    style="@style/textStyle20_bold_white"-->
+<!--                    android:gravity="center"-->
+<!--                    android:visibility="invisible"-->
+<!--                    android:text="Champion" />-->
 
                 <TextView
                     android:id="@+id/level"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1.8"
-                    android:layout_marginTop="-10dp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:textColor="@color/white"
                     android:gravity="center"
                     android:text="5/5"
-                    android:textSize="20dp" />
+                    style="@style/textStyle20_bold_white"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -89,6 +91,21 @@
 
                 <include layout="@layout/medium_button"
                     android:id="@+id/return_button"/>
+
+                <TextView
+                    android:id="@+id/history_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/see_history"
+                    android:gravity="center"
+                    style="@style/textStyle16_white"
+                    app:cornerRadius="50dp"
+                    android:focusable="true" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

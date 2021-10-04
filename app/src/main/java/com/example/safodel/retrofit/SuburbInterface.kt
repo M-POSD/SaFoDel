@@ -1,9 +1,6 @@
 package com.example.safodel.retrofit
 
-import com.example.safodel.model.SuburbMapResponse
-import com.example.safodel.model.SuburbResponse
-import com.example.safodel.model.SuburbStreetsResponse
-import com.example.safodel.model.SuburbTimeResponse
+import com.example.safodel.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,22 +8,47 @@ import retrofit2.http.Query
 
 interface SuburbInterface {
     @GET("{key}?")
-    fun totalRepos(@Path("key") key: String?,
-                  @Query("suburb") suburb_name: String)
-                : Call<SuburbResponse>
+    fun totalRepos(
+        @Path("key") key: String?,
+        @Query("suburb") suburb_name: String
+    )
+            : Call<SuburbResponse>
 
     @GET("{key}?")
-    fun timeRepos(@Path("key") key: String?,
-                  @Query("suburb") suburb_name: String)
+    fun timeRepos(
+        @Path("key") key: String?,
+        @Query("suburb") suburb_name: String
+    )
             : Call<SuburbTimeResponse>
 
     @GET("{key}?")
-    fun streetRepos(@Path("key") key : String?,
-                    @Query("suburb") suburb_name: String)
-                    : Call<SuburbStreetsResponse>
+    fun streetRepos(
+        @Path("key") key: String?,
+        @Query("suburb") suburb_name: String
+    )
+            : Call<SuburbStreetsResponse>
 
     @GET("{key}?")
-    fun mapRepos(@Path("key") key : String?,
-                    @Query("location") location_name: String)
+    fun mapRepos(
+        @Path("key") key: String?,
+        @Query("suburb") suburb_name: String
+    )
             : Call<SuburbMapResponse>
+
+    @GET("{key}")
+    fun alertsRepos(@Path("key") key: String?): Call<SuburbAlertsResponse>
+
+    @GET("{key}")
+    fun pathsRepos(
+        @Path("key") key: String?,
+        @Query("suburb") suburb_name: String
+    )
+            : Call<SuburbPathsResponse>
+
+    @GET("{key}")
+    fun allRepos(
+        @Path("key") key: String?,
+        @Query("suburb") suburb_name: String
+    )
+            : Call<SuburbAllResponse>
 }

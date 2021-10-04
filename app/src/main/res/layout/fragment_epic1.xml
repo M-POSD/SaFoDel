@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="@color/snow"
     tools:context=".fragment.home.Epic1Fragment">
 
     <include
@@ -20,7 +21,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/snow"
             android:orientation="vertical">
 
             <TextView
@@ -29,7 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
                 android:text="Demo" />
 
             <androidx.viewpager2.widget.ViewPager2
@@ -44,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_margin="5dp" />
 
             <TextView
                 android:id="@+id/heading2"
@@ -67,30 +66,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_margin="5dp" />
 
-            <TextView
-                android:id="@+id/heading3"
-                style="@style/textStyle20_bold_black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="15dp"
-                android:text="Demo" />
+<!--            <TextView-->
+<!--                android:id="@+id/heading3"-->
+<!--                style="@style/textStyle20_bold_black"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginHorizontal="15dp"-->
+<!--                android:text="Demo" />-->
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2_section3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/snow" />
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/viewPager2_section3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/snow" />-->
 
-            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-                android:id="@+id/worm_dots_indicator_section3"
-                style="@style/worm_dot_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp" />
+<!--            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator-->
+<!--                android:id="@+id/worm_dots_indicator_section3"-->
+<!--                style="@style/worm_dot_indicator"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_margin="10dp" />-->
 
             <View
                 android:layout_width="match_parent"

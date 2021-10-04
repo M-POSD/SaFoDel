@@ -40,6 +40,11 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <include
+        android:id="@+id/homepage_button_layout2"
+        layout="@layout/homepage_button_layout"
+        android:visibility="invisible"/>
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="0dp"

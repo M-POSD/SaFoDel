@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentQuizBinding
@@ -27,6 +28,9 @@ class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inf
 
         configBtnOnClickListener()
 
+        binding.historyBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty_12,0,
+            R.drawable.ic_baseline_navigate_next_24,0)
+
         return binding.root
     }
 
@@ -37,7 +41,11 @@ class QuizFragment : BasicFragment<FragmentQuizBinding>(FragmentQuizBinding::inf
 
     private fun configBtnOnClickListener() {
         binding.startBtn.button.setOnClickListener {
-            findNavController().navigate(R.id.exam1Fragment, null, navAnimationLeftToRight())
+            findNavController().navigate(R.id.quizPageFragment, null, navAnimationLeftToRight())
+        }
+
+        binding.historyBtn.setOnClickListener {
+            findNavController().navigate(R.id.quizHistoryFragment, null, navAnimationLeftToRight())
         }
     }
 }

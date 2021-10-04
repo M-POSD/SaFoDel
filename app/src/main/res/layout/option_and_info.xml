@@ -11,22 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/default_option_border_bg"
-        android:paddingVertical="10dp"
+        android:paddingVertical="15dp"
         android:paddingHorizontal="20dp"
         android:layout_marginBottom="10dp"
         android:text="Apple1"
-        style="@style/textStyle16_gray"
+        style="@style/textStyle16_black"
         android:drawableRight="@drawable/default_option_icon"/>
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        android:text="Apple1"
-        style="@style/textStyle14_black"/>
 </LinearLayout>

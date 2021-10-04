@@ -21,13 +21,21 @@ class EpicStyle3Adapter(val context: Context, group2Data: MutableList<GroupCard2
         val data: GroupCard2Data = group2[position]
 
         when (data.cardType) {
+            7 -> {
+                viewHolder.binding.roadSignImage.scaleX = 1f
+                viewHolder.binding.roadSignImage.scaleY = 1.3f
+            }
+
+            // 8 for scale image 1.3f times
             8 -> {
                 viewHolder.binding.roadSignImage.scaleX = 1.3f
                 viewHolder.binding.roadSignImage.scaleY = 1.3f
             }
+
+            // 9 for scale image 1.2f times
             9 -> {
                 viewHolder.binding.roadSignImage.scaleX = 1.2f
-                viewHolder.binding.roadSignImage.scaleY = 1.2f
+                viewHolder.binding.roadSignImage.scaleY = 1f
             }
         }
         viewHolder.binding.roadSignImage.setImageResource(data.image)

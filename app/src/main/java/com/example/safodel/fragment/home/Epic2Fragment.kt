@@ -14,7 +14,7 @@ import com.example.safodel.model.GroupCard2Data
 class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::inflate) {
     private lateinit var adapter1: EpicStyle1Adapter
     private lateinit var adapter2: EpicStyle1Adapter
-    private lateinit var adapter3: EpicStyle2Adapter
+    private lateinit var adapter3: EpicStyle1Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +37,11 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         _binding = null
     }
 
+    /**
+     * 1. set the view for advantages of delivering on e-bike
+     * 2. config the view with recycle view adapter
+     * 3. connect the indicator view with view pager2
+     */
     private fun configSection1() {
         binding.heading1.text = getString(R.string.info1_name)
         adapter1 = EpicStyle1Adapter(requireActivity(), getSection1Data())
@@ -44,6 +49,11 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         binding.wormDotsIndicatorSection1.setViewPager2(binding.viewPager2Section1)
     }
 
+    /**
+     * 1. set the view for e-bikes rules and regulation
+     * 2. config the view with recycle view adapter
+     * 3. connect the indicator view with view pager2
+     */
     private fun configSection2() {
         binding.heading2.text = getString(R.string.info2_name)
         adapter2 = EpicStyle1Adapter(requireActivity(), getSection2Data())
@@ -51,13 +61,21 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         binding.wormDotsIndicatorSection2.setViewPager2(binding.viewPager2Section2)
     }
 
+    /**
+     * 1. set the view for risks with e-bikes
+     * 2. config the view with recycle view adapter
+     * 3. connect the indicator view with view pager2
+     */
     private fun configSection3() {
         binding.heading3.text = getString(R.string.info3_name)
-        adapter3 = EpicStyle2Adapter(requireActivity(), getSection3Data())
+        adapter3 = EpicStyle1Adapter(requireActivity(), getSection3Data())
         binding.viewPager2Section3.adapter = adapter3
         binding.wormDotsIndicatorSection3.setViewPager2(binding.viewPager2Section3)
     }
 
+    /**
+     * get the first section data
+     */
     private fun getSection1Data(): MutableList<GroupCard1Data> {
         val data = GroupCard1Data.init()
         var i = 0
@@ -70,6 +88,9 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         return data
     }
 
+    /**
+     * get the second section data
+     */
     private fun getSection2Data(): MutableList<GroupCard1Data> {
         val data = GroupCard1Data.init()
         var i = 0
@@ -82,8 +103,11 @@ class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::
         return data
     }
 
-    private fun getSection3Data(): MutableList<GroupCard2Data> {
-        val data = GroupCard2Data.init()
+    /**
+     * get the third section data
+     */
+    private fun getSection3Data(): MutableList<GroupCard1Data> {
+        val data = GroupCard1Data.init()
         var i = 0
         while (i < data.size) {
             when (data[i].dataType) {

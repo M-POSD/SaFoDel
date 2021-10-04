@@ -21,13 +21,12 @@
             android:id="@+id/quiz_text"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1.5"
-            android:fontFamily="@font/rubik_bold"
+            style="@style/textStyle20_bold_green"
             android:gravity="center"
             android:text="@string/quiz"
-            android:textColor="@color/primary_green"
-            android:textSize="30dp" />
+            android:textSize="45dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -36,33 +35,49 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             app:cardCornerRadius="30dp"
-            android:backgroundTint="@color/primary_green"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:weightSum="10"
+                android:background="@color/primary_green"
                 android:padding="16dp">
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
-                    android:layout_marginHorizontal="20dp"
-                    android:fontFamily="@font/rubik_bold"
-                    android:gravity="center"
+                    style="@style/textStyle20_bold_white"
+                    android:justificationMode="inter_word"
+                    android:layout_marginHorizontal="10dp"
                     android:text="@string/quiz_heading"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="4.7"/>
+                    android:layout_weight="3.5"/>
 
                 <include android:id="@+id/startBtn"
                     layout="@layout/medium_button"/>
+
+                <TextView
+                    android:id="@+id/history_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/see_history"
+                    android:gravity="center"
+                    style="@style/textStyle16_white"
+                    app:cornerRadius="50dp"
+                    android:focusable="true" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

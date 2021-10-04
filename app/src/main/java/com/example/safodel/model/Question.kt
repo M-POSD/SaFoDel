@@ -1,11 +1,12 @@
 package com.example.safodel.model
 
-import android.util.Log
 import com.example.safodel.R
 import kotlin.collections.ArrayList
-import kotlin.random.Random
 import kotlin.random.Random.Default.nextInt
 
+/**
+ * questions for quiz
+ */
 class Question(
     var id: Int,
     var question: Int,
@@ -80,7 +81,7 @@ class Question(
                 R.string.no,
                 0,
                 0,
-                2,
+                1,
                 R.string.question6_information
             ))
             questions.add(Question(
@@ -93,7 +94,28 @@ class Question(
                 2,
                 R.string.question7_information
             ))
+            questions.add(Question(
+                8, R.string.question8_heading,
+                0,
+                R.string.yes,
+                R.string.no,
+                0,
+                0,
+                2,
+                R.string.question8_information
+            ))
+            questions.add(Question(
+                9, R.string.question9_heading,
+                0,
+                R.string.question9_option1,
+                R.string.question9_option2,
+                R.string.question9_option3,
+                R.string.question9_option4,
+                1,
+                R.string.question9_information
+            ))
 
+            // randomly select five questions
             var questionList: MutableList<Question> = ArrayList()
             for (i in 1..5) {
                 var random = nextInt(0, questions.size - 1)

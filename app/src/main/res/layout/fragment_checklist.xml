@@ -16,15 +16,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/checklist_heading"
+        style="@style/textStyle20_bold_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:gravity="center"
+        android:text="@string/checklist_heading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.633"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,8 +54,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:layout_marginTop="40dp"
             android:weightSum="10">
 
             <View
@@ -64,11 +80,14 @@
 
             <TextView
                 android:id="@+id/checklist_notification_text"
-                style="@style/textStyle16_gray"
+                style="@style/textStyle16_black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.8"
+                android:layout_weight="5"
+                android:background="@drawable/wrong_info_border_bg"
                 android:justificationMode="inter_word"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="5dp"
                 android:text="@string/checklist_notification_unprepared" />
 
         </LinearLayout>

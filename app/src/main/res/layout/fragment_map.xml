@@ -37,48 +37,86 @@
             layout="@layout/simple_toolbar"
             android:id="@+id/toolbar" />
 
+    <FrameLayout
+        android:id="@+id/search_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:clickable="true"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="center_horizontal">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+        <View
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:alpha="0.9"
+            android:background="@drawable/white_shape">
+        </View>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/outline_search_black_36"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:alpha="0.5"/>
+
+        <TextView
+            android:id="@+id/search_bar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:textSize="16dp"
+            android:fontFamily="@font/opensans_bold"
+            android:hint="@string/tap_to_search_address" />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/search_map1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:fitsSystemWindows="true"
         android:orientation="horizontal">
+
+        <View
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="7dp"
+            android:alpha="0.9"
+            android:background="@drawable/white_shape"/>
 
         <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
             android:id="@+id/spinner"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="?attr/actionBarSize"
             app:smsp_enableDismissSearch="true"
             app:smsp_enableErrorLabel="false"
-            app:smsp_errorText="ERROR"
-            app:smsp_floatingLabelColor="@color/deep_green"
-            app:smsp_floatingLabelText="Accident Prone Location:"
-            app:smsp_hint="Select the suburb"
-            mapbox:smsp_hintSize="16dp"
-            app:smsp_hintColor="#388E3C"
+            app:smsp_errorText="@string/error"
+            app:smsp_hint="@string/select_area"
+            app:smsp_hintColor="@color/black"
             app:smsp_isSearchable="true"
-            app:smsp_itemColor="@color/deep_green"
-            app:smsp_itemListColor="@color/third_green"
+            app:smsp_itemColor="@color/black"
+            app:smsp_itemListColor="@color/black"
             app:smsp_itemListHintBackgroundColor="#808080"
             app:smsp_itemListHintColor="#FFFFFF"
             app:smsp_multilineError="false"
-            app:smsp_searchHeaderBackgroundColor="@color/third_green"
+            app:smsp_searchHeaderBackgroundColor="@color/primary_green"
+            app:smsp_searchHeaderText="@string/search_header"
+            app:smsp_searchTextColor="@color/black"
             app:smsp_selectedItemListColor="@color/black"
-            android:fitsSystemWindows="true"/>
+            app:smsp_underlineSize="0dp"
+            mapbox:smsp_hintSize="13dp"
+            mapbox:smsp_showDropdownHint="false" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/updateMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/blue_outline"
-            android:text="Update" />
-    </LinearLayout>
+    </FrameLayout>
+
+
+    <include
+        layout="@layout/filter_cards"
+        android:id="@+id/filterCards"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/tripProgressCard"
@@ -120,7 +158,8 @@
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/third_green"
+        android:backgroundTint="@color/white"
+        mapbox:backgroundTint="@color/white"
         android:contentDescription="desc"
         android:src="@drawable/baseline_gps_fixed_black_36"
         />
@@ -132,7 +171,8 @@
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/third_green"
+        android:backgroundTint="@color/white"
+        mapbox:backgroundTint="@color/white"
         android:contentDescription="desc"
         android:src="@drawable/baseline_assistant_direction_black_36"
         />
@@ -143,21 +183,36 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
+        mapbox:backgroundTint="@color/white"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/third_green"
+        android:backgroundTint="@color/white"
         android:contentDescription="desc"
         android:src="@drawable/outline_highlight_off_black_36" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatButtonSearch"
+        android:id="@+id/floatButtonZoomIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         mapbox:fabSize="mini"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/third_green"
+        mapbox:backgroundTint="@color/white"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/white"
         android:contentDescription="desc"
-        android:src="@drawable/outline_search_black_36" />
+        android:src="@drawable/baseline_add_black_36" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButtonZoomOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        mapbox:backgroundTint="@color/white"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="desc"
+        android:src="@drawable/baseline_remove_black_36" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

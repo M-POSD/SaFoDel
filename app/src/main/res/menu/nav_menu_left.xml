@@ -18,5 +18,9 @@
             android:icon="@drawable/baseline_people_alt_black_24"
             android:title="@string/developer"/>
 
+        <item
+            android:id="@+id/navLanguage"
+            android:icon="@drawable/global_language"
+            android:title="@string/language"/>
     </group>
 </menu>

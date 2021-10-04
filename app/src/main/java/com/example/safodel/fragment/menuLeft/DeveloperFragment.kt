@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.example.safodel.R
 import com.example.safodel.databinding.FragmentDeveloperBinding
 import com.example.safodel.fragment.BasicFragment
 
@@ -19,12 +22,11 @@ class DeveloperFragment : BasicFragment<FragmentDeveloperBinding>(FragmentDevelo
     ): View {
         _binding = FragmentDeveloperBinding.inflate(inflater,container,false)
 
-        binding.knowMore.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
-        binding.knowMore.setOnClickListener {
-            val url = "https://bit.ly/ta27-safodel"
-            val internetAct = Intent(Intent.ACTION_VIEW)
-            internetAct.data = Uri.parse(url)
-            startActivity(internetAct)
+        binding.about.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
+        binding.about.setOnClickListener {
+            MaterialDialog(requireContext()).show {
+                customView(R.layout.developer_info)
+            }
         }
 
         val toolbar = binding.toolbar.root

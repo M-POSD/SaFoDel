@@ -1,37 +1,55 @@
 package com.example.safodel.ui.main
 
+import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Rect
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
-import com.example.safodel.viewModel.CheckListViewModel
+import com.example.safodel.model.WeatherTemp
+import com.example.safodel.viewModel.HistoryDetailViewModel
+import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mapbox.maps.extension.style.expressions.dsl.generated.length
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
+import timber.log.Timber
+import java.util.*
 
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
     private lateinit var toastMain: Toast
-    private lateinit var drawer : DrawerLayout
+    private lateinit var drawer: DrawerLayout
     private lateinit var bottomMenu: Menu
-
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var navHostFragment: NavHostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +57,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         drawer = binding.drawerLayout
         bottomMenu = binding.bottomNavigation.menu
-        val navHostFragment =
+        bottomNavigationView = binding.bottomNavigation
+        navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
         configBottomNavigation() //method to set up bottom nav
@@ -49,17 +68,22 @@ class MainActivity : AppCompatActivity() {
         toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
         val leftHeader = binding.leftNavigation.getHeaderView(0)
-        val leftHeaderText = leftHeader.findViewById<View>(R.id.left_header_text)
-        leftHeaderText.isClickable = true
-        leftHeaderText.setOnClickListener {
-            drawer.closeDrawers()
-        }
+        val leftHeaderSaFo = leftHeader.findViewById<View>(R.id.left_header_safo)
+        val leftHeaderDel = leftHeader.findViewById<View>(R.id.left_header_del)
+
+
+        leftHeaderSaFo.isClickable = true
+        leftHeaderDel.isClickable = true
+        leftHeaderSaFo.setOnClickListener(this)
+        leftHeaderDel.setOnClickListener(this)
+
 
         configCheckListIcon()
 
         recordLearningMode()
-    }
+        setMapLearningMode()
 
+    }
 
 
     /**
@@ -79,101 +103,186 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // stop users to go back if they are in the following fragment,
         // giving the warning message at the same time
-        if (navController.currentDestination?.id == R.id.exam1Fragment ||
-            navController.currentDestination?.id == R.id.examFinishFragment) {
-            toastMain.setText("Not allow go back in the page")
-            toastMain.show()
+        if (navController.currentDestination?.id == R.id.quizPageFragment
+        ) {
+            MaterialDialog(this).show {
+                message(
+                    text = "${getString(R.string.check_leave)}" +
+                            "\n${getString(R.string.warning_msg)}"
+                )
+                positiveButton(R.string.no)
+                negativeButton(R.string.yes)
+                this.negativeButton {
+                    removeQuizPageFragment()
+                    super.onBackPressed()
+                }
+            }
             return
         }
 
-        if(navController.currentDestination?.id == R.id.mapfragment ||
-            navController.currentDestination?.id == R.id.examFragment ||
+        if (navController.currentDestination?.id == R.id.mapfragment ||
+            navController.currentDestination?.id == R.id.quizFragment ||
             navController.currentDestination?.id == R.id.analysisFragment ||
-            navController.currentDestination?.id == R.id.checklistFragment){
+            navController.currentDestination?.id == R.id.checklistFragment
+        ) {
             binding.bottomNavigation.selectedItemId = R.id.navHome
             return
         }
 
-        if(navController.currentDestination?.id != R.id.homeFragment)
-        {
+        if (navController.currentDestination?.id != R.id.homeFragment) {
+            removeQuizPageFragment()
             super.onBackPressed()
             return
         }
 
         if (doubleBackToExitPressedOnce) {
+            removeQuizPageFragment()
             super.onBackPressed()
             return
         }
 
         this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+        toastMain.cancel()
+        toastMain.setText("Please click BACK again to exit")
+        toastMain.show()
 
         // give user three seconds to leave without re-notification
-        Handler(Looper.getMainLooper()).postDelayed(Runnable {
-            doubleBackToExitPressedOnce = false
-        }, 3000)
+        Handler(Looper.getMainLooper()).postDelayed(
+            Runnable
+            {
+                doubleBackToExitPressedOnce = false
+            }, 3000
+        )
     }
 
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.navHome -> {
-                    navController.popBackStack(R.id.homeFragment, true) // Previous fragment out of stack
-                    navController.navigate(R.id.homeFragment)
-                    true
-                }
-                R.id.navMap -> {
-                    if(navController.currentDestination?.id != R.id.navMap){
-                        navController.navigate(R.id.mapfragment)
+            val menuItem = it
+            var isItemSelected = false
+            if (navController.currentDestination?.id == R.id.quizPageFragment) {
+                MaterialDialog(this).show {
+                    message(
+                        text = "${getString(R.string.check_leave)}" +
+                                "\n${getString(R.string.warning_msg)}"
+                    )
+                    positiveButton(R.string.no)
+                    negativeButton(R.string.yes)
+                    this.negativeButton {
+                        bottomNav(menuItem)
+                        isItemSelected = true
                     }
-                    true
+                    closeDrawer()
                 }
-                R.id.navExam -> {
-                    if(navController.currentDestination?.id != R.id.navExam){
-                        navController.navigate(R.id.examFragment)
-                    }
-                    true
-                }
-                R.id.navAnalysis -> {
-                    if(navController.currentDestination?.id != R.id.navAnalysis){
-                        navController.navigate(R.id.analysisFragment)
-                    }
-                    true
-                }
-                R.id.navCheckList -> {
-                    if(navController.currentDestination?.id != R.id.navCheckList){
-                        navController.navigate(R.id.checklistFragment)
-                    }
-                    true
-                }
-                else -> {
-                    navController.popBackStack()
-                    binding.bottomNavigation.selectedItemId = R.id.navHome
-                    true
-                }
+                isItemSelected
+            } else {
+                bottomNav(it)
+                true
             }
         }
 
+    }
+
+    private fun bottomNav(menuItem: MenuItem) {
+        menuItem.isChecked = true
+        when (menuItem.itemId) {
+            R.id.navHome -> {
+                navController.popBackStack(
+                    R.id.homeFragment,
+                    true
+                ) // Previous fragment out of stack
+                navController.navigate(R.id.homeFragment)
+            }
+            R.id.navMap -> {
+                if (navController.currentDestination?.id != R.id.navMap) {
+                    navController.navigate(R.id.mapfragment)
+                }
+            }
+            R.id.navExam -> {
+                if (navController.currentDestination?.id != R.id.navExam) {
+                    navController.navigate(R.id.quizFragment)
+                }
+            }
+            R.id.navAnalysis -> {
+                if (navController.currentDestination?.id != R.id.navAnalysis) {
+                    navController.navigate(R.id.analysisFragment)
+                }
+            }
+            R.id.navCheckList -> {
+                if (navController.currentDestination?.id != R.id.navCheckList) {
+                    navController.navigate(R.id.checklistFragment)
+                }
+            }
+            else -> {
+                navController.popBackStack()
+                binding.bottomNavigation.selectedItemId = R.id.navHome
+            }
+        }
     }
 
     private fun configLeftNavigation() {
         binding.leftNavigation.setCheckedItem(R.id.left_navigation)
         binding.leftNavigation.setNavigationItemSelectedListener {
-            if (!navController.popBackStack(it.itemId, false)) {
-                if (navController.currentDestination?.id == R.id.appIntroFragment)
-                    navController.popBackStack() // Previous fragment out of stack
-                when (it.itemId) {
-                    R.id.navAppIntro -> navController.navigate(R.id.appIntroFragment)
-                    R.id.navDeveloper -> navController.navigate(R.id.developerFragment)
+            val menuItem = it
+            var isItemSelected = false
+            if (navController.currentDestination?.id == R.id.quizPageFragment) {
+                MaterialDialog(this).show {
+                    message(
+                        text = "${getString(R.string.check_leave)}" +
+                                "\n${getString(R.string.warning_msg)}"
+                    )
+                    positiveButton(R.string.no)
+                    negativeButton(R.string.yes)
+                    this.negativeButton {
+                        isItemSelected = true
+                        leftNav(menuItem)
+                        menuItem.isChecked = true
+                    }
+                    closeDrawer()
                 }
+
+                isItemSelected
+            } else {
+                leftNav(it)
+                drawer.closeDrawers() // close the drawer of the left navigation.
+                true
             }
-            drawer.closeDrawers() // close the drawer of the left navigation.
-            true
+        }
+    }
+
+    private fun leftNav(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.navAppIntro -> {
+                if (navController.currentDestination?.id == R.id.appIntroFragment) {
+                    navController.popBackStack()
+                }
+                navController.navigate(R.id.appIntroFragment)
+            }
+            R.id.navDeveloper -> {
+                if (navController.currentDestination?.id == R.id.developerFragment) {
+                    navController.popBackStack()
+                }
+                navController.navigate(R.id.developerFragment)
+            }
+            R.id.navLanguage -> switchLanguageList()
+        }
+    }
+
+    private fun removeQuizPageFragment() {
+        val fragmentLabel = navController.previousBackStackEntry?.destination?.label
+        if (fragmentLabel == "fragment_exam_page") {
+            navController.popBackStack(
+                R.id.quizPageFragment,
+                false
+            )
         }
     }
 
     fun openDrawer() {
         drawer.openDrawer(GravityCompat.START)
+    }
+
+    fun closeDrawer() {
+        drawer.closeDrawer(GravityCompat.START)
     }
 
     override fun getResources(): Resources {
@@ -192,7 +301,7 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.visibility = View.VISIBLE
     }
 
-    fun bottomNavHeight(): Int{
+    fun bottomNavHeight(): Int {
         return binding.bottomNavigation.height
     }
 
@@ -205,43 +314,47 @@ class MainActivity : AppCompatActivity() {
             "isLearningMode",
             false
         )
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            "isLearningMode", Context.MODE_PRIVATE
-        )
-
-        val spEditor = sharedPref.edit()
-        spEditor.putBoolean("isLearningMode", isLearningMode)
-        spEditor.apply()
+        intent.removeExtra("isLearningMode")
+        setLearningMode(isLearningMode)
     }
 
-     fun getStatusHeight(): Int{
+    fun getStatusHeight(): Int {
         val rec = Rect()
         window.decorView.getWindowVisibleDisplayFrame(rec)
-        val statusBarHeight = rec.top
-        return statusBarHeight
+        return rec.top
     }
 
-    fun lockSwipeDrawer(){
+    fun lockSwipeDrawer() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
-    fun unlockSwipeDrawer(){
+    fun unlockSwipeDrawer() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
+    fun setLockSwipeDrawer(isChecked: Boolean){
+        when(isChecked){
+            true -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            false -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        }
+    }
+
     fun changeCheckListIcon(isChecked: Boolean) {
-        when(isChecked) {
+        when (isChecked) {
             true -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_finish)
             false -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_not_finish)
         }
 
     }
 
-    // keep the record of the checkbox clicked
+    /**
+     * keep the record of the checkbox clicked
+     */
     fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
         val checkbox = "checkbox$checkbox_num"
+        Log.d("keepCheckboxSharePrefer", "  $checkbox: $isChecked")
         val sharedPref = this.applicationContext.getSharedPreferences(
-            checkbox, Context.MODE_PRIVATE
+            checkbox, MODE_PRIVATE
         )
 
         val spEditor = sharedPref.edit()
@@ -249,17 +362,148 @@ class MainActivity : AppCompatActivity() {
         spEditor.apply()
     }
 
-    // get the previous checkbox clicked by the user
+    /**
+     * get the previous checkbox clicked by the user
+     */
     fun getCheckboxSharePrefer(checkbox_num: Int): Boolean {
         val checkbox = "checkbox$checkbox_num"
         val sharedPref = this.applicationContext.getSharedPreferences(
             checkbox,
             Context.MODE_PRIVATE
         )
+
+        Log.d("getCheckboxSharePrefer", "$checkbox: ${sharedPref.getBoolean(checkbox, false)}")
         return sharedPref.getBoolean(checkbox, false)
     }
 
-    // keep the record of the checkbox clicked
+
+    /**
+     * change the clickList icon on the bottom menu based on whether user has ticked all checkbox on the checkList
+     */
+    private fun configCheckListIcon() {
+        if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
+            && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
+            && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
+            && getCheckboxSharePrefer(7) && getCheckboxSharePrefer(8)
+        ) {
+            changeCheckListIcon(true)
+        } else {
+            changeCheckListIcon(false)
+        }
+    }
+
+    fun callOnNav(index: Int) {
+        bottomNavigationView.menu.getItem(index).isChecked = true
+    }
+
+    fun setMapLearningMode() {
+        val sf = getPreferences(Context.MODE_PRIVATE)
+        val editor = sf.edit()
+        editor.putBoolean("mapLeaningMode", true)
+        editor.apply()
+    }
+
+    /**
+     * clean the left menu item is selected before
+     */
+    fun cleanLeftMenuIsChecked() {
+        val numOfItems = binding.leftNavigation.menu.size
+        var times = 0
+        while (times < numOfItems) {
+            binding.leftNavigation.menu.getItem(times).isChecked = false
+            times++
+        }
+    }
+
+    /**
+     * display the list of languages for user to select
+     * once option is selected the setLocale function will be called
+     */
+    private fun switchLanguageList() {
+        val listLanguages: Array<String> = arrayOf("English", "हिंदी", "中文")
+        val mBuilder = AlertDialog.Builder(this)
+        mBuilder.setTitle(getString(R.string.select_language))
+        mBuilder.setSingleChoiceItems(listLanguages, -1) { dialog, it ->
+            when (it) {
+                0 -> {
+                    setLocale("en_AU")
+                }
+                1 -> {
+                    setLocale("hi")
+                }
+                2 -> {
+                    setLocale("zh_CN")
+                }
+//                3 -> {
+//                    setLocale("zh_TW")
+//                }
+            }
+
+            if (navController.currentDestination?.id == R.id.quizPageFragment) {
+                navController.popBackStack()
+            }
+
+            recreateActivity()
+            dialog.dismiss()
+        }
+        val mDialog = mBuilder.create()
+        mDialog.show()
+    }
+
+    /**
+     * set the application language
+     */
+    private fun setLocale(lang: String) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val resources: Resources = this.resources
+        val dm: DisplayMetrics = this.resources.displayMetrics
+        val config: Configuration = this.resources.configuration
+
+        when (lang) {
+            "en_AU" -> {
+                config.locale = Locale.ENGLISH
+            }
+            "hi" -> {
+                config.locale = locale
+            }
+            "zh_CN" -> {
+                config.locale = Locale.CHINESE
+            }
+//            "zh_TW" -> {
+//                config.locale = Locale.TRADITIONAL_CHINESE
+//            }
+        }
+
+        resources.updateConfiguration(config, dm)
+        keepLanguageToSharedPref(lang)
+    }
+
+    /**
+     * keep the selected new language for app into sharedPreference
+     */
+    private fun keepLanguageToSharedPref(lang: String) {
+        val spEditor =
+            this.applicationContext.getSharedPreferences("language", Activity.MODE_PRIVATE).edit()
+        spEditor.putString("lang", lang)
+        spEditor.apply()
+    }
+
+    /**
+     * Recreate the activity
+     */
+    private fun recreateActivity() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            super.recreate()
+        } else {
+            finish()
+            startActivity(intent)
+        }
+    }
+
+    /**
+     * keep the record of the current weather
+     */
     fun keepWeatherSharePrefer(currentWeather: String) {
         val weather = "weather"
         val sharedPref = this.applicationContext.getSharedPreferences(
@@ -271,7 +515,9 @@ class MainActivity : AppCompatActivity() {
         spEditor.apply()
     }
 
-    // get the previous checkbox clicked by the user
+    /**
+     * get the weather store in sharedPreference
+     */
     fun getWeatherSharePrefer(): String? {
         val weather = "weather"
         val sharedPref = this.applicationContext.getSharedPreferences(
@@ -281,15 +527,78 @@ class MainActivity : AppCompatActivity() {
         return sharedPref.getString(weather, "Placeholder")
     }
 
-    private fun configCheckListIcon() {
-            if (getCheckboxSharePrefer(1) && getCheckboxSharePrefer(2)
-                && getCheckboxSharePrefer(3) && getCheckboxSharePrefer(4)
-                && getCheckboxSharePrefer(5) && getCheckboxSharePrefer(6)
-            ) {
-                changeCheckListIcon(true)
-            } else {
-                changeCheckListIcon(false)
+    /**
+     * update the menu footer information
+     */
+    fun updateMenuFooterInfo(weatherObject: WeatherTemp) {
+        when (weatherObject.weather) {
+            "Clear" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_clear)
             }
+            "Clouds" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clouds)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_clouds)
+            }
+            "Rain" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.rain)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
+            "Thunderstorm" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.thunderstorm)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
+            "Drizzle" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.drizzle)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
+            "Snow" -> {
+                binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.snow)
+                binding.leftNavFooter.currentWeatherInfo.text = getString(R.string.weather_rain)
+            }
+            else -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.dust)
+        }
+
+        binding.leftNavFooter.currentLocationInfo.text = weatherObject.location
+        binding.leftNavFooter.currentTempInfo.text = weatherObject.temp.toString() + "°C"
+        binding.leftNavFooter.currentHumidityInfo.text = weatherObject.humidity.toString() + "%"
+        binding.leftNavFooter.currentWindSpeedInfo.text =
+            weatherObject.windSpeed.toString() + " " + getString(R.string.miles_per_hour)
+
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.left_header_safo, R.id.left_header_del -> {
+                drawer.closeDrawers()
+            }
+        }
+    }
+
+    /**
+     * get sharePref for key = isLearningMode
+     */
+    fun isLearningMode(): Boolean {
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            "isLearningMode",
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getBoolean("isLearningMode", false)
+    }
+
+    /**
+     * set sharePref for key = isLearningMode
+     */
+    fun setLearningMode(isLearningMode: Boolean) {
+        val sharedPref = this.applicationContext.getSharedPreferences(
+            "isLearningMode",
+            Context.MODE_PRIVATE
+        )
+
+        val spEditor = sharedPref.edit()
+        spEditor.clear()
+        spEditor.putBoolean("isLearningMode", isLearningMode)
+        spEditor.apply()
     }
 }
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/result_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/q_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="left"
+        style="@style/textStyle20_bold_black"/>
+    <TextView
+        android:id="@+id/q_desc"
+        style="@style/textStyle16_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        android:layout_gravity="center"
+        android:gravity="left"/>
+    <TextView
+        android:id="@+id/info_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="left"
+        style="@style/textStyle20_bold_black"/>
+    <TextView
+        android:id="@+id/info_desc"
+        style="@style/textStyle16_black"
+        android:justificationMode="inter_word"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="left"/>
+    <TextView
+        android:id="@+id/is_correct_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="left"
+        style="@style/textStyle20_bold_black"/>
+
+</LinearLayout>

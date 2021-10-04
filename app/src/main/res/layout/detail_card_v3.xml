@@ -22,12 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:gravity="center"
+            android:background="@color/primary_green_10"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginVertical="10dp"
                 android:orientation="vertical">
 
@@ -36,11 +37,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="Demo"
                     android:justificationMode="inter_word"
-                    android:textColor="@color/wrong_border_color"
-                    android:textSize="16dp" />
+                    android:padding="5dp"
+                    android:text="Demo"
+                    style="@style/textStyle16_red"/>
 
                 <TextView
                     android:id="@+id/description2"
@@ -50,7 +50,7 @@
                     android:text="Demo"
                     android:justificationMode="inter_word"
                     android:visibility="gone"
-                    style="@style/textStyle16_gray" />
+                    style="@style/textStyle16_black" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
