@@ -90,7 +90,7 @@ class QuizHistoryFragment :
                 binding.historyDetail.historyDetailScrollView.fullScroll(ScrollView.FOCUS_UP)
                 val result = it.quizResults
                 binding.historyDetail.timeDetail.text =
-                    DateStringConverter().parseDateToStr("dd-MM-yyyy hh:mm:ss", it.timeEntry.time)
+                    DateStringConverter().parseDateToStr("dd-MM-yyyy HH:mm:ss", it.timeEntry.time)
 
                 var count = 1
                 for (i in result) {

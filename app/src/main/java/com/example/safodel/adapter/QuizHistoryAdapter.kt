@@ -29,7 +29,7 @@ class QuizHistoryAdapter(results: MutableList<TimeEntryWithQuizResult>, context:
         val record = quizResults[position]
 
         viewHolder.binding.tvRvDate.text =
-            DateStringConverter().parseDateToStr("dd-MM-yyyy hh:mm:ss", record.timeEntry.time)
+            DateStringConverter().parseDateToStr("dd-MM-yyyy HH:mm:ss", record.timeEntry.time)
 
 //        viewHolder.binding.ivItemDelete.setOnClickListener {
 //            quizResults.remove(record)
