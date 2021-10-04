@@ -70,11 +70,17 @@ Follow Mapbox's [docs](https://docs.mapbox.com/help/getting-started/access-token
 
 | Module              | Description
 | ------------------- | -----------
+| [Androud-Gif-Drawable](https://github.com/koral--/android-gif-drawable)              | Views and Drawable for animated GIFs in Android.
 | [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize) | Auto size the screen
 | [DotsIndicator](https://github.com/tommybuonomo/dotsindicator) | Material View Pager Dots Indicator
 | [Explosionfield](https://github.com/tyrantgit/ExplosionField)  | Explosive dust effect for views
 | [Material-dialogs](https://github.com/afollestad/material-dialogs) | Create dialog
+| [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)              | A powerful & easy to use chart library for Android
+| [SmartMaterialSpinner](https://github.com/Chivorns/SmartMaterialSpinner) | Android spinner library
 | [Spotlight](https://github.com/TakuSemba/Spotlight)              | Lights wherever we want
+| [VusikView](https://github.com/dynamitechetan/VusikView)              | An animation Repo
+
+
 
 
 
