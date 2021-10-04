@@ -332,6 +332,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
+    fun setLockSwipeDrawer(isChecked: Boolean){
+        when(isChecked){
+            true -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            false -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        }
+    }
+
     fun changeCheckListIcon(isChecked: Boolean) {
         when (isChecked) {
             true -> bottomMenu.findItem(R.id.navCheckList).setIcon(R.drawable.checklist_finish)
