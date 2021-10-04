@@ -1,11 +1,15 @@
 package com.example.safodel.ui.main
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Rect
+import android.location.Location
+import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +21,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.core.view.size
@@ -32,6 +37,7 @@ import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.HistoryDetailViewModel
 import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
+import com.google.android.gms.location.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mapbox.maps.extension.style.expressions.dsl.generated.length
 
@@ -39,6 +45,7 @@ import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
 import timber.log.Timber
 import java.util.*
+import java.util.jar.Manifest
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -50,6 +57,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var bottomMenu: Menu
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navHostFragment: NavHostFragment
+
+    private val PERMISSION_ID = 1000
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,11 +87,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         leftHeaderSaFo.setOnClickListener(this)
         leftHeaderDel.setOnClickListener(this)
 
-
         configCheckListIcon()
 
         recordLearningMode()
         setMapLearningMode()
+
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+//        getLastLocation()
 
     }
 
@@ -620,12 +633,89 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         spEditor.putBoolean("isLearningMode", isLearningMode)
         spEditor.apply()
     }
+
+    /**
+     * Check the user's permission
+     */
+    private fun checkPermission(): Boolean {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true
+        }
+
+        return false
+    }
+
+    /**
+     * Get the user's permission
+     */
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,  android.Manifest.permission.ACCESS_COARSE_LOCATION), PERMISSION_ID
+        )
+    }
+
+    private fun isLocationEnabled():Boolean {
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_ID) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                Log.d("onRequestPermissionsResult", "debug purpose" )
+            }
+        }
+    }
+
+    private fun getLastLocation(){
+        if(checkPermission()){
+
+            if (isLocationEnabled()) {
+                fusedLocationProviderClient.lastLocation.addOnCompleteListener{ task ->
+                    var location: Location? = task.result as Location
+                    if (location == null) {
+                        toastMain.setText("nothing here fuck")
+                        toastMain.show()
+                    } else {
+                        Log.d("testing//////////////", "Lat: ${location.latitude}, Log:${location.longitude}")
+                    }
+
+                }
+            } else {
+                toastMain.setText("Please enable your location service")
+                toastMain.show()
+            }
+
+        } else {
+            requestPermission()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getNewLocation() {
+        locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 0
+        locationRequest.fastestInterval = 0
+        locationRequest.numUpdates = 2
+        fusedLocationProviderClient!!.requestLocationUpdates(
+            locationRequest,locationCallback, Looper.myLooper()
+        )
+    }
+
+    private val locationCallback = object: LocationCallback() {
+        override fun onLocationResult(p0: LocationResult) {
+//            super.onLocationResult(p0)
+            var lastLocation: Location = p0.lastLocation
+            Log.d("testing//////////////", "Lat: ${lastLocation.latitude}, Log:${lastLocation.longitude}")
+        }
+    }
 }
-
-
-//
-// val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()
-//var action = navController.currentDestination
-//                    val currentFragment = navController.currentDestination?.removeAction()
-//
-//Log.e("Fragment", action.toString())

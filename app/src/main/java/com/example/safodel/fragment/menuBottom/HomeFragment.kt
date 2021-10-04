@@ -730,22 +730,17 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun configScrollingViewActionCapture(numTarget:Int, view: View, spotLight: Spotlight) {
         when(numTarget) {
             3 -> {
-//                homePageImage.homepageAppBar.setAllEnabled(true)
                 homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when (appBarLayout.totalScrollRange) {
                         //  State Collapsed
                         abs(verticalOffset) -> {
-                            Log.d("homepage_app_bar", "Collapsed")
                             view.findViewById<TextView>(R.id.next_target).alpha = 1f
-//                            homePageImage.homepageAppBar.setAllEnabled(false)
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
                             view.findViewById<View>(R.id.next_target).setOnClickListener{
                                 spotLight.next()
                             }
                         }
                         else -> {
-                            Log.d("homepage_app_bar", "Failed")
-//                            homePageImage.homepageAppBar.setAllEnabled(true)
                             view.findViewById<TextView>(R.id.next_target).alpha = 0f
                             view.findViewById<View>(R.id.next_target).isClickable = false
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
@@ -760,10 +755,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     when {
                         //  State Expanded
                         verticalOffset == 0 -> {
-                            Log.d("homepage_app_bar", "Fully expended")
                             view.findViewById<TextView>(R.id.next_target).alpha = 1f
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
-//                            homePageImage.homepageAppBar.setAllEnabled(false)
                             view.findViewById<View>(R.id.next_target).setOnClickListener{
                                 spotLight.next()
                             }
@@ -771,12 +764,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
                         //  State Collapsed
                         abs(verticalOffset) == appBarLayout.totalScrollRange -> {
-                            Log.d("homepage_app_bar", "Collapsed")
                         }
 
                         else -> {
-                            Log.d("homepage_app_bar", "Failed")
-//                            homePageImage.homepageAppBar.setAllEnabled(true)
                             view.findViewById<TextView>(R.id.next_target).alpha = 0f
                             view.findViewById<View>(R.id.next_target).isClickable = false
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)
