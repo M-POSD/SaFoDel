@@ -142,7 +142,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         this.doubleBackToExitPressedOnce = true
-        toastMain.cancel()
         toastMain.setText("Please click BACK again to exit")
         toastMain.show()
 
