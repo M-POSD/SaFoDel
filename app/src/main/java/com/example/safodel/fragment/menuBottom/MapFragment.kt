@@ -20,6 +20,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -38,6 +39,7 @@ import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.ui.map.TrafficPlugin
 import com.example.safodel.viewModel.MapAccidentViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.DirectionsCriteria
@@ -138,6 +140,10 @@ private var accidentClickTimes = 0
 private lateinit var toast: Toast
 private lateinit var fragmentNow: OnMapReadyCallback
 private lateinit var mapViewModel: MapAccidentViewModel
+private lateinit var floatButton: FloatingActionButton
+private lateinit var floatButtonNav: FloatingActionButton
+private lateinit var tripProgressCard: CardView
+private lateinit var floatButtonStop: FloatingActionButton
 
 // Retrofit
 private lateinit var suburbInterface: SuburbInterface
@@ -327,6 +333,10 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         spotlightRoot = FrameLayout(requireContext())
         floatButtonZoomIn = binding.floatButtonZoomIn
         floatButtonZoomOut = binding.floatButtonZoomOut
+        floatButton = binding.floatButton
+        floatButtonNav = binding.floatButtonNav
+        tripProgressCard = binding.tripProgressCard
+        floatButtonStop = binding.floatButtonStop
         setToolbarBasic(toolbar)
 
 
@@ -1209,7 +1219,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         // clear
         mapboxNavigation.setRoutes(listOf())
         binding.maneuverView.visibility = View.INVISIBLE
-        binding.tripProgressCard.visibility = View.INVISIBLE
+        tripProgressCard.visibility = View.INVISIBLE
         changeFloatButtonHeight()
 
     }
@@ -1220,30 +1230,30 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
      */
     private fun changeFloatButtonHeight() {
         // change the float button height
-        val FBHeight = binding.floatButton.layoutParams as CoordinatorLayout.LayoutParams
-        if (binding.tripProgressCard.visibility.equals(View.VISIBLE))
-            FBHeight.bottomMargin = binding.tripProgressCard.height + 20
+        val FBHeight = floatButton.layoutParams as CoordinatorLayout.LayoutParams
+        if (tripProgressCard.visibility.equals(View.VISIBLE))
+            FBHeight.bottomMargin = tripProgressCard.height + 20
         else
             FBHeight.bottomMargin = mainActivity.bottomNavHeight() + 20
-        binding.floatButton.layoutParams = FBHeight
+        floatButton.layoutParams = FBHeight
 
         // change the float button Nav height
-        val FBHeightNav = binding.floatButtonNav.layoutParams as CoordinatorLayout.LayoutParams
+        val FBHeightNav = floatButtonNav.layoutParams as CoordinatorLayout.LayoutParams
         FBHeightNav.bottomMargin = FBHeight.bottomMargin * 2
-        binding.floatButtonNav.layoutParams = FBHeightNav
+        floatButtonNav.layoutParams = FBHeightNav
 
         // change the float button Stop height
-        val FBHeightStop = binding.floatButtonStop.layoutParams as CoordinatorLayout.LayoutParams
+        val FBHeightStop = floatButtonStop.layoutParams as CoordinatorLayout.LayoutParams
         FBHeightStop.bottomMargin = FBHeight.bottomMargin * 3
-        binding.floatButtonStop.layoutParams = FBHeightStop
+        floatButtonStop.layoutParams = FBHeightStop
 
-        val FBHeightZoomOut = binding.floatButtonZoomOut.layoutParams as CoordinatorLayout.LayoutParams
+        val FBHeightZoomOut = floatButtonZoomOut.layoutParams as CoordinatorLayout.LayoutParams
         FBHeightZoomOut.bottomMargin = FBHeight.bottomMargin * 3
-        binding.floatButtonZoomOut.layoutParams = FBHeightZoomOut
+        floatButtonZoomOut.layoutParams = FBHeightZoomOut
 
-        val FBHeightZoomIn = binding.floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
+        val FBHeightZoomIn = floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
         FBHeightZoomIn.bottomMargin = FBHeight.bottomMargin * 4
-        binding.floatButtonZoomIn.layoutParams = FBHeightZoomIn
+        floatButtonZoomIn.layoutParams = FBHeightZoomIn
     }
 
 
