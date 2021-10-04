@@ -22,8 +22,8 @@ Educating Food Delivery Bike Riders in Victoria
 - Safety Gears information sharing (Find out the cycling gear you need to deliver safe)
 - In an Accident tips sharing (Find out the information while encountered the accident)
 - Ride Safer tips sharing (Find out how to ride safely while delivering food)
-- A quiz for testing user road rules understanding
 - A map to see accident location base on suburb area
+- A quiz for testing user road rules understanding
 - Locate the current location  
 - A good Logo
 - A good UI
