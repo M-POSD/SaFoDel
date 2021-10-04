@@ -22,7 +22,7 @@ Educating Food Delivery Bike Riders in Victoria
 - In an Accident tips sharing (Find out the information while encountered the accident)
 - Ride Safer tips sharing (Find out how to ride safely while delivering food)
 - A quiz for testing user road rules understanding
-- A map to see accident location base on LGA area
+- A map to see accident location base on suburb area
 - Locate the current location  
 - A good Logo
 - A good UI
