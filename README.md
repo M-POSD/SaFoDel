@@ -1,7 +1,8 @@
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/88869576/130990605-514f741e-8113-465d-bba5-64700b490d3e.png">
+  <img src="https://user-images.githubusercontent.com/88869576/135811856-0df65737-8fd3-4d84-b122-b42505f43aff.png">
 </p>
+
   
 ## [SaFoDel](https://m-posd.github.io/)
 Educating Food Delivery Bike Riders in Victoria
