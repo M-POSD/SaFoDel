@@ -153,7 +153,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     fun setMarginView(){
         val coroutineScope = CoroutineScope(Dispatchers.Main)
         coroutineScope.launch {
-            val scrollHeight = binding.scrollView.layoutParams as LinearLayout.LayoutParams
+            val scrollHeight = scrollView.layoutParams as LinearLayout.LayoutParams
 
             while (scrollHeight.topMargin == 0)
                 scrollHeight.topMargin = toolbar.measuredHeight
