@@ -351,7 +351,10 @@
     <string name="weather_clouds">Clouds</string>
     <string name="weather_rain">Rain</string>
 
+    <!-- other -->
+
     <string name="miles_per_hour">mi/hr</string>
+    <string name="back_to_exit_warning">Please click BACK again to exit</string>
 
 
 </resources>

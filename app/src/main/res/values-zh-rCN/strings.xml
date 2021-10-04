@@ -278,4 +278,5 @@
     </string>
     <string name="checklist_heading">出发前请携带</string>
     <string name="road_sign_heading">以下是重要的路标</string>
+    <string name="back_to_exit_warning">请再次点击返回退出</string>
 </resources>

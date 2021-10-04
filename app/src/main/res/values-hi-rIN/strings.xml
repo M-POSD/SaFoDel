@@ -278,4 +278,5 @@
     </string>
     <string name="checklist_heading">जाने से पहले, ले आओ</string>
     <string name="road_sign_heading">जानने के लिए कुछ उपयोगी सड़क संकेतं</string>
+    <string name="back_to_exit_warning">कृपया बाहर निकलने के लिए फिर से वापस क्लिक करें</string>
 </resources>

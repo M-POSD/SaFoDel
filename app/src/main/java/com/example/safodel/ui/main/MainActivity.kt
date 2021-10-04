@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val leftHeaderSaFo = leftHeader.findViewById<View>(R.id.left_header_safo)
         val leftHeaderDel = leftHeader.findViewById<View>(R.id.left_header_del)
 
-
         leftHeaderSaFo.isClickable = true
         leftHeaderDel.isClickable = true
         leftHeaderSaFo.setOnClickListener(this)
@@ -90,7 +89,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Press the navigation icon to pop up the navigation window
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             android.R.id.home -> drawer.openDrawer(GravityCompat.START)
         }
@@ -101,8 +99,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * If the user is in home, school and map pages, he/she needs to click twice
      */
     override fun onBackPressed() {
-        // stop users to go back if they are in the following fragment,
-        // giving the warning message at the same time
+        /*
+            stop users to go back if they are in the following fragment,
+            giving the warning message at the same time
+         */
         if (navController.currentDestination?.id == R.id.quizPageFragment
         ) {
             MaterialDialog(this).show {
@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        // return back home if current destination is the page on the bottom nav
         if (navController.currentDestination?.id == R.id.mapfragment ||
             navController.currentDestination?.id == R.id.quizFragment ||
             navController.currentDestination?.id == R.id.analysisFragment ||
@@ -129,12 +130,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        /*
+            remove quiz page fragment from pop stack if the current page is not home fragment
+            home fragment have already removed all fragment in the pop stack
+         */
         if (navController.currentDestination?.id != R.id.homeFragment) {
             removeQuizPageFragment()
             super.onBackPressed()
             return
         }
 
+        // configure the back button to be pressed twice before the app exits
         if (doubleBackToExitPressedOnce) {
             removeQuizPageFragment()
             super.onBackPressed()
@@ -142,22 +148,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         this.doubleBackToExitPressedOnce = true
-        toastMain.setText("Please click BACK again to exit")
+        toastMain.setText(getString(R.string.back_to_exit_warning))
         toastMain.show()
 
         // give user three seconds to leave without re-notification
         Handler(Looper.getMainLooper()).postDelayed(
-            Runnable
-            {
+            Runnable {
                 doubleBackToExitPressedOnce = false
             }, 3000
         )
     }
 
+    /**
+     * Config the bottom navigation basic settings
+     */
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             val menuItem = it
             var isItemSelected = false
+
+            // if user is in the quiz page, provide warning message for the user if he/she wants to leave
             if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
                     message(
@@ -181,6 +191,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    /**
+     * Define each bottom will direct to which page on the bottom nav
+     */
     private fun bottomNav(menuItem: MenuItem) {
         menuItem.isChecked = true
         when (menuItem.itemId) {
@@ -218,11 +231,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Config the left navigation basic settings
+     */
     private fun configLeftNavigation() {
         binding.leftNavigation.setCheckedItem(R.id.left_navigation)
         binding.leftNavigation.setNavigationItemSelectedListener {
             val menuItem = it
             var isItemSelected = false
+
+            // if user is in the quiz page, provide warning message for the user if he/she wants to leave
             if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
                     message(
@@ -248,6 +266,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Define each bottom will direct to which page on the left nav
+     */
     private fun leftNav(menuItem: MenuItem) {
         when (menuItem.itemId) {
             R.id.navAppIntro -> {
