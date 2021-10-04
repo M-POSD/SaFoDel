@@ -52,7 +52,7 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
         // connect to the product video page
         binding.appIntroKnowMore.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
         binding.appIntroKnowMore.setOnClickListener {
-            val url = "https://drive.google.com/drive/u/1/folders/1sQS4D_pINpBBTHe-X5caEgynHGnHwdzx"
+            val url = "https://biteable.com/watch/3240085/ecf530c917dc74814c7a7ae2e3fa7744"
             val internetAct = Intent(Intent.ACTION_VIEW)
             internetAct.data = Uri.parse(url)
             startActivity(internetAct)
