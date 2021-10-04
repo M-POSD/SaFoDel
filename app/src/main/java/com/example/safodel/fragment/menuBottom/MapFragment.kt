@@ -9,22 +9,23 @@ import android.graphics.Color.parseColor
 import android.graphics.PointF
 import android.location.Location
 import android.os.Bundle
+import android.text.method.Touch
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.DecelerateInterpolator
-import android.widget.AdapterView
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.children
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.get
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
@@ -366,8 +367,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-
-
 
         suburbInterface = SuburbClient.getSuburbService()
 
