@@ -32,6 +32,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.ajithvgiri.searchdialog.OnSearchItemSelected
+import com.ajithvgiri.searchdialog.SearchListItem
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.model.WeatherTemp
@@ -51,7 +53,7 @@ import java.util.*
 import java.util.jar.Manifest
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelected {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
@@ -724,5 +726,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             var lastLocation: Location = p0.lastLocation
             Log.d("testing//////////////", "Lat: ${lastLocation.latitude}, Log:${lastLocation.longitude}")
         }
+    }
+
+    override fun onClick(position: Int, searchListItem: SearchListItem) {
+
     }
 }

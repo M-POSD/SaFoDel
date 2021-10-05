@@ -30,6 +30,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
+import com.ajithvgiri.searchdialog.OnSearchItemSelected
+import com.ajithvgiri.searchdialog.SearchListItem
+import com.ajithvgiri.searchdialog.SearchableDialog
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
 import com.example.safodel.databinding.FilterCardsBinding
 import com.example.safodel.databinding.FragmentMapBinding
@@ -138,6 +142,7 @@ private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private var alertClickTimes = 0
 private var accidentClickTimes = 0
+private var spinnerIndex = 0
 private lateinit var toast: Toast
 private lateinit var fragmentNow: OnMapReadyCallback
 private lateinit var mapViewModel: MapAccidentViewModel
@@ -145,13 +150,14 @@ private lateinit var floatButton: FloatingActionButton
 private lateinit var floatButtonNav: FloatingActionButton
 private lateinit var tripProgressCard: CardView
 private lateinit var floatButtonStop: FloatingActionButton
+private lateinit var spinnerText: TextView
 
 // Retrofit
 private lateinit var suburbInterface: SuburbInterface
 
 
 class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
-    OnMapReadyCallback, PermissionsListener {
+    OnMapReadyCallback, PermissionsListener,OnSearchItemSelected {
 
     // View
     private lateinit var toolbar: Toolbar
@@ -178,6 +184,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var filterCardBinding: FilterCardsBinding
     private lateinit var floatButtonZoomIn: View
     private lateinit var floatButtonZoomOut: View
+    private lateinit var searchableDialog: SearchableDialog
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -338,6 +345,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         floatButtonNav = binding.floatButtonNav
         tripProgressCard = binding.tripProgressCard
         floatButtonStop = binding.floatButtonStop
+        spinnerText = binding.spinnerText
         setToolbarBasic(toolbar)
 
 
@@ -349,24 +357,32 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         dialog = MaterialDialog(requireContext())
 
         // spinner init
-        val spinner = binding.spinner
-        spinner.item = suburbList
-        spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.opensans_medium)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?, view: View?, position: Int, id: Long
-            ) {
-                removeAlertBubble()
-                setDialog()
-                spinnerTimes++ // calculate the times to test
-                if (spinnerTimes >= 1) {
-                    suburb = parent?.getItemAtPosition(position).toString()
-                    callAllClient(true)
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        //val spinner = binding.spinner
+        //spinner.item = suburbList
+        //spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.opensans_medium)
+        searchableDialog = SearchableDialog(mainActivity, suburbList, getString(R.string.select_suburb))
+        searchableDialog.setOnItemSelected(this)
+        binding.spinnerB.setOnClickListener {
+            searchableDialog.show()
+            searchableDialog.recyclerView.smoothScrollToPosition(spinnerIndex)
         }
+
+
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+//            ) {
+//                removeAlertBubble()
+//                setDialog()
+//                spinnerTimes++ // calculate the times to test
+//                if (spinnerTimes >= 1) {
+//                    suburb = parent?.getItemAtPosition(position).toString()
+//                    callAllClient(true)
+//                }
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {}
+//        }
 
         suburbInterface = SuburbClient.getSuburbService()
 
@@ -1642,7 +1658,24 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
     }
 
+    override fun onClick(position: Int, searchListItem: SearchListItem) {
+        searchableDialog.dismiss()
+        removeAlertBubble()
+        setDialog()
+        spinnerTimes++ // calculate the times to test
+        if (spinnerTimes >= 1) {
+            //suburb = parent?.getItemAtPosition(position).toString()
+            suburb = searchListItem.title
+            toast.setText(searchListItem.title)
+            toast.show()
+            callAllClient(true)
+            spinnerIndex = searchListItem.id
+            spinnerText.text = suburb
+        }
+    }
+
 }
+
 
 
 

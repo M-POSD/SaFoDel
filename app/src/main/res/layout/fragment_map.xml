@@ -81,35 +81,22 @@
         android:orientation="horizontal">
 
         <View
+            android:id="@+id/spinnerB"
             android:layout_width="220dp"
             android:layout_height="40dp"
             android:layout_marginTop="7dp"
             android:alpha="0.9"
-            android:background="@drawable/white_shape"/>
+            android:background="@drawable/snow_shape"/>
 
-        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
-            android:id="@+id/spinner"
-            android:layout_width="200dp"
-            android:layout_height="56dp"
-            android:layout_gravity="center_horizontal"
-            app:smsp_enableDismissSearch="true"
-            app:smsp_enableErrorLabel="false"
-            app:smsp_errorText="@string/error"
-            app:smsp_hint="@string/select_area"
-            app:smsp_hintColor="@color/black"
-            app:smsp_isSearchable="true"
-            app:smsp_itemColor="@color/black"
-            app:smsp_itemListColor="@color/black"
-            app:smsp_itemListHintBackgroundColor="#808080"
-            app:smsp_itemListHintColor="#FFFFFF"
-            app:smsp_multilineError="false"
-            app:smsp_searchHeaderBackgroundColor="@color/primary_green"
-            app:smsp_searchHeaderText="@string/search_header"
-            app:smsp_searchTextColor="@color/black"
-            app:smsp_selectedItemListColor="@color/black"
-            app:smsp_underlineSize="0dp"
-            mapbox:smsp_hintSize="13dp"
-            mapbox:smsp_showDropdownHint="false" />
+        <TextView
+            android:id="@+id/spinner_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_suburb"
+            android:layout_gravity="center"
+            android:textAppearance="@style/textStyle14_black"
+            android:maxLines="1" />
+
 
     </FrameLayout>
 

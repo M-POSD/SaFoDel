@@ -128,7 +128,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         spProvince = binding.spinner
         val typeFace = ResourcesCompat.getFont(requireContext(), R.font.opensans_medium)
         spProvince.typeface = typeFace
-        spProvince.item = suburbList
+        //spProvince.item = suburbList
         spProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
                 setDialog()
