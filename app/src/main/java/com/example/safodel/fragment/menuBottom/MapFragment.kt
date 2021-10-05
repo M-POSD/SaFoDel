@@ -400,12 +400,13 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
         // go to the user's current location
         binding.floatButton.setOnClickListener {
-            mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
+            if(this::mapboxMap.isInitialized){
+                mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
             if (this::navigationCamera.isInitialized) {
                 navigationCamera.requestNavigationCameraToOverview()
                 updateNavCamera()
             }
-
+            }
         }
 
         // initialize Mapbox Navigation
@@ -1255,20 +1256,20 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
         // change the float button Nav height
         val FBHeightNav = floatButtonNav.layoutParams as CoordinatorLayout.LayoutParams
-        FBHeightNav.bottomMargin = FBHeight.bottomMargin * 2
+        FBHeightNav.bottomMargin = FBHeight.bottomMargin
         floatButtonNav.layoutParams = FBHeightNav
 
         // change the float button Stop height
         val FBHeightStop = floatButtonStop.layoutParams as CoordinatorLayout.LayoutParams
-        FBHeightStop.bottomMargin = FBHeight.bottomMargin * 3
+        FBHeightStop.bottomMargin = FBHeight.bottomMargin * 2
         floatButtonStop.layoutParams = FBHeightStop
 
         val FBHeightZoomOut = floatButtonZoomOut.layoutParams as CoordinatorLayout.LayoutParams
-        FBHeightZoomOut.bottomMargin = FBHeight.bottomMargin * 3
+        FBHeightZoomOut.bottomMargin = FBHeight.bottomMargin * 2
         floatButtonZoomOut.layoutParams = FBHeightZoomOut
 
         val FBHeightZoomIn = floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
-        FBHeightZoomIn.bottomMargin = FBHeight.bottomMargin * 4
+        FBHeightZoomIn.bottomMargin = FBHeight.bottomMargin * 3
         floatButtonZoomIn.layoutParams = FBHeightZoomIn
 
         spinnerText.setCompoundDrawablesWithIntrinsicBounds(
@@ -1473,7 +1474,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
             override fun onFailure(call: Call<SuburbAllResponse?>, t: Throwable) {
                 dialog.dismiss()
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.map_null), Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -1671,8 +1672,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         if (spinnerTimes >= 1) {
             //suburb = parent?.getItemAtPosition(position).toString()
             suburb = searchListItem.title
-            toast.setText(searchListItem.title)
-            toast.show()
             callAllClient(true)
             spinnerIndex = searchListItem.id
             spinnerText.text = suburb

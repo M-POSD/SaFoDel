@@ -652,7 +652,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
 
             override fun onFailure(call: Call<WeatherResponse?>?, t: Throwable) {
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.weather_null), Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -207,7 +207,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                 }
                 override fun onFailure(call: Call<SuburbStreetsResponse?>?, t: Throwable) {
                     dialog.dismiss()
-                    toast3.setText(t.message)
+                    toast3.setText(getString(R.string.trend_null))
                     toast3.show()
                     Timber.i(t.localizedMessage.toString())
                 }
