@@ -16,6 +16,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.get
 import com.afollestad.materialdialogs.MaterialDialog
+import com.ajithvgiri.searchdialog.OnSearchItemSelected
+import com.ajithvgiri.searchdialog.SearchListItem
+import com.ajithvgiri.searchdialog.SearchableDialog
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.safodel.R
 import com.example.safodel.adapter.AnalysisViewAdapter
@@ -42,9 +45,10 @@ import timber.log.Timber
 import com.example.safodel.ui.analysis.YourMarkerView
 import com.example.safodel.ui.main.MainActivity
 
+private var spinnerIndex = 0
 
-class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysisBinding::inflate) {
-    private lateinit var spProvince: SmartMaterialSpinner<Any>
+class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysisBinding::inflate),OnSearchItemSelected {
+//    private lateinit var spProvince: SmartMaterialSpinner<Any>
     private var suburbList = SuburbList.init()
     private lateinit var suburbInterface: SuburbInterface
     private lateinit var dialog: MaterialDialog
@@ -58,6 +62,8 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     private lateinit var toast3: Toast
     private lateinit var scrollView: View
     private lateinit var toolbar: Toolbar
+    private lateinit var searchableDialog: SearchableDialog
+    private lateinit var spinnerText: TextView
 
     private lateinit var adapter: AnalysisViewAdapter
 
@@ -71,6 +77,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         toast2 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
         toast3 = Toast.makeText(activity, null, Toast.LENGTH_SHORT)
         scrollView = binding.scrollView
+        spinnerText = binding.spinnerText
         toolbar = binding.toolbar.root
 
         // Set Dialog
@@ -89,9 +96,6 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         bar.zoomOut()
         bar.xAxis.labelCount = 5
 
-        // Setting Spinner
-        initSpinner()
-
         // setting height of scroll view
         setMarginView()
 
@@ -102,6 +106,8 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         binding.viewPager2Home.adapter = adapter
         binding.wormDotsIndicatorHome.setViewPager2(binding.viewPager2Home)
         mainActivity = activity as MainActivity
+        // Setting Spinner
+        initSpinner()
 
         return binding.root
     }
@@ -125,17 +131,23 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Setting the spinner
      */
     private fun initSpinner() {
-        spProvince = binding.spinner
-        val typeFace = ResourcesCompat.getFont(requireContext(), R.font.opensans_medium)
-        spProvince.typeface = typeFace
-        //spProvince.item = suburbList
-        spProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
-                setDialog()
-                callSuburbClient(spProvince.item[position].toString())
-                //binding.suburbName.text = spProvince.item[position].toString()
-            }
-            override fun onNothingSelected(adapterView: AdapterView<*>) {}
+//        spProvince = binding.spinner
+//        val typeFace = ResourcesCompat.getFont(requireContext(), R.font.opensans_medium)
+//        spProvince.typeface = typeFace
+//        spProvince.item = suburbList
+//        spProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
+//                setDialog()
+//                callSuburbClient(spProvince.item[position].toString())
+//            }
+//            override fun onNothingSelected(adapterView: AdapterView<*>) {}
+//        }
+
+        searchableDialog = SearchableDialog(mainActivity, suburbList, getString(R.string.select_suburb))
+        searchableDialog.setOnItemSelected(this)
+        binding.spinnerBackground.setOnClickListener {
+            searchableDialog.show()
+            searchableDialog.recyclerView.smoothScrollToPosition(spinnerIndex)
         }
     }
 
@@ -189,7 +201,6 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                 }
                 override fun onFailure(call: Call<SuburbStreetsResponse?>?, t: Throwable) {
                     dialog.dismiss()
-                    toast3.cancel()
                     toast3.setText(t.message)
                     toast3.show()
                     Timber.i(t.localizedMessage.toString())
@@ -326,20 +337,13 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
 //        lineChart.invalidate()
 //    }
 
-    /*
-        Set the style of bar2
-     */
-//    private fun setLineStyle(lineChart:LineChart){
-//        lineChart.axisLeft.setDrawGridLines(false)
-//        lineChart.xAxis.setDrawGridLines(false)
-//        lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-//        lineChart.axisRight.isEnabled = false
-//        lineChart.xAxis.axisMinimum = 0f
-//        lineChart.xAxis.axisMaximum = 23f
-//        lineChart.axisLeft.valueFormatter = IntegerFormatter()
-//        lineChart.description.text = ""
-//        lineChart.zoomOut()
-//    }
+    override fun onClick(position: Int, searchListItem: SearchListItem) {
+        searchableDialog.dismiss()
+        setDialog()
+        callSuburbClient(searchListItem.title)
+        spinnerIndex = searchListItem.id
+        spinnerText.text = searchListItem.title
+    }
 }
 
 
@@ -366,6 +370,7 @@ class StreetNameFormatter(bar: HorizontalBarChart, map: HashMap<Int,String>):Val
         return "NULL"
 
     }
+
 }
 
 

@@ -150,7 +150,7 @@ private lateinit var floatButton: FloatingActionButton
 private lateinit var floatButtonNav: FloatingActionButton
 private lateinit var tripProgressCard: CardView
 private lateinit var floatButtonStop: FloatingActionButton
-private lateinit var spinnerText: TextView
+
 
 // Retrofit
 private lateinit var suburbInterface: SuburbInterface
@@ -165,6 +165,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var diaglogFilter: MaterialDialog
     private lateinit var recenter: View
     private lateinit var spotlightRoot: FrameLayout
+    private lateinit var spinnerText: TextView
 
 
     // Map
