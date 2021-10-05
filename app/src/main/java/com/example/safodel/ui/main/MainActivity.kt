@@ -40,6 +40,9 @@ import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import com.google.android.gms.location.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mapbox.maps.extension.style.expressions.dsl.generated.length
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
@@ -92,8 +95,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         recordLearningMode()
         setMapLearningMode()
 
-//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-//        getLastLocation()
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        getLastLocation()
 
     }
 
@@ -654,6 +657,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             this,
             arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,  android.Manifest.permission.ACCESS_COARSE_LOCATION), PERMISSION_ID
         )
+
     }
 
     private fun isLocationEnabled():Boolean {
@@ -671,6 +675,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (requestCode == PERMISSION_ID) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 Log.d("onRequestPermissionsResult", "debug purpose" )
+            }
+            else{
+                getLastLocation()
             }
         }
     }
