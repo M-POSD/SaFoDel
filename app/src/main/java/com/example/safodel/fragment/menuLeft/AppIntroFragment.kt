@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,17 +15,9 @@ import com.example.safodel.fragment.BasicFragment
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 
-import androidx.annotation.NonNull
-
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
-
-
-
-
 class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntroBinding::inflate){
-    private lateinit var handler: Handler
-    private lateinit var runnable: Runnable
     private lateinit var youTubeView: YouTubePlayerView
     private val VIDEO_ID = "ZcUVtaflDy8"
 
@@ -88,19 +79,5 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
         youTubeView.release()
         _binding = null
     }
-
-//    private fun configHelmetShaking() {
-//        handler = Handler(Looper.getMainLooper())
-//        runnable = Runnable {
-//            binding.logo.visibility = View.VISIBLE
-//            binding.logoShaking.visibility = View.GONE
-//    }
-//        binding.logo.setOnClickListener{
-//            binding.logo.visibility = View.GONE
-//            binding.logoShaking.visibility = View.VISIBLE
-//            handler.postDelayed(runnable, 1000)
-//        }
-//
-//    }
 
 }
