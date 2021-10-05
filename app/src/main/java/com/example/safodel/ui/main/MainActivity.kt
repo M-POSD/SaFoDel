@@ -19,6 +19,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -36,8 +37,10 @@ import com.ajithvgiri.searchdialog.OnSearchItemSelected
 import com.ajithvgiri.searchdialog.SearchListItem
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
+import com.example.safodel.model.UserLocation
 import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.HistoryDetailViewModel
+import com.example.safodel.viewModel.LocationViewModel
 import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import com.google.android.gms.location.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -53,7 +56,7 @@ import java.util.*
 import java.util.jar.Manifest
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelected {
+class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSelected {
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
@@ -65,7 +68,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelec
 
     private val PERMISSION_ID = 1000
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var locationRequest: LocationRequest
+
+    //    lateinit var userLocation: UserLocation
+    private val viewModel: LocationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -370,8 +375,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelec
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
-    fun setLockSwipeDrawer(isChecked: Boolean){
-        when(isChecked){
+    fun setLockSwipeDrawer(isChecked: Boolean) {
+        when (isChecked) {
             true -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             false -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
@@ -643,8 +648,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelec
      * Check the user's permission
      */
     private fun checkPermission(): Boolean {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             return true
         }
 
@@ -657,12 +669,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelec
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,  android.Manifest.permission.ACCESS_COARSE_LOCATION), PERMISSION_ID
+            arrayOf(
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ), PERMISSION_ID
         )
 
     }
 
-    private fun isLocationEnabled():Boolean {
+    private fun isLocationEnabled(): Boolean {
         var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
@@ -676,55 +691,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelec
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_ID) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                Log.d("onRequestPermissionsResult", "debug purpose" )
-            }
-            else{
+                Log.d("onRequestPermissionsResult", "debug purpose")
+            } else {
                 getLastLocation()
             }
         }
     }
 
-    private fun getLastLocation(){
-        if(checkPermission()){
-
+    private fun getLastLocation() {
+        if (checkPermission()) {
             if (isLocationEnabled()) {
-                fusedLocationProviderClient.lastLocation.addOnCompleteListener{ task ->
+                fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
                     var location: Location? = task.result as Location
                     if (location == null) {
-                        toastMain.setText("nothing here fuck")
+                        toastMain.setText("Unable to get the current location")
                         toastMain.show()
                     } else {
-                        Log.d("testing//////////////", "Lat: ${location.latitude}, Log:${location.longitude}")
+                        val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
+                        viewModel.setUserLocation(userLocation)
+                        Log.d("getLastLocation", "location: ${location.latitude}, ${location.longitude}")
                     }
-
                 }
             } else {
                 toastMain.setText("Please enable your location service")
                 toastMain.show()
             }
-
         } else {
             requestPermission()
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun getNewLocation() {
-        locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 0
-        locationRequest.fastestInterval = 0
-        locationRequest.numUpdates = 2
-        fusedLocationProviderClient!!.requestLocationUpdates(
-            locationRequest,locationCallback, Looper.myLooper()
-        )
-    }
-
-    private val locationCallback = object: LocationCallback() {
-        override fun onLocationResult(p0: LocationResult) {
-//            super.onLocationResult(p0)
-            var lastLocation: Location = p0.lastLocation
-            Log.d("testing//////////////", "Lat: ${lastLocation.latitude}, Log:${lastLocation.longitude}")
         }
     }
 

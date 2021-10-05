@@ -37,6 +37,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
@@ -44,6 +45,7 @@ import com.example.safodel.databinding.HomepageImagesBinding
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.IsLearningModeViewModel
+import com.example.safodel.viewModel.LocationViewModel
 import com.example.safodel.viewModel.WeatherViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
@@ -60,14 +62,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     // get weather
     private val APP_ID = "898ef19b846722554449f6068e7c7253"
     private val UNITS = "metric"
-    private var LAT = -37.876823f
-    private var LON = 145.045837f
-//    private val CITY_NAME = "clayton,AU"
+    private var lat = -37.876823f
+    private var lon = 145.045837f
 
     private lateinit var weatherService: RetrofitInterface
-
-//    // Permission
-//    private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
     private lateinit var toast: Toast
@@ -84,9 +82,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var homeScrollView: NestedScrollView
 
     private var isBeginnerMode = false
+    private var isFirstCreated = true
     private var currentToast: Toast? = null
-//    private var isRaining = false
-//    private var isInitialRainingAnimation = true
 
     private lateinit var adapter: HomeViewAdapter
     private lateinit var runnable: Runnable
@@ -94,7 +91,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private lateinit var weatherModel: WeatherViewModel
     private lateinit var learningModeModel: IsLearningModeViewModel
-    private var isFirstCreated = true
+    private val locationViewModel: LocationViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,11 +109,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         handler = Handler(Looper.getMainLooper())
         weatherService = RetrofitClient.getRetrofitService()
-        callWeatherService()
-
-//        // request permission of user location
-//        permissionsManager = PermissionsManager(this)
-//        permissionsManager.requestLocationPermissions(activity)
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
@@ -164,8 +157,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
 
         isBeginnerMode = mainActivity.isLearningMode()
-        weatherModel = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
-        learningModeModel = ViewModelProvider(requireActivity()).get(IsLearningModeViewModel::class.java)
+
+        val viewModelProvider = ViewModelProvider(requireActivity())
+        weatherModel = viewModelProvider.get(WeatherViewModel::class.java)
+        learningModeModel = viewModelProvider.get(IsLearningModeViewModel::class.java)
+
+        locationViewModel.getUserLocation().observe(mainActivity, { location ->
+            lat = location.lat
+            lon = location.lon
+            callWeatherService()
+        })
 
         return binding.root
 
@@ -602,8 +603,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun callWeatherService() {
         val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(
-            LAT.toString(),
-            LON.toString(),
+            lat.toString(),
+            lon.toString(),
             APP_ID,
             UNITS
         )
@@ -617,9 +618,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     val weatherResponse = response.body()!!
                     val weatherList = weatherResponse.weatherMainList
 
-                    LAT = (LAT * 100.0).roundToInt() / 100.0f
-                    LON = (LON * 100.0).roundToInt() / 100.0f
-                    val location = "$LAT, $LON"
+                    lat = (lat * 100.0).roundToInt() / 100.0f
+                    lon = (lon * 100.0).roundToInt() / 100.0f
+                    val location = "$lat, $lon"
                     val temp = weatherResponse.main.temp
                     val pressure = weatherResponse.main.pressure
                     val humidity = weatherResponse.main.humidity
