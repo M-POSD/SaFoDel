@@ -45,7 +45,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
  * <p>
  * Initialise this plugin in the {@link com.mapbox.mapboxsdk.maps.OnMapReadyCallback#onMapReady(MapboxMap)} and provide
  * a valid instance of {@link MapView} and {@link MapboxMap}.
- * Base on Mapbox official doc
+ * Sourcecode is based on Mapbox official doc
  * </p>
  * <p>
  * Use {@link #setVisibility(boolean)} to switch state of this plugin to enable or disabled.
