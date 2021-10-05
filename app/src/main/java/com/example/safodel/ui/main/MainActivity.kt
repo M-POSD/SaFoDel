@@ -706,6 +706,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
                     if (location == null) {
                         toastMain.setText("Unable to get the current location")
                         toastMain.show()
+
                     } else {
                         val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
                         viewModel.setUserLocation(userLocation)
