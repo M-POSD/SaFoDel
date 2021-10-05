@@ -693,6 +693,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,OnSearchItemSelec
                     if (location == null) {
                         toastMain.setText("nothing here fuck")
                         toastMain.show()
+
                     } else {
                         Log.d("testing//////////////", "Lat: ${location.latitude}, Log:${location.longitude}")
                     }

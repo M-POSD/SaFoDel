@@ -109,6 +109,8 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         // Setting Spinner
         initSpinner()
 
+
+
         return binding.root
     }
 
@@ -149,6 +151,10 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             searchableDialog.show()
             searchableDialog.recyclerView.smoothScrollToPosition(spinnerIndex)
         }
+
+        spinnerText.setCompoundDrawablesWithIntrinsicBounds(
+            R.drawable.baseline_search_black_36,0,0,0
+        )
     }
 
     /*
