@@ -12,14 +12,8 @@ import com.afollestad.materialdialogs.customview.customView
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentAppIntroBinding
 import com.example.safodel.fragment.BasicFragment
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
 class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntroBinding::inflate){
-    private lateinit var youTubeView: YouTubePlayerView
-    private val VIDEO_ID = "ZcUVtaflDy8"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,15 +54,6 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
             startActivity(internetAct)
         }
 
-        // youtube video
-        youTubeView = binding.youtubeVideo
-        lifecycle.addObserver(youTubeView)
-
-        youTubeView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.cueVideo(VIDEO_ID, 0f)
-            }
-        })
 
         setToolbarBasic(toolbar)
         return binding.root
@@ -76,7 +61,6 @@ class AppIntroFragment : BasicFragment<FragmentAppIntroBinding>(FragmentAppIntro
 
     override fun onDestroyView() {
         super.onDestroyView()
-        youTubeView.release()
         _binding = null
     }
 

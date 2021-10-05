@@ -169,8 +169,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                 if (mSelectedOptionPosition == 0) {
 
                     // no option has been selected, give a warning message
-                    if (binding.submitBtn.button.text == "SUBMIT") {
-                        toast.cancel()
+                    if (binding.submitBtn.button.text == getString(R.string.submit_button)) {
                         toast.setText(getString(R.string.notify_select_option))
                         toast.show()
                     } else {
