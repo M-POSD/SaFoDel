@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
     private lateinit var bottomMenu: Menu
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navHostFragment: NavHostFragment
+    private var isGetLocation = false
 
     private val PERMISSION_ID = 1000
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         leftHeaderDel.setOnClickListener(this)
 
         configCheckListIcon()
+
 
         recordLearningMode()
         setMapLearningMode()
@@ -322,6 +324,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
 
     fun openDrawer() {
         drawer.openDrawer(GravityCompat.START)
+        if(!isGetLocation) getLastLocation()
     }
 
     fun closeDrawer() {
@@ -711,6 +714,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
                         val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
                         viewModel.setUserLocation(userLocation)
                         Log.d("getLastLocation", "location: ${location.latitude}, ${location.longitude}")
+                        isGetLocation = true
                     }
                 }
             } else {

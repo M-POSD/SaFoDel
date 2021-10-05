@@ -80,13 +80,6 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <View
-            android:id="@+id/spinnerB"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="7dp"
-            android:alpha="0.9"
-            android:background="@drawable/snow_shape"/>
 
         <TextView
             android:id="@+id/spinner_text"
@@ -95,6 +88,11 @@
             android:text="@string/select_suburb"
             android:layout_gravity="center"
             android:textAppearance="@style/textStyle14_black"
+            android:background="@drawable/gray_outline"
+            android:paddingRight="30dp"
+            android:paddingLeft="10dp"
+            android:paddingVertical="10dp"
+            android:layout_margin="10dp"
             android:maxLines="1" />
 
 

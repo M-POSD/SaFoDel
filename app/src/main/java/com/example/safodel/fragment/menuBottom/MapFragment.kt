@@ -363,7 +363,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         //spinner.typeface = ResourcesCompat.getFont(requireContext(), R.font.opensans_medium)
         searchableDialog = SearchableDialog(mainActivity, suburbList, getString(R.string.select_suburb))
         searchableDialog.setOnItemSelected(this)
-        binding.spinnerB.setOnClickListener {
+        binding.searchMap1.setOnClickListener {
             searchableDialog.show()
             searchableDialog.recyclerView.smoothScrollToPosition(spinnerIndex)
         }
@@ -1270,6 +1270,10 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         val FBHeightZoomIn = floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
         FBHeightZoomIn.bottomMargin = FBHeight.bottomMargin * 4
         floatButtonZoomIn.layoutParams = FBHeightZoomIn
+
+        spinnerText.setCompoundDrawablesWithIntrinsicBounds(
+            R.drawable.baseline_search_black_36,0,0,0
+        )
     }
 
 
