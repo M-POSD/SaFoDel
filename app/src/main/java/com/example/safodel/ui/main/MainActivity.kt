@@ -56,7 +56,13 @@ import java.util.*
 import java.util.jar.Manifest
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSelected {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    /**
+     *  Sourcecode of get user location part
+     *  https://www.youtube.com/watch?v=vard0CUTLbA&ab_channel=doctorcode
+     */
+
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
@@ -726,7 +732,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         }
     }
 
-    override fun onClick(position: Int, searchListItem: SearchListItem) {
-
-    }
 }
