@@ -76,14 +76,14 @@
     <string name="v2_title">What is SaFoDel ?</string>
     <string name="v2_description">We help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders.</string>
     <string name="v3_description">It helps you by providing consolidated safety information, cycling rules and tips as well as convey to you insights about bicycle accidents in Victoria.</string>
-    <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\n\nClick Next for the next step\n\nClick Close for leaving this mode</string>
-    <string name="first_target">This area is the main feature of the application, you can click each button to quickly navigate to your destination</string>
-    <string name="second_target">This area is the main feature with some interesting image and details. Click the one with image to your destination</string>
-    <string name="third_target">Scroll up until the logo has been fully collapsed</string>
-    <string name="fourth_target">This area is the static information you need to be familiar with</string>
+    <string name="v0">Welcome to learning mode\nIt\'s time to get to know more about the application\n\nClick Next for the next step\n\nClick Close to leave learning mode</string>
+    <string name="first_target">This bar allows for quick navigation across the main features of the app, you can click on any button to quickly navigate to your desired feature</string>
+    <string name="second_target">This panel also shows some of the main features of the app but with further detail and images. Click on any of the images to go to the destination feature</string>
+    <string name="third_target">Scroll up until the logo has disappeared to see all our available app sections</string>
+    <string name="fourth_target">These cards contain useful information about cycling related issues</string>
     <string name="fifth_target">Scroll down until the logo has been fully extended</string>
-    <string name="ninth_target">Left Menu has\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team\n\nLanguage:\nSwitch preferred language</string>
-    <string name="click_next">Well down. Please click next</string>
+    <string name="ninth_target">The left menu has\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team\n\nLanguage:\nSwitch to your preferred language</string>
+    <string name="click_next">Well down. Click next</string>
 
     <!--  epic1  -->
     <string name="epic1_name">Ride Safer</string>
