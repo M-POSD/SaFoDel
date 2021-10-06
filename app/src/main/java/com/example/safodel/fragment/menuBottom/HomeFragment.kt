@@ -8,45 +8,48 @@ import android.os.Handler
 import android.os.Looper
 import android.view.*
 import android.view.animation.DecelerateInterpolator
-import androidx.navigation.fragment.findNavController
-import com.example.safodel.R
-import com.example.safodel.databinding.FragmentHomeBinding
-import com.example.safodel.fragment.BasicFragment
-import androidx.core.view.children
-import androidx.core.view.doOnPreDraw
-import com.example.safodel.ui.main.MainActivity
-import com.takusemba.spotlight.OnSpotlightListener
-import com.takusemba.spotlight.Target
-import com.takusemba.spotlight.Spotlight
-import com.takusemba.spotlight.shape.*
-import android.view.ViewGroup
-import android.widget.*
-import com.example.safodel.retrofit.RetrofitClient
-import com.example.safodel.retrofit.RetrofitInterface
-import com.example.safodel.model.WeatherResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.collections.ArrayList
-import android.view.MenuInflater
+import android.widget.FrameLayout
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
+import androidx.core.view.children
+import androidx.core.view.doOnPreDraw
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.safodel.R
 import com.example.safodel.adapter.HomeViewAdapter
+import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
+import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.WeatherResponse
 import com.example.safodel.model.WeatherTemp
+import com.example.safodel.retrofit.RetrofitClient
+import com.example.safodel.retrofit.RetrofitInterface
+import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.viewModel.IsLearningModeViewModel
 import com.example.safodel.viewModel.LocationViewModel
 import com.example.safodel.viewModel.WeatherViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
-import kotlinx.coroutines.*
+import com.takusemba.spotlight.OnSpotlightListener
+import com.takusemba.spotlight.Spotlight
+import com.takusemba.spotlight.Target
+import com.takusemba.spotlight.shape.Circle
+import com.takusemba.spotlight.shape.RoundedRectangle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.droidsonroids.gif.GifImageView
-import java.lang.Runnable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -125,28 +128,15 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         imageAnimations()
         imagesDrivingAnimation()
-//        if (getCurrentTime() > 18 || getCurrentTime() < 7) {
-//            configTheme("night")
-//
-//        } else {
-//            configTheme("light")
-//        }
 
         configTheme("light")
         val coroutineScope = CoroutineScope(Dispatchers.Default)
         coroutineScope.launch {
-
-            async {
-                // try to get the height of status bar and then margin top
-                val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
-                while (toolbarHeight.topMargin == 0)
-                    toolbarHeight.topMargin = mainActivity.getStatusHeight()
-                toolbar.layoutParams = toolbarHeight
-            }.await()
-
-            withContext(Dispatchers.Main){
-
-            }
+            // try to get the height of status bar and then margin top
+            val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
+            while (toolbarHeight.topMargin == 0)
+                toolbarHeight.topMargin = mainActivity.getStatusHeight()
+            toolbar.layoutParams = toolbarHeight
         }
 
         binding.toolbar.simpleToolbar.fitsSystemWindows = false
