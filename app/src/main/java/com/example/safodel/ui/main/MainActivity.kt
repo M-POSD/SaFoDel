@@ -312,7 +312,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun openDrawer() {
         drawer.openDrawer(GravityCompat.START)
-        if(!isGetLocation) getLastLocation()
+        if (!isGetLocation) getLastLocation()
     }
 
     private fun closeDrawer() {
@@ -642,7 +642,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             arrayOf(
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ),permissionsID
+            ), permissionsID
         )
 
     }
@@ -660,7 +660,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == permissionsID) {
-            if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_DENIED){
+            if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_DENIED) {
                 getLastLocation()
             }
         }
@@ -669,25 +669,52 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun getLastLocation() {
         if (checkPermission()) {
             if (isLocationEnabled()) {
-                fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        if (task.result != null) {
-                            val location: Location = task.result as Location
-                            val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
-                            viewModel.setUserLocation(userLocation)
-                            toastMain.setText("task.isSuccessful")
-                            toastMain.show()
+                val locationRequest = LocationRequest.create() // Create location request.
+                locationRequest.interval = 60000
+                locationRequest.fastestInterval = 5000
+                locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 
-                        } else {
-                            toastMain.setText(getString(R.string.click_left_menu))
-                            toastMain.show()
+                val locationCallback: LocationCallback = object : LocationCallback() {
+                    override fun onLocationResult(locationResult: LocationResult) {
+                        for (location in locationResult.locations) {
+                            if (location != null) {
+
+                                val userLocation =
+                                    UserLocation(
+                                        location.latitude.toFloat(),
+                                        location.longitude.toFloat()
+                                    )
+                                viewModel.setUserLocation(userLocation)
+                                toastMain.setText("task.isSuccessful")
+                                toastMain.show()
+                                isGetLocation = true
+                            } else {
+                                toastMain.setText(getString(R.string.click_left_menu))
+                                toastMain.show()
+                            }
                         }
-                    } else {
-                        toastMain.setText("task.isNotSuccessful")
-                        toastMain.show()
                     }
-                    isGetLocation = true
                 }
+
+                // Create a location provider client and send request for getting location.
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
+
+//                fusedLocationProviderClient!!.lastLocation.addOnSuccessListener { location ->
+//                    if (location != null) {
+//                        val userLocation =
+//                            UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
+//                        viewModel.setUserLocation(userLocation)
+//                        toastMain.setText("task.isSuccessful")
+//                        toastMain.show()
+//                        isGetLocation = true
+//                    } else {
+//                        toastMain.setText(getString(R.string.click_left_menu))
+//                        toastMain.show()
+//
+//                    }
+//                }
+
             } else {
                 toastMain.setText(getString(R.string.ask_allow_service))
                 toastMain.show()
@@ -696,5 +723,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             requestPermission()
         }
     }
-
 }
