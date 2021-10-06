@@ -659,13 +659,19 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
      */
     private fun removeAlertBubble() {
         if (alertClickTimes > 0) {
-            markerViewManager.removeMarker(alertMarkerBubble)
-            alertClickTimes--
+            if(this::alertMarkerBubble.isInitialized){
+                markerViewManager.removeMarker(alertMarkerBubble)
+                alertClickTimes--
+            }
+
         }
 
         if (accidentClickTimes > 0) {
-            markerViewManager.removeMarker(accidentMarkerBubble)
-            accidentClickTimes--
+            if(this::accidentMarkerBubble.isInitialized){
+                markerViewManager.removeMarker(accidentMarkerBubble)
+                accidentClickTimes--
+            }
+
         }
     }
 
