@@ -12,19 +12,15 @@ import com.example.safodel.R
 import com.example.safodel.databinding.FragmentHeroFeatureBinding
 import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.viewModel.IsLearningModeViewModel
-import com.example.safodel.viewModel.WeatherViewModel
-import java.util.*
 
 class HomeViewAdapter(val context: Context, private val parentFragment: Fragment):
     RecyclerView.Adapter<HomeViewAdapter.ViewHolder>() {
-//    private lateinit var model: WeatherViewModel
     private lateinit var learningModeModel: IsLearningModeViewModel
     private lateinit var mainActivity: MainActivity
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: FragmentHeroFeatureBinding =
             FragmentHeroFeatureBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        model = ViewModelProvider(parentFragment.requireActivity()).get(WeatherViewModel::class.java)
         learningModeModel = ViewModelProvider(parentFragment.requireActivity()).get(IsLearningModeViewModel::class.java)
         mainActivity = parentFragment.activity as MainActivity
         return ViewHolder(binding)
@@ -38,27 +34,6 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
             0 -> {
                 setVisibility(viewHolder,0)
             }
-
-//            // 1 -> display current weather, time, traffic info
-//            1 -> {
-//                setVisibility(viewHolder,1)
-//                val calendar = Calendar.getInstance()
-//                val hour = calendar.get(Calendar.HOUR_OF_DAY).toString()
-//                var minute = calendar.get(Calendar.MINUTE).toString()
-//                if(minute.length == 1) {
-//                    minute = "0$minute"
-//                }
-//                viewHolder.binding.heroFeatureInfo2.genericInfoDescription1.text =
-//                    context.getString(R.string.current_time) +
-//                    "$hour : $minute"
-//
-//                // live data to change the weather in line with the one in home page
-//                model.getWeather().observe(parentFragment.viewLifecycleOwner, { t ->
-//                    viewHolder.binding.heroFeatureInfo2.genericInfoDescription2.text =
-//                        context.getString(R.string.current_weather) + t
-//                })
-//
-//            }
 
             // 2 -> map page info intro with navigation
             1 -> {
@@ -132,7 +107,5 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
         })
     }
 
-    class ViewHolder(binding: FragmentHeroFeatureBinding) : RecyclerView.ViewHolder(binding.root) {
-        val binding: FragmentHeroFeatureBinding = binding
-    }
+    class ViewHolder(val binding: FragmentHeroFeatureBinding) : RecyclerView.ViewHolder(binding.root)
 }

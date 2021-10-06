@@ -16,9 +16,8 @@ class WelcomeSafoDelFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWelcomeSafodelBinding.inflate(inflater, container, false)
-//        configAllAnimations()
         return binding.root
     }
 
@@ -28,9 +27,9 @@ class WelcomeSafoDelFragment: Fragment() {
 
     // confi all animations in the start activity
     private fun configAllAnimations() {
-        var objectAnimator1: ObjectAnimator =
+        val objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.welcomeInformation1.image, "translationX", 100f, 0f)
-        var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.welcomeInformation1.image, "alpha", 0f, 1f)
+        val objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.welcomeInformation1.image, "alpha", 0f, 1f)
 
         objectAnimator1.duration = 1300
         objectAnimator2.duration = 1300

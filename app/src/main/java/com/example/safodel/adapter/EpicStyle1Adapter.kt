@@ -2,7 +2,6 @@ package com.example.safodel.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Paint
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -101,7 +100,5 @@ class EpicStyle1Adapter(val context: Context, group1Data: MutableList<GroupCard1
 
     override fun getItemCount() = group1.size
 
-    class ViewHolder(binding: FragmentEpicStyle1Binding) : RecyclerView.ViewHolder(binding.root) {
-        val binding: FragmentEpicStyle1Binding = binding
-    }
+    class ViewHolder(val binding: FragmentEpicStyle1Binding) : RecyclerView.ViewHolder(binding.root)
 }

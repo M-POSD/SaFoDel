@@ -2,12 +2,10 @@ package com.example.safodel.fragment.menuBottom
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
-import android.graphics.Point
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
 import androidx.navigation.fragment.findNavController
@@ -29,10 +27,8 @@ import com.example.safodel.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 import kotlin.collections.ArrayList
 import android.view.MenuInflater
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
@@ -42,14 +38,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.IsLearningModeViewModel
 import com.example.safodel.viewModel.LocationViewModel
 import com.example.safodel.viewModel.WeatherViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
-import com.mapbox.android.core.permissions.PermissionsManager
 import kotlinx.coroutines.*
 import pl.droidsonroids.gif.GifImageView
 import java.lang.Runnable
@@ -60,8 +54,8 @@ import kotlin.math.roundToInt
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
     PermissionsListener {
     // get weather
-    private val APP_ID = "898ef19b846722554449f6068e7c7253"
-    private val UNITS = "metric"
+    private val appId = "898ef19b846722554449f6068e7c7253"
+    private val units = "metric"
     private var lat = -37.876823f
     private var lon = 145.045837f
 
@@ -175,9 +169,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("onViewCreated", isBeginnerMode.toString())
         view.doOnPreDraw {
-            Log.d("view.doOnPreDraw", isBeginnerMode.toString())
             if (isBeginnerMode) {
                 learningModeModel.setLearningMode(true)
                 startSpotLight()
@@ -242,36 +234,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun rainingAnimation() {
         homePageImage.vusik.setImages(rainingList).start()
         homePageImage.vusik.startNotesFall()
-//        if (isInitialRainingAnimation) {
-//            isInitialRainingAnimation = false
-//            isRaining = true
-//            homePageImage.vusik.setImages(rainingList).start()
-//            homePageImage.vusik.startNotesFall()
-//        } else {
-//            if (isRaining) {
-//                isRaining = false
-//                homePageImage.vusik.pauseNotesFall()
-//                homePageImage.vusik.visibility = View.INVISIBLE
-//            } else {
-//                isRaining = true
-//                homePageImage.vusik.resumeNotesFall()
-//                homePageImage.vusik.visibility = View.VISIBLE
-//            }
-//        }
     }
 
     // add animation for the individual image
     private fun imageAnimations() {
-        var objectAnimator1: ObjectAnimator =
+        val objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.backpack,
                 "translationX",
                 -100f,
                 homePageImage.backpack.translationX
             )
-        var objectAnimator2: ObjectAnimator =
+        val objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.backpack, "alpha", 0f, 1f)
-        var objectAnimator3: ObjectAnimator =
+        val objectAnimator3: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.helmet,
                 "translationY",
@@ -279,9 +255,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.helmet.translationY
             )
 
-        var objectAnimator4: ObjectAnimator =
+        val objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.helmet, "alpha", 0f, 1f)
-        var objectAnimator5: ObjectAnimator =
+        val objectAnimator5: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.headlight, "alpha", 0f, 1f)
                 .setDuration(500)
 
@@ -298,7 +274,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // add driving functionalities for images
     private fun imagesDrivingAnimation() {
-        var objectAnimator1: ObjectAnimator =
+        val objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.images2,
                 "translationX",
@@ -306,7 +282,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 4 * (view?.width ?: 1500) / 5.toFloat()
             )
 
-        var objectAnimator2: ObjectAnimator =
+        val objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.images2,
                 "translationX",
@@ -323,35 +299,24 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
     }
 
-    // record the button position clicked to match the tab selected next page
-    private fun recordPosition(position: Int) {
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            "epicPosition", Context.MODE_PRIVATE
-        )
-
-        val spEditor = sharedPref.edit()
-        spEditor.putString("epicPosition", "" + position)
-        spEditor.apply()
-    }
-
     // config onClickListener for navigation
     private fun configOnClickListener() {
-        homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardLeft.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic1Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardRight.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic2Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardLeft.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic3Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardRight.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic4Fragment, null, navAnimationLeftToRight())
         }
@@ -380,12 +345,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     // start all animation
-    private fun startAnimation(mode: String) {
-        when (mode) {
-            "light" -> animatorSetLight.start()
-            "night" -> animatorSetNight.start()
-        }
-
+    private fun startAnimation() {
+        animatorSetLight.start()
         homePageImage.images.setOnClickListener {
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning) {
                 homePageImage.images.visibility = View.INVISIBLE
@@ -583,13 +544,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         if (this is ViewGroup) children.forEach { child -> child.setAllEnabled(enabled) }
     }
 
-   private fun View.getLocationOnScreen(): Point
-    {
-        val location = IntArray(2)
-        this.getLocationOnScreen(location)
-        return Point(location[0],location[1])
-    }
-
     private fun isAllEnable(isEnable: Boolean) {
         requireActivity().findViewById<View>(R.id.homeCoordinatorLayout1).setAllEnabled(isEnable)
         homePageImage.homepageAppBar.setAllEnabled(isEnable)
@@ -605,8 +559,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(
             lat.toString(),
             lon.toString(),
-            APP_ID,
-            UNITS
+            appId,
+            units
         )
 
         callAsync.enqueue(object : Callback<WeatherResponse?> {
@@ -625,58 +579,42 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     val pressure = weatherResponse.main.pressure
                     val humidity = weatherResponse.main.humidity
                     var windSpeed = weatherResponse.wind.speed
-                    windSpeed = Math.round(windSpeed * 2.237 * 100.0) / 100.0f
+                    windSpeed = (windSpeed * 2.237 * 100.0).roundToInt() / 100.0f
 
-
-                    if (weatherList != null) {
-                        val weather = weatherList[0].main
-                        if (weather == "Rain") {
-                            rainingAnimation()
-                        }
-                        Log.d("currentWeather", weather)
-                        mainActivity.keepWeatherSharePrefer(weather)
-                        weatherModel.setWeather(
-                            WeatherTemp(
-                                location,
-                                weather,
-                                temp,
-                                pressure,
-                                humidity,
-                                windSpeed
-                            )
-                        )
+                    val weather = weatherList[0].main
+                    if (weather == "Rain") {
+                        rainingAnimation()
                     }
-                } else {
-                    Log.i("Error ", "Response failed")
+                    mainActivity.keepWeatherSharePrefer(weather)
+                    weatherModel.setWeather(
+                        WeatherTemp(
+                            location,
+                            weather,
+                            temp,
+                            pressure,
+                            humidity,
+                            windSpeed
+                        )
+                    )
                 }
             }
 
             override fun onFailure(call: Call<WeatherResponse?>?, t: Throwable) {
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.weather_null), Toast.LENGTH_SHORT).show()
             }
         })
     }
-
-    // get current hour
-    private fun getCurrentTime(): Int {
-        val calendar = Calendar.getInstance()
-        return calendar.get(Calendar.HOUR_OF_DAY)
-    }
-
     // theme based on light or night
     private fun configTheme(mode: String) {
         when (mode) {
             "light" -> {
                 homePageImage.homepageAppBar.setBackgroundResource(R.color.white)
                 homePageImage.headlight.visibility = View.INVISIBLE
-//                homePageImage.homepageAppBar.setBackgroundResource(R.drawable.bluesky_snow_gradient)
                 homePageImage.backpack.alpha = 0f
                 homePageImage.backpack.setImageResource(R.drawable.driver_backpack_home)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
-                // homePageImage.groundForDriver.visibility = View.VISIBLE
-                startAnimation("light")
-//                setToolbarLightMode(toolbar)
+                startAnimation()
                 setToolbarBasic(toolbar)
             }
         }
@@ -707,27 +645,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         spEditor.apply()
     }
 
-    /**
-     * get the previous checkbox clicked by the user
-     */
-    private fun getViewPagerPosition(): Int {
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            "position",
-            Context.MODE_PRIVATE
-        )
-
-        return sharedPref.getInt("position", -1)
-    }
-
-    suspend fun runViewPager() {
-        delay(6000L)
-        if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
-            homepageButtonLayout.viewPager2Home.currentItem -= 4
-        } else {
-            homepageButtonLayout.viewPager2Home.currentItem += 1
-        }
-    }
-
+    @SuppressLint("CutPasteId")
     private fun configScrollingViewActionCapture(numTarget:Int, view: View, spotLight: Spotlight) {
         when(numTarget) {
             3 -> {

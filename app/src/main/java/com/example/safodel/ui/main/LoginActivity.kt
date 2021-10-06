@@ -36,19 +36,21 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 val editor = pref.edit()
                 wrongCount++
-                if(wrongCount < 7) {
-                    toast.setText("account or password is invalid")
-                    toast.show()
-                }
-                else if(wrongCount >= 7 && wrongCount < 10){
-                    toast.setText("Last " + (10-wrongCount) +" chances.")
-                    toast.show()
-                }
-                else if(wrongCount == 10){
-                    editor.putBoolean("enabled",false)
-                    editor.apply()
-                    binding.passwordEdit.isEnabled = false
-                    ExplosionField.attach2Window(this).explode(binding.login)
+                when {
+                    wrongCount < 7 -> {
+                        toast.setText("account or password is invalid")
+                        toast.show()
+                    }
+                    wrongCount in 7..9 -> {
+                        toast.setText("Last " + (10-wrongCount) +" chances.")
+                        toast.show()
+                    }
+                    wrongCount == 10 -> {
+                        editor.putBoolean("enabled",false)
+                        editor.apply()
+                        binding.passwordEdit.isEnabled = false
+                        ExplosionField.attach2Window(this).explode(binding.login)
+                    }
                 }
             }
         }

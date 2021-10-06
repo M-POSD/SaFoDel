@@ -1,7 +1,6 @@
 package com.example.safodel.repository
 
 import android.app.Application
-import android.util.Log
 import androidx.annotation.WorkerThread
 import com.example.safodel.dao.TimeEntryWithQuizResultDAO
 import com.example.safodel.database.QuizDatabase
@@ -10,8 +9,8 @@ import com.example.safodel.entity.TimeEntry
 import com.example.safodel.entity.TimeEntryWithQuizResult
 import kotlinx.coroutines.flow.Flow
 
-class TimeEntryWithQuizResultRepository(private val application: Application) {
-    var timeEntryWithQuizResultDAO: TimeEntryWithQuizResultDAO
+class TimeEntryWithQuizResultRepository(application: Application) {
+    private var timeEntryWithQuizResultDAO: TimeEntryWithQuizResultDAO
     init{
         val db: QuizDatabase = QuizDatabase.getInstance(application)
         timeEntryWithQuizResultDAO = db.timeEntryWithQuizResultDAO()

@@ -3,7 +3,6 @@ package com.example.safodel.fragment.menuBottom
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,6 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.R
 import com.example.safodel.databinding.DetailCardChecklistBinding
 import com.example.safodel.databinding.FragmentChecklistBinding
@@ -286,9 +283,9 @@ class CheckListFragment :
      * set the image animation from transparent to visible
      */
     private fun imageAnimation(imageView: ImageView) {
-        var objectAnimator: ObjectAnimator =
+        val objectAnimator: ObjectAnimator =
             ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f).setDuration(500)
-        var animatorSet = AnimatorSet()
+        val animatorSet = AnimatorSet()
         animatorSet.play(objectAnimator)
         animatorSet.start()
     }

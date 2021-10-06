@@ -3,60 +3,49 @@ package com.example.safodel.ui.main
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Rect
 import android.location.Location
 import android.location.LocationManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.ajithvgiri.searchdialog.OnSearchItemSelected
-import com.ajithvgiri.searchdialog.SearchListItem
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
 import com.example.safodel.model.UserLocation
 import com.example.safodel.model.WeatherTemp
-import com.example.safodel.viewModel.HistoryDetailViewModel
 import com.example.safodel.viewModel.LocationViewModel
-import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import com.google.android.gms.location.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mapbox.maps.extension.style.expressions.dsl.generated.length
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
-import timber.log.Timber
 import java.util.*
-import java.util.jar.Manifest
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSelected {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    /**
+     *  Sourcecode of get user location part
+     *  https://www.youtube.com/watch?v=vard0CUTLbA&ab_channel=doctorcode
+     */
+
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
@@ -67,10 +56,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
     private lateinit var navHostFragment: NavHostFragment
     private var isGetLocation = false
 
-    private val PERMISSION_ID = 1000
+    private val permissionsID = 1000
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
-    //    lateinit var userLocation: UserLocation
     private val viewModel: LocationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,7 +120,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         ) {
             MaterialDialog(this).show {
                 message(
-                    text = "${getString(R.string.check_leave)}" +
+                    text = getString(R.string.check_leave) +
                             "\n${getString(R.string.warning_msg)}"
                 )
                 positiveButton(R.string.no)
@@ -178,7 +166,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
 
         // give user three seconds to leave without re-notification
         Handler(Looper.getMainLooper()).postDelayed(
-            Runnable {
+            {
                 doubleBackToExitPressedOnce = false
             }, 3000
         )
@@ -196,7 +184,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
             if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
                     message(
-                        text = "${getString(R.string.check_leave)}" +
+                        text = getString(R.string.check_leave) +
                                 "\n${getString(R.string.warning_msg)}"
                     )
                     positiveButton(R.string.no)
@@ -269,7 +257,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
             if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
                     message(
-                        text = "${getString(R.string.check_leave)}" +
+                        text = getString(R.string.check_leave) +
                                 "\n${getString(R.string.warning_msg)}"
                     )
                     positiveButton(R.string.no)
@@ -327,7 +315,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         if(!isGetLocation) getLastLocation()
     }
 
-    fun closeDrawer() {
+    private fun closeDrawer() {
         drawer.closeDrawer(GravityCompat.START)
     }
 
@@ -398,7 +386,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
      */
     fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
         val checkbox = "checkbox$checkbox_num"
-        Log.d("keepCheckboxSharePrefer", "  $checkbox: $isChecked")
         val sharedPref = this.applicationContext.getSharedPreferences(
             checkbox, MODE_PRIVATE
         )
@@ -417,8 +404,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
             checkbox,
             Context.MODE_PRIVATE
         )
-
-        Log.d("getCheckboxSharePrefer", "$checkbox: ${sharedPref.getBoolean(checkbox, false)}")
         return sharedPref.getBoolean(checkbox, false)
     }
 
@@ -442,7 +427,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         bottomNavigationView.menu.getItem(index).isChecked = true
     }
 
-    fun setMapLearningMode() {
+    private fun setMapLearningMode() {
         val sf = getPreferences(Context.MODE_PRIVATE)
         val editor = sf.edit()
         editor.putBoolean("mapLeaningMode", true)
@@ -539,12 +524,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
      * Recreate the activity
      */
     private fun recreateActivity() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            super.recreate()
-        } else {
-            finish()
-            startActivity(intent)
-        }
+        super.recreate()
     }
 
     /**
@@ -562,20 +542,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
     }
 
     /**
-     * get the weather store in sharedPreference
-     */
-    fun getWeatherSharePrefer(): String? {
-        val weather = "weather"
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            weather,
-            Context.MODE_PRIVATE
-        )
-        return sharedPref.getString(weather, "Placeholder")
-    }
-
-    /**
      * update the menu footer information
      */
+    @SuppressLint("SetTextI18n")
     fun updateMenuFooterInfo(weatherObject: WeatherTemp) {
         when (weatherObject.weather) {
             "Clear" -> {
@@ -675,13 +644,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
             arrayOf(
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ), PERMISSION_ID
+            ),permissionsID
         )
 
     }
 
     private fun isLocationEnabled(): Boolean {
-        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
@@ -692,10 +661,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_ID) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                Log.d("onRequestPermissionsResult", "debug purpose")
-            } else {
+        if (requestCode == permissionsID) {
+            if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_DENIED){
                 getLastLocation()
             }
         }
@@ -705,17 +672,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         if (checkPermission()) {
             if (isLocationEnabled()) {
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-                    var location: Location? = task.result as Location
-                    if (location == null) {
-                        toastMain.setText("Unable to get the current location")
-                        toastMain.show()
-
-                    } else {
-                        val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
-                        viewModel.setUserLocation(userLocation)
-                        Log.d("getLastLocation", "location: ${location.latitude}, ${location.longitude}")
-                        isGetLocation = true
-                    }
+                    val location: Location = task.result as Location
+                    val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
+                    viewModel.setUserLocation(userLocation)
+                    isGetLocation = true
                 }
             } else {
                 toastMain.setText("Please enable your location service")
@@ -726,7 +686,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnSearchItemSele
         }
     }
 
-    override fun onClick(position: Int, searchListItem: SearchListItem) {
-
-    }
 }

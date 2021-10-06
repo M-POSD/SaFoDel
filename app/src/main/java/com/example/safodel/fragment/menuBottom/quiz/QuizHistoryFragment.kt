@@ -1,5 +1,6 @@
 package com.example.safodel.fragment.menuBottom.quiz
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -122,6 +123,7 @@ class QuizHistoryFragment :
     /**
      * display the all details for the specific quiz result
      */
+    @SuppressLint("SetTextI18n")
     private fun configQuizResultView(num: Int, quizResult: QuizResult) {
         val question = getString(R.string.question)
         val questionHeading = getString(quizResult.question_heading)
@@ -135,38 +137,38 @@ class QuizHistoryFragment :
 
         when(num) {
             1-> {
-                binding.historyDetail.q1.qHeading.text = "$question"
-                binding.historyDetail.q1.qDesc.text = "$questionHeading"
-                binding.historyDetail.q1.infoHeading.text = "$info"
-                binding.historyDetail.q1.infoDesc.text = "$questionInfo"
+                binding.historyDetail.q1.qHeading.text = question
+                binding.historyDetail.q1.qDesc.text = questionHeading
+                binding.historyDetail.q1.infoHeading.text = info
+                binding.historyDetail.q1.infoDesc.text = questionInfo
                 binding.historyDetail.q1.isCorrectHeading.text = "$correctAnswer  $isCorrect"
             }
             2-> {
-                binding.historyDetail.q2.qHeading.text = "$question"
-                binding.historyDetail.q2.qDesc.text = "$questionHeading"
-                binding.historyDetail.q2.infoHeading.text = "$info"
-                binding.historyDetail.q2.infoDesc.text = "$questionInfo"
+                binding.historyDetail.q2.qHeading.text = question
+                binding.historyDetail.q2.qDesc.text = questionHeading
+                binding.historyDetail.q2.infoHeading.text = info
+                binding.historyDetail.q2.infoDesc.text = questionInfo
                 binding.historyDetail.q2.isCorrectHeading.text = "$correctAnswer  $isCorrect"
             }
             3-> {
-                binding.historyDetail.q3.qHeading.text = "$question"
-                binding.historyDetail.q3.qDesc.text = "$questionHeading"
-                binding.historyDetail.q3.infoHeading.text = "$info"
-                binding.historyDetail.q3.infoDesc.text = "$questionInfo"
+                binding.historyDetail.q3.qHeading.text = question
+                binding.historyDetail.q3.qDesc.text = questionHeading
+                binding.historyDetail.q3.infoHeading.text = info
+                binding.historyDetail.q3.infoDesc.text = questionInfo
                 binding.historyDetail.q3.isCorrectHeading.text = "$correctAnswer  $isCorrect"
             }
             4-> {
-                binding.historyDetail.q4.qHeading.text = "$question"
-                binding.historyDetail.q4.qDesc.text = "$questionHeading"
-                binding.historyDetail.q4.infoHeading.text = "$info"
-                binding.historyDetail.q4.infoDesc.text = "$questionInfo"
+                binding.historyDetail.q4.qHeading.text = question
+                binding.historyDetail.q4.qDesc.text = questionHeading
+                binding.historyDetail.q4.infoHeading.text = info
+                binding.historyDetail.q4.infoDesc.text = questionInfo
                 binding.historyDetail.q4.isCorrectHeading.text = "$correctAnswer  $isCorrect"
             }
             5-> {
-                binding.historyDetail.q5.qHeading.text = "$question"
-                binding.historyDetail.q5.qDesc.text = "$questionHeading"
-                binding.historyDetail.q5.infoHeading.text = "$info"
-                binding.historyDetail.q5.infoDesc.text = "$questionInfo"
+                binding.historyDetail.q5.qHeading.text = question
+                binding.historyDetail.q5.qDesc.text = questionHeading
+                binding.historyDetail.q5.infoHeading.text = info
+                binding.historyDetail.q5.infoDesc.text = questionInfo
                 binding.historyDetail.q5.isCorrectHeading.text = "$correctAnswer  $isCorrect"
             }
         }

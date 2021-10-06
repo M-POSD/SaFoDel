@@ -137,19 +137,6 @@
         app:layout_constraintTop_toTopOf="@+id/mapView"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        mapbox:fabSize="mini"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/white"
-        mapbox:backgroundTint="@color/white"
-        android:contentDescription="desc"
-        android:src="@drawable/baseline_gps_fixed_black_36"
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatButtonNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -160,6 +147,19 @@
         mapbox:backgroundTint="@color/white"
         android:contentDescription="desc"
         android:src="@drawable/baseline_assistant_direction_black_36"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        mapbox:fabSize="mini"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/white"
+        mapbox:backgroundTint="@color/white"
+        android:contentDescription="desc"
+        android:src="@drawable/baseline_gps_fixed_black_36"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
