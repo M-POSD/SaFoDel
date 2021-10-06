@@ -8,8 +8,6 @@
 
     <include android:id="@+id/hero_feature_info1"
         layout="@layout/hero_feature_info1"/>
-    <include android:id="@+id/hero_feature_info2"
-        layout="@layout/hero_feature_info2"/>
     <include android:id="@+id/hero_feature_info3"
         layout="@layout/hero_feature_info3"/>
     <include android:id="@+id/hero_feature_info4"
