@@ -670,13 +670,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (checkPermission()) {
             if (isLocationEnabled()) {
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-                    val location: Location = task.result as Location
-                    val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
-                    viewModel.setUserLocation(userLocation)
+                    if (task.isSuccessful) {
+                        if (task.result != null) {
+                            val location: Location = task.result as Location
+                            val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
+                            viewModel.setUserLocation(userLocation)
+
+                        } else {
+                            toastMain.setText(getString(R.string.click_left_menu))
+                            toastMain.show()
+                        }
+                    }
                     isGetLocation = true
                 }
             } else {
-                toastMain.setText("Please enable your location service")
+                toastMain.setText(getString(R.string.ask_allow_service))
                 toastMain.show()
             }
         } else {

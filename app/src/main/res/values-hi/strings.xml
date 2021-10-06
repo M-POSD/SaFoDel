@@ -286,4 +286,6 @@
     <string name="kms_per_hour">किमी/घंटा</string>
     <string name="next">अगला</string>
     <string name="close_btn">बंद करे</string>
+    <string name="ask_allow_service">कृपया अपनी स्थान सेवा सक्षम करें</string>
+    <string name="click_left_menu">स्थान लोड करना पुनः आरंभ करने के लिए बाएँ मेनू पर क्लिक करें।</string>
 </resources>
