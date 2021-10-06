@@ -12,7 +12,7 @@ class HistoryDetailViewModel: ViewModel() {
         return result
     }
 
-    fun setResult(timeEntryWithQuizResult: TimeEntryWithQuizResult?) {
+    fun setResult(timeEntryWithQuizResult: TimeEntryWithQuizResult) {
         result.value = timeEntryWithQuizResult
     }
 }
