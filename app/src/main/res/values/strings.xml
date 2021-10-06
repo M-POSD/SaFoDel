@@ -207,11 +207,11 @@
     <string name="false_text">False</string>
 
     <string name="question1_heading">What is the max speed you can ride your e-bike?</string>
-    <string name="question1_option1">25 KM/H</string>
-    <string name="question1_option2">30 KM/H</string>
-    <string name="question1_option3">35 KM/H</string>
-    <string name="question1_option4">50 KM/H</string>
-    <string name="question1_information">The Australian government has set a strict speed limit of 25 Km/h on e-bikes</string>
+    <string name="question1_option1">25 km/h</string>
+    <string name="question1_option2">30 km/h</string>
+    <string name="question1_option3">35 km/h</string>
+    <string name="question1_option4">50 km/h</string>
+    <string name="question1_information">The Australian government has set a strict speed limit of 25 km/h on e-bikes</string>
 
     <string name="question2_heading">Even if a road has a bike lane, can you ignore riding on it?</string>
     <string name="question2_information">Ride in bike lanes where they are provided, unless impractical to do so</string>

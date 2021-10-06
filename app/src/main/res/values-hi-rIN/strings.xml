@@ -280,4 +280,8 @@
     <string name="road_sign_heading">जानने के लिए कुछ उपयोगी सड़क संकेतं</string>
     <string name="back_to_exit_warning">कृपया बाहर निकलने के लिए फिर से वापस क्लिक करें</string>
     <string name="v3_description">यह समेकित सुरक्षा जानकारी, साइकिल चलाने के नियम और टिप्स प्रदान करने के साथ-साथ आपको विक्टोरिया में साइकिल दुर्घटनाओं के बारे में जानकारी प्रदान करने में मदद करता है।</string>
+
+    <string name="weather_null">मौसम डेटा प्राप्त करने में विफल</string>
+    <string name="map_null">मानचित्र डेटा प्राप्त करने में विफल</string>
+    <string name="trend_null">रुझान डेटा प्राप्त करने में विफल</string>
 </resources>
