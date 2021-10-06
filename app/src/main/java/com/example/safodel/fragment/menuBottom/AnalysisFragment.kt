@@ -247,6 +247,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         bar.xAxis.setDrawGridLines(false)
         bar.axisRight.isEnabled = false
         bar.xAxis.isGranularityEnabled = true
+        bar.axisLeft.isGranularityEnabled = true
         bar.xAxis.position = XAxis.XAxisPosition.BOTTOM
         bar.axisLeft.valueFormatter = IntegerFormatter()
         bar.xAxis.valueFormatter = StreetNameFormatter(bar,map)
