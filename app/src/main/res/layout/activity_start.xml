@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:attrs="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:attrs="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:weightSum="10"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="10">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/start_viewPager2"
@@ -15,59 +15,103 @@
         android:background="@color/snow" />
 
     <LinearLayout
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3.4"
         android:background="@color/snow"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="10dp">
 
-        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-            android:id="@+id/worm_dots_indicator"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            style="@style/worm_dot_indicator"
-            />
+            android:orientation="vertical">
 
-<!--        <include layout="@layout/horizontal_scrolling_icon"/>-->
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/worm_dots_indicator"
+                style="@style/worm_dot_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp" />
 
-        <include
-            android:id="@+id/start_button"
-            layout="@layout/large_button" />
+            <!--        <include layout="@layout/horizontal_scrolling_icon"/>-->
 
-        <TextView
-            android:id="@+id/learning_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <include
+                android:id="@+id/start_button"
+                layout="@layout/large_button" />
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/learning_mode"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_gravity="center"-->
+            <!--            android:gravity="center"-->
+            <!--            android:clickable="true"-->
+            <!--            android:layout_marginHorizontal="10dp"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:alpha="0"-->
+            <!--            style="@style/textStyle14_black"-->
+            <!--            android:text="@string/learning_mode"-->
+            <!--            android:textSize="12dp"-->
+            <!--            app:cornerRadius="50dp"-->
+            <!--            android:focusable="true" />-->
+            <!--        <TextView-->
+            <!--            android:id="@+id/setting_languages"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_gravity="center"-->
+            <!--            android:gravity="center"-->
+            <!--            android:clickable="true"-->
+            <!--            android:layout_marginHorizontal="10dp"-->
+            <!--            android:layout_marginTop="5dp"-->
+            <!--            android:alpha="0"-->
+            <!--            style="@style/textStyle14_black"-->
+            <!--            android:text="@string/select_language"-->
+            <!--            android:textSize="12dp"-->
+            <!--            app:cornerRadius="50dp"-->
+            <!--            android:focusable="true" />-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:clickable="true"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:alpha="0"
-            style="@style/textStyle14_black"
-            android:text="@string/learning_mode"
-            android:textSize="12dp"
-            app:cornerRadius="50dp"
-            android:focusable="true" />
-        <TextView
-            android:id="@+id/setting_languages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:clickable="true"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="5dp"
-            android:alpha="0"
-            style="@style/textStyle14_black"
-            android:text="@string/select_language"
-            android:textSize="12dp"
-            app:cornerRadius="50dp"
-            android:focusable="true" />
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/learning_mode"
+                style="@style/textStyle14_black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:alpha="0"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/learning_mode"
+                app:cornerRadius="50dp" />
+
+            <TextView
+                android:id="@+id/setting_languages"
+                style="@style/textStyle14_black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:alpha="0"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/select_language"
+                app:cornerRadius="50dp" />
+        </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

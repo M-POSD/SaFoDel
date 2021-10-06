@@ -44,15 +44,15 @@ class StartActivity : AppCompatActivity() {
         configOnClickListener()
 
 
-        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(
-            R.drawable.empty_12, 0,
-            R.drawable.ic_baseline_navigate_next_24_gray, 0
-        )
-
-        binding.settingLanguages.setCompoundDrawablesWithIntrinsicBounds(
-            R.drawable.empty_12, 0,
-            R.drawable.ic_baseline_navigate_next_24_gray, 0
-        )
+//        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(
+//            R.drawable.empty_12, 0,
+//            R.drawable.ic_baseline_navigate_next_24_gray, 0
+//        )
+//
+//        binding.settingLanguages.setCompoundDrawablesWithIntrinsicBounds(
+//            R.drawable.empty_12, 0,
+//            R.drawable.ic_baseline_navigate_next_24_gray, 0
+//        )
 
         AutoSizeConfig.getInstance().isBaseOnWidth = false
 
