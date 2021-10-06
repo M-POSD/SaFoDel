@@ -76,8 +76,8 @@ Follow Mapbox's [docs](https://docs.mapbox.com/help/getting-started/access-token
 | [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize) | Auto size the screen
 | [DotsIndicator](https://github.com/tommybuonomo/dotsindicator) | Material View Pager Dots Indicator
 | [Explosionfield](https://github.com/tyrantgit/ExplosionField)  | Explosive dust effect for views
-| [Material-dialogs](https://github.com/afollestad/material-dialogs) | Create dialog
 | [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)              | A powerful & easy to use chart library for Android
+| [SearchDialog](https://github.com/ajithvgiri/search-dialog) | Create dialog
 | [SmartMaterialSpinner](https://github.com/Chivorns/SmartMaterialSpinner) | Android spinner library
 | [Spotlight](https://github.com/TakuSemba/Spotlight)              | Lights wherever we want
 | [VusikView](https://github.com/dynamitechetan/VusikView)              | An animation Repo
