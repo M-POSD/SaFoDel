@@ -2,12 +2,12 @@ package com.example.safodel.fragment.menuBottom
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
 import androidx.navigation.fragment.findNavController
@@ -32,7 +32,6 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 import android.view.MenuInflater
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
@@ -42,14 +41,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.adapter.HomeViewAdapter
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.IsLearningModeViewModel
 import com.example.safodel.viewModel.LocationViewModel
 import com.example.safodel.viewModel.WeatherViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
-import com.mapbox.android.core.permissions.PermissionsManager
 import kotlinx.coroutines.*
 import pl.droidsonroids.gif.GifImageView
 import java.lang.Runnable
@@ -60,8 +57,8 @@ import kotlin.math.roundToInt
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
     PermissionsListener {
     // get weather
-    private val APP_ID = "898ef19b846722554449f6068e7c7253"
-    private val UNITS = "metric"
+    private val appId = "898ef19b846722554449f6068e7c7253"
+    private val units = "metric"
     private var lat = -37.876823f
     private var lon = 145.045837f
 
@@ -175,9 +172,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("onViewCreated", isBeginnerMode.toString())
         view.doOnPreDraw {
-            Log.d("view.doOnPreDraw", isBeginnerMode.toString())
             if (isBeginnerMode) {
                 learningModeModel.setLearningMode(true)
                 startSpotLight()
@@ -242,36 +237,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun rainingAnimation() {
         homePageImage.vusik.setImages(rainingList).start()
         homePageImage.vusik.startNotesFall()
-//        if (isInitialRainingAnimation) {
-//            isInitialRainingAnimation = false
-//            isRaining = true
-//            homePageImage.vusik.setImages(rainingList).start()
-//            homePageImage.vusik.startNotesFall()
-//        } else {
-//            if (isRaining) {
-//                isRaining = false
-//                homePageImage.vusik.pauseNotesFall()
-//                homePageImage.vusik.visibility = View.INVISIBLE
-//            } else {
-//                isRaining = true
-//                homePageImage.vusik.resumeNotesFall()
-//                homePageImage.vusik.visibility = View.VISIBLE
-//            }
-//        }
     }
 
     // add animation for the individual image
     private fun imageAnimations() {
-        var objectAnimator1: ObjectAnimator =
+        val objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.backpack,
                 "translationX",
                 -100f,
                 homePageImage.backpack.translationX
             )
-        var objectAnimator2: ObjectAnimator =
+        val objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.backpack, "alpha", 0f, 1f)
-        var objectAnimator3: ObjectAnimator =
+        val objectAnimator3: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.helmet,
                 "translationY",
@@ -279,9 +258,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.helmet.translationY
             )
 
-        var objectAnimator4: ObjectAnimator =
+        val objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.helmet, "alpha", 0f, 1f)
-        var objectAnimator5: ObjectAnimator =
+        val objectAnimator5: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.headlight, "alpha", 0f, 1f)
                 .setDuration(500)
 
@@ -298,7 +277,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // add driving functionalities for images
     private fun imagesDrivingAnimation() {
-        var objectAnimator1: ObjectAnimator =
+        val objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.images2,
                 "translationX",
@@ -306,7 +285,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 4 * (view?.width ?: 1500) / 5.toFloat()
             )
 
-        var objectAnimator2: ObjectAnimator =
+        val objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.images2,
                 "translationX",
@@ -336,22 +315,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // config onClickListener for navigation
     private fun configOnClickListener() {
-        homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardLeft.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic1Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardRight.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic2Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardLeft.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic3Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardRight.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic4Fragment, null, navAnimationLeftToRight())
         }
@@ -605,8 +584,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(
             lat.toString(),
             lon.toString(),
-            APP_ID,
-            UNITS
+            appId,
+            units
         )
 
         callAsync.enqueue(object : Callback<WeatherResponse?> {
@@ -625,29 +604,23 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     val pressure = weatherResponse.main.pressure
                     val humidity = weatherResponse.main.humidity
                     var windSpeed = weatherResponse.wind.speed
-                    windSpeed = Math.round(windSpeed * 2.237 * 100.0) / 100.0f
+                    windSpeed = (windSpeed * 2.237 * 100.0).roundToInt() / 100.0f
 
-
-                    if (weatherList != null) {
-                        val weather = weatherList[0].main
-                        if (weather == "Rain") {
-                            rainingAnimation()
-                        }
-                        Log.d("currentWeather", weather)
-                        mainActivity.keepWeatherSharePrefer(weather)
-                        weatherModel.setWeather(
-                            WeatherTemp(
-                                location,
-                                weather,
-                                temp,
-                                pressure,
-                                humidity,
-                                windSpeed
-                            )
-                        )
+                    val weather = weatherList[0].main
+                    if (weather == "Rain") {
+                        rainingAnimation()
                     }
-                } else {
-                    Log.i("Error ", "Response failed")
+                    mainActivity.keepWeatherSharePrefer(weather)
+                    weatherModel.setWeather(
+                        WeatherTemp(
+                            location,
+                            weather,
+                            temp,
+                            pressure,
+                            humidity,
+                            windSpeed
+                        )
+                    )
                 }
             }
 
@@ -669,14 +642,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             "light" -> {
                 homePageImage.homepageAppBar.setBackgroundResource(R.color.white)
                 homePageImage.headlight.visibility = View.INVISIBLE
-//                homePageImage.homepageAppBar.setBackgroundResource(R.drawable.bluesky_snow_gradient)
                 homePageImage.backpack.alpha = 0f
                 homePageImage.backpack.setImageResource(R.drawable.driver_backpack_home)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
-                // homePageImage.groundForDriver.visibility = View.VISIBLE
                 startAnimation("light")
-//                setToolbarLightMode(toolbar)
                 setToolbarBasic(toolbar)
             }
         }
@@ -728,6 +698,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
     }
 
+    @SuppressLint("CutPasteId")
     private fun configScrollingViewActionCapture(numTarget:Int, view: View, spotLight: Spotlight) {
         when(numTarget) {
             3 -> {
