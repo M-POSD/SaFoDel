@@ -24,6 +24,7 @@
             android:scaleX="4"
             android:scaleY="3"
             android:alpha="0.2"
+            android:visibility="invisible"
             android:src="@drawable/rain" />
     </LinearLayout>
 

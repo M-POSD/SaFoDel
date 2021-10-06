@@ -288,4 +288,5 @@
     <string name="close_btn">关闭</string>
     <string name="ask_allow_service">请启用您的定位服务</string>
     <string name="click_left_menu">单击左侧菜单以重新加载位置。</string>
+    <string name="get_weather_successful">成功获取用户位置数据</string>
 </resources>

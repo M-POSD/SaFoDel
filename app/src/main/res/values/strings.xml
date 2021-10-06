@@ -364,6 +364,7 @@
     <string name="ask_allow_service">Please enable your location service</string>
 
     <string name="click_left_menu">Click the left menu to restart loading the location.</string>
+    <string name="get_weather_successful">Get user location data successful</string>
 
 
 </resources>

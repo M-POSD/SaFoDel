@@ -33,6 +33,7 @@ import com.example.safodel.model.WeatherTemp
 import com.example.safodel.viewModel.LocationViewModel
 import com.google.android.gms.location.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomMenu: Menu
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var leftNavigationView: NavigationView
     private lateinit var navHostFragment: NavHostFragment
     private var isGetLocation = false
 
@@ -68,6 +70,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer = binding.drawerLayout
         bottomMenu = binding.bottomNavigation.menu
         bottomNavigationView = binding.bottomNavigation
+        leftNavigationView = binding.leftNavigation
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
@@ -248,8 +251,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Config the left navigation basic settings
      */
     private fun configLeftNavigation() {
-        binding.leftNavigation.setCheckedItem(R.id.left_navigation)
-        binding.leftNavigation.setNavigationItemSelectedListener {
+        leftNavigationView.setCheckedItem(R.id.left_navigation)
+        leftNavigationView.setNavigationItemSelectedListener {
             val menuItem = it
             var isItemSelected = false
 
@@ -330,13 +333,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      */
     fun isBottomNavigationVisible(boolean: Boolean) {
         if (!boolean)
-            binding.bottomNavigation.visibility = View.INVISIBLE
+            bottomNavigationView.visibility = View.INVISIBLE
         else
-            binding.bottomNavigation.visibility = View.VISIBLE
+            bottomNavigationView.visibility = View.VISIBLE
     }
 
     fun bottomNavHeight(): Int {
-        return binding.bottomNavigation.height
+        return bottomNavigationView.height
     }
 
 
@@ -438,10 +441,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * clean the left menu item is selected before
      */
     fun cleanLeftMenuIsChecked() {
-        val numOfItems = binding.leftNavigation.menu.size
+        val numOfItems = leftNavigationView.menu.size
         var times = 0
         while (times < numOfItems) {
-            binding.leftNavigation.menu.getItem(times).isChecked = false
+            leftNavigationView.menu.getItem(times).isChecked = false
             times++
         }
     }
@@ -528,24 +531,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     /**
-     * keep the record of the current weather
-     */
-    fun keepWeatherSharePrefer(currentWeather: String) {
-        val weather = "weather"
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            weather, Context.MODE_PRIVATE
-        )
-
-        val spEditor = sharedPref.edit()
-        spEditor.putString(weather, currentWeather)
-        spEditor.apply()
-    }
-
-    /**
      * update the menu footer information
      */
     @SuppressLint("SetTextI18n")
     fun updateMenuFooterInfo(weatherObject: WeatherTemp) {
+
+        binding.leftNavFooter.currentWeatherIcon.visibility = View.VISIBLE
         when (weatherObject.weather) {
             "Clear" -> {
                 binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear)
@@ -669,58 +660,68 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun getLastLocation() {
         if (checkPermission()) {
             if (isLocationEnabled()) {
-                val locationRequest = LocationRequest.create() // Create location request.
-                locationRequest.interval = 60000
-                locationRequest.fastestInterval = 5000
-                locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
-                val locationCallback: LocationCallback = object : LocationCallback() {
-                    override fun onLocationResult(locationResult: LocationResult) {
-                        for (location in locationResult.locations) {
-                            if (location != null) {
-
-                                val userLocation =
-                                    UserLocation(
-                                        location.latitude.toFloat(),
-                                        location.longitude.toFloat()
-                                    )
-                                viewModel.setUserLocation(userLocation)
-                                toastMain.setText("task.isSuccessful")
-                                toastMain.show()
-                                isGetLocation = true
-                            } else {
-                                toastMain.setText(getString(R.string.click_left_menu))
-                                toastMain.show()
-                            }
-                        }
+                fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                    if (location != null) {
+                        val userLocation =
+                            UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
+                        viewModel.setUserLocation(userLocation)
+                        updateLocation()
+                        isGetLocation = true
+                    } else {
+                        toastMain.setText(getString(R.string.click_left_menu))
+                        toastMain.show()
+                        updateLocation()
                     }
                 }
-
-                // Create a location provider client and send request for getting location.
-                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
-
-//                fusedLocationProviderClient!!.lastLocation.addOnSuccessListener { location ->
-//                    if (location != null) {
-//                        val userLocation =
-//                            UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
-//                        viewModel.setUserLocation(userLocation)
-//                        toastMain.setText("task.isSuccessful")
-//                        toastMain.show()
-//                        isGetLocation = true
-//                    } else {
-//                        toastMain.setText(getString(R.string.click_left_menu))
-//                        toastMain.show()
-//
-//                    }
-//                }
-
             } else {
                 toastMain.setText(getString(R.string.ask_allow_service))
                 toastMain.show()
             }
         } else {
             requestPermission()
+        }
+    }
+
+
+    private fun updateLocation() {
+        if (checkPermission()) {
+            if (isLocationEnabled()) {
+                val locationRequest = LocationRequest.create() // Create location request.
+                locationRequest.interval = 5L
+                locationRequest.fastestInterval = 0
+                locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+                locationRequest.numUpdates = 1
+
+                // Create a location provider client and send request for getting location.
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+                fusedLocationProviderClient.requestLocationUpdates(
+                    locationRequest,
+                    locationCallback,
+                    Looper.myLooper()
+                )
+            }
+        }
+    }
+
+    private val locationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            var lastLocation: Location = locationResult.lastLocation
+
+            if (lastLocation != null) {
+                val userLocation =
+                    UserLocation(
+                        lastLocation.latitude.toFloat(),
+                        lastLocation.longitude.toFloat()
+                    )
+                viewModel.setUserLocation(userLocation)
+                toastMain.setText(getString(R.string.get_weather_successful))
+                toastMain.show()
+                isGetLocation = true
+            } else {
+                toastMain.setText(getString(R.string.click_left_menu))
+                toastMain.show()
+            }
+
         }
     }
 }
