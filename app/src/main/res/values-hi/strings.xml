@@ -18,7 +18,7 @@
     <string name="close_button">बंद करे</string>
     <string name="SaFoDel">साफोडेल</string>
     <string name="SaFo">सफो</string>
-    <string name="Del">का</string>
+    <string name="Del">डेल</string>
     <string name="welcome_to">में स्वागत</string>
     <string name="start_subtitle">आपका सुरक्षित भोजन डिलीवरी पार्टनर</string>
     <string name="learning_mode">सीखने का तरीका</string>
@@ -255,7 +255,7 @@
     <string name="analysis_intro">दुर्घटना रुझान</string>
     <string name="checklist_intro">डिलीवर करने के लिए तैयार हो जाएं</string>
     <string name="quiz_intro">अपनी समझ की जांच करें</string>
-    <string name="analysis_heading1">2000~</string>
+    <string name="analysis_heading1">~2000</string>
     <string name="analysis_heading2">80%</string>
     <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
     <string name="analysis_heading4">74%</string>
@@ -279,4 +279,5 @@
     <string name="checklist_heading">जाने से पहले, ले आओ</string>
     <string name="road_sign_heading">जानने के लिए कुछ उपयोगी सड़क संकेतं</string>
     <string name="back_to_exit_warning">कृपया बाहर निकलने के लिए फिर से वापस क्लिक करें</string>
+    <string name="v3_description">यह समेकित सुरक्षा जानकारी, साइकिल चलाने के नियम और टिप्स प्रदान करने के साथ-साथ आपको विक्टोरिया में साइकिल दुर्घटनाओं के बारे में जानकारी प्रदान करने में मदद करता है।</string>
 </resources>

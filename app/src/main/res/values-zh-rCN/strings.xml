@@ -50,7 +50,7 @@
     <string name="in_an_accident1_slang">发生事故时应遵循的步骤</string>
     <string name="in_an_accident2_slang">有关当前临时工权利运动的信息</string>
     <string name="in_an_accident3_slang">查找有关保险索赔的信息</string>
-    <string name="v1">送餐员没有得到足够的安全培训和当地交通知识，使他们处于无法接受的脆弱状态</string>
+    <string name="v1">送餐员没有得到足够的安全培训和当地交通知识，让他们处于风险之中</string>
     <string name="v2_title">什么是 赛福多？</string>
     <string name="v2_description">我们帮助您，为骑自行车的安全送餐体验做好准备。 目前，这些服务主要针对维多利亚州的骑手</string>
     <string name="v0">欢迎使用学习模式\n是时候了解有关应用程序的更多信息了\n\n单击下一步进行下一步\n\n单击关闭退出此模式</string>
@@ -255,7 +255,7 @@
     <string name="analysis_intro">事故趋势</string>
     <string name="quiz_intro">检查你的理解</string>
     <string name="checklist_intro">做好送外卖的准备</string>
-    <string name="analysis_heading1">2000~</string>
+    <string name="analysis_heading1">~2000</string>
     <string name="analysis_heading2">80%</string>
     <string name="analysis_heading3">上午 8-9 &amp; 下午 4-6</string>
     <string name="analysis_heading4">74%</string>
@@ -279,4 +279,5 @@
     <string name="checklist_heading">出发前请携带</string>
     <string name="road_sign_heading">以下是重要的路标</string>
     <string name="back_to_exit_warning">请再次点击返回退出</string>
+    <string name="v3_description">它通过提供综合安全信息、骑车规则和提示，以及向您传达关于维多利亚州自行车事故的见解，来帮助您。</string>
 </resources>

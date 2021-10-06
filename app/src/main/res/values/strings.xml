@@ -72,9 +72,10 @@
     <string name="in_an_accident3_slang">Find out information regarding insurance claims</string>
 
     <!--  spotlight description  -->
-    <string name="v1">Food delivery riders are not given enough safety training and local traffic knowledge, making them unacceptably vulnerable</string>
+    <string name="v1">Food delivery riders are not given enough safety training and local traffic knowledge, putting them at risk.</string>
     <string name="v2_title">What is SaFoDel ?</string>
-    <string name="v2_description">We help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders</string>
+    <string name="v2_description">We help you prepare for a safe food delivery experience on a bike. Currently, these services focused on the Victorian riders.</string>
+    <string name="v3_description">It helps you by providing consolidated safety information, cycling rules and tips as well as convey to you insights about bicycle accidents in Victoria.</string>
     <string name="v0">Welcome to learning mode\nIt\'s time to know more about the application\n\nClick Next for the next step\n\nClick Close for leaving this mode</string>
     <string name="first_target">This area is the main feature of the application, you can click each button to quickly navigate to your destination</string>
     <string name="second_target">This area is the main feature with some interesting image and details. Click the one with image to your destination</string>
@@ -276,7 +277,7 @@
     <string name="what_description">The COVID outbreak propelled the popularity of food delivery services and accelerated growth in cycling numbers. However, this has been accompanied by a growing increase in the number of delivery riders being involved in accidents.</string>
 
     <string name="why">WHY</string>
-    <string name="why_description">One of the primary reasons for this increasing trend is that riders are not given adequate safety training and local traffic knowledge and this makes them unacceptably vulnerable. (puts them at risk) </string>
+    <string name="why_description">One of the primary reasons for this increasing trend is that riders are not given adequate safety training and local traffic knowledge and this puts them at risk.</string>
 
     <string name="how">HOW</string>
     <string name="how_description">We provide relevant safety and cycling information for cyclists, in multiple languages, insights into your local area via an interactive map and insights into historical trends as well as remind you on delivery essentials in the form of an interactive checklist.</string>
@@ -326,7 +327,7 @@
     <string name="not_available">Not Available</string>
     <string name="did_you_know">Did you know?</string>
 
-    <string name="analysis_heading1">2000~</string>
+    <string name="analysis_heading1">~2000</string>
     <string name="analysis_description1">bicycle accidents have been reported in Victoria since 2019.</string>
     <string name="analysis_heading2">80%</string>
     <string name="analysis_description2">of reported bicycle accidents occurred in clear conditions</string>

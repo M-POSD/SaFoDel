@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:justificationMode="inter_word"
-            android:paddingVertical="20dp"
+            android:paddingVertical="15dp"
             android:paddingHorizontal="40dp"
             android:text="@string/v1"
             style="@style/textStyle16_black" />
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:justificationMode="inter_word"
-            android:paddingVertical="20dp"
+            android:paddingVertical="10dp"
             android:paddingHorizontal="40dp"
             android:text="@string/v2_title"
             style="@style/textStyle20_bold_black"/>
@@ -54,10 +54,19 @@
             android:id="@+id/section2_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="20dp"
+            android:paddingVertical="15dp"
             android:paddingHorizontal="40dp"
             android:justificationMode="inter_word"
             android:text="@string/v2_description"
+            style="@style/textStyle16_black" />
+        <TextView
+            android:id="@+id/section3_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="40dp"
+            android:justificationMode="inter_word"
+            android:text="@string/v3_description"
             style="@style/textStyle16_black" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
