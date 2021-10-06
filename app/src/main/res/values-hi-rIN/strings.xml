@@ -248,7 +248,6 @@
     <string name="weather_clear">धूप</string>
     <string name="weather_clouds">बादलों</string>
     <string name="weather_rain">वर्षा</string>
-    <string name="miles_per_hour">मील/घंटा</string>
     <string name="current_location">मैं</string>
     <string name="location_granted">उपयोगकर्ता स्थान की अनुमति नहीं दी गई</string>
     <string name="map_intro">अपने क्षेत्र से परिचित हों</string>
@@ -284,4 +283,5 @@
     <string name="weather_null">मौसम डेटा प्राप्त करने में विफल</string>
     <string name="map_null">मानचित्र डेटा प्राप्त करने में विफल</string>
     <string name="trend_null">रुझान डेटा प्राप्त करने में विफल</string>
+    <string name="kms_per_hour">किमी/घंटा</string>
 </resources>

@@ -248,7 +248,6 @@
     <string name="weather_clouds">多云</string>
     <string name="weather_rain">下雨</string>
     <string name="current_wind_speed">风速：</string>
-    <string name="miles_per_hour">英里/小时</string>
     <string name="current_location">位置：</string>
     <string name="location_granted">用户位置权限未授予</string>
     <string name="map_intro">熟悉你所在的地区</string>
@@ -284,4 +283,5 @@
     <string name="weather_null">获取天气数据失败</string>
     <string name="map_null">获取地图数据失败</string>
     <string name="trend_null">获取图表数据失败</string>
+    <string name="kms_per_hour">公里/小时</string>
 </resources>

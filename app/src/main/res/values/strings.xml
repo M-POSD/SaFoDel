@@ -354,7 +354,7 @@
 
     <!-- other -->
 
-    <string name="miles_per_hour">mi/hr</string>
+    <string name="kms_per_hour">km/hr</string>
     <string name="back_to_exit_warning">Please click BACK again to exit</string>
     <string name="weather_null" >Failed to get weather data</string>
     <string name="map_null" >Failed to get map data</string>

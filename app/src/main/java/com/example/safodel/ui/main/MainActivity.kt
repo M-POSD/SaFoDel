@@ -573,12 +573,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             else -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.dust)
         }
-
-        binding.leftNavFooter.currentLocationInfo.text = weatherObject.location
         binding.leftNavFooter.currentTempInfo.text = weatherObject.temp.toString() + "°C"
         binding.leftNavFooter.currentHumidityInfo.text = weatherObject.humidity.toString() + "%"
         binding.leftNavFooter.currentWindSpeedInfo.text =
-            weatherObject.windSpeed.toString() + " " + getString(R.string.miles_per_hour)
+            weatherObject.windSpeed.toString() + " " + getString(R.string.kms_per_hour)
 
     }
 

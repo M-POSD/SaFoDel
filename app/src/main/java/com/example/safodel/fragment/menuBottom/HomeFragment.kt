@@ -579,7 +579,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     val pressure = weatherResponse.main.pressure
                     val humidity = weatherResponse.main.humidity
                     var windSpeed = weatherResponse.wind.speed
-                    windSpeed = (windSpeed * 2.237 * 100.0).roundToInt() / 100.0f
+                    windSpeed = (windSpeed * 3.6 * 100.0).roundToInt() / 100.0f
 
                     val weather = weatherList[0].main
                     if (weather == "Rain") {
