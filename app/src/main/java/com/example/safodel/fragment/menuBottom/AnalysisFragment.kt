@@ -168,7 +168,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
     /*
         setting basic view draw
      */
-    fun setMarginView(){
+    private fun setMarginView(){
         val coroutineScope = CoroutineScope(Dispatchers.Main)
         coroutineScope.launch {
             val scrollHeight = scrollView.layoutParams as LinearLayout.LayoutParams
@@ -205,7 +205,6 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
                     dialog.dismiss()
                     toast3.setText(getString(R.string.trend_null))
                     toast3.show()
-                    Timber.i(t.localizedMessage.toString())
                 }
             })
         }
@@ -224,15 +223,13 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             it.accidentsNumber
         }
         val data: MutableList<BarEntry> = ArrayList()
-        var count = 0
         val map :HashMap<Int,String>  = HashMap()
-        for (each in rawList){
-            map.put(count,each.accidentAddressName)
+        for ((count, each) in rawList.withIndex()){
+            map[count] = each.accidentAddressName
             data.add(BarEntry(count.toFloat(),each.accidentsNumber.toFloat()))
-            count++
         }
         val barDataset = BarDataSet(data,getString(R.string.accident_times))
-        barDataset.setColor(color)
+        barDataset.color = color
         val barData = BarData(barDataset)
         bar.data = barData
         setHBarStyle(bar,map)
@@ -243,7 +240,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Set the style of Horizontal Bar Chart
      */
     private fun setHBarStyle(bar:HorizontalBarChart, map:HashMap<Int,String>){
-        val marker: IMarker = YourMarkerView(activity,com.example.safodel.R.layout.analysis_bar_content)
+        val marker: IMarker = YourMarkerView(activity,R.layout.analysis_bar_content)
         bar.marker = marker
         bar.axisLeft.setDrawGridLines(false)
         bar.axisRight.setDrawGridLines(false)
@@ -271,7 +268,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
 /*
     Create a formatter of Integer
  */
-class IntegerFormatter() : ValueFormatter() {
+class IntegerFormatter : ValueFormatter() {
     override fun getFormattedValue(value: Float): String {
         if(value < 0.5)
             return 0.toString()
@@ -282,11 +279,9 @@ class IntegerFormatter() : ValueFormatter() {
 /*
     Formatter
  */
-class StreetNameFormatter(bar: HorizontalBarChart, map: HashMap<Int,String>):ValueFormatter(){
-    val map = map
-    val bar = bar
+class StreetNameFormatter(private val bar: HorizontalBarChart, val map: HashMap<Int, String>):ValueFormatter(){
     override fun getFormattedValue(value: Float): String {
-        val res = map.get(value.toInt())
+        val res = map[value.toInt()]
         bar.zoomOut()
 
         if(res != null)
