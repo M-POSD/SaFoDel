@@ -675,11 +675,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             val location: Location = task.result as Location
                             val userLocation = UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
                             viewModel.setUserLocation(userLocation)
+                            toastMain.setText("task.isSuccessful")
+                            toastMain.show()
 
                         } else {
                             toastMain.setText(getString(R.string.click_left_menu))
                             toastMain.show()
                         }
+                    } else {
+                        toastMain.setText("task.isNotSuccessful")
+                        toastMain.show()
                     }
                     isGetLocation = true
                 }
