@@ -23,6 +23,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="snow">#FFFEF9</color>
     <color name="gray2">#7A8089</color>
+    <color name="light_gray">#D3D3D3</color>
     <color name="spotlightBackground">#BF000000</color>
     <color name="correct_border_color">#8AD0AB</color>
     <color name="wrong_border_color">#DD4747</color>
