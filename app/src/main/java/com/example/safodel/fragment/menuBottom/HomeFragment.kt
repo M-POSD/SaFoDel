@@ -3,8 +3,6 @@ package com.example.safodel.fragment.menuBottom
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -29,7 +27,6 @@ import com.example.safodel.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 import kotlin.collections.ArrayList
 import android.view.MenuInflater
 import androidx.appcompat.app.AppCompatActivity
@@ -302,17 +299,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
     }
 
-    // record the button position clicked to match the tab selected next page
-    private fun recordPosition(position: Int) {
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            "epicPosition", Context.MODE_PRIVATE
-        )
-
-        val spEditor = sharedPref.edit()
-        spEditor.putString("epicPosition", "" + position)
-        spEditor.apply()
-    }
-
     // config onClickListener for navigation
     private fun configOnClickListener() {
         homepageButtonLayout.epicCard12.cardLeft.setOnClickListener {
@@ -562,13 +548,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         if (this is ViewGroup) children.forEach { child -> child.setAllEnabled(enabled) }
     }
 
-   private fun View.getLocationOnScreen(): Point
-    {
-        val location = IntArray(2)
-        this.getLocationOnScreen(location)
-        return Point(location[0],location[1])
-    }
-
     private fun isAllEnable(isEnable: Boolean) {
         requireActivity().findViewById<View>(R.id.homeCoordinatorLayout1).setAllEnabled(isEnable)
         homePageImage.homepageAppBar.setAllEnabled(isEnable)
@@ -629,13 +608,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             }
         })
     }
-
-    // get current hour
-    private fun getCurrentTime(): Int {
-        val calendar = Calendar.getInstance()
-        return calendar.get(Calendar.HOUR_OF_DAY)
-    }
-
     // theme based on light or night
     private fun configTheme(mode: String) {
         when (mode) {
@@ -675,27 +647,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         val spEditor = sharedPref.edit()
         spEditor.putInt("position", position)
         spEditor.apply()
-    }
-
-    /**
-     * get the previous checkbox clicked by the user
-     */
-    private fun getViewPagerPosition(): Int {
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            "position",
-            Context.MODE_PRIVATE
-        )
-
-        return sharedPref.getInt("position", -1)
-    }
-
-    suspend fun runViewPager() {
-        delay(6000L)
-        if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
-            homepageButtonLayout.viewPager2Home.currentItem -= 4
-        } else {
-            homepageButtonLayout.viewPager2Home.currentItem += 1
-        }
     }
 
     @SuppressLint("CutPasteId")
