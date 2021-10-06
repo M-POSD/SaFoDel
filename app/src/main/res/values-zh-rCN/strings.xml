@@ -284,4 +284,6 @@
     <string name="map_null">获取地图数据失败</string>
     <string name="trend_null">获取图表数据失败</string>
     <string name="kms_per_hour">公里/小时</string>
+    <string name="next">下一个</string>
+    <string name="close_btn">关闭</string>
 </resources>

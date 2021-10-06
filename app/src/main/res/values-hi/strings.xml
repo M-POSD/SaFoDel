@@ -284,4 +284,6 @@
     <string name="map_null">मानचित्र डेटा प्राप्त करने में विफल</string>
     <string name="trend_null">रुझान डेटा प्राप्त करने में विफल</string>
     <string name="kms_per_hour">किमी/घंटा</string>
+    <string name="next">अगला</string>
+    <string name="close_btn">बंद करे</string>
 </resources>

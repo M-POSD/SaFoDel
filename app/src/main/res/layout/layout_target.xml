@@ -24,7 +24,7 @@
                 android:layout_weight="7"
                 android:layout_marginLeft="20dp"
                 android:justificationMode="inter_word"
-                android:text="I am the Demoddddddddddddddddd" />
+                android:text="@string/not_available" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -41,7 +41,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:backgroundTint="@color/primary_green"
                     android:elevation="5dp"
-                    android:text="Next"
+                    android:text="@string/next"
                     android:textSize="12dp"
                     app:cornerRadius="50dp" />
 
@@ -53,7 +53,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:backgroundTint="@color/primary_green"
                     android:elevation="5dp"
-                    android:text="Close"
+                    android:text="@string/close_btn"
                     android:textSize="12dp"
                     app:cornerRadius="50dp" />
             </LinearLayout>

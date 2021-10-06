@@ -359,6 +359,8 @@
     <string name="weather_null" >Failed to get weather data</string>
     <string name="map_null" >Failed to get map data</string>
     <string name="trend_null" >Failed to get trend data</string>
+    <string name="next">Next</string>
+    <string name="close_btn">Close</string>
 
 
 </resources>
