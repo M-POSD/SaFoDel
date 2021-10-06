@@ -665,11 +665,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         val userLocation =
                             UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
                         viewModel.setUserLocation(userLocation)
-                        updateLocation()
                         isGetLocation = true
                     } else {
-                        toastMain.setText(getString(R.string.click_left_menu))
-                        toastMain.show()
+//                        toastMain.setText(getString(R.string.click_left_menu))
+//                        toastMain.show()
                         updateLocation()
                     }
                 }
@@ -717,11 +716,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 toastMain.setText(getString(R.string.get_weather_successful))
                 toastMain.show()
                 isGetLocation = true
-            } else {
-                toastMain.setText(getString(R.string.click_left_menu))
-                toastMain.show()
             }
-
+//            else {
+//                toastMain.setText(getString(R.string.click_left_menu))
+//                toastMain.show()
+//            }
         }
     }
 }
