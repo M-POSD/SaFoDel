@@ -1,21 +1,10 @@
 package com.example.safodel.adapter
 
 import android.content.Context
-import android.graphics.LinearGradient
-import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.Shader
-import android.os.Build
-import android.text.TextPaint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safodel.R
 import com.example.safodel.databinding.FragmentWelcomeSafodelBinding
 
 class SafodelViewAdapter(val context: Context) :
@@ -45,8 +34,6 @@ class SafodelViewAdapter(val context: Context) :
 
     override fun getItemCount() = 2
 
-    class ViewHolder(binding: FragmentWelcomeSafodelBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        val binding: FragmentWelcomeSafodelBinding = binding
-    }
+    class ViewHolder(val binding: FragmentWelcomeSafodelBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

@@ -28,7 +28,6 @@ import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.ui.map.TrafficPlugin
-import com.example.safodel.viewModel.MapAccidentViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -127,7 +126,6 @@ private var spinnerIndex = 0
  */
 private lateinit var toast: Toast
 private lateinit var fragmentNow: OnMapReadyCallback
-private lateinit var mapViewModel: MapAccidentViewModel
 private lateinit var floatButton: FloatingActionButton
 private lateinit var floatButtonNav: FloatingActionButton
 private lateinit var tripProgressCard: CardView
@@ -305,7 +303,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         filterCards = binding.filterCards.root
         filterCardBinding = binding.filterCards
         fragmentNow = this
-        mapViewModel = MapAccidentViewModel()
         mapView2 = binding.mapView2  // for navigation
         mapboxMap2 = mapView2.getMapboxMap() // for navigation
         dialogFilter = MaterialDialog(mainActivity)

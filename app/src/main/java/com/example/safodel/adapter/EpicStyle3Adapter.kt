@@ -46,7 +46,5 @@ class EpicStyle3Adapter(val context: Context, group2Data: MutableList<GroupCard2
 
     override fun getItemCount() = group2.size
 
-    class ViewHolder(binding: FragmentEpicStyle3Binding) : RecyclerView.ViewHolder(binding.root) {
-        val binding: FragmentEpicStyle3Binding = binding
-    }
+    class ViewHolder(val binding: FragmentEpicStyle3Binding) : RecyclerView.ViewHolder(binding.root)
 }

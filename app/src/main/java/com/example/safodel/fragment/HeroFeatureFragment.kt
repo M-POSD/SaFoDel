@@ -14,7 +14,7 @@ class HeroFeatureFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHeroFeatureBinding.inflate(inflater, container, false)
         return binding.root
     }

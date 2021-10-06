@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 class RetrofitClient {
 
     companion object RetrofitManager {
-        private val BASE_URL = "https://api.openweathermap.org/"
+        private const val BASE_URL = "https://api.openweathermap.org/"
 
         fun getRetrofitService(): RetrofitInterface {
             val retrofit = Retrofit.Builder()

@@ -345,12 +345,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     // start all animation
-    private fun startAnimation(mode: String) {
-        when (mode) {
-            "light" -> animatorSetLight.start()
-            "night" -> animatorSetNight.start()
-        }
-
+    private fun startAnimation() {
+        animatorSetLight.start()
         homePageImage.images.setOnClickListener {
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning) {
                 homePageImage.images.visibility = View.INVISIBLE
@@ -618,7 +614,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.backpack.setImageResource(R.drawable.driver_backpack_home)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
-                startAnimation("light")
+                startAnimation()
                 setToolbarBasic(toolbar)
             }
         }

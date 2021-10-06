@@ -1,5 +1,6 @@
 package com.example.safodel.fragment.menuBottom.quiz
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ class QuizResultFragment : BasicFragment<FragmentQuizResaultBinding>(FragmentQui
     /**
      * set the default view
      */
+    @SuppressLint("SetTextI18n")
     private fun configDefaultView() {
         binding.returnButton.button.text = getString(R.string.again_button)
 

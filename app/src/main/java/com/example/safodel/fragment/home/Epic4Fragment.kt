@@ -104,7 +104,7 @@ class Epic4Fragment : BasicFragment<FragmentEpic4Binding>(FragmentEpic4Binding::
     }
 
     /**
-     * get the thrid section data
+     * get the third section data
      */
     private fun getSection3Data(): MutableList<GroupCard1Data> {
         val data = GroupCard1Data.init()
