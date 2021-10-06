@@ -133,14 +133,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //        }
 
         configTheme("light")
-        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        val coroutineScope = CoroutineScope(Dispatchers.Default)
         coroutineScope.launch {
-            // try to get the height of status bar and then margin top
-            val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
-            while (toolbarHeight.topMargin == 0)
-                toolbarHeight.topMargin = mainActivity.getStatusHeight()
-            toolbar.layoutParams = toolbarHeight
-            this.cancel()
+
+            async {
+                // try to get the height of status bar and then margin top
+                val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
+                while (toolbarHeight.topMargin == 0)
+                    toolbarHeight.topMargin = mainActivity.getStatusHeight()
+                toolbar.layoutParams = toolbarHeight
+            }.await()
+
+            withContext(Dispatchers.Main){
+
+            }
         }
 
         binding.toolbar.simpleToolbar.fitsSystemWindows = false
@@ -462,7 +468,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //        val absX = location.x
 //        val absY = location.y + mainActivity.getStatusHeight()
 
-        val ninthTarget = Target.Builder()
+        val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
+        while (toolbarHeight.topMargin == 0)
+            toolbarHeight.topMargin = mainActivity.getStatusHeight()
+        toolbar.layoutParams = toolbarHeight
+
+         val  ninthTarget = Target.Builder()
             .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))
             .setShape(Circle(120f))
             .setOverlay(ninth)
