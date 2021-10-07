@@ -32,7 +32,7 @@
     <string name="raining">雨天</string>
     <string name="light_mode">日间模式</string>
     <string name="dark_mode">夜间模式</string>
-    <string name="home_page_slang_1">为您在维多利亚州骑自行车更安全地运送食物做好准备</string>
+    <string name="home_page_slang_1">为您在维多利亚州更安全的送餐做准备</string>
     <string name="home_page_slang_2">\'不要为了他人的方便而冒着生命危险\'</string>
     <string name="epic1_slang">了解如何在运送食物的同时安全骑行</string>
     <string name="epic2_slang">查找有关使用电动自行车送餐的信息</string>
@@ -73,11 +73,11 @@
     <string name="tip1_3_statistics">8% 的自行车骑手伤亡发生在司机打开车门侵入自行车骑手的道路时</string>
     <string name="tip1_3_description">在人们可能进出，停放车辆的周围应当小心，降低速度，保持警惕</string>
     <string name="tip2_0_description">夜间骑车时要格外小心。 司机更难看到你，你也更难发现潜在危险</string>
-    <string name="tip2_1_title">保持可被见</string>
+    <string name="tip2_1_title">保持醒目</string>
     <string name="tip2_1_description">应当时刻被人看到，尝试在光线充足的道路上骑行，穿鲜艳的衣服并使用反光装备</string>
-    <string name="tip2_2_title">配有合适的灯</string>
+    <string name="tip2_2_title">安装符合规定的灯</string>
     <string name="tip2_2_description">从法律上讲，您需要使用：\n - 白色前灯\n - 红色后灯\n - 红色反光板</string>
-    <string name="tip2_3_title">保持可被预测</string>
+    <string name="tip2_3_title">预先判断潜在事故</string>
     <string name="tip2_3_description">以其他道路使用者希望您骑行的方式骑行</string>
     <string name="epic2_name">电动自行车送餐</string>
     <string name="info1_name">电动自行车送餐的优势</string>
@@ -182,7 +182,7 @@
     <string name="question9_option4">向右并道</string>
     <string name="question9_information">在夜间或能见度较差的条件下骑行时，任何骑自行车的人都必须使用前灯、尾灯（闪烁或常亮）和后红色反光板</string>
     <string name="quiz">测验</string>
-    <string name="quiz_heading">做個簡短的測驗來測試您對道路規則的了解</string>
+    <string name="quiz_heading">做个简短的测验来测试您对道路规则的理解</string>
     <string name="result">结果</string>
     <string name="result_heading_1">再次学习规则</string>
     <string name="result_heading_2">查看规则</string>
@@ -252,11 +252,11 @@
     <string name="location_granted">用户位置权限未授予</string>
     <string name="map_intro">熟悉你所在的地区</string>
     <string name="analysis_intro">事故趋势</string>
-    <string name="quiz_intro">检查你的理解</string>
-    <string name="checklist_intro">做好送外卖的准备</string>
+    <string name="quiz_intro">测试你对道路规则的理解</string>
+    <string name="checklist_intro">做好送餐前的准备</string>
     <string name="analysis_heading1">~2000</string>
     <string name="analysis_heading2">80%</string>
-    <string name="analysis_heading3">上午 8-9 &amp; 下午 4-6</string>
+    <string name="analysis_heading3">上午 8-9 和下午 4-6</string>
     <string name="analysis_heading4">74%</string>
     <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">自 2019 年以来，维多利亚州已经纪录自行车事故。</string>
@@ -268,7 +268,7 @@
     <string name="alerts">警报</string>
     <string name="traffic">交通状况</string>
     <string name="accidents">事故地点</string>
-    <string name="did_you_know">你可知道？</string>
+    <string name="did_you_know">你知道吗？</string>
     <string name="search_header">搜索/选择郊区</string>
 
     <string name="about">关于</string>
