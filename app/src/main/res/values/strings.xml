@@ -79,10 +79,10 @@
     <string name="v0">Welcome to learning mode\nIt\'s time to get to know more about the application\n\nClick Next for the next step\n\nClick Close to leave learning mode</string>
     <string name="first_target">This bar allows for quick navigation across the main features of the app, you can click on any button to quickly navigate to your desired feature</string>
     <string name="second_target">This panel also shows some of the main features of the app but with further detail and images. Click on any of the images to go to the destination feature</string>
-    <string name="third_target">Scroll up until the logo has disappeared to see all our available app sections</string>
-    <string name="fourth_target">These cards contain useful information about cycling related issues</string>
-    <string name="fifth_target">Scroll down until the logo has been fully extended</string>
-    <string name="ninth_target">The left menu has\nABOUT APP:\nUnderstand the purpose of this app\n\nABOUT US:\nKnow more about the developer team\n\nLanguage:\nSwitch to your preferred language</string>
+    <string name="third_target">Scroll up until the logo has disappeared to see all our available app sections.</string>
+    <string name="fourth_target">These cards contain useful information about cycling related issues.</string>
+    <string name="fifth_target">Scroll down until the logo has been fully extended.</string>
+    <string name="ninth_target">The left menu has\nABOUT APP:\nUnderstand the purpose of this app.\n\nABOUT US:\nKnow more about the developer team.\n\nLanguage:\nSwitch to your preferred language.</string>
     <string name="click_next">Well down. Click next</string>
 
     <!--  epic1  -->
@@ -92,40 +92,40 @@
 
     <string name="tip1_1_title">Hook turn at intersections</string>
     <string name="tip1_1_statistics">Bicycle crashes are marginally more common (55%) at intersections</string>
-    <string name="tip1_1_description">It’s often safer to perform a hook turn at an intersection to turn right</string>
+    <string name="tip1_1_description">It’s often safer to perform a hook turn at an intersection to turn right.</string>
     <string name="tip1_2_title">Blind spots</string>
     <string name="tip1_2_statistics" translatable="false"></string>
-    <string name="tip1_2_description">Avoid riding in a vehicle’s blind spots and beware larger vehicles have bigger blind spots</string>
+    <string name="tip1_2_description">Avoid riding in a vehicle’s blind spots and beware larger vehicles have bigger blind spots.</string>
     <string name="tip1_3_title">Watch out for dooring</string>
     <string name="tip1_3_statistics">8% of bike rider casualties occur when a driver opens their door into the path of a bike rider</string>
-    <string name="tip1_3_description">Be careful around parked vehicles where people may be getting in or out, reduce speed, be vigilant</string>
-    <string name="tip2_0_description">Take extra care when cycling at night. It is harder for drivers to see you and for you to see hazards</string>
+    <string name="tip1_3_description">Be careful around parked vehicles where people may be getting in or out, reduce speed, be vigilant.</string>
+    <string name="tip2_0_description">Take extra care when cycling at night. It is harder for drivers to see you and for you to see hazards.</string>
     <string name="tip2_1_title">Be visible</string>
     <string name="tip2_1_statistics" translatable="false"></string>
-    <string name="tip2_1_description">Be seen, try ride on well lit roads, wear visible clothing and use reflective gear</string>
+    <string name="tip2_1_description">Be seen, try ride on well lit roads, wear visible clothing and use reflective gear.</string>
     <string name="tip2_2_title">Have the right lights</string>
     <string name="tip2_2_statistics" translatable="false"></string>
     <string name="tip2_2_description">Legally you need to ride with a:\n - White front light\n - Red back light\n - Red reflector</string>
     <string name="tip2_3_title">Be predictable</string>
     <string name="tip2_3_statistics" translatable="false"></string>
-    <string name="tip2_3_description">Ride in a way that other road users would expect you to ride</string>
+    <string name="tip2_3_description">Ride in a way that other road users would expect you to ride.</string>
 
     <!--  epic2  -->
     <string name="epic2_name">Delivery on E-bike</string>
     <string name="info1_name">Advantages of Delivering on E-Bikes</string>
     <string name="info2_name">E-Bikes Rules &amp; Regulation</string>
     <string name="info3_name">Risks with E-bikes</string>
-    <string name="info1_1_description">Make riding twice as easy as push bikes</string>
-    <string name="info1_2_description">Good for uphill riding or long distances</string>
-    <string name="info1_3_description">Promote sustainability</string>
-    <string name="info1_4_description">Usually cheaper to rent</string>
-    <string name="info2_1_description">Max motor power of 250 watts in Victoria</string>
-    <string name="info2_2_description">Max speed of 25 km/h </string>
-    <string name="info2_3_description">All other rules regarding regular bicycles</string>
-    <string name="info3_1_description">Higher speeds can be more dangerous</string>
-    <string name="info3_2_description">Initial e-bike throttle leads to injuries</string>
-    <string name="info3_3_description">E-bike battery catching fire</string>
-    <string name="info3_4_description">Higher rates of bike theft </string>
+    <string name="info1_1_description">Make riding twice as easy as push bikes.</string>
+    <string name="info1_2_description">Good for uphill riding or long distances.</string>
+    <string name="info1_3_description">Promote sustainability.</string>
+    <string name="info1_4_description">Usually cheaper to rent.</string>
+    <string name="info2_1_description">Max motor power of 250 watts in Victoria.</string>
+    <string name="info2_2_description">Max speed of 25 km/h.</string>
+    <string name="info2_3_description">All other rules regarding regular bicycles.</string>
+    <string name="info3_1_description">Higher speeds can be more dangerous.</string>
+    <string name="info3_2_description">Initial e-bike throttle leads to injuries.</string>
+    <string name="info3_3_description">E-bike battery catching fire.</string>
+    <string name="info3_4_description">Higher rates of bike theft.</string>
 
     <!--  epic3  -->
     <!--    <string name="epic3_name" >Safety Gear</string>-->
@@ -147,29 +147,29 @@
     <string name="in_an_accident1_name">Steps to Follow</string>
     <string name="in_an_accident2_name">Workers\' Rights</string>
     <string name="in_an_accident3_name">Claiming Insurance</string>
-    <string name="in_an_accident1_0_description">This is general advice only, for personalised advice please seek professional help</string>
+    <string name="in_an_accident1_0_description">This is general advice only, for personalised advice please seek professional help.</string>
     <string name="in_an_accident1_1_title">Check on Yourself</string>
-    <string name="in_an_accident1_1_description">Make sure you\'re okay, contact help if needed and try to place yourself in a safe location</string>
+    <string name="in_an_accident1_1_description">Make sure you\'re okay, contact help if needed and try to place yourself in a safe location.</string>
     <string name="in_an_accident1_2_title">Collect Details &amp; Take Photos</string>
-    <string name="in_an_accident1_2_description">Collect the details of those involved in the accident and any witnesses, take photos as evidence</string>
+    <string name="in_an_accident1_2_description">Collect the details of those involved in the accident and any witnesses, take photos as evidence.</string>
     <string name="in_an_accident1_2_title2">Collect Details &amp; Take Photos</string>
-    <string name="in_an_accident1_2_description2">Collect the details of those involved in the accident and any witnesses</string>
+    <string name="in_an_accident1_2_description2">Collect the details of those involved in the accident and any witnesses.</string>
     <string name="in_an_accident1_3_title">See a Doctor</string>
-    <string name="in_an_accident1_3_description">Even if you feel it is only small, it is always good to check with a doctor </string>
+    <string name="in_an_accident1_3_description">Even if you feel it is only small, it is always good to check with a doctor.</string>
     <string name="in_an_accident1_4_title">Report Incident to Police &amp; Platform</string>
-    <string name="in_an_accident1_4_description">Report the accident to the police as well as the platform you were working for at the time</string>
+    <string name="in_an_accident1_4_description">Report the accident to the police as well as the platform you were working for at the time.</string>
     <string name="in_an_accident2_0_title">Who is a gig worker? </string>
-    <string name="in_an_accident2_0_description">A gig worker is someone that provides services via mobile app platforms, legally they typically have an independent contractor status</string>
+    <string name="in_an_accident2_0_description">Gig workers work via mobile app platforms and are typically treated like independent contractors.</string>
     <string name="in_an_accident2_0_source" translatable="false">https://www.fairwork.gov.au/find-help-for/independent-contractors/gig-economy</string>
     <string name="in_an_accident2_1_title">Inconsistent Practices </string>
-    <string name="in_an_accident2_1_description">There are few regulations in this industry, so each platform have different requirements and conditions for their workers</string>
+    <string name="in_an_accident2_1_description">With little regulation in the industry, platforms have different requirements and conditions for their workers.</string>
     <string name="in_an_accident2_2_title">Employee or Not?</string>
-    <string name="in_an_accident2_2_description">Uber Eats treats its riders as independent contractors whilst Deliveroo as employees, be careful as there are different legal implications with each</string>
+    <string name="in_an_accident2_2_description">Uber Eats treats workers as independent contractors whilst Deliveroo treats them as employees.</string>
     <string name="in_an_accident2_3_title">Growing Momentum</string>
-    <string name="in_an_accident2_3_description">How gig workers are treated is an evolving area, groups like the Transport Workers Union (TWU) are pushing for more entitlements</string>
-    <string name="in_an_accident3_0_description">Most delivery companies offer a support package for driver and delivery partners, helping to cover partners should something go wrong while using their platform</string>
-    <string name="in_an_accident3_1_description">To find out the insurance details provided by your food delivery platform, select your partner next</string>
-    <string name="in_an_accident3_2_description">The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions</string>
+    <string name="in_an_accident2_3_description">How gig workers are treated is an evolving area, groups like the Transport Workers Union (TWU) are pushing for more entitlements.</string>
+    <string name="in_an_accident3_0_description">Most delivery companies offer a support package for driver and delivery partners, helping to cover partners should something go wrong while using their platform.</string>
+    <string name="in_an_accident3_1_description">To find out the insurance details provided by your food delivery platform, select your partner next.</string>
+    <string name="in_an_accident3_2_description">The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions.</string>
     <string name="click_to_know_more">Click to Know More</string>
     <string name="uber_link" translatable="false">https://www.uber.com/au/en/drive/insurance/injury-protection/</string>
     <string name="deliveroo_link" translatable="false">https://riders.deliveroo.com.au/en/news/your-free-deliveroo-rider-insurance</string>
@@ -180,17 +180,17 @@
     <string name="epic3_name">Road Signs</string>
     <string name="road_sign_heading">Some useful road signs to know</string>
     <string name="road_sign1_title">Slippery when wet</string>
-    <string name="road_sign1_description">Roads that get especially slippery with wet weather, reduce your speed and be careful</string>
+    <string name="road_sign1_description">Roads that get especially slippery with wet weather, reduce your speed and be careful.</string>
     <string name="road_sign2_title">Construction related signs</string>
-    <string name="road_sign2_description">Roadwork or construction ahead, be prepared to be slow down, stop, encounter detours or traffic control</string>
+    <string name="road_sign2_description">Roadwork or construction ahead, be prepared to be slow down, stop, encounter detours or traffic control.</string>
     <string name="road_sign3_title">Biking parking related signs</string>
-    <string name="road_sign3_description">Keep an eye out for signs that prohibit bike parking, not following these signs could have you fined or your bike seized</string>
+    <string name="road_sign3_description">Keep an eye out for signs that prohibit bike parking, not following these signs could have you fined or your bike seized.</string>
     <string name="road_sign4_title">Shared paths</string>
-    <string name="road_sign4_description">Paths that are for both cyclists and pedestrians, it\'s expected pedestrians stay to the left and cyclists warn when they\'re approaching</string>
+    <string name="road_sign4_description">Paths that are for both cyclists and pedestrians, it\'s expected pedestrians stay to the left and cyclists warn when they\'re approaching.</string>
     <string name="road_sign5_title">Hook turns</string>
-    <string name="road_sign5_description">An intersection where you can only turn right with a hook turn though it is recommended cyclists do hook turns rather than directly turn right at as it is often safer</string>
+    <string name="road_sign5_description">An intersection where you can only turn right with a hook turn though it is recommended cyclists do hook turns rather than directly turn right at as it is often safer.</string>
     <string name="road_sign6_title">Dismount signs</string>
-    <string name="road_sign6_description">Places where cyclists must dismount and walk instead of ride (usually at pedestrian crossings or bridges)</string>
+    <string name="road_sign6_description">Places where cyclists must dismount and walk instead of ride (usually at pedestrian crossings or bridges).</string>
 
     <!--  question  -->
 
@@ -211,35 +211,35 @@
     <string name="question1_option2">30 km/h</string>
     <string name="question1_option3">35 km/h</string>
     <string name="question1_option4">50 km/h</string>
-    <string name="question1_information">The Australian government has set a strict speed limit of 25 km/h on e-bikes</string>
+    <string name="question1_information">The Australian government has set a strict speed limit of 25 km/h on e-bikes.</string>
 
     <string name="question2_heading">Even if a road has a bike lane, can you ignore riding on it?</string>
-    <string name="question2_information">Ride in bike lanes where they are provided, unless impractical to do so</string>
+    <string name="question2_information">Ride in bike lanes where they are provided, unless impractical to do so.</string>
 
     <string name="question3_heading">As a delivery rider, should you stop when you see tram passengers getting off?</string>
-    <string name="question3_information">Bike riders must stop behind a tram that has stopped at a tram stop, to allow passengers to get on and off safely</string>
+    <string name="question3_information">Bike riders must stop behind a tram that has stopped at a tram stop, to allow passengers to get on and off safely.</string>
 
     <string name="question4_heading">Should you signal when turning right?</string>
-    <string name="question4_information">Bike riders must signal when turning right, and can help share the road more safely by riding predictably, using eye contact and indicating all changes of direction</string>
+    <string name="question4_information">Bike riders must signal when turning right, and can help share the road more safely by riding predictably, using eye contact and indicating all changes of direction.</string>
 
     <string name="question5_heading">Is it okay if you forgot to carry the bike lights while delivering at night?</string>
     <string name="question5_information">Any bike rider must use a front light, rear light (flashing or steady), and a rear red reflector when riding at night or in conditions where visibility is poor.</string>
 
     <string name="question6_heading">Whenever you are changing lanes, is it your responsibility to give way and look for vehicles already in that lane?</string>
-    <string name="question6_information">Whenever you change lanes from one marked lane or line of traffic to another, you must give way to vehicles already in that lane or line of traffic..</string>
+    <string name="question6_information">Whenever you change lanes from one marked lane or line of traffic to another, you must give way to vehicles already in that lane or line of traffic.</string>
 
     <string name="question7_heading">You can wear any helmet while delivering, regardless of its ratings.</string>
-    <string name="question7_information">Cyclists need to wear a securely fitted and fastened helmet with a mark of compliance with the Australian Standard</string>
+    <string name="question7_information">Cyclists need to wear a securely fitted and fastened helmet with a mark of compliance with the Australian Standard.</string>
 
     <string name="question8_heading">Are you allowed to ride on a footpath while delivering food?</string>
-    <string name="question8_information">You cannot ride on a footpath unless accompanying a child under 13</string>
+    <string name="question8_information">You cannot ride on a footpath unless accompanying a child under 13.</string>
 
     <string name="question9_heading">When are you required to give a hand signal?</string>
     <string name="question9_option1">Turning or merging right</string>
     <string name="question9_option2">Turning or merging left</string>
     <string name="question9_option3">Turning right</string>
     <string name="question9_option4">Merging right</string>
-    <string name="question9_information">Any bike rider must use a front light, rear light (flashing or steady), and a rear red reflector when riding at night or in conditions where visibility is poor</string>
+    <string name="question9_information">Any bike rider must use a front light, rear light (flashing or steady), and a rear red reflector when riding at night or in conditions where visibility is poor.</string>
 
     <!--  quiz  -->
     <string name="quiz">QUIZ</string>
@@ -330,13 +330,13 @@
     <string name="analysis_heading1">~2000</string>
     <string name="analysis_description1">bicycle accidents have been reported in Victoria since 2019.</string>
     <string name="analysis_heading2">80%</string>
-    <string name="analysis_description2">of reported bicycle accidents occurred in clear conditions</string>
+    <string name="analysis_description2">of reported bicycle accidents occurred in clear conditions.</string>
     <string name="analysis_heading3">8-9 AM &amp; 4-6 PM</string>
-    <string name="analysis_description3">were the times most accidents were reported (peak hour traffic)</string>
+    <string name="analysis_description3">were the times most accidents were reported (peak hour traffic).</string>
     <string name="analysis_heading4">74%</string>
-    <string name="analysis_description4">bicycle accidents were reported in Daylight</string>
+    <string name="analysis_description4">bicycle accidents were reported in Daylight.</string>
     <string name="analysis_heading5">20%</string>
-    <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn</string>
+    <string name="analysis_description5">bicycle accidents were reported at night or during dusk/dawn.</string>
     <string name="search_header">Search/Select Suburb</string>
 
     <!-- weather -->
@@ -363,7 +363,7 @@
     <string name="close_btn">Close</string>
     <string name="ask_allow_service">Please enable your location service</string>
 
-    <string name="click_left_menu">Click the left menu to restart loading the location.</string>
+    <string name="click_left_menu">Click the left menu to restart loading the location</string>
     <string name="get_weather_successful">Get user location data successful</string>
 
 

@@ -35,7 +35,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
                 setVisibility(viewHolder,0)
             }
 
-            // 2 -> map page info intro with navigation
+            // 1 -> map page info intro with navigation
             1 -> {
                 setVisibility(viewHolder,1)
                 viewHolder.binding.heroFeatureInfo3.card.setOnClickListener{
@@ -44,7 +44,7 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
                 }
             }
 
-            // 3 -> history trend page intro with navigation
+            // 2 -> history trend page intro with navigation
             2 -> {
                 setVisibility(viewHolder,2)
                 viewHolder.binding.heroFeatureInfo4.card.setOnClickListener{
@@ -53,21 +53,21 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
                 }
             }
 
-            // 4 -> checklist page intro with navigation
+            // 3 -> quiz page intro with navigation
             3 -> {
                 setVisibility(viewHolder,3)
-                viewHolder.binding.heroFeatureInfo5.card.setOnClickListener{
-                    parentFragment.findNavController().navigate(R.id.checklistFragment)
-                    mainActivity.callOnNav(4)
-                }
-            }
-
-            // 5 -> quiz page intro with navigation
-            4 -> {
-                setVisibility(viewHolder,4)
                 viewHolder.binding.heroFeatureInfo6.card.setOnClickListener{
                     parentFragment.findNavController().navigate(R.id.quizFragment)
                     mainActivity.callOnNav(3)
+                }
+            }
+
+            // 4 -> checklist page intro with navigation
+            4 -> {
+                setVisibility(viewHolder,4)
+                viewHolder.binding.heroFeatureInfo5.card.setOnClickListener{
+                    parentFragment.findNavController().navigate(R.id.checklistFragment)
+                    mainActivity.callOnNav(4)
                 }
             }
         }
@@ -91,8 +91,8 @@ class HomeViewAdapter(val context: Context, private val parentFragment: Fragment
             0 -> viewHolder.binding.heroFeatureInfo1.intro1Layout.visibility = View.VISIBLE
             1 -> viewHolder.binding.heroFeatureInfo3.intro3Layout.visibility = View.VISIBLE
             2 -> viewHolder.binding.heroFeatureInfo4.intro4Layout.visibility = View.VISIBLE
-            3 -> viewHolder.binding.heroFeatureInfo5.intro5Layout.visibility = View.VISIBLE
-            4 -> viewHolder.binding.heroFeatureInfo6.intro6Layout.visibility = View.VISIBLE
+            3 -> viewHolder.binding.heroFeatureInfo6.intro6Layout.visibility = View.VISIBLE
+            4 -> viewHolder.binding.heroFeatureInfo5.intro5Layout.visibility = View.VISIBLE
         }
     }
 
