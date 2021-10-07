@@ -77,6 +77,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var homepageButtonLayout: HomepageButtonLayoutBinding
     private lateinit var homepageButtonLayout2: HomepageButtonLayoutBinding
     private lateinit var homeScrollView: NestedScrollView
+    private lateinit var homeWholePage : View
 
     private var isBeginnerMode = false
     private var isFirstCreated = true
@@ -112,6 +113,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         homePageImage = binding.homePageImages
         homepageButtonLayout = binding.homepageButtonLayout
         homepageButtonLayout2 = binding.homepageButtonLayout2
+        homeWholePage = binding.homeFragmentXML
 
         homeScrollView = binding.homeScrollView
         mainActivity = activity as MainActivity
@@ -137,6 +139,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             while (toolbarHeight.topMargin == 0)
                 toolbarHeight.topMargin = mainActivity.getStatusHeight()
             toolbar.layoutParams = toolbarHeight
+
+            val homeWholeHeight = homeWholePage.layoutParams as FrameLayout.LayoutParams
+            while(homeWholeHeight.bottomMargin == 0)
+                homeWholeHeight.bottomMargin = mainActivity.bottomNavHeight() + 10
+            homeWholePage.layoutParams = homeWholeHeight
         }
 
         binding.toolbar.simpleToolbar.fitsSystemWindows = false

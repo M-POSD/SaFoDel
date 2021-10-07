@@ -338,7 +338,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun bottomNavHeight(): Int {
-        return bottomNavigationView.height
+        return bottomNavigationView.measuredHeight
     }
 
 
