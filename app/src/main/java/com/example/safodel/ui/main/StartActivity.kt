@@ -55,7 +55,6 @@ class StartActivity : AppCompatActivity() {
 //            R.drawable.ic_baseline_navigate_next_24_gray, 0
 //        )
 
-        AutoSizeConfig.getInstance().isBaseOnWidth = false
 
     }
 

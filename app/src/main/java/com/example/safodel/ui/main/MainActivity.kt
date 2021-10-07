@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         navController = navHostFragment.navController // Control fragment
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
-        AutoSizeConfig.getInstance().isBaseOnWidth = false
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
