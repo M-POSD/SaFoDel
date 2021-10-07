@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityLoginBinding
 import tyrantgit.explosionfield.ExplosionField
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val pref = getSharedPreferences("login", Context.MODE_PRIVATE)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         toast = Toast.makeText(this,"message",Toast.LENGTH_SHORT)
         pref.edit().putBoolean("enabled",true).apply()
         binding.login.setOnClickListener {

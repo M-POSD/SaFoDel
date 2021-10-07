@@ -19,7 +19,7 @@ import com.example.safodel.R
 import com.example.safodel.adapter.SafodelViewAdapter
 import java.util.*
 import android.util.DisplayMetrics
-
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class StartActivity : AppCompatActivity() {
@@ -33,6 +33,7 @@ class StartActivity : AppCompatActivity() {
 
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         binding.startButton.button.alpha = 0f
         viewPage2 = binding.startViewPager2
