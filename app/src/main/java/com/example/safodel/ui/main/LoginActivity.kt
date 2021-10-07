@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityLoginBinding
 import tyrantgit.explosionfield.ExplosionField
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val pref = getSharedPreferences("login", Context.MODE_PRIVATE)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         toast = Toast.makeText(this,"message",Toast.LENGTH_SHORT)
         pref.edit().putBoolean("enabled",true).apply()
         binding.login.setOnClickListener {
@@ -36,19 +38,21 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 val editor = pref.edit()
                 wrongCount++
-                if(wrongCount < 7) {
-                    toast.setText("account or password is invalid")
-                    toast.show()
-                }
-                else if(wrongCount >= 7 && wrongCount < 10){
-                    toast.setText("Last " + (10-wrongCount) +" chances.")
-                    toast.show()
-                }
-                else if(wrongCount == 10){
-                    editor.putBoolean("enabled",false)
-                    editor.apply()
-                    binding.passwordEdit.isEnabled = false
-                    ExplosionField.attach2Window(this).explode(binding.login)
+                when {
+                    wrongCount < 7 -> {
+                        toast.setText("account or password is invalid")
+                        toast.show()
+                    }
+                    wrongCount in 7..9 -> {
+                        toast.setText("Last " + (10-wrongCount) +" chances.")
+                        toast.show()
+                    }
+                    wrongCount == 10 -> {
+                        editor.putBoolean("enabled",false)
+                        editor.apply()
+                        binding.passwordEdit.isEnabled = false
+                        ExplosionField.attach2Window(this).explode(binding.login)
+                    }
                 }
             }
         }

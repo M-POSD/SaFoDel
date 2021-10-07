@@ -2,55 +2,54 @@ package com.example.safodel.fragment.menuBottom
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
-import android.graphics.Point
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
-import androidx.navigation.fragment.findNavController
-import com.example.safodel.R
-import com.example.safodel.databinding.FragmentHomeBinding
-import com.example.safodel.fragment.BasicFragment
-import androidx.core.view.children
-import androidx.core.view.doOnPreDraw
-import com.example.safodel.ui.main.MainActivity
-import com.takusemba.spotlight.OnSpotlightListener
-import com.takusemba.spotlight.Target
-import com.takusemba.spotlight.Spotlight
-import com.takusemba.spotlight.shape.*
-import android.view.ViewGroup
-import android.widget.*
-import com.example.safodel.retrofit.RetrofitClient
-import com.example.safodel.retrofit.RetrofitInterface
-import com.example.safodel.model.WeatherResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
-import android.view.MenuInflater
-import androidx.activity.OnBackPressedCallback
+import android.widget.FrameLayout
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
+import androidx.core.view.children
+import androidx.core.view.doOnPreDraw
 import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.safodel.R
 import com.example.safodel.adapter.HomeViewAdapter
+import com.example.safodel.databinding.FragmentHomeBinding
 import com.example.safodel.databinding.HomepageButtonLayoutBinding
 import com.example.safodel.databinding.HomepageImagesBinding
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.safodel.fragment.BasicFragment
+import com.example.safodel.model.WeatherResponse
 import com.example.safodel.model.WeatherTemp
+import com.example.safodel.retrofit.RetrofitClient
+import com.example.safodel.retrofit.RetrofitInterface
+import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.viewModel.IsLearningModeViewModel
+import com.example.safodel.viewModel.LocationViewModel
 import com.example.safodel.viewModel.WeatherViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.mapbox.android.core.permissions.PermissionsListener
-import com.mapbox.android.core.permissions.PermissionsManager
-import kotlinx.coroutines.*
+import com.takusemba.spotlight.OnSpotlightListener
+import com.takusemba.spotlight.Spotlight
+import com.takusemba.spotlight.Target
+import com.takusemba.spotlight.shape.Circle
+import com.takusemba.spotlight.shape.RoundedRectangle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.droidsonroids.gif.GifImageView
-import java.lang.Runnable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -58,16 +57,12 @@ import kotlin.math.roundToInt
 class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
     PermissionsListener {
     // get weather
-    private val APP_ID = "898ef19b846722554449f6068e7c7253"
-    private val UNITS = "metric"
-    private var LAT = -37.876823f
-    private var LON = 145.045837f
-//    private val CITY_NAME = "clayton,AU"
+    private val appId = "898ef19b846722554449f6068e7c7253"
+    private val units = "metric"
+    private var lat = -37.876823f
+    private var lon = 145.045837f
 
     private lateinit var weatherService: RetrofitInterface
-
-//    // Permission
-//    private lateinit var permissionsManager: PermissionsManager
 
     // Basic value
     private lateinit var toast: Toast
@@ -82,11 +77,11 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private lateinit var homepageButtonLayout: HomepageButtonLayoutBinding
     private lateinit var homepageButtonLayout2: HomepageButtonLayoutBinding
     private lateinit var homeScrollView: NestedScrollView
+    private lateinit var homeWholePage : View
 
     private var isBeginnerMode = false
+    private var isFirstCreated = true
     private var currentToast: Toast? = null
-//    private var isRaining = false
-//    private var isInitialRainingAnimation = true
 
     private lateinit var adapter: HomeViewAdapter
     private lateinit var runnable: Runnable
@@ -94,7 +89,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private lateinit var weatherModel: WeatherViewModel
     private lateinit var learningModeModel: IsLearningModeViewModel
-    private var isFirstCreated = true
+    private val locationViewModel: LocationViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,17 +107,13 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         handler = Handler(Looper.getMainLooper())
         weatherService = RetrofitClient.getRetrofitService()
-        callWeatherService()
-
-//        // request permission of user location
-//        permissionsManager = PermissionsManager(this)
-//        permissionsManager.requestLocationPermissions(activity)
 
         toast = Toast.makeText(requireActivity(), null, Toast.LENGTH_SHORT)
         toolbar = binding.toolbar.root
         homePageImage = binding.homePageImages
         homepageButtonLayout = binding.homepageButtonLayout
         homepageButtonLayout2 = binding.homepageButtonLayout2
+        homeWholePage = binding.homeFragmentXML
 
         homeScrollView = binding.homeScrollView
         mainActivity = activity as MainActivity
@@ -138,22 +130,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         imageAnimations()
         imagesDrivingAnimation()
-//        if (getCurrentTime() > 18 || getCurrentTime() < 7) {
-//            configTheme("night")
-//
-//        } else {
-//            configTheme("light")
-//        }
 
         configTheme("light")
-        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        val coroutineScope = CoroutineScope(Dispatchers.Default)
         coroutineScope.launch {
             // try to get the height of status bar and then margin top
             val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
             while (toolbarHeight.topMargin == 0)
                 toolbarHeight.topMargin = mainActivity.getStatusHeight()
             toolbar.layoutParams = toolbarHeight
-            this.cancel()
+
+            val homeWholeHeight = homeWholePage.layoutParams as FrameLayout.LayoutParams
+            while(homeWholeHeight.bottomMargin == 0)
+                homeWholeHeight.bottomMargin = mainActivity.bottomNavHeight() + 10
+            homeWholePage.layoutParams = homeWholeHeight
         }
 
         binding.toolbar.simpleToolbar.fitsSystemWindows = false
@@ -164,8 +154,16 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         homepageButtonLayout.wormDotsIndicatorHome.setViewPager2(homepageButtonLayout.viewPager2Home)
 
         isBeginnerMode = mainActivity.isLearningMode()
-        weatherModel = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
-        learningModeModel = ViewModelProvider(requireActivity()).get(IsLearningModeViewModel::class.java)
+
+        val viewModelProvider = ViewModelProvider(requireActivity())
+        weatherModel = viewModelProvider.get(WeatherViewModel::class.java)
+        learningModeModel = viewModelProvider.get(IsLearningModeViewModel::class.java)
+
+        locationViewModel.getUserLocation().observe(mainActivity, { location ->
+            lat = location.lat
+            lon = location.lon
+            callWeatherService()
+        })
 
         return binding.root
 
@@ -174,9 +172,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("onViewCreated", isBeginnerMode.toString())
         view.doOnPreDraw {
-            Log.d("view.doOnPreDraw", isBeginnerMode.toString())
             if (isBeginnerMode) {
                 learningModeModel.setLearningMode(true)
                 startSpotLight()
@@ -241,36 +237,20 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     private fun rainingAnimation() {
         homePageImage.vusik.setImages(rainingList).start()
         homePageImage.vusik.startNotesFall()
-//        if (isInitialRainingAnimation) {
-//            isInitialRainingAnimation = false
-//            isRaining = true
-//            homePageImage.vusik.setImages(rainingList).start()
-//            homePageImage.vusik.startNotesFall()
-//        } else {
-//            if (isRaining) {
-//                isRaining = false
-//                homePageImage.vusik.pauseNotesFall()
-//                homePageImage.vusik.visibility = View.INVISIBLE
-//            } else {
-//                isRaining = true
-//                homePageImage.vusik.resumeNotesFall()
-//                homePageImage.vusik.visibility = View.VISIBLE
-//            }
-//        }
     }
 
     // add animation for the individual image
     private fun imageAnimations() {
-        var objectAnimator1: ObjectAnimator =
+        val objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.backpack,
                 "translationX",
                 -100f,
                 homePageImage.backpack.translationX
             )
-        var objectAnimator2: ObjectAnimator =
+        val objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.backpack, "alpha", 0f, 1f)
-        var objectAnimator3: ObjectAnimator =
+        val objectAnimator3: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.helmet,
                 "translationY",
@@ -278,9 +258,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 homePageImage.helmet.translationY
             )
 
-        var objectAnimator4: ObjectAnimator =
+        val objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.helmet, "alpha", 0f, 1f)
-        var objectAnimator5: ObjectAnimator =
+        val objectAnimator5: ObjectAnimator =
             ObjectAnimator.ofFloat(homePageImage.headlight, "alpha", 0f, 1f)
                 .setDuration(500)
 
@@ -297,7 +277,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     // add driving functionalities for images
     private fun imagesDrivingAnimation() {
-        var objectAnimator1: ObjectAnimator =
+        val objectAnimator1: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.images2,
                 "translationX",
@@ -305,7 +285,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                 4 * (view?.width ?: 1500) / 5.toFloat()
             )
 
-        var objectAnimator2: ObjectAnimator =
+        val objectAnimator2: ObjectAnimator =
             ObjectAnimator.ofFloat(
                 homePageImage.images2,
                 "translationX",
@@ -322,35 +302,24 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         }
     }
 
-    // record the button position clicked to match the tab selected next page
-    private fun recordPosition(position: Int) {
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            "epicPosition", Context.MODE_PRIVATE
-        )
-
-        val spEditor = sharedPref.edit()
-        spEditor.putString("epicPosition", "" + position)
-        spEditor.apply()
-    }
-
     // config onClickListener for navigation
     private fun configOnClickListener() {
-        homepageButtonLayout.epicCard12.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardLeft.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic1Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard12.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard12.cardRight.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic2Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard34.cardLeft.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardLeft.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic3Fragment, null, navAnimationLeftToRight())
         }
 
-        homepageButtonLayout.epicCard34.cardRight.setOnClickListener() {
+        homepageButtonLayout.epicCard34.cardRight.setOnClickListener {
             setViewPagerPosition(homepageButtonLayout.viewPager2Home.currentItem)
             findNavController().navigate(R.id.epic4Fragment, null, navAnimationLeftToRight())
         }
@@ -379,12 +348,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
     }
 
     // start all animation
-    private fun startAnimation(mode: String) {
-        when (mode) {
-            "light" -> animatorSetLight.start()
-            "night" -> animatorSetNight.start()
-        }
-
+    private fun startAnimation() {
+        animatorSetLight.start()
         homePageImage.images.setOnClickListener {
             if (!animatorSetLight.isRunning && !animatorSetNight.isRunning) {
                 homePageImage.images.visibility = View.INVISIBLE
@@ -500,7 +465,12 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 //        val absX = location.x
 //        val absY = location.y + mainActivity.getStatusHeight()
 
-        val ninthTarget = Target.Builder()
+        val toolbarHeight = toolbar.layoutParams as CoordinatorLayout.LayoutParams
+        while (toolbarHeight.topMargin == 0)
+            toolbarHeight.topMargin = mainActivity.getStatusHeight()
+        toolbar.layoutParams = toolbarHeight
+
+         val  ninthTarget = Target.Builder()
             .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))
             .setShape(Circle(120f))
             .setOverlay(ninth)
@@ -582,13 +552,6 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         if (this is ViewGroup) children.forEach { child -> child.setAllEnabled(enabled) }
     }
 
-   private fun View.getLocationOnScreen(): Point
-    {
-        val location = IntArray(2)
-        this.getLocationOnScreen(location)
-        return Point(location[0],location[1])
-    }
-
     private fun isAllEnable(isEnable: Boolean) {
         requireActivity().findViewById<View>(R.id.homeCoordinatorLayout1).setAllEnabled(isEnable)
         homePageImage.homepageAppBar.setAllEnabled(isEnable)
@@ -602,10 +565,10 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     private fun callWeatherService() {
         val callAsync: Call<WeatherResponse> = weatherService.getCurrentWeatherData(
-            LAT.toString(),
-            LON.toString(),
-            APP_ID,
-            UNITS
+            lat.toString(),
+            lon.toString(),
+            appId,
+            units
         )
 
         callAsync.enqueue(object : Callback<WeatherResponse?> {
@@ -617,65 +580,49 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     val weatherResponse = response.body()!!
                     val weatherList = weatherResponse.weatherMainList
 
-                    LAT = (LAT * 100.0).roundToInt() / 100.0f
-                    LON = (LON * 100.0).roundToInt() / 100.0f
-                    val location = "$LAT, $LON"
+                    lat = (lat * 100.0).roundToInt() / 100.0f
+                    lon = (lon * 100.0).roundToInt() / 100.0f
+                    val location = "$lat, $lon"
                     val temp = weatherResponse.main.temp
                     val pressure = weatherResponse.main.pressure
                     val humidity = weatherResponse.main.humidity
                     var windSpeed = weatherResponse.wind.speed
-                    windSpeed = Math.round(windSpeed * 2.237 * 100.0) / 100.0f
+                    windSpeed = (windSpeed * 3.6 * 100.0).roundToInt() / 100.0f
 
-
-                    if (weatherList != null) {
-                        val weather = weatherList[0].main
-                        if (weather == "Rain") {
-                            rainingAnimation()
-                        }
-                        Log.d("currentWeather", weather)
-                        mainActivity.keepWeatherSharePrefer(weather)
-                        weatherModel.setWeather(
-                            WeatherTemp(
-                                location,
-                                weather,
-                                temp,
-                                pressure,
-                                humidity,
-                                windSpeed
-                            )
-                        )
+                    val weather = weatherList[0].main
+                    if (weather == "Rain") {
+                        rainingAnimation()
                     }
-                } else {
-                    Log.i("Error ", "Response failed")
+
+                    weatherModel.setWeather(
+                        WeatherTemp(
+                            location,
+                            weather,
+                            temp,
+                            pressure,
+                            humidity,
+                            windSpeed
+                        )
+                    )
                 }
             }
 
             override fun onFailure(call: Call<WeatherResponse?>?, t: Throwable) {
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.weather_null), Toast.LENGTH_SHORT).show()
             }
         })
     }
-
-    // get current hour
-    private fun getCurrentTime(): Int {
-        val calendar = Calendar.getInstance()
-        return calendar.get(Calendar.HOUR_OF_DAY)
-    }
-
     // theme based on light or night
     private fun configTheme(mode: String) {
         when (mode) {
             "light" -> {
                 homePageImage.homepageAppBar.setBackgroundResource(R.color.white)
                 homePageImage.headlight.visibility = View.INVISIBLE
-//                homePageImage.homepageAppBar.setBackgroundResource(R.drawable.bluesky_snow_gradient)
                 homePageImage.backpack.alpha = 0f
                 homePageImage.backpack.setImageResource(R.drawable.driver_backpack_home)
                 homePageImage.helmet.alpha = 0f
                 homePageImage.headlight.alpha = 0f
-                // homePageImage.groundForDriver.visibility = View.VISIBLE
-                startAnimation("light")
-//                setToolbarLightMode(toolbar)
+                startAnimation()
                 setToolbarBasic(toolbar)
             }
         }
@@ -706,46 +653,21 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         spEditor.apply()
     }
 
-    /**
-     * get the previous checkbox clicked by the user
-     */
-    private fun getViewPagerPosition(): Int {
-        val sharedPref = requireActivity().applicationContext.getSharedPreferences(
-            "position",
-            Context.MODE_PRIVATE
-        )
-
-        return sharedPref.getInt("position", -1)
-    }
-
-    suspend fun runViewPager() {
-        delay(6000L)
-        if (homepageButtonLayout.viewPager2Home.currentItem == 4) {
-            homepageButtonLayout.viewPager2Home.currentItem -= 4
-        } else {
-            homepageButtonLayout.viewPager2Home.currentItem += 1
-        }
-    }
-
+    @SuppressLint("CutPasteId")
     private fun configScrollingViewActionCapture(numTarget:Int, view: View, spotLight: Spotlight) {
         when(numTarget) {
             3 -> {
-//                homePageImage.homepageAppBar.setAllEnabled(true)
                 homePageImage.homepageAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when (appBarLayout.totalScrollRange) {
                         //  State Collapsed
                         abs(verticalOffset) -> {
-                            Log.d("homepage_app_bar", "Collapsed")
                             view.findViewById<TextView>(R.id.next_target).alpha = 1f
-//                            homePageImage.homepageAppBar.setAllEnabled(false)
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
                             view.findViewById<View>(R.id.next_target).setOnClickListener{
                                 spotLight.next()
                             }
                         }
                         else -> {
-                            Log.d("homepage_app_bar", "Failed")
-//                            homePageImage.homepageAppBar.setAllEnabled(true)
                             view.findViewById<TextView>(R.id.next_target).alpha = 0f
                             view.findViewById<View>(R.id.next_target).isClickable = false
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.third_target)
@@ -760,10 +682,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     when {
                         //  State Expanded
                         verticalOffset == 0 -> {
-                            Log.d("homepage_app_bar", "Fully expended")
                             view.findViewById<TextView>(R.id.next_target).alpha = 1f
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.click_next)
-//                            homePageImage.homepageAppBar.setAllEnabled(false)
                             view.findViewById<View>(R.id.next_target).setOnClickListener{
                                 spotLight.next()
                             }
@@ -771,12 +691,9 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
                         //  State Collapsed
                         abs(verticalOffset) == appBarLayout.totalScrollRange -> {
-                            Log.d("homepage_app_bar", "Collapsed")
                         }
 
                         else -> {
-                            Log.d("homepage_app_bar", "Failed")
-//                            homePageImage.homepageAppBar.setAllEnabled(true)
                             view.findViewById<TextView>(R.id.next_target).alpha = 0f
                             view.findViewById<View>(R.id.next_target).isClickable = false
                             view.findViewById<TextView>(R.id.custom_text).text = getString(R.string.fifth_target)

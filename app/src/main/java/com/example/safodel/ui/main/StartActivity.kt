@@ -3,7 +3,6 @@ package com.example.safodel.ui.main
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Activity
-import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
@@ -13,8 +12,6 @@ import me.jessyan.autosize.AutoSizeConfig
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.os.LocaleList
-import android.util.Log
 import android.view.animation.*
 import androidx.appcompat.app.AlertDialog
 import androidx.viewpager2.widget.ViewPager2
@@ -22,8 +19,7 @@ import com.example.safodel.R
 import com.example.safodel.adapter.SafodelViewAdapter
 import java.util.*
 import android.util.DisplayMetrics
-import android.os.Build
-
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class StartActivity : AppCompatActivity() {
@@ -37,6 +33,7 @@ class StartActivity : AppCompatActivity() {
 
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         binding.startButton.button.alpha = 0f
         viewPage2 = binding.startViewPager2
@@ -48,17 +45,16 @@ class StartActivity : AppCompatActivity() {
         configOnClickListener()
 
 
-        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(
-            R.drawable.empty_12, 0,
-            R.drawable.ic_baseline_navigate_next_24_gray, 0
-        )
+//        binding.learningMode.setCompoundDrawablesWithIntrinsicBounds(
+//            R.drawable.empty_12, 0,
+//            R.drawable.ic_baseline_navigate_next_24_gray, 0
+//        )
+//
+//        binding.settingLanguages.setCompoundDrawablesWithIntrinsicBounds(
+//            R.drawable.empty_12, 0,
+//            R.drawable.ic_baseline_navigate_next_24_gray, 0
+//        )
 
-        binding.settingLanguages.setCompoundDrawablesWithIntrinsicBounds(
-            R.drawable.empty_12, 0,
-            R.drawable.ic_baseline_navigate_next_24_gray, 0
-        )
-
-        AutoSizeConfig.getInstance().isBaseOnWidth = false
 
     }
 
@@ -92,23 +88,17 @@ class StartActivity : AppCompatActivity() {
 
     // confi all animations in the start activity
     private fun configAllAnimations() {
-//        var objectAnimator1: ObjectAnimator =
-//            ObjectAnimator.ofFloat(binding.image, "translationX", 100f, 0f)
-//        var objectAnimator2: ObjectAnimator = ObjectAnimator.ofFloat(binding.image, "alpha", 0f, 1f)
-        var objectAnimator3: ObjectAnimator =
+        val objectAnimator3: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.startButton.button, "alpha", 0f, 1f)
-        var objectAnimator4: ObjectAnimator =
+        val objectAnimator4: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.learningMode, "alpha", 0f, 1f)
-        var objectAnimator5: ObjectAnimator =
+        val objectAnimator5: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.settingLanguages, "alpha", 0f, 1f)
-//        objectAnimator1.duration = 1300
-//        objectAnimator2.duration = 1300
         objectAnimator3.duration = 1000
         objectAnimator4.duration = 1000
         objectAnimator5.duration = 1000
 
         val animatorSet = AnimatorSet()
-//        animatorSet.play(objectAnimator1).with(objectAnimator2).before(objectAnimator3)
         animatorSet.play(objectAnimator3).before(objectAnimator4)
         animatorSet.play(objectAnimator4).before(objectAnimator5)
         animatorSet.start()
@@ -130,9 +120,6 @@ class StartActivity : AppCompatActivity() {
                 2 -> {
                     setLocale("zh_CN")
                 }
-//                3 -> {
-//                    setLocale("zh_TW")
-//                }
             }
             recreateActivity()
             dialog.dismiss()
@@ -158,9 +145,6 @@ class StartActivity : AppCompatActivity() {
             "zh_CN" -> {
                 config.locale = Locale.CHINESE
             }
-//            "zh_TW" -> {
-//                config.locale = Locale.TRADITIONAL_CHINESE
-//            }
         }
 
         resources.updateConfiguration(config, dm)
@@ -185,14 +169,8 @@ class StartActivity : AppCompatActivity() {
 
     private fun recreateActivity() {
         try {
-        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.HONEYCOMB) {
             super.recreate()
-        } else {
-            finish()
-            startActivity(intent)
-        }
         } catch (e: NullPointerException) {
-            Log.d("NullPointerException", e.message.toString())
         }
     }
 }

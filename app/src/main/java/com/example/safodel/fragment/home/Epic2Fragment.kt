@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.*
 import com.example.safodel.R
 import com.example.safodel.adapter.EpicStyle1Adapter
-import com.example.safodel.adapter.EpicStyle2Adapter
 import com.example.safodel.databinding.FragmentEpic2Binding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.GroupCard1Data
-import com.example.safodel.model.GroupCard2Data
 
 
 class Epic2Fragment : BasicFragment<FragmentEpic2Binding>(FragmentEpic2Binding::inflate) {

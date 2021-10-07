@@ -1,47 +1,52 @@
 package com.example.safodel.ui.main
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Rect
-import android.os.Build
+import android.location.Location
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.example.safodel.R
 import com.example.safodel.databinding.ActivityMainBinding
+import com.example.safodel.model.UserLocation
 import com.example.safodel.model.WeatherTemp
-import com.example.safodel.viewModel.HistoryDetailViewModel
-import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
+import com.example.safodel.viewModel.LocationViewModel
+import com.google.android.gms.location.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mapbox.maps.extension.style.expressions.dsl.generated.length
+import com.google.android.material.navigation.NavigationView
 
 import me.jessyan.autosize.AutoSizeCompat
 import me.jessyan.autosize.AutoSizeConfig
-import timber.log.Timber
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    /**
+     *  Sourcecode of get user location part
+     *  https://www.youtube.com/watch?v=vard0CUTLbA&ab_channel=doctorcode
+     */
+
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce = false
     private lateinit var navController: NavController
@@ -49,7 +54,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomMenu: Menu
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var leftNavigationView: NavigationView
     private lateinit var navHostFragment: NavHostFragment
+    private var isGetLocation = false
+
+    private val permissionsID = 1000
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    private val viewModel: LocationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +70,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer = binding.drawerLayout
         bottomMenu = binding.bottomNavigation.menu
         bottomNavigationView = binding.bottomNavigation
+        leftNavigationView = binding.leftNavigation
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController // Control fragment
         configBottomNavigation() //method to set up bottom nav
         configLeftNavigation() // method to set up left nav
-        AutoSizeConfig.getInstance().isBaseOnWidth = false
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         toastMain = Toast.makeText(this, null, Toast.LENGTH_SHORT)
 
@@ -71,17 +83,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val leftHeaderSaFo = leftHeader.findViewById<View>(R.id.left_header_safo)
         val leftHeaderDel = leftHeader.findViewById<View>(R.id.left_header_del)
 
-
         leftHeaderSaFo.isClickable = true
         leftHeaderDel.isClickable = true
         leftHeaderSaFo.setOnClickListener(this)
         leftHeaderDel.setOnClickListener(this)
 
-
         configCheckListIcon()
+
 
         recordLearningMode()
         setMapLearningMode()
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        getLastLocation()
 
     }
 
@@ -90,7 +104,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Press the navigation icon to pop up the navigation window
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             android.R.id.home -> drawer.openDrawer(GravityCompat.START)
         }
@@ -101,13 +114,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * If the user is in home, school and map pages, he/she needs to click twice
      */
     override fun onBackPressed() {
-        // stop users to go back if they are in the following fragment,
-        // giving the warning message at the same time
+        /*
+            stop users to go back if they are in the following fragment,
+            giving the warning message at the same time
+         */
         if (navController.currentDestination?.id == R.id.quizPageFragment
         ) {
             MaterialDialog(this).show {
                 message(
-                    text = "${getString(R.string.check_leave)}" +
+                    text = getString(R.string.check_leave) +
                             "\n${getString(R.string.warning_msg)}"
                 )
                 positiveButton(R.string.no)
@@ -120,6 +135,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        // return back home if current destination is the page on the bottom nav
         if (navController.currentDestination?.id == R.id.mapfragment ||
             navController.currentDestination?.id == R.id.quizFragment ||
             navController.currentDestination?.id == R.id.analysisFragment ||
@@ -129,12 +145,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        /*
+            remove quiz page fragment from pop stack if the current page is not home fragment
+            home fragment have already removed all fragment in the pop stack
+         */
         if (navController.currentDestination?.id != R.id.homeFragment) {
             removeQuizPageFragment()
             super.onBackPressed()
             return
         }
 
+        // configure the back button to be pressed twice before the app exits
         if (doubleBackToExitPressedOnce) {
             removeQuizPageFragment()
             super.onBackPressed()
@@ -142,27 +163,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         this.doubleBackToExitPressedOnce = true
-        toastMain.cancel()
-        toastMain.setText("Please click BACK again to exit")
+        toastMain.setText(getString(R.string.back_to_exit_warning))
         toastMain.show()
 
         // give user three seconds to leave without re-notification
         Handler(Looper.getMainLooper()).postDelayed(
-            Runnable
             {
                 doubleBackToExitPressedOnce = false
             }, 3000
         )
     }
 
+    /**
+     * Config the bottom navigation basic settings
+     */
     private fun configBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             val menuItem = it
             var isItemSelected = false
+
+            // if user is in the quiz page, provide warning message for the user if he/she wants to leave
             if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
                     message(
-                        text = "${getString(R.string.check_leave)}" +
+                        text = getString(R.string.check_leave) +
                                 "\n${getString(R.string.warning_msg)}"
                     )
                     positiveButton(R.string.no)
@@ -182,6 +206,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    /**
+     * Define each bottom will direct to which page on the bottom nav
+     */
     private fun bottomNav(menuItem: MenuItem) {
         menuItem.isChecked = true
         when (menuItem.itemId) {
@@ -219,15 +246,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Config the left navigation basic settings
+     */
     private fun configLeftNavigation() {
-        binding.leftNavigation.setCheckedItem(R.id.left_navigation)
-        binding.leftNavigation.setNavigationItemSelectedListener {
+        leftNavigationView.setCheckedItem(R.id.left_navigation)
+        leftNavigationView.setNavigationItemSelectedListener {
             val menuItem = it
             var isItemSelected = false
+
+            // if user is in the quiz page, provide warning message for the user if he/she wants to leave
             if (navController.currentDestination?.id == R.id.quizPageFragment) {
                 MaterialDialog(this).show {
                     message(
-                        text = "${getString(R.string.check_leave)}" +
+                        text = getString(R.string.check_leave) +
                                 "\n${getString(R.string.warning_msg)}"
                     )
                     positiveButton(R.string.no)
@@ -249,6 +281,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Define each bottom will direct to which page on the left nav
+     */
     private fun leftNav(menuItem: MenuItem) {
         when (menuItem.itemId) {
             R.id.navAppIntro -> {
@@ -279,9 +314,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun openDrawer() {
         drawer.openDrawer(GravityCompat.START)
+        if (!isGetLocation) getLastLocation()
     }
 
-    fun closeDrawer() {
+    private fun closeDrawer() {
         drawer.closeDrawer(GravityCompat.START)
     }
 
@@ -296,13 +332,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      */
     fun isBottomNavigationVisible(boolean: Boolean) {
         if (!boolean)
-            binding.bottomNavigation.visibility = View.INVISIBLE
+            bottomNavigationView.visibility = View.INVISIBLE
         else
-            binding.bottomNavigation.visibility = View.VISIBLE
+            bottomNavigationView.visibility = View.VISIBLE
     }
 
     fun bottomNavHeight(): Int {
-        return binding.bottomNavigation.height
+        return bottomNavigationView.measuredHeight
     }
 
 
@@ -332,8 +368,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
-    fun setLockSwipeDrawer(isChecked: Boolean){
-        when(isChecked){
+    fun setLockSwipeDrawer(isChecked: Boolean) {
+        when (isChecked) {
             true -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             false -> drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
@@ -352,7 +388,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      */
     fun keepCheckboxSharePrefer(checkbox_num: Int, isChecked: Boolean) {
         val checkbox = "checkbox$checkbox_num"
-        Log.d("keepCheckboxSharePrefer", "  $checkbox: $isChecked")
         val sharedPref = this.applicationContext.getSharedPreferences(
             checkbox, MODE_PRIVATE
         )
@@ -371,8 +406,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             checkbox,
             Context.MODE_PRIVATE
         )
-
-        Log.d("getCheckboxSharePrefer", "$checkbox: ${sharedPref.getBoolean(checkbox, false)}")
         return sharedPref.getBoolean(checkbox, false)
     }
 
@@ -396,7 +429,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         bottomNavigationView.menu.getItem(index).isChecked = true
     }
 
-    fun setMapLearningMode() {
+    private fun setMapLearningMode() {
         val sf = getPreferences(Context.MODE_PRIVATE)
         val editor = sf.edit()
         editor.putBoolean("mapLeaningMode", true)
@@ -407,10 +440,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * clean the left menu item is selected before
      */
     fun cleanLeftMenuIsChecked() {
-        val numOfItems = binding.leftNavigation.menu.size
+        val numOfItems = leftNavigationView.menu.size
         var times = 0
         while (times < numOfItems) {
-            binding.leftNavigation.menu.getItem(times).isChecked = false
+            leftNavigationView.menu.getItem(times).isChecked = false
             times++
         }
     }
@@ -493,44 +526,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Recreate the activity
      */
     private fun recreateActivity() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            super.recreate()
-        } else {
-            finish()
-            startActivity(intent)
-        }
-    }
-
-    /**
-     * keep the record of the current weather
-     */
-    fun keepWeatherSharePrefer(currentWeather: String) {
-        val weather = "weather"
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            weather, Context.MODE_PRIVATE
-        )
-
-        val spEditor = sharedPref.edit()
-        spEditor.putString(weather, currentWeather)
-        spEditor.apply()
-    }
-
-    /**
-     * get the weather store in sharedPreference
-     */
-    fun getWeatherSharePrefer(): String? {
-        val weather = "weather"
-        val sharedPref = this.applicationContext.getSharedPreferences(
-            weather,
-            Context.MODE_PRIVATE
-        )
-        return sharedPref.getString(weather, "Placeholder")
+        super.recreate()
     }
 
     /**
      * update the menu footer information
      */
+    @SuppressLint("SetTextI18n")
     fun updateMenuFooterInfo(weatherObject: WeatherTemp) {
+
+        binding.leftNavFooter.currentWeatherIcon.visibility = View.VISIBLE
         when (weatherObject.weather) {
             "Clear" -> {
                 binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.clear)
@@ -558,12 +563,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             else -> binding.leftNavFooter.currentWeatherIcon.setImageResource(R.drawable.dust)
         }
-
-        binding.leftNavFooter.currentLocationInfo.text = weatherObject.location
         binding.leftNavFooter.currentTempInfo.text = weatherObject.temp.toString() + "°C"
         binding.leftNavFooter.currentHumidityInfo.text = weatherObject.humidity.toString() + "%"
         binding.leftNavFooter.currentWindSpeedInfo.text =
-            weatherObject.windSpeed.toString() + " " + getString(R.string.miles_per_hour)
+            weatherObject.windSpeed.toString() + " " + getString(R.string.kms_per_hour)
 
     }
 
@@ -600,12 +603,123 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         spEditor.putBoolean("isLearningMode", isLearningMode)
         spEditor.apply()
     }
+
+    /**
+     * Check the user's permission
+     */
+    private fun checkPermission(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+
+        return false
+    }
+
+    /**
+     * Get the user's permission
+     */
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ), permissionsID
+        )
+
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == permissionsID) {
+            if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_DENIED) {
+                getLastLocation()
+            }
+        }
+    }
+
+    private fun getLastLocation() {
+        if (checkPermission()) {
+            if (isLocationEnabled()) {
+                fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                    if (location != null) {
+                        val userLocation =
+                            UserLocation(location.latitude.toFloat(), location.longitude.toFloat())
+                        viewModel.setUserLocation(userLocation)
+                        isGetLocation = true
+                    } else {
+//                        toastMain.setText(getString(R.string.click_left_menu))
+//                        toastMain.show()
+                        updateLocation()
+                    }
+                }
+            } else {
+                toastMain.setText(getString(R.string.ask_allow_service))
+                toastMain.show()
+            }
+        } else {
+            requestPermission()
+        }
+    }
+
+
+    private fun updateLocation() {
+        if (checkPermission()) {
+            if (isLocationEnabled()) {
+                val locationRequest = LocationRequest.create() // Create location request.
+                locationRequest.interval = 5L
+                locationRequest.fastestInterval = 0
+                locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+                locationRequest.numUpdates = 1
+
+                // Create a location provider client and send request for getting location.
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+                fusedLocationProviderClient.requestLocationUpdates(
+                    locationRequest,
+                    locationCallback,
+                    Looper.myLooper()
+                )
+            }
+        }
+    }
+
+    private val locationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            var lastLocation: Location = locationResult.lastLocation
+
+            if (lastLocation != null) {
+                val userLocation =
+                    UserLocation(
+                        lastLocation.latitude.toFloat(),
+                        lastLocation.longitude.toFloat()
+                    )
+                viewModel.setUserLocation(userLocation)
+                toastMain.setText(getString(R.string.get_weather_successful))
+                toastMain.show()
+                isGetLocation = true
+            }
+//            else {
+//                toastMain.setText(getString(R.string.click_left_menu))
+//                toastMain.show()
+//            }
+        }
+    }
 }
-
-
-//
-// val currentFragment = supportFragmentManager.fragments.last().childFragmentManager.fragments.last()
-//var action = navController.currentDestination
-//                    val currentFragment = navController.currentDestination?.removeAction()
-//
-//Log.e("Fragment", action.toString())

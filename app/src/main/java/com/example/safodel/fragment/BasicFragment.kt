@@ -35,10 +35,6 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
         _binding = null
     }
 
-    override fun onLowMemory() {
-        super.onLowMemory()
-    }
-
     /**
      *  Press the navigation icon to pop up the navigation window
      */
@@ -202,7 +198,7 @@ abstract class BasicFragment<TBinding : ViewBinding>(private val inflate: Inflat
     /**
      * observe the current weather
      */
-    fun observeWeather() {
+    private fun observeWeather() {
         model = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
         model.getWeather().observe(viewLifecycleOwner, { t ->
             val mainActivity = activity as MainActivity

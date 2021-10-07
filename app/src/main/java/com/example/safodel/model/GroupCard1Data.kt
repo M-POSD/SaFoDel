@@ -13,7 +13,7 @@ class GroupCard1Data(
 ) {
     companion object {
         fun init(): MutableList<GroupCard1Data> {
-            var groupCard1Data: MutableList<GroupCard1Data> = ArrayList()
+            val groupCard1Data: MutableList<GroupCard1Data> = ArrayList()
 
             // eBikeInfo1 data
             groupCard1Data.add(

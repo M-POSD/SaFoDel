@@ -5,6 +5,4 @@ import com.google.gson.annotations.SerializedName
 class SuburbAccidents {
     @SerializedName("accidents")
     var accidents: Int = 0
-    @SerializedName("suburb")
-    var suburbName: String = ""
 }

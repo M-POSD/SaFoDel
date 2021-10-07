@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.17552083333333332" />
         <entry key="app/src/main/res/drawable/blue_outline.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/drawable/bottom_nav_selector.xml" value="0.2324074074074074" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.2712962962962963" />
@@ -10,6 +11,7 @@
         <entry key="app/src/main/res/drawable/correct_option_border_bg.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/drawable/darksky_snow_gradient.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/drawable/default_option_border_bg.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/gray_outline.xml" value="0.22857142857142856" />
         <entry key="app/src/main/res/drawable/green_red_gradient.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.10462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new.xml" value="0.1868421052631579" />
@@ -44,15 +46,15 @@
         <entry key="app/src/main/res/layout/analysis_generic_info.xml" value="0.335" />
         <entry key="app/src/main/res/layout/appinfo_about.xml" value="0.335" />
         <entry key="app/src/main/res/layout/appinfo_audience.xml" value="0.21784420289855072" />
-        <entry key="app/src/main/res/layout/appinfo_how.xml" value="0.22604166666666667" />
-        <entry key="app/src/main/res/layout/appinfo_what.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/appinfo_why.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/layout/appinfo_how.xml" value="0.184375" />
+        <entry key="app/src/main/res/layout/appinfo_what.xml" value="0.184375" />
+        <entry key="app/src/main/res/layout/appinfo_why.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/big_button.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/check_leave_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/checkbox_layout.xml" value="0.15517241379310345" />
         <entry key="app/src/main/res/layout/checkbox_layout2.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/detail_card_checklist.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/detail_card_checklist.xml" value="0.25" />
         <entry key="app/src/main/res/layout/detail_card_checklist2.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card_standard.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card_v0.xml" value="0.2930253623188406" />
@@ -67,22 +69,22 @@
         <entry key="app/src/main/res/layout/detail_page_layout.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/detail_page_layout2.xml" value="0.25" />
         <entry key="app/src/main/res/layout/detail_page_layout3.xml" value="0.2296875" />
-        <entry key="app/src/main/res/layout/developer_info.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/developer_info.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/epic_page_layout.xml" value="0.29393115942028986" />
         <entry key="app/src/main/res/layout/epic_page_layout_v0.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/extreme_small.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/filter_card.xml" value="0.2028985507246377" />
-        <entry key="app/src/main/res/layout/filter_cards.xml" value="0.253125" />
+        <entry key="app/src/main/res/layout/filter_cards.xml" value="0.1" />
         <entry key="app/src/main/res/layout/filter_target.xml" value="0.1506811538900023" />
         <entry key="app/src/main/res/layout/fragment_accident3.xml" value="0.17798913043478262" />
         <entry key="app/src/main/res/layout/fragment_analysis.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_app_intro.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_checklist.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_app_intro.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_checklist.xml" value="0.1651376146788991" />
         <entry key="app/src/main/res/layout/fragment_checklist2.xml" value="0.26096491228070173" />
         <entry key="app/src/main/res/layout/fragment_developer.xml" value="0.22682283502033612" />
         <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
-        <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_epic4.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/fragment_epic_style1.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_epic_style2.xml" value="0.12310030395136778" />
@@ -92,7 +94,7 @@
         <entry key="app/src/main/res/layout/fragment_exam1.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_gear3.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/fragment_hero_feature.xml" value="0.1094224924012158" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_info1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_info2.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
@@ -112,20 +114,21 @@
         <entry key="app/src/main/res/layout/fragment_welcome_safodel.xml" value="0.1094224924012158" />
         <entry key="app/src/main/res/layout/group_card_v1.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/group_card_v2.xml" value="0.22239583333333332" />
-        <entry key="app/src/main/res/layout/hero_feature_info1.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/hero_feature_info1.xml" value="0.25" />
         <entry key="app/src/main/res/layout/hero_feature_info2.xml" value="0.19655797101449277" />
         <entry key="app/src/main/res/layout/hero_feature_info3.xml" value="0.45" />
         <entry key="app/src/main/res/layout/hero_feature_info4.xml" value="0.25" />
         <entry key="app/src/main/res/layout/hero_feature_info5.xml" value="0.25" />
         <entry key="app/src/main/res/layout/hero_feature_info6.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/homepage_button_layout.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/homepage_images.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/homepage_button_layout.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/homepage_images.xml" value="0.2742382271468144" />
         <entry key="app/src/main/res/layout/items_lga.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/large_button.xml" value="0.125" />
         <entry key="app/src/main/res/layout/large_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/left_nav_footer.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/left_nav_footer.xml" value="0.125" />
         <entry key="app/src/main/res/layout/left_nav_header.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/list_spinner_customer.xml" value="0.175" />
         <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.23324275362318841" />
         <entry key="app/src/main/res/layout/medium_btn.xml" value="0.21197916666666666" />
@@ -138,13 +141,14 @@
         <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.15219298245614035" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/small_card.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/small_cards.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/small_cards.xml" value="0.165" />
         <entry key="app/src/main/res/layout/start_button.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/menu/nav_icon_menu_dark_mode.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/menu/nav_icon_menu_light_mode.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/nav_menu_bottom.xml" value="0.17324561403508773" />
         <entry key="app/src/main/res/menu/nav_menu_left.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1942084942084942" />
       </map>
     </option>
   </component>

@@ -1,5 +1,6 @@
 package com.example.safodel.ui.analysis;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.TextView;
 
@@ -9,9 +10,10 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 
+@SuppressLint("ViewConstructor")
 public class YourMarkerView extends MarkerView {
 
-    private TextView tvContent;
+    private final TextView tvContent;
 
     public  YourMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);
@@ -23,12 +25,13 @@ public class YourMarkerView extends MarkerView {
 
     // callbacks everytime the MarkerView is redrawn, can be used to update the
     // content (user-interface)
+    @SuppressLint("SetTextI18n")
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
 
         tvContent.setText("" +e.getY());
 
-        // this will perform necessary layouting
+        // this will perform necessary laying
         super.refreshContent(e, highlight);
     }
 

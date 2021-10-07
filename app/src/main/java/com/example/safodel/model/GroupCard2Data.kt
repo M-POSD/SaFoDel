@@ -15,7 +15,7 @@ class   GroupCard2Data(
 ) {
     companion object {
         fun init(): MutableList<GroupCard2Data> {
-            var groupCard2Data: MutableList<GroupCard2Data> = ArrayList()
+            val groupCard2Data: MutableList<GroupCard2Data> = ArrayList()
 
             // tip1 data
             groupCard2Data.add(

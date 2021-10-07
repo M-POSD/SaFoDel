@@ -93,8 +93,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
     // Spinner
-    implementation "com.github.arcadefire:nice-spinner:1.4.4"
-    implementation 'com.github.chivorns:smartmaterialspinner:1.5.0'
+    implementation 'com.github.ajithvgiri:search-dialog:v1.5'
 
     // Raining animation
     implementation 'dyanamitechetan.vusikview:vusikview:1.1'
@@ -105,7 +104,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
 
     // Chart
-    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // Page indicator view
@@ -124,5 +122,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
 
 }

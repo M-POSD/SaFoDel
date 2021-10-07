@@ -13,9 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="30sp"
-            android:layout_marginTop="80sp"
-            android:layout_marginBottom="5sp">
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/left_header_safo"
@@ -38,7 +38,7 @@
         <View
             android:layout_width="200dp"
             android:layout_height="1dp"
-            android:layout_marginLeft="20sp"
+            android:layout_marginLeft="20dp"
             android:background="#9E9E9E" />
     </LinearLayout>
 

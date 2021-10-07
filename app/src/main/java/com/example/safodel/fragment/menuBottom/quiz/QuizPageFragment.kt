@@ -1,8 +1,8 @@
 package com.example.safodel.fragment.menuBottom.quiz
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.afollestad.materialdialogs.MaterialDialog
 import com.example.safodel.R
 import com.example.safodel.databinding.FragmentQuizPageBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.Question
 import com.example.safodel.entity.QuizResult
 import com.example.safodel.entity.TimeEntry
-import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.viewModel.TimeEntryWithQuizResultViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -69,6 +66,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
     /**
      * set questions to the view
      */
+    @SuppressLint("SetTextI18n")
     private fun setQuestions() {
         // default image view
         binding.image.visibility = View.GONE
@@ -76,7 +74,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         binding.submitBtn.button.text = getString(R.string.submit_button)
         // when the question haven't answered, set the current questions is clickable until has been answer
         setOptionClickable(true)
-        val question = mQuestions!![mCurrentPosition - 1]
+        val question = mQuestions[mCurrentPosition - 1]
 
         // set info view isGone
         infoView(0)
@@ -86,7 +84,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         binding.progress.text = "$mCurrentPosition/${binding.progressBar.max}"
 
 
-        binding.question.text = getString(question!!.question)
+        binding.question.text = getString(question.question)
 
         if (question.image != 0) {
             binding.image.setImageResource(question.image)
@@ -102,7 +100,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
      */
     private fun configDefaultOptionsView() {
         val options = ArrayList<TextView>()
-        val question = mQuestions!![mCurrentPosition - 1]
+        val question = mQuestions[mCurrentPosition - 1]
         options.add(0, binding.opt1.option)
         binding.opt1.option.text = getString(question.option1)
         options.add(1, binding.opt2.option)
@@ -130,7 +128,7 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
         for (option in options) {
             option.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.default_option_icon,0)
             option.setTextColor(ContextCompat.getColor(requireActivity(), R.color.bottom_nav_gray))
-            var typeface: Typeface? =
+            val typeface: Typeface? =
                 ResourcesCompat.getFont(requireActivity(), R.font.opensans_medium)
             option.typeface = typeface
             option.background = ContextCompat.getDrawable(
@@ -169,19 +167,18 @@ class QuizPageFragment : BasicFragment<FragmentQuizPageBinding>(FragmentQuizPage
                 if (mSelectedOptionPosition == 0) {
 
                     // no option has been selected, give a warning message
-                    if (binding.submitBtn.button.text == "SUBMIT") {
-                        toast.cancel()
+                    if (binding.submitBtn.button.text == getString(R.string.submit_button)) {
                         toast.setText(getString(R.string.notify_select_option))
                         toast.show()
                     } else {
                         mCurrentPosition++
 
                         when {
-                            mCurrentPosition <= mQuestions!!.size -> {
+                            mCurrentPosition <= mQuestions.size -> {
                                 setQuestions()
                             }
                             else -> {
-                                var timeEntry = TimeEntry(Calendar.getInstance().time)
+                                val timeEntry = TimeEntry(Calendar.getInstance().time)
 
                                 // store quiz results to database
                                 timeEntryWithQuizResultViewModel.addTimeEntryWithQuizResults(timeEntry, results)

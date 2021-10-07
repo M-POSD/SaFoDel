@@ -1,5 +1,6 @@
 package com.example.safodel.adapter
 
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 
 import android.content.Context
@@ -25,16 +26,13 @@ class QuizHistoryAdapter(results: MutableList<TimeEntryWithQuizResult>, context:
         return ViewHolder(binding)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val record = quizResults[position]
 
         viewHolder.binding.tvRvDate.text =
-            DateStringConverter().parseDateToStr("dd-MM-yyyy hh:mm:ss", record.timeEntry.time)
+            DateStringConverter().parseDateToStr("dd-MM-yyyy HH:mm:ss", record.timeEntry.time)
 
-//        viewHolder.binding.ivItemDelete.setOnClickListener {
-//            quizResults.remove(record)
-//            notifyDataSetChanged()
-//        }
 
         val model: HistoryDetailViewModel = ViewModelProvider(myContext as FragmentActivity).get(
             HistoryDetailViewModel::class.java
@@ -49,7 +47,5 @@ class QuizHistoryAdapter(results: MutableList<TimeEntryWithQuizResult>, context:
 
     override fun getItemCount(): Int = quizResults.size
 
-    class ViewHolder(binding: QuizHistoryRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        val binding: QuizHistoryRvBinding = binding
-    }
+    class ViewHolder(val binding: QuizHistoryRvBinding) : RecyclerView.ViewHolder(binding.root)
 }

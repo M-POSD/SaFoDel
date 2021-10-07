@@ -21,7 +21,7 @@ class Question(
 ) {
     companion object {
         fun init(): MutableList<Question> {
-            var questions: MutableList<Question> = ArrayList()
+            val questions: MutableList<Question> = ArrayList()
 
             questions.add(Question(
                     1,
@@ -116,9 +116,9 @@ class Question(
             ))
 
             // randomly select five questions
-            var questionList: MutableList<Question> = ArrayList()
+            val questionList: MutableList<Question> = ArrayList()
             for (i in 1..5) {
-                var random = nextInt(0, questions.size - 1)
+                val random = nextInt(0, questions.size - 1)
                 questionList.add(questions.removeAt(random))
             }
 
