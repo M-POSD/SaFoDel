@@ -648,7 +648,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
-    private fun isNetworkEnabled(): Boolean {
+    fun isNetworkEnabled(): Boolean {
         val networkManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             networkManager?.run {
