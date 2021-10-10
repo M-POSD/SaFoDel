@@ -348,7 +348,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         // go to the user's current location
         binding.floatButton.setOnClickListener {
             if(this::mapboxMap.isInitialized){
-                mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
+                mapboxMap.style?.let { it1 -> enableLocationComponent(it1,true) }
             if (this::navigationCamera.isInitialized) {
                 navigationCamera.requestNavigationCameraToOverview()
                 updateNavCamera()
@@ -398,7 +398,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             }
 
             // get user location
-            enableLocationComponent(it)
+            enableLocationComponent(it,false)
 
             // Check data is empty or not
             checkDataEmpty()
@@ -706,7 +706,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         cameraAutoZoomToSuburb()
         checkDataEmpty()
         mapboxMap.getStyle {
-            enableLocationComponent(it)
+            enableLocationComponent(it,true)
 
             it.getSourceAs<GeoJsonSource>("source")?.setGeoJson(
                 FeatureCollection.fromFeatures(
@@ -811,7 +811,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     /*-- get the location permission --*/
     @SuppressWarnings("MissingPermission")
-    fun enableLocationComponent(loadMapStyle: Style) {
+    fun enableLocationComponent(loadMapStyle: Style,boolean: Boolean) {
         if (PermissionsManager.areLocationPermissionsGranted(context)) {
             val customLocationComponentOptions: LocationComponentOptions? = context?.let {
                 LocationComponentOptions
@@ -826,7 +826,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     .locationComponentOptions(customLocationComponentOptions).build()
             }?.let {
                 locationComponent.activateLocationComponent(it)
-                if(locationComponent.lastKnownLocation == null ){
+                if(boolean && locationComponent.lastKnownLocation == null ){
                     toast.setText(getString(R.string.ask_allow_location_service))
                     toast.show()
                 }
@@ -903,7 +903,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     override fun onPermissionResult(granted: Boolean) {
         if (granted) {
             mapboxMap.getStyle {
-                enableLocationComponent(it)
+                enableLocationComponent(it,false)
             }
         } else {
             Toast.makeText(context, getString(R.string.location_granted), Toast.LENGTH_LONG)
