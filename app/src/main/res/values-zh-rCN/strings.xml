@@ -150,7 +150,7 @@
     <string name="road_sign5_title">钩型转弯</string>
     <string name="road_sign5_description">一个十字路口，你只能用钩形转弯右转，但建议骑自行车的人做钩形转弯而不是直接右转，因为这样通常更安全。</string>
     <string name="road_sign6_title">下车标志</string>
-    <string name="road_sign6_description">骑自行车者必须下车步行而不是骑车的地方（通常在人行横道或桥梁。</string>
+    <string name="road_sign6_description">骑自行车者必须下车步行而不是骑车的地方（通常在人行横道或桥梁）。</string>
     <string name="yes">是</string>
     <string name="no">不</string>
     <string name="true_text">正确</string>
@@ -273,7 +273,7 @@
 
     <string name="about">关于</string>
     <string name="about_us">
-        我们是莫纳什可持续发展促进会(M-POSD)。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
+        我们是莫纳什可持续发展促进会 M-POSD。作为一个由不同国籍的学生组成的热情团队，我们坚信通过我们的工作促进可持续发展的理念。
     </string>
     <string name="checklist_heading">出发前请携带</string>
     <string name="road_sign_heading">以下是重要的路标</string>
