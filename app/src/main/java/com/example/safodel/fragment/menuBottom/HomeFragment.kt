@@ -472,7 +472,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
          val  ninthTarget = Target.Builder()
             .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))
-            .setShape(Circle(120f))
+            .setShape(Circle(95f))
             .setOverlay(ninth)
             .build()
         ninth.findViewById<TextView>(R.id.next_target).alpha = 0f
