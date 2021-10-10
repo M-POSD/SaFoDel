@@ -590,7 +590,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     windSpeed = (windSpeed * 3.6 * 100.0).roundToInt() / 100.0f
 
                     val weather = weatherList[0].main
-                    if (weather == "Rain") {
+                    if (weather == "Rain" || weather == "Drizzle") {
                         rainingAnimation()
                     }
 
