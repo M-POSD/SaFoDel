@@ -812,10 +812,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     /*-- get the location permission --*/
     @SuppressWarnings("MissingPermission")
     fun enableLocationComponent(loadMapStyle: Style) {
-        if (!mainActivity.isNetworkEnabled()) {
-            toast.setText(getString(R.string.ask_allow_network_service))
-            toast.show()
-        } else
         if (PermissionsManager.areLocationPermissionsGranted(context)) {
             val customLocationComponentOptions: LocationComponentOptions? = context?.let {
                 LocationComponentOptions
@@ -1236,6 +1232,12 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         Call the retrofit client to get all data in the map
      */
     private fun callAllClient(boolean: Boolean){
+        if (!mainActivity.isNetworkEnabled()) {
+            toast.setText(getString(R.string.ask_allow_network_service))
+            toast.show()
+            dialog.dismiss()
+            return
+        }
         val mapIsInitialize = this::mapboxMap.isInitialized
         alertsFeature.clear()
         feature.clear()
