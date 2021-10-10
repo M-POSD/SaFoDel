@@ -184,7 +184,12 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Init the data from retrofit 2
      */
     private fun callSuburbClient(suburbName: String){
-
+        if (!mainActivity.isNetworkEnabled()) {
+            toast1.setText(getString(R.string.ask_allow_network_service))
+            toast1.show()
+            dialog.dismiss()
+            return
+        }
         val coroutineScope = CoroutineScope(Dispatchers.Main)
         coroutineScope.launch {
             val callStreet: Call<SuburbStreetsResponse> = suburbInterface.streetRepos(

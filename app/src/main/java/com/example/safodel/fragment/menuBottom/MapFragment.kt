@@ -826,6 +826,10 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     .locationComponentOptions(customLocationComponentOptions).build()
             }?.let {
                 locationComponent.activateLocationComponent(it)
+                if(locationComponent.lastKnownLocation == null ){
+                    toast.setText("Please open location.")
+                    toast.show()
+                }
             }
             locationComponent.isLocationComponentEnabled = true
             locationComponent.cameraMode = CameraMode.TRACKING
