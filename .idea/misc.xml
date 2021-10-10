@@ -81,7 +81,7 @@
         <entry key="app/src/main/res/layout/fragment_app_intro.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_checklist.xml" value="0.1651376146788991" />
         <entry key="app/src/main/res/layout/fragment_checklist2.xml" value="0.26096491228070173" />
-        <entry key="app/src/main/res/layout/fragment_developer.xml" value="0.22682283502033612" />
+        <entry key="app/src/main/res/layout/fragment_developer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
@@ -100,7 +100,7 @@
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_quiz_history.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_quiz_history.xml" value="0.17365269461077845" />
         <entry key="app/src/main/res/layout/fragment_quiz_history_date.xml" value="0.225" />
         <entry key="app/src/main/res/layout/fragment_quiz_history_detail.xml" value="0.24993264803940818" />
         <entry key="app/src/main/res/layout/fragment_quiz_page.xml" value="0.2052401746724891" />
