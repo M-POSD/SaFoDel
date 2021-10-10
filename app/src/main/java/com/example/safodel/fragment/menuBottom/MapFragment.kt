@@ -827,7 +827,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             }?.let {
                 locationComponent.activateLocationComponent(it)
                 if(locationComponent.lastKnownLocation == null ){
-                    toast.setText("Please open location.")
+                    toast.setText(getString(R.string.ask_allow_location_service))
                     toast.show()
                 }
             }
