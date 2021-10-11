@@ -117,7 +117,7 @@ class QuizHistoryFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
-//        historyViewModel.setResult(null)
+        historyViewModel.setResult(null)
         _binding = null
     }
 
