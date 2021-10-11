@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.safodel.R
+import com.example.safodel.databinding.CheckboxLayoutBinding
 import com.example.safodel.databinding.DetailCardChecklistBinding
 import com.example.safodel.databinding.FragmentChecklistBinding
 import com.example.safodel.fragment.BasicFragment
@@ -51,7 +52,6 @@ class CheckListFragment :
 
         configNotificationView()
         configDefaultTextView()
-        configCheckboxClickListener()
 
         return binding.root
     }
@@ -110,6 +110,8 @@ class CheckListFragment :
         if (checklist.bikeLockCheckbox8.checkbox.isChecked) {
             bikeLockImageView.alpha = 1f
         }
+
+        configCheckboxClickListener()
     }
 
     /**
@@ -170,124 +172,36 @@ class CheckListFragment :
      * set up when the check box is clicked, the record will be recorded in share preference
      */
     private fun configCheckboxClickListener() {
-        checklist.helmetCheckbox1.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(
-                    1,
-                    true
-                )
-                imageAnimation(helmetImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(
-                    1,
-                    false
-                )
-                helmetImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
-        checklist.maskCheckbox2.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(
-                    2,
-                    true
-                )
-                imageAnimation(maskImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(
-                    2,
-                    false
-                )
-                maskImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
-        checklist.glovesCheckbox3.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(
-                    3,
-                    true
-                )
-                imageAnimation(glovesImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(
-                    3,
-                    false
-                )
-                glovesImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
-        checklist.lightCheckbox4.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(4, true)
-                imageAnimation(lightImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(4, false)
-                lightImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
-        checklist.sanitizerCheckbox5.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(5, true)
-                imageAnimation(sanitizerImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(5, false)
-                sanitizerImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
-        checklist.vestCheckbox6.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(6, true)
-                imageAnimation(vestImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(6, false)
-                vestImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
-
-        checklist.backpackCheckbox7.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(7, true)
-                imageAnimation(backpackImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(7, false)
-                backpackImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
-        checklist.bikeLockCheckbox8.checkbox.setOnClickListener {
-            val isChecked = (it as CheckBox).isChecked
-            if (isChecked) {
-                mainActivity.keepCheckboxSharePrefer(8, true)
-                imageAnimation(bikeLockImageView)
-            } else {
-                mainActivity.keepCheckboxSharePrefer(8, false)
-                bikeLockImageView.alpha = 0f
-            }
-            configNotificationView()
-        }
+        imageAnimation(checklist.helmetCheckbox1,helmetImageView,1)
+        imageAnimation(checklist.maskCheckbox2,maskImageView,2)
+        imageAnimation(checklist.glovesCheckbox3,glovesImageView,3)
+        imageAnimation(checklist.lightCheckbox4,lightImageView,4)
+        imageAnimation(checklist.sanitizerCheckbox5,sanitizerImageView,5)
+        imageAnimation(checklist.vestCheckbox6,vestImageView,6)
+        imageAnimation(checklist.backpackCheckbox7,backpackImageView,7)
+        imageAnimation(checklist.bikeLockCheckbox8,bikeLockImageView,8)
     }
 
     /**
      * set the image animation from transparent to visible
      */
-    private fun imageAnimation(imageView: ImageView) {
-        val objectAnimator: ObjectAnimator =
-            ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f).setDuration(500)
+    private fun imageAnimation(checkBox:CheckboxLayoutBinding,imageView: ImageView,index: Int) {
         val animatorSet = AnimatorSet()
-        animatorSet.play(objectAnimator)
-        animatorSet.start()
+        checkBox.checkbox.setOnClickListener {
+            val isChecked = (it as CheckBox).isChecked
+            if (isChecked) {
+                mainActivity.keepCheckboxSharePrefer(index, true)
+                val objectAnimator: ObjectAnimator =
+                    ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f).setDuration(500)
+                animatorSet.play(objectAnimator)
+                animatorSet.start()
+            } else {
+                animatorSet.cancel()
+                mainActivity.keepCheckboxSharePrefer(index, false)
+                imageView.alpha = 0f
+            }
+            configNotificationView()
+        }
     }
 
     private fun setHeaderHeight(){
