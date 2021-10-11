@@ -574,10 +574,11 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                         val type = featureAccident[0].getStringProperty("type")
                         val road = featureAccident[0].getStringProperty("road")
                         val severity = featureAccident[0].getStringProperty("severity")
+                        val year = featureAccident[0].getNumberProperty("year")
                         val long = featureAccident[0].getNumberProperty("long")
                         val lat = featureAccident[0].getNumberProperty("lat")
                         val pointNow = Point.fromLngLat(long as Double, lat as Double)
-                        handleClickAccident(type,road,severity,pointNow,true)
+                        handleClickAccident(year.toInt(),type,road,severity,pointNow,true)
                     }
                     featureAlert.isNotEmpty() -> {
                         val type = featureAlert[0].getStringProperty("type")
@@ -679,16 +680,18 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         Handle Accident circle click event.
      */
     @SuppressLint("InflateParams")
-    fun handleClickAccident(type: String, road: String, severity: String, point: Point, boolean: Boolean) {
+    fun handleClickAccident(year:Int, type: String, road: String, severity: String, point: Point, boolean: Boolean) {
         removeAlertBubble()
         if (boolean) {
             val accidentBubble = LayoutInflater.from(mainActivity).inflate(
                 R.layout.marker_accident_bubble,null
             )
             accidentBubble.layoutParams = FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val accidentsYear = accidentBubble.findViewById<TextView>(R.id.marker_accident_year)
             val accidentTitle = accidentBubble.findViewById<TextView>(R.id.marker_accident_title)
             val accidentRoad = accidentBubble.findViewById<TextView>(R.id.marker_accident_road)
             val accidentSeverity  = accidentBubble.findViewById<TextView>(R.id.marker_accident_severity)
+            accidentsYear.text = year.toString()
             accidentTitle.text = type
             accidentRoad.text = road
             accidentSeverity.text = severity
@@ -1290,6 +1293,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             val eachFeature = Feature.fromGeometry(eachPoint)
                             eachFeature.addStringProperty("type",each.type)
                             eachFeature.addStringProperty("road",each.road_name)
+                            eachFeature.addNumberProperty("year",each.year.toInt())
                             eachFeature.addStringProperty("severity",each.severity)
                             eachFeature.addNumberProperty("long",each.location.long)
                             eachFeature.addNumberProperty("lat",each.location.lat)
