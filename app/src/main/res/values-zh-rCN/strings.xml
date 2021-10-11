@@ -261,7 +261,7 @@
     <string name="analysis_heading5">20%</string>
     <string name="analysis_description1">自 2019 年以来，维多利亚州已经纪录自行车事故。</string>
     <string name="analysis_description2">在晴朗的天气条件下报告了自行车事故。</string>
-    <string name="analysis_description3">是最高记录事故的时间(高峰时段)。</string>
+    <string name="analysis_description3">是最高记录事故的时间（高峰时段）。</string>
     <string name="analysis_description5">在夜间或黄昏/黎明期间报告了自行车事故。</string>
     <string name="analysis_description4">自行车事故发生在白天。</string>
     <string name="bike_paths">自行车道</string>
