@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
+import androidx.compose.ui.text.toUpperCase
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.databinding.FragmentQuizHistoryBinding
@@ -91,7 +92,7 @@ class QuizHistoryFragment :
                 binding.historyDetail.historyDetailScrollView.fullScroll(ScrollView.FOCUS_UP)
                 val result = it.quizResults
                 binding.historyDetail.timeDetail.text =
-                    DateStringConverter().parseDateToStr("dd-MM-yyyy HH:mm:ss", it.timeEntry.time)
+                    DateStringConverter().parseDateToStr("dd-MM-yyyy hh:mm:ss aa", it.timeEntry.time)
 
                 var count = 1
                 for (i in result) {
