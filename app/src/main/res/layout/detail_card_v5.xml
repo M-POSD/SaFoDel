@@ -66,10 +66,9 @@
                         android:id="@+id/description"
                         style="@style/textStyle16_black"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
+                        android:layout_height="match_parent"
                         android:justificationMode="inter_word"
-                        android:text="Demo" />
+                        android:text="Demo deo mdeomm demoo" />
 
                 </LinearLayout>
 
