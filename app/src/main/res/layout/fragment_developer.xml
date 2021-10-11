@@ -17,11 +17,11 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="286dp"
+            android:layout_height="wrap_content"
             android:scaleX="1"
             android:scaleY="1"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/logo_mposd" />
 
 
@@ -30,7 +30,7 @@
             style="@style/textStyle16_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:clickable="true"
             android:text="@string/about" />
 
