@@ -31,7 +31,7 @@ class QuizHistoryAdapter(results: MutableList<TimeEntryWithQuizResult>, context:
         val record = quizResults[position]
 
         viewHolder.binding.tvRvDate.text =
-            DateStringConverter().parseDateToStr("dd-MM-yyyy  hh:mm  aa", record.timeEntry.time)
+            DateStringConverter().parseDateToStr("dd-MM-yyyy  hh:mm  aa", record.timeEntry.time).uppercase()
 
 
         val model: HistoryDetailViewModel = ViewModelProvider(myContext as FragmentActivity).get(

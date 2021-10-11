@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:background="@color/snow"
         android:orientation="vertical">
 
@@ -16,9 +16,10 @@
         <TextView
             android:id="@+id/time_detail"
             style="@style/textStyle20_bold_black"
-            android:layout_width="300sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textSize="23dp"
             android:gravity="center" />
 
         <LinearLayout
