@@ -39,7 +39,6 @@
                     android:layout_gravity="center"
                     style="@style/textStyle16_red"
                     android:justificationMode="inter_word"
-                    android:padding="5dp"
                     android:text="Demo" />
 
                 <TextView
