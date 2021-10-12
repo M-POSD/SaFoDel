@@ -373,6 +373,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         update the map when call getMapAsync()
      */
     override fun onMapReady(mapboxMap: MapboxMap) {
+        if(mapView.isDestroyed) return
         mapboxMap.setMaxZoomPreference(20.0)
         mapboxMap.setMinZoomPreference(5.0)
         this.mapboxMap = mapboxMap
@@ -872,8 +873,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
-
+        if(this::mapView.isInitialized)
+            mapView.onSaveInstanceState(outState)
     }
 
 
@@ -884,6 +885,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     override fun onDestroyView() {
         super.onDestroyView()
+        dialog.dismiss()
         if (this::markerViewManager.isInitialized)
             markerViewManager.onDestroy()
         mapView.onDestroy()
@@ -1361,19 +1363,19 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             searchBarMap1.layoutParams = searchBarMap1Height
             filterCards.layoutParams = filterCardsHeight
 
-            binding.filterCards.filterPaths.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterPaths.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_path, 0, 0, 0
             )
 
-            binding.filterCards.filterTraffic.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterTraffic.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_traffic,0,0,0
             )
 
-            binding.filterCards.filterAccidents.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterAccidents.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_accident,0,0,0
             )
 
-            binding.filterCards.filterAlerts.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterAlerts.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_alert,0,0,0
             )
             this.cancel()
