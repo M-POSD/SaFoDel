@@ -115,6 +115,7 @@ private val locationList: ArrayList<Point> = ArrayList()
 private val pathsList: ArrayList<ArrayList<Point>> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var alertsFeature: ArrayList<Feature> = ArrayList()
+private var destinationFeature: ArrayList<Feature> = ArrayList()
 private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private var alertClickTimes = 0
@@ -158,7 +159,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var searchBarMap1: FrameLayout
     private lateinit var suburbPoint: Point
     private lateinit var trafficPlugin: TrafficPlugin
-    private lateinit var searchBar: FrameLayout
     private lateinit var filterCards : View
     private lateinit var markerViewManager: MarkerViewManager
     private lateinit var alertMarkerBubble: MarkerView
@@ -166,6 +166,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var filterCardBinding: FilterCardsBinding
     private lateinit var floatButtonZoomIn: View
     private lateinit var floatButtonZoomOut: View
+    private lateinit var floatButtonDestination: View
     private lateinit var searchableDialog: SearchableDialog
 
     // Route
@@ -299,7 +300,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         toolbar = binding.toolbar.root
         recenter = binding.recenter
         mapView = binding.mapView
-        searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
         filterCards = binding.filterCards.root
         filterCardBinding = binding.filterCards
@@ -310,6 +310,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         spotlightRoot = FrameLayout(requireContext())
         floatButtonZoomIn = binding.floatButtonZoomIn
         floatButtonZoomOut = binding.floatButtonZoomOut
+        floatButtonDestination = binding.floatButtonDestination
         floatButton = binding.floatButton
         floatButtonNav = binding.floatButtonNav
         tripProgressCard = binding.tripProgressCard
@@ -427,7 +428,19 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                         )
                     }
                 )!!
+            )
 
+            /*--   Add  destination image   --*/
+            it.addImage(
+                "destination_image",
+                BitmapUtils.getBitmapFromDrawable(
+                    context?.let { it1 ->
+                        ContextCompat.getDrawable(
+                            it1,
+                            R.drawable.destination_point
+                        )
+                    }
+                )!!
             )
 
             /*-- Add source --*/
@@ -446,6 +459,16 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     "alertSource", FeatureCollection.fromFeatures(
                         ArrayList<Feature>(
                             alertsFeature
+                        )
+                    )
+                )
+            )
+
+            it.addSource(
+                GeoJsonSource(
+                    "destinationSource", FeatureCollection.fromFeatures(
+                        ArrayList<Feature>(
+                            destinationFeature
                         )
                     )
                 )
@@ -557,6 +580,24 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             //alertIconLayer.minZoom = 15f
             it.addLayer(alertIconLayer)
 
+            /*-- Add destination layer --*/
+            val destinationIconLayer = SymbolLayer("destination_layer", "destinationSource")
+            destinationIconLayer.withProperties(
+                visibility(Property.VISIBLE),
+                iconImage("destination_image"),
+                iconSize(
+                    interpolate(
+                        linear(), zoom(),
+                        stop(10, 0.05f),
+                        stop(15, 0.075f),
+                        stop(20.0f, 0.15f)
+                    )
+                ),
+                iconIgnorePlacement(false),
+                iconAllowOverlap(false)
+            )
+            it.addLayer(destinationIconLayer)
+
             /*
                 Handle click event -- pop up windows
              */
@@ -608,6 +649,21 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             /*--  Float button can hide the crash data relative view.   --*/
             binding.floatButtonNav.setOnClickListener {
                 changeToNav()
+            }
+
+            /*-- Check destination function   --*/
+            floatButtonDestination.setOnClickListener {
+                val intent: Intent = PlaceAutocomplete.IntentBuilder()
+                    .accessToken(getString(R.string.mapbox_access_token))
+                    .placeOptions(
+                        PlaceOptions.builder()
+                            .backgroundColor(parseColor("#EEEEEE"))
+                            .limit(10)
+                            .build(PlaceOptions.MODE_CARDS)
+                    )
+                    .build(mainActivity)
+                startActivityForResult(intent, 1)
+
             }
             dialog.dismiss()
         }
@@ -755,6 +811,52 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     }
 
 
+    fun addDestinationToMap(){
+        if(!this::mapboxMap.isInitialized) return
+        cameraAutoZoomToDesrination()
+        checkDestinationEmpty()
+        mapboxMap.getStyle {
+            enableLocationComponent(it, true)
+
+            // Destination source
+            it.getSourceAs<GeoJsonSource>("destinationSource")?.setGeoJson(
+                FeatureCollection.fromFeatures(
+                    ArrayList<Feature>(
+                        destinationFeature
+                    )
+                )
+            )
+        }
+
+        /*-- Set the camera's animation --*/
+        mapboxMap.animateCamera(
+            CameraUpdateFactory
+                .newCameraPosition(
+                    CameraPosition.Builder()
+                        .zoom(10.5)
+                        .build()
+                ), 3000
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+            val selectedCarmenFeature = PlaceAutocomplete.getPlace(data)
+            val long = selectedCarmenFeature.center()?.longitude()!!
+            val lat = selectedCarmenFeature.center()?.latitude()!!
+
+            destinationFeature.clear()
+            val eachPoint = Point.fromLngLat(long,lat)
+            val eachFeature = Feature.fromGeometry(eachPoint)
+            eachFeature.addNumberProperty("long",long)
+            eachFeature.addNumberProperty("lat", lat)
+            destinationFeature.add(eachFeature)
+            addDestinationToMap()
+        }
+    }
+
+
     /*
         Create listener for all float button
      */
@@ -803,10 +905,30 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
     }
 
+    /*-- Camera auto zoom to the suburb area --*/
+    private fun cameraAutoZoomToDesrination(){
+        if (this::mapboxMap.isInitialized && destinationFeature.size != 0) {
+            val lat = destinationFeature[0].getNumberProperty("lat")
+            val long = destinationFeature[0].getNumberProperty("long")
+            val position = CameraPosition.Builder()
+                .target(LatLng(lat as Double, long as Double))
+                .zoom(10.0)
+                .build()
+            mapboxMap.cameraPosition = position
+        }
+    }
+
     /*-- Make a toast when data is updating --*/
     private fun checkDataEmpty(){
-
         if (feature.size == 0 && locationList.size == 0) {
+            toast.setText(getString(R.string.no_data))
+            toast.show()
+        }
+    }
+
+    /*-- Make a toast when no data in destinaion feature --*/
+    private fun checkDestinationEmpty(){
+        if (destinationFeature.size == 0) {
             toast.setText(getString(R.string.no_data))
             toast.show()
         }
@@ -933,7 +1055,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     mapView2.visibility = View.VISIBLE
                     mapView.visibility = View.INVISIBLE
                     binding.recenter.visibility = View.VISIBLE
-                    binding.searchBar.visibility = View.VISIBLE
                     binding.floatButtonStop.visibility = View.VISIBLE
                     initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
@@ -942,18 +1063,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     bcLayer.setProperties(visibility(Property.NONE))
                     scLayer?.setProperties(visibility(Property.NONE))
                     siLayer?.setProperties(visibility(Property.NONE))
-
-                    /*--    Edit the Search bar    --*/
-                    val coroutineScope = CoroutineScope(Dispatchers.Main)
-                    coroutineScope.launch {
-                        // try to get the height of status bar and then margin top
-                        val searchBarHeight =
-                            searchBar.layoutParams as CoordinatorLayout.LayoutParams
-                        while (searchBarHeight.topMargin == 0)
-                            searchBarHeight.topMargin = mainActivity.getStatusHeight()
-                        searchBar.layoutParams = searchBarHeight
-                        this.cancel()
-                    }
 
                 }
                 else {
@@ -965,7 +1074,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             mainActivity.isBottomNavigationVisible(true)
                             mapView2.visibility = View.INVISIBLE
                             binding.floatButtonStop.visibility = View.INVISIBLE
-                            binding.searchBar.visibility = View.INVISIBLE
                             mapView.visibility = View.VISIBLE
                             recenter.visibility = View.INVISIBLE
                             binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
@@ -1081,33 +1189,10 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             navigationCamera.requestNavigationCameraToFollowing()
         }
 
-        searchBar.setOnClickListener {
-            val intent: Intent = PlaceAutocomplete.IntentBuilder()
-                .accessToken(getString(R.string.mapbox_access_token))
-                .placeOptions(
-                    PlaceOptions.builder()
-                        .backgroundColor(parseColor("#EEEEEE"))
-                        .limit(10)
-                        .build(PlaceOptions.MODE_CARDS)
-                )
-                .build(mainActivity)
-            startActivityForResult(intent, 1)
-
-        }
-
         mapboxNavigation.startTripSession()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
-            val selectedCarmenFeature = PlaceAutocomplete.getPlace(data)
-            val long = selectedCarmenFeature.center()?.longitude()!!
-            val lat = selectedCarmenFeature.center()?.latitude()!!
 
-            findRoute(Point.fromLngLat(long, lat))
-        }
-    }
 
 
     /*
@@ -1225,12 +1310,16 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         floatButtonStop.layoutParams = fBHeightStop
 
         val fBHeightZoomOut = floatButtonZoomOut.layoutParams as CoordinatorLayout.LayoutParams
-        fBHeightZoomOut.bottomMargin = fBHeight.bottomMargin * 2
+        fBHeightZoomOut.bottomMargin = fBHeight.bottomMargin * 3
         floatButtonZoomOut.layoutParams = fBHeightZoomOut
 
         val fBHeightZoomIn = floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
-        fBHeightZoomIn.bottomMargin = fBHeight.bottomMargin * 3
+        fBHeightZoomIn.bottomMargin = fBHeight.bottomMargin * 4
         floatButtonZoomIn.layoutParams = fBHeightZoomIn
+
+        val fBHeightDestination = floatButtonDestination.layoutParams as CoordinatorLayout.LayoutParams
+        fBHeightDestination.bottomMargin = fBHeight.bottomMargin * 2
+        floatButtonDestination.layoutParams = fBHeightDestination
 
         spinnerText.setCompoundDrawablesWithIntrinsicBounds(
             R.drawable.baseline_search_black_36,0,0,0
