@@ -659,6 +659,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     .placeOptions(
                         PlaceOptions.builder()
                             .backgroundColor(parseColor("#EEEEEE"))
+                            .country("AU")
                             .limit(10)
                             .build(PlaceOptions.MODE_CARDS)
                     )
@@ -817,7 +818,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         cameraAutoZoomToDesrination()
         checkDestinationEmpty()
         mapboxMap.getStyle {
-            enableLocationComponent(it, true)
+            //enableLocationComponent(it, true)
 
             // Destination source
             it.getSourceAs<GeoJsonSource>("destinationSource")?.setGeoJson(
