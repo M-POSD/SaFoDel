@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.*
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -120,6 +121,7 @@ private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private var alertClickTimes = 0
 private var accidentClickTimes = 0
+private var destinationClickTimes = 0
 private var spinnerIndex = 0
 
 
@@ -163,6 +165,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var markerViewManager: MarkerViewManager
     private lateinit var alertMarkerBubble: MarkerView
     private lateinit var accidentMarkerBubble: MarkerView
+    private lateinit var destinationMarkerBubble: MarkerView
     private lateinit var filterCardBinding: FilterCardsBinding
     private lateinit var floatButtonZoomIn: View
     private lateinit var floatButtonZoomOut: View
@@ -611,6 +614,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
                 val featureAlert = mapboxMap.queryRenderedFeatures(rectF, "alert_layer")
                 val featureAccident = mapboxMap.queryRenderedFeatures(rectF,"shadow_circle_layer")
+                val featureDestination = mapboxMap.queryRenderedFeatures(rectF,"destination_layer")
 
                 when {
                     featureAccident.isNotEmpty() -> {
@@ -629,6 +633,13 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                         val lat = featureAlert[0].getNumberProperty("lat")
                         val pointNow = Point.fromLngLat(long as Double, lat as Double)
                         handleClickAlert(type, pointNow, true)
+                    }
+                    featureDestination.isNotEmpty() -> {
+                        val title = featureDestination[0].getStringProperty("title")
+                        val long = featureDestination[0].getNumberProperty("long")
+                        val lat = featureDestination[0].getNumberProperty("lat")
+                        val pointNow = Point.fromLngLat(long as Double, lat as Double)
+                        handleClickDestination(title, pointNow, true)
                     }
                     else -> handleClickAlert("", pointHere, false)
                 }
@@ -733,6 +744,14 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             }
 
         }
+
+        if (destinationClickTimes > 0) {
+            if(this::destinationMarkerBubble.isInitialized){
+                markerViewManager.removeMarker(destinationMarkerBubble)
+                destinationClickTimes--
+            }
+
+        }
     }
 
     /*
@@ -759,6 +778,34 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             accidentClickTimes++
         }
     }
+
+    /*
+        Handle destination circle click event.
+     */
+    @SuppressLint("InflateParams")
+    fun handleClickDestination(title: String, point: Point, boolean: Boolean) {
+        removeAlertBubble()
+        if (boolean) {
+            val destinationBubble = LayoutInflater.from(mainActivity).inflate(
+                R.layout.marker_destination_bubble,null
+            )
+            destinationBubble.layoutParams = FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val accidentTitle = destinationBubble.findViewById<TextView>(R.id.marker_destination_title)
+            val clearButton = destinationBubble.findViewById<TextView>(R.id.clear_destination_point_button)
+            clearButton.setOnClickListener {
+                destinationFeature.clear()
+                removeAlertBubble()
+                updateDestinationPoint()
+            }
+
+            accidentTitle.text = title
+            destinationMarkerBubble = MarkerView(LatLng(point.latitude(), point.longitude()), destinationBubble)
+            markerViewManager.addMarker(destinationMarkerBubble)
+            destinationClickTimes++
+        }
+    }
+
+
 
     /*
         Update the map without recreate the map and layer
@@ -814,21 +861,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
 
     fun addDestinationToMap(){
-        if(!this::mapboxMap.isInitialized) return
-        cameraAutoZoomToDesrination()
-        checkDestinationEmpty()
-        mapboxMap.getStyle {
-            //enableLocationComponent(it, true)
-
-            // Destination source
-            it.getSourceAs<GeoJsonSource>("destinationSource")?.setGeoJson(
-                FeatureCollection.fromFeatures(
-                    ArrayList<Feature>(
-                        destinationFeature
-                    )
-                )
-            )
-        }
+        updateDestinationPoint()
 
         /*-- Set the camera's animation --*/
         mapboxMap.animateCamera(
@@ -841,18 +874,37 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         )
     }
 
+    fun updateDestinationPoint(){
+        if(!this::mapboxMap.isInitialized) return
+        cameraAutoZoomToDesrination()
+        mapboxMap.getStyle {
+            //enableLocationComponent(it, true)
+
+            // Destination source
+            it.getSourceAs<GeoJsonSource>("destinationSource")?.setGeoJson(
+                FeatureCollection.fromFeatures(
+                    ArrayList<Feature>(
+                        destinationFeature
+                    )
+                )
+            )
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 1) {
             val selectedCarmenFeature = PlaceAutocomplete.getPlace(data)
             val long = selectedCarmenFeature.center()?.longitude()!!
             val lat = selectedCarmenFeature.center()?.latitude()!!
+            val title = selectedCarmenFeature.placeName()
 
             destinationFeature.clear()
             val eachPoint = Point.fromLngLat(long,lat)
             val eachFeature = Feature.fromGeometry(eachPoint)
             eachFeature.addNumberProperty("long",long)
             eachFeature.addNumberProperty("lat", lat)
+            eachFeature.addStringProperty("title", title)
             destinationFeature.add(eachFeature)
             addDestinationToMap()
         }
@@ -923,14 +975,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     /*-- Make a toast when data is updating --*/
     private fun checkDataEmpty(){
         if (feature.size == 0 && locationList.size == 0) {
-            toast.setText(getString(R.string.no_data))
-            toast.show()
-        }
-    }
-
-    /*-- Make a toast when no data in destinaion feature --*/
-    private fun checkDestinationEmpty(){
-        if (destinationFeature.size == 0) {
             toast.setText(getString(R.string.no_data))
             toast.show()
         }

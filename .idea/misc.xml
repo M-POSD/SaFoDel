@@ -131,6 +131,7 @@
         <entry key="app/src/main/res/layout/list_spinner_customer.xml" value="0.175" />
         <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.23324275362318841" />
+        <entry key="app/src/main/res/layout/marker_destination_bubble.xml" value="0.30434782608695654" />
         <entry key="app/src/main/res/layout/medium_btn.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/medium_button.xml" value="0.125" />
         <entry key="app/src/main/res/layout/medium_card.xml" value="0.537109375" />
