@@ -19,6 +19,7 @@
             android:maxWidth="200dp"
             android:padding="8dp"
             tools:text="marker title"
+            android:justificationMode="inter_word"
             style="@style/textStyle14_black"
             android:layout_height="wrap_content" />
 
