@@ -575,7 +575,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             stop(20,48f)
                         )
                     ),
-                    lineColor(ContextCompat.getColor(requireActivity(), R.color.blueSky))
+                    lineColor(ContextCompat.getColor(requireActivity(), R.color.skin))
                 )
             )
 
