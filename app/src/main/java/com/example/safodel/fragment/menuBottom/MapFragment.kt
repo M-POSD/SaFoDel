@@ -225,6 +225,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             // show arrow on the route line with the next maneuver
             val maneuverArrowResult = routeArrowAPI.addUpcomingManeuverArrow(routeProgress)
             val style = mapboxMap2.getStyle()
+            
             if (style != null) {
                 routeArrowView.renderManeuverUpdate(style, maneuverArrowResult)
             }
