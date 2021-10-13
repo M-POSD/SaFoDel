@@ -133,7 +133,7 @@ class GroupCard1Data(
                     "inAnAccident3",
                     R.string.in_an_accident3_2_description,
                     R.drawable.inanaccident3_2,
-                    2
+                    -2
                 )
             )
 
