@@ -291,4 +291,5 @@
     <string name="click_left_menu">स्थान लोड करना पुनः आरंभ करने के लिए बाएँ मेनू पर क्लिक करें।</string>
     <string name="get_weather_successful">उपयोगकर्ता स्थान डेटा सफल प्राप्त करें</string>
     <string name="clear">" स्पष्ट"</string>
+    <string name="Reference_path">संदर्भ पथ</string>
 </resources>

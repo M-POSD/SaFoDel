@@ -23,15 +23,35 @@
             style="@style/textStyle14_black"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/clear_destination_point_button"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:clickable="true"
-            android:layout_gravity="right"
-            android:padding="8dp"
-            style="@style/textStyle14_gray"
             android:layout_height="wrap_content"
-            android:text="@string/clear"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/route_destination_point_button"
+                android:layout_width="wrap_content"
+                android:clickable="true"
+                android:layout_gravity="left"
+                android:padding="8dp"
+                style="@style/textStyle14_gray"
+                android:layout_height="wrap_content"
+                android:text="@string/Reference_path"/>
+
+            <TextView
+                android:id="@+id/clear_destination_point_button"
+                android:layout_width="wrap_content"
+                android:clickable="true"
+                android:layout_gravity="right"
+                android:padding="8dp"
+                style="@style/textStyle14_gray"
+                android:layout_height="wrap_content"
+                android:text="@string/clear"/>
+
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
