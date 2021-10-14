@@ -122,6 +122,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
 
     override fun onDestroyView() {
         super.onDestroyView()
+        dialog.dismiss()
         _binding = null
     }
 
@@ -184,7 +185,12 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Init the data from retrofit 2
      */
     private fun callSuburbClient(suburbName: String){
-
+        if (!mainActivity.isNetworkEnabled()) {
+            toast1.setText(getString(R.string.ask_allow_network_service))
+            toast1.show()
+            dialog.dismiss()
+            return
+        }
         val coroutineScope = CoroutineScope(Dispatchers.Main)
         coroutineScope.launch {
             val callStreet: Call<SuburbStreetsResponse> = suburbInterface.streetRepos(
@@ -218,7 +224,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Setting the bar chart
      */
     private fun setStreetsBarChat(list: List<SuburbStreetsAccidents>){
-        val color  = ContextCompat.getColor(requireContext(), R.color.primary_green)
+        val color  = ContextCompat.getColor(mainActivity, R.color.primary_green)
         val rawList = list.sortedBy {
             it.accidentsNumber
         }
@@ -228,7 +234,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
             map[count] = each.accidentAddressName
             data.add(BarEntry(count.toFloat(),each.accidentsNumber.toFloat()))
         }
-        val barDataset = BarDataSet(data,getString(R.string.accident_times))
+        val barDataset = BarDataSet(data,mainActivity.getString(R.string.accident_times))
         barDataset.color = color
         val barData = BarData(barDataset)
         bar.data = barData
@@ -240,7 +246,7 @@ class AnalysisFragment : BasicFragment<FragmentAnalysisBinding>(FragmentAnalysis
         Set the style of Horizontal Bar Chart
      */
     private fun setHBarStyle(bar:HorizontalBarChart, map:HashMap<Int,String>){
-        val marker: IMarker = YourMarkerView(activity,R.layout.analysis_bar_content)
+        val marker: IMarker = YourMarkerView(mainActivity,R.layout.analysis_bar_content)
         bar.marker = marker
         bar.axisLeft.setDrawGridLines(false)
         bar.axisRight.setDrawGridLines(false)

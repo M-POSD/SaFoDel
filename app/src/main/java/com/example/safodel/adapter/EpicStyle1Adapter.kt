@@ -66,16 +66,21 @@ class EpicStyle1Adapter(val context: Context, group1Data: MutableList<GroupCard1
                     context.startActivity(internetAct)
                 }
 
-//                viewHolder.binding.imageRight.description.paintFlags  = Paint.UNDERLINE_TEXT_FLAG
-//                viewHolder.binding.imageRight.description.setOnClickListener {
-//                    val url = context.getString(data.description_id)
-//                    val internetAct = Intent(Intent.ACTION_VIEW)
-//                    internetAct.data = Uri.parse(url)
-//                    context.startActivity(internetAct)
-//                }
-//                viewHolder.binding.imageRight.image.setImageResource(data.image)
                 viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
                 viewHolder.binding.imageRight.linearLayout2.visibility = View.INVISIBLE
+            }
+
+            -2 -> {
+                viewHolder.binding.imageRight.description.text = context.getString(data.description_id)
+                viewHolder.binding.imageRight.image.setImageResource(data.image)
+                viewHolder.binding.imageRight.image.setOnClickListener {
+                    val url = "https://www.tac.vic.gov.au/"
+                    val internetAct = Intent(Intent.ACTION_VIEW)
+                    internetAct.data = Uri.parse(url)
+                    context.startActivity(internetAct)
+                }
+                viewHolder.binding.foodDeliveryImage.linearLayout1.visibility = View.INVISIBLE
+                viewHolder.binding.pureText.linearLayout3.visibility = View.INVISIBLE
             }
 
             // all other information display (contains an image)

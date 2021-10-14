@@ -62,7 +62,7 @@
         <entry key="app/src/main/res/layout/detail_card_v2.xml" value="0.4251101321585903" />
         <entry key="app/src/main/res/layout/detail_card_v3.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/detail_card_v4.xml" value="0.19384057971014493" />
-        <entry key="app/src/main/res/layout/detail_card_v5.xml" value="0.352112676056338" />
+        <entry key="app/src/main/res/layout/detail_card_v5.xml" value="0.375" />
         <entry key="app/src/main/res/layout/detail_card_v6.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/detail_card_v7.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/detail_card_v8.xml" value="0.22239583333333332" />
@@ -81,7 +81,7 @@
         <entry key="app/src/main/res/layout/fragment_app_intro.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_checklist.xml" value="0.1651376146788991" />
         <entry key="app/src/main/res/layout/fragment_checklist2.xml" value="0.26096491228070173" />
-        <entry key="app/src/main/res/layout/fragment_developer.xml" value="0.22682283502033612" />
+        <entry key="app/src/main/res/layout/fragment_developer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_epic1.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_epic2.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/fragment_epic3.xml" value="0.12234042553191489" />
@@ -100,7 +100,7 @@
         <entry key="app/src/main/res/layout/fragment_info3.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_quiz_history.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_quiz_history.xml" value="0.17365269461077845" />
         <entry key="app/src/main/res/layout/fragment_quiz_history_date.xml" value="0.225" />
         <entry key="app/src/main/res/layout/fragment_quiz_history_detail.xml" value="0.24993264803940818" />
         <entry key="app/src/main/res/layout/fragment_quiz_page.xml" value="0.2052401746724891" />
@@ -131,12 +131,13 @@
         <entry key="app/src/main/res/layout/list_spinner_customer.xml" value="0.175" />
         <entry key="app/src/main/res/layout/marker_accident_bubble.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/marker_alert_bubble.xml" value="0.23324275362318841" />
+        <entry key="app/src/main/res/layout/marker_destination_bubble.xml" value="0.30434782608695654" />
         <entry key="app/src/main/res/layout/medium_btn.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/medium_button.xml" value="0.125" />
         <entry key="app/src/main/res/layout/medium_card.xml" value="0.537109375" />
         <entry key="app/src/main/res/layout/option_and_info.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/quiz_history_rv.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/quiz_result_display_layout.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/quiz_result_display_layout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/search_address.xml" value="0.14994934143870314" />
         <entry key="app/src/main/res/layout/simple_tabbar.xml" value="0.15219298245614035" />
         <entry key="app/src/main/res/layout/simple_toolbar.xml" value="0.12234042553191489" />

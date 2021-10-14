@@ -129,10 +129,10 @@
     <string name="in_an_accident2_2_title">कर्मचारी या नहीं?</string>
     <string name="in_an_accident2_2_description">Uber Eats श्रमिकों के साथ स्वतंत्र ठेकेदारों के रूप में व्यवहार करता है जबकि डिलिवरू उनके साथ कर्मचारियों के रूप में व्यवहार करता है</string>
     <string name="in_an_accident2_3_title">बढ़ती गति</string>
-    <string name="in_an_accident2_3_description">गिग वर्कर्स के साथ कैसा व्यवहार किया जाता है, यह एक उभरता हुआ क्षेत्र है, ट्रांसपोर्ट वर्कर्स यूनियन (TWU) जैसे समूह अधिक अधिकारों के लिए जोर दे रहे हैं</string>
+    <string name="in_an_accident2_3_description">गट्रांसपोर्ट वर्कर्स यूनियन जैसे समूह गिग वर्कर्स को अधिक काम के हकदार बनाने के लिए जोर दे रहे हैं।</string>
     <string name="in_an_accident3_0_description">अधिकांश डिलीवरी कंपनियां ड्राइवर और डिलीवरी पार्टनर्स के लिए एक सपोर्ट पैकेज की पेशकश करती हैं, जिससे पार्टनर को उनके प्लेटफॉर्म का उपयोग करते समय कुछ गलत होने पर कवर करने में मदद मिलती है</string>
     <string name="in_an_accident3_1_description">अपने फ़ूड डिलीवरी प्लेटफ़ॉर्म द्वारा प्रदान किए गए बीमा विवरण का पता लगाने के लिए, आगे अपने साथी का चयन करें</string>
-    <string name="in_an_accident3_2_description">टीएसी (परिवहन दुर्घटना आयोग) कुछ नियमों और शर्तों के तहत नो फॉल्ट लाभ प्रदान करता है</string>
+    <string name="in_an_accident3_2_description">परिवहन दुर्घटना आयोग एक \'नो-फॉल्ट\' बीमा योजना प्रदान करता है, पात्रता के लिए जाँच करें।</string>
     <string name="click_to_know_more">अधिक जानने के लिए क्लिक करें</string>
     <string name="uber_link">https://www.uber.com/au/en/drive/insurance/injury-protection/</string>
     <string name="deliveroo_link">https://riders.deliveroo.com.au/hi/news/your-free-deliveroo-rider-insurance</string>
@@ -286,7 +286,10 @@
     <string name="kms_per_hour">किमी/घंटा</string>
     <string name="next">अगला</string>
     <string name="close_btn">बंद करे</string>
-    <string name="ask_allow_service">कृपया अपनी स्थान सेवा सक्षम करें</string>
+    <string name="ask_allow_location_service">कृपया अपनी स्थान सेवा सक्षम करें</string>
+    <string name="ask_allow_network_service">कृपया अपनी नेटवर्क सेवा सक्षम करें</string>
     <string name="click_left_menu">स्थान लोड करना पुनः आरंभ करने के लिए बाएँ मेनू पर क्लिक करें।</string>
     <string name="get_weather_successful">उपयोगकर्ता स्थान डेटा सफल प्राप्त करें</string>
+    <string name="clear">" स्पष्ट"</string>
+    <string name="Reference_path">संदर्भ पथ</string>
 </resources>

@@ -25,11 +25,14 @@ import com.example.safodel.databinding.FilterCardsBinding
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.*
+import com.example.safodel.retrofit.DirectionClient
+import com.example.safodel.retrofit.DirectionInterface
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.ui.map.TrafficPlugin
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.DirectionsCriteria
@@ -70,13 +73,8 @@ import com.mapbox.maps.plugin.animation.camera
 import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.navigation.base.TimeFormat
-import com.mapbox.navigation.base.extensions.applyDefaultNavigationOptions
-import com.mapbox.navigation.base.extensions.applyLanguageAndVoiceUnitOptions
 import com.mapbox.navigation.base.formatter.DistanceFormatterOptions
 import com.mapbox.navigation.base.options.NavigationOptions
-import com.mapbox.navigation.base.route.RouterCallback
-import com.mapbox.navigation.base.route.RouterFailure
-import com.mapbox.navigation.base.route.RouterOrigin
 import com.mapbox.navigation.core.directions.session.RoutesObserver
 import com.mapbox.navigation.core.formatter.MapboxDistanceFormatter
 import com.mapbox.navigation.core.trip.session.LocationObserver
@@ -101,12 +99,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
-import java.math.RoundingMode
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
 import com.mapbox.geojson.*
+import com.mapbox.geojson.gson.GeometryGeoJson
 import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin
+import com.mapbox.navigation.base.extensions.applyDefaultNavigationOptions
+import com.mapbox.navigation.base.extensions.applyLanguageAndVoiceUnitOptions
+import com.mapbox.navigation.base.route.RouterCallback
+import com.mapbox.navigation.base.route.RouterFailure
+import com.mapbox.navigation.base.route.RouterOrigin
+import kotlin.text.StringBuilder
 
 /*
     Global basic value
@@ -115,10 +119,19 @@ private val locationList: ArrayList<Point> = ArrayList()
 private val pathsList: ArrayList<ArrayList<Point>> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var alertsFeature: ArrayList<Feature> = ArrayList()
+private var destinationFeature: ArrayList<Feature> = ArrayList()
+private var simpleRouteGeometry: Geometry = LineString.fromJson("{\n" +
+        "   \"TYPE\": \"LineString\",\n" +
+        "   \"coordinates\": [\n" +
+        "     [100.0, 0.0],\n" +
+        "     [101.0, 1.0]\n" +
+        "   ]\n" +
+        " }")
 private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private var alertClickTimes = 0
 private var accidentClickTimes = 0
+private var destinationClickTimes = 0
 private var spinnerIndex = 0
 
 
@@ -135,6 +148,7 @@ private lateinit var floatButtonStop: FloatingActionButton
 
 // Retrofit
 private lateinit var suburbInterface: SuburbInterface
+private lateinit var directionInterface: DirectionInterface
 
 
 class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -158,15 +172,18 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var searchBarMap1: FrameLayout
     private lateinit var suburbPoint: Point
     private lateinit var trafficPlugin: TrafficPlugin
-    private lateinit var searchBar: FrameLayout
     private lateinit var filterCards : View
     private lateinit var markerViewManager: MarkerViewManager
     private lateinit var alertMarkerBubble: MarkerView
     private lateinit var accidentMarkerBubble: MarkerView
+    private lateinit var destinationMarkerBubble: MarkerView
     private lateinit var filterCardBinding: FilterCardsBinding
     private lateinit var floatButtonZoomIn: View
     private lateinit var floatButtonZoomOut: View
+    private lateinit var floatButtonDestination: View
     private lateinit var searchableDialog: SearchableDialog
+
+
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -224,6 +241,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             // show arrow on the route line with the next maneuver
             val maneuverArrowResult = routeArrowAPI.addUpcomingManeuverArrow(routeProgress)
             val style = mapboxMap2.getStyle()
+            
             if (style != null) {
                 routeArrowView.renderManeuverUpdate(style, maneuverArrowResult)
             }
@@ -299,7 +317,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         toolbar = binding.toolbar.root
         recenter = binding.recenter
         mapView = binding.mapView
-        searchBar = binding.searchBar
         searchBarMap1 = binding.searchMap1
         filterCards = binding.filterCards.root
         filterCardBinding = binding.filterCards
@@ -310,6 +327,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         spotlightRoot = FrameLayout(requireContext())
         floatButtonZoomIn = binding.floatButtonZoomIn
         floatButtonZoomOut = binding.floatButtonZoomOut
+        floatButtonDestination = binding.floatButtonDestination
         floatButton = binding.floatButton
         floatButtonNav = binding.floatButtonNav
         tripProgressCard = binding.tripProgressCard
@@ -334,6 +352,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
 
         suburbInterface = SuburbClient.getSuburbService()
+        directionInterface = DirectionClient.getDirectionService()
 
         // change the float button height
         changeFloatButtonHeight()
@@ -348,7 +367,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         // go to the user's current location
         binding.floatButton.setOnClickListener {
             if(this::mapboxMap.isInitialized){
-                mapboxMap.style?.let { it1 -> enableLocationComponent(it1) }
+                mapboxMap.style?.let { it1 -> enableLocationComponent(it1,true) }
             if (this::navigationCamera.isInitialized) {
                 navigationCamera.requestNavigationCameraToOverview()
                 updateNavCamera()
@@ -363,7 +382,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 .build()
         )
 
-
         fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState) // init the map
         return binding.root
@@ -373,6 +391,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         update the map when call getMapAsync()
      */
     override fun onMapReady(mapboxMap: MapboxMap) {
+        if(mapView.isDestroyed) return
         mapboxMap.setMaxZoomPreference(20.0)
         mapboxMap.setMinZoomPreference(5.0)
         this.mapboxMap = mapboxMap
@@ -398,7 +417,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             }
 
             // get user location
-            enableLocationComponent(it)
+            enableLocationComponent(it,false)
 
             // Check data is empty or not
             checkDataEmpty()
@@ -426,7 +445,19 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                         )
                     }
                 )!!
+            )
 
+            /*--   Add  destination image   --*/
+            it.addImage(
+                "destination_image",
+                BitmapUtils.getBitmapFromDrawable(
+                    context?.let { it1 ->
+                        ContextCompat.getDrawable(
+                            it1,
+                            R.drawable.destination_point
+                        )
+                    }
+                )!!
             )
 
             /*-- Add source --*/
@@ -450,6 +481,16 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 )
             )
 
+            it.addSource(
+                GeoJsonSource(
+                    "destinationSource", FeatureCollection.fromFeatures(
+                        ArrayList<Feature>(
+                            destinationFeature
+                        )
+                    )
+                )
+            )
+
             // paths source
             it.addSource(
                 GeoJsonSource(
@@ -464,6 +505,12 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 )
             )
 
+            // simple route source
+            it.addSource(
+                GeoJsonSource(
+                    "simpleRouteSource"
+                )
+            )
             trafficPlugin = TrafficPlugin(mapView, mapboxMap, it)
             trafficPlugin.setVisibility(true)
 
@@ -523,6 +570,24 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 )
             )
 
+            /*-- Add Simpel route layer --*/
+            it.addLayer(
+                LineLayer("simple_route_layer", "simpleRouteSource").withProperties(
+                    lineOpacity(.7f),
+                    lineCap(Property.LINE_CAP_SQUARE),
+                    lineJoin(Property.LINE_JOIN_ROUND),
+                    lineWidth(
+                        interpolate(
+                            exponential(6f), zoom(),
+                            stop(10,3f),
+                            stop(15,12f),
+                            stop(20,48f)
+                        )
+                    ),
+                    lineColor(ContextCompat.getColor(requireActivity(), R.color.gray2))
+                )
+            )
+
             /*
                 add the icon layer
              */
@@ -556,6 +621,25 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             //alertIconLayer.minZoom = 15f
             it.addLayer(alertIconLayer)
 
+            /*-- Add destination layer --*/
+            val destinationIconLayer = SymbolLayer("destination_layer", "destinationSource")
+            destinationIconLayer.withProperties(
+                visibility(Property.VISIBLE),
+                iconImage("destination_image"),
+                iconSize(
+                    interpolate(
+                        linear(), zoom(),
+                        stop(5,0.075f),
+                        stop(10, 0.15f),
+                        stop(15, 0.225f),
+                        stop(20.0f, 0.45f)
+                    )
+                ),
+                iconIgnorePlacement(false),
+                iconAllowOverlap(false)
+            )
+            it.addLayer(destinationIconLayer)
+
             /*
                 Handle click event -- pop up windows
              */
@@ -568,16 +652,18 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
                 val featureAlert = mapboxMap.queryRenderedFeatures(rectF, "alert_layer")
                 val featureAccident = mapboxMap.queryRenderedFeatures(rectF,"shadow_circle_layer")
+                val featureDestination = mapboxMap.queryRenderedFeatures(rectF,"destination_layer")
 
                 when {
                     featureAccident.isNotEmpty() -> {
                         val type = featureAccident[0].getStringProperty("type")
                         val road = featureAccident[0].getStringProperty("road")
                         val severity = featureAccident[0].getStringProperty("severity")
+                        val year = featureAccident[0].getNumberProperty("year")
                         val long = featureAccident[0].getNumberProperty("long")
                         val lat = featureAccident[0].getNumberProperty("lat")
                         val pointNow = Point.fromLngLat(long as Double, lat as Double)
-                        handleClickAccident(type,road,severity,pointNow,true)
+                        handleClickAccident(year.toInt(),type,road,severity,pointNow,true)
                     }
                     featureAlert.isNotEmpty() -> {
                         val type = featureAlert[0].getStringProperty("type")
@@ -585,6 +671,13 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                         val lat = featureAlert[0].getNumberProperty("lat")
                         val pointNow = Point.fromLngLat(long as Double, lat as Double)
                         handleClickAlert(type, pointNow, true)
+                    }
+                    featureDestination.isNotEmpty() -> {
+                        val title = featureDestination[0].getStringProperty("title")
+                        val long = featureDestination[0].getNumberProperty("long")
+                        val lat = featureDestination[0].getNumberProperty("lat")
+                        val pointNow = Point.fromLngLat(long as Double, lat as Double)
+                        handleClickDestination(title, pointNow, true)
                     }
                     else -> handleClickAlert("", pointHere, false)
                 }
@@ -607,6 +700,22 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             binding.floatButtonNav.setOnClickListener {
                 changeToNav()
             }
+
+            /*-- Check destination function   --*/
+            floatButtonDestination.setOnClickListener {
+                val intent: Intent = PlaceAutocomplete.IntentBuilder()
+                    .accessToken(getString(R.string.mapbox_access_token))
+                    .placeOptions(
+                        PlaceOptions.builder()
+                            .backgroundColor(parseColor("#EEEEEE"))
+                            .country("AU")
+                            .limit(10)
+                            .build(PlaceOptions.MODE_CARDS)
+                    )
+                    .build(mainActivity)
+                startActivityForResult(intent, 1)
+
+            }
             dialog.dismiss()
         }
 
@@ -627,6 +736,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         filterPathsListener()
         filterAccidentListener()
         filterAlertsListener()
+
 
     }
 
@@ -673,22 +783,32 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             }
 
         }
+
+        if (destinationClickTimes > 0) {
+            if(this::destinationMarkerBubble.isInitialized){
+                markerViewManager.removeMarker(destinationMarkerBubble)
+                destinationClickTimes--
+            }
+
+        }
     }
 
     /*
         Handle Accident circle click event.
      */
     @SuppressLint("InflateParams")
-    fun handleClickAccident(type: String, road: String, severity: String, point: Point, boolean: Boolean) {
+    fun handleClickAccident(year:Int, type: String, road: String, severity: String, point: Point, boolean: Boolean) {
         removeAlertBubble()
         if (boolean) {
             val accidentBubble = LayoutInflater.from(mainActivity).inflate(
                 R.layout.marker_accident_bubble,null
             )
             accidentBubble.layoutParams = FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val accidentsYear = accidentBubble.findViewById<TextView>(R.id.marker_accident_year)
             val accidentTitle = accidentBubble.findViewById<TextView>(R.id.marker_accident_title)
             val accidentRoad = accidentBubble.findViewById<TextView>(R.id.marker_accident_road)
             val accidentSeverity  = accidentBubble.findViewById<TextView>(R.id.marker_accident_severity)
+            accidentsYear.text = year.toString()
             accidentTitle.text = type
             accidentRoad.text = road
             accidentSeverity.text = severity
@@ -699,13 +819,54 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     }
 
     /*
+        Handle destination circle click event.
+     */
+    @SuppressLint("InflateParams")
+    fun handleClickDestination(title: String, point: Point, boolean: Boolean) {
+        removeAlertBubble()
+        if (boolean) {
+            val destinationBubble = LayoutInflater.from(mainActivity).inflate(
+                R.layout.marker_destination_bubble,null
+            )
+            destinationBubble.layoutParams = FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val accidentTitle = destinationBubble.findViewById<TextView>(R.id.marker_destination_title)
+            val clearButton = destinationBubble.findViewById<TextView>(R.id.clear_destination_point_button)
+            val simpleRouteButton = destinationBubble.findViewById<TextView>(R.id.route_destination_point_button)
+            clearButton.setOnClickListener {
+                destinationFeature.clear()
+                removeAlertBubble()
+                clearSimplePath()
+                updateDestinationPoint()
+            }
+
+            simpleRouteButton.setOnClickListener {
+                var lat = 0.0
+                var long = 0.0
+                if(destinationFeature.size != 0){
+                    long = destinationFeature[0].getNumberProperty("long") as Double
+                    lat = destinationFeature[0].getNumberProperty("lat") as Double
+                }
+                simpleFindRoute(Point.fromLngLat(long,lat))
+            }
+
+            accidentTitle.text = title
+            destinationMarkerBubble = MarkerView(LatLng(point.latitude(), point.longitude()), destinationBubble)
+            markerViewManager.addMarker(destinationMarkerBubble)
+            destinationClickTimes++
+        }
+    }
+
+
+
+    /*
         Update the map without recreate the map and layer
      */
     fun onMapUpdate(){
+        if(!this::mapboxMap.isInitialized) return
         cameraAutoZoomToSuburb()
         checkDataEmpty()
         mapboxMap.getStyle {
-            enableLocationComponent(it)
+            enableLocationComponent(it,true)
 
             it.getSourceAs<GeoJsonSource>("source")?.setGeoJson(
                 FeatureCollection.fromFeatures(
@@ -734,6 +895,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     )
                 )
             )
+
+
         }
 
         /*-- Set the camera's animation --*/
@@ -747,6 +910,103 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         )
 
         dialog.dismiss() // remove the dialog
+    }
+
+    fun addSimpleRouteToMap(){
+        if(!this::mapboxMap.isInitialized) return
+        cameraAutoZoomToDesrination()
+        mapboxMap.getStyle {
+            //enableLocationComponent(it, true)
+
+            it.getSourceAs<GeoJsonSource>("simpleRouteSource")?.setGeoJson(
+                FeatureCollection.fromFeatures(
+                    arrayOf(
+                        Feature.fromGeometry(
+                            simpleRouteGeometry
+                        )
+                    )
+                )
+            )
+
+            val layer = it.getLayer("simple_route_layer")
+            if(layer != null){
+                layer.setProperties(visibility(Property.VISIBLE))
+            }
+            removeAlertBubble()
+
+        }
+
+        /*-- Set the camera's animation --*/
+        mapboxMap.animateCamera(
+            CameraUpdateFactory
+                .newCameraPosition(
+                    CameraPosition.Builder()
+                        .zoom(10.5)
+                        .build()
+                ), 3000
+        )
+    }
+
+    fun clearSimplePath(){
+        mapboxMap.getStyle {
+            val layer = it.getLayer("simple_route_layer")
+            if(layer != null){
+                layer.setProperties(visibility(Property.NONE))
+            }
+        }
+    }
+
+
+    fun addDestinationToMap(){
+        updateDestinationPoint()
+
+        /*-- Set the camera's animation --*/
+        mapboxMap.animateCamera(
+            CameraUpdateFactory
+                .newCameraPosition(
+                    CameraPosition.Builder()
+                        .zoom(10.5)
+                        .build()
+                ), 3000
+        )
+    }
+
+    fun updateDestinationPoint(){
+        if(!this::mapboxMap.isInitialized) return
+        cameraAutoZoomToDesrination()
+        removeAlertBubble()
+        clearSimplePath()
+        mapboxMap.getStyle {
+            //enableLocationComponent(it, true)
+
+            // Destination source
+            it.getSourceAs<GeoJsonSource>("destinationSource")?.setGeoJson(
+                FeatureCollection.fromFeatures(
+                    ArrayList<Feature>(
+                        destinationFeature
+                    )
+                )
+            )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+            val selectedCarmenFeature = PlaceAutocomplete.getPlace(data)
+            val long = selectedCarmenFeature.center()?.longitude()!!
+            val lat = selectedCarmenFeature.center()?.latitude()!!
+            val title = selectedCarmenFeature.placeName()
+
+            destinationFeature.clear()
+            val eachPoint = Point.fromLngLat(long,lat)
+            val eachFeature = Feature.fromGeometry(eachPoint)
+            eachFeature.addNumberProperty("long",long)
+            eachFeature.addNumberProperty("lat", lat)
+            eachFeature.addStringProperty("title", title)
+            destinationFeature.add(eachFeature)
+            addDestinationToMap()
+        }
     }
 
 
@@ -788,7 +1048,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     /*-- Camera auto zoom to the suburb area --*/
     private fun cameraAutoZoomToSuburb(){
 
-        if (feature.size != 0 && locationList.size != 0) {
+        if (this::mapboxMap.isInitialized && feature.size != 0 && locationList.size != 0) {
             suburbPoint = locationList[0]
             val position = CameraPosition.Builder()
                 .target(LatLng(suburbPoint.latitude(), suburbPoint.longitude()))
@@ -798,9 +1058,80 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
     }
 
+    /*-- Camera auto zoom to the suburb area --*/
+    private fun cameraAutoZoomToDesrination(){
+        if (this::mapboxMap.isInitialized && destinationFeature.size != 0) {
+            val lat = destinationFeature[0].getNumberProperty("lat")
+            val long = destinationFeature[0].getNumberProperty("long")
+            val position = CameraPosition.Builder()
+                .target(LatLng(lat as Double, long as Double))
+                .zoom(10.0)
+                .build()
+            mapboxMap.cameraPosition = position
+        }
+    }
+
+    fun simpleFindRoute(point: Point){
+        mapboxMap.getStyle { it -> enableLocationComponent(it,true) }
+        val origin = mapboxMap.locationComponent.lastKnownLocation?.let {
+            Point.fromLngLat(it.longitude, it.latitude)
+        } ?: return
+
+        callDirectionClient(origin,point)
+    }
+
+
+    private fun callDirectionClient(origin: Point, destination: Point){
+        dialog.show()
+        if (!mainActivity.isNetworkEnabled()) {
+            toast.setText(getString(R.string.ask_allow_network_service))
+            toast.show()
+            dialog.dismiss()
+            return
+        }
+        val sb = StringBuilder()
+        sb.append(origin.longitude())
+        sb.append(',')
+        sb.append(origin.latitude())
+        sb.append(';')
+        sb.append(destination.longitude())
+        sb.append(',')
+        sb.append(destination.latitude())
+        val key = sb.toString()
+
+        val callAsync: Call<DirectionResponse> = directionInterface.directionRepos(
+            key,
+            "geojson",
+            getString(R.string.mapbox_access_token)
+        )
+        callAsync.enqueue(object : Callback<DirectionResponse?> {
+            override fun onResponse(
+                call: Call<DirectionResponse?>?,
+                response: Response<DirectionResponse?>
+            ) {
+                if (response.isSuccessful) {
+                    dialog.dismiss()
+                    val result = response.body()!!.directionResult
+
+                    if(result.size != 0){
+                        val geometry = result[0].geometry
+                        val json = Gson().toJson(geometry)
+                        val geo = GeometryGeoJson.fromJson(json)
+                        simpleRouteGeometry = geo
+                    }
+
+                    addSimpleRouteToMap()
+                }}
+
+            override fun onFailure(call: Call<DirectionResponse?>, t: Throwable) {
+                dialog.dismiss()
+                Toast.makeText(activity, getString(R.string.map_null), Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     /*-- Make a toast when data is updating --*/
     private fun checkDataEmpty(){
-
         if (feature.size == 0 && locationList.size == 0) {
             toast.setText(getString(R.string.no_data))
             toast.show()
@@ -810,11 +1141,12 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     /*-- get the location permission --*/
     @SuppressWarnings("MissingPermission")
-    fun enableLocationComponent(loadMapStyle: Style) {
+    fun enableLocationComponent(loadMapStyle: Style,boolean: Boolean) {
         if (PermissionsManager.areLocationPermissionsGranted(context)) {
             val customLocationComponentOptions: LocationComponentOptions? = context?.let {
                 LocationComponentOptions
                     .builder(it)
+                    .pulseMaxRadius(10.0f)
                     .pulseEnabled(true).build()
             }
 
@@ -825,10 +1157,16 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     .locationComponentOptions(customLocationComponentOptions).build()
             }?.let {
                 locationComponent.activateLocationComponent(it)
+                if(boolean && locationComponent.lastKnownLocation == null ){
+                    toast.setText(getString(R.string.ask_allow_location_service))
+                    toast.show()
+                    dialog.dismiss()
+                }
             }
             locationComponent.isLocationComponentEnabled = true
             locationComponent.cameraMode = CameraMode.TRACKING
             locationComponent.renderMode = RenderMode.COMPASS
+
         } else {
             /*-- Ask permission --*/
             permissionsManager = PermissionsManager(this)
@@ -864,8 +1202,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
-
+        if(this::mapView.isInitialized)
+            mapView.onSaveInstanceState(outState)
     }
 
 
@@ -876,6 +1214,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
     override fun onDestroyView() {
         super.onDestroyView()
+        dialog.dismiss()
         if (this::markerViewManager.isInitialized)
             markerViewManager.onDestroy()
         mapView.onDestroy()
@@ -898,7 +1237,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     override fun onPermissionResult(granted: Boolean) {
         if (granted) {
             mapboxMap.getStyle {
-                enableLocationComponent(it)
+                enableLocationComponent(it,false)
             }
         } else {
             Toast.makeText(context, getString(R.string.location_granted), Toast.LENGTH_LONG)
@@ -923,7 +1262,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     mapView2.visibility = View.VISIBLE
                     mapView.visibility = View.INVISIBLE
                     binding.recenter.visibility = View.VISIBLE
-                    binding.searchBar.visibility = View.VISIBLE
                     binding.floatButtonStop.visibility = View.VISIBLE
                     initNav()
                     binding.floatButtonNav.setImageResource(R.drawable.crash_36)
@@ -932,18 +1270,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                     bcLayer.setProperties(visibility(Property.NONE))
                     scLayer?.setProperties(visibility(Property.NONE))
                     siLayer?.setProperties(visibility(Property.NONE))
-
-                    /*--    Edit the Search bar    --*/
-                    val coroutineScope = CoroutineScope(Dispatchers.Main)
-                    coroutineScope.launch {
-                        // try to get the height of status bar and then margin top
-                        val searchBarHeight =
-                            searchBar.layoutParams as CoordinatorLayout.LayoutParams
-                        while (searchBarHeight.topMargin == 0)
-                            searchBarHeight.topMargin = mainActivity.getStatusHeight()
-                        searchBar.layoutParams = searchBarHeight
-                        this.cancel()
-                    }
 
                 }
                 else {
@@ -955,7 +1281,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             mainActivity.isBottomNavigationVisible(true)
                             mapView2.visibility = View.INVISIBLE
                             binding.floatButtonStop.visibility = View.INVISIBLE
-                            binding.searchBar.visibility = View.INVISIBLE
                             mapView.visibility = View.VISIBLE
                             recenter.visibility = View.INVISIBLE
                             binding.floatButtonNav.setImageResource(R.drawable.baseline_assistant_direction_black_36)
@@ -1071,34 +1396,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             navigationCamera.requestNavigationCameraToFollowing()
         }
 
-        searchBar.setOnClickListener {
-            val intent: Intent = PlaceAutocomplete.IntentBuilder()
-                .accessToken(getString(R.string.mapbox_access_token))
-                .placeOptions(
-                    PlaceOptions.builder()
-                        .backgroundColor(parseColor("#EEEEEE"))
-                        .limit(10)
-                        .build(PlaceOptions.MODE_CARDS)
-                )
-                .build(mainActivity)
-            startActivityForResult(intent, 1)
-
-        }
-
         mapboxNavigation.startTripSession()
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
-            val selectedCarmenFeature = PlaceAutocomplete.getPlace(data)
-            val long = selectedCarmenFeature.center()?.longitude()!!
-            val lat = selectedCarmenFeature.center()?.latitude()!!
-
-            findRoute(Point.fromLngLat(long, lat))
-        }
-    }
-
 
     /*
         Update the navigation camera
@@ -1164,6 +1463,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 }
             }
         )
+
     }
 
     /*
@@ -1215,12 +1515,16 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         floatButtonStop.layoutParams = fBHeightStop
 
         val fBHeightZoomOut = floatButtonZoomOut.layoutParams as CoordinatorLayout.LayoutParams
-        fBHeightZoomOut.bottomMargin = fBHeight.bottomMargin * 2
+        fBHeightZoomOut.bottomMargin = fBHeight.bottomMargin * 3
         floatButtonZoomOut.layoutParams = fBHeightZoomOut
 
         val fBHeightZoomIn = floatButtonZoomIn.layoutParams as CoordinatorLayout.LayoutParams
-        fBHeightZoomIn.bottomMargin = fBHeight.bottomMargin * 3
+        fBHeightZoomIn.bottomMargin = fBHeight.bottomMargin * 4
         floatButtonZoomIn.layoutParams = fBHeightZoomIn
+
+        val fBHeightDestination = floatButtonDestination.layoutParams as CoordinatorLayout.LayoutParams
+        fBHeightDestination.bottomMargin = fBHeight.bottomMargin * 2
+        floatButtonDestination.layoutParams = fBHeightDestination
 
         spinnerText.setCompoundDrawablesWithIntrinsicBounds(
             R.drawable.baseline_search_black_36,0,0,0
@@ -1231,6 +1535,13 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         Call the retrofit client to get all data in the map
      */
     private fun callAllClient(boolean: Boolean){
+        if (!mainActivity.isNetworkEnabled()) {
+            toast.setText(getString(R.string.ask_allow_network_service))
+            toast.show()
+            dialog.dismiss()
+            return
+        }
+        val mapIsInitialize = this::mapboxMap.isInitialized
         alertsFeature.clear()
         feature.clear()
         locationList.clear()
@@ -1278,6 +1589,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             val eachFeature = Feature.fromGeometry(eachPoint)
                             eachFeature.addStringProperty("type",each.type)
                             eachFeature.addStringProperty("road",each.road_name)
+                            eachFeature.addNumberProperty("year",each.year.toInt())
                             eachFeature.addStringProperty("severity",each.severity)
                             eachFeature.addNumberProperty("long",each.location.long)
                             eachFeature.addNumberProperty("lat",each.location.lat)
@@ -1299,7 +1611,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                             pathsList.add(coordinates)
                         }
                     }
-                    if(boolean) onMapUpdate()
+                    if(boolean && mapIsInitialize) onMapUpdate()
                     else mapView.getMapAsync(fragmentNow)
                 }
                 else {
@@ -1345,19 +1657,19 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             searchBarMap1.layoutParams = searchBarMap1Height
             filterCards.layoutParams = filterCardsHeight
 
-            binding.filterCards.filterPaths.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterPaths.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_path, 0, 0, 0
             )
 
-            binding.filterCards.filterTraffic.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterTraffic.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_traffic,0,0,0
             )
 
-            binding.filterCards.filterAccidents.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterAccidents.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_accident,0,0,0
             )
 
-            binding.filterCards.filterAlerts.setCompoundDrawablesWithIntrinsicBounds(
+            filterCardBinding.filterAlerts.setCompoundDrawablesWithIntrinsicBounds(
                 R.drawable.filter_alert,0,0,0
             )
             this.cancel()

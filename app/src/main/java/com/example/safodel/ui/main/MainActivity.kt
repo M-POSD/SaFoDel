@@ -9,6 +9,10 @@ import android.content.res.Resources
 import android.graphics.Rect
 import android.location.Location
 import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -639,8 +643,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun isLocationEnabled(): Boolean {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    fun isNetworkEnabled(): Boolean {
+        val networkManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            networkManager?.run {
+                networkManager.getNetworkCapabilities(networkManager.activeNetwork)?.run {
+                    return hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                            hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                }
+            }
+        } else {
+            networkManager?.run {
+                networkManager.activeNetworkInfo?.run {
+                    return type == ConnectivityManager.TYPE_WIFI || type == ConnectivityManager.TYPE_MOBILE
+                }
+            }
+        }
+        return false
     }
 
     override fun onRequestPermissionsResult(
@@ -658,7 +682,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getLastLocation() {
         if (checkPermission()) {
-            if (isLocationEnabled()) {
+            if (!isNetworkEnabled()) {
+                toastMain.setText(getString(R.string.ask_allow_network_service))
+                toastMain.show()
+            } else if (!isLocationEnabled()) {
+                toastMain.setText(getString(R.string.ask_allow_location_service))
+                toastMain.show()
+            } else {
                 fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
                         val userLocation =
@@ -666,14 +696,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         viewModel.setUserLocation(userLocation)
                         isGetLocation = true
                     } else {
-//                        toastMain.setText(getString(R.string.click_left_menu))
-//                        toastMain.show()
                         updateLocation()
                     }
                 }
-            } else {
-                toastMain.setText(getString(R.string.ask_allow_service))
-                toastMain.show()
             }
         } else {
             requestPermission()

@@ -472,7 +472,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
          val  ninthTarget = Target.Builder()
             .setAnchor(binding.toolbar.simpleToolbar.getChildAt(1))
-            .setShape(Circle(120f))
+            .setShape(Circle(95f))
             .setOverlay(ninth)
             .build()
         ninth.findViewById<TextView>(R.id.next_target).alpha = 0f
@@ -590,7 +590,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
                     windSpeed = (windSpeed * 3.6 * 100.0).roundToInt() / 100.0f
 
                     val weather = weatherList[0].main
-                    if (weather == "Rain") {
+                    if (weather == "Rain" || weather == "Drizzle") {
                         rainingAnimation()
                     }
 

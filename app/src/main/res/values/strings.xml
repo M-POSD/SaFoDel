@@ -149,7 +149,7 @@
     <string name="in_an_accident3_name">Claiming Insurance</string>
     <string name="in_an_accident1_0_description">This is general advice only, for personalised advice please seek professional help.</string>
     <string name="in_an_accident1_1_title">Check on Yourself</string>
-    <string name="in_an_accident1_1_description">Make sure you\'re okay, contact help if needed and try to place yourself in a safe location.</string>
+    <string name="in_an_accident1_1_description">Make sure you are okay, contact help if needed and try to place yourself in a safe location.</string>
     <string name="in_an_accident1_2_title">Collect Details &amp; Take Photos</string>
     <string name="in_an_accident1_2_description">Collect the details of those involved in the accident and any witnesses, take photos as evidence.</string>
     <string name="in_an_accident1_2_title2">Collect Details &amp; Take Photos</string>
@@ -162,14 +162,14 @@
     <string name="in_an_accident2_0_description">Gig workers work via mobile app platforms and are typically treated like independent contractors.</string>
     <string name="in_an_accident2_0_source" translatable="false">https://www.fairwork.gov.au/find-help-for/independent-contractors/gig-economy</string>
     <string name="in_an_accident2_1_title">Inconsistent Practices </string>
-    <string name="in_an_accident2_1_description">With little regulation in the industry, platforms have different requirements and conditions for their workers.</string>
+    <string name="in_an_accident2_1_description">With little regulation in the industry, platforms have different conditions and requirements for their workers.</string>
     <string name="in_an_accident2_2_title">Employee or Not?</string>
-    <string name="in_an_accident2_2_description">Uber Eats treats workers as independent contractors whilst Deliveroo treats them as employees.</string>
+    <string name="in_an_accident2_2_description">Uber Eats treats its workers as independent contractors whilst rival Deliveroo treats them as employees.</string>
     <string name="in_an_accident2_3_title">Growing Momentum</string>
-    <string name="in_an_accident2_3_description">How gig workers are treated is an evolving area, groups like the Transport Workers Union (TWU) are pushing for more entitlements.</string>
+    <string name="in_an_accident2_3_description">Groups like the Transport Workers Union are pushing for gig workers to have more work entitlements.</string>
     <string name="in_an_accident3_0_description">Most delivery companies offer a support package for driver and delivery partners, helping to cover partners should something go wrong while using their platform.</string>
     <string name="in_an_accident3_1_description">To find out the insurance details provided by your food delivery platform, select your partner next.</string>
-    <string name="in_an_accident3_2_description">The TAC (Transport Accident Commission) provides No Fault Benefits under certain terms and conditions.</string>
+    <string name="in_an_accident3_2_description">The Transport Accident Commission provides a \'no-fault\' insurance scheme, check for eligibility.</string>
     <string name="click_to_know_more">Click to Know More</string>
     <string name="uber_link" translatable="false">https://www.uber.com/au/en/drive/insurance/injury-protection/</string>
     <string name="deliveroo_link" translatable="false">https://riders.deliveroo.com.au/en/news/your-free-deliveroo-rider-insurance</string>
@@ -361,10 +361,13 @@
     <string name="trend_null" >Failed to get trend data</string>
     <string name="next">Next</string>
     <string name="close_btn">Close</string>
-    <string name="ask_allow_service">Please enable your location service</string>
+    <string name="ask_allow_location_service">Please enable your location service</string>
+    <string name="ask_allow_network_service">Please enable your network service</string>
 
     <string name="click_left_menu">Click the left menu to restart loading the location</string>
     <string name="get_weather_successful">Get user location data successful</string>
+    <string name="clear">Clear</string>
+    <string name="Reference_path">Reference Path</string>
 
 
 </resources>

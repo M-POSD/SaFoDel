@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
+import androidx.compose.ui.text.toUpperCase
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.safodel.databinding.FragmentQuizHistoryBinding
@@ -91,7 +92,7 @@ class QuizHistoryFragment :
                 binding.historyDetail.historyDetailScrollView.fullScroll(ScrollView.FOCUS_UP)
                 val result = it.quizResults
                 binding.historyDetail.timeDetail.text =
-                    DateStringConverter().parseDateToStr("dd-MM-yyyy HH:mm:ss", it.timeEntry.time)
+                    DateStringConverter().parseDateToStr("dd-MM-yyyy  hh:mm:ss  aa", it.timeEntry.time).uppercase()
 
                 var count = 1
                 for (i in result) {
@@ -116,7 +117,7 @@ class QuizHistoryFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
-//        historyViewModel.setResult(null)
+        historyViewModel.setResult(null)
         _binding = null
     }
 
@@ -132,44 +133,51 @@ class QuizHistoryFragment :
         val questionInfo = getString(quizResult.question_info)
 
         val correctAnswer = getString(R.string.is_correct)
-        val isCorrect =
-            if (quizResult.isCorrect) getString(R.string.true_text) else getString(R.string.false_text)
-
+        var imageId = if (quizResult.isCorrect) R.drawable.success_icon else R.drawable.error_icon
+//        val isCorrect =
+//            if (quizResult.isCorrect) getString(R.string.true_text) else getString(R.string.false_text)
+//        binding.historyDetail.q1.isCorrectHeading.text = "$correctAnswer  $isCorrect"
         when(num) {
             1-> {
                 binding.historyDetail.q1.qHeading.text = question
                 binding.historyDetail.q1.qDesc.text = questionHeading
                 binding.historyDetail.q1.infoHeading.text = info
                 binding.historyDetail.q1.infoDesc.text = questionInfo
-                binding.historyDetail.q1.isCorrectHeading.text = "$correctAnswer  $isCorrect"
+                binding.historyDetail.q1.isCorrectHeading.text = "$correctAnswer"
+                binding.historyDetail.q1.isCorrectImage.setImageResource(imageId)
+
             }
             2-> {
                 binding.historyDetail.q2.qHeading.text = question
                 binding.historyDetail.q2.qDesc.text = questionHeading
                 binding.historyDetail.q2.infoHeading.text = info
                 binding.historyDetail.q2.infoDesc.text = questionInfo
-                binding.historyDetail.q2.isCorrectHeading.text = "$correctAnswer  $isCorrect"
+                binding.historyDetail.q2.isCorrectHeading.text = "$correctAnswer"
+                binding.historyDetail.q2.isCorrectImage.setImageResource(imageId)
             }
             3-> {
                 binding.historyDetail.q3.qHeading.text = question
                 binding.historyDetail.q3.qDesc.text = questionHeading
                 binding.historyDetail.q3.infoHeading.text = info
                 binding.historyDetail.q3.infoDesc.text = questionInfo
-                binding.historyDetail.q3.isCorrectHeading.text = "$correctAnswer  $isCorrect"
+                binding.historyDetail.q3.isCorrectHeading.text = "$correctAnswer"
+                binding.historyDetail.q3.isCorrectImage.setImageResource(imageId)
             }
             4-> {
                 binding.historyDetail.q4.qHeading.text = question
                 binding.historyDetail.q4.qDesc.text = questionHeading
                 binding.historyDetail.q4.infoHeading.text = info
                 binding.historyDetail.q4.infoDesc.text = questionInfo
-                binding.historyDetail.q4.isCorrectHeading.text = "$correctAnswer  $isCorrect"
+                binding.historyDetail.q4.isCorrectHeading.text = "$correctAnswer"
+                binding.historyDetail.q4.isCorrectImage.setImageResource(imageId)
             }
             5-> {
                 binding.historyDetail.q5.qHeading.text = question
                 binding.historyDetail.q5.qDesc.text = questionHeading
                 binding.historyDetail.q5.infoHeading.text = info
                 binding.historyDetail.q5.infoDesc.text = questionInfo
-                binding.historyDetail.q5.isCorrectHeading.text = "$correctAnswer  $isCorrect"
+                binding.historyDetail.q5.isCorrectHeading.text = "$correctAnswer"
+                binding.historyDetail.q5.isCorrectImage.setImageResource(imageId)
             }
         }
     }
