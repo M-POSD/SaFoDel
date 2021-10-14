@@ -48,12 +48,7 @@
                 style="@style/textStyle14_green"
                 android:layout_height="wrap_content"
                 android:text="@string/clear"/>
-
-
-
         </LinearLayout>
-
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
