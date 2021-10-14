@@ -629,9 +629,10 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 iconSize(
                     interpolate(
                         linear(), zoom(),
-                        stop(10, 0.05f),
-                        stop(15, 0.075f),
-                        stop(20.0f, 0.15f)
+                        stop(5,0.075f),
+                        stop(10, 0.15f),
+                        stop(15, 0.225f),
+                        stop(20.0f, 0.45f)
                     )
                 ),
                 iconIgnorePlacement(false),
