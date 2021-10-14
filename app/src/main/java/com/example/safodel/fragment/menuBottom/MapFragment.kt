@@ -7,6 +7,7 @@ import android.graphics.Color.parseColor
 import android.graphics.RectF
 import android.location.Location
 import android.os.Bundle
+import android.util.JsonReader
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,11 +28,16 @@ import com.example.safodel.databinding.FilterCardsBinding
 import com.example.safodel.databinding.FragmentMapBinding
 import com.example.safodel.fragment.BasicFragment
 import com.example.safodel.model.*
+import com.example.safodel.retrofit.DirectionClient
+import com.example.safodel.retrofit.DirectionInterface
 import com.example.safodel.retrofit.SuburbClient
 import com.example.safodel.retrofit.SuburbInterface
 import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.ui.map.TrafficPlugin
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
+import com.google.gson.annotations.JsonAdapter
+import com.google.gson.reflect.TypeToken
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.DirectionsCriteria
@@ -109,7 +115,9 @@ import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
 import com.mapbox.geojson.*
+import com.mapbox.geojson.gson.GeometryGeoJson
 import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin
+import kotlin.text.StringBuilder
 
 /*
     Global basic value
@@ -119,13 +127,19 @@ private val pathsList: ArrayList<ArrayList<Point>> = ArrayList()
 private var feature: ArrayList<Feature> = ArrayList()
 private var alertsFeature: ArrayList<Feature> = ArrayList()
 private var destinationFeature: ArrayList<Feature> = ArrayList()
+private var simpleRouteGeometry: Geometry = LineString.fromJson("{\n" +
+        "   \"TYPE\": \"LineString\",\n" +
+        "   \"coordinates\": [\n" +
+        "     [100.0, 0.0],\n" +
+        "     [101.0, 1.0]\n" +
+        "   ]\n" +
+        " }")
 private var suburb: String = "MELBOURNE"
 private var spinnerTimes = 0
 private var alertClickTimes = 0
 private var accidentClickTimes = 0
 private var destinationClickTimes = 0
 private var spinnerIndex = 0
-private var routeRequestID = 0L
 
 
 /*
@@ -141,6 +155,7 @@ private lateinit var floatButtonStop: FloatingActionButton
 
 // Retrofit
 private lateinit var suburbInterface: SuburbInterface
+private lateinit var directionInterface: DirectionInterface
 
 
 class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -174,7 +189,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     private lateinit var floatButtonZoomOut: View
     private lateinit var floatButtonDestination: View
     private lateinit var searchableDialog: SearchableDialog
-    private lateinit var simpleRoute: DirectionsRoute
+
+
 
     // Route
     private lateinit var routeLineAPI: MapboxRouteLineApi
@@ -343,6 +359,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         }
 
         suburbInterface = SuburbClient.getSuburbService()
+        directionInterface = DirectionClient.getDirectionService()
 
         // change the float button height
         changeFloatButtonHeight()
@@ -371,9 +388,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 .accessToken(getString(R.string.mapbox_access_token))
                 .build()
         )
-
-        initNav()
-
 
         fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState) // init the map
@@ -914,7 +928,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 FeatureCollection.fromFeatures(
                     arrayOf(
                         Feature.fromGeometry(
-                            simpleRoute.geometry()?.let { it1 -> LineString.fromPolyline(it1,Constants.PRECISION_6) }
+                            simpleRouteGeometry
                         )
                     )
                 )
@@ -926,8 +940,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             }
 
         }
-
-        mapboxNavigation.cancelRouteRequest(routeRequestID)
 
         /*-- Set the camera's animation --*/
         mapboxMap.animateCamera(
@@ -967,6 +979,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     fun updateDestinationPoint(){
         if(!this::mapboxMap.isInitialized) return
         cameraAutoZoomToDesrination()
+        removeAlertBubble()
+        clearSimplePath()
         mapboxMap.getStyle {
             //enableLocationComponent(it, true)
 
@@ -1063,44 +1077,66 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
     }
 
     fun simpleFindRoute(point: Point){
-        dialog.show()
         mapboxMap.getStyle { it -> enableLocationComponent(it,true) }
         val origin = mapboxMap.locationComponent.lastKnownLocation?.let {
             Point.fromLngLat(it.longitude, it.latitude)
         } ?: return
 
-        routeRequestID = mapboxNavigation.requestRoutes(
-            RouteOptions.builder()
-                .applyDefaultNavigationOptions()
-                .profile(DirectionsCriteria.PROFILE_CYCLING)
-                .applyLanguageAndVoiceUnitOptions(mainActivity)
-                .coordinatesList(listOf(origin, point))
-                .build(),
-            object : RouterCallback {
-                override fun onRoutesReady(
-                    routes: List<DirectionsRoute>,
-                    routerOrigin: RouterOrigin
-                ) {
-                    simpleRoute =  routes.first()
-                    addSimpleRouteToMap()
-                    dialog.dismiss()
-                }
+        callDirectionClient(origin,point)
+    }
 
-                override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
-                    dialog.dismiss()
-                    toast.setText(getString(R.string.can_not_go))
-                    toast.show()
 
-                }
+    private fun callDirectionClient(origin: Point, destination: Point){
+        dialog.show()
+        if (!mainActivity.isNetworkEnabled()) {
+            toast.setText(getString(R.string.ask_allow_network_service))
+            toast.show()
+            dialog.dismiss()
+            return
+        }
+        val sb = StringBuilder()
+        sb.append(origin.longitude())
+        sb.append(',')
+        sb.append(origin.latitude())
+        sb.append(';')
+        sb.append(destination.longitude())
+        sb.append(',')
+        sb.append(destination.latitude())
+        val key = sb.toString()
+        Log.d("Main","Enter retrofit")
 
-                override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
-                    // no impl
-                    dialog.dismiss()
-                }
-            }
+        val callAsync: Call<DirectionResponse> = directionInterface.directionRepos(
+            key,
+            "geojson",
+            getString(R.string.mapbox_access_token)
         )
+        callAsync.enqueue(object : Callback<DirectionResponse?> {
+            override fun onResponse(
+                call: Call<DirectionResponse?>?,
+                response: Response<DirectionResponse?>
+            ) {
+                if (response.isSuccessful) {
+                    dialog.dismiss()
+                    Log.d("Main","retrofit successful")
+                    val result = response.body()!!.directionResult
 
+                    if(result.size != 0){
+                        val geometry = result[0].geometry
+                        val json = Gson().toJson(geometry)
+                        val geo = GeometryGeoJson.fromJson(json)
+                        simpleRouteGeometry = geo
+                    }
 
+                    addSimpleRouteToMap()
+                }}
+
+            override fun onFailure(call: Call<DirectionResponse?>, t: Throwable) {
+                dialog.dismiss()
+                Log.d("Main","Fail")
+                Log.d("Main",t.message.toString())
+                Toast.makeText(activity, getString(R.string.map_null), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     /*-- Make a toast when data is updating --*/
@@ -1405,35 +1441,36 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             Point.fromLngLat(it.longitude, it.latitude)
         } ?: return
 
-        mapboxNavigation.requestRoutes(
-            RouteOptions.builder()
-                .applyDefaultNavigationOptions()
-                .profile(DirectionsCriteria.PROFILE_CYCLING)
-                .applyLanguageAndVoiceUnitOptions(mainActivity)
-                .coordinatesList(listOf(origin, destination))
-                .build(),
-            object : RouterCallback {
-                override fun onRoutesReady(
-                    routes: List<DirectionsRoute>,
-                    routerOrigin: RouterOrigin
-                ) {
-                    dialog.dismiss()
-                    setRouteAndStartNavigation(routes.first())
-                }
+//        mapboxNavigation.requestRoutes(
+//            RouteOptions.builder()
+//                .applyDefaultNavigationOptions()
+//                .profile(DirectionsCriteria.PROFILE_CYCLING)
+//                .applyLanguageAndVoiceUnitOptions(mainActivity)
+//                .coordinatesList(listOf(origin, destination))
+//                .build(),
+//            object : RouterCallback {
+//                override fun onRoutesReady(
+//                    routes: List<DirectionsRoute>,
+//                    routerOrigin: RouterOrigin
+//                ) {
+//                    dialog.dismiss()
+//                    setRouteAndStartNavigation(routes.first())
+//                }
+//
+//                override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
+//                    dialog.dismiss()
+//                    toast.setText(getString(R.string.can_not_go))
+//                    toast.show()
+//
+//                }
+//
+//                override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
+//                    // no impl
+//                    dialog.dismiss()
+//                }
+//            }
+//        )
 
-                override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
-                    dialog.dismiss()
-                    toast.setText(getString(R.string.can_not_go))
-                    toast.show()
-
-                }
-
-                override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
-                    // no impl
-                    dialog.dismiss()
-                }
-            }
-        )
     }
 
     /*
