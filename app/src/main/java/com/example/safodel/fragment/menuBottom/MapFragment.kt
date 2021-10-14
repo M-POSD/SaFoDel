@@ -1144,7 +1144,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             val customLocationComponentOptions: LocationComponentOptions? = context?.let {
                 LocationComponentOptions
                     .builder(it)
-                    .pulseEnabled(false).build()
+                    .pulseMaxRadius(10.0f)
+                    .pulseEnabled(true).build()
             }
 
             val locationComponent: LocationComponent = mapboxMap.locationComponent
