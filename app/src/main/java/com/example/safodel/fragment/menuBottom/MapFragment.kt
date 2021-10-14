@@ -7,14 +7,11 @@ import android.graphics.Color.parseColor
 import android.graphics.RectF
 import android.location.Location
 import android.os.Bundle
-import android.util.JsonReader
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.*
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -36,14 +33,11 @@ import com.example.safodel.ui.main.MainActivity
 import com.example.safodel.ui.map.TrafficPlugin
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
-import com.google.gson.annotations.JsonAdapter
-import com.google.gson.reflect.TypeToken
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.api.directions.v5.models.RouteOptions
-import com.mapbox.core.constants.Constants
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
@@ -79,13 +73,8 @@ import com.mapbox.maps.plugin.animation.camera
 import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.navigation.base.TimeFormat
-import com.mapbox.navigation.base.extensions.applyDefaultNavigationOptions
-import com.mapbox.navigation.base.extensions.applyLanguageAndVoiceUnitOptions
 import com.mapbox.navigation.base.formatter.DistanceFormatterOptions
 import com.mapbox.navigation.base.options.NavigationOptions
-import com.mapbox.navigation.base.route.RouterCallback
-import com.mapbox.navigation.base.route.RouterFailure
-import com.mapbox.navigation.base.route.RouterOrigin
 import com.mapbox.navigation.core.directions.session.RoutesObserver
 import com.mapbox.navigation.core.formatter.MapboxDistanceFormatter
 import com.mapbox.navigation.core.trip.session.LocationObserver
@@ -110,13 +99,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
-import java.math.RoundingMode
 import com.mapbox.maps.MapboxMap as MapboxMap2
 import com.mapbox.maps.MapView as MapView2
 import com.mapbox.maps.Style as Style2
 import com.mapbox.geojson.*
 import com.mapbox.geojson.gson.GeometryGeoJson
 import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin
+import com.mapbox.navigation.base.extensions.applyDefaultNavigationOptions
+import com.mapbox.navigation.base.extensions.applyLanguageAndVoiceUnitOptions
+import com.mapbox.navigation.base.route.RouterCallback
+import com.mapbox.navigation.base.route.RouterFailure
+import com.mapbox.navigation.base.route.RouterOrigin
 import kotlin.text.StringBuilder
 
 /*
@@ -1103,7 +1096,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         sb.append(',')
         sb.append(destination.latitude())
         val key = sb.toString()
-        Log.d("Main","Enter retrofit")
 
         val callAsync: Call<DirectionResponse> = directionInterface.directionRepos(
             key,
@@ -1117,7 +1109,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             ) {
                 if (response.isSuccessful) {
                     dialog.dismiss()
-                    Log.d("Main","retrofit successful")
                     val result = response.body()!!.directionResult
 
                     if(result.size != 0){
@@ -1132,8 +1123,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
             override fun onFailure(call: Call<DirectionResponse?>, t: Throwable) {
                 dialog.dismiss()
-                Log.d("Main","Fail")
-                Log.d("Main",t.message.toString())
                 Toast.makeText(activity, getString(R.string.map_null), Toast.LENGTH_SHORT).show()
             }
         })
@@ -1155,7 +1144,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             val customLocationComponentOptions: LocationComponentOptions? = context?.let {
                 LocationComponentOptions
                     .builder(it)
-                    .pulseEnabled(true).build()
+                    .pulseEnabled(false).build()
             }
 
             val locationComponent: LocationComponent = mapboxMap.locationComponent
@@ -1174,6 +1163,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             locationComponent.isLocationComponentEnabled = true
             locationComponent.cameraMode = CameraMode.TRACKING
             locationComponent.renderMode = RenderMode.COMPASS
+
         } else {
             /*-- Ask permission --*/
             permissionsManager = PermissionsManager(this)
@@ -1441,35 +1431,35 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             Point.fromLngLat(it.longitude, it.latitude)
         } ?: return
 
-//        mapboxNavigation.requestRoutes(
-//            RouteOptions.builder()
-//                .applyDefaultNavigationOptions()
-//                .profile(DirectionsCriteria.PROFILE_CYCLING)
-//                .applyLanguageAndVoiceUnitOptions(mainActivity)
-//                .coordinatesList(listOf(origin, destination))
-//                .build(),
-//            object : RouterCallback {
-//                override fun onRoutesReady(
-//                    routes: List<DirectionsRoute>,
-//                    routerOrigin: RouterOrigin
-//                ) {
-//                    dialog.dismiss()
-//                    setRouteAndStartNavigation(routes.first())
-//                }
-//
-//                override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
-//                    dialog.dismiss()
-//                    toast.setText(getString(R.string.can_not_go))
-//                    toast.show()
-//
-//                }
-//
-//                override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
-//                    // no impl
-//                    dialog.dismiss()
-//                }
-//            }
-//        )
+        mapboxNavigation.requestRoutes(
+            RouteOptions.builder()
+                .applyDefaultNavigationOptions()
+                .profile(DirectionsCriteria.PROFILE_CYCLING)
+                .applyLanguageAndVoiceUnitOptions(mainActivity)
+                .coordinatesList(listOf(origin, destination))
+                .build(),
+            object : RouterCallback {
+                override fun onRoutesReady(
+                    routes: List<DirectionsRoute>,
+                    routerOrigin: RouterOrigin
+                ) {
+                    dialog.dismiss()
+                    setRouteAndStartNavigation(routes.first())
+                }
+
+                override fun onFailure(reasons: List<RouterFailure>, routeOptions: RouteOptions) {
+                    dialog.dismiss()
+                    toast.setText(getString(R.string.can_not_go))
+                    toast.show()
+
+                }
+
+                override fun onCanceled(routeOptions: RouteOptions, routerOrigin: RouterOrigin) {
+                    // no impl
+                    dialog.dismiss()
+                }
+            }
+        )
 
     }
 
