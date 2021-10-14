@@ -932,6 +932,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
             if(layer != null){
                 layer.setProperties(visibility(Property.VISIBLE))
             }
+            removeAlertBubble()
 
         }
 
