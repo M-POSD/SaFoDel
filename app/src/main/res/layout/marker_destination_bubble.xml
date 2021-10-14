@@ -26,7 +26,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="right">
 
             <TextView
                 android:id="@+id/route_destination_point_button"
@@ -34,7 +35,7 @@
                 android:clickable="true"
                 android:layout_gravity="left"
                 android:padding="8dp"
-                style="@style/textStyle14_gray"
+                style="@style/textStyle14_green"
                 android:layout_height="wrap_content"
                 android:text="@string/Reference_path"/>
 
@@ -44,15 +45,10 @@
                 android:clickable="true"
                 android:layout_gravity="right"
                 android:padding="8dp"
-                style="@style/textStyle14_gray"
+                style="@style/textStyle14_green"
                 android:layout_height="wrap_content"
                 android:text="@string/clear"/>
-
-
-
         </LinearLayout>
-
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
