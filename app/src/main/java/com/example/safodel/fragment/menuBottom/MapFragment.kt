@@ -372,6 +372,8 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
                 .build()
         )
 
+        initNav()
+
 
         fitSearchMap1() // fit windows to the search bar in Mapview1
         mapView.onCreate(savedInstanceState) // init the map
@@ -726,6 +728,7 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
         filterPathsListener()
         filterAccidentListener()
         filterAlertsListener()
+
 
     }
 
@@ -1366,9 +1369,6 @@ class MapFragment : BasicFragment<FragmentMapBinding>(FragmentMapBinding::inflat
 
         mapboxNavigation.startTripSession()
     }
-
-
-
 
     /*
         Update the navigation camera
