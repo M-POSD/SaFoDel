@@ -21,14 +21,14 @@ Educating Food Delivery Bike Riders in Victoria
 - Accident Trends add accident trend **graph** for each suburb and common information among all suburbs
 - E-Bike Delivery **information** sharing (Find information on using e-bikes for food delivery)
 - In an Accident **tips** sharing (Find out the information while encountered the accident)
-- Locate the **current location** and can **find the route reference** to the **destination**
+- Locate the **current location** and can **find the route reference** to user's **destination**
 - Ride Safer **tips** sharing (Find out how to ride safely while delivering food)
 - A **quiz** for testing user road rules understanding
 - A **checklist** for finding necessary cycling gear
 - A **map** to see (base on suburb)
   - the current traffic
   - the accident location
-  - the bike friendly path
+  - the bike-friendly path
   - alarm for emergency work on the street
 - A good Logo
 - A good UI
